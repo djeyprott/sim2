@@ -153,7 +153,17 @@ public class SimulationHostTests
         var host = new SimulationHost(NewSimulation());
         host.Dispose();
         host.Dispose();
-        Assert.Throws<ObjectDisposedException>(() => { host.InvokeAsync(simulation => simulation.Tick); });
+        bool refused = false;
+        try
+        {
+            host.InvokeAsync(simulation => simulation.Tick);
+        }
+        catch (ObjectDisposedException)
+        {
+            refused = true;
+        }
+
+        Assert.True(refused);
     }
 
     private sealed class ThrowingSystem : ISimSystem

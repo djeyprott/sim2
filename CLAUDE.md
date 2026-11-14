@@ -14,7 +14,8 @@ The design doc and milestone specs live in the claude.ai Project "sim2" (`design
 - `Sim.Core` never references Godot. The viewer only displays.
 - Deterministic: same build, machine and seed give the same history. Single-threaded core. Never rely on the iteration order of `Dictionary` or `HashSet`. Use the core's own random streams, never `System.Random`, inside the core.
 - One tick is one month. Systems declare an interval of 1, 3 or 12 months and a fixed update order.
-- State lives in flat arrays indexed by cell id.
+- State lives in flat arrays indexed by cell id. A system adds its fields in `Register` through `WorldState.AddIntField` / `AddDoubleField`; anything not in `WorldState` is not saved or checksummed.
+- Real systems are listed, in update order, only in `SystemCatalog.CreateDefault()`. Renaming a system or a field breaks old saves.
 - Content (goods, technologies, terrain types) lives in data files, not code.
 
 ## Grid

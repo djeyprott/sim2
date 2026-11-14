@@ -14,3 +14,5 @@ jobs:
           dotnet-version: 8.0.x
       - name: Build and test
         run: dotnet test sim2.sln --configuration Release
+      - name: Headless run of 12,000 years
+        run: dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 1 --years 12000

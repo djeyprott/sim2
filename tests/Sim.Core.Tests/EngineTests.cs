@@ -34,6 +34,10 @@ internal sealed class RecordingSystem : ISimSystem
 
     public List<ulong> Draws { get; } = new List<ulong>();
 
+    public void Register(WorldState state)
+    {
+    }
+
     public void Update(SimContext context)
     {
         Ticks.Add(context.Tick);

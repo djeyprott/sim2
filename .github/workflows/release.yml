@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    tags: ['v*']
     paths:
       - 'viewer/**'
       - 'src/**'
       - 'data/earth.world'
+      - 'release-version.txt'
       - '.github/workflows/release.yml'
 
 env:
@@ -118,14 +118,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eux
-          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-            gh release create "$GITHUB_REF_NAME" build/sim2-windows.zip --title "$GITHUB_REF_NAME" --generate-notes
-          else
-            gh release delete dev --cleanup-tag -y || true
-            sleep 3
-            gh release create dev build/sim2-windows.zip --prerelease --target "$GITHUB_SHA" \
-              --title "Development build" \
-              --notes "Latest build from the main branch (commit $GITHUB_SHA). Download sim2-windows.zip, unzip it and run sim2.exe."
+          # Rolling development build from the main branch.
+          gh release delete dev --cleanup-tag -y || true
+          sleep 3
+          gh release create dev build/sim2-windows.zip --prerelease --target "$GITHUB_SHA" \
+            --title "Development build" \
+            --notes "Latest build from the main branch (commit $GITHUB_SHA). Download sim2-windows.zip, unzip it and run sim2.exe."
+          # Numbered release: published once, when release-version.txt names a version with no release yet.
+          version="v$(tr -d '[:space:]' < release-version.txt)"
+          if ! gh release view "$version" > /dev/null 2>&1; then
+            gh release create "$version" build/sim2-windows.zip --target "$GITHUB_SHA" --latest \
+              --title "sim2 $version" \
+              --notes "Download sim2-windows.zip, unzip it and run sim2.exe. Windows will warn that the program is unsigned: choose More info, then Run anyway."
           fi
 
       - name: Commit viewer screenshot

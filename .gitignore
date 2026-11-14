@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+TestResults/
+
+# Godot
+.godot/
+*.import
+export_presets.cfg
+
+# Raw source data and generated world files
+data/raw/
+*.world
+*.sav

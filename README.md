@@ -10,7 +10,7 @@ Milestone 0 (Skeleton) is in progress.
 |---|---|
 | 1. Grid and its tests | Done |
 | 2. Earth import tool and world file | Done |
-| 3. Clock, scheduler, random streams | Not started |
+| 3. Clock, scheduler, random streams | Done |
 | 4. World state, save and load, checksum | Not started |
 | 5. Headless runner | Not started |
 | 6. Viewer | Not started |

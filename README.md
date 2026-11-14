@@ -29,7 +29,7 @@ Controls: drag to move, mouse wheel to zoom, click a cell to select it, Space to
 
 ## Running the tests
 
-Requires the .NET 8 SDK or later.
+Requires the .NET 10 SDK or later.
 
 ```
 dotnet test sim2.sln

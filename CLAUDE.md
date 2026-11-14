@@ -1,7 +1,7 @@
 # sim2 working rules
 
 Human history simulator: Godot 4 with C#, watch-only, Earth from 10,000 BCE, open-ended runs.
-The design doc and milestone specs live in the claude.ai Project "sim2" (`design-doc.md`, `milestone-0-spec.md`). They are the source of truth.
+The design doc and milestone specs live in the claude.ai Project "sim2" (`design-doc.md`, `milestone-0-spec.md`, `milestone-1-spec.md`). They are the source of truth. The current milestone's spec is mirrored at `docs/milestone-1-spec.md`: to change it, edit that file and write it to the project from the file, so the two never differ.
 
 ## Scope rules
 
@@ -32,7 +32,7 @@ The design doc and milestone specs live in the claude.ai Project "sim2" (`design
 ## Workflow
 
 - The cloud workspace has no .NET SDK. GitHub Actions (`.github/workflows/ci.yml`) is the build and test check: push, then read the run result with `gh run list` and `gh run view`. Artifact downloads are blocked from the workspace; have jobs commit outputs that need inspecting.
-- Target framework is `net8.0` for Godot compatibility.
+- Target framework is `net10.0` everywhere, including the viewer.
 - The viewer uses Godot 4.6-stable with `Godot.NET.Sdk/4.6.0`; keep the two versions in step. CI compiles it with `dotnet build viewer/Viewer.csproj`.
 - The "Windows build" job runs the viewer under a virtual display with `SIM2_SCREENSHOT` set, commits `docs/viewer-screenshot.png`, exports the Windows package and publishes it as the `dev` prerelease. To publish a numbered release, change `release-version.txt` (tags cannot be pushed from the cloud workspace); the job creates `v<version>` if it does not exist yet. Read that screenshot to see the viewer; extend `RunScreenshotScript` in `viewer/scripts/Main.cs` to exercise new UI.
 - The viewer talks to the simulation only through `SimulationHost` (`LatestFrame`, `InvokeAsync`).

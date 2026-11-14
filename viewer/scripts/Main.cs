@@ -47,6 +47,7 @@ public partial class Main : Node2D
     private Vector2 _pressPosition;
     private bool _movedSincePress;
     private int _hoverCell = -1;
+    private string? _hoverText;
     private int _selectedCell = -1;
     private int _speedIndex;
     private int _speedBeforePause = 2;
@@ -101,6 +102,7 @@ public partial class Main : Node2D
 
         _hud.SpeedChosen += SetSpeed;
         _hud.MapModeChosen += ApplyMapMode;
+        RefreshInfo();
         _hud.SaveRequested += () => _saveDialog.PopupCentered(new Vector2I(900, 600));
         _hud.LoadRequested += () => _loadDialog.PopupCentered(new Vector2I(900, 600));
 
@@ -144,6 +146,9 @@ public partial class Main : Node2D
         PollPendingTask();
         PanWithKeys((float)delta);
         UpdateHover();
+
+        float halfViewWidth = GetViewportRect().Size.X / (2f * _zoom);
+        _mapView.ShowCopiesInView(_camera.Position.X - halfViewWidth, _camera.Position.X + halfViewWidth);
         UpdateStatus(frame, delta);
 
         if (_screenshotPath != null)
@@ -444,8 +449,10 @@ public partial class Main : Node2D
         if (cell != _hoverCell)
         {
             _hoverCell = cell;
-            RefreshInfo();
+            _hoverText = cell >= 0 ? DescribeCell(cell) : null;
         }
+
+        _hud.UpdateTooltip(_hoverText);
     }
 
     private void SelectCell(int cell)
@@ -457,28 +464,9 @@ public partial class Main : Node2D
 
     private void RefreshInfo()
     {
-        string text = "";
-        if (_selectedCell >= 0)
-        {
-            text += "Selected\n" + DescribeCell(_selectedCell);
-        }
-
-        if (_hoverCell >= 0 && _hoverCell != _selectedCell)
-        {
-            if (text.Length > 0)
-            {
-                text += "\n\n";
-            }
-
-            text += "Under the pointer\n" + DescribeCell(_hoverCell);
-        }
-
-        if (text.Length == 0)
-        {
-            text = "Point at the map for details.\nClick to keep a cell selected.";
-        }
-
-        _hud.SetInfo(text);
+        _hud.SetInfo(_selectedCell >= 0
+            ? "Selected\n" + DescribeCell(_selectedCell)
+            : "Click a cell to keep its details here.");
     }
 
     private string DescribeCell(int cell)
@@ -533,11 +521,11 @@ public partial class Main : Node2D
 
     private void ClampCamera()
     {
+        // The map wraps around left to right, and stops at the top and bottom.
         Vector2 half = GetViewportRect().Size / (2f * _zoom);
-        float limitX = MapView.HalfWidth - half.X;
         float limitY = MapView.HalfHeight - half.Y;
         Vector2 position = _camera.Position;
-        position.X = limitX > 0f ? Math.Clamp(position.X, -limitX, limitX) : 0f;
+        position.X = MapView.WrapX(position.X);
         position.Y = limitY > 0f ? Math.Clamp(position.Y, -limitY, limitY) : 0f;
         _camera.Position = position;
     }
@@ -552,9 +540,12 @@ public partial class Main : Node2D
         }
         else if (_frame == 60)
         {
-            _camera.Position = MapView.MapPosition(41.0, 29.0);
-            ZoomAt(MapView.MapPosition(41.0, 29.0), 6f);
-            SelectCell(_map!.Grid.FindCell(41.1, 29.05));
+            // Look across the edge of the map (the Bering Strait) to show that it wraps,
+            // and put the pointer in the middle so the tooltip appears.
+            _camera.Position = MapView.MapPosition(64.0, 180.0);
+            ZoomAt(MapView.MapPosition(64.0, 180.0), 5f);
+            SelectCell(_map!.Grid.FindCell(66.0, -169.0));
+            GetViewport().WarpMouse(GetViewportRect().Size / 2f);
         }
         else if (_frame == 90)
         {

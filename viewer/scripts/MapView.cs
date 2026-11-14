@@ -8,6 +8,7 @@ namespace Viewer;
 
 /// <summary>
 /// Draws the world as a flat map: longitude across, latitude down, clipped near the poles.
+/// The map repeats to the left and right, so it can be scrolled around the globe without end.
 /// Every cell is a polygon whose colour comes from one pixel of a small texture, so recolouring
 /// the whole map only means rewriting that texture.
 /// </summary>
@@ -23,7 +24,12 @@ public partial class MapView : Node2D
     private WorldMap? _map;
     private Image? _image;
     private ImageTexture? _texture;
-    private CellOutline? _outline;
+
+    // Three side-by-side copies of the map (west, centre, east) that share one mesh and one texture.
+    private readonly Node2D[] _copies = new Node2D[3];
+    private readonly CellOutline[] _outlines = new CellOutline[3];
+
+    public static float WorldWidth => 360f * PixelsPerDegree;
 
     public static float HalfWidth => 180f * PixelsPerDegree;
 
@@ -42,6 +48,12 @@ public partial class MapView : Node2D
         _image = Image.CreateFromData(TextureSize, TextureSize, false, Image.Format.Rgb8, _pixels);
         _texture = ImageTexture.CreateFromImage(_image);
 
+        for (int k = 0; k < _copies.Length; k++)
+        {
+            _copies[k] = new Node2D { Position = new Vector2((k - 1) * WorldWidth, 0f) };
+            AddChild(_copies[k]);
+        }
+
         var vertices = new List<Vector2>();
         var uvs = new List<Vector2>();
         var indices = new List<int>();
@@ -57,29 +69,11 @@ public partial class MapView : Node2D
             }
 
             int count = ProjectCell(grid, cell, corners, points);
-            float minX = float.MaxValue;
-            float maxX = float.MinValue;
-            for (int k = 0; k < count; k++)
-            {
-                minX = Math.Min(minX, points[k].X);
-                maxX = Math.Max(maxX, points[k].X);
-            }
-
             var uv = new Vector2(
                 (cell % TextureSize + 0.5f) / TextureSize,
                 (cell / TextureSize + 0.5f) / TextureSize);
 
-            AddPolygon(vertices, uvs, indices, points, count, uv, 0f);
-
-            // Cells on the left or right edge are drawn again on the other side so the edges are filled.
-            if (minX < -HalfWidth)
-            {
-                AddPolygon(vertices, uvs, indices, points, count, uv, 360f * PixelsPerDegree);
-            }
-            else if (maxX > HalfWidth)
-            {
-                AddPolygon(vertices, uvs, indices, points, count, uv, -360f * PixelsPerDegree);
-            }
+            AddPolygon(vertices, uvs, indices, points, count, uv);
 
             cellsInChunk++;
             if (cellsInChunk >= CellsPerChunk)
@@ -91,8 +85,39 @@ public partial class MapView : Node2D
 
         FlushChunk(vertices, uvs, indices);
 
-        _outline = new CellOutline();
-        AddChild(_outline);
+        for (int k = 0; k < _copies.Length; k++)
+        {
+            _outlines[k] = new CellOutline();
+            _copies[k].AddChild(_outlines[k]);
+        }
+    }
+
+    /// <summary>Brings a horizontal map position back into the centre copy.</summary>
+    public static float WrapX(float x)
+    {
+        float wrapped = (x + HalfWidth) % WorldWidth;
+        if (wrapped < 0f)
+        {
+            wrapped += WorldWidth;
+        }
+
+        return wrapped - HalfWidth;
+    }
+
+    /// <summary>Hides the copies of the map that are outside the view, given its left and right edges.</summary>
+    public void ShowCopiesInView(float left, float right)
+    {
+        for (int k = 0; k < _copies.Length; k++)
+        {
+            if (_copies[k] == null)
+            {
+                continue;
+            }
+
+            float centre = (k - 1) * WorldWidth;
+            float margin = 2f * PixelsPerDegree;
+            _copies[k].Visible = right > centre - HalfWidth - margin && left < centre + HalfWidth + margin;
+        }
     }
 
     /// <summary>Recolours every cell.</summary>
@@ -124,14 +149,15 @@ public partial class MapView : Node2D
             return -1;
         }
 
-        double longitude = mapPosition.X / PixelsPerDegree;
+        double longitude = WrapX(mapPosition.X) / PixelsPerDegree;
         double latitude = -mapPosition.Y / PixelsPerDegree;
-        if (Math.Abs(latitude) > MaxLatitude || Math.Abs(longitude) > 180.0)
+        if (Math.Abs(latitude) > MaxLatitude)
         {
             return -1;
         }
 
-        return _map.Grid.FindCell(latitude, longitude);
+        int cell = _map.Grid.FindCell(latitude, longitude);
+        return Math.Abs(_map.Grid.Latitude(cell)) > MaxLatitude ? -1 : cell;
     }
 
     /// <summary>Where a latitude and longitude sit on the map.</summary>
@@ -141,14 +167,18 @@ public partial class MapView : Node2D
     /// <summary>Outlines one cell, or none when given -1.</summary>
     public void SetSelectedCell(int cell)
     {
-        if (_map == null || _outline == null)
+        if (_map == null || _outlines[0] == null)
         {
             return;
         }
 
         if (cell < 0 || Math.Abs(_map.Grid.Latitude(cell)) > MaxLatitude)
         {
-            _outline.SetPoints(Array.Empty<Vector2>());
+            foreach (CellOutline outline in _outlines)
+            {
+                outline.SetPoints(Array.Empty<Vector2>());
+            }
+
             return;
         }
 
@@ -162,7 +192,10 @@ public partial class MapView : Node2D
         }
 
         closed[count] = points[0];
-        _outline.SetPoints(closed);
+        foreach (CellOutline outline in _outlines)
+        {
+            outline.SetPoints(closed);
+        }
     }
 
     // Projects a cell's corners to map positions, keeping them on the same side as the cell centre.
@@ -196,13 +229,12 @@ public partial class MapView : Node2D
         List<int> indices,
         Span<Vector2> points,
         int count,
-        Vector2 uv,
-        float shiftX)
+        Vector2 uv)
     {
         int first = vertices.Count;
         for (int k = 0; k < count; k++)
         {
-            vertices.Add(new Vector2(points[k].X + shiftX, points[k].Y));
+            vertices.Add(points[k]);
             uvs.Add(uv);
         }
 
@@ -230,13 +262,15 @@ public partial class MapView : Node2D
         var mesh = new ArrayMesh();
         mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, arrays);
 
-        var instance = new MeshInstance2D
+        foreach (Node2D copy in _copies)
         {
-            Mesh = mesh,
-            Texture = _texture,
-            TextureFilter = TextureFilterEnum.Nearest,
-        };
-        AddChild(instance);
+            copy.AddChild(new MeshInstance2D
+            {
+                Mesh = mesh,
+                Texture = _texture,
+                TextureFilter = TextureFilterEnum.Nearest,
+            });
+        }
 
         vertices.Clear();
         uvs.Clear();

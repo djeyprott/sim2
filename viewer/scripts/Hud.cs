@@ -12,6 +12,8 @@ public partial class Hud : CanvasLayer
     private Label _dateLabel = null!;
     private Label _statusLabel = null!;
     private Label _infoLabel = null!;
+    private PanelContainer _tooltipPanel = null!;
+    private Label _tooltipLabel = null!;
     private Button _saveButton = null!;
     private Button _loadButton = null!;
 
@@ -98,7 +100,54 @@ public partial class Hud : CanvasLayer
         };
         infoMargin.AddChild(_infoLabel);
 
+        _tooltipPanel = new PanelContainer { MouseFilter = Control.MouseFilterEnum.Ignore, Visible = false };
+        AddChild(_tooltipPanel);
+
+        var tooltipMargin = NewMargin(10);
+        tooltipMargin.MouseFilter = Control.MouseFilterEnum.Ignore;
+        _tooltipPanel.AddChild(tooltipMargin);
+
+        _tooltipLabel = new Label { Text = "", MouseFilter = Control.MouseFilterEnum.Ignore };
+        tooltipMargin.AddChild(_tooltipLabel);
+
         ShowSpeed(0);
+    }
+
+    /// <summary>
+    /// Shows a small panel of text beside the pointer, or hides it when given null.
+    /// Call every frame so it follows the pointer.
+    /// </summary>
+    public void UpdateTooltip(string? text)
+    {
+        // Hide it while the pointer is over a button or panel.
+        if (text == null || GetViewport().GuiGetHoveredControl() != null)
+        {
+            _tooltipPanel.Visible = false;
+            return;
+        }
+
+        if (_tooltipLabel.Text != text)
+        {
+            _tooltipLabel.Text = text;
+            _tooltipPanel.ResetSize();
+        }
+
+        Vector2 pointer = GetViewport().GetMousePosition();
+        Vector2 screen = GetViewport().GetVisibleRect().Size;
+        Vector2 size = _tooltipPanel.GetCombinedMinimumSize();
+        Vector2 position = pointer + new Vector2(18f, 18f);
+        if (position.X + size.X > screen.X)
+        {
+            position.X = pointer.X - size.X - 12f;
+        }
+
+        if (position.Y + size.Y > screen.Y)
+        {
+            position.Y = pointer.Y - size.Y - 12f;
+        }
+
+        _tooltipPanel.Position = new Vector2(Math.Max(0f, position.X), Math.Max(0f, position.Y));
+        _tooltipPanel.Visible = true;
     }
 
     public void SetDate(string text) => _dateLabel.Text = text;

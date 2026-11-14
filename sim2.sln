@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sim.Core", "src\Sim.Core\Si
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sim.Core.Tests", "tests\Sim.Core.Tests\Sim.Core.Tests.csproj", "{D0A197B7-A192-4814-8E2B-3F391A51E4DA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sim.Tools.EarthImport", "src\Sim.Tools.EarthImport\Sim.Tools.EarthImport.csproj", "{EFCEA0A9-1F12-4358-ABF8-A4F449655CBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D0A197B7-A192-4814-8E2B-3F391A51E4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0A197B7-A192-4814-8E2B-3F391A51E4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0A197B7-A192-4814-8E2B-3F391A51E4DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCEA0A9-1F12-4358-ABF8-A4F449655CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCEA0A9-1F12-4358-ABF8-A4F449655CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCEA0A9-1F12-4358-ABF8-A4F449655CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCEA0A9-1F12-4358-ABF8-A4F449655CBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

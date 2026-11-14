@@ -1,0 +1,52 @@
+name: Earth import
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/Sim.Tools.EarthImport/**'
+      - 'data/earth-overrides.txt'
+      - 'tools/etopo_to_raw.py'
+      - '.github/workflows/import.yml'
+
+env:
+  # NOAA NCEI ETOPO 2022, 60 arc-second, ice surface elevation.
+  ETOPO_URL: https://www.ngdc.noaa.gov/thredds/fileServer/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Cache converted elevation data
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: raw/etopo60.i16
+          key: etopo2022-60s-surface-i16-v1
+      - uses: actions/setup-python@v5
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          python-version: '3.12'
+      - name: Download and convert elevation data
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p raw
+          pip install netCDF4 numpy
+          curl -fL --retry 3 -o raw/etopo.nc "$ETOPO_URL"
+          ls -l raw
+          python tools/etopo_to_raw.py raw/etopo.nc raw/etopo60.i16
+          rm raw/etopo.nc
+      - name: Build world file
+        run: >
+          dotnet run --project src/Sim.Tools.EarthImport -c Release --
+          --elevation raw/etopo60.i16 --width 21600 --height 10800
+          --overrides data/earth-overrides.txt
+          --out out/earth.world --preview out/earth-preview.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-world
+          path: out/

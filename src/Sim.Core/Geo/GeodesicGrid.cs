@@ -156,17 +156,26 @@ public sealed class GeodesicGrid
             j = Math.Clamp((int)Math.Round(wb / sum * n), 0, n - i);
         }
 
-        int cell = _faceTables[face][i * (n + 1) + j];
+        return FindCellFrom(_faceTables[face][i * (n + 1) + j], p);
+    }
+
+    /// <summary>
+    /// The cell whose centre is nearest to <paramref name="unitPoint"/>, searching outward from
+    /// <paramref name="startCell"/>. Fast when the start is close. The point must have length 1.
+    /// </summary>
+    public int FindCellFrom(int startCell, Vec3 unitPoint)
+    {
+        int cell = startCell;
         while (true)
         {
-            double bestDot = Vec3.Dot(_centre[cell], p);
+            double bestDot = Vec3.Dot(_centre[cell], unitPoint);
             int bestCell = cell;
             int start = cell * MaxNeighbours;
             int m = _neighbourCount[cell];
             for (int x = 0; x < m; x++)
             {
                 int u = _neighbours[start + x];
-                double d = Vec3.Dot(_centre[u], p);
+                double d = Vec3.Dot(_centre[u], unitPoint);
                 if (d > bestDot)
                 {
                     bestDot = d;

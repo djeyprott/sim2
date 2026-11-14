@@ -1,0 +1,30 @@
+# Fixes for straits and land bridges narrower than one grid cell (about 51 km).
+# Each line: kind lat1 lon1 lat2 lon2
+# Every cell along the path from point 1 to point 2 is forced to water or land.
+# Latitude is positive north, longitude positive east, both in degrees.
+
+# Straits that connect seas to the ocean
+water 35.90  -6.30  36.00  -4.90   # Strait of Gibraltar
+water 39.95  25.90  40.20  26.40   # Dardanelles, lower
+water 40.20  26.40  40.45  26.80   # Dardanelles, upper
+water 40.45  26.80  40.60  27.40   # Dardanelles into the Sea of Marmara
+water 40.90  28.90  41.35  29.20   # Bosporus
+water 45.00  36.50  45.60  36.70   # Kerch Strait
+water 12.30  43.60  12.90  43.10   # Bab-el-Mandeb
+water 26.20  56.80  26.70  56.20   # Strait of Hormuz
+water 55.30  12.80  56.20  12.40   # Oresund
+water 54.80  10.90  55.90  10.90   # Great Belt
+water 50.80   1.20  51.30   1.90   # Strait of Dover
+
+# Straits that separate islands
+water 37.90  15.60  38.40  15.70   # Strait of Messina
+water -6.30 105.50  -5.70 106.00   # Sunda Strait
+water -8.90 115.70  -8.20 115.90   # Lombok Strait
+water  1.10 103.40   1.30 104.30   # Singapore Strait
+water 41.30 140.20  41.70 141.10   # Tsugaru Strait
+water -41.40 174.30 -41.00 174.90  # Cook Strait
+water 20.20 109.60  20.20 110.80   # Hainan Strait
+
+# Land bridges
+land   8.90 -79.90   9.30 -79.50   # Isthmus of Panama
+land  10.00  98.70  10.60  99.10   # Kra Isthmus

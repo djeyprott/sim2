@@ -10,7 +10,7 @@ TestResults/
 *.import
 export_presets.cfg
 
-# Raw source data and generated world files
-data/raw/
-*.world
+# Raw source data and import output
+raw/
+out/
 *.sav

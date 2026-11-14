@@ -4,17 +4,7 @@ A human history simulator. You watch civilization develop on Earth from 10,000 B
 
 ## Status
 
-Milestone 0 (Skeleton) is in progress.
-
-| Build step | State |
-|---|---|
-| 1. Grid and its tests | Done |
-| 2. Earth import tool and world file | Done |
-| 3. Clock, scheduler, random streams | Done |
-| 4. World state, save and load, checksum | Done |
-| 5. Headless runner | Done |
-| 6. Viewer | Built, awaiting hands-on check on Windows |
-| 7. Release build | Done |
+Milestone 0 (Skeleton) is complete and released as v0.1: the Earth map, the monthly clock, save and load, a windowless runner and the viewer. Nothing lives on the map yet. Milestone 1 (Land and people) is next.
 
 ![Terrain classes of the imported Earth map](docs/earth-preview.png)
 

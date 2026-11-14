@@ -15,7 +15,11 @@ public static class Preview
         new byte[] { 96, 150, 80 },   // Lowland
         new byte[] { 176, 160, 100 }, // Hills
         new byte[] { 120, 96, 84 },   // Mountains
+        new byte[] { 90, 170, 220 },  // Lake
     };
+
+    private static readonly byte[] MinorRiver = { 110, 160, 215 };
+    private static readonly byte[] MajorRiver = { 40, 90, 200 };
 
     public static void Write(WorldMap world, string path, int width, int height)
     {
@@ -34,6 +38,15 @@ public static class Preview
                 double lon = -180.0 + (x + 0.5) * 360.0 / width;
                 cell = grid.FindCellFrom(cell, Vec3.FromLatLon(lat, lon));
                 byte[] colour = Colours[(int)world.Terrain(cell)];
+                if (world.River(cell) == RiverSize.Major)
+                {
+                    colour = MajorRiver;
+                }
+                else if (world.River(cell) == RiverSize.Minor)
+                {
+                    colour = MinorRiver;
+                }
+
                 raw[offset++] = colour[0];
                 raw[offset++] = colour[1];
                 raw[offset++] = colour[2];

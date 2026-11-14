@@ -6,9 +6,10 @@ using Sim.Core.Map;
 namespace Sim.Tools.EarthImport;
 
 /// <summary>
-/// Turns a global elevation raster into a world file.
-/// Input: raw 16-bit little-endian elevations in metres, rows from north to south,
-/// columns from 180 W to 180 E, each sample at the centre of its pixel.
+/// Turns global rasters into a world file.
+/// Elevation: raw 16-bit little-endian metres. Climate, lakes and rivers: the files written by
+/// tools/prepare_environment.py. Every raster has rows from north to south and columns from
+/// 180 W to 180 E, each sample at the centre of its pixel.
 /// </summary>
 public static class Program
 {
@@ -19,7 +20,11 @@ public static class Program
     // Land at or above this mean elevation counts as mountains even when flat (high plateaus).
     private const double HighPlateauMetres = 3000.0;
 
+    // A cell becomes a lake when at least this share of it is covered by lake.
+    private const double LakeShare = 0.5;
+
     private const double PathStepKm = 5.0;
+    private const int Months = WorldMap.MonthsPerYear;
 
     public static int Main(string[] args)
     {
@@ -33,6 +38,9 @@ public static class Program
         int width = int.Parse(Require(options, "--width"), CultureInfo.InvariantCulture);
         int height = int.Parse(Require(options, "--height"), CultureInfo.InvariantCulture);
         string overridesPath = Require(options, "--overrides");
+        string environmentFolder = Require(options, "--environment");
+        int envWidth = int.Parse(Require(options, "--env-width"), CultureInfo.InvariantCulture);
+        int envHeight = int.Parse(Require(options, "--env-height"), CultureInfo.InvariantCulture);
         string outPath = Require(options, "--out");
         options.TryGetValue("--preview", out string? previewPath);
 
@@ -40,7 +48,7 @@ public static class Program
         GeodesicGrid grid = GeodesicGrid.Create(GeodesicGrid.EarthFrequency);
         int count = grid.CellCount;
 
-        // Per-cell sums over the samples falling in the cell, weighted by sample area.
+        // Per-cell sums over the elevation samples falling in the cell, weighted by sample area.
         var weight = new double[count];
         var landWeight = new double[count];
         var landSum = new double[count];
@@ -48,7 +56,7 @@ public static class Program
         var waterSum = new double[count];
 
         Console.WriteLine("Reading elevation samples...");
-        Accumulate(grid, elevationPath, width, height, weight, landWeight, landSum, landSumSq, waterSum);
+        AccumulateElevation(grid, elevationPath, width, height, weight, landWeight, landSum, landSumSq, waterSum);
 
         for (int cell = 0; cell < count; cell++)
         {
@@ -71,8 +79,8 @@ public static class Program
             low[cell] = forced[cell] == 1 || (forced[cell] == 0 && mostlyBelowSea);
         }
 
-        // Sea is every low cell connected to the open ocean. Low cells that are cut off
-        // (dry depressions, and inland seas until lakes arrive in milestone 1) stay land.
+        // Sea is every low cell connected to the open ocean. Low cells that are cut off stay land
+        // unless the lake data below says they are a lake.
         var sea = new bool[count];
         int seed = grid.FindCell(0.0, -30.0);
         if (!low[seed])
@@ -96,9 +104,51 @@ public static class Program
             }
         }
 
-        var elevation = new short[count];
-        var terrain = new TerrainClass[count];
-        var classCounts = new int[5];
+        Console.WriteLine("Reading climate, lakes and rivers...");
+        int[] cellOfSample = MapSamplesToCells(grid, envWidth, envHeight, out double[] sampleWeight);
+        int samples = envWidth * envHeight;
+
+        // Lakes.
+        byte[] lakeRaster = File.ReadAllBytes(Path.Combine(environmentFolder, "lakes.u8"));
+        CheckSize(lakeRaster.Length, samples, "lakes.u8");
+        var envWeight = new double[count];
+        var lakeWeight = new double[count];
+        for (int s = 0; s < samples; s++)
+        {
+            int cell = cellOfSample[s];
+            envWeight[cell] += sampleWeight[s];
+            if (lakeRaster[s] != 0)
+            {
+                lakeWeight[cell] += sampleWeight[s];
+            }
+        }
+
+        var lake = new bool[count];
+        int lakeCells = 0;
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (!sea[cell] && forced[cell] != 2 && envWeight[cell] > 0.0 && lakeWeight[cell] >= LakeShare * envWeight[cell])
+            {
+                lake[cell] = true;
+                lakeCells++;
+            }
+        }
+
+        // Rivers: the largest river touching the cell.
+        byte[] riverRaster = File.ReadAllBytes(Path.Combine(environmentFolder, "rivers.u8"));
+        CheckSize(riverRaster.Length, samples, "rivers.u8");
+        var data = new WorldMapData("Earth", grid);
+        for (int s = 0; s < samples; s++)
+        {
+            int cell = cellOfSample[s];
+            if (riverRaster[s] > (byte)data.River[cell] && riverRaster[s] <= (byte)RiverSize.Major)
+            {
+                data.River[cell] = (RiverSize)riverRaster[s];
+            }
+        }
+
+        // Elevation and terrain class.
+        var classCounts = new int[6];
         double landArea = 0.0;
         double totalArea = 0.0;
         int enclosedLow = 0;
@@ -117,7 +167,7 @@ public static class Program
                 kind = TerrainClass.Ocean;
                 foreach (int other in grid.Neighbours(cell))
                 {
-                    if (!sea[other])
+                    if (!sea[other] && !lake[other])
                     {
                         kind = TerrainClass.Coast;
                         break;
@@ -145,7 +195,11 @@ public static class Program
                     value = 1.0;
                 }
 
-                if (relief >= MountainsReliefMetres || value >= HighPlateauMetres)
+                if (lake[cell])
+                {
+                    kind = TerrainClass.Lake;
+                }
+                else if (relief >= MountainsReliefMetres || value >= HighPlateauMetres)
                 {
                     kind = TerrainClass.Mountains;
                 }
@@ -158,20 +212,45 @@ public static class Program
                     kind = TerrainClass.Lowland;
                 }
 
-                landArea += grid.AreaKm2(cell);
+                if (!lake[cell])
+                {
+                    landArea += grid.AreaKm2(cell);
+                }
             }
 
             totalArea += grid.AreaKm2(cell);
-            elevation[cell] = (short)Math.Clamp(Math.Round(value), short.MinValue, short.MaxValue);
-            terrain[cell] = kind;
+            data.ElevationMetres[cell] = (short)Math.Clamp(Math.Round(value), short.MinValue, short.MaxValue);
+            data.Terrain[cell] = kind;
             classCounts[(int)kind]++;
+
+            if (kind != TerrainClass.Lowland && kind != TerrainClass.Hills && kind != TerrainClass.Mountains)
+            {
+                data.River[cell] = RiverSize.None;
+            }
         }
 
-        var world = new WorldMap("Earth", grid, elevation, terrain);
+        // Climate for land and lake cells.
+        FillClimate(grid, data, sea, environmentFolder, cellOfSample, sampleWeight, samples);
+
+        var world = new WorldMap(data);
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outPath))!);
         world.Save(outPath);
 
-        Console.WriteLine($"Wrote {outPath}");
+        int minorRiverCells = 0;
+        int majorRiverCells = 0;
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (world.River(cell) == RiverSize.Minor)
+            {
+                minorRiverCells++;
+            }
+            else if (world.River(cell) == RiverSize.Major)
+            {
+                majorRiverCells++;
+            }
+        }
+
+        Console.WriteLine($"Wrote {outPath} ({new FileInfo(outPath).Length} bytes)");
         Console.WriteLine($"Checksum {world.Checksum}");
         Console.WriteLine($"Cells: {count}");
         for (int k = 0; k < classCounts.Length; k++)
@@ -180,7 +259,9 @@ public static class Program
         }
 
         Console.WriteLine($"Land share of surface: {100.0 * landArea / totalArea:F2}%");
-        Console.WriteLine($"Enclosed below-sea-level cells kept as land: {enclosedLow}");
+        Console.WriteLine($"Lake cells: {lakeCells}");
+        Console.WriteLine($"River cells: {minorRiverCells} minor, {majorRiverCells} major");
+        Console.WriteLine($"Enclosed below-sea-level cells not counted as sea: {enclosedLow}");
         PrintProbes(world);
 
         if (previewPath != null)
@@ -203,7 +284,226 @@ public static class Program
         return value;
     }
 
-    private static void Accumulate(
+    private static void CheckSize(long actual, long expected, string name)
+    {
+        if (actual != expected)
+        {
+            throw new InvalidDataException($"{name} has {actual} bytes, expected {expected}.");
+        }
+    }
+
+    // For each raster sample, the cell it falls in and its relative area.
+    private static int[] MapSamplesToCells(GeodesicGrid grid, int width, int height, out double[] sampleWeight)
+    {
+        var cellOfSample = new int[width * height];
+        sampleWeight = new double[width * height];
+
+        var cosLon = new double[width];
+        var sinLon = new double[width];
+        for (int col = 0; col < width; col++)
+        {
+            double lon = (-180.0 + (col + 0.5) * 360.0 / width) * Math.PI / 180.0;
+            cosLon[col] = Math.Cos(lon);
+            sinLon[col] = Math.Sin(lon);
+        }
+
+        int rowStartCell = 0;
+        for (int row = 0; row < height; row++)
+        {
+            double lat = (90.0 - (row + 0.5) * 180.0 / height) * Math.PI / 180.0;
+            double cosLat = Math.Cos(lat);
+            double sinLat = Math.Sin(lat);
+            int cell = rowStartCell;
+            for (int col = 0; col < width; col++)
+            {
+                cell = grid.FindCellFrom(cell, new Vec3(cosLat * cosLon[col], cosLat * sinLon[col], sinLat));
+                if (col == 0)
+                {
+                    rowStartCell = cell;
+                }
+
+                cellOfSample[row * width + col] = cell;
+                sampleWeight[row * width + col] = cosLat;
+            }
+        }
+
+        return cellOfSample;
+    }
+
+    private static void FillClimate(
+        GeodesicGrid grid,
+        WorldMapData data,
+        bool[] sea,
+        string folder,
+        int[] cellOfSample,
+        double[] sampleWeight,
+        int samples)
+    {
+        if (!BitConverter.IsLittleEndian)
+        {
+            throw new PlatformNotSupportedException("The import tool needs a little-endian machine.");
+        }
+
+        int count = grid.CellCount;
+        var temperature = new double[count * Months];
+        var rainfall = new double[count * Months];
+        var climateWeight = new double[count];
+
+        byte[] temperatureBytes = File.ReadAllBytes(Path.Combine(folder, "climate_tmean.i16"));
+        byte[] rainfallBytes = File.ReadAllBytes(Path.Combine(folder, "climate_ppt.i16"));
+        CheckSize(temperatureBytes.Length, (long)samples * Months * 2, "climate_tmean.i16");
+        CheckSize(rainfallBytes.Length, (long)samples * Months * 2, "climate_ppt.i16");
+        ReadOnlySpan<short> temperatureRaster = MemoryMarshal.Cast<byte, short>(temperatureBytes);
+        ReadOnlySpan<short> rainfallRaster = MemoryMarshal.Cast<byte, short>(rainfallBytes);
+
+        for (int s = 0; s < samples; s++)
+        {
+            // A sample counts only if it has data in every month.
+            bool valid = true;
+            for (int month = 0; month < Months; month++)
+            {
+                if (temperatureRaster[month * samples + s] == short.MinValue || rainfallRaster[month * samples + s] == short.MinValue)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (!valid)
+            {
+                continue;
+            }
+
+            int cell = cellOfSample[s];
+            double w = sampleWeight[s];
+            climateWeight[cell] += w;
+            for (int month = 0; month < Months; month++)
+            {
+                temperature[cell * Months + month] += w * temperatureRaster[month * samples + s] / 10.0;
+                rainfall[cell * Months + month] += w * rainfallRaster[month * samples + s];
+            }
+        }
+
+        var known = new bool[count];
+        int direct = 0;
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (!sea[cell] && climateWeight[cell] > 0.0)
+            {
+                for (int month = 0; month < Months; month++)
+                {
+                    temperature[cell * Months + month] /= climateWeight[cell];
+                    rainfall[cell * Months + month] /= climateWeight[cell];
+                }
+
+                known[cell] = true;
+                direct++;
+            }
+        }
+
+        // Cells the dataset misses (small islands, coast slivers) copy the average of known neighbours.
+        int filled = 0;
+        for (int pass = 0; pass < 6; pass++)
+        {
+            var newlyKnown = new List<int>();
+            for (int cell = 0; cell < count; cell++)
+            {
+                if (sea[cell] || known[cell])
+                {
+                    continue;
+                }
+
+                int sources = 0;
+                foreach (int other in grid.Neighbours(cell))
+                {
+                    if (known[other])
+                    {
+                        sources++;
+                    }
+                }
+
+                if (sources == 0)
+                {
+                    continue;
+                }
+
+                for (int month = 0; month < Months; month++)
+                {
+                    double t = 0.0;
+                    double r = 0.0;
+                    foreach (int other in grid.Neighbours(cell))
+                    {
+                        if (known[other])
+                        {
+                            t += temperature[other * Months + month];
+                            r += rainfall[other * Months + month];
+                        }
+                    }
+
+                    temperature[cell * Months + month] = t / sources;
+                    rainfall[cell * Months + month] = r / sources;
+                }
+
+                newlyKnown.Add(cell);
+            }
+
+            foreach (int cell in newlyKnown)
+            {
+                known[cell] = true;
+            }
+
+            filled += newlyKnown.Count;
+            if (newlyKnown.Count == 0)
+            {
+                break;
+            }
+        }
+
+        // Whatever is still unknown (Antarctica, remote islands) gets a simple estimate from
+        // latitude and elevation.
+        int estimated = 0;
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (sea[cell] || known[cell])
+            {
+                continue;
+            }
+
+            double latitude = grid.Latitude(cell) * Math.PI / 180.0;
+            double sinLat = Math.Sin(latitude);
+            double elevation = Math.Max(0, (int)data.ElevationMetres[cell]);
+            double annual = 28.0 - 50.0 * sinLat * sinLat - 0.0065 * elevation;
+            double swing = 15.0 * Math.Abs(sinLat);
+            int warmestMonth = latitude >= 0.0 ? 6 : 0;
+            for (int month = 0; month < Months; month++)
+            {
+                temperature[cell * Months + month] = annual + swing * Math.Cos(2.0 * Math.PI * (month - warmestMonth) / Months);
+                rainfall[cell * Months + month] = Math.Abs(grid.Latitude(cell)) > 60.0 ? 10.0 : 80.0;
+            }
+
+            known[cell] = true;
+            estimated++;
+        }
+
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (sea[cell])
+            {
+                continue;
+            }
+
+            for (int month = 0; month < Months; month++)
+            {
+                int index = cell * Months + month;
+                data.TemperatureTenths[index] = (short)Math.Clamp(Math.Round(temperature[index] * 10.0), -900.0, 700.0);
+                data.RainfallMm[index] = (short)Math.Clamp(Math.Round(rainfall[index]), 0.0, 30000.0);
+            }
+        }
+
+        Console.WriteLine($"Climate: {direct} cells from data, {filled} filled from neighbours, {estimated} estimated.");
+    }
+
+    private static void AccumulateElevation(
         GeodesicGrid grid,
         string path,
         int width,
@@ -330,29 +630,38 @@ public static class Program
             ("Tibet", 33.0, 88.0),
             ("Alps", 46.5, 10.0),
             ("Black Sea", 43.0, 34.0),
-            ("Mediterranean", 35.0, 18.0),
-            ("Baltic", 58.0, 20.0),
-            ("Red Sea", 20.0, 38.5),
-            ("Persian Gulf", 27.0, 51.0),
-            ("Sea of Marmara", 40.7, 28.2),
             ("Bosporus", 41.1, 29.05),
-            ("Strait of Dover", 51.0, 1.5),
-            ("Strait of Gibraltar", 35.95, -5.6),
             ("Panama", 9.1, -79.7),
             ("Caspian Sea", 41.0, 51.0),
             ("Lake Superior", 47.7, -87.5),
+            ("Lake Victoria", -1.0, 33.0),
+            ("Lake Baikal", 53.5, 108.0),
+            ("Aral Sea", 45.0, 60.0),
             ("Greenland interior", 72.0, -40.0),
             ("Antarctica interior", -80.0, 0.0),
-            ("Sicily", 37.6, 14.2),
-            ("Hokkaido", 43.4, 142.8),
             ("Netherlands", 52.3, 5.3),
+            ("Nile at Luxor", 25.7, 32.65),
+            ("Nile delta", 30.6, 31.2),
+            ("Mississippi at Vicksburg", 32.3, -90.9),
+            ("Amazon at Manaus", -3.1, -60.0),
+            ("Yangtze at Wuhan", 30.6, 114.3),
+            ("Danube at Budapest", 47.5, 19.05),
+            ("Euphrates", 33.0, 44.2),
+            ("London", 51.5, -0.1),
+            ("Moscow", 55.75, 37.6),
+            ("Singapore", 1.35, 103.8),
+            ("Sydney", -33.9, 151.1),
+            ("Yakutsk", 62.0, 129.7),
         };
 
         Console.WriteLine("Probe points:");
         foreach (var probe in probes)
         {
             int cell = world.Grid.FindCell(probe.Lat, probe.Lon);
-            Console.WriteLine($"  {probe.Name}: {world.Terrain(cell)}, {world.ElevationMetres(cell)} m");
+            string climate = world.HasClimate(cell)
+                ? $", Jan {world.TemperatureC(cell, 0):F1} C, Jul {world.TemperatureC(cell, 6):F1} C, mean {world.MeanTemperatureC(cell):F1} C, rain {world.AnnualRainfallMm(cell):F0} mm"
+                : "";
+            Console.WriteLine($"  {probe.Name}: {world.Terrain(cell)}, {world.ElevationMetres(cell)} m, river {world.River(cell)}{climate}");
         }
     }
 }

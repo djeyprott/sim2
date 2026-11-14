@@ -5,13 +5,21 @@ on:
   push:
     paths:
       - 'src/Sim.Tools.EarthImport/**'
+      - 'src/Sim.Core/Map/**'
+      - 'src/Sim.Core/Geo/**'
       - 'data/earth-overrides.txt'
       - 'tools/etopo_to_raw.py'
+      - 'tools/prepare_environment.py'
       - '.github/workflows/import.yml'
 
 env:
   # NOAA NCEI ETOPO 2022, 60 arc-second, ice surface elevation.
   ETOPO_URL: https://www.ngdc.noaa.gov/thredds/fileServer/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc
+  # TerraClimate 1981-2010 monthly climatology (public domain, CC0).
+  TERRACLIMATE_URL: http://thredds.northwestknowledge.net:8080/thredds/fileServer/TERRACLIMATE_ALL/summaries
+  TERRACLIMATE_FALLBACK_URL: https://www.reacchpna.org/thredds/fileServer/TERRACLIMATE_ALL/summaries
+  # Natural Earth 10m physical vectors (public domain).
+  NATURAL_EARTH_URL: https://naciscdn.org/naturalearth/10m/physical
 
 jobs:
   import:
@@ -29,8 +37,13 @@ jobs:
         with:
           path: raw/etopo60.i16
           key: etopo2022-60s-surface-i16-v1
+      - name: Cache downloaded climate, lake and river sources
+        id: source-cache
+        uses: actions/cache@v4
+        with:
+          path: raw/env-src
+          key: env-sources-terraclimate19812010-ne10m-v1
       - uses: actions/setup-python@v5
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           python-version: '3.12'
       - name: Download and convert elevation data
@@ -42,23 +55,41 @@ jobs:
           ls -l raw
           python tools/etopo_to_raw.py raw/etopo.nc raw/etopo60.i16
           rm raw/etopo.nc
+      - name: Download climate, lake and river sources
+        if: steps.source-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eux
+          mkdir -p raw/env-src
+          cd raw/env-src
+          for var in tmax tmin ppt; do
+            curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_URL/TerraClimate19812010_$var.nc" \
+              || curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_FALLBACK_URL/TerraClimate19812010_$var.nc"
+          done
+          for name in ne_10m_lakes ne_10m_rivers_lake_centerlines; do
+            curl -fL --retry 3 -o $name.zip "$NATURAL_EARTH_URL/$name.zip"
+            unzip -o -q $name.zip
+            rm $name.zip
+          done
+          ls -l
+      - name: Prepare climate, lake and river rasters
+        run: |
+          set -eux
+          pip install netCDF4 numpy pyshp pillow
+          mkdir -p raw/env
+          python tools/prepare_environment.py raw/env-src raw/env data/earth-rivers.bin
+          ls -l raw/env data
       - name: Build world file
         run: >
           dotnet run --project src/Sim.Tools.EarthImport -c Release --
           --elevation raw/etopo60.i16 --width 21600 --height 10800
           --overrides data/earth-overrides.txt
+          --environment raw/env --env-width 4320 --env-height 2160
           --out data/earth.world --preview docs/earth-preview.png
-      - uses: actions/upload-artifact@v4
-        with:
-          name: earth-world
-          path: |
-            data/earth.world
-            docs/earth-preview.png
       - name: Commit world file
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/earth.world docs/earth-preview.png
+          git add data/earth.world data/earth-rivers.bin docs/earth-preview.png
           git diff --cached --quiet && exit 0
           git commit -m "Regenerate earth.world from import"
           git pull --rebase

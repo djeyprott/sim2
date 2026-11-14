@@ -1,0 +1,140 @@
+name: Windows build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths:
+      - 'viewer/**'
+      - 'src/**'
+      - 'data/earth.world'
+      - '.github/workflows/release.yml'
+
+env:
+  GODOT_VERSION: 4.6-stable
+  GODOT_TEMPLATES_DIR: 4.6.stable.mono
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Cache Godot
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-${{ env.GODOT_VERSION }}-mono-linux-with-templates-v1
+
+      - name: Download Godot and export templates
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eux
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}"
+          mkdir -p ~/godot ~/.local/share/godot/export_templates/${GODOT_TEMPLATES_DIR}
+          curl -fL --retry 3 -o /tmp/godot.zip "${base}/Godot_v${GODOT_VERSION}_mono_linux_x86_64.zip"
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          mv /tmp/godot/Godot_v${GODOT_VERSION}_mono_linux_x86_64/* ~/godot/
+          curl -fL --retry 3 -o /tmp/templates.tpz "${base}/Godot_v${GODOT_VERSION}_mono_export_templates.tpz"
+          unzip -q /tmp/templates.tpz -d /tmp/templates
+          # Only the Windows templates are needed.
+          cp /tmp/templates/templates/version.txt ~/.local/share/godot/export_templates/${GODOT_TEMPLATES_DIR}/
+          cp /tmp/templates/templates/windows_*x86_64* ~/.local/share/godot/export_templates/${GODOT_TEMPLATES_DIR}/
+          ls -la ~/godot ~/.local/share/godot/export_templates/${GODOT_TEMPLATES_DIR}
+
+      - name: Import project and build scripts
+        run: |
+          set -eux
+          GODOT=~/godot/Godot_v${GODOT_VERSION}_mono_linux.x86_64
+          $GODOT --headless --path viewer --import || true
+          dotnet build viewer/Viewer.csproj
+
+      - name: Run the viewer and take a screenshot
+        id: screenshot
+        continue-on-error: true
+        run: |
+          set -ux
+          GODOT=~/godot/Godot_v${GODOT_VERSION}_mono_linux.x86_64
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri > /dev/null
+          export SIM2_WORLD="$PWD/data/earth.world"
+          export SIM2_SCREENSHOT="$PWD/docs/viewer-screenshot.png"
+          timeout 300 xvfb-run -a -s "-screen 0 1600x900x24" \
+            $GODOT --path viewer --rendering-driver opengl3 --audio-driver Dummy --resolution 1600x900 2>&1 | tee /tmp/viewer.log
+          code=${PIPESTATUS[0]}
+          echo "Viewer exit code: $code"
+          ls -l docs/
+          exit $code
+
+      - name: Export Windows viewer
+        run: |
+          set -eux
+          GODOT=~/godot/Godot_v${GODOT_VERSION}_mono_linux.x86_64
+          mkdir -p build/windows
+          $GODOT --headless --path viewer --export-release "Windows Desktop" ../build/windows/sim2.exe 2>&1 | tee /tmp/export.log
+          ls -la build/windows
+          test -f build/windows/sim2.exe
+
+      - name: Publish headless runner and assemble package
+        run: |
+          set -eux
+          dotnet publish src/Sim.Headless -c Release -r win-x64 --self-contained true \
+            -p:PublishSingleFile=true -p:DebugType=none -o build/headless
+          cp build/headless/sim2-headless.exe build/windows/
+          cp data/earth.world build/windows/
+          cat > build/windows/README.txt <<'TXT'
+          sim2 - human history simulator
+
+          sim2.exe            The viewer. Double-click to start.
+          sim2-headless.exe   Runs the simulation with no window, from a command prompt.
+          earth.world         The Earth map. Keep it next to the programs.
+
+          Windows may warn that the program is from an unknown publisher,
+          because it is not signed. Choose "More info" then "Run anyway".
+
+          Controls: drag to move, mouse wheel to zoom, click a cell to select it,
+          Space to pause or resume, keys 1 to 5 to set the speed.
+          TXT
+          sed -i 's/^          //' build/windows/README.txt
+          mv build/windows build/sim2-windows
+          (cd build && zip -qr sim2-windows.zip sim2-windows)
+          ls -la build build/sim2-windows
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sim2-windows
+          path: build/sim2-windows.zip
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eux
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            gh release create "$GITHUB_REF_NAME" build/sim2-windows.zip --title "$GITHUB_REF_NAME" --generate-notes
+          else
+            gh release delete dev --cleanup-tag -y || true
+            sleep 3
+            gh release create dev build/sim2-windows.zip --prerelease --target "$GITHUB_SHA" \
+              --title "Development build" \
+              --notes "Latest build from the main branch (commit $GITHUB_SHA). Download sim2-windows.zip, unzip it and run sim2.exe."
+          fi
+
+      - name: Commit viewer screenshot
+        if: github.ref == 'refs/heads/main' && steps.screenshot.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/viewer-screenshot.png
+          git diff --cached --quiet && exit 0
+          git commit -m "Update viewer screenshot"
+          git pull --rebase
+          git push

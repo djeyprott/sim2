@@ -16,3 +16,5 @@ jobs:
         run: dotnet test sim2.sln --configuration Release
       - name: Headless run of 12,000 years
         run: dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 1 --years 12000
+      - name: Compile the viewer
+        run: dotnet build viewer/Viewer.csproj

@@ -7,8 +7,7 @@ TestResults/
 
 # Godot
 .godot/
-*.import
-export_presets.cfg
+build/
 
 # Raw source data and import output
 raw/

@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.4.
 
-Progress: step 1 in progress.
+Progress: step 1 (move to .NET 10) done 2026-11-14, awaiting a launch check of the Windows build by the owner. Step 2 is next.
 
 Change log:
 - 1.0 (2026-11-14): agreed and frozen.
@@ -143,7 +143,7 @@ By hand in the viewer:
 
 Each step ends with a new development build you can download.
 
-1. Move to .NET 10
+1. Move to .NET 10 (done)
 2. Baseline climate, lakes and rivers in the world file, with their map modes
 3. Saved state that is not per cell
 4. Changing climate, biomes and ice, with their map modes

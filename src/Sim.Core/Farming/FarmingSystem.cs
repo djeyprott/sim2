@@ -354,9 +354,14 @@ public sealed class FarmingSystem : ISimSystem
         int farmerGroup = groups.FindOrAdd(cell, _farmer);
         double farmers = groups.Size(farmerGroup);
 
+        // Where the harvest goes into a store, the farmers grow (and take in foragers) only while the
+        // store still held a safety margin when the harvest came in.
+        bool stored = _stockpiles != null && _settlementPlusOne != null && _settlementPlusOne[cell] > 0;
+        bool margin = !stored || _stockpiles!.Stock(cell, _grain) >= _parameters.GrowthReserve * farmers;
+
         // Foragers in the cell take up farming.
         int foragerGroup = groups.Find(cell, _forager);
-        if (foragerGroup >= 0 && capacity > 0.0)
+        if (foragerGroup >= 0 && capacity > 0.0 && margin)
         {
             double foragers = groups.Size(foragerGroup);
             double joining = _parameters.ConversionRate * foragers;
@@ -365,17 +370,17 @@ public sealed class FarmingSystem : ISimSystem
         }
 
         double food;
-        if (_stockpiles != null && _settlementPlusOne != null && _settlementPlusOne[cell] > 0)
+        if (stored)
         {
             // The harvest goes into the settlement's store, which the farmers eat from month by month.
-            // They grow toward what the land feeds in an average year, but only when they did not go
-            // hungry since the last harvest and the store still held a safety margin when it came in.
-            bool margin = _stockpiles.Stock(cell, _grain) >= _parameters.GrowthReserve * farmers;
-            _stockpiles.Produce(cell, _grain, harvest);
+            // They grow toward what an average harvest feeds once the store's spoilage is taken off,
+            // but only when they did not go hungry since the last harvest and the store kept its margin.
+            _stockpiles!.Produce(cell, _grain, harvest);
             food = groups.Food(farmerGroup);
-            if (margin && _hunger[cell] <= 0.0 && capacity > 0.0 && farmers < capacity)
+            double sustainable = capacity * (1.0 - _stockpiles.Goods.Get(_grain).Spoilage);
+            if (margin && _hunger[cell] <= 0.0 && sustainable > 0.0 && farmers < sustainable)
             {
-                farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / capacity);
+                farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / sustainable);
             }
 
             _storeFed[cell] = 1;

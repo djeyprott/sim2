@@ -172,6 +172,9 @@ public sealed class FarmingParameters
 
     public double MajorRiverYield { get; set; } = 1.0;
 
+    /// <summary>How well crops grow on a biome away from rivers, by biome name (1 when not listed).</summary>
+    public Dictionary<string, double> BiomeFactors { get; set; } = new Dictionary<string, double>();
+
     public double InventionChance { get; set; }
 
     public double ConversionRate { get; set; }
@@ -222,6 +225,11 @@ public sealed class FarmingParameters
         if (p.FamineDeathShare + p.FamineLeaveShare > 1.0)
         {
             throw new InvalidDataException("famineDeathShare and famineLeaveShare together must not exceed 1.");
+        }
+
+        if (p.BiomeFactors.Values.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)))
+        {
+            throw new InvalidDataException("Farming biome factors must be between 0 and 1.");
         }
 
         if (p.FarmDensity <= 0.0 || p.MajorRiverYield <= 0.0 || p.MinorRiverWater < 0.0 || p.MajorRiverWater < 0.0

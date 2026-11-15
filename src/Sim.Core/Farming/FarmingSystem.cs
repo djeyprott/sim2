@@ -38,6 +38,7 @@ public sealed class FarmingSystem : ISimSystem
     private readonly int _forager;
     private readonly int _farmer;
     private readonly bool[] _noFarmingBiome;
+    private readonly double[] _biomeFactor;
 
     // Saved state.
     private int[] _cropPlusOne = Array.Empty<int>();
@@ -82,6 +83,12 @@ public sealed class FarmingSystem : ISimSystem
         _forager = occupations.IndexOf(OccupationSet.Forager);
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _noFarmingBiome = new bool[biomes.Count];
+        _biomeFactor = Enumerable.Repeat(1.0, biomes.Count).ToArray();
+        foreach (KeyValuePair<string, double> pair in parameters.BiomeFactors.OrderBy(p => p.Key, StringComparer.Ordinal))
+        {
+            _biomeFactor[biomes.IndexOf(pair.Key)] = pair.Value;
+        }
+
         foreach (string name in parameters.NoFarmingBiomes)
         {
             _noFarmingBiome[biomes.IndexOf(name)] = true;
@@ -245,7 +252,8 @@ public sealed class FarmingSystem : ISimSystem
             _baseRain[cell] * factor,
             _baseDriest[cell] * factor,
             _summerShare[cell]);
-        return Crops.Get(crop).Suitability(climate, climate.Rain + _riverWater[cell]);
+        double suitability = Crops.Get(crop).Suitability(climate, climate.Rain + _riverWater[cell]);
+        return _map!.River(cell) == RiverSize.None ? suitability * _biomeFactor[biome] : suitability;
     }
 
     /// <summary>Every first farming of a crop so far: which crop, where and when (tick).</summary>

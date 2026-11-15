@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Sim.Core.Engine;
 using Sim.Core.Map;
+using Sim.Core.Stats;
 
 namespace Sim.Headless;
 
@@ -29,7 +30,7 @@ public static class Program
             if (a + 1 >= args.Length || !args[a].StartsWith("--", StringComparison.Ordinal))
             {
                 throw new ArgumentException(
-                    "Usage: sim2-headless [--world FILE] [--seed N] [--homelands real|random] [--years N] [--load FILE] [--save FILE]");
+                    "Usage: sim2-headless [--world FILE] [--seed N] [--homelands real|random] [--years N] [--load FILE] [--save FILE] [--stats FILE.csv]");
             }
 
             options[args[a]] = args[a + 1];
@@ -71,7 +72,31 @@ public static class Program
 
         long ticks = years * GameDate.MonthsPerYear;
         var watch = Stopwatch.StartNew();
-        simulation.Run(ticks);
+        if (options.TryGetValue("--stats", out string? statsPath))
+        {
+            // One row at the start and one after each simulated year.
+            var statistics = new RunStatistics(simulation);
+            using (var writer = new StreamWriter(statsPath))
+            {
+                writer.WriteLine(statistics.Header());
+                writer.WriteLine(statistics.Row());
+                for (long year = 0; year < years; year++)
+                {
+                    simulation.Run(GameDate.MonthsPerYear);
+                    writer.WriteLine(statistics.Row());
+                }
+            }
+
+            string originsPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
+                Path.GetFileNameWithoutExtension(statsPath) + "-origins.csv");
+            File.WriteAllText(originsPath, statistics.Origins());
+            Console.WriteLine($"Wrote yearly statistics to {statsPath} and farming origins to {originsPath}");
+        }
+        else
+        {
+            simulation.Run(ticks);
+        }
+
         watch.Stop();
 
         double seconds = Math.Max(watch.Elapsed.TotalSeconds, 1e-9);

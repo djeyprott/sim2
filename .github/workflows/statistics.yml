@@ -1,0 +1,48 @@
+name: Statistics
+
+# Runs the headless simulation for a few seeds and commits the yearly statistics to docs/stats,
+# so runs can be compared and tuned without downloading anything.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'data/content/**'
+      - '.github/workflows/statistics.yml'
+
+concurrency:
+  group: statistics
+  cancel-in-progress: true
+
+jobs:
+  statistics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Build
+        run: dotnet build src/Sim.Headless -c Release
+      - name: Run seeds 1 to 3 with real and random crop homelands, 6,000 years each
+        run: |
+          mkdir -p docs/stats
+          for homelands in real random; do
+            for seed in 1 2 3; do
+              dotnet run --project src/Sim.Headless -c Release --no-build -- \
+                --world data/earth.world --seed $seed --homelands $homelands --years 6000 \
+                --stats docs/stats/$homelands-seed$seed.csv
+            done
+          done
+      - name: Commit the statistics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/stats
+          git diff --cached --quiet && exit 0
+          git commit -m "Update run statistics"
+          git pull --rebase
+          git push

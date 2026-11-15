@@ -28,7 +28,8 @@ public sealed class ForagerSystem : ISimSystem
 
     private WorldMap? _map;
     private int[] _cells = Array.Empty<int>();
-    private double[] _baseFactor = Array.Empty<double>();
+    private double[] _shoreFactor = Array.Empty<double>();
+    private double[] _riverBonus = Array.Empty<double>();
     private bool[] _reachable = Array.Empty<bool>();
     private int[] _neighbourStart = Array.Empty<int>();
     private int[] _neighbours = Array.Empty<int>();
@@ -86,8 +87,10 @@ public sealed class ForagerSystem : ISimSystem
 
         _cells = cells.ToArray();
 
-        // Fixed part of each cell's capacity: area, coast or lake shore, and river.
-        _baseFactor = new double[_cells.Length];
+        // Fixed parts of each cell's capacity: area times the coast or lake shore factor, and the
+        // river's extra people.
+        _shoreFactor = new double[_cells.Length];
+        _riverBonus = new double[_cells.Length];
         for (int i = 0; i < _cells.Length; i++)
         {
             int cell = _cells[i];
@@ -99,15 +102,14 @@ public sealed class ForagerSystem : ISimSystem
                 lakeShore |= map.IsLake(other);
             }
 
-            double factor = map.Grid.AreaKm2(cell);
-            factor *= coast ? _parameters.CoastFactor : lakeShore ? _parameters.LakeShoreFactor : 1.0;
-            factor *= map.River(cell) switch
+            double area = map.Grid.AreaKm2(cell);
+            _shoreFactor[i] = area * (coast ? _parameters.CoastFactor : lakeShore ? _parameters.LakeShoreFactor : 1.0);
+            _riverBonus[i] = area * map.River(cell) switch
             {
-                RiverSize.Major => _parameters.MajorRiverFactor,
-                RiverSize.Minor => _parameters.MinorRiverFactor,
-                _ => 1.0,
+                RiverSize.Major => _parameters.MajorRiverBonus,
+                RiverSize.Minor => _parameters.MinorRiverBonus,
+                _ => 0.0,
             };
-            _baseFactor[i] = factor;
         }
 
         // Neighbours people can move to: reached land cells only.
@@ -181,7 +183,8 @@ public sealed class ForagerSystem : ISimSystem
         {
             int cell = _cells[i];
             int biome = _biome[cell];
-            _capacity[cell] = biome >= 0 ? _baseFactor[i] * _densityByBiome[biome] : 0.0;
+            double density = biome >= 0 ? _densityByBiome[biome] : 0.0;
+            _capacity[cell] = density > 0.0 ? _shoreFactor[i] * density + _riverBonus[i] : 0.0;
         }
     }
 

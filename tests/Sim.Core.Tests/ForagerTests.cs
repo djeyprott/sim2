@@ -105,7 +105,7 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
         biome[iced] = iceIndex;
         sim.Run(12);
 
-        Assert.True(people[centre] > 0.0, "People should move into the emptied cell.");
+        Assert.All(block.Skip(1), cell => Assert.True(people[cell] > 0.0, "People should move into the emptied cells at the edge."));
         Assert.All(block, cell => Assert.True(people[cell] < capacity[cell]));
         Assert.True(people[iced] < before, "A cell that turned to ice should lose people.");
     }

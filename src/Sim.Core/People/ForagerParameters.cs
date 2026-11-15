@@ -22,9 +22,11 @@ public sealed class ForagerParameters
 
     public double LakeShoreFactor { get; set; } = 1.0;
 
-    public double MinorRiverFactor { get; set; } = 1.0;
+    /// <summary>Extra people per square km on a minor river.</summary>
+    public double MinorRiverBonus { get; set; }
 
-    public double MajorRiverFactor { get; set; } = 1.0;
+    /// <summary>Extra people per square km on a major river.</summary>
+    public double MajorRiverBonus { get; set; }
 
     public double GrowthRate { get; set; } = 0.03;
 
@@ -54,9 +56,14 @@ public sealed class ForagerParameters
             throw new InvalidDataException("Forager densities cannot be negative.");
         }
 
-        if (CoastFactor <= 0.0 || LakeShoreFactor <= 0.0 || MinorRiverFactor <= 0.0 || MajorRiverFactor <= 0.0)
+        if (CoastFactor <= 0.0 || LakeShoreFactor <= 0.0)
         {
-            throw new InvalidDataException("Coast, lake shore and river factors must be positive.");
+            throw new InvalidDataException("Coast and lake shore factors must be positive.");
+        }
+
+        if (MinorRiverBonus < 0.0 || MajorRiverBonus < 0.0)
+        {
+            throw new InvalidDataException("River bonuses cannot be negative.");
         }
 
         if (GrowthRate <= 0.0 || GrowthRate > 1.0 || MigrationRate < 0.0 || MigrationRate > 1.0

@@ -17,11 +17,15 @@
     "Rainforest": 0.03
   },
 
-  // Multipliers for cells on a sea coast or lake shore (fish and shellfish), and on rivers.
+  // Multipliers for cells on a sea coast or lake shore (fish and shellfish).
   "coastFactor": 1.6,
   "lakeShoreFactor": 1.3,
-  "minorRiverFactor": 1.3,
-  "majorRiverFactor": 1.8,
+
+  // Extra people per square km a river can feed, whatever the biome around it, so a river
+  // through a desert (like the Nile) supports far more people than the desert alone.
+  // Ice feeds no one, river or not.
+  "minorRiverBonus": 0.012,
+  "majorRiverBonus": 0.035,
 
   // Share of the room to grow that a population fills in a year (logistic growth rate).
   "growthRate": 0.03,

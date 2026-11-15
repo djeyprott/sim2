@@ -18,6 +18,7 @@ The design doc and milestone specs live in the claude.ai Project "sim2" (`design
 - Real systems are listed, in update order, only in `SystemCatalog.CreateDefault()`. Renaming a system or a field breaks old saves.
 - Content (goods, technologies, biomes, crops) and tuning numbers live in `data/content/*.json`, which are built into `Sim.Core` as embedded resources and read through `ContentFiles`. JSON there may have `//` comments.
 - Things that are not cells (regions, settlements, later states and figures) live in `WorldState` tables (`AddTable`, `EntityTable` with stable never-reused ids); run choices live in `WorldState` settings. Systems set starting state in `Initialize`, which runs once at construction before any load.
+- People are population groups (design doc, "Population model"): rows in a `WorldState` table with traits (occupation now; language and religion later) and conditions (food now). Groups with identical traits in a cell are merged; at most 8 per cell. Never add per-cell population numbers outside the group model.
 - Read another system's state only through the shared state names (for example `ClimateSystem.BiomeField`), and from the viewer only through `SimulationHost.InvokeAsync` or frame extractors.
 
 ## Grid

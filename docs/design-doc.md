@@ -1,8 +1,9 @@
-# sim2 design doc (version 0.5)
+# sim2 design doc (version 0.6)
 
 Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is in progress (`milestone-1-spec.md`).
 
 Change log:
+- 0.6 (2026-11-14): population model agreed: population groups in the manner of Victoria 2's pops.
 - 0.5 (2026-11-14): added the climate and crop decisions made for milestone 1, the .NET 10 move, the release process and new backlog items.
 - 0.4 (2026-11-14): sphere grid, start date and coastlines confirmed.
 
@@ -36,11 +37,29 @@ A desktop program in which you watch human civilization develop from the Neolith
 - **Map cells**: terrain, rivers, lakes, climate, biome and natural resources.
 - **Settlements**: villages and cities sit in cells and hold population, stockpiles and buildings.
 - **Goods**: tracked as quantities per settlement stockpile. Every unit is produced, moved by trade, consumed or destroyed, so totals always balance.
-- **Populations**: grow, starve, sicken and migrate.
+- **Populations**: population groups (see the population model) that grow, starve, sicken, migrate and change occupation, language and religion.
 - **Technology**: discovered locally and spread through contact.
 - **Organizations**: states and other bodies that hold territory or resources, fight wars, split and collapse.
 - **Culture**: languages, religions and ideas that spread and split.
 - **Historical figures**: named individuals with personalities, family ties, goals and life events. Ordinary people stay as population numbers.
+
+## Population model
+
+People are held in **population groups**, in the manner of Victoria 2's pops. Agreed 2026-11-14.
+
+- **Groups:** each land cell holds a short list of groups, at most 8. A group has a size, a few traits and some conditions.
+- **Traits** split people into different groups:
+  - **Occupation**, such as forager, farmer, later herder, craftsman, trader, soldier or priest. Occupations live in a data file and become available by era and technology; milestone 1 has only forager and farmer. Each occupation belongs to a class (lower, middle or upper) and lives in the countryside or the settlement, so class and town-or-country are not separate traits.
+  - **Language** (milestone 5).
+  - **Religion** (milestone 5).
+- **Conditions** are numbers each group carries, averaged by size when groups merge:
+  - **Needs met**, in tiers as in Victoria 2: life needs, everyday needs and luxuries. In milestone 1 the only need is food. Needs drive growth, migration, occupation change and later unrest.
+  - Later: savings, literacy, unrest, and political views as a percentage mix.
+- **Merging:** groups in the same cell with identical traits are always one group. When a cell would go over the limit, its smallest group joins the most similar group.
+- **How people change group:** birth and death within a group; changing occupation (for example foragers taking up farming); moving to another cell, keeping their traits; changing language (assimilation); changing religion (conversion).
+- **Held elsewhere, not on groups:** customs and values belong to a language's culture or a religion; technology is held per culture or region; which state a group belongs to comes from who rules its cell.
+- **Not tracked:** individual ordinary people, households and families, ages and sexes, and ancestry separate from language. Named historical figures are a separate system, linked to the groups and organisations they come from.
+- **Storage:** groups are rows in a world-state table with stable ids, with a per-cell index. Speed is measured from the start against the 5-minute limit for a 5,000-year run.
 
 ## Non-goals
 

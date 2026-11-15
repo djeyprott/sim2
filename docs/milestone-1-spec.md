@@ -1,10 +1,11 @@
-# Milestone 1 spec: Land and people (version 1.0, agreed)
+# Milestone 1 spec: Land and people (version 1.1, agreed)
 
-Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.4.
+Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
 
-Progress: steps 1 to 6 done 2026-11-14. Step 7 is next.
+Progress: steps 1 to 6 done 2026-11-14. Step 6b (population groups) is next, then step 7.
 
 Change log:
+- 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
 - 1.0 (2026-11-14): agreed and frozen.
 - Draft 2 (2026-11-14): climate now changes at random during a run; crop homelands can be real or random; a new-run screen is added to choose these.
 - Draft 1 (2026-11-14): first draft.
@@ -38,7 +39,7 @@ The import job adds these per cell, and the world file format moves to version 2
 ### 3. Saved state that is not per cell
 
 - A new kind of saved state for things that are not cells: tables with a stable id per entry, and run settings. It is saved, loaded and checksummed like cell state.
-- First users: climate regions, run settings and settlements. States and figures will reuse it later.
+- First users: climate regions, run settings, population groups and settlements. States and figures will reuse it later.
 
 ### 4. Changing climate
 
@@ -56,6 +57,9 @@ The import job adds these per cell, and the world file format moves to version 2
 
 ### 6. Foragers
 
+- Foragers are a population group (occupation "forager") in each cell, not a separate per-cell number. In milestone 1 a group's only traits are its occupation, and its only condition is food: the share of its food needs met this year.
+- Each cell holds at most 8 groups; groups in a cell with the same traits are always merged.
+
 - Each land cell has a forager population and a limit on how many foragers it can feed, set by its current biome, rivers and coast. The limit moves as climate changes. Rivers add a fixed number of people per km² whatever the biome, so a river through a desert supports many more people than the desert alone. Numbers are in `data/content/foragers.json`.
 - Which land is reached at the start: the landmasses holding a list of seed places (the continents and large islands people had reached), plus any landmass within two sea cells (about 100 km) of a reached one, except a list of unreached landmasses (Madagascar, New Zealand, Iceland, Greenland, Antarctica, and the larger Caribbean islands). Remote Pacific islands are unreached because they are too far by sea.
 - Yearly: populations grow toward the limit, shrink when the limit falls, and move into neighbouring land cells that have room. This is how climate drives migration.
@@ -68,11 +72,11 @@ The import job adds these per cell, and the world file format moves to version 2
 - **Yield**: a farming cell's food depends on how well its current climate suits its best crop, and on rivers. A region that dries out can stop supporting its crop.
 - **Spread**: farming passes to neighbouring cells where the crop can grow, by farmers moving in and by foragers taking it up.
 - **Harvest**: computed once a year at the harvest season of the cell's hemisphere, with random good and bad years on top of the slower climate swings.
-- Each cell tracks farmers separately from foragers. Farmland feeds many times more people than foraging.
+- Farmers are a separate group from foragers in the same cell. Foragers taking up farming move from the forager group to the farmer group, so farming displaces foraging gradually. Farmland feeds many times more people than foraging.
 
 ### 8. Famine
 
-- When a bad harvest or a drying climate leaves a cell with more people than food, people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
+- When a bad harvest or a drying climate leaves a group with less food than it needs, its food condition falls, and its people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
 
 ### 9. Settlements
 
@@ -128,6 +132,7 @@ Farming
 
 Soundness
 - [ ] Population is never negative and never an invalid number in any cell.
+- [ ] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits.
 - [ ] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
 - [ ] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate and foragers: 52 seconds.)
 
@@ -149,7 +154,8 @@ Each step ends with a new development build you can download.
 3. Saved state that is not per cell (done)
 4. Changing climate, biomes and ice, with their map modes (done)
 5. New-run settings and start screen (done)
-6. Foragers and the population map mode (done)
+6. Foragers and the population map mode (done, as a per-cell number)
+6b. Population groups: move foragers onto groups, with merging and the per-cell limit
 7. Farming: crops, invention, yield, spread, harvest
 8. Famine
 9. Settlements

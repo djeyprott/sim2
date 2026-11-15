@@ -53,7 +53,7 @@
       ]
     },
     {
-      "good": "Obsidian", "perPerson": 0.05,
+      "good": "Obsidian", "perPerson": 0.2,
       "sourceRadiusKm": 60,
       "sources": [
         { "name": "Gollu Dag (Cappadocia)", "lat": 38.25, "lon": 34.55 },

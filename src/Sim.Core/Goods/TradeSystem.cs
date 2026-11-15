@@ -568,13 +568,16 @@ public sealed class TradeSystem : ISimSystem
         }
     }
 
-    /// <summary>Every link, by its settlements' ids, with the food value it carries a season on average.</summary>
+    /// <summary>Every link between standing settlements, by their ids, with the food value it carries a season on average.</summary>
     public List<(int A, int B, double Value)> Links()
     {
         var links = new List<(int, int, double)>(_linkA.Length);
         for (int link = 0; link < _linkA.Length; link++)
         {
-            links.Add((_linkA[link], _linkB[link], _linkValue[link]));
+            if (_settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
+            {
+                links.Add((_linkA[link], _linkB[link], _linkValue[link]));
+            }
         }
 
         return links;

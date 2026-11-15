@@ -210,7 +210,10 @@ public sealed class CraftSystem : ISimSystem
             }
         }
 
-        // The store-fed people use up their everyday and luxury needs.
+        // The store-fed people use up their everyday and luxury needs. The dearer a good is here, the
+        // less of it they use (its base value over its price, at most all of the need), so a scarce
+        // good is not all used up by the first village it reaches and can be traded further.
+        _prices.Work(cell, tick, _wanted);
         double everydayWanted = 0.0, everydayTaken = 0.0, luxuryWanted = 0.0, luxuryTaken = 0.0;
         for (int good = 0; good < _rules.NeedPerPerson.Length; good++)
         {
@@ -221,7 +224,8 @@ public sealed class CraftSystem : ISimSystem
             }
 
             double wanted = perPerson * fed;
-            double taken = stockpiles.Consume(cell, good, wanted);
+            double use = Math.Min(1.0, _rules.Goods.Get(good).Value / _prices.Price(good));
+            double taken = stockpiles.Consume(cell, good, wanted * use);
             if (_rules.Goods.Get(good).NeedTier == NeedTier.Everyday)
             {
                 everydayWanted += wanted;

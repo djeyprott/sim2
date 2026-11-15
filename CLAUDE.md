@@ -1,7 +1,7 @@
 # sim2 working rules
 
 Human history simulator: Godot 4 with C#, watch-only, Earth from 10,000 BCE, open-ended runs.
-The design doc and milestone specs live in the claude.ai Project "sim2" (`design-doc.md`, `milestone-0-spec.md`, `milestone-1-spec.md`). They are the source of truth. The design doc and the current milestone's spec are mirrored at `docs/design-doc.md` and `docs/milestone-1-spec.md`: to change one, edit the file and write it to the project from the file, so the two never differ.
+The design doc and milestone specs live in the claude.ai Project "sim2" (`design-doc.md`, `milestone-0-spec.md`, `milestone-1-spec.md`, `milestone-2-spec.md`). They are the source of truth. The design doc and the current milestone's spec are mirrored at `docs/design-doc.md` and `docs/milestone-2-spec.md` (milestone 1's finished spec stays at `docs/milestone-1-spec.md`): to change one, edit the file and write it to the project from the file, so the two never differ.
 
 ## Scope rules
 

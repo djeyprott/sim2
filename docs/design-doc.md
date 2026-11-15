@@ -1,8 +1,9 @@
-# sim2 design doc (version 0.8)
+# sim2 design doc (version 0.9)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 needs an agreed spec before work starts.
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is in progress (`milestone-2-spec.md`, agreed 2026-11-15).
 
 Change log:
+- 0.9 (2026-11-15): milestone 2 spec agreed: herding comes in milestone 2, so the herding backlog item moves into it.
 - 0.8 (2026-11-15): milestone 1 complete, released as v0.2.
 - 0.7 (2026-11-15): backlog item on farming open grassland before the plough.
 - 0.6 (2026-11-14): population model agreed: population groups in the manner of Victoria 2's pops.
@@ -87,7 +88,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 |---|-----------|------|-------|
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
-| 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes | |
+| 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | In progress |
 | 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
@@ -107,8 +108,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - End-of-Ice-Age start: a colder north and remaining ice sheets (Canada, Scandinavia) that melt back over the first few thousand years. Considered for milestone 1 and declined by the owner on 2026-11-14 in favour of the modern baseline.
 - Climate change caused by people in later eras (consider with milestone 7).
 - Lower Ice Age sea level and changing coastlines.
-- Herd animals and pastoralism (decide in the milestone 2 or 3 spec).
-- Open grassland is hard to farm before the plough. Steppe, prairie and pampas have tough root mats and unreliable rain, so early farmers kept to forest edges and river valleys while herders held the open grassland (the Pontic steppe was herding country from about 4500 BCE and was ploughed at scale only in the 18th and 19th centuries). Consider with pastoralism and the plough (milestones 2 and 3): a grassland yield penalty that the plough removes, and herders who outcompete early farmers there. Milestone 1 only applies a gentle grassland yield penalty during step 10 tuning.
+- Open grassland is hard to farm before the plough. Steppe, prairie and pampas have tough root mats and unreliable rain, so early farmers kept to forest edges and river valleys while herders held the open grassland (the Pontic steppe was herding country from about 4500 BCE and was ploughed at scale only in the 18th and 19th centuries). Milestone 1 applies a grassland yield factor of 0.5 away from rivers; milestone 2 adds herders who outcompete early farmers there; the plough that removes the penalty is for milestone 3.
 - Disease.
 - The Aral Sea at its historical size, and small straits that are currently closed (for example Bali joined to Java).
 - Globe view.

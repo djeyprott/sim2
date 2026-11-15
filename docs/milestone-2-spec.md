@@ -1,8 +1,11 @@
-# Milestone 2 spec: Goods and trade (draft 2)
+# Milestone 2 spec: Goods and trade (version 1.0, agreed)
 
-Status: **draft**, not yet agreed. Nothing is built until the owner agrees it. The four open decisions are settled; what remains is to agree the whole spec. Parent: `design-doc.md` version 0.8.
+Status: agreed by the owner 2026-11-15. Feature list is frozen. Parent: `design-doc.md` version 0.9.
+
+Progress: step 1 started 2026-11-15.
 
 Change log:
+- 1.0 (2026-11-15): agreed and frozen.
 - Draft 2 (2026-11-15): the owner settled the four open decisions: herding comes in this milestone; local prices measured in food; trade over land and rivers only; about ten goods.
 - Draft 1 (2026-11-15): first draft.
 

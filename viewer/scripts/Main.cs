@@ -278,7 +278,7 @@ public partial class Main : Node2D
         {
             if (!double.IsNaN(summary[0]))
             {
-                worldInfo = "World " + summary[0].ToString("+0.00;-0.00;0.00", CultureInfo.InvariantCulture) + " °C";
+                worldInfo = "Δ " + summary[0].ToString("+0.00;-0.00;0.00", CultureInfo.InvariantCulture) + " °C";
             }
 
             if (!double.IsNaN(summary[1]))
@@ -293,7 +293,7 @@ public partial class Main : Node2D
 
             if (summary.Length >= 4 && !double.IsNaN(summary[3]))
             {
-                worldInfo += ", " + (summary[3] / 1e6).ToString("0.0", CultureInfo.InvariantCulture) + " M stored";
+                worldInfo += ", " + (summary[3] / 1e6).ToString("0.0", CultureInfo.InvariantCulture) + " M food";
             }
         }
 

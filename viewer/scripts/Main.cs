@@ -12,6 +12,7 @@ using Sim.Core.Geo;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Settlements;
 
 namespace Viewer;
 
@@ -23,6 +24,7 @@ namespace Viewer;
 public partial class Main : Node2D
 {
     private const float MaxZoom = 40f;
+    private const double SettlementRefreshSeconds = 1.0;
     private const float KeyPanPixelsPerSecond = 900f;
     private const float ClickSlopPixels = 5f;
 
@@ -62,6 +64,10 @@ public partial class Main : Node2D
     private ClimateSystem? _climate;
     private ForagerSystem? _foragers;
     private FarmingSystem? _farming;
+    private SettlementSystem? _settlementSystem;
+    private Task<List<SettlementInfo>>? _settlementTask;
+    private double _settlementAge = double.MaxValue;
+    private long _settlementTick = -1;
     private Color[] _cropColours = Array.Empty<Color>();
     private readonly OccupationSet _occupations = OccupationSet.LoadDefault();
     private double[] _areaKm2 = Array.Empty<double>();
@@ -82,6 +88,7 @@ public partial class Main : Node2D
     private FileDialog _loadDialog = null!;
 
     private float _zoom = 1f;
+    private bool _screenshotOk;
     private float _minZoom = 0.1f;
     private bool _dragging;
     private Vector2 _pressPosition;
@@ -205,6 +212,11 @@ public partial class Main : Node2D
         _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
         _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
+        _settlementSystem = systems.OfType<SettlementSystem>().FirstOrDefault();
+        _settlementTask = null;
+        _settlementAge = double.MaxValue;
+        _settlementTick = -1;
+        _mapView.SetSettlements(Array.Empty<Vector2>(), Array.Empty<string>(), Array.Empty<float>());
         _cropColours = _farming == null
             ? Array.Empty<Color>()
             : _farming.Crops.Crops.Select(c => Color.FromHtml(c.Colour)).ToArray();
@@ -292,6 +304,9 @@ public partial class Main : Node2D
 
         float halfViewWidth = GetViewportRect().Size.X / (2f * _zoom);
         _mapView.ShowCopiesInView(_camera.Position.X - halfViewWidth, _camera.Position.X + halfViewWidth);
+        Vector2 viewSize = GetViewportRect().Size / _zoom;
+        _mapView.SetSettlementView(_zoom, new Rect2(_camera.Position - viewSize / 2f, viewSize));
+        PollSettlements(frame, delta);
         UpdateStatus(frame, delta);
 
         if (_screenshotPath != null)
@@ -940,6 +955,60 @@ public partial class Main : Node2D
             : "Click a cell to keep its details here."));
     }
 
+    // Asks the simulation for its settlements about once a second while the date moves, and draws them.
+    private void PollSettlements(SimFrame frame, double delta)
+    {
+        _settlementAge += delta;
+        if (_settlementTask != null)
+        {
+            if (!_settlementTask.IsCompleted)
+            {
+                return;
+            }
+
+            if (_settlementTask.IsCompletedSuccessfully)
+            {
+                List<SettlementInfo> list = _settlementTask.Result;
+                GeodesicGrid grid = _map!.Grid;
+                var positions = new Vector2[list.Count];
+                var names = new string[list.Count];
+                var populations = new float[list.Count];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    int cell = list[i].Cell;
+                    positions[i] = MapView.MapPosition(grid.Latitude(cell), grid.Longitude(cell));
+                    names[i] = list[i].Name;
+                    populations[i] = (float)list[i].Population;
+                }
+
+                _mapView.SetSettlements(positions, names, populations);
+            }
+
+            _settlementTask = null;
+        }
+
+        SettlementSystem? settlements = _settlementSystem;
+        if (_host != null && settlements != null && _settlementAge >= SettlementRefreshSeconds && frame.Tick != _settlementTick)
+        {
+            _settlementTick = frame.Tick;
+            _settlementAge = 0.0;
+            _settlementTask = _host.InvokeAsync(_ => settlements.All());
+        }
+    }
+
+    // Runs on the simulation thread: the cell's settlement, if any.
+    private static string DescribeSettlement(int cell, SettlementSystem? settlements)
+    {
+        if (settlements?.InCell(cell) is not { } s)
+        {
+            return "";
+        }
+
+        var founded = new GameDate(s.Founded);
+        return $"\nSettlement: {s.Name}, founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, "
+            + $"{s.Population.ToString("N0", CultureInfo.InvariantCulture)} people";
+    }
+
     // Asks the simulation for a cell's current climate every so often, without waiting for the answer.
     private void Track(LiveCell live, int cell, double delta)
     {
@@ -972,11 +1041,13 @@ public partial class Main : Node2D
             ForagerSystem? foragers = _foragers;
             OccupationSet occupations = _occupations;
             FarmingSystem? farmingForCell = _farming;
+            SettlementSystem? settlementsForCell = _settlementSystem;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeGroups(sim, target, occupations) + DescribeFarming(sim, target, farmingForCell) : null,
+                foragers != null ? DescribeSettlement(target, settlementsForCell) + DescribeGroups(sim, target, occupations)
+                    + DescribeFarming(sim, target, farmingForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;
@@ -1185,8 +1256,18 @@ public partial class Main : Node2D
                 break;
             case 195:
                 GD.Print($"Screenshot script: {_runDescription}, date {frame?.Date}, tick {frame?.Tick}, selected cell {_selectedCell}");
-                bool saved = SaveScreenshot("-detail");
-                GetTree().Quit(saved && frame != null && frame.Tick > 0 ? 0 : 1);
+                _screenshotOk = SaveScreenshot("-detail") && frame != null && frame.Tick > 0;
+
+                // Close in on the Fertile Crescent to show settlement names.
+                SetMapMode(PopulationMode);
+                SelectCell(-1);
+                _camera.Position = MapView.MapPosition(36.5, 40.0);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 4f);
+                GetViewport().WarpMouse(new Vector2(20f, GetViewportRect().Size.Y - 20f));
+                break;
+            case 225:
+                bool savedSettlements = SaveScreenshot("-settlements");
+                GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
                 break;
         }
     }

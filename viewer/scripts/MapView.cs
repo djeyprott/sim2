@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Godot;
 using Sim.Core.Geo;
 using Sim.Core.Map;
@@ -29,6 +30,7 @@ public partial class MapView : Node2D
     // Three side-by-side copies of the map (west, centre, east) that share one mesh and one texture.
     private readonly Node2D[] _copies = new Node2D[3];
     private readonly CellOutline[] _outlines = new CellOutline[3];
+    private readonly SettlementLayer[] _settlementLayers = new SettlementLayer[3];
     private readonly List<MeshInstance2D> _minorRivers = new List<MeshInstance2D>();
 
     private static readonly Color MajorRiverColour = Color.Color8(52, 104, 205);
@@ -100,8 +102,33 @@ public partial class MapView : Node2D
 
         for (int k = 0; k < _copies.Length; k++)
         {
+            _settlementLayers[k] = new SettlementLayer();
+            _copies[k].AddChild(_settlementLayers[k]);
             _outlines[k] = new CellOutline();
             _copies[k].AddChild(_outlines[k]);
+        }
+    }
+
+    /// <summary>Replaces the settlements shown: map positions, names and populations.</summary>
+    public void SetSettlements(Vector2[] positions, string[] names, float[] populations)
+    {
+        foreach (SettlementLayer layer in _settlementLayers)
+        {
+            layer?.SetSettlements(positions, names, populations);
+        }
+    }
+
+    /// <summary>Tells the settlement layers the zoom and the visible part of the map.</summary>
+    public void SetSettlementView(float zoom, Rect2 view)
+    {
+        for (int k = 0; k < _copies.Length; k++)
+        {
+            if (_settlementLayers[k] != null)
+            {
+                Rect2 local = view;
+                local.Position -= _copies[k].Position;
+                _settlementLayers[k].SetView(zoom, local);
+            }
         }
     }
 
@@ -389,5 +416,94 @@ public partial class CellOutline : Node2D
             DrawPolyline(_points, Colors.White, 2f);
             DrawPolyline(_points, Colors.Black, -1f);
         }
+    }
+}
+
+/// <summary>
+/// Draws settlements as dots, and their names once the view is zoomed in far enough. One layer
+/// sits in each copy of the map; dots and text keep the same size on screen at every zoom.
+/// </summary>
+public partial class SettlementLayer : Node2D
+{
+    private const float NameMinZoom = 6f;
+    private const int MaxNames = 300;
+    private const int FontSize = 13;
+
+    private Vector2[] _positions = Array.Empty<Vector2>();
+    private string[] _names = Array.Empty<string>();
+    private float[] _populations = Array.Empty<float>();
+    private float _zoom = 1f;
+    private Rect2 _view;
+
+    public void SetSettlements(Vector2[] positions, string[] names, float[] populations)
+    {
+        _positions = positions;
+        _names = names;
+        _populations = populations;
+        QueueRedraw();
+    }
+
+    /// <summary>Gives the zoom and the visible part of the map, in this copy's own coordinates.</summary>
+    public void SetView(float zoom, Rect2 view)
+    {
+        bool namesShown = zoom >= NameMinZoom;
+        if (zoom != _zoom || (namesShown && view != _view))
+        {
+            _zoom = zoom;
+            _view = view;
+            QueueRedraw();
+        }
+    }
+
+    public override void _Draw()
+    {
+        if (_positions.Length == 0 || !IsVisibleInTree())
+        {
+            return;
+        }
+
+        float unit = 1f / _zoom;
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            float half = (_populations[i] >= 300f ? 2.5f : 1.5f) * unit;
+            Vector2 p = _positions[i];
+            DrawRect(new Rect2(p.X - half - unit, p.Y - half - unit, 2f * (half + unit), 2f * (half + unit)), Colors.Black);
+            DrawRect(new Rect2(p.X - half, p.Y - half, 2f * half, 2f * half), Colors.White);
+        }
+
+        if (_zoom < NameMinZoom)
+        {
+            return;
+        }
+
+        // Largest first, skipping any name that would overlap one already drawn.
+        Font font = ThemeDB.FallbackFont;
+        var order = Enumerable.Range(0, _positions.Length)
+            .Where(i => _view.HasPoint(_positions[i]))
+            .OrderByDescending(i => _populations[i])
+            .ToList();
+        var taken = new List<Rect2>();
+        var scale = new Vector2(unit, unit);
+        foreach (int i in order)
+        {
+            if (taken.Count >= MaxNames)
+            {
+                break;
+            }
+
+            Vector2 size = font.GetStringSize(_names[i], HorizontalAlignment.Left, -1, FontSize) * unit;
+            var box = new Rect2(_positions[i] + new Vector2(5f * unit, -size.Y * 0.5f), size);
+            if (taken.Any(t => t.Intersects(box)))
+            {
+                continue;
+            }
+
+            taken.Add(box);
+            DrawSetTransform(_positions[i] + new Vector2(5f * unit, 4f * unit), 0f, scale);
+            DrawStringOutline(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, FontSize, 3, Colors.Black);
+            DrawString(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, FontSize, Colors.White);
+        }
+
+        DrawSetTransform(Vector2.Zero, 0f, Vector2.One);
     }
 }

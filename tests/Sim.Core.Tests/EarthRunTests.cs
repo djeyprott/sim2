@@ -5,6 +5,7 @@ using Sim.Core.Farming;
 using Sim.Core.Geo;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Settlements;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -57,6 +58,11 @@ public sealed class EarthRunResult
 
     public int FarmingCells { get; set; }
 
+    public int SettlementsAt5000 { get; set; }
+
+    /// <summary>Settlements whose cell does not point back at them, or cells sharing a settlement.</summary>
+    public int SettlementProblems { get; set; }
+
     /// <summary>Famines recorded, counted once per cell and year.</summary>
     public int FamineCellYears { get; set; }
 
@@ -80,6 +86,7 @@ public sealed class EarthRunResult
             + $"foragers {MinForagersToCapacity:F3} to {MaxForagersToCapacity:F3} of what their land feeds; "
             + $"up to {MaxGroupsInACell} groups in a cell; {Regions6000} separate farming regions within 6,000 years; "
             + $"spread {SpreadKmPerYear:F2} km a year; farthest origin {FarthestOriginFromRealHomelandKm:F0} km from a real homeland; "
+            + $"{SettlementsAt5000} settlements after 5,000 years; "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
@@ -204,6 +211,15 @@ public abstract class EarthRunFixtureBase
             {
                 result.PopulationAt5000 = groups.WorldTotal();
                 result.FarmersAt5000 = farmingSystem?.WorldFarmers() ?? 0.0;
+                SettlementSystem? settlementSystem = sim.Systems.OfType<SettlementSystem>().SingleOrDefault();
+                if (settlementSystem != null)
+                {
+                    List<SettlementInfo> all = settlementSystem.All();
+                    result.SettlementsAt5000 = all.Count;
+                    int[] index = sim.State.IntField(SettlementSystem.SettlementField);
+                    result.SettlementProblems += all.Count(st => index[st.Cell] != st.Id + 1 || !world.IsLand(st.Cell));
+                    result.SettlementProblems += Math.Abs(index.Count(i => i > 0) - all.Count);
+                }
             }
         }
 
@@ -394,6 +410,16 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     public void Between_2_and_25_percent_of_land_changes_biome()
     {
         Assert.All(_results, r => Assert.InRange(r.BiomeChangedShare, 0.02, 0.25));
+    }
+
+    [Fact]
+    public void Settlements_are_founded_and_stand_one_per_land_cell()
+    {
+        Assert.All(_results, r =>
+        {
+            Assert.True(r.SettlementsAt5000 > 0, $"Seed {r.Seed}: no settlements.");
+            Assert.Equal(0, r.SettlementProblems);
+        });
     }
 
     [Fact]

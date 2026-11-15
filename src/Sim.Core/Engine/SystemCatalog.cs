@@ -1,6 +1,7 @@
 using Sim.Core.Climate;
 using Sim.Core.Farming;
 using Sim.Core.People;
+using Sim.Core.Settlements;
 
 namespace Sim.Core.Engine;
 
@@ -26,6 +27,7 @@ public static class SystemCatalog
         if (farming)
         {
             systems.Add(FarmingSystem.CreateDefault(climate.Biomes, occupations));
+            systems.Add(SettlementSystem.CreateDefault(occupations));
         }
 
         return systems;

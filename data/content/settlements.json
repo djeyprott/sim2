@@ -1,0 +1,19 @@
+// Settlements: at most one per cell, standing for its main village or town.
+{
+  // A cell founds a settlement when its farmers reach this many people.
+  "foundAtFarmers": 1000,
+
+  // A settlement is abandoned when its cell's farmers fall below this many people.
+  "abandonBelowFarmers": 100,
+
+  // Share of the cell's people who live in its settlement. The rest live in the countryside.
+  "settledShare": 0.15,
+
+  // Placeholder names: two or three syllables, each an onset, a vowel and a coda.
+  // Languages replace this in milestone 5.
+  "minSyllables": 2,
+  "maxSyllables": 3,
+  "onsets": [ "", "b", "d", "g", "k", "l", "m", "n", "p", "r", "s", "t", "v", "z", "sh", "th", "br", "kr", "tr", "st", "h", "y" ],
+  "vowels": [ "a", "e", "i", "o", "u", "a", "e", "ai", "ou", "ei" ],
+  "codas": [ "", "", "", "", "n", "r", "s", "l", "m", "k", "th", "sh" ]
+}

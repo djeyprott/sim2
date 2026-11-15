@@ -4,6 +4,7 @@ using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Settlements;
 using Xunit;
 
 namespace Sim.Core.Tests;
@@ -71,6 +72,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             new PopulationSystem(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
+            SettlementSystem.CreateDefault(occupations),
         };
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -180,6 +182,56 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.NotEqual(real, a);
         Assert.NotEqual(a, Centres(2));
         Assert.Equal(a, Centres(1));
+    }
+
+    [Fact]
+    public void Settlements_are_founded_in_farming_cells_one_per_cell_and_named()
+    {
+        Simulation sim = FastFarming(3);
+        SettlementSystem settlements = sim.Systems.OfType<SettlementSystem>().Single();
+        sim.Run(300 * 12);
+
+        List<SettlementInfo> all = settlements.All();
+        Assert.True(all.Count >= 20, $"Only {all.Count} settlements were founded in 300 years.");
+        Assert.Equal(all.Count, all.Select(s => s.Cell).Distinct().Count());
+
+        var groups = new PopulationGroups(sim.State);
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        int[] index = sim.State.IntField(SettlementSystem.SettlementField);
+        foreach (SettlementInfo s in all)
+        {
+            Assert.Equal(s.Id + 1, index[s.Cell]);
+            int group = groups.Find(s.Cell, farmer);
+            Assert.True(group >= 0 && groups.Size(group) >= settlements.Parameters.AbandonBelowFarmers,
+                $"{s.Name} stands in a cell without farmers.");
+            Assert.InRange(s.Population, 0.0, groups.CellTotal(s.Cell));
+            Assert.Matches("^[A-Z][a-z]+$", s.Name);
+        }
+
+        Assert.True(all.Select(s => s.Name).Distinct().Count() > all.Count / 2, "Names should mostly differ.");
+        Assert.Equal(all.Count, index.Count(i => i > 0));
+    }
+
+    [Fact]
+    public void Settlement_names_are_the_same_for_the_same_seed()
+    {
+        SettlementParameters p = SettlementParameters.LoadDefault();
+        string[] Names(ulong seed)
+        {
+            var rng = new Rng(seed);
+            return Enumerable.Range(0, 20).Select(_ => p.MakeName(rng)).ToArray();
+        }
+
+        Assert.Equal(Names(1), Names(1));
+        Assert.NotEqual(Names(1), Names(2));
+        Assert.All(Names(3), n => Assert.InRange(n.Length, 2, 30));
+    }
+
+    [Fact]
+    public void Settlement_file_rejects_an_abandon_threshold_above_the_founding_one()
+    {
+        Assert.Throws<InvalidDataException>(() => SettlementParameters.Parse(
+            ContentFiles.ReadText("settlements.json").Replace("\"abandonBelowFarmers\": 100", "\"abandonBelowFarmers\": 5000")));
     }
 
     [Fact]

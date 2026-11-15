@@ -519,8 +519,11 @@ public partial class SettlementLayer : Node2D
                     continue;
                 }
 
-                float width = (_routeValues[i] >= 100f ? 4f : _routeValues[i] >= 10f ? 2.5f : 1.2f) * unit;
-                DrawLine(a, b, RouteColour, width);
+                // Quiet routes faint and thin, busy ones bright and thick.
+                float v = _routeValues[i];
+                float width = (v >= 20f ? 3.5f : v >= 2f ? 2f : 1f) * unit;
+                float alpha = v >= 20f ? 1f : v >= 2f ? 0.75f : 0.3f;
+                DrawLine(a, b, new Color(RouteColour, alpha), width);
             }
         }
 

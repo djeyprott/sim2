@@ -713,9 +713,9 @@ public partial class Main : Node2D
                 break;
             case TradeMode:
                 title = "Trade routes (food value carried a season)";
-                entries.Add((TradeRouteColour, "1 or more"));
-                entries.Add((TradeRouteColour, "10 or more (thicker)"));
-                entries.Add((TradeRouteColour, "100 or more (thickest)"));
+                entries.Add((new Color(TradeRouteColour, 0.3f), "0.2 or more"));
+                entries.Add((new Color(TradeRouteColour, 0.75f), "2 or more (thicker)"));
+                entries.Add((TradeRouteColour, "20 or more (thickest)"));
                 break;
             case RainfallChangeMode:
                 title = "Rainfall vs present day";
@@ -1381,7 +1381,7 @@ public partial class Main : Node2D
                 SelectCell(-1);
                 _camera.Position = MapView.MapPosition(36.5, 40.0);
                 ZoomAt(MapView.MapPosition(36.5, 40.0), 2f);
-                GetViewport().WarpMouse(new Vector2(20f, GetViewportRect().Size.Y - 20f));
+                GetViewport().WarpMouse(new Vector2(GetViewportRect().Size.X / 2f, 12f));
                 break;
             case 215:
                 _screenshotOk &= SaveScreenshot("-trade");

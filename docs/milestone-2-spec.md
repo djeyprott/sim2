@@ -1,30 +1,31 @@
-# Milestone 2 spec: Goods and trade (draft 1)
+# Milestone 2 spec: Goods and trade (draft 2)
 
-Status: **draft**, not yet agreed. Nothing is built until the owner agrees it. Parent: `design-doc.md` version 0.8.
+Status: **draft**, not yet agreed. Nothing is built until the owner agrees it. The four open decisions are settled; what remains is to agree the whole spec. Parent: `design-doc.md` version 0.8.
 
 Change log:
-- Draft 1 (2026-11-15): first draft. Open decisions are marked **Open** and listed at the end.
+- Draft 2 (2026-11-15): the owner settled the four open decisions: herding comes in this milestone; local prices measured in food; trade over land and rivers only; about ten goods.
+- Draft 1 (2026-11-15): first draft.
 
 ## Purpose
 
 Give the world an economy you can watch. When this milestone is done, harvests fill settlement stores and carry villages through bad years, craftsmen turn raw materials into pots, tools and cloth, and goods travel from settlement to settlement along trade routes that you can see on the map. Rare goods such as obsidian and salt spread hundreds of kilometres from the few places they come from. Every unit of every good is accounted for from the moment it is made until it is eaten, used up, spoiled or lost.
 
-## Proposed decisions
+## Decisions
 
 1. **Goods live in settlement stockpiles.** A settlement's stockpile holds quantities of each good. Cells without a settlement keep no stores: their people eat what they produce that year, and anything left over is lost. This makes settlements matter: they are where food is stored and where trade happens.
 2. **Goods are bulk quantities, not items.** A good is a name, a unit (for example tonnes), a spoilage rate and a weight for transport. The list lives in `data/content/goods.json`.
 3. **Every unit is accounted for.** For each good the world keeps a ledger: produced, consumed, spoiled, lost (for example in an abandoned settlement), in stores and in transit. Produced always equals the sum of the rest.
 4. **Needs come in tiers**, as in the population model. Life needs: food. Everyday needs: tools, pottery and cloth. Luxuries: ornaments, obsidian and salt. A group's needs met is a condition it carries. Unmet life needs cause famine, as now. Everyday and luxury needs met raise growth a little and drive demand. They do not yet cause unrest (unrest comes with states in milestone 4).
-5. **Local prices, no money.** **Open (question 2).** Proposed: each settlement has a price for each good, measured in food, which rises when the good is scarce there and falls when it is plentiful. Trade moves goods from where they are cheap to where they are dear, if the price gap beats the cost of carrying them. Coins and money come later.
-6. **Trade runs over land and rivers.** **Open (question 3).** Each settlement links to nearby settlements within a few days' travel. Carrying goods costs more over mountains and less along rivers. Goods can pass along a chain of links, so obsidian can travel a long way by being traded on from village to village. Sea and coastal trade arrive with seafaring in milestone 3.
-7. **Herding.** **Open (question 1).** The milestone 1 spec left herd animals to the milestone 2 or 3 spec. Proposed: herding comes in this milestone, because livestock gives goods (meat, milk, wool, hides) and lets herders hold the open grassland that farmers cannot use well (design doc backlog).
+5. **Local prices, no money** (decided by the owner 2026-11-15). Each settlement has a price for each good, measured in food, which rises when the good is scarce there and falls when it is plentiful. Trade moves goods from where they are cheap to where they are dear, if the price gap beats the cost of carrying them. Coins and money come later.
+6. **Trade runs over land and rivers** (decided by the owner 2026-11-15). Each settlement links to nearby settlements within a few days' travel. Carrying goods costs more over mountains and less along rivers. Goods can pass along a chain of links, so obsidian can travel a long way by being traded on from village to village. Sea and coastal trade arrive with seafaring in milestone 3.
+7. **Herding comes in this milestone** (decided by the owner 2026-11-15). The milestone 1 spec left herd animals to the milestone 2 or 3 spec. It comes now because livestock gives goods (meat, milk, wool, hides) and lets herders hold the open grassland that farmers cannot use well (design doc backlog).
 8. **Settlement threshold.** Unchanged at 1,000 farmers unless the owner decides otherwise after watching runs. Because stores live in settlements, a higher threshold would also mean fewer places that can store food.
 
 ## What gets built
 
 ### 1. Goods
 
-- `data/content/goods.json` lists about ten goods for the Neolithic: grain (all staple crops), wild food, wood, flint and stone tools, clay and pottery, fibre and cloth, salt, obsidian and ornaments. With herding: livestock products (meat and milk, wool, hides).
+- `data/content/goods.json` lists about ten goods for the Neolithic (decided by the owner 2026-11-15): grain (all staple crops), wild food, wood, flint and stone tools, clay and pottery, fibre and cloth, salt, obsidian and ornaments, plus the livestock products of herding: meat and milk, wool, hides.
 - Each good has a unit, a yearly spoilage rate (grain loses about a tenth a year in store; stone does not spoil), a carrying weight and its needs tier, if any.
 
 ### 2. Natural resources
@@ -43,7 +44,7 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 - **Foragers** produce wild food and eat it the same year. They keep no stores and do not trade in this milestone.
 - **Craftsmen** are a new occupation that lives in settlements. They turn inputs into outputs by recipes in `data/content/recipes.json` (for example clay and wood into pottery, fibre into cloth, flint into tools). The share of a settlement's people who work as craftsmen rises and falls with the prices of what they make.
 - **Gathering of materials** (wood, clay, flint, salt, obsidian) is done by the farmers and herders of the cell, as a small share of their time, where the resource is present.
-- **Herders** (if question 1 is yes): a new occupation that keeps livestock on grassland and savanna, as described in section 8.
+- **Herders**: a new occupation that keeps livestock on grassland and savanna, as described in section 8.
 
 ### 5. Consumption and food stores
 
@@ -64,7 +65,7 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 - Everyday and luxury needs met add a small bonus to growth. Food remains what limits population.
 - Needs met is stored per group, averaged by size when groups merge, as the population model sets out.
 
-### 8. Herding (if question 1 is yes)
+### 8. Herding
 
 - **Livestock**: a data file lists herd animals with real homelands, like crops: sheep and goats (Southwest Asia), cattle (Southwest Asia and the Sahel), pigs (Southwest Asia and China), llamas and alpacas (Andes). Horses are left to milestone 3.
 - Herding is first taken up where an animal lives wild, and spreads like farming, by herders moving and by foragers and farmers taking it up.
@@ -76,13 +77,13 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 
 - **Goods map mode**: pick a good; settlements are coloured by how much they hold, or by its price there.
 - **Trade map mode**: trade routes drawn as lines, thicker for more goods carried.
-- If herding is in: a **herding map mode** showing which animals are kept where.
+- A **herding map mode** showing which animals are kept where.
 - The tooltip and the pinned cell panel list a settlement's stockpile and prices, and each group's needs met.
 - The top bar adds world food in store.
 
 ### 10. Headless runner
 
-- The statistics file adds, for each good: produced, consumed, spoiled, lost, in store and in transit, and the total traded that year. If herding is in, it adds herders and where each animal was first herded.
+- The statistics file adds, for each good: produced, consumed, spoiled, lost, in store and in transit, and the total traded that year. It also adds herders and where each animal was first herded.
 
 ## Not in this milestone
 
@@ -112,7 +113,7 @@ Trade
 - [ ] Goods flow from cheaper to dearer settlements: over a run, the average price gap between linked settlements shrinks for every good that is traded.
 - [ ] Trade routes exist in every region where farming has spread.
 
-Herding (if question 1 is yes)
+Herding
 - [ ] Herding is first taken up in at least 2 separate regions within 6,000 years in at least 8 of 10 seeds.
 - [ ] After 5,000 years, herders hold more of the open grassland that people live on than farmers do.
 
@@ -128,7 +129,7 @@ By hand in the viewer:
 - [ ] Trade routes are visible and grow as settlements fill a region.
 - [ ] A bad harvest in one area is softened by stores, and you can see grain move in from neighbours.
 - [ ] The tooltip shows a settlement's stockpile and prices, and groups' needs met.
-- [ ] If herding is in: herders spread over the steppe and farmers keep to the valleys and forest edges.
+- [ ] Herders spread over the steppe and farmers keep to the valleys and forest edges.
 - [ ] The frame rate stays smooth at every speed.
 
 ## Build order
@@ -140,17 +141,10 @@ Each step ends with a new development build you can download.
 3. Craftsmen and recipes; everyday and luxury needs
 4. Prices
 5. Trade links and trade; trade routes in the viewer
-6. Herding (if question 1 is yes)
+6. Herding
 7. Goods map mode, tooltip and statistics file
 8. Tuning against the exit tests, release v0.3
 
-## Open decisions for the owner
-
-1. **Herding**: in this milestone (more work, but it fixes the steppe and adds livestock goods), or in milestone 3 with horses and the plough?
-2. **Prices**: local prices measured in food (proposed), or a simpler model where goods just flow from surplus to shortage without prices?
-3. **Trade reach**: land and rivers only (proposed), or also short coastal hops between neighbouring coastal settlements now?
-4. **Number of goods**: about ten Neolithic goods (proposed), or fewer to start (for example just food, tools and one luxury)?
-
 ## Numbers that will need tuning
 
-Spoilage rates, recipe amounts, needs per person, the share of time spent gathering, link reach and carrying costs, how fast prices react, and (if in) herding densities. They start as estimates in data files and are tuned in the last step.
+Spoilage rates, recipe amounts, needs per person, the share of time spent gathering, link reach and carrying costs, how fast prices react, and herding densities. They start as estimates in data files and are tuned in the last step.

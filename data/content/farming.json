@@ -1,0 +1,56 @@
+// Farming: how crops are first farmed, how much farmland feeds, and how farming spreads.
+// Numbers are first estimates, tuned in milestone 1 step 10.
+{
+  // Biomes where no crop can be farmed, unless a major river runs through the cell.
+  "noFarmingBiomes": [ "Ice", "Tundra", "Desert" ],
+
+  // Water a river adds to a cell's rainfall for crops, in mm a year (flood plains).
+  "minorRiverWater": 250,
+  "majorRiverWater": 600,
+
+  // A crop grows wild where it grows at least this well in its homeland at the start.
+  "wildMinSuitability": 0.5,
+
+  // With random homelands, each crop's homeland is centred on a random reached land cell where
+  // it grows at least this well at the start.
+  "randomHomelandMinSuitability": 0.7,
+
+  // People per square km that farmland feeds where its crop grows at its best.
+  "farmDensity": 1.5,
+
+  // Farmland on a major river feeds this many times more (flood-plain soils).
+  "majorRiverYield": 1.5,
+
+  // Chance per year that a cell where a crop grows wild, full of foragers, first farms it.
+  // Each crop is first farmed only once; afterwards it spreads.
+  "inventionChance": 0.000003,
+
+  // Share of a farming cell's foragers who take up farming each year.
+  "conversionRate": 0.03,
+
+  // Logistic growth rate of farmers toward what their farmland feeds.
+  "growthRate": 0.04,
+
+  // Largest share of farmers lost in a year when the harvest falls below their needs.
+  "maxLoss": 0.2,
+
+  // Once a farming cell is at least this full, each neighbouring cell where its crop grows at
+  // least minSpreadSuitability well has spreadChance a year of taking up farming. A share of
+  // the farmers (spreadShare) moves there.
+  "spreadWhenFull": 0.4,
+  "minSpreadSuitability": 0.3,
+  "spreadChance": 0.015,
+  "spreadShare": 0.1,
+
+  // A farming cell switches to a neighbour's crop, with this chance a year, if that crop
+  // grows better here by at least this much.
+  "cropSwitchChance": 0.05,
+  "cropSwitchMargin": 0.2,
+
+  // Good and bad harvests: each year a region's harvest is multiplied by a random factor with
+  // this spread, kept between the two limits. Regions come from a coarse grid of this frequency.
+  "harvestSpread": 0.15,
+  "harvestMin": 0.3,
+  "harvestMax": 1.4,
+  "harvestRegionFrequency": 6
+}

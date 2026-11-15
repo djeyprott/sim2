@@ -46,6 +46,9 @@ public sealed class WorldState
         return values;
     }
 
+    /// <summary>True if a per-cell field with this name exists, for example because an optional system registered it.</summary>
+    public bool HasField(string name) => _fields.Any(f => f.Name == name);
+
     public int[] IntField(string name) =>
         Find(name).Ints ?? throw new InvalidOperationException($"Field '{name}' does not hold whole numbers.");
 

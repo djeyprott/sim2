@@ -17,6 +17,10 @@ public sealed class ForagerSystem : ISimSystem
     public const string SystemName = "foragers";
     public const string CapacityField = "people.foragerCapacity";
 
+    // The farming system's field for the share of a cell's land that is farmed. Foragers can
+    // only use what is left.
+    private const string FarmingLandShareField = "farming.landShare";
+
     // Below this many people a cell is treated as empty.
     private const double Extinct = 0.01;
 
@@ -31,6 +35,9 @@ public sealed class ForagerSystem : ISimSystem
     private double[] _population = Array.Empty<double>();
     private double[] _capacity = Array.Empty<double>();
     private int[] _biome = Array.Empty<int>();
+
+    // Share of each cell's land given over to farming, when the farming system is running.
+    private double[]? _farmedShare;
 
     private WorldMap? _map;
     private int[] _cells = Array.Empty<int>();
@@ -84,6 +91,7 @@ public sealed class ForagerSystem : ISimSystem
         WorldMap map = context.Map;
         _map = map;
         _biome = context.State.IntField(ClimateSystem.BiomeField);
+        _farmedShare = context.State.HasField(FarmingLandShareField) ? context.State.DoubleField(FarmingLandShareField) : null;
         _groups = new PopulationGroups(context.State);
         _population = new double[map.CellCount];
         _groupOfCell = new int[map.CellCount];
@@ -221,7 +229,13 @@ public sealed class ForagerSystem : ISimSystem
             int cell = _cells[i];
             int biome = _biome[cell];
             double density = biome >= 0 ? _densityByBiome[biome] : 0.0;
-            _capacity[cell] = density > 0.0 ? _shoreFactor[i] * density + _riverBonus[i] : 0.0;
+            double capacity = density > 0.0 ? _shoreFactor[i] * density + _riverBonus[i] : 0.0;
+            if (_farmedShare != null)
+            {
+                capacity *= 1.0 - Math.Clamp(_farmedShare[cell], 0.0, 1.0);
+            }
+
+            _capacity[cell] = capacity;
         }
     }
 

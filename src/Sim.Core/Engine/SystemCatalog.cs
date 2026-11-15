@@ -1,4 +1,5 @@
 using Sim.Core.Climate;
+using Sim.Core.Farming;
 using Sim.Core.People;
 
 namespace Sim.Core.Engine;
@@ -10,15 +11,23 @@ namespace Sim.Core.Engine;
 public static class SystemCatalog
 {
     /// <summary>The systems of the real simulation, in update order.</summary>
-    public static IReadOnlyList<ISimSystem> CreateDefault()
+    /// <param name="farming">False leaves farming out, so the world stays foragers. Used by tests.</param>
+    public static IReadOnlyList<ISimSystem> CreateDefault(bool farming = true)
     {
         ClimateSystem climate = ClimateSystem.CreateDefault();
         OccupationSet occupations = OccupationSet.LoadDefault();
-        return new ISimSystem[]
+        var systems = new List<ISimSystem>
         {
             climate,
             new PopulationSystem(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
         };
+
+        if (farming)
+        {
+            systems.Add(FarmingSystem.CreateDefault(climate.Biomes, occupations));
+        }
+
+        return systems;
     }
 }

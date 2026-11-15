@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
 
-Progress: steps 1 to 6b done 2026-11-14. Step 7 is next.
+Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) built 2026-11-15, being tuned against the exit tests.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.

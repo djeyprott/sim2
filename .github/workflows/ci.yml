@@ -13,7 +13,7 @@ jobs:
         with:
           dotnet-version: 10.0.x
       - name: Build and test
-        run: dotnet test sim2.sln --configuration Release --logger "console;verbosity=detailed"
+        run: dotnet test sim2.sln --configuration Release --filter "Category!=Exit" --logger "console;verbosity=detailed"
       - name: Headless run of 5,000 years, which must finish within 5 minutes
         run: |
           dotnet build src/Sim.Headless -c Release

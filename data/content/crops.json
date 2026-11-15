@@ -1,0 +1,55 @@
+// Crop groups: where each grew wild on the real Earth, and the climate it tolerates.
+//
+// Each climate range is four numbers: below the first the crop cannot grow, from the second to
+// the third it grows at its best, and above the fourth it cannot grow; in between, how well it
+// grows rises or falls in a straight line.
+//   warmest  mean temperature of the warmest month, degrees C
+//   coldest  mean temperature of the coldest month, degrees C
+//   water    rainfall over the year plus what a river adds (see farming.json), mm
+// Every crop needs a warmest month of at least 10 degrees C, so none grows in tundra or ice.
+// The homeland is a circle on the real Earth: cells inside it where the crop grows well at the
+// start of a run are where it grows wild and can first be farmed.
+{
+  "crops": [
+    {
+      "name": "Wheat and barley", "colour": "#e0bf4c",
+      "homeland": { "lat": 36.0, "lon": 40.0, "radiusKm": 700 },
+      "warmest": [14, 18, 30, 38], "coldest": [-15, -5, 12, 22], "water": [200, 350, 900, 1800]
+    },
+    {
+      "name": "Rice", "colour": "#7fd3a8",
+      "homeland": { "lat": 29.5, "lon": 115.0, "radiusKm": 600 },
+      "warmest": [20, 24, 32, 38], "coldest": [-5, 2, 30, 35], "water": [800, 1200, 4000, 8000]
+    },
+    {
+      "name": "Millet", "colour": "#c7894a",
+      "homeland": { "lat": 35.0, "lon": 110.0, "radiusKm": 600 },
+      "warmest": [17, 21, 30, 36], "coldest": [-25, -12, 10, 20], "water": [250, 400, 900, 1500]
+    },
+    {
+      "name": "Maize, beans and squash", "colour": "#f2e35a",
+      "homeland": { "lat": 18.0, "lon": -99.0, "radiusKm": 700 },
+      "warmest": [17, 21, 30, 36], "coldest": [0, 8, 28, 32], "water": [400, 600, 1500, 3000]
+    },
+    {
+      "name": "Potato and quinoa", "colour": "#b07ad6",
+      "homeland": { "lat": -15.0, "lon": -70.0, "radiusKm": 600 },
+      "warmest": [10, 12, 20, 26], "coldest": [-8, -2, 14, 20], "water": [300, 500, 1200, 2500]
+    },
+    {
+      "name": "Sorghum and pearl millet", "colour": "#e07a4a",
+      "homeland": { "lat": 13.0, "lon": 20.0, "radiusKm": 900 },
+      "warmest": [22, 26, 36, 42], "coldest": [10, 16, 30, 35], "water": [250, 400, 900, 1500]
+    },
+    {
+      "name": "Yams and oil palm", "colour": "#9ccf4a",
+      "homeland": { "lat": 7.0, "lon": 0.0, "radiusKm": 700 },
+      "warmest": [22, 25, 32, 36], "coldest": [16, 20, 30, 32], "water": [900, 1300, 3000, 5000]
+    },
+    {
+      "name": "Taro and banana", "colour": "#4ac0c7",
+      "homeland": { "lat": -6.0, "lon": 144.0, "radiusKm": 600 },
+      "warmest": [20, 23, 32, 36], "coldest": [12, 16, 30, 32], "water": [1200, 1800, 5000, 9000]
+    }
+  ]
+}

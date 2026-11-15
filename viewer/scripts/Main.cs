@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Godot;
 using Sim.Core.Climate;
 using Sim.Core.Engine;
+using Sim.Core.Farming;
 using Sim.Core.Geo;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
@@ -33,6 +34,7 @@ public partial class Main : Node2D
     private const int TemperatureChangeMode = 5;
     private const int RainfallChangeMode = 6;
     private const int PopulationMode = 7;
+    private const int FarmingMode = 8;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -59,6 +61,8 @@ public partial class Main : Node2D
     // directly; anything else is read through the host.
     private ClimateSystem? _climate;
     private ForagerSystem? _foragers;
+    private FarmingSystem? _farming;
+    private Color[] _cropColours = Array.Empty<Color>();
     private readonly OccupationSet _occupations = OccupationSet.LoadDefault();
     private double[] _areaKm2 = Array.Empty<double>();
     private Color[] _biomeColours = Array.Empty<Color>();
@@ -200,6 +204,10 @@ public partial class Main : Node2D
         _host?.Dispose();
         _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
         _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
+        _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
+        _cropColours = _farming == null
+            ? Array.Empty<Color>()
+            : _farming.Crops.Crops.Select(c => Color.FromHtml(c.Colour)).ToArray();
         _biomeColours = _climate == null
             ? Array.Empty<Color>()
             : _climate.Biomes.Biomes.Select(b => Color.FromHtml(b.Colour)).ToArray();
@@ -207,10 +215,12 @@ public partial class Main : Node2D
         _host = new SimulationHost(simulation);
         ClimateSystem? climate = _climate;
         ForagerSystem? foragers = _foragers;
+        FarmingSystem? farmingSystem = _farming;
         _host.SetSummaryExtractor(sim => new[]
         {
             climate?.WorldTemperatureShift() ?? double.NaN,
             foragers != null ? new PopulationGroups(sim.State).WorldTotal() : double.NaN,
+            farmingSystem?.WorldFarmers() ?? double.NaN,
         });
 
         _hover = new LiveCell();
@@ -258,6 +268,11 @@ public partial class Main : Node2D
             if (!double.IsNaN(summary[1]))
             {
                 worldInfo += "   " + (summary[1] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M people";
+            }
+
+            if (summary.Length >= 3 && !double.IsNaN(summary[2]))
+            {
+                worldInfo += ", " + (summary[2] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M farmers";
             }
         }
 
@@ -443,6 +458,12 @@ public partial class Main : Node2D
             };
         }
 
+        if (mode == FarmingMode && _farming != null)
+        {
+            int cellCount = _map.CellCount;
+            extractor = sim => ExtractFarming(sim, cellCount);
+        }
+
         if (mode == PopulationMode && _foragers != null)
         {
             double[] area = _areaKm2;
@@ -486,6 +507,39 @@ public partial class Main : Node2D
         }
 
         ShowLegend(mode);
+    }
+
+    // Per cell: a farmed crop's index plus the farmers' share of the cell's people (0 to 0.998);
+    // or, where nothing is farmed, minus one minus the index of a crop that grows wild there;
+    // or -100 for neither.
+    private static double[] ExtractFarming(Simulation sim, int cellCount)
+    {
+        int[] crop = sim.State.IntField(FarmingSystem.CropField);
+        int[] wild = sim.State.IntField(FarmingSystem.WildCropsField);
+        var groups = new PopulationGroups(sim.State);
+        var totals = new double[cellCount];
+        groups.FillCellTotals(totals);
+        var farmers = new double[cellCount];
+        groups.FillCellTotals(farmers, FarmerOccupation);
+        var values = new double[cellCount];
+        for (int cell = 0; cell < cellCount; cell++)
+        {
+            if (crop[cell] > 0)
+            {
+                double share = totals[cell] > 0.0 ? farmers[cell] / totals[cell] : 0.0;
+                values[cell] = crop[cell] - 1 + 0.001 + 0.998 * Math.Clamp(share, 0.0, 1.0);
+            }
+            else if (wild[cell] != 0)
+            {
+                values[cell] = -1 - System.Numerics.BitOperations.TrailingZeroCount(wild[cell]);
+            }
+            else
+            {
+                values[cell] = -100.0;
+            }
+        }
+
+        return values;
     }
 
     private static double[] ExtractBiomes(Simulation sim)
@@ -534,6 +588,31 @@ public partial class Main : Node2D
             case RainfallChangeMode:
                 _mapView.SetColours(cell => map.IsLand(cell) ? Gradient(values[cell], RainfallChangeStops) : Neutral(cell));
                 break;
+            case FarmingMode:
+                _mapView.SetColours(cell =>
+                {
+                    if (!map.IsLand(cell))
+                    {
+                        return Neutral(cell);
+                    }
+
+                    double v = values[cell];
+                    if (v >= 0.0)
+                    {
+                        int crop = (int)v;
+                        double share = v - crop;
+                        return crop < _cropColours.Length ? NoFarming.Lerp(_cropColours[crop], (float)(0.45 + 0.55 * share)) : NoFarming;
+                    }
+
+                    if (v > -99.0)
+                    {
+                        int crop = (int)(-v) - 1;
+                        return crop < _cropColours.Length ? NoFarming.Lerp(_cropColours[crop], 0.22f) : NoFarming;
+                    }
+
+                    return NoFarming;
+                });
+                break;
             case PopulationMode:
                 _mapView.SetColours(cell => !map.IsLand(cell) ? Neutral(cell)
                     : values[cell] <= 0.0 ? EmptyLand
@@ -578,6 +657,16 @@ public partial class Main : Node2D
             case TemperatureChangeMode:
                 title = "Temperature vs present day";
                 entries.AddRange(TemperatureChangeStops.Select(s => (s.Colour, s.At.ToString("+0.0;-0.0;0", CultureInfo.InvariantCulture) + " °C")));
+                break;
+            case FarmingMode:
+                title = "Farming (brighter: more of the people farm)";
+                if (_farming != null)
+                {
+                    entries.AddRange(_farming.Crops.Crops.Select(c => (_cropColours[c.Index], c.Name)));
+                    entries.Add((NoFarming.Lerp(_cropColours[0], 0.22f), "Grows wild, not yet farmed"));
+                }
+
+                entries.Add((NoFarming, "No farming"));
                 break;
             case PopulationMode:
                 title = "People per 100 km²";
@@ -661,6 +750,8 @@ public partial class Main : Node2D
     };
 
     private static readonly Color EmptyLand = Color.Color8(70, 70, 74);
+    private static readonly Color NoFarming = Color.Color8(62, 64, 68);
+    private static readonly int FarmerOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
 
     // Stops are powers of ten of people per 100 km².
     private static readonly (double At, Color Colour)[] PopulationStops =
@@ -880,11 +971,12 @@ public partial class Main : Node2D
             live.PendingCell = target;
             ForagerSystem? foragers = _foragers;
             OccupationSet occupations = _occupations;
+            FarmingSystem? farmingForCell = _farming;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeGroups(sim, target, occupations) : null,
+                foragers != null ? DescribeGroups(sim, target, occupations) + DescribeFarming(sim, target, farmingForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;
@@ -944,6 +1036,34 @@ public partial class Main : Node2D
                 ? "\nNo people: not reached yet"
                 : $"\nLand can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)} foragers"
                     + (people.Groups.Length > 0 ? "\nGroups:" + people.Groups : "\nGroups: none");
+        }
+
+        return text;
+    }
+
+    // Runs on the simulation thread: what is farmed in the cell, and what grows wild there.
+    private static string DescribeFarming(Simulation sim, int cell, FarmingSystem? farming)
+    {
+        if (farming == null)
+        {
+            return "";
+        }
+
+        string text = "";
+        int crop = sim.State.IntField(FarmingSystem.CropField)[cell] - 1;
+        if (crop >= 0)
+        {
+            var since = new GameDate(Math.Max(0, sim.State.IntField(FarmingSystem.SinceField)[cell] - 1));
+            double capacity = sim.State.DoubleField(FarmingSystem.CapacityField)[cell];
+            text += $"\nFarming {farming.Crops.Get(crop).Name} since {since.Year} {(since.IsBce ? "BCE" : "CE")}"
+                + $"\nFarmland can feed {capacity.ToString("N0", CultureInfo.InvariantCulture)}";
+        }
+
+        int wild = sim.State.IntField(FarmingSystem.WildCropsField)[cell];
+        if (wild != 0)
+        {
+            var names = farming.Crops.Crops.Where(c => (wild & (1 << c.Index)) != 0).Select(c => c.Name);
+            text += "\nGrows wild: " + string.Join(", ", names);
         }
 
         return text;
@@ -1027,33 +1147,36 @@ public partial class Main : Node2D
             case 10:
                 SetSpeed(4);
                 break;
-            case 40:
+            case 90:
                 SetSpeed(0);
                 SetMapMode(BiomeMode);
                 break;
-            case 55:
+            case 105:
                 SaveScreenshot("");
                 SetMapMode(TemperatureChangeMode);
                 break;
-            case 70:
+            case 120:
                 SaveScreenshot("-temperature-change");
                 SetMapMode(RainfallChangeMode);
                 break;
-            case 85:
+            case 135:
                 SaveScreenshot("-rainfall-change");
                 SetMapMode(PopulationMode);
                 break;
-            case 100:
+            case 150:
                 SaveScreenshot("-population");
-                SetMapMode(BiomeMode);
+                SetMapMode(FarmingMode);
+                break;
+            case 165:
+                SaveScreenshot("-farming");
 
-                // Zoom in on northeast Africa and the Middle East, with the pointer in the middle for the tooltip.
-                _camera.Position = MapView.MapPosition(24.0, 34.0);
-                ZoomAt(MapView.MapPosition(24.0, 34.0), 4f);
+                // Zoom in on Southwest Asia, with the pointer in the middle for the tooltip.
+                _camera.Position = MapView.MapPosition(33.0, 40.0);
+                ZoomAt(MapView.MapPosition(33.0, 40.0), 4f);
                 SelectCell(_map!.Grid.FindCell(30.6, 31.2));
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
-            case 130:
+            case 195:
                 GD.Print($"Screenshot script: {_runDescription}, date {frame?.Date}, tick {frame?.Tick}, selected cell {_selectedCell}");
                 bool saved = SaveScreenshot("-detail");
                 GetTree().Quit(saved && frame != null && frame.Tick > 0 ? 0 : 1);

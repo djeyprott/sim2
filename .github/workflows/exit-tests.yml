@@ -1,0 +1,32 @@
+name: Exit tests
+
+# The milestone exit tests: long runs of the full simulation on Earth with 10 seeds each.
+# They run separately from CI so ordinary changes get quick results.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'data/**'
+      - '.github/workflows/exit-tests.yml'
+
+jobs:
+  exit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [EarthRealHomelandTests, EarthRandomHomelandTests, EarthNoFarmingTests]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Run ${{ matrix.suite }}
+        run: >
+          dotnet test sim2.sln --configuration Release
+          --filter "FullyQualifiedName~${{ matrix.suite }}"
+          --logger "console;verbosity=detailed"

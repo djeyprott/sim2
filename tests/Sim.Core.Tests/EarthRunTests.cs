@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Sim.Core.Climate;
 using Sim.Core.Engine;
+using Sim.Core.Farming;
+using Sim.Core.Geo;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Xunit;
@@ -27,11 +29,13 @@ public sealed class EarthRunResult
 
     public double StartPopulation { get; set; }
 
-    public double EndPopulation { get; set; }
+    public double PopulationAt5000 { get; set; }
 
-    public double MinPopulationToCapacity { get; set; } = double.MaxValue;
+    public double FarmersAt5000 { get; set; }
 
-    public double MaxPopulationToCapacity { get; set; }
+    public double MinForagersToCapacity { get; set; } = double.MaxValue;
+
+    public double MaxForagersToCapacity { get; set; }
 
     public bool BadPopulation { get; set; }
 
@@ -41,56 +45,78 @@ public sealed class EarthRunResult
 
     public bool DuplicateGroups { get; set; }
 
-    public int GroupIds { get; set; }
+    public int FarmingOnForbiddenLand { get; set; }
 
-    public override string ToString() =>
-        $"Seed {Seed}: {Seconds:F0} s; world shift up to {MaxWorldShift:F2} C, cell shift up to {MaxCellShift:F2} C, "
-        + $"rainfall {MinRainFactor:F2} to {MaxRainFactor:F2}, {100.0 * BiomeChangedShare:F1}% of land changed biome; "
-        + $"population {StartPopulation / 1e6:F2} M at start, {EndPopulation / 1e6:F2} M at end, "
-        + $"{MinPopulationToCapacity:F3} to {MaxPopulationToCapacity:F3} of what the land can feed; "
-        + $"up to {MaxGroupsInACell} groups in a cell, {GroupIds} group ids used";
+    public List<(int Crop, int Cell, long Tick)> Origins { get; set; } = new List<(int, int, long)>();
+
+    public int Regions6000 { get; set; }
+
+    public double SpreadKmPerYear { get; set; } = double.NaN;
+
+    public double FarthestOriginFromRealHomelandKm { get; set; }
+
+    public int FarmingCells { get; set; }
+
+    public override string ToString()
+    {
+        string origins = string.Join(", ", Origins.Select(o => $"crop {o.Crop} at cell {o.Cell} in {new GameDate(o.Tick)}"));
+        return $"Seed {Seed}: {Seconds:F0} s; world shift up to {MaxWorldShift:F2} C, rainfall {MinRainFactor:F2} to {MaxRainFactor:F2}, "
+            + $"{100.0 * BiomeChangedShare:F1}% of land changed biome; population {StartPopulation / 1e6:F2} M at start, "
+            + $"{PopulationAt5000 / 1e6:F2} M after 5,000 years ({FarmersAt5000 / 1e6:F2} M farmers in {FarmingCells} cells); "
+            + $"foragers {MinForagersToCapacity:F3} to {MaxForagersToCapacity:F3} of what their land feeds; "
+            + $"up to {MaxGroupsInACell} groups in a cell; {Regions6000} separate farming regions within 6,000 years; "
+            + $"spread {SpreadKmPerYear:F2} km a year; farthest origin {FarthestOriginFromRealHomelandKm:F0} km from a real homeland; "
+            + $"origins: {origins}";
+    }
 }
 
 /// <summary>
-/// Runs the full simulation on Earth for 5,000 years with 10 seeds, once, and records what the
-/// exit tests check. Shared by every test in <see cref="EarthRunTests"/>.
+/// Runs the full simulation on Earth with 10 seeds, once per test class, and records what the
+/// exit tests check. Subclasses choose the settings.
 /// </summary>
-public sealed class EarthRunFixture
+public abstract class EarthRunFixtureBase
 {
     public const int Seeds = 10;
-    public const int Years = 5000;
 
-    public EarthRunFixture()
+    protected EarthRunFixtureBase(bool farming, CropHomelands homelands, int years)
     {
         WorldMap world = WorldMap.Load(Path.Combine(AppContext.BaseDirectory, "earth.world"));
         Results = new EarthRunResult[Seeds];
-        Parallel.For(0, Seeds, s => Results[s] = Run(world, (ulong)(s + 1)));
+        Parallel.For(0, Seeds, s => Results[s] = Run(world, (ulong)(s + 1), farming, homelands, years));
     }
 
     public EarthRunResult[] Results { get; }
 
-    private static EarthRunResult Run(WorldMap world, ulong seed)
+    private static EarthRunResult Run(WorldMap world, ulong seed, bool farming, CropHomelands homelands, int years)
     {
         var watch = Stopwatch.StartNew();
-        var sim = new Simulation(world, new RunSettings { Seed = seed }, SystemCatalog.CreateDefault());
+        var sim = new Simulation(world, new RunSettings { Seed = seed, CropHomelands = homelands }, SystemCatalog.CreateDefault(farming));
         ClimateSystem climate = sim.Systems.OfType<ClimateSystem>().Single();
         ForagerSystem foragers = sim.Systems.OfType<ForagerSystem>().Single();
+        FarmingSystem? farmingSystem = sim.Systems.OfType<FarmingSystem>().SingleOrDefault();
 
         int[] land = climate.LandCells.ToArray();
         int[] unreached = land.Where(cell => !foragers.IsReachable(cell)).ToArray();
         int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
         double[] factor = sim.State.DoubleField(ClimateSystem.RainfallFactorField);
         double[] shift = sim.State.DoubleField(ClimateSystem.TemperatureShiftField);
+        double[] foragerCapacity = sim.State.DoubleField(ForagerSystem.CapacityField);
+        int[]? cropPlusOne = farming ? sim.State.IntField(FarmingSystem.CropField) : null;
+        bool[] forbidden = new bool[climate.Biomes.Count];
+        foreach (string name in FarmingParameters.LoadDefault().NoFarmingBiomes)
+        {
+            forbidden[climate.Biomes.IndexOf(name)] = true;
+        }
+
         var groups = new PopulationGroups(sim.State);
         var people = new double[world.CellCount];
         int[] startBiome = land.Select(cell => biome[cell]).ToArray();
         var changed = new bool[land.Length];
 
-        var result = new EarthRunResult { Seed = seed, StartPopulation = foragers.WorldPopulation() };
-        for (int year = 0; year < Years; year++)
+        var result = new EarthRunResult { Seed = seed, StartPopulation = groups.WorldTotal() };
+        for (int year = 0; year < years; year++)
         {
             sim.Run(12);
-            groups.FillCellTotals(people);
             for (int group = 0; group < groups.IdCount; group++)
             {
                 if (groups.IsAlive(group))
@@ -102,11 +128,6 @@ public sealed class EarthRunFixture
                         result.BadPopulation = true;
                     }
                 }
-            }
-
-            if (year % 100 == 0)
-            {
-                CheckGroups(world, groups, result);
             }
 
             result.MaxWorldShift = Math.Max(result.MaxWorldShift, Math.Abs(climate.WorldTemperatureShift()));
@@ -121,24 +142,110 @@ public sealed class EarthRunFixture
                     changed[i] = true;
                 }
 
+                if (cropPlusOne != null && cropPlusOne[cell] > 0 && biome[cell] >= 0 && forbidden[biome[cell]]
+                    && world.River(cell) != RiverSize.Major)
+                {
+                    result.FarmingOnForbiddenLand++;
+                }
             }
 
-            foreach (int cell in unreached)
+            if (year % 10 == 0)
             {
-                result.MaxUnreachedPopulation = Math.Max(result.MaxUnreachedPopulation, people[cell]);
+                groups.FillCellTotals(people);
+                foreach (int cell in unreached)
+                {
+                    result.MaxUnreachedPopulation = Math.Max(result.MaxUnreachedPopulation, people[cell]);
+                }
             }
 
-            double ratio = foragers.WorldPopulation() / foragers.WorldCapacity();
-            result.MinPopulationToCapacity = Math.Min(result.MinPopulationToCapacity, ratio);
-            result.MaxPopulationToCapacity = Math.Max(result.MaxPopulationToCapacity, ratio);
+            if (year % 100 == 0)
+            {
+                CheckGroups(world, groups, result);
+            }
+
+            double ratio = foragers.WorldPopulation() / foragerCapacity.Sum();
+            result.MinForagersToCapacity = Math.Min(result.MinForagersToCapacity, ratio);
+            result.MaxForagersToCapacity = Math.Max(result.MaxForagersToCapacity, ratio);
+
+            if (year == 4999)
+            {
+                result.PopulationAt5000 = groups.WorldTotal();
+                result.FarmersAt5000 = farmingSystem?.WorldFarmers() ?? 0.0;
+            }
         }
 
         result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
-        result.EndPopulation = foragers.WorldPopulation();
         CheckGroups(world, groups, result);
-        result.GroupIds = groups.IdCount;
+
+        if (farmingSystem != null)
+        {
+            result.Origins = farmingSystem.Origins().ToList();
+            result.Regions6000 = SeparateRegions(world.Grid, result.Origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
+            result.SpreadKmPerYear = SpreadSpeed(world.Grid, sim.State.IntField(FarmingSystem.SinceField), cropPlusOne!, result.Origins);
+            result.FarmingCells = cropPlusOne!.Count(c => c > 0);
+            CropSet crops = farmingSystem.Crops;
+            result.FarthestOriginFromRealHomelandKm = result.Origins.Count == 0 ? 0.0 : result.Origins.Max(o =>
+                crops.Crops.Min(c => Km(world.Grid, o.Cell, world.Grid.FindCell(c.HomelandLat, c.HomelandLon))));
+        }
+
         result.Seconds = watch.Elapsed.TotalSeconds;
         return result;
+    }
+
+    public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    // How many origins are at least 1,000 km from every origin counted before them.
+    private static int SeparateRegions(GeodesicGrid grid, List<int> cells)
+    {
+        var counted = new List<int>();
+        foreach (int cell in cells)
+        {
+            if (counted.All(other => grid.DistanceKm(cell, other) >= 1000.0))
+            {
+                counted.Add(cell);
+            }
+        }
+
+        return counted.Count;
+    }
+
+    // Average speed farming reached cells at least 300 km from its nearest earlier origin.
+    private static double SpreadSpeed(GeodesicGrid grid, int[] sincePlusOne, int[] cropPlusOne, List<(int Crop, int Cell, long Tick)> origins)
+    {
+        double total = 0.0;
+        int count = 0;
+        for (int cell = 0; cell < cropPlusOne.Length; cell++)
+        {
+            if (cropPlusOne[cell] == 0 || sincePlusOne[cell] == 0)
+            {
+                continue;
+            }
+
+            long since = sincePlusOne[cell] - 1;
+            double best = double.MaxValue;
+            long bestTick = 0;
+            foreach (var origin in origins)
+            {
+                if (origin.Tick <= since)
+                {
+                    double km = grid.DistanceKm(cell, origin.Cell);
+                    if (km < best)
+                    {
+                        best = km;
+                        bestTick = origin.Tick;
+                    }
+                }
+            }
+
+            double years = (since - bestTick) / 12.0;
+            if (best >= 300.0 && best < double.MaxValue && years > 0.0)
+            {
+                total += best / years;
+                count++;
+            }
+        }
+
+        return count == 0 ? double.NaN : total / count;
     }
 
     private static void CheckGroups(WorldMap world, PopulationGroups groups, EarthRunResult result)
@@ -162,11 +269,36 @@ public sealed class EarthRunFixture
     }
 }
 
-public class EarthRunTests : IClassFixture<EarthRunFixture>
+public sealed class RealHomelandRunFixture : EarthRunFixtureBase
+{
+    public RealHomelandRunFixture()
+        : base(farming: true, CropHomelands.Real, years: 6000)
+    {
+    }
+}
+
+public sealed class RandomHomelandRunFixture : EarthRunFixtureBase
+{
+    public RandomHomelandRunFixture()
+        : base(farming: true, CropHomelands.Random, years: 6000)
+    {
+    }
+}
+
+public sealed class NoFarmingRunFixture : EarthRunFixtureBase
+{
+    public NoFarmingRunFixture()
+        : base(farming: false, CropHomelands.Real, years: 5000)
+    {
+    }
+}
+
+[Trait("Category", "Exit")]
+public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
 {
     private readonly EarthRunResult[] _results;
 
-    public EarthRunTests(EarthRunFixture fixture, ITestOutputHelper output)
+    public EarthRealHomelandTests(RealHomelandRunFixture fixture, ITestOutputHelper output)
     {
         _results = fixture.Results;
         foreach (EarthRunResult result in _results)
@@ -192,6 +324,99 @@ public class EarthRunTests : IClassFixture<EarthRunFixture>
     }
 
     [Fact]
+    public void Farming_starts_in_at_least_3_separate_regions_within_6000_years_in_8_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.Regions6000 >= 3) >= 8, string.Join(", ", _results.Select(r => r.Regions6000)));
+    }
+
+    [Fact]
+    public void The_first_farming_differs_between_seeds()
+    {
+        var firsts = _results.Where(r => r.Origins.Count > 0).Select(r => r.Origins.OrderBy(o => o.Tick).First()).ToList();
+        Assert.True(firsts.Select(o => o.Cell).Distinct().Count() >= 5, "The first farming cell should vary between seeds.");
+        Assert.True(firsts.Select(o => o.Tick).Distinct().Count() >= 8, "The first farming date should vary between seeds.");
+    }
+
+    [Fact]
+    public void Farming_spreads_at_0_3_to_3_km_a_year()
+    {
+        Assert.All(_results, r => Assert.InRange(r.SpreadKmPerYear, 0.3, 3.0));
+    }
+
+    [Fact]
+    public void After_5000_years_population_is_between_5_and_40_million()
+    {
+        Assert.All(_results, r => Assert.InRange(r.PopulationAt5000, 5e6, 40e6));
+    }
+
+    [Fact]
+    public void No_farming_in_ice_tundra_or_desert_without_a_major_river()
+    {
+        Assert.All(_results, r => Assert.Equal(0, r.FarmingOnForbiddenLand));
+    }
+
+    [Fact]
+    public void Groups_stay_valid()
+    {
+        foreach (EarthRunResult r in _results)
+        {
+            Assert.False(r.BadPopulation, $"Seed {r.Seed} had an invalid population.");
+            Assert.InRange(r.MaxGroupsInACell, 1, PopulationGroups.MaxGroupsPerCell);
+            Assert.False(r.DuplicateGroups, $"Seed {r.Seed} had two groups with the same traits in a cell.");
+            Assert.Equal(0.0, r.MaxUnreachedPopulation);
+        }
+    }
+}
+
+[Trait("Category", "Exit")]
+public class EarthRandomHomelandTests : IClassFixture<RandomHomelandRunFixture>
+{
+    private readonly EarthRunResult[] _results;
+
+    public EarthRandomHomelandTests(RandomHomelandRunFixture fixture, ITestOutputHelper output)
+    {
+        _results = fixture.Results;
+        foreach (EarthRunResult result in _results)
+        {
+            output.WriteLine(result.ToString());
+        }
+    }
+
+    [Fact]
+    public void Farming_starts_in_at_least_3_separate_regions_within_6000_years_in_8_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.Regions6000 >= 3) >= 8, string.Join(", ", _results.Select(r => r.Regions6000)));
+    }
+
+    [Fact]
+    public void In_8_of_10_seeds_an_origin_lies_more_than_2000_km_from_every_real_homeland()
+    {
+        Assert.True(_results.Count(r => r.FarthestOriginFromRealHomelandKm > 2000.0) >= 8,
+            string.Join(", ", _results.Select(r => r.FarthestOriginFromRealHomelandKm.ToString("F0"))));
+    }
+
+    [Fact]
+    public void Groups_stay_valid()
+    {
+        Assert.All(_results, r => Assert.False(r.BadPopulation || r.DuplicateGroups || r.FarmingOnForbiddenLand > 0));
+    }
+}
+
+[Trait("Category", "Exit")]
+public class EarthNoFarmingTests : IClassFixture<NoFarmingRunFixture>
+{
+    private readonly EarthRunResult[] _results;
+
+    public EarthNoFarmingTests(NoFarmingRunFixture fixture, ITestOutputHelper output)
+    {
+        _results = fixture.Results;
+        foreach (EarthRunResult result in _results)
+        {
+            output.WriteLine(result.ToString());
+        }
+    }
+
+    [Fact]
     public void Starting_population_is_between_2_and_6_million()
     {
         Assert.All(_results, r => Assert.InRange(r.StartPopulation, 2e6, 6e6));
@@ -202,8 +427,8 @@ public class EarthRunTests : IClassFixture<EarthRunFixture>
     {
         foreach (EarthRunResult r in _results)
         {
-            Assert.InRange(r.MinPopulationToCapacity, 0.8, 1.2);
-            Assert.InRange(r.MaxPopulationToCapacity, 0.8, 1.2);
+            Assert.InRange(r.MinForagersToCapacity, 0.8, 1.2);
+            Assert.InRange(r.MaxForagersToCapacity, 0.8, 1.2);
         }
     }
 
@@ -211,16 +436,6 @@ public class EarthRunTests : IClassFixture<EarthRunFixture>
     public void Unreached_islands_stay_empty()
     {
         Assert.All(_results, r => Assert.Equal(0.0, r.MaxUnreachedPopulation));
-    }
-
-    [Fact]
-    public void No_cell_holds_more_than_8_groups_or_two_groups_with_the_same_traits()
-    {
-        foreach (EarthRunResult r in _results)
-        {
-            Assert.InRange(r.MaxGroupsInACell, 1, PopulationGroups.MaxGroupsPerCell);
-            Assert.False(r.DuplicateGroups, $"Seed {r.Seed} had two groups with the same traits in a cell.");
-        }
     }
 
     [Fact]

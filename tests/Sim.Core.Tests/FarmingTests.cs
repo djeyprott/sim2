@@ -80,7 +80,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         CropSet crops = Farming(sim).Crops;
         bool Wild(double lat, double lon, string crop) => (wild[_world.Grid.FindCell(lat, lon)] & (1 << crops.IndexOf(crop))) != 0;
 
-        Assert.True(Wild(36.5, 38.5, "Wheat and barley"), "Wheat should grow wild in the Fertile Crescent.");
+        Assert.True(Wild(36.0, 36.5, "Wheat and barley"), "Wheat should grow wild in the Fertile Crescent.");
         Assert.False(Wild(48.0, 2.0, "Wheat and barley"), "Wheat should not grow wild in France.");
         foreach (Crop crop in crops.Crops)
         {

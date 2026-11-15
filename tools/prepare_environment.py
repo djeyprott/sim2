@@ -20,14 +20,16 @@ import warnings
 import netCDF4
 import numpy as np
 import shapefile
-from PIL import Image, ImageDraw
+from PIL import Image, ImageChops, ImageDraw
 
 WIDTH, HEIGHT = 4320, 2160
 NODATA = -32768
 
 # Natural Earth "scalerank": lower means a more important river.
 MAJOR_RIVER_MAX_RANK = 5
-MINOR_RIVER_MAX_RANK = 9
+# Ranks 8 and above are regional extras that cover only North America and Europe,
+# so they are left out to keep every continent on the same footing.
+MINOR_RIVER_MAX_RANK = 7
 
 src, out, river_lines_path = sys.argv[1], sys.argv[2], sys.argv[3]
 
@@ -109,27 +111,38 @@ def signed_area(ring):
 
 
 # ---- Lakes ----
+# Ring direction is not reliable in this dataset, so each lake is filled with the even-odd rule:
+# a pixel is lake if it lies inside an odd number of the lake's rings (islands are holes).
 lake_image = Image.new("L", (WIDTH, HEIGHT), 0)
-draw = ImageDraw.Draw(lake_image)
 kinds = collections.Counter()
-outer, holes = [], []
+lake_count = 0
 for sr in shapefile.Reader(f"{src}/ne_10m_lakes").iterShapeRecords():
-    kind = str(record_dict(sr).get("featurecla", ""))
+    record = record_dict(sr)
+    kind = str(record.get("featurecla", ""))
     kinds[kind] += 1
     if kind not in ("Lake", "Alkaline Lake"):
         continue
-    for ring in rings(sr.shape):
-        if len(ring) < 3:
-            continue
-        # In a shapefile, outer rings run clockwise (negative area in lon/lat) and holes anticlockwise.
-        (outer if signed_area(ring) < 0 else holes).append([pixel(x, y) for x, y in ring])
-for ring in outer:
-    draw.polygon(ring, fill=1)
-for ring in holes:
-    draw.polygon(ring, fill=0)
+    pixel_rings = [[pixel(x, y) for x, y in ring] for ring in rings(sr.shape) if len(ring) >= 3]
+    if not pixel_rings:
+        continue
+    xs = [p[0] for ring in pixel_rings for p in ring]
+    ys = [p[1] for ring in pixel_rings for p in ring]
+    x0, y0 = max(0, int(min(xs)) - 1), max(0, int(min(ys)) - 1)
+    x1, y1 = min(WIDTH, int(max(xs)) + 2), min(HEIGHT, int(max(ys)) + 2)
+    if x1 <= x0 or y1 <= y0:
+        continue
+    inside = Image.new("1", (x1 - x0, y1 - y0), 0)
+    for ring in pixel_rings:
+        layer = Image.new("1", inside.size, 0)
+        ImageDraw.Draw(layer).polygon([(x - x0, y - y0) for x, y in ring], fill=1)
+        inside = ImageChops.logical_xor(inside, layer)
+    lake_image.paste(1, (x0, y0), inside)
+    lake_count += 1
+    if "caspian" in str(record.get("name", "")).lower():
+        print("Caspian Sea found, pixels", sum(inside.getdata()) // 255 if inside.mode != "1" else sum(1 for v in inside.getdata() if v))
 lakes = np.asarray(lake_image, dtype=np.uint8)
 print("lake kinds", dict(kinds))
-print("lake rings", len(outer), "holes", len(holes), "lake pixels", int(lakes.sum()))
+print("lakes drawn", lake_count, "lake pixels", int(lakes.sum()))
 lakes.tofile(f"{out}/lakes.u8")
 
 # ---- Rivers ----

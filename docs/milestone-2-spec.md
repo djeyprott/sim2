@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: steps 1 and 2 done 2026-11-15. Step 2: wood, flint, clay, fibre, salt and obsidian are gathered by the farmers of each settlement up to a stock per person (until prices take over in step 4); obsidian from 18 real sources and salt from 16 real deposits plus dry coasts and salt-lake shores. Step 1 (goods, ledger, stockpiles, harvests into stores, monthly eating). Ledger balances to about 1e-12 in every seed. With the 1.1 famine numbers (real homelands): shortages in 4.2% to 4.8% of farming cell-years; famine deaths 0.87 to 0.99 per 1,000 farmer-years with a store against 1.7 to 2.2 without (8 of 10 seeds meet the halving test, seeds 2 and 5 fall just short, left to trade and step 8); severe famines under 0.1% of famine-death cell-years.
+Progress: steps 1 to 3 done 2026-11-15. Step 3: craftsmen (a new occupation living in settlements, up to a tenth of a settlement's store-fed people) make stone tools, pottery, cloth and ornaments by recipes; farmers and craftsmen use up everyday and luxury goods and their needs met adds up to 15% to farmers' growth. With craftsmen eating from the store, farmers now grow only while the store holds half a year's food (was a quarter). Famine deaths with a store are 0.52 to 0.63 of those without (real homelands), still short of the halving test; trade (step 5) and tuning (step 8) are expected to close the gap. A 5,000-year headless run takes 55 to 95 seconds depending on the build machine; the runner now prints each system's time. Step 2: Step 2: wood, flint, clay, fibre, salt and obsidian are gathered by the farmers of each settlement up to a stock per person (until prices take over in step 4); obsidian from 18 real sources and salt from 16 real deposits plus dry coasts and salt-lake shores. Step 1 (goods, ledger, stockpiles, harvests into stores, monthly eating). Ledger balances to about 1e-12 in every seed. With the 1.1 famine numbers (real homelands): shortages in 4.2% to 4.8% of farming cell-years; famine deaths 0.87 to 0.99 per 1,000 farmer-years with a store against 1.7 to 2.2 without (8 of 10 seeds meet the halving test, seeds 2 and 5 fall just short, left to trade and step 8); severe famines under 0.1% of famine-death cell-years.
 
 Change log:
 - 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
@@ -145,7 +145,7 @@ Each step ends with a new development build you can download.
 
 1. Goods list, ledger and stockpiles; harvests go into stores; food eaten from stores (done)
 2. Natural resources and gathering (done)
-3. Craftsmen and recipes; everyday and luxury needs
+3. Craftsmen and recipes; everyday and luxury needs (done)
 4. Prices
 5. Trade links and trade; trade routes in the viewer
 6. Herding

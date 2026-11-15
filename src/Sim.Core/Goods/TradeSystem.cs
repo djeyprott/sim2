@@ -23,13 +23,15 @@ public sealed class TradeParameters
 
     public double RouteValue { get; set; } = 1.0;
 
+    public int RebuildYears { get; set; } = 5;
+
     public static TradeParameters LoadDefault() => Parse(ContentFiles.ReadText("trade.json"));
 
     public static TradeParameters Parse(string json)
     {
         TradeParameters p = ContentFiles.Parse<TradeParameters>(json, "trade");
         if (p.MaxLinkCost <= 0.0 || p.LinksPerSettlement < 1 || p.RiverFactor <= 0.0 || p.CostPerStep < 0.0
-            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0)
+            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0 || p.RebuildYears < 1)
         {
             throw new InvalidDataException("trade.json: maxLinkCost, linksPerSettlement and riverFactor must be above 0, sendShare 0 to 1, and no negative costs.");
         }
@@ -51,8 +53,8 @@ public readonly record struct TradeRoute(int CellA, int CellB, double Value);
 
 /// <summary>
 /// Trade between settlements (milestone 2, step 5). Each settlement links to the few settlements
-/// it can reach most cheaply over land; links are rebuilt in January whenever settlements were
-/// founded or abandoned. Each season (every three months, for speed) goods sent last season enter
+/// it can reach most cheaply over land; links are rebuilt every few Januaries (trade.json), around
+/// settlements founded or abandoned since. Each season (every three months, for speed) goods sent last season enter
 /// the stores; then, along each link, each good moves from the cheaper end to the dearer end when
 /// the price gap beats the carrying cost, arriving the next season. Links and route volumes are worked out
 /// from the world state and are not saved: after a load they are rebuilt identically, and route
@@ -70,7 +72,7 @@ public sealed class TradeSystem : ISimSystem
     private WorldMap? _map;
     private EntityTable? _settlements;
     private IntColumn? _settlementCell;
-    private int[] _settlementPlusOne = Array.Empty<int>();
+    private int[] _linkedPlusOne = Array.Empty<int>();
     private double[] _stepCost = Array.Empty<double>();
 
     private bool _built;
@@ -94,6 +96,10 @@ public sealed class TradeSystem : ISimSystem
     private double[] _best = Array.Empty<double>();
     private int[] _seen = Array.Empty<int>();
     private int _stamp;
+    private const double MinimumSend = 0.001;
+    private readonly List<int> _destinations = new List<int>();
+    private int[] _destinationStamp = Array.Empty<int>();
+    private int _destinationRound = 1;
     private readonly PriorityQueue<int, double> _queue = new PriorityQueue<int, double>();
 
     // Average relative price gap per good along links, before January's trade and before
@@ -116,8 +122,12 @@ public sealed class TradeSystem : ISimSystem
 
     public TradeParameters Parameters => _parameters;
 
+    /// <summary>Settlement id plus one in each cell, as recorded when trade links were last rebuilt.</summary>
+    public const string LinkedSettlementField = "trade.linkedSettlement";
+
     public void Register(WorldState state)
     {
+        _linkedPlusOne = state.AddIntField(LinkedSettlementField);
     }
 
     public void Initialize(SimContext context)
@@ -129,7 +139,6 @@ public sealed class TradeSystem : ISimSystem
         _prices = new Prices(state, _map, PriceParameters.LoadDefault(), CraftRules.LoadDefault(_goods), _occupations);
         _settlements = state.Table(SettlementSystem.TableName);
         _settlementCell = _settlements.IntColumn("cell");
-        _settlementPlusOne = state.IntField(SettlementSystem.SettlementField);
         _wanted = new double[_goods.Count];
         _carry = _goods.Goods.Select(g => g.Weight * _parameters.CostPerStep).ToArray();
         _gapJanuary = new double[_goods.Count];
@@ -150,6 +159,7 @@ public sealed class TradeSystem : ISimSystem
         double cheapest = _parameters.TerrainCost.Values.Min() * Math.Min(1.0, _parameters.RiverFactor);
         _maxStepDifference = _parameters.TerrainCost.Values.Max() - cheapest;
         _best = new double[cells];
+        _destinationStamp = new int[cells];
         _seen = new int[cells];
     }
 
@@ -158,20 +168,38 @@ public sealed class TradeSystem : ISimSystem
         EntityTable settlements = _settlements!;
         Stockpiles stockpiles = _stockpiles!;
 
-        // Last month's goods arrive.
-        for (int id = 0; id < settlements.IdCount; id++)
+        // Last season's goods arrive. After a load, every settlement is checked once, since the
+        // list of where goods were sent is not saved.
+        if (!_built)
         {
-            if (settlements.IsAlive(id))
+            for (int id = 0; id < settlements.IdCount; id++)
             {
-                stockpiles.Arrive(_settlementCell![id]);
+                if (settlements.IsAlive(id))
+                {
+                    stockpiles.Arrive(_settlementCell![id]);
+                }
+            }
+        }
+        else
+        {
+            foreach (int cell in _destinations)
+            {
+                stockpiles.Arrive(cell);
             }
         }
 
+        _destinations.Clear();
         int month = (int)(context.Tick % GameDate.MonthsPerYear);
+        long year = context.Tick / GameDate.MonthsPerYear;
         long start = System.Diagnostics.Stopwatch.GetTimestamp();
-        if (!_built || (month == 0 && SettlementsChanged()))
+        if (!_built)
         {
-            BuildLinks();
+            BuildLinks(update: false);
+        }
+
+        if (month == 0 && year % _parameters.RebuildYears == 0 && SettlementsChanged())
+        {
+            BuildLinks(update: true);
         }
 
         BuildSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
@@ -183,6 +211,7 @@ public sealed class TradeSystem : ISimSystem
         start = System.Diagnostics.Stopwatch.GetTimestamp();
         WorkPrices(context.Tick);
         PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
+        _destinationRound++;
         if (month == 0 || month == 3)
         {
             AddGaps(month == 0 ? _gapJanuary : _gapFebruary);
@@ -193,6 +222,11 @@ public sealed class TradeSystem : ISimSystem
         {
             int a = _linkA[link];
             int b = _linkB[link];
+            if (!settlements.IsAlive(a) || !settlements.IsAlive(b))
+            {
+                continue;
+            }
+
             int cellA = _settlementCell![a];
             int cellB = _settlementCell[b];
             double cost = _linkCost[link];
@@ -227,7 +261,18 @@ public sealed class TradeSystem : ISimSystem
 
         double scale = Math.Min(1.0, (dear - cheap - carry) / dear);
         double amount = _parameters.SendShare * scale * stock / fromDegree;
+        if (amount < MinimumSend)
+        {
+            return 0.0;
+        }
+
         double sent = _stockpiles.Send(from, to, good, amount);
+        if (_destinationStamp[to] != _destinationRound)
+        {
+            _destinationStamp[to] = _destinationRound;
+            _destinations.Add(to);
+        }
+
         return sent * 0.5 * (cheap + dear);
     }
 
@@ -259,12 +304,17 @@ public sealed class TradeSystem : ISimSystem
         {
             double value = _goods.Get(g).Value;
             double total = 0.0;
+            int counted = 0;
             for (int link = 0; link < _linkA.Length; link++)
             {
-                total += Math.Abs(_price[_linkA[link] * goods + g] - _price[_linkB[link] * goods + g]) / value;
+                if (_settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
+                {
+                    total += Math.Abs(_price[_linkA[link] * goods + g] - _price[_linkB[link] * goods + g]) / value;
+                    counted++;
+                }
             }
 
-            gaps[g] += total / _linkA.Length;
+            gaps[g] += counted == 0 ? 0.0 : total / counted;
         }
     }
 
@@ -288,10 +338,12 @@ public sealed class TradeSystem : ISimSystem
     }
 
     // Each settlement chooses its cheapest-to-reach settlements; a link counts if either end chose it.
-    // A settlement's choice depends only on which settlements stand within its reach, so only the
-    // settlements near one that was founded or abandoned choose again. Links are kept in
-    // (lower id, higher id) order, so the result is the same as building everything afresh.
-    private void BuildLinks()
+    // Links are built over the settlements recorded in the saved "trade.linkedSettlement" field when
+    // links were last rebuilt, so after a load they come out exactly as before. A settlement's
+    // choice depends only on which settlements stand within its reach, so on a rebuild only those
+    // near one founded or abandoned since choose again. Links are kept in (lower id, higher id)
+    // order, so the result does not depend on how it was reached.
+    private void BuildLinks(bool update)
     {
         EntityTable settlements = _settlements!;
         int ids = settlements.IdCount;
@@ -302,41 +354,62 @@ public sealed class TradeSystem : ISimSystem
 
         var choose = new SortedSet<int>();
         var reached = new List<(double Cost, int Id)>();
-        bool all = !_built;
-        for (int id = 0; id < ids; id++)
+        if (!update)
         {
-            bool alive = settlements.IsAlive(id);
-            bool wasAlive = id < _aliveWhenBuilt.Length && _aliveWhenBuilt[id];
-            if (!alive)
+            // Everything recorded at the last rebuild chooses afresh.
+            _aliveWhenBuilt = new bool[ids];
+            for (int cell = 0; cell < _linkedPlusOne.Length; cell++)
             {
-                _chosen[id] = null;
-            }
-
-            if (all)
-            {
-                if (alive)
+                if (_linkedPlusOne[cell] > 0)
                 {
+                    int id = _linkedPlusOne[cell] - 1;
+                    _aliveWhenBuilt[id] = true;
                     choose.Add(id);
                 }
+            }
+        }
+        else
+        {
+            // Record the settlements standing now, and find who must choose again.
+            var changed = new List<int>();
+            for (int id = 0; id < ids; id++)
+            {
+                bool alive = settlements.IsAlive(id);
+                bool wasAlive = id < _aliveWhenBuilt.Length && _aliveWhenBuilt[id];
+                if (alive == wasAlive)
+                {
+                    continue;
+                }
 
-                continue;
+                int cell = _settlementCell![id];
+                if (alive)
+                {
+                    _linkedPlusOne[cell] = id + 1;
+                    choose.Add(id);
+                }
+                else
+                {
+                    if (_linkedPlusOne[cell] == id + 1)
+                    {
+                        _linkedPlusOne[cell] = 0;
+                    }
+
+                    _chosen[id] = null;
+                }
+
+                changed.Add(cell);
             }
 
-            if (alive == wasAlive)
+            _aliveWhenBuilt = new bool[ids];
+            for (int id = 0; id < ids; id++)
             {
-                continue;
+                _aliveWhenBuilt[id] = settlements.IsAlive(id);
             }
 
-            // Founded or abandoned: it chooses (if alive), and so does every settlement that might reach it.
-            if (alive)
+            foreach (int cell in changed)
             {
-                choose.Add(id);
-            }
-
-            Reach(_settlementCell![id], reached, _parameters.MaxLinkCost + _maxStepDifference);
-            foreach ((_, int other) in reached)
-            {
-                if (settlements.IsAlive(other))
+                Reach(cell, reached, _parameters.MaxLinkCost + _maxStepDifference);
+                foreach ((_, int other) in reached)
                 {
                     choose.Add(other);
                 }
@@ -351,16 +424,14 @@ public sealed class TradeSystem : ISimSystem
             _chosen[id] = reached.GetRange(0, count).ToArray();
         }
 
-        _aliveWhenBuilt = new bool[ids];
         var pairs = new SortedDictionary<(int A, int B), double>();
         for (int id = 0; id < ids; id++)
         {
-            if (!settlements.IsAlive(id))
+            if (!_aliveWhenBuilt[id])
             {
                 continue;
             }
 
-            _aliveWhenBuilt[id] = true;
             foreach ((double cost, int other) in _chosen[id] ?? Array.Empty<(double, int)>())
             {
                 var key = id < other ? (id, other) : (other, id);
@@ -413,9 +484,9 @@ public sealed class TradeSystem : ISimSystem
                 continue;
             }
 
-            if (cell != start && _settlementPlusOne[cell] > 0)
+            if (cell != start && _linkedPlusOne[cell] > 0)
             {
-                reached.Add((cost, _settlementPlusOne[cell] - 1));
+                reached.Add((cost, _linkedPlusOne[cell] - 1));
             }
 
             bool river = map.River(cell) != RiverSize.None;

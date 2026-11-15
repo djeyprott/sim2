@@ -98,7 +98,7 @@ public sealed class Prices
         }
 
         double ratio = wanted / Math.Max(stock, 1e-6);
-        double factor = Math.Pow(ratio, p.Elasticity);
+        double factor = p.Elasticity == 1.0 ? ratio : Math.Pow(ratio, p.Elasticity);
         return value * Math.Clamp(factor, p.MinFactor, p.MaxFactor);
     }
 

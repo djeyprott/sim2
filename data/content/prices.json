@@ -8,7 +8,7 @@
 // gatherTimeValue: the food a farmer gives up by spending their whole year's gathering share
 // (perPerson in resources.json) on a material; they gather it only if it is worth more.
 {
-  "elasticity": 0.7,
+  "elasticity": 1.0,
   "minFactor": 0.2,
   "maxFactor": 5.0,
   "foodReserveYears": 0.5,

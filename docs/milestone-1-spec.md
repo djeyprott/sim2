@@ -1,8 +1,8 @@
 # Milestone 1 spec: Land and people (version 1.1, agreed)
 
-Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.7.
+Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.8.
 
-Progress: steps 1 to 9 done; step 10 statistics file and tuning done 2026-11-15, all automated exit tests passing. Waiting on the owner's checks in the viewer before release v0.2.
+Progress: complete 2026-11-15. All automated exit tests pass, the owner checked the viewer, and the milestone is released as v0.2.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -136,14 +136,14 @@ Soundness
 - [x] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
 - [x] A 5,000-year headless run on the build machine takes under 5 minutes. (With every milestone 1 system: 23 to 34 seconds, varying with the build machine.)
 
-By hand in the viewer:
+By hand in the viewer (checked by the owner 2026-11-15):
 
-- [ ] The start screen sets the seed and crop homelands, and a loaded save shows the settings it was started with.
-- [ ] Each new map mode is readable and matches the tooltip.
-- [ ] You can see a region dry out or cool over centuries, its biome change, and people leave it.
-- [ ] You can watch farming start, spread and found settlements, and tell which crop is where. (Automated support: after 5,000 years with real homelands there are 5,800 to 10,200 settlements, at most one per cell, each in a land cell that points back to it. A settlement is founded at 1,000 farmers, holds 15% of its cell's people and is abandoned below 100 farmers; numbers in `data/content/settlements.json`.)
-- [ ] A famine is visible as a drop in population that later recovers. (Automated support: with real homelands about 3% of farming cell-years see a harvest below 85% of needs, and 98% of famine-hit cells regain 90% of their people within 50 years.)
-- [ ] The frame rate stays smooth at every speed.
+- [x] The start screen sets the seed and crop homelands, and a loaded save shows the settings it was started with.
+- [x] Each new map mode is readable and matches the tooltip.
+- [x] You can see a region dry out or cool over centuries, its biome change, and people leave it.
+- [x] You can watch farming start, spread and found settlements, and tell which crop is where. (Automated support: after 5,000 years with real homelands there are 5,800 to 10,200 settlements, at most one per cell, each in a land cell that points back to it. A settlement is founded at 1,000 farmers, holds 15% of its cell's people and is abandoned below 100 farmers; numbers in `data/content/settlements.json`.)
+- [x] A famine is visible as a drop in population that later recovers. (Automated support: with real homelands about 3% of farming cell-years see a harvest below 85% of needs, and 98% of famine-hit cells regain 90% of their people within 50 years.)
+- [x] The frame rate stays smooth at every speed.
 
 ## Build order
 
@@ -159,7 +159,7 @@ Each step ends with a new development build you can download.
 7. Farming: crops, invention, yield, spread, harvest (done)
 8. Famine (done)
 9. Settlements (done)
-10. Statistics file, tuning against the exit tests (done), release v0.2
+10. Statistics file, tuning against the exit tests, release v0.2 (done)
 
 ## Numbers that will need tuning
 

@@ -1,8 +1,9 @@
-# sim2 design doc (version 0.7)
+# sim2 design doc (version 0.8)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is in progress (`milestone-1-spec.md`).
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 needs an agreed spec before work starts.
 
 Change log:
+- 0.8 (2026-11-15): milestone 1 complete, released as v0.2.
 - 0.7 (2026-11-15): backlog item on farming open grassland before the plough.
 - 0.6 (2026-11-14): population model agreed: population groups in the manner of Victoria 2's pops.
 - 0.5 (2026-11-14): added the climate and crop decisions made for milestone 1, the .NET 10 move, the release process and new backlog items.
@@ -85,7 +86,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 | # | Milestone | Adds | State |
 |---|-----------|------|-------|
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
-| 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | In progress |
+| 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
 | 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes | |
 | 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |

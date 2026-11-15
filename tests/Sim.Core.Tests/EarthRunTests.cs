@@ -102,6 +102,8 @@ public abstract class EarthRunFixtureBase
         double[] shift = sim.State.DoubleField(ClimateSystem.TemperatureShiftField);
         double[] foragerCapacity = sim.State.DoubleField(ForagerSystem.CapacityField);
         int[]? cropPlusOne = farming ? sim.State.IntField(FarmingSystem.CropField) : null;
+        int[]? sincePlusOne = farming ? sim.State.IntField(FarmingSystem.SinceField) : null;
+        long lastCheck = -1;
         bool[] forbidden = new bool[climate.Biomes.Count];
         foreach (string name in FarmingParameters.LoadDefault().NoFarmingBiomes)
         {
@@ -142,13 +144,15 @@ public abstract class EarthRunFixtureBase
                     changed[i] = true;
                 }
 
-                if (cropPlusOne != null && cropPlusOne[cell] > 0 && biome[cell] >= 0 && forbidden[biome[cell]]
-                    && world.River(cell) != RiverSize.Major)
+                // Farming that started since the last check on land where it may not.
+                if (cropPlusOne != null && cropPlusOne[cell] > 0 && sincePlusOne![cell] - 1 > lastCheck
+                    && biome[cell] >= 0 && forbidden[biome[cell]] && world.River(cell) != RiverSize.Major)
                 {
                     result.FarmingOnForbiddenLand++;
                 }
             }
 
+            lastCheck = sim.Tick - 1;
             if (year % 10 == 0)
             {
                 groups.FillCellTotals(people);

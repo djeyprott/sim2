@@ -332,9 +332,10 @@ public sealed class FarmingSystem : ISimSystem
             farmers -= _parameters.MaxLoss * farmers;
         }
 
-        if (farmers < 1.0 && capacity <= 0.0)
+        if (capacity <= 0.0)
         {
-            // The crop no longer grows here and the farmers are gone: the cell stops farming.
+            // The crop no longer grows here (the climate has turned, or the land became desert):
+            // the cell stops farming and its farmers go back to foraging.
             if (foragerGroup < 0 && farmers > 0.0)
             {
                 foragerGroup = groups.FindOrAdd(cell, _forager);

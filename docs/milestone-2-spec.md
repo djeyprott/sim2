@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-15. Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: step 1 started 2026-11-15.
+Progress: step 1 done 2026-11-15 (goods, ledger, stockpiles, harvests into stores, monthly eating). Ledger balances to about 1e-12 in every seed. Famine is at 2.7% to 3.0% of farming cell-years with real homelands, about the milestone 1 level; halving it is left to tuning in step 8.
 
 Change log:
 - 1.0 (2026-11-15): agreed and frozen.
@@ -139,7 +139,7 @@ By hand in the viewer:
 
 Each step ends with a new development build you can download.
 
-1. Goods list, ledger and stockpiles; harvests go into stores; food eaten from stores
+1. Goods list, ledger and stockpiles; harvests go into stores; food eaten from stores (done)
 2. Natural resources and gathering
 3. Craftsmen and recipes; everyday and luxury needs
 4. Prices

@@ -190,6 +190,16 @@ public sealed class TradeSystem : ISimSystem
 
         _destinations.Clear();
         int month = (int)(context.Tick % GameDate.MonthsPerYear);
+        if (month == 0)
+        {
+            for (int id = 0; id < settlements.IdCount; id++)
+            {
+                if (settlements.IsAlive(id))
+                {
+                    stockpiles.AgeSales(_settlementCell![id]);
+                }
+            }
+        }
         long year = context.Tick / GameDate.MonthsPerYear;
         long start = System.Diagnostics.Stopwatch.GetTimestamp();
         if (!_built)
@@ -212,9 +222,9 @@ public sealed class TradeSystem : ISimSystem
         WorkPrices(context.Tick);
         PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         _destinationRound++;
-        if (month == 0 || month == 3)
+        if (month == 0)
         {
-            AddGaps(month == 0 ? _gapJanuary : _gapFebruary);
+            AddGaps(_gapJanuary);
         }
 
         int goods = _goods.Count;
@@ -247,6 +257,48 @@ public sealed class TradeSystem : ISimSystem
             }
 
             _linkValue[link] = 0.9 * _linkValue[link] + 0.1 * value;
+        }
+
+        // In January, the gaps again, counting goods on their way as already there.
+        if (month == 0)
+        {
+            AddGapsAfterTrade(context.Tick);
+        }
+    }
+
+    private void AddGapsAfterTrade(long tick)
+    {
+        int goods = _goods.Count;
+        EntityTable settlements = _settlements!;
+        double[] row = new double[goods];
+        var after = new double[settlements.IdCount * goods];
+        for (int id = 0; id < settlements.IdCount; id++)
+        {
+            if (id < _degree.Length && _degree[id] > 0 && settlements.IsAlive(id))
+            {
+                _prices!.Work(_settlementCell![id], tick, _wanted);
+                for (int g = 0; g < goods; g++)
+                {
+                    after[id * goods + g] = _prices.PriceWithIncoming(g);
+                }
+            }
+        }
+
+        for (int g = 0; g < goods; g++)
+        {
+            double value = _goods.Get(g).Value;
+            double total = 0.0;
+            int counted = 0;
+            for (int link = 0; link < _linkA.Length; link++)
+            {
+                if (settlements.IsAlive(_linkA[link]) && settlements.IsAlive(_linkB[link]))
+                {
+                    total += Math.Abs(after[_linkA[link] * goods + g] - after[_linkB[link] * goods + g]) / value;
+                    counted++;
+                }
+            }
+
+            _gapFebruary[g] += counted == 0 ? 0.0 : total / counted;
         }
     }
 
@@ -553,6 +605,6 @@ public sealed class TradeSystem : ISimSystem
     /// <summary>For each good, the run's summed average relative price gap along links before January's trade.</summary>
     public IReadOnlyList<double> GapBeforeTrade => _gapJanuary;
 
-    /// <summary>For each good, the same a season later (April), after January's goods arrived.</summary>
+    /// <summary>For each good, the same straight after January's trade, counting goods on their way as arrived.</summary>
     public IReadOnlyList<double> GapAfterTrade => _gapFebruary;
 }

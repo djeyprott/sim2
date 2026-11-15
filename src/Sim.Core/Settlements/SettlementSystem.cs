@@ -97,6 +97,7 @@ public sealed class SettlementSystem : ISimSystem
                 _table!.Remove(id);
                 _settlementPlusOne[cell] = 0;
                 _stockpiles?.LoseAll(cell);
+                _stockpiles?.ClearSales(cell);
                 continue;
             }
 

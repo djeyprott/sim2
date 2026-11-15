@@ -16,7 +16,7 @@
   "riverFactor": 0.5,
   "costPerStep": 0.02,
   "sendShare": 0.15,
-  "routeValue": 1.0,
+  "routeValue": 0.2,
 
   // Links are rebuilt every this many years (in January), around settlements founded or
   // abandoned since; a new settlement may wait that long to be linked.

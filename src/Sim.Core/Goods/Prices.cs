@@ -137,6 +137,12 @@ public sealed class Prices
             wanted[g] += _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
         }
 
+        // What it has been selling to its trade partners: about a year's worth.
+        for (int g = 0; g < wanted.Length; g++)
+        {
+            wanted[g] += 0.5 * _stockpiles.Sold(cell, g);
+        }
+
         // Materials for what the craftsmen would make: the shortfall of each output, by its recipes.
         for (int g = 0; g < wanted.Length; g++)
         {
@@ -177,6 +183,10 @@ public sealed class Prices
 
         return price;
     }
+
+    /// <summary>A good's price in the settlement last passed to <see cref="Work"/>, counting goods on their way there as in store.</summary>
+    public double PriceWithIncoming(int good) =>
+        PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good) + _stockpiles.Incoming(_cell, good), _parameters);
 
     /// <summary>One good's price in a cell's settlement at the given tick.</summary>
     public double Price(int cell, int good, long tick)

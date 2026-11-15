@@ -125,7 +125,7 @@ Foragers
 Farming
 - [x] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds. (Measured: 6 to 8 regions in every seed.)
 - [x] The place and date of the first invention differ between seeds.
-- [ ] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,960 to 4,731 km from a real homeland.)
+- [x] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,960 to 4,731 km from a real homeland.)
 - [x] Farming spreads at an average of 0.3 to 3 km per year. (Measured: 0.48 to 0.96 km a year.)
 - [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured with real homelands: 18.6 to 30.4 million. Random homelands give 22.9 to 43.7 million; to be retuned with famine in step 8 or 10.)
 - [x] No farming ever appears in ice, tundra or desert cells without a major river. (Farming also ends at once where the climate turns against its crop; the farmers go back to foraging.)

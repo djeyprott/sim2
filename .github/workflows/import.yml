@@ -16,8 +16,8 @@ env:
   # NOAA NCEI ETOPO 2022, 60 arc-second, ice surface elevation.
   ETOPO_URL: https://www.ngdc.noaa.gov/thredds/fileServer/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc
   # TerraClimate 1981-2010 monthly climatology (public domain, CC0).
-  TERRACLIMATE_URL: http://thredds.northwestknowledge.net:8080/thredds/fileServer/TERRACLIMATE_ALL/summaries
-  TERRACLIMATE_FALLBACK_URL: https://www.reacchpna.org/thredds/fileServer/TERRACLIMATE_ALL/summaries
+  TERRACLIMATE_URL: https://www.reacchpna.org/thredds/fileServer/TERRACLIMATE_ALL/climatology
+  TERRACLIMATE_FALLBACK_URL: http://thredds.northwestknowledge.net:8080/thredds/fileServer/TERRACLIMATE_ALL/climatology
   # Natural Earth 10m physical vectors (public domain).
   NATURAL_EARTH_URL: https://naciscdn.org/naturalearth/10m/physical
 
@@ -62,8 +62,8 @@ jobs:
           mkdir -p raw/env-src
           cd raw/env-src
           for var in tmax tmin ppt; do
-            curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_URL/TerraClimate19812010_$var.nc" \
-              || curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_FALLBACK_URL/TerraClimate19812010_$var.nc"
+            curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_URL/TerraClimate_19812010_$var.nc" \
+              || curl -fL --retry 3 --max-time 1200 -o $var.nc "$TERRACLIMATE_FALLBACK_URL/TerraClimate_19812010_$var.nc"
           done
           for name in ne_10m_lakes ne_10m_rivers_lake_centerlines; do
             curl -fL --retry 3 -o $name.zip "$NATURAL_EARTH_URL/$name.zip"

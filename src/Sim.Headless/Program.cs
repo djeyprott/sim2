@@ -71,6 +71,7 @@ public static class Program
         Console.WriteLine($"{simulation.Settings.Describe()}, starting at {simulation.Date}, {simulation.Systems.Count} systems");
 
         long ticks = years * GameDate.MonthsPerYear;
+        simulation.MeasureSystemTime = true;
         var watch = Stopwatch.StartNew();
         if (options.TryGetValue("--stats", out string? statsPath))
         {
@@ -101,6 +102,10 @@ public static class Program
 
         double seconds = Math.Max(watch.Elapsed.TotalSeconds, 1e-9);
         Console.WriteLine($"Ran {ticks} ticks ({years} years) in {seconds:F3} s: {ticks / seconds:F0} ticks per second");
+        for (int i = 0; i < simulation.Systems.Count; i++)
+        {
+            Console.WriteLine($"  {simulation.Systems[i].Name}: {simulation.SystemSeconds[i]:F1} s");
+        }
         Console.WriteLine($"Ended at {simulation.Date}");
         Console.WriteLine($"State checksum {simulation.StateChecksum()}");
 

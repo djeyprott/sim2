@@ -98,6 +98,17 @@ public sealed class Simulation
 
     public IReadOnlyList<ISimSystem> Systems => _systems;
 
+    /// <summary>
+    /// When set, the wall-clock time each system spends in Update is added up in
+    /// <see cref="SystemSeconds"/> (for profiling; it does not change the simulation).
+    /// </summary>
+    public bool MeasureSystemTime { get; set; }
+
+    private double[]? _systemSeconds;
+
+    /// <summary>Seconds each system has spent in Update while <see cref="MeasureSystemTime"/> was set, in update order.</summary>
+    public IReadOnlyList<double> SystemSeconds => _systemSeconds ?? new double[_systems.Length];
+
     /// <summary>Simulates one month.</summary>
     public void Step()
     {
@@ -106,7 +117,17 @@ public sealed class Simulation
             if (Tick % _systems[i].IntervalMonths == 0)
             {
                 _contexts[i].Tick = Tick;
-                _systems[i].Update(_contexts[i]);
+                if (MeasureSystemTime)
+                {
+                    long start = System.Diagnostics.Stopwatch.GetTimestamp();
+                    _systems[i].Update(_contexts[i]);
+                    _systemSeconds ??= new double[_systems.Length];
+                    _systemSeconds[i] += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
+                }
+                else
+                {
+                    _systems[i].Update(_contexts[i]);
+                }
             }
         }
 

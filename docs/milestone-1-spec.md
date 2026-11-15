@@ -1,6 +1,6 @@
 # Milestone 1 spec: Land and people (version 1.1, agreed)
 
-Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
+Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.7.
 
 Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) and step 8 (famine) done 2026-11-15, all exit tests passing.
 
@@ -163,4 +163,6 @@ Each step ends with a new development build you can download.
 
 ## Numbers that will need tuning
 
-How fast and how far climate swings, growth rates, feeding limits per biome, the chance of inventing farming, spread rates and the settlement threshold all start as estimates. Step 10 also adds a gentle farm yield penalty on grassland, agreed by the owner on 2026-11-15, so that early farming keeps mostly to forest edges and river valleys rather than the open steppe; the fuller treatment (the plough, herders) is in the design doc's backlog. Step 10 adjusts them until the exit tests pass. They live in data files, not code.
+How fast and how far climate swings, growth rates, feeding limits per biome, the chance of inventing farming, spread rates and the settlement threshold all start as estimates. Step 10 adjusts them until the exit tests pass. They live in data files, not code.
+
+Step 10 also adds a gentle farm yield penalty on grassland, agreed by the owner on 2026-11-15, so that early farming keeps mostly to forest edges and river valleys rather than the open steppe. The fuller treatment (the plough, herders) is in the design doc's backlog.

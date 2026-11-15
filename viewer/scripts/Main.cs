@@ -1034,7 +1034,7 @@ public partial class Main : Node2D
 
         if (stock.Count > 0)
         {
-            text += "\n  In store: " + string.Join(", ", stock);
+            text += "\n  In store: " + Wrap(stock);
         }
 
         // Prices in food, for the goods the settlement holds or wants.
@@ -1049,16 +1049,28 @@ public partial class Main : Node2D
             double amount = sim.State.HasField(field) ? sim.State.DoubleField(field)[cell] : 0.0;
             if (wanted[good.Index] > 0.0 || amount >= 1.0)
             {
-                priced.Add($"{good.Name.ToLowerInvariant()} {price[good.Index].ToString("0.###", CultureInfo.InvariantCulture)}");
+                priced.Add($"{good.Name.ToLowerInvariant()} {price[good.Index].ToString("0.##", CultureInfo.InvariantCulture)}");
             }
         }
 
         if (priced.Count > 0)
         {
-            text += "\n  Prices in food: " + string.Join(", ", priced);
+            text += "\n  Prices in food: " + Wrap(priced);
         }
 
         return text;
+    }
+
+    // Joins a list, five items to a line, with later lines indented under the first.
+    private static string Wrap(List<string> items)
+    {
+        var lines = new List<string>();
+        for (int i = 0; i < items.Count; i += 5)
+        {
+            lines.Add(string.Join(", ", items.Skip(i).Take(5)));
+        }
+
+        return string.Join(",\n    ", lines);
     }
 
     // Runs on the simulation thread: what can be gathered in the cell.

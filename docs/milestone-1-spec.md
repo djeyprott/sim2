@@ -74,7 +74,7 @@ The import job adds these per cell, and the world file format moves to version 2
 - **Harvest**: computed once a year at the harvest season of the cell's hemisphere, with random good and bad years on top of the slower climate swings.
 - Farmers are a separate group from foragers in the same cell. Foragers taking up farming move from the forager group to the farmer group, so farming displaces foraging gradually. Farmland feeds many times more people than foraging.
 
-### 8. Famine (done)
+### 8. Famine
 
 - When a bad harvest or a drying climate leaves a group with less food than it needs, its food condition falls, and its people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
 
@@ -157,7 +157,7 @@ Each step ends with a new development build you can download.
 6. Foragers and the population map mode (done, as a per-cell number)
 6b. Population groups: move foragers onto groups, with merging and the per-cell limit (done)
 7. Farming: crops, invention, yield, spread, harvest (done)
-8. Famine
+8. Famine (done)
 9. Settlements
 10. Statistics file, tuning against the exit tests, release v0.2
 

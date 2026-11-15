@@ -89,6 +89,7 @@ public partial class Main : Node2D
 
     private float _zoom = 1f;
     private bool _screenshotOk;
+    private int _frameWaits;
     private float _minZoom = 0.1f;
     private bool _dragging;
     private Vector2 _pressPosition;
@@ -1226,6 +1227,13 @@ public partial class Main : Node2D
                 SetSpeed(4);
                 break;
             case 90:
+                // Run until 3,000 years have passed, so farming and settlements have had time to grow.
+                if (frame != null && frame.Tick < 3000L * 12 && _frameWaits++ < 3000)
+                {
+                    _frame--;
+                    break;
+                }
+
                 SetSpeed(0);
                 SetMapMode(BiomeMode);
                 break;
@@ -1263,7 +1271,7 @@ public partial class Main : Node2D
                 SelectCell(-1);
                 _camera.Position = MapView.MapPosition(36.5, 40.0);
                 ZoomAt(MapView.MapPosition(36.5, 40.0), 4f);
-                GetViewport().WarpMouse(new Vector2(20f, GetViewportRect().Size.Y - 20f));
+                GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
             case 225:
                 bool savedSettlements = SaveScreenshot("-settlements");

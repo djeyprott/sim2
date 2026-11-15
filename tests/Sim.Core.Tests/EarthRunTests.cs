@@ -61,6 +61,20 @@ public sealed class EarthRunResult
 
     public int SettlementsAt5000 { get; set; }
 
+    /// <summary>Farthest a settlement holding obsidian lies from the nearest obsidian source, after 5,000 years.</summary>
+    public double ObsidianReachKm { get; set; }
+
+    /// <summary>Goods whose average price gap along links was not smaller after a season's trade, by name.</summary>
+    public List<string> GapsNotShrinking { get; set; } = new List<string>();
+
+    /// <summary>Goods traded at all (some price gap along links).</summary>
+    public int TradedGoods { get; set; }
+
+    /// <summary>Groups of five or more linked settlements with no trade route, and settlements on a route, after 5,000 years.</summary>
+    public int RegionsWithoutRoutes { get; set; }
+
+    public double ShareOnRoutes { get; set; }
+
     /// <summary>Largest share by which any good's ledger failed to balance, checked every 100 years.</summary>
     public double MaxLedgerImbalance { get; set; }
 
@@ -141,6 +155,8 @@ public sealed class EarthRunResult
             + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed "
             + $"({100.0 * PonticOpenGrasslandFarmedShare:F0}% of its {PonticOpenGrasslandCells} open grassland cells); "
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
+            + $"obsidian up to {ObsidianReachKm:F0} km from a source; {TradedGoods} goods traded, gaps not shrinking: [{string.Join(", ", GapsNotShrinking)}]; "
+            + $"{RegionsWithoutRoutes} linked regions without routes, {100.0 * ShareOnRoutes:F0}% of settlements on a route; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
@@ -321,6 +337,7 @@ public abstract class EarthRunFixtureBase
                     result.TemperateForestFarmedShare = farmedIn[2] / (double)Math.Max(1, totals[2]);
                 }
 
+                MeasureTrade(sim, world, stockpiles, result);
                 SettlementSystem? settlementSystem = sim.Systems.OfType<SettlementSystem>().SingleOrDefault();
                 if (settlementSystem != null)
                 {
@@ -390,6 +407,93 @@ public abstract class EarthRunFixtureBase
         }
 
         groups.FillCellTotals(farmersAtStart, farmer);
+    }
+
+    private static void MeasureTrade(Simulation sim, WorldMap world, Stockpiles stockpiles, EarthRunResult result)
+    {
+        TradeSystem? trade = sim.Systems.OfType<TradeSystem>().SingleOrDefault();
+        ResourceSystem? resources = sim.Systems.OfType<ResourceSystem>().SingleOrDefault();
+        if (trade == null || resources == null)
+        {
+            return;
+        }
+
+        // Obsidian's reach.
+        int obsidian = stockpiles.Goods.IndexOf("Obsidian");
+        ResourceRule rule = resources.Rules.Goods.Single(r => r.Good == "Obsidian");
+        int[] sources = rule.Sources.Select(s => world.Grid.FindCell(s.Lat, s.Lon)).ToArray();
+        int[] settlementPlusOne = sim.State.IntField(SettlementSystem.SettlementField);
+        for (int cell = 0; cell < world.CellCount; cell++)
+        {
+            if (settlementPlusOne[cell] > 0 && stockpiles.Stock(cell, obsidian) + stockpiles.Incoming(cell, obsidian) > 0.01)
+            {
+                double nearest = sources.Min(source => world.Grid.DistanceKm(cell, source));
+                result.ObsidianReachKm = Math.Max(result.ObsidianReachKm, nearest);
+            }
+        }
+
+        // Price gaps before and after a season's trade.
+        for (int g = 0; g < stockpiles.Goods.Count; g++)
+        {
+            double before = trade.GapBeforeTrade[g];
+            double after = trade.GapAfterTrade[g];
+            if (before > 1e-6)
+            {
+                result.TradedGoods++;
+                if (after >= before)
+                {
+                    result.GapsNotShrinking.Add(stockpiles.Goods.Get(g).Name);
+                }
+            }
+        }
+
+        // Routes in every linked region: join linked settlements into groups.
+        List<(int A, int B, double Value)> links = trade.Links();
+        int ids = links.Count == 0 ? 0 : links.Max(l => Math.Max(l.A, l.B)) + 1;
+        var parent = Enumerable.Range(0, ids).ToArray();
+        int Root(int x)
+        {
+            while (parent[x] != x)
+            {
+                parent[x] = parent[parent[x]];
+                x = parent[x];
+            }
+
+            return x;
+        }
+
+        var onRoute = new bool[ids];
+        var linked = new bool[ids];
+        foreach ((int a, int b, double value) in links)
+        {
+            parent[Root(a)] = Root(b);
+            linked[a] = linked[b] = true;
+            if (value >= trade.Parameters.RouteValue)
+            {
+                onRoute[a] = onRoute[b] = true;
+            }
+        }
+
+        var size = new Dictionary<int, int>();
+        var routed = new HashSet<int>();
+        for (int id = 0; id < ids; id++)
+        {
+            if (!linked[id])
+            {
+                continue;
+            }
+
+            int root = Root(id);
+            size[root] = size.GetValueOrDefault(root) + 1;
+            if (onRoute[id])
+            {
+                routed.Add(root);
+            }
+        }
+
+        result.RegionsWithoutRoutes = size.Count(pair => pair.Value >= 5 && !routed.Contains(pair.Key));
+        int linkedCount = linked.Count(x => x);
+        result.ShareOnRoutes = linkedCount == 0 ? 0.0 : onRoute.Count(x => x) / (double)linkedCount;
     }
 
     private static void CheckGoods(Stockpiles stockpiles, EarthRunResult result)
@@ -584,6 +688,26 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
             Assert.True(r.SettlementsAt5000 > 0, $"Seed {r.Seed}: no settlements.");
             Assert.Equal(0, r.SettlementProblems);
         });
+    }
+
+    [Fact]
+    public void Obsidian_travels_more_than_500_km_from_its_sources_in_8_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.ObsidianReachKm > 500.0) >= 8,
+            "Obsidian reach: " + string.Join(", ", _results.Select(r => $"{r.ObsidianReachKm:F0} km")));
+    }
+
+    [Fact]
+    public void Trade_shrinks_the_price_gap_for_every_traded_good()
+    {
+        Assert.All(_results, r => Assert.True(r.TradedGoods > 0 && r.GapsNotShrinking.Count == 0,
+            $"Seed {r.Seed}: {r.TradedGoods} goods traded; gaps not shrinking for {string.Join(", ", r.GapsNotShrinking)}."));
+    }
+
+    [Fact]
+    public void Every_linked_region_has_trade_routes()
+    {
+        Assert.All(_results, r => Assert.Equal(0, r.RegionsWithoutRoutes));
     }
 
     [Fact]

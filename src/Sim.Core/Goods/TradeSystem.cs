@@ -94,6 +94,7 @@ public sealed class TradeSystem : ISimSystem
     private double[] _best = Array.Empty<double>();
     private int[] _seen = Array.Empty<int>();
     private int _stamp;
+    private readonly PriorityQueue<int, double> _queue = new PriorityQueue<int, double>();
 
     // Average relative price gap per good along links, before January's trade and before
     // February's (after January's goods arrived), summed over the run; for exit tests only.
@@ -400,7 +401,8 @@ public sealed class TradeSystem : ISimSystem
         reached.Clear();
         WorldMap map = _map!;
         _stamp++;
-        var queue = new PriorityQueue<int, double>();
+        PriorityQueue<int, double> queue = _queue;
+        queue.Clear();
         _best[start] = 0.0;
         _seen[start] = _stamp;
         queue.Enqueue(start, 0.0);
@@ -443,7 +445,19 @@ public sealed class TradeSystem : ISimSystem
         }
     }
 
-    /// <summary>Links that carry at least the route value a month on average, by their settlements' cells.</summary>
+    /// <summary>Every link, by its settlements' ids, with the food value it carries a season on average.</summary>
+    public List<(int A, int B, double Value)> Links()
+    {
+        var links = new List<(int, int, double)>(_linkA.Length);
+        for (int link = 0; link < _linkA.Length; link++)
+        {
+            links.Add((_linkA[link], _linkB[link], _linkValue[link]));
+        }
+
+        return links;
+    }
+
+    /// <summary>Links that carry at least the route value a season on average, by their settlements' cells.</summary>
     public List<TradeRoute> Routes()
     {
         var routes = new List<TradeRoute>();

@@ -9,6 +9,7 @@ on:
       - 'src/**'
       - 'data/earth.world'
       - 'data/earth-rivers.bin'
+      - 'data/content/**'
       - 'release-version.txt'
       - '.github/workflows/release.yml'
 

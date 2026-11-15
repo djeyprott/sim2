@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Viewer;
@@ -7,13 +8,19 @@ namespace Viewer;
 public partial class Hud : CanvasLayer
 {
     /// <summary>Map modes in the order of their index.</summary>
-    public static readonly string[] MapModeNames = { "Terrain", "Elevation", "Temperature", "Rainfall" };
+    public static readonly string[] MapModeNames =
+    {
+        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change",
+    };
 
     private static readonly string[] SpeedNames = { "Pause", "1 month/s", "1 year/s", "10 years/s", "Max" };
 
     private readonly Button[] _speedButtons = new Button[SpeedNames.Length];
     private OptionButton _modeButton = null!;
     private Label _dateLabel = null!;
+    private Label _worldLabel = null!;
+    private PanelContainer _legendPanel = null!;
+    private VBoxContainer _legendList = null!;
     private Label _statusLabel = null!;
     private Label _infoLabel = null!;
     private PanelContainer _tooltipPanel = null!;
@@ -44,8 +51,10 @@ public partial class Hud : CanvasLayer
         row.AddThemeConstantOverride("separation", 8);
         margin.AddChild(row);
 
-        _dateLabel = new Label { Text = "", CustomMinimumSize = new Vector2(230, 0) };
+        _dateLabel = new Label { Text = "", CustomMinimumSize = new Vector2(190, 0) };
         row.AddChild(_dateLabel);
+        _worldLabel = new Label { Text = "", CustomMinimumSize = new Vector2(150, 0) };
+        row.AddChild(_worldLabel);
         row.AddChild(new VSeparator());
 
         for (int i = 0; i < SpeedNames.Length; i++)
@@ -107,6 +116,17 @@ public partial class Hud : CanvasLayer
         };
         infoMargin.AddChild(_infoLabel);
 
+        _legendPanel = new PanelContainer { MouseFilter = Control.MouseFilterEnum.Ignore, Visible = false };
+        AddChild(_legendPanel);
+
+        var legendMargin = NewMargin(10);
+        legendMargin.MouseFilter = Control.MouseFilterEnum.Ignore;
+        _legendPanel.AddChild(legendMargin);
+
+        _legendList = new VBoxContainer { MouseFilter = Control.MouseFilterEnum.Ignore };
+        _legendList.AddThemeConstantOverride("separation", 2);
+        legendMargin.AddChild(_legendList);
+
         _tooltipPanel = new PanelContainer { MouseFilter = Control.MouseFilterEnum.Ignore, Visible = false };
         AddChild(_tooltipPanel);
 
@@ -157,11 +177,72 @@ public partial class Hud : CanvasLayer
         _tooltipPanel.Visible = true;
     }
 
-    public void SetDate(string text) => _dateLabel.Text = text;
+    public void SetDate(string text)
+    {
+        if (_dateLabel.Text != text)
+        {
+            _dateLabel.Text = text;
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        // Keep the legend in the bottom-right corner as its contents and the window change size.
+        if (_legendPanel.Visible)
+        {
+            Vector2 screen = GetViewport().GetVisibleRect().Size;
+            Vector2 size = _legendPanel.GetCombinedMinimumSize();
+            _legendPanel.Size = size;
+            _legendPanel.Position = screen - size - new Vector2(12f, 12f);
+        }
+    }
+
+    /// <summary>Whole-world figures shown beside the date.</summary>
+    public void SetWorldInfo(string text)
+    {
+        if (_worldLabel.Text != text)
+        {
+            _worldLabel.Text = text;
+        }
+    }
+
+    /// <summary>Shows a key for the map in the bottom-right corner, or hides it when given no entries.</summary>
+    public void SetLegend(string title, IReadOnlyList<(Color Colour, string Label)> entries)
+    {
+        foreach (Node child in _legendList.GetChildren())
+        {
+            _legendList.RemoveChild(child);
+            child.QueueFree();
+        }
+
+        _legendList.AddChild(new Label { Text = title, MouseFilter = Control.MouseFilterEnum.Ignore });
+        foreach ((Color colour, string label) in entries)
+        {
+            var line = new HBoxContainer { MouseFilter = Control.MouseFilterEnum.Ignore };
+            line.AddThemeConstantOverride("separation", 8);
+            line.AddChild(new ColorRect
+            {
+                Color = colour,
+                CustomMinimumSize = new Vector2(18, 14),
+                SizeFlagsVertical = Control.SizeFlags.ShrinkCenter,
+                MouseFilter = Control.MouseFilterEnum.Ignore,
+            });
+            line.AddChild(new Label { Text = label, MouseFilter = Control.MouseFilterEnum.Ignore });
+            _legendList.AddChild(line);
+        }
+
+        _legendPanel.Visible = entries.Count > 0;
+    }
 
     public void SetStatus(string text) => _statusLabel.Text = text;
 
-    public void SetInfo(string text) => _infoLabel.Text = text;
+    public void SetInfo(string text)
+    {
+        if (_infoLabel.Text != text)
+        {
+            _infoLabel.Text = text;
+        }
+    }
 
     /// <summary>Shows a map mode as chosen without raising the event.</summary>
     public void ShowMapMode(int index) => _modeButton.Selected = index;

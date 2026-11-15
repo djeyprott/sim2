@@ -1,3 +1,5 @@
+using Sim.Core.Climate;
+
 namespace Sim.Core.Engine;
 
 /// <summary>
@@ -6,6 +8,9 @@ namespace Sim.Core.Engine;
 /// </summary>
 public static class SystemCatalog
 {
-    /// <summary>The systems of the real simulation, in update order. Empty until milestone 1.</summary>
-    public static IReadOnlyList<ISimSystem> CreateDefault() => Array.Empty<ISimSystem>();
+    /// <summary>The systems of the real simulation, in update order.</summary>
+    public static IReadOnlyList<ISimSystem> CreateDefault() => new ISimSystem[]
+    {
+        ClimateSystem.CreateDefault(),
+    };
 }

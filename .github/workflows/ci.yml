@@ -13,7 +13,7 @@ jobs:
         with:
           dotnet-version: 10.0.x
       - name: Build and test
-        run: dotnet test sim2.sln --configuration Release
+        run: dotnet test sim2.sln --configuration Release --logger "console;verbosity=detailed"
       - name: Headless run of 12,000 years
         run: dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 1 --years 12000
       - name: Compile the viewer

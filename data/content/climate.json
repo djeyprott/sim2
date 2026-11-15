@@ -1,0 +1,30 @@
+// How climate changes during a run. Every value here is a first estimate, tuned in milestone 1 step 10.
+//
+// The world is divided into regions, one per cell of a coarse grid of the same kind as the map
+// (frequency 4 gives 162 regions about 1,800 km across). Each region carries a temperature
+// shift and a rainfall shift, and the world carries a temperature shift on top. Each shift is
+// the sum of a few components that wander at random and drift back toward zero:
+//   years   how long a swing typically lasts
+//   spread  how large it typically is (standard deviation): degrees C for temperature, and
+//           for rainfall a natural-log factor (0.15 is roughly plus or minus 15 percent)
+// A cell blends the regions near it, weighted by distance, so there are no visible borders.
+{
+  "regionGridFrequency": 4,
+  "blendRadiusKm": 1000,
+  "regionTemperature": [
+    { "years": 20, "spread": 0.4 },
+    { "years": 300, "spread": 0.6 }
+  ],
+  "regionRainfall": [
+    { "years": 15, "spread": 0.10 },
+    { "years": 250, "spread": 0.15 }
+  ],
+  "worldTemperature": [
+    { "years": 1500, "spread": 0.8 },
+    { "years": 150, "spread": 0.25 }
+  ],
+  "worldTemperatureLimit": 2.0,
+  "rainfallFactorMin": 0.5,
+  "rainfallFactorMax": 1.5,
+  "biomeIntervalYears": 10
+}

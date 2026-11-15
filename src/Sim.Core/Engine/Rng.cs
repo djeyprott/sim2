@@ -92,6 +92,14 @@ public sealed class Rng
         return minInclusive + NextInt((int)span);
     }
 
+    /// <summary>A number from the standard normal distribution (mean 0, standard deviation 1).</summary>
+    public double NextGaussian()
+    {
+        double u1 = 1.0 - NextDouble();
+        double u2 = NextDouble();
+        return Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2);
+    }
+
     /// <summary>True with the given probability.</summary>
     public bool Chance(double probability) => NextDouble() < probability;
 

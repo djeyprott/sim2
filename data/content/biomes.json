@@ -1,0 +1,43 @@
+// Biomes and the rules that assign them from a cell's current climate.
+//
+// Rules are tried in order and the first match wins. The last rule must have no conditions.
+// Each condition is a lower bound (min..., the value must be at least this) or an upper bound
+// (max..., the value must be below this) on one of these measures of the year's climate:
+//   mean          mean temperature over the year, degrees C
+//   warmest       mean temperature of the warmest month, degrees C
+//   coldest       mean temperature of the coldest month, degrees C
+//   rain          rainfall over the year, mm
+//   driest        rainfall of the driest month, mm
+//   summerShare   share of the year's rain falling in the summer half (April-September in the
+//                 north, October-March in the south), 0 to 1
+//   dryness       rainfall divided by the Koppen dryness threshold: below 0.5 is desert,
+//                 0.5 to 1 is semi-arid, above 1 is humid
+//   monsoonIndex  driest + rain / 25 - 100: at least 0 where a tropical forest stays green
+//                 through its dry season (Koppen Af and Am)
+{
+  "biomes": [
+    { "name": "Ice", "colour": "#eef3f7" },
+    { "name": "Tundra", "colour": "#a7b8a6" },
+    { "name": "Boreal forest", "colour": "#2e6450" },
+    { "name": "Temperate forest", "colour": "#4f9a3e" },
+    { "name": "Mediterranean", "colour": "#9c9a3c" },
+    { "name": "Grassland", "colour": "#cfc56c" },
+    { "name": "Desert", "colour": "#e8d3a0" },
+    { "name": "Savanna", "colour": "#d39a4a" },
+    { "name": "Tropical seasonal forest", "colour": "#7cae38" },
+    { "name": "Rainforest", "colour": "#11663a" }
+  ],
+  "rules": [
+    { "biome": "Ice", "maxWarmest": 0 },
+    { "biome": "Tundra", "maxWarmest": 10 },
+    { "biome": "Desert", "maxDryness": 0.5 },
+    { "biome": "Rainforest", "minColdest": 18, "minMonsoonIndex": 0 },
+    { "biome": "Savanna", "minColdest": 18, "maxDryness": 1.0 },
+    { "biome": "Savanna", "minColdest": 18, "maxRain": 1200 },
+    { "biome": "Tropical seasonal forest", "minColdest": 18 },
+    { "biome": "Grassland", "maxDryness": 1.0 },
+    { "biome": "Mediterranean", "minColdest": -3, "maxSummerShare": 0.3 },
+    { "biome": "Boreal forest", "maxColdest": -3, "maxMean": 3 },
+    { "biome": "Temperate forest" }
+  ]
+}

@@ -137,6 +137,19 @@ public class SimulationHostTests
     }
 
     [Fact]
+    public void Frames_carry_the_extractor_tag_and_summary_values()
+    {
+        using var host = new SimulationHost(NewSimulation());
+        host.SetValueExtractor(simulation => new double[] { 1.0 }, tag: 7).GetAwaiter().GetResult();
+        host.SetSummaryExtractor(simulation => new double[] { simulation.Tick }).GetAwaiter().GetResult();
+        Assert.True(WaitFor(() => host.LatestFrame.ValuesTag == 7 && host.LatestFrame.Summary != null));
+
+        host.TicksPerSecond = SimulationHost.MaxSpeed;
+        Assert.True(WaitFor(() => host.LatestFrame.Summary![0] > 100.0));
+        host.TicksPerSecond = 0.0;
+    }
+
+    [Fact]
     public void A_failing_system_pauses_the_host_and_reports_the_fault()
     {
         var simulation = new Simulation(TestWorlds.Small(), 1, new ISimSystem[] { new ThrowingSystem() });

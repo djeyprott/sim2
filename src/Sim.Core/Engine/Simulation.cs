@@ -12,7 +12,7 @@ namespace Sim.Core.Engine;
 /// </summary>
 public sealed class Simulation
 {
-    public const int SaveFormatVersion = 1;
+    public const int SaveFormatVersion = 2;
 
     private static readonly byte[] SaveMagic = Encoding.ASCII.GetBytes("SIM2SAVE");
 
@@ -63,6 +63,12 @@ public sealed class Simulation
         }
 
         State.Seal();
+
+        for (int i = 0; i < _systems.Length; i++)
+        {
+            _contexts[i].Tick = 0;
+            _systems[i].Initialize(_contexts[i]);
+        }
     }
 
     public WorldMap Map { get; }
@@ -243,7 +249,7 @@ public sealed class Simulation
             rngStates[i] = parts;
         }
 
-        byte[][] blocks = State.ReadBlocks(reader);
+        Action applyState = State.Read(reader);
 
         // Everything checked out: only now change the simulation.
         Seed = seed;
@@ -253,6 +259,6 @@ public sealed class Simulation
             _contexts[i].Rng.SetState(rngStates[i]);
         }
 
-        State.Apply(blocks);
+        applyState();
     }
 }

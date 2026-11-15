@@ -17,6 +17,15 @@ public interface ISimSystem
     /// <summary>Called once, before the run starts. Add this system's state fields here and keep the arrays.</summary>
     void Register(WorldState state);
 
+    /// <summary>
+    /// Called once when the simulation is created, after every system has registered and before
+    /// any save is loaded into it. Set the starting state of a new run here, and build anything
+    /// derived from the map that the system needs. A loaded save replaces the state afterwards.
+    /// </summary>
+    void Initialize(SimContext context)
+    {
+    }
+
     void Update(SimContext context);
 }
 

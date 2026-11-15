@@ -6,11 +6,13 @@ namespace Sim.Core.Hosting;
 /// <summary>What a display is given after the simulation advances. Safe to read from any thread.</summary>
 public sealed class SimFrame
 {
-    public SimFrame(long tick, double[]? values, double measuredTicksPerSecond)
+    public SimFrame(long tick, double[]? values, double measuredTicksPerSecond, int valuesTag = 0, double[]? summary = null)
     {
         Tick = tick;
         Values = values;
         MeasuredTicksPerSecond = measuredTicksPerSecond;
+        ValuesTag = valuesTag;
+        Summary = summary;
     }
 
     /// <summary>The next tick to be simulated at the time of the frame.</summary>
@@ -18,6 +20,12 @@ public sealed class SimFrame
 
     /// <summary>A copy of the per-cell values the current map mode asked for, or null.</summary>
     public double[]? Values { get; }
+
+    /// <summary>The tag given with the extractor that produced <see cref="Values"/>.</summary>
+    public int ValuesTag { get; }
+
+    /// <summary>A few whole-world values chosen by the summary extractor, or null.</summary>
+    public double[]? Summary { get; }
 
     public double MeasuredTicksPerSecond { get; }
 
@@ -46,6 +54,8 @@ public sealed class SimulationHost : IDisposable
     private double _speed;
     private bool _stop;
     private Func<Simulation, double[]?>? _extractor;
+    private int _extractorTag;
+    private Func<Simulation, double[]?>? _summaryExtractor;
     private SimFrame _latest;
     private Exception? _fault;
 
@@ -131,10 +141,19 @@ public sealed class SimulationHost : IDisposable
 
     /// <summary>
     /// Chooses which per-cell values each frame carries. The function runs on the simulation
-    /// thread and must return a fresh copy. Pass null for frames with no values.
+    /// thread and must return a fresh copy. Pass null for frames with no values. Frames carry
+    /// the tag, so a display can tell which extractor their values came from.
     /// </summary>
-    public Task SetValueExtractor(Func<Simulation, double[]?>? extractor) =>
-        InvokeAsync(_ => { _extractor = extractor; });
+    public Task SetValueExtractor(Func<Simulation, double[]?>? extractor, int tag = 0) =>
+        InvokeAsync(_ =>
+        {
+            _extractor = extractor;
+            _extractorTag = tag;
+        });
+
+    /// <summary>Chooses a few whole-world values each frame carries, such as totals. Runs on the simulation thread.</summary>
+    public Task SetSummaryExtractor(Func<Simulation, double[]?>? extractor) =>
+        InvokeAsync(_ => { _summaryExtractor = extractor; });
 
     public Task SaveAsync(string path) => InvokeAsync(simulation => simulation.Save(path));
 
@@ -252,7 +271,13 @@ public sealed class SimulationHost : IDisposable
             dirty |= ran > 0 || changed;
             if (dirty && (changed || now - lastPublish >= PublishIntervalSeconds))
             {
-                Volatile.Write(ref _latest, new SimFrame(_simulation.Tick, _extractor?.Invoke(_simulation), rate));
+                var frame = new SimFrame(
+                    _simulation.Tick,
+                    _extractor?.Invoke(_simulation),
+                    rate,
+                    _extractorTag,
+                    _summaryExtractor?.Invoke(_simulation));
+                Volatile.Write(ref _latest, frame);
                 lastPublish = now;
                 dirty = false;
             }

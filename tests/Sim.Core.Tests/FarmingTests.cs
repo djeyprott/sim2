@@ -142,7 +142,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     public void Famine_shares_must_not_exceed_one_together()
     {
         Assert.Throws<InvalidDataException>(() => FarmingParameters.Parse(
-            ContentFiles.ReadText("farming.json").Replace("\"famineDeathShare\": 0.5", "\"famineDeathShare\": 0.8")));
+            ContentFiles.ReadText("farming.json").Replace("\"famineDeathShare\": 0.2", "\"famineDeathShare\": 0.8")));
     }
 
     [Fact]

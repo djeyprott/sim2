@@ -132,9 +132,9 @@ Farming
 
 Soundness
 - [ ] Population is never negative and never an invalid number in any cell.
-- [ ] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits.
+- [x] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits. (Holds so far with foragers only; to be rechecked with farmers.)
 - [ ] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
-- [ ] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate and foragers: 52 seconds.)
+- [ ] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate and forager groups: 21 to 52 seconds, varying with the build machine.)
 
 By hand in the viewer:
 

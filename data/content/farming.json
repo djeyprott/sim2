@@ -24,7 +24,7 @@
   // Before the plough, open grassland (steppe, prairie, pampas) was hard to farm: tough root
   // mats and unreliable rain. Away from rivers, a crop grows only this well there, for yield,
   // spread and switching alike. Cells on a minor or major river are exempt (river valleys).
-  "biomeFactors": { "Grassland": 0.7 },
+  "biomeFactors": { "Grassland": 0.5 },
 
   // Chance per year that a cell where a crop grows wild, full of foragers, first farms it.
   // Each crop is first farmed only once; afterwards it spreads.

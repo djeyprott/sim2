@@ -56,7 +56,8 @@ The import job adds these per cell, and the world file format moves to version 2
 
 ### 6. Foragers
 
-- Each land cell has a forager population and a limit on how many foragers it can feed, set by its current biome, rivers and coast. The limit moves as climate changes.
+- Each land cell has a forager population and a limit on how many foragers it can feed, set by its current biome, rivers and coast. The limit moves as climate changes. Rivers add a fixed number of people per km² whatever the biome, so a river through a desert supports many more people than the desert alone. Numbers are in `data/content/foragers.json`.
+- Which land is reached at the start: the landmasses holding a list of seed places (the continents and large islands people had reached), plus any landmass within two sea cells (about 100 km) of a reached one, except a list of unreached landmasses (Madagascar, New Zealand, Iceland, Greenland, Antarctica, and the larger Caribbean islands). Remote Pacific islands are unreached because they are too far by sea.
 - Yearly: populations grow toward the limit, shrink when the limit falls, and move into neighbouring land cells that have room. This is how climate drives migration.
 - The starting population of the world is between 2 and 6 million.
 
@@ -113,9 +114,9 @@ Map and climate
 - [x] Between 2% and 25% of land cells change biome at least once in 5,000 years. (Measured: 19% to 23%. At any one time about 3% to 4% of land is in a different biome from the start.)
 
 Foragers
-- [ ] Starting world population is between 2 and 6 million.
-- [ ] With farming switched off, world population stays within 20% of what the land can feed at that time, for 5,000 years.
-- [ ] Islands marked as unreached stay empty.
+- [x] Starting world population is between 2 and 6 million. (Measured: 4.37 million.)
+- [x] With farming switched off, world population stays within 20% of what the land can feed at that time, for 5,000 years. (Measured before farming exists: 98.6% to 100.3%. To be rechecked with farming switched off once it exists.)
+- [x] Islands marked as unreached stay empty.
 
 Farming
 - [ ] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds.
@@ -128,7 +129,7 @@ Farming
 Soundness
 - [ ] Population is never negative and never an invalid number in any cell.
 - [ ] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
-- [ ] A 5,000-year headless run on the build machine takes under 5 minutes.
+- [ ] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate and foragers: 52 seconds.)
 
 By hand in the viewer:
 

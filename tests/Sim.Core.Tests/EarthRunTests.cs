@@ -60,6 +60,12 @@ public sealed class EarthRunResult
 
     public int SettlementsAt5000 { get; set; }
 
+    /// <summary>Share of farming cells on grassland away from rivers after 5,000 years.</summary>
+    public double OpenGrasslandFarmingShare { get; set; }
+
+    /// <summary>Share of Pontic steppe land (45 to 52 N, 30 to 50 E) that is farmed after 5,000 years.</summary>
+    public double PonticSteppeFarmedShare { get; set; }
+
     /// <summary>Settlements whose cell does not point back at them, or cells sharing a settlement.</summary>
     public int SettlementProblems { get; set; }
 
@@ -87,6 +93,7 @@ public sealed class EarthRunResult
             + $"up to {MaxGroupsInACell} groups in a cell; {Regions6000} separate farming regions within 6,000 years; "
             + $"spread {SpreadKmPerYear:F2} km a year; farthest origin {FarthestOriginFromRealHomelandKm:F0} km from a real homeland; "
             + $"{SettlementsAt5000} settlements after 5,000 years; "
+            + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed; "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
@@ -211,6 +218,31 @@ public abstract class EarthRunFixtureBase
             {
                 result.PopulationAt5000 = groups.WorldTotal();
                 result.FarmersAt5000 = farmingSystem?.WorldFarmers() ?? 0.0;
+                if (cropPlusOne != null)
+                {
+                    int grassland = climate.Biomes.IndexOf("Grassland");
+                    int farmed = 0;
+                    int open = 0;
+                    int steppe = 0;
+                    int steppeFarmed = 0;
+                    foreach (int cell in land)
+                    {
+                        double lat = world.Grid.Latitude(cell);
+                        double lon = world.Grid.Longitude(cell);
+                        bool inSteppe = lat >= 45.0 && lat <= 52.0 && lon >= 30.0 && lon <= 50.0;
+                        steppe += inSteppe ? 1 : 0;
+                        if (cropPlusOne[cell] > 0)
+                        {
+                            farmed++;
+                            open += biome[cell] == grassland && world.River(cell) == RiverSize.None ? 1 : 0;
+                            steppeFarmed += inSteppe ? 1 : 0;
+                        }
+                    }
+
+                    result.OpenGrasslandFarmingShare = farmed == 0 ? 0.0 : open / (double)farmed;
+                    result.PonticSteppeFarmedShare = steppe == 0 ? 0.0 : steppeFarmed / (double)steppe;
+                }
+
                 SettlementSystem? settlementSystem = sim.Systems.OfType<SettlementSystem>().SingleOrDefault();
                 if (settlementSystem != null)
                 {

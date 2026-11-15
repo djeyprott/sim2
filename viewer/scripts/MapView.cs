@@ -118,6 +118,23 @@ public partial class MapView : Node2D
         }
     }
 
+    /// <summary>Replaces the trade routes: pairs of end positions, and the value each carries a month.</summary>
+    public void SetRoutes(Vector2[] ends, float[] values)
+    {
+        foreach (SettlementLayer layer in _settlementLayers)
+        {
+            layer?.SetRoutes(ends, values);
+        }
+    }
+
+    public void SetRoutesVisible(bool visible)
+    {
+        foreach (SettlementLayer layer in _settlementLayers)
+        {
+            layer?.SetRoutesVisible(visible);
+        }
+    }
+
     /// <summary>Tells the settlement layers the zoom and the visible part of the map.</summary>
     public void SetSettlementView(float zoom, Rect2 view)
     {
@@ -433,6 +450,10 @@ public partial class SettlementLayer : Node2D
     private const float CellPixelsPerZoom = 0.46f * MapView.PixelsPerDegree;
 
     private Vector2[] _positions = Array.Empty<Vector2>();
+    private Vector2[] _routeEnds = Array.Empty<Vector2>();
+    private float[] _routeValues = Array.Empty<float>();
+    private bool _routesVisible;
+    private static readonly Color RouteColour = new Color(0.95f, 0.55f, 0.15f);
     private string[] _names = Array.Empty<string>();
     private float[] _populations = Array.Empty<float>();
     private float _zoom = 1f;
@@ -444,6 +465,25 @@ public partial class SettlementLayer : Node2D
         _names = names;
         _populations = populations;
         QueueRedraw();
+    }
+
+    public void SetRoutes(Vector2[] ends, float[] values)
+    {
+        _routeEnds = ends;
+        _routeValues = values;
+        if (_routesVisible)
+        {
+            QueueRedraw();
+        }
+    }
+
+    public void SetRoutesVisible(bool visible)
+    {
+        if (visible != _routesVisible)
+        {
+            _routesVisible = visible;
+            QueueRedraw();
+        }
     }
 
     /// <summary>Gives the zoom and the visible part of the map, in this copy's own coordinates.</summary>
@@ -467,6 +507,23 @@ public partial class SettlementLayer : Node2D
 
         // Dots grow with the cells on screen, so at the world view they stay small marks that do not hide the map.
         float unit = 1f / _zoom;
+        if (_routesVisible)
+        {
+            // Thicker lines for routes that carry more; skip any that would cross the map's edge.
+            for (int i = 0; i < _routeValues.Length; i++)
+            {
+                Vector2 a = _routeEnds[2 * i];
+                Vector2 b = _routeEnds[2 * i + 1];
+                if (Math.Abs(a.X - b.X) > MapView.WorldWidth / 2f)
+                {
+                    continue;
+                }
+
+                float width = (_routeValues[i] >= 100f ? 4f : _routeValues[i] >= 10f ? 2.5f : 1.2f) * unit;
+                DrawLine(a, b, RouteColour, width);
+            }
+        }
+
         float cellPixels = CellPixelsPerZoom * _zoom;
         float baseHalf = Math.Clamp(0.12f * cellPixels, 0.5f, 2.5f);
         bool outline = baseHalf >= 1.2f;

@@ -103,3 +103,16 @@ public class CraftRuleTests
         Assert.Throws<InvalidDataException>(() => CraftRules.Parse(ContentFiles.ReadText("recipes.json"), needs, goods));
     }
 }
+
+public class TradeRuleTests
+{
+    [Fact]
+    public void Trade_settings_load_and_bad_ones_are_rejected()
+    {
+        TradeParameters p = TradeParameters.LoadDefault();
+        Assert.True(p.MaxLinkCost > 0.0 && p.LinksPerSettlement > 0);
+        string text = ContentFiles.ReadText("trade.json");
+        Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"sendShare\": 0.05", "\"sendShare\": 1.5")));
+        Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"hills\": 1.6, ", "")));
+    }
+}

@@ -12,10 +12,14 @@ namespace Sim.Core.Goods;
 public sealed class Stockpiles
 {
     public const string StockFieldPrefix = "goods.stock.";
+
+    /// <summary>Goods on their way to a cell's settlement, arriving next month (milestone 2, trade).</summary>
+    public const string IncomingFieldPrefix = "goods.incoming.";
     public const string LedgerTableName = "goods.ledger";
 
     private readonly GoodSet _goods;
     private readonly double[][] _stock;
+    private readonly double[][] _incoming;
     private readonly EntityTable _ledger;
     private readonly DoubleColumn _produced;
     private readonly DoubleColumn _consumed;
@@ -27,6 +31,7 @@ public sealed class Stockpiles
     {
         _goods = goods;
         _stock = goods.Goods.Select(g => state.DoubleField(StockFieldPrefix + g.Slug)).ToArray();
+        _incoming = goods.Goods.Select(g => state.DoubleField(IncomingFieldPrefix + g.Slug)).ToArray();
         _ledger = state.Table(LedgerTableName);
         _produced = _ledger.DoubleColumn("produced");
         _consumed = _ledger.DoubleColumn("consumed");
@@ -42,6 +47,7 @@ public sealed class Stockpiles
         foreach (Good good in goods.Goods)
         {
             state.AddDoubleField(StockFieldPrefix + good.Slug);
+            state.AddDoubleField(IncomingFieldPrefix + good.Slug);
         }
 
         EntityTable ledger = state.AddTable(LedgerTableName);
@@ -116,7 +122,10 @@ public sealed class Stockpiles
         }
     }
 
-    /// <summary>Everything in a cell's stockpile is lost, for example when its settlement is abandoned.</summary>
+    /// <summary>
+    /// Everything in a cell's stockpile, and on its way there, is lost, for example when its
+    /// settlement is abandoned.
+    /// </summary>
     public void LoseAll(int cell)
     {
         for (int g = 0; g < _stock.Length; g++)
@@ -127,8 +136,48 @@ public sealed class Stockpiles
                 _lost[g] += stock;
                 _stock[g][cell] = 0.0;
             }
+
+            double incoming = _incoming[g][cell];
+            if (incoming != 0.0)
+            {
+                _lost[g] += incoming;
+                _transit[g] -= incoming;
+                _incoming[g][cell] = 0.0;
+            }
         }
     }
+
+    /// <summary>Sends goods from one cell's stockpile to another's; they are in transit until <see cref="Arrive"/>.</summary>
+    public double Send(int from, int to, int good, double amount)
+    {
+        double sent = Math.Min(Math.Max(amount, 0.0), _stock[good][from]);
+        if (sent <= 0.0)
+        {
+            return 0.0;
+        }
+
+        _stock[good][from] -= sent;
+        _incoming[good][to] += sent;
+        _transit[good] += sent;
+        return sent;
+    }
+
+    /// <summary>Goods on their way to a cell arrive in its stockpile.</summary>
+    public void Arrive(int cell)
+    {
+        for (int g = 0; g < _incoming.Length; g++)
+        {
+            double incoming = _incoming[g][cell];
+            if (incoming != 0.0)
+            {
+                _stock[g][cell] += incoming;
+                _transit[g] -= incoming;
+                _incoming[g][cell] = 0.0;
+            }
+        }
+    }
+
+    public double Incoming(int cell, int good) => _incoming[good][cell];
 
     public double Produced(int good) => _produced[good];
 

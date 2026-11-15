@@ -10,7 +10,7 @@ public partial class Hud : CanvasLayer
     /// <summary>Map modes in the order of their index.</summary>
     public static readonly string[] MapModeNames =
     {
-        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming",
+        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming", "Trade",
     };
 
     private static readonly string[] SpeedNames = { "Pause", "1 month/s", "1 year/s", "10 years/s", "Max" };

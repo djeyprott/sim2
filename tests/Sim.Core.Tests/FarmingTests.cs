@@ -77,6 +77,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             SettlementSystem.CreateDefault(occupations),
             ResourceSystem.CreateDefault(climate.Biomes, occupations),
             CraftSystem.CreateDefault(occupations),
+            TradeSystem.CreateDefault(occupations),
         };
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -308,6 +309,12 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         }
 
         Assert.True(craftsmen > 0.0, "There should be craftsmen.");
+
+        // Settlements are linked and trade with each other.
+        TradeSystem trade = sim.Systems.OfType<TradeSystem>().Single();
+        Assert.True(trade.LinkCount > 10, $"Only {trade.LinkCount} trade links.");
+        Assert.True(trade.Routes().Count > 0, "No trade routes.");
+        Assert.True(Enumerable.Range(0, stockpiles.Goods.Count).Any(g => stockpiles.InTransit(g) > 0.0), "Nothing is in transit.");
 
         // Prices stay within their bounds, and gathering stops near what a settlement wants.
         PriceParameters priceParameters = PriceParameters.LoadDefault();

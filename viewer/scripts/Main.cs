@@ -42,6 +42,7 @@ public partial class Main : Node2D
     private const int RainfallChangeMode = 6;
     private const int PopulationMode = 7;
     private const int FarmingMode = 8;
+    private const int TradeMode = 9;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -71,7 +72,8 @@ public partial class Main : Node2D
     private FarmingSystem? _farming;
     private SettlementSystem? _settlementSystem;
     private ResourceSystem? _resourceSystem;
-    private Task<List<SettlementInfo>>? _settlementTask;
+    private Task<(List<SettlementInfo> Settlements, List<TradeRoute> Routes)>? _settlementTask;
+    private TradeSystem? _tradeSystem;
     private double _settlementAge = double.MaxValue;
     private long _settlementTick = -1;
     private Color[] _cropColours = Array.Empty<Color>();
@@ -221,6 +223,7 @@ public partial class Main : Node2D
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
         _settlementSystem = systems.OfType<SettlementSystem>().FirstOrDefault();
         _resourceSystem = systems.OfType<ResourceSystem>().FirstOrDefault();
+        _tradeSystem = systems.OfType<TradeSystem>().FirstOrDefault();
         _settlementTask = null;
         _settlementAge = double.MaxValue;
         _settlementTick = -1;
@@ -493,7 +496,7 @@ public partial class Main : Node2D
             extractor = sim => ExtractFarming(sim, cellCount);
         }
 
-        if (mode == PopulationMode && _foragers != null)
+        if ((mode == PopulationMode || mode == TradeMode) && _foragers != null)
         {
             double[] area = _areaKm2;
             extractor = sim =>
@@ -647,6 +650,12 @@ public partial class Main : Node2D
                     : values[cell] <= 0.0 ? EmptyLand
                     : Gradient(Math.Log10(values[cell]), PopulationStops));
                 break;
+            case TradeMode:
+                // Population, faded, under the trade routes.
+                _mapView.SetColours(cell => !map.IsLand(cell) ? Neutral(cell)
+                    : values[cell] <= 0.0 ? EmptyLand
+                    : EmptyLand.Lerp(Gradient(Math.Log10(values[cell]), PopulationStops), 0.35f));
+                break;
         }
     }
 
@@ -701,6 +710,12 @@ public partial class Main : Node2D
                 title = "People per 100 km²";
                 entries.Add((EmptyLand, "None"));
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
+                break;
+            case TradeMode:
+                title = "Trade routes (food value carried a month)";
+                entries.Add((TradeRouteColour, "1 or more"));
+                entries.Add((TradeRouteColour, "10 or more (thicker)"));
+                entries.Add((TradeRouteColour, "100 or more (thickest)"));
                 break;
             case RainfallChangeMode:
                 title = "Rainfall vs present day";
@@ -982,7 +997,7 @@ public partial class Main : Node2D
 
             if (_settlementTask.IsCompletedSuccessfully)
             {
-                List<SettlementInfo> list = _settlementTask.Result;
+                (List<SettlementInfo> list, List<TradeRoute> routes) = _settlementTask.Result;
                 GeodesicGrid grid = _map!.Grid;
                 var positions = new Vector2[list.Count];
                 var names = new string[list.Count];
@@ -996,17 +1011,29 @@ public partial class Main : Node2D
                 }
 
                 _mapView.SetSettlements(positions, names, populations);
+
+                var ends = new Vector2[routes.Count * 2];
+                var values = new float[routes.Count];
+                for (int i = 0; i < routes.Count; i++)
+                {
+                    ends[2 * i] = MapView.MapPosition(grid.Latitude(routes[i].CellA), grid.Longitude(routes[i].CellA));
+                    ends[2 * i + 1] = MapView.MapPosition(grid.Latitude(routes[i].CellB), grid.Longitude(routes[i].CellB));
+                    values[i] = (float)routes[i].Value;
+                }
+
+                _mapView.SetRoutes(ends, values);
             }
 
             _settlementTask = null;
         }
 
         SettlementSystem? settlements = _settlementSystem;
+        TradeSystem? trade = _tradeSystem;
         if (_host != null && settlements != null && _settlementAge >= SettlementRefreshSeconds && frame.Tick != _settlementTick)
         {
             _settlementTick = frame.Tick;
             _settlementAge = 0.0;
-            _settlementTask = _host.InvokeAsync(_ => settlements.All());
+            _settlementTask = _host.InvokeAsync(_ => (settlements.All(), trade?.Routes() ?? new List<TradeRoute>()));
         }
     }
 
@@ -1349,22 +1376,33 @@ public partial class Main : Node2D
                 GD.Print($"Screenshot script: {_runDescription}, date {frame?.Date}, tick {frame?.Tick}, selected cell {_selectedCell}");
                 _screenshotOk = SaveScreenshot("-detail") && frame != null && frame.Tick > 0;
 
-                // Close in on the Fertile Crescent to show settlement names.
-                SetMapMode(PopulationMode);
+                // Southwest Asia's trade routes.
+                SetMapMode(TradeMode);
                 SelectCell(-1);
                 _camera.Position = MapView.MapPosition(36.5, 40.0);
-                ZoomAt(MapView.MapPosition(36.5, 40.0), 5f);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 2f);
+                GetViewport().WarpMouse(new Vector2(20f, GetViewportRect().Size.Y - 20f));
+                break;
+            case 215:
+                _screenshotOk &= SaveScreenshot("-trade");
+
+                // Close in on the Fertile Crescent to show settlement names.
+                SetMapMode(PopulationMode);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 2.5f);
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
-            case 225:
+            case 240:
                 bool savedSettlements = SaveScreenshot("-settlements");
                 GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
                 break;
         }
     }
 
+    private static readonly Color TradeRouteColour = new Color(0.95f, 0.55f, 0.15f);
+
     private void SetMapMode(int mode)
     {
+        _mapView.SetRoutesVisible(mode == TradeMode);
         ApplyMapMode(mode);
         _hud.ShowMapMode(mode);
     }

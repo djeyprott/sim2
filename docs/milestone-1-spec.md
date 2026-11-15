@@ -156,7 +156,7 @@ Each step ends with a new development build you can download.
 5. New-run settings and start screen (done)
 6. Foragers and the population map mode (done, as a per-cell number)
 6b. Population groups: move foragers onto groups, with merging and the per-cell limit (done)
-7. Farming: crops, invention, yield, spread, harvest
+7. Farming: crops, invention, yield, spread, harvest (done)
 8. Famine
 9. Settlements
 10. Statistics file, tuning against the exit tests, release v0.2

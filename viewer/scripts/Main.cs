@@ -665,9 +665,9 @@ public partial class Main : Node2D
     {
         (-1.0, Color.Color8(60, 40, 90)),
         (0.0, Color.Color8(110, 60, 140)),
-        (0.5, Color.Color8(180, 80, 120)),
+        (0.47712125471966244, Color.Color8(180, 80, 120)), // 3
         (1.0, Color.Color8(235, 130, 70)),
-        (1.5, Color.Color8(250, 210, 90)),
+        (1.4771212547196624, Color.Color8(250, 210, 90)), // 30
         (2.0, Color.Color8(255, 250, 200)),
     };
 

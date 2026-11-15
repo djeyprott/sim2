@@ -283,17 +283,17 @@ public partial class Main : Node2D
 
             if (!double.IsNaN(summary[1]))
             {
-                worldInfo += "   " + (summary[1] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M people";
+                worldInfo += "   " + (summary[1] / 1e6).ToString("0.0", CultureInfo.InvariantCulture) + " M people";
             }
 
             if (summary.Length >= 3 && !double.IsNaN(summary[2]))
             {
-                worldInfo += ", " + (summary[2] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M farmers";
+                worldInfo += ", " + (summary[2] / 1e6).ToString("0.0", CultureInfo.InvariantCulture) + " M farmers";
             }
 
             if (summary.Length >= 4 && !double.IsNaN(summary[3]))
             {
-                worldInfo += "   Food in store " + (summary[3] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M";
+                worldInfo += ", " + (summary[3] / 1e6).ToString("0.0", CultureInfo.InvariantCulture) + " M stored";
             }
         }
 

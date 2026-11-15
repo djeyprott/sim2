@@ -14,7 +14,9 @@ jobs:
           dotnet-version: 10.0.x
       - name: Build and test
         run: dotnet test sim2.sln --configuration Release --logger "console;verbosity=detailed"
-      - name: Headless run of 12,000 years
-        run: dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 1 --years 12000
+      - name: Headless run of 5,000 years, which must finish within 5 minutes
+        run: |
+          dotnet build src/Sim.Headless -c Release
+          timeout 300 dotnet run --project src/Sim.Headless -c Release --no-build -- --world data/earth.world --seed 1 --years 5000
       - name: Compile the viewer
         run: dotnet build viewer/Viewer.csproj

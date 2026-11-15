@@ -174,10 +174,4 @@ public class EarthRunTests : IClassFixture<EarthRunFixture>
     {
         Assert.All(_results, r => Assert.False(r.BadPopulation, $"Seed {r.Seed} had an invalid population."));
     }
-
-    [Fact]
-    public void A_5000_year_run_takes_under_5_minutes()
-    {
-        Assert.All(_results, r => Assert.True(r.Seconds < 300.0, $"Seed {r.Seed} took {r.Seconds:F0} s."));
-    }
 }

@@ -22,6 +22,13 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
 
     private bool Reached(Simulation sim, double lat, double lon) => Foragers(sim).IsReachable(_world.Grid.FindCell(lat, lon));
 
+    private double[] PeoplePerCell(Simulation sim)
+    {
+        var totals = new double[_world.CellCount];
+        new PopulationGroups(sim.State).FillCellTotals(totals);
+        return totals;
+    }
+
     [Fact]
     public void The_right_land_is_reached_at_the_start()
     {
@@ -42,22 +49,24 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
     }
 
     [Fact]
-    public void Every_reached_cell_starts_full_and_the_rest_start_empty()
+    public void Every_reached_cell_starts_with_one_full_forager_group_and_the_rest_start_empty()
     {
         Simulation sim = NewSimulation();
-        double[] people = sim.State.DoubleField(ForagerSystem.PopulationField);
+        var groups = new PopulationGroups(sim.State);
         double[] capacity = sim.State.DoubleField(ForagerSystem.CapacityField);
         ForagerSystem foragers = Foragers(sim);
         for (int cell = 0; cell < _world.CellCount; cell++)
         {
-            if (foragers.IsReachable(cell))
+            if (foragers.IsReachable(cell) && capacity[cell] > 0.0)
             {
-                Assert.Equal(capacity[cell], people[cell]);
+                Assert.Equal(1, groups.CountInCell(cell));
+                int group = groups.Find(cell, foragers.Occupation);
+                Assert.Equal(capacity[cell], groups.Size(group));
+                Assert.Equal(1.0, groups.Food(group));
             }
             else
             {
-                Assert.Equal(0.0, people[cell]);
-                Assert.Equal(0.0, capacity[cell]);
+                Assert.Equal(0, groups.CountInCell(cell));
             }
         }
     }
@@ -82,8 +91,8 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
     public void Land_that_cannot_feed_anyone_empties_and_people_move_into_empty_land()
     {
         Simulation sim = NewSimulation();
-        double[] people = sim.State.DoubleField(ForagerSystem.PopulationField);
-        double[] capacity = sim.State.DoubleField(ForagerSystem.CapacityField);
+        var groups = new PopulationGroups(sim.State);
+        int forager = Foragers(sim).Occupation;
         int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
 
         // Get past the first January, so the next yearly update (year 1) does not recalculate biomes.
@@ -95,19 +104,26 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
         block.AddRange(_world.Grid.Neighbours(centre).ToArray());
         foreach (int cell in block)
         {
-            people[cell] = 0.0;
+            groups.SetSize(groups.Find(cell, forager), 0.0);
         }
 
         int iced = _world.Grid.FindCell(50.0, 30.0);
         int iceIndex = sim.Systems.OfType<ClimateSystem>().Single().Biomes.IndexOf("Ice");
-        double before = people[iced];
-
+        double before = groups.Size(groups.Find(iced, forager));
         biome[iced] = iceIndex;
         sim.Run(12);
 
-        Assert.All(block.Skip(1), cell => Assert.True(people[cell] > 0.0, "People should move into the emptied cells at the edge."));
-        Assert.All(block, cell => Assert.True(people[cell] < capacity[cell]));
-        Assert.True(people[iced] < before, "A cell that turned to ice should lose people.");
+        double[] capacity = sim.State.DoubleField(ForagerSystem.CapacityField);
+        Assert.All(block.Skip(1), cell =>
+        {
+            double people = groups.Size(groups.Find(cell, forager));
+            Assert.True(people > 0.0, "People should move into the emptied cells at the edge.");
+            Assert.True(people < capacity[cell]);
+        });
+
+        int icedGroup = groups.Find(iced, forager);
+        Assert.True(groups.Size(icedGroup) < before, "A cell that turned to ice should lose people.");
+        Assert.Equal(0.0, groups.Food(icedGroup));
     }
 
     [Fact]
@@ -125,6 +141,7 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
         second.Load(new MemoryStream(save.ToArray()));
         second.Run(35 * 12 - 7);
         Assert.Equal(straight.StateChecksum(), second.StateChecksum());
+        Assert.Equal(PeoplePerCell(straight), PeoplePerCell(second));
     }
 
     [Fact]
@@ -133,6 +150,7 @@ public class ForagerTests : IClassFixture<EarthWorldFixture>
         BiomeSet biomes = BiomeSet.LoadDefault();
         ForagerParameters parameters = ForagerParameters.LoadDefault();
         Assert.All(biomes.Biomes, b => Assert.True(parameters.Density.ContainsKey(b.Name), b.Name));
-        Assert.Throws<InvalidDataException>(() => new ForagerSystem(new ForagerParameters { Reached = parameters.Reached }, biomes));
+        Assert.Throws<InvalidDataException>(() =>
+            new ForagerSystem(new ForagerParameters { Reached = parameters.Reached }, biomes, OccupationSet.LoadDefault()));
     }
 }

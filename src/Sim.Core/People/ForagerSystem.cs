@@ -6,14 +6,15 @@ using Sim.Core.Map;
 namespace Sim.Core.People;
 
 /// <summary>
-/// Hunter-gatherer populations. Each reached land cell can feed a number of foragers set by its
-/// current biome, coast and rivers. Each year populations grow toward that number, shrink when
-/// it falls, and move into neighbouring land cells that are less full. Runs yearly, after climate.
+/// Hunter-gatherers: the population groups with the occupation "Forager". Each reached land cell
+/// can feed a number of foragers set by its current biome, coast and rivers. Each year forager
+/// groups grow toward that number, shrink when it falls, and move into neighbouring land cells
+/// that are less full. A group's food is the share of its needs the land meets. Runs yearly,
+/// after climate and population.
 /// </summary>
 public sealed class ForagerSystem : ISimSystem
 {
     public const string SystemName = "foragers";
-    public const string PopulationField = "people.foragers";
     public const string CapacityField = "people.foragerCapacity";
 
     // Below this many people a cell is treated as empty.
@@ -21,7 +22,12 @@ public sealed class ForagerSystem : ISimSystem
 
     private readonly ForagerParameters _parameters;
     private readonly double[] _densityByBiome;
+    private readonly int _occupation;
 
+    private PopulationGroups? _groups;
+    private int[] _groupOfCell = Array.Empty<int>();
+
+    // Working copy of each cell's foragers during an update; the groups hold the saved values.
     private double[] _population = Array.Empty<double>();
     private double[] _capacity = Array.Empty<double>();
     private int[] _biome = Array.Empty<int>();
@@ -36,9 +42,10 @@ public sealed class ForagerSystem : ISimSystem
     private double[] _flowIn = Array.Empty<double>();
     private double[] _fullness = Array.Empty<double>();
 
-    public ForagerSystem(ForagerParameters parameters, BiomeSet biomes)
+    public ForagerSystem(ForagerParameters parameters, BiomeSet biomes, OccupationSet occupations)
     {
         _parameters = parameters;
+        _occupation = occupations.IndexOf(OccupationSet.Forager);
         _densityByBiome = new double[biomes.Count];
         foreach (Biome biome in biomes.Biomes)
         {
@@ -55,7 +62,11 @@ public sealed class ForagerSystem : ISimSystem
 
     public int IntervalMonths => 12;
 
-    public static ForagerSystem CreateDefault(BiomeSet biomes) => new ForagerSystem(ForagerParameters.LoadDefault(), biomes);
+    public static ForagerSystem CreateDefault(BiomeSet biomes, OccupationSet occupations) =>
+        new ForagerSystem(ForagerParameters.LoadDefault(), biomes, occupations);
+
+    /// <summary>The occupation index of foragers.</summary>
+    public int Occupation => _occupation;
 
     /// <summary>True for land cells people had reached at the start of the run. Fixed after initializing.</summary>
     public bool IsReachable(int cell) => _reachable.Length > cell && _reachable[cell];
@@ -65,7 +76,6 @@ public sealed class ForagerSystem : ISimSystem
 
     public void Register(WorldState state)
     {
-        _population = state.AddDoubleField(PopulationField);
         _capacity = state.AddDoubleField(CapacityField);
     }
 
@@ -74,6 +84,9 @@ public sealed class ForagerSystem : ISimSystem
         WorldMap map = context.Map;
         _map = map;
         _biome = context.State.IntField(ClimateSystem.BiomeField);
+        _groups = new PopulationGroups(context.State);
+        _population = new double[map.CellCount];
+        _groupOfCell = new int[map.CellCount];
         _reachable = FindReachableLand(map);
 
         var cells = new List<int>();
@@ -138,32 +151,56 @@ public sealed class ForagerSystem : ISimSystem
         _flowIn = new double[map.CellCount];
         _fullness = new double[map.CellCount];
 
-        // Start every reached cell full.
+        // Start every reached cell with a full forager group.
         UpdateCapacity();
         foreach (int cell in _cells)
         {
-            _population[cell] = _capacity[cell];
+            if (_capacity[cell] > 0.0)
+            {
+                int group = _groups.FindOrAdd(cell, _occupation);
+                _groups.SetSize(group, _capacity[cell]);
+                _groups.SetFood(group, 1.0);
+            }
         }
     }
 
     public void Update(SimContext context)
     {
+        PopulationGroups groups = _groups!;
+        groups.FillGroupIndex(_groupOfCell, _occupation);
+        foreach (int cell in _cells)
+        {
+            int group = _groupOfCell[cell];
+            _population[cell] = group >= 0 ? groups.Size(group) : 0.0;
+        }
+
         UpdateCapacity();
         Grow();
         Migrate();
+
+        // Write back to the groups, creating a forager group where people have just arrived.
+        foreach (int cell in _cells)
+        {
+            double people = _population[cell];
+            int group = _groupOfCell[cell];
+            if (group < 0)
+            {
+                if (people <= 0.0)
+                {
+                    continue;
+                }
+
+                group = groups.FindOrAdd(cell, _occupation);
+            }
+
+            groups.SetSize(group, people);
+            double capacity = _capacity[cell];
+            groups.SetFood(group, people <= 0.0 ? 1.0 : capacity <= 0.0 ? 0.0 : Math.Min(1.0, capacity / people));
+        }
     }
 
     /// <summary>Total foragers in the world.</summary>
-    public double WorldPopulation()
-    {
-        double total = 0.0;
-        foreach (int cell in _cells)
-        {
-            total += _population[cell];
-        }
-
-        return total;
-    }
+    public double WorldPopulation() => _groups?.WorldTotal(_occupation) ?? 0.0;
 
     /// <summary>Total foragers the world's land can currently feed.</summary>
     public double WorldCapacity()

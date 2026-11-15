@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
 
-Progress: steps 1 to 6 done 2026-11-14. Step 6b (population groups) is next, then step 7.
+Progress: steps 1 to 6b done 2026-11-14. Step 7 is next.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -155,7 +155,7 @@ Each step ends with a new development build you can download.
 4. Changing climate, biomes and ice, with their map modes (done)
 5. New-run settings and start screen (done)
 6. Foragers and the population map mode (done, as a per-cell number)
-6b. Population groups: move foragers onto groups, with merging and the per-cell limit
+6b. Population groups: move foragers onto groups, with merging and the per-cell limit (done)
 7. Farming: crops, invention, yield, spread, harvest
 8. Famine
 9. Settlements

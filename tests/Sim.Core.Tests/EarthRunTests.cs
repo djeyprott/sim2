@@ -37,11 +37,18 @@ public sealed class EarthRunResult
 
     public double MaxUnreachedPopulation { get; set; }
 
+    public int MaxGroupsInACell { get; set; }
+
+    public bool DuplicateGroups { get; set; }
+
+    public int GroupIds { get; set; }
+
     public override string ToString() =>
         $"Seed {Seed}: {Seconds:F0} s; world shift up to {MaxWorldShift:F2} C, cell shift up to {MaxCellShift:F2} C, "
         + $"rainfall {MinRainFactor:F2} to {MaxRainFactor:F2}, {100.0 * BiomeChangedShare:F1}% of land changed biome; "
         + $"population {StartPopulation / 1e6:F2} M at start, {EndPopulation / 1e6:F2} M at end, "
-        + $"{MinPopulationToCapacity:F3} to {MaxPopulationToCapacity:F3} of what the land can feed";
+        + $"{MinPopulationToCapacity:F3} to {MaxPopulationToCapacity:F3} of what the land can feed; "
+        + $"up to {MaxGroupsInACell} groups in a cell, {GroupIds} group ids used";
 }
 
 /// <summary>
@@ -74,7 +81,8 @@ public sealed class EarthRunFixture
         int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
         double[] factor = sim.State.DoubleField(ClimateSystem.RainfallFactorField);
         double[] shift = sim.State.DoubleField(ClimateSystem.TemperatureShiftField);
-        double[] people = sim.State.DoubleField(ForagerSystem.PopulationField);
+        var groups = new PopulationGroups(sim.State);
+        var people = new double[world.CellCount];
         int[] startBiome = land.Select(cell => biome[cell]).ToArray();
         var changed = new bool[land.Length];
 
@@ -82,6 +90,25 @@ public sealed class EarthRunFixture
         for (int year = 0; year < Years; year++)
         {
             sim.Run(12);
+            groups.FillCellTotals(people);
+            for (int group = 0; group < groups.IdCount; group++)
+            {
+                if (groups.IsAlive(group))
+                {
+                    double size = groups.Size(group);
+                    double food = groups.Food(group);
+                    if (size < 0.0 || double.IsNaN(size) || double.IsInfinity(size) || food < 0.0 || food > 1.0 || double.IsNaN(food))
+                    {
+                        result.BadPopulation = true;
+                    }
+                }
+            }
+
+            if (year % 100 == 0)
+            {
+                CheckGroups(world, groups, result);
+            }
+
             result.MaxWorldShift = Math.Max(result.MaxWorldShift, Math.Abs(climate.WorldTemperatureShift()));
             for (int i = 0; i < land.Length; i++)
             {
@@ -94,11 +121,6 @@ public sealed class EarthRunFixture
                     changed[i] = true;
                 }
 
-                double p = people[cell];
-                if (p < 0.0 || double.IsNaN(p) || double.IsInfinity(p))
-                {
-                    result.BadPopulation = true;
-                }
             }
 
             foreach (int cell in unreached)
@@ -113,8 +135,30 @@ public sealed class EarthRunFixture
 
         result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
         result.EndPopulation = foragers.WorldPopulation();
+        CheckGroups(world, groups, result);
+        result.GroupIds = groups.IdCount;
         result.Seconds = watch.Elapsed.TotalSeconds;
         return result;
+    }
+
+    private static void CheckGroups(WorldMap world, PopulationGroups groups, EarthRunResult result)
+    {
+        var occupations = new List<int>();
+        for (int cell = 0; cell < world.CellCount; cell++)
+        {
+            occupations.Clear();
+            foreach (int group in groups.InCell(cell))
+            {
+                if (occupations.Contains(groups.Occupation(group)))
+                {
+                    result.DuplicateGroups = true;
+                }
+
+                occupations.Add(groups.Occupation(group));
+            }
+
+            result.MaxGroupsInACell = Math.Max(result.MaxGroupsInACell, occupations.Count);
+        }
     }
 }
 
@@ -167,6 +211,16 @@ public class EarthRunTests : IClassFixture<EarthRunFixture>
     public void Unreached_islands_stay_empty()
     {
         Assert.All(_results, r => Assert.Equal(0.0, r.MaxUnreachedPopulation));
+    }
+
+    [Fact]
+    public void No_cell_holds_more_than_8_groups_or_two_groups_with_the_same_traits()
+    {
+        foreach (EarthRunResult r in _results)
+        {
+            Assert.InRange(r.MaxGroupsInACell, 1, PopulationGroups.MaxGroupsPerCell);
+            Assert.False(r.DuplicateGroups, $"Seed {r.Seed} had two groups with the same traits in a cell.");
+        }
     }
 
     [Fact]

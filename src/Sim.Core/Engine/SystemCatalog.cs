@@ -13,10 +13,12 @@ public static class SystemCatalog
     public static IReadOnlyList<ISimSystem> CreateDefault()
     {
         ClimateSystem climate = ClimateSystem.CreateDefault();
+        OccupationSet occupations = OccupationSet.LoadDefault();
         return new ISimSystem[]
         {
             climate,
-            ForagerSystem.CreateDefault(climate.Biomes),
+            new PopulationSystem(),
+            ForagerSystem.CreateDefault(climate.Biomes, occupations),
         };
     }
 }

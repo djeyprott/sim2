@@ -59,6 +59,7 @@ public partial class Main : Node2D
     // directly; anything else is read through the host.
     private ClimateSystem? _climate;
     private ForagerSystem? _foragers;
+    private readonly OccupationSet _occupations = OccupationSet.LoadDefault();
     private double[] _areaKm2 = Array.Empty<double>();
     private Color[] _biomeColours = Array.Empty<Color>();
     private double[] _baselineMean = Array.Empty<double>();
@@ -206,10 +207,10 @@ public partial class Main : Node2D
         _host = new SimulationHost(simulation);
         ClimateSystem? climate = _climate;
         ForagerSystem? foragers = _foragers;
-        _host.SetSummaryExtractor(_ => new[]
+        _host.SetSummaryExtractor(sim => new[]
         {
             climate?.WorldTemperatureShift() ?? double.NaN,
-            foragers?.WorldPopulation() ?? double.NaN,
+            foragers != null ? new PopulationGroups(sim.State).WorldTotal() : double.NaN,
         });
 
         _hover = new LiveCell();
@@ -447,7 +448,8 @@ public partial class Main : Node2D
             double[] area = _areaKm2;
             extractor = sim =>
             {
-                double[] people = sim.State.DoubleField(ForagerSystem.PopulationField);
+                var people = new double[area.Length];
+                new PopulationGroups(sim.State).FillCellTotals(people);
                 var perHundredKm2 = new double[people.Length];
                 for (int cell = 0; cell < people.Length; cell++)
                 {
@@ -877,11 +879,12 @@ public partial class Main : Node2D
             int target = live.Cell;
             live.PendingCell = target;
             ForagerSystem? foragers = _foragers;
+            OccupationSet occupations = _occupations;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? sim.State.DoubleField(ForagerSystem.PopulationField)[target] : double.NaN,
+                foragers != null ? DescribeGroups(sim, target, occupations) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;
@@ -935,15 +938,30 @@ public partial class Main : Node2D
                 + $"{(factor * 100.0).ToString("0", CultureInfo.InvariantCulture)}% rain";
         }
 
-        if (live && now is { } people && !double.IsNaN(people.Foragers))
+        if (live && now is { } people && people.Groups != null)
         {
             text += !people.Reachable
                 ? "\nNo people: not reached yet"
-                : $"\nForagers: {people.Foragers.ToString("N0", CultureInfo.InvariantCulture)} "
-                    + $"(land can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)})";
+                : $"\nLand can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)} foragers"
+                    + (people.Groups.Length > 0 ? "\nGroups:" + people.Groups : "\nGroups: none");
         }
 
         return text;
+    }
+
+    // Runs on the simulation thread: one line per population group in the cell.
+    private static string DescribeGroups(Simulation sim, int cell, OccupationSet occupations)
+    {
+        var groups = new PopulationGroups(sim.State);
+        var text = new System.Text.StringBuilder();
+        foreach (int group in groups.InCell(cell))
+        {
+            string name = occupations.Get(groups.Occupation(group)).Name;
+            text.Append($"\n  {name}: {groups.Size(group).ToString("N0", CultureInfo.InvariantCulture)}, "
+                + $"food {(groups.Food(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%");
+        }
+
+        return text.ToString();
     }
 
     private void FitWholeMap()
@@ -1062,7 +1080,7 @@ public partial class Main : Node2D
         double TemperatureShift,
         double RainfallFactor,
         int Biome,
-        double Foragers,
+        string? Groups,
         double Capacity,
         bool Reachable);
 

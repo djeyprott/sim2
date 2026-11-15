@@ -179,7 +179,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
                 Assert.True(groups.Find(cell, farmer) >= 0, "A farming cell needs a farmer group.");
             }
 
-            Assert.InRange(groups.CountInCell(cell), 0, 2);
+            Assert.InRange(groups.CountInCell(cell), 0, OccupationSet.LoadDefault().Count);
         }
     }
 

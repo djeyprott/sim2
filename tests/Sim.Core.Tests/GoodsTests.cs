@@ -28,3 +28,41 @@ public class GoodsTests
         Assert.Throws<InvalidDataException>(() => GoodSet.Parse(text.Replace("\"spoilage\": 0.10", "\"spoilage\": 1.5")));
     }
 }
+
+public class ResourceTests : IClassFixture<EarthWorldFixture>
+{
+    private readonly Sim.Core.Map.WorldMap _world;
+
+    public ResourceTests(EarthWorldFixture fixture)
+    {
+        _world = fixture.World;
+    }
+
+    [Fact]
+    public void Resources_are_where_the_rules_put_them()
+    {
+        var sim = new Sim.Core.Engine.Simulation(_world, new Sim.Core.Engine.RunSettings { Seed = 1 }, Sim.Core.Engine.SystemCatalog.CreateDefault());
+        ResourceSystem resources = sim.Systems.OfType<ResourceSystem>().Single();
+        int Rule(string good) => resources.Rules.Goods.FindIndex(r => r.Good == good);
+        int Cell(double lat, double lon) => _world.Grid.FindCell(lat, lon);
+
+        Assert.Equal(1.0, resources.Richness(Rule("Obsidian"), Cell(38.25, 34.55)));
+        Assert.Equal(0.0, resources.Richness(Rule("Obsidian"), Cell(48.85, 2.35)));
+        Assert.Equal(1.0, resources.Richness(Rule("Salt"), Cell(47.56, 13.65)));
+        Assert.Equal(0.0, resources.Richness(Rule("Salt"), Cell(50.0, 10.0)));
+        Assert.True(resources.Richness(Rule("Flint"), Cell(46.5, 9.0)) >= 1.0, "The Alps should have flint.");
+        Assert.True(resources.Richness(Rule("Wood"), Cell(-3.0, -60.0)) >= 1.0, "The Amazon should have wood.");
+        Assert.True(resources.Richness(Rule("Wood"), Cell(23.0, 10.0)) < 0.1, "The Sahara should have almost no wood.");
+
+        int obsidianCells = Enumerable.Range(0, _world.CellCount).Count(c => resources.Richness(Rule("Obsidian"), c) > 0.0);
+        Assert.InRange(obsidianCells, 18, 400);
+    }
+
+    [Fact]
+    public void Bad_resource_files_are_rejected()
+    {
+        string text = ContentFiles.ReadText("resources.json");
+        Assert.Throws<InvalidDataException>(() => ResourceRules.Parse(text.Replace("\"hills\": 1.0, \"mountains\": 1.0", "\"hills\": 1.0, \"plateau\": 1.0")));
+        Assert.Throws<InvalidDataException>(() => ResourceRules.Parse(text.Replace("\"river\": 1.0", "\"river\": 2.0")));
+    }
+}

@@ -1,0 +1,80 @@
+// Natural resources and gathering (milestone 2, step 2).
+// Each rule says where a good can be gathered and how much. A cell's richness for a good is the
+// largest of the terms that apply to it, from 0 (none) to 1 (plenty):
+//   biomes: by the cell's current biome; terrain: lowland, hills or mountains;
+//   river: on any river; coast: next to the sea; dryCoast: next to the sea where rain is below
+//   dryRainMm a year; dryLakeShore: next to a lake where rain is below dryRainMm; farmland:
+//   where crops are farmed; sources: within sourceRadiusKm of a listed place.
+// Each year the farmers of a settled cell gather perPerson units each times richness, into the
+// settlement's store, until the store holds stockPerPerson units for each of the cell's people.
+// (From step 4, prices decide how much is wanted instead of stockPerPerson.)
+{
+  "gatherers": [ "Farmer" ],
+  "dryRainMm": 600,
+  "goods": [
+    {
+      "good": "Wood", "perPerson": 0.5, "stockPerPerson": 0.5,
+      "biomes": { "Boreal forest": 1.0, "Temperate forest": 1.0, "Tropical seasonal forest": 1.0, "Rainforest": 1.0,
+                  "Mediterranean": 0.6, "Savanna": 0.4, "Grassland": 0.15, "Tundra": 0.05, "Desert": 0.02 }
+    },
+    {
+      "good": "Flint", "perPerson": 0.1, "stockPerPerson": 0.2,
+      "terrain": { "hills": 1.0, "mountains": 1.0, "lowland": 0.2 }
+    },
+    {
+      "good": "Clay", "perPerson": 0.2, "stockPerPerson": 0.3,
+      "river": 1.0, "terrain": { "lowland": 0.4, "hills": 0.2 }
+    },
+    {
+      "good": "Fibre", "perPerson": 0.2, "stockPerPerson": 0.3,
+      "farmland": 1.0,
+      "biomes": { "Grassland": 0.4, "Savanna": 0.4, "Temperate forest": 0.3, "Tropical seasonal forest": 0.3, "Rainforest": 0.2, "Mediterranean": 0.3 }
+    },
+    {
+      "good": "Salt", "perPerson": 0.05, "stockPerPerson": 0.05,
+      "dryCoast": 1.0, "coast": 0.3, "dryLakeShore": 1.0, "sourceRadiusKm": 60,
+      "sources": [
+        { "name": "Hallstatt", "lat": 47.56, "lon": 13.65 },
+        { "name": "Wieliczka", "lat": 49.98, "lon": 20.05 },
+        { "name": "Cardona", "lat": 41.91, "lon": 1.68 },
+        { "name": "Cheshire", "lat": 53.26, "lon": -2.52 },
+        { "name": "Mount Sedom", "lat": 31.1, "lon": 35.4 },
+        { "name": "Lake Tuz", "lat": 38.7, "lon": 33.4 },
+        { "name": "Khewra", "lat": 32.65, "lon": 73.0 },
+        { "name": "Yuncheng salt lake", "lat": 35.0, "lon": 111.0 },
+        { "name": "Zigong brine wells", "lat": 29.35, "lon": 104.77 },
+        { "name": "Danakil", "lat": 14.2, "lon": 40.3 },
+        { "name": "Taoudenni", "lat": 22.67, "lon": -3.98 },
+        { "name": "Bilma", "lat": 18.69, "lon": 12.92 },
+        { "name": "Zipaquira", "lat": 5.03, "lon": -74.0 },
+        { "name": "Salar de Uyuni", "lat": -20.1, "lon": -67.5 },
+        { "name": "Lake Texcoco", "lat": 19.5, "lon": -99.0 },
+        { "name": "Great Salt Lake", "lat": 41.1, "lon": -112.5 }
+      ]
+    },
+    {
+      "good": "Obsidian", "perPerson": 0.05, "stockPerPerson": 0.05,
+      "sourceRadiusKm": 60,
+      "sources": [
+        { "name": "Gollu Dag (Cappadocia)", "lat": 38.25, "lon": 34.55 },
+        { "name": "Bingol", "lat": 39.0, "lon": 40.5 },
+        { "name": "Nemrut Dag", "lat": 38.65, "lon": 42.23 },
+        { "name": "Gutansar (Armenia)", "lat": 40.37, "lon": 44.7 },
+        { "name": "Melos", "lat": 36.7, "lon": 24.4 },
+        { "name": "Lipari", "lat": 38.48, "lon": 14.95 },
+        { "name": "Pantelleria", "lat": 36.78, "lon": 12.0 },
+        { "name": "Monte Arci (Sardinia)", "lat": 39.78, "lon": 8.75 },
+        { "name": "Tokaj (Carpathians)", "lat": 48.4, "lon": 21.4 },
+        { "name": "Fantale (Ethiopia)", "lat": 8.9, "lon": 39.9 },
+        { "name": "Naivasha (Kenya)", "lat": -0.8, "lon": 36.4 },
+        { "name": "Pachuca (Mexico)", "lat": 20.2, "lon": -98.7 },
+        { "name": "El Chayal (Guatemala)", "lat": 14.7, "lon": -90.4 },
+        { "name": "Mullumica (Ecuador)", "lat": -0.2, "lon": -78.2 },
+        { "name": "Chivay (Peru)", "lat": -15.6, "lon": -71.6 },
+        { "name": "Obsidian Cliff (Yellowstone)", "lat": 44.8, "lon": -110.7 },
+        { "name": "Shirataki (Hokkaido)", "lat": 43.9, "lon": 143.2 },
+        { "name": "Paektu (Changbai)", "lat": 42.0, "lon": 128.1 }
+      ]
+    }
+  ]
+}

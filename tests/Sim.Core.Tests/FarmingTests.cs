@@ -75,6 +75,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
             SettlementSystem.CreateDefault(occupations),
+            ResourceSystem.CreateDefault(climate.Biomes, occupations),
         };
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -274,6 +275,11 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(stocked >= 20, $"Only {stocked} settlements hold grain.");
         Assert.True(stockpiles.Produced(grain) > 0.0 && stockpiles.Consumed(grain) > 0.0 && stockpiles.Spoiled(grain) > 0.0);
         Assert.True(stockpiles.Produced(wild) > 1e6, "Foragers' wild food should be in the ledger.");
+        foreach (string gathered in new[] { "Wood", "Clay", "Fibre" })
+        {
+            int g = stockpiles.Goods.IndexOf(gathered);
+            Assert.True(stockpiles.InStore(g) > 0.0, $"No {gathered} was gathered into stores.");
+        }
     }
 
     [Fact]

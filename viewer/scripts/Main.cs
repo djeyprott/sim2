@@ -27,6 +27,7 @@ public partial class Main : Node2D
     private const float MaxZoom = 40f;
     private const double SettlementRefreshSeconds = 1.0;
     private const string GrainStockField = Stockpiles.StockFieldPrefix + "grain";
+    private static readonly GoodSet ViewerGoods = GoodSet.LoadDefault();
     private const float KeyPanPixelsPerSecond = 900f;
     private const float ClickSlopPixels = 5f;
 
@@ -67,6 +68,7 @@ public partial class Main : Node2D
     private ForagerSystem? _foragers;
     private FarmingSystem? _farming;
     private SettlementSystem? _settlementSystem;
+    private ResourceSystem? _resourceSystem;
     private Task<List<SettlementInfo>>? _settlementTask;
     private double _settlementAge = double.MaxValue;
     private long _settlementTick = -1;
@@ -216,6 +218,7 @@ public partial class Main : Node2D
         _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
         _settlementSystem = systems.OfType<SettlementSystem>().FirstOrDefault();
+        _resourceSystem = systems.OfType<ResourceSystem>().FirstOrDefault();
         _settlementTask = null;
         _settlementAge = double.MaxValue;
         _settlementTick = -1;
@@ -1016,13 +1019,37 @@ public partial class Main : Node2D
         var founded = new GameDate(s.Founded);
         string text = $"\nSettlement: {s.Name}, founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, "
             + $"{s.Population.ToString("N0", CultureInfo.InvariantCulture)} people";
-        if (sim.State.HasField(GrainStockField))
+        var stock = new List<string>();
+        foreach (Good good in ViewerGoods.Goods)
         {
-            double grain = sim.State.DoubleField(GrainStockField)[cell];
-            text += $"\n  Grain in store: {grain.ToString("N0", CultureInfo.InvariantCulture)} person-years";
+            string field = Stockpiles.StockFieldPrefix + good.Slug;
+            double amount = sim.State.HasField(field) ? sim.State.DoubleField(field)[cell] : 0.0;
+            if (amount >= 1.0)
+            {
+                stock.Add($"{good.Name.ToLowerInvariant()} {amount.ToString("N0", CultureInfo.InvariantCulture)}");
+            }
+        }
+
+        if (stock.Count > 0)
+        {
+            text += "\n  In store: " + string.Join(", ", stock);
         }
 
         return text;
+    }
+
+    // Runs on the simulation thread: what can be gathered in the cell.
+    private static string DescribeResources(int cell, ResourceSystem? resources)
+    {
+        if (resources == null)
+        {
+            return "";
+        }
+
+        List<string> names = resources.ResourcesIn(cell)
+            .Select(r => r.Richness >= 0.7 ? r.Good.ToLowerInvariant() : $"some {r.Good.ToLowerInvariant()}")
+            .ToList();
+        return names.Count == 0 ? "" : "\nResources: " + string.Join(", ", names);
     }
 
     // Asks the simulation for a cell's current climate every so often, without waiting for the answer.
@@ -1058,12 +1085,13 @@ public partial class Main : Node2D
             OccupationSet occupations = _occupations;
             FarmingSystem? farmingForCell = _farming;
             SettlementSystem? settlementsForCell = _settlementSystem;
+            ResourceSystem? resourcesForCell = _resourceSystem;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
                 foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeGroups(sim, target, occupations)
-                    + DescribeFarming(sim, target, farmingForCell) : null,
+                    + DescribeFarming(sim, target, farmingForCell) + DescribeResources(target, resourcesForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;

@@ -1,8 +1,9 @@
-# sim2 design doc (version 0.6)
+# sim2 design doc (version 0.7)
 
 Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is in progress (`milestone-1-spec.md`).
 
 Change log:
+- 0.7 (2026-11-15): backlog item on farming open grassland before the plough.
 - 0.6 (2026-11-14): population model agreed: population groups in the manner of Victoria 2's pops.
 - 0.5 (2026-11-14): added the climate and crop decisions made for milestone 1, the .NET 10 move, the release process and new backlog items.
 - 0.4 (2026-11-14): sphere grid, start date and coastlines confirmed.
@@ -106,6 +107,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - Climate change caused by people in later eras (consider with milestone 7).
 - Lower Ice Age sea level and changing coastlines.
 - Herd animals and pastoralism (decide in the milestone 2 or 3 spec).
+- Open grassland is hard to farm before the plough. Steppe, prairie and pampas have tough root mats and unreliable rain, so early farmers kept to forest edges and river valleys while herders held the open grassland (the Pontic steppe was herding country from about 4500 BCE and was ploughed at scale only in the 18th and 19th centuries). Consider with pastoralism and the plough (milestones 2 and 3): a grassland yield penalty that the plough removes, and herders who outcompete early farmers there. Milestone 1 only applies a gentle grassland yield penalty during step 10 tuning.
 - Disease.
 - The Aral Sea at its historical size, and small straits that are currently closed (for example Bali joined to Java).
 - Globe view.

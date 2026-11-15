@@ -163,4 +163,4 @@ Each step ends with a new development build you can download.
 
 ## Numbers that will need tuning
 
-How fast and how far climate swings, growth rates, feeding limits per biome, the chance of inventing farming, spread rates and the settlement threshold all start as estimates. Step 10 adjusts them until the exit tests pass. They live in data files, not code.
+How fast and how far climate swings, growth rates, feeding limits per biome, the chance of inventing farming, spread rates and the settlement threshold all start as estimates. Step 10 also adds a gentle farm yield penalty on grassland, agreed by the owner on 2026-11-15, so that early farming keeps mostly to forest edges and river valleys rather than the open steppe; the fuller treatment (the plough, herders) is in the design doc's backlog. Step 10 adjusts them until the exit tests pass. They live in data files, not code.

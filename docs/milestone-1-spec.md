@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.7.
 
-Progress: steps 1 to 6b done 2026-11-14; steps 7 (farming), 8 (famine) and 9 (settlements) done 2026-11-15, all exit tests passing.
+Progress: steps 1 to 9 done; step 10 statistics file and tuning done 2026-11-15, all automated exit tests passing. Waiting on the owner's checks in the viewer before release v0.2.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -123,25 +123,25 @@ Foragers
 - [x] Islands marked as unreached stay empty.
 
 Farming
-- [x] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds. (Measured: 6 to 8 regions in every seed.)
+- [x] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds. (Measured: 5 to 8 regions in every seed.)
 - [x] The place and date of the first invention differ between seeds.
-- [x] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,960 to 4,731 km from a real homeland.)
-- [x] Farming spreads at an average of 0.3 to 3 km per year. (Measured: 0.48 to 0.96 km a year.)
-- [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured with famine: real homelands 13.1 to 27.0 million; random homelands 19.2 to 39.1 million.)
+- [x] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,250 to 4,881 km from a real homeland.)
+- [x] Farming spreads at an average of 0.3 to 3 km per year. (Measured: 0.46 to 0.76 km a year.)
+- [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured after tuning: real homelands 18.7 to 29.3 million; random homelands 24.5 to 38.2 million.)
 - [x] No farming ever appears in ice, tundra or desert cells without a major river. (Farming also ends at once where the climate turns against its crop; the farmers go back to foraging.)
 
 Soundness
 - [x] Population is never negative and never an invalid number in any cell. (Holds with foragers, farmers and famine.)
 - [x] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits. (Holds with foragers and farmers: up to 2 groups in a cell so far.)
 - [x] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
-- [x] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate, foragers and farming: 18 to 52 seconds, varying with the build machine.)
+- [x] A 5,000-year headless run on the build machine takes under 5 minutes. (With every milestone 1 system: 23 to 34 seconds, varying with the build machine.)
 
 By hand in the viewer:
 
 - [ ] The start screen sets the seed and crop homelands, and a loaded save shows the settings it was started with.
 - [ ] Each new map mode is readable and matches the tooltip.
 - [ ] You can see a region dry out or cool over centuries, its biome change, and people leave it.
-- [ ] You can watch farming start, spread and found settlements, and tell which crop is where. (Automated support: after 5,000 years with real homelands there are 3,800 to 9,300 settlements, at most one per cell, each in a land cell that points back to it. A settlement is founded at 1,000 farmers, holds 15% of its cell's people and is abandoned below 100 farmers; numbers in `data/content/settlements.json`.)
+- [ ] You can watch farming start, spread and found settlements, and tell which crop is where. (Automated support: after 5,000 years with real homelands there are 5,800 to 10,200 settlements, at most one per cell, each in a land cell that points back to it. A settlement is founded at 1,000 farmers, holds 15% of its cell's people and is abandoned below 100 farmers; numbers in `data/content/settlements.json`.)
 - [ ] A famine is visible as a drop in population that later recovers. (Automated support: with real homelands about 3% of farming cell-years see a harvest below 85% of needs, and 98% of famine-hit cells regain 90% of their people within 50 years.)
 - [ ] The frame rate stays smooth at every speed.
 
@@ -159,10 +159,12 @@ Each step ends with a new development build you can download.
 7. Farming: crops, invention, yield, spread, harvest (done)
 8. Famine (done)
 9. Settlements (done)
-10. Statistics file, tuning against the exit tests, release v0.2
+10. Statistics file, tuning against the exit tests (done), release v0.2
 
 ## Numbers that will need tuning
 
 How fast and how far climate swings, growth rates, feeding limits per biome, the chance of inventing farming, spread rates and the settlement threshold all start as estimates. Step 10 adjusts them until the exit tests pass. They live in data files, not code.
 
-Step 10 also adds a gentle farm yield penalty on grassland, agreed by the owner on 2026-11-15, so that early farming keeps mostly to forest edges and river valleys rather than the open steppe. The fuller treatment (the plough, herders) is in the design doc's backlog.
+Step 10 also adds a gentle farm yield penalty on grassland, agreed by the owner on 2026-11-15, so that early farming keeps mostly to forest edges and river valleys rather than the open steppe. The fuller treatment (the plough, herders) is in the design doc's backlog. Done: away from rivers, crops grow only 0.5 as well on grassland (`biomeFactors` in `farming.json`). A factor of 0.7 still let farmers take 53% to 65% of the open Pontic steppe by 5000 BCE when farming reached it; at 0.5 that falls to 20% to 49%, and worldwide 4% to 12% of open grassland is farmed against 15% to 37% of temperate forest. The settlement threshold stays at 1,000 farmers for now; the owner will decide after watching runs.
+
+Statistics: the headless runner writes a yearly CSV (`--stats FILE.csv`) and a list of farming origins. The "Statistics" job commits six runs (seeds 1 to 3, real and random homelands, 6,000 years) to `docs/stats/`.

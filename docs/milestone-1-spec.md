@@ -78,7 +78,7 @@ The import job adds these per cell, and the world file format moves to version 2
 
 - When a bad harvest or a drying climate leaves a group with less food than it needs, its food condition falls, and its people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
 
-### 9. Settlements (done)
+### 9. Settlements
 
 - A settlement is founded when a cell's farmer population passes a threshold. It gets a generated name, a founding date and a population that is part of the cell's total.
 - Settlements grow, shrink, and are abandoned if their cell empties.
@@ -158,7 +158,7 @@ Each step ends with a new development build you can download.
 6b. Population groups: move foragers onto groups, with merging and the per-cell limit (done)
 7. Farming: crops, invention, yield, spread, harvest (done)
 8. Famine (done)
-9. Settlements
+9. Settlements (done)
 10. Statistics file, tuning against the exit tests, release v0.2
 
 ## Numbers that will need tuning

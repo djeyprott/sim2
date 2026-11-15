@@ -47,4 +47,6 @@ Options: `--world` (map file), `--seed` (whole number, default 1), `--years` (de
 
 ## Data
 
-Elevation comes from the NOAA NCEI ETOPO 2022 Global Relief Model, 60 arc-second ice surface version (doi:10.25921/fd45-gt74).
+- Elevation: NOAA NCEI ETOPO 2022 Global Relief Model, 60 arc-second ice surface version (doi:10.25921/fd45-gt74).
+- Climate: TerraClimate 1981-2010 monthly averages (Abatzoglou et al. 2018, Scientific Data 5:170191), public domain.
+- Lakes and rivers: Natural Earth 10m physical vectors, public domain.

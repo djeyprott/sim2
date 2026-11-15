@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.4.
 
-Progress: step 1 (move to .NET 10) done 2026-11-14, awaiting a launch check of the Windows build by the owner. Step 2 is next.
+Progress: steps 1 and 2 done 2026-11-14. Step 3 is next.
 
 Change log:
 - 1.0 (2026-11-14): agreed and frozen.
@@ -31,9 +31,9 @@ Put a living world on the map. When this milestone is done, you start a run in 1
 
 The import job adds these per cell, and the world file format moves to version 2.
 
-- **Baseline temperature and rainfall** for each month, from a public present-day climate dataset. Source to be chosen from datasets whose licence allows redistribution; licence checked before import.
-- **Lakes**: cells that are mostly lake become water. This fixes the Caspian Sea and the Great Lakes. Source: Natural Earth.
-- **Rivers**: each land cell records the size of the largest river crossing it (none, minor, major). Source: Natural Earth.
+- **Baseline temperature and rainfall** for each month, from the TerraClimate 1981-2010 averages, which are in the public domain.
+- **Lakes**: cells that are mostly lake become water. This fixes the Caspian Sea and the Great Lakes. Source: Natural Earth, which is in the public domain. Reservoirs are left out. The Caspian Sea is not in that lake data and is added by a hand-written entry.
+- **Rivers**: each land cell records the size of the largest river crossing it (none, minor, major). Source: Natural Earth. Its smallest rivers are left out because they only cover North America and Europe.
 
 ### 3. Saved state that is not per cell
 
@@ -106,7 +106,7 @@ The import job adds these per cell, and the world file format moves to version 2
 Automated, on the Earth map with real crop homelands, across 10 different seeds unless stated:
 
 Map and climate
-- [ ] The Caspian Sea and Lake Superior are water.
+- [x] The Caspian Sea and Lake Superior are water.
 - [ ] At the start of a run the Sahara is desert, the Amazon is rainforest and Greenland's interior is ice.
 - [ ] Over 5,000 years the worldwide temperature shift stays within 2.5 degrees C and no cell's rainfall leaves the range of 0.4 to 1.6 times its baseline.
 - [ ] Climate differs between seeds and is identical for the same seed.
@@ -144,7 +144,7 @@ By hand in the viewer:
 Each step ends with a new development build you can download.
 
 1. Move to .NET 10 (done)
-2. Baseline climate, lakes and rivers in the world file, with their map modes
+2. Baseline climate, lakes and rivers in the world file, with their map modes (done)
 3. Saved state that is not per cell
 4. Changing climate, biomes and ice, with their map modes
 5. New-run settings and start screen

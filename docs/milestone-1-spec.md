@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.4.
 
-Progress: steps 1 and 2 done 2026-11-14. Step 3 is next.
+Progress: steps 1 to 4 done 2026-11-14. Step 5 is next.
 
 Change log:
 - 1.0 (2026-11-14): agreed and frozen.
@@ -45,7 +45,7 @@ The import job adds these per cell, and the world file format moves to version 2
 - The world is covered by about 160 climate regions, each roughly 1,800 km across. Each region carries a temperature shift and a rainfall factor that wander slowly and at random, on both a decades scale and a centuries scale. A worldwide warm or cool trend is added on top.
 - A cell's current climate is its baseline adjusted by a blend of the nearest regions, so changes are smooth across the map with no visible region borders.
 - Updated once a year. Limits keep it believable: the worldwide temperature shift stays within about 2 degrees C either way, and a cell's rainfall stays between about half and one and a half times its baseline.
-- **Biome** is worked out from each cell's current climate, so biomes move: deserts advance and retreat, forest gives way to grassland. One of about ten types (for example tundra, forest, grassland, desert, rainforest). The biome list and its rules live in a data file. Recalculated every ten years.
+- **Biome** is worked out from each cell's current climate (ten biomes, rules in `data/content/biomes.json` following the Koppen dryness threshold), so biomes move: deserts advance and retreat, forest gives way to grassland. One of about ten types (for example tundra, forest, grassland, desert, rainforest). The biome list and its rules live in a data file. Recalculated every ten years.
 - **Ice**: cells whose current climate is too cold for any thaw are ice. Coastlines and sea level do not change.
 
 ### 5. New-run settings
@@ -107,10 +107,10 @@ Automated, on the Earth map with real crop homelands, across 10 different seeds 
 
 Map and climate
 - [x] The Caspian Sea and Lake Superior are water.
-- [ ] At the start of a run the Sahara is desert, the Amazon is rainforest and Greenland's interior is ice.
-- [ ] Over 5,000 years the worldwide temperature shift stays within 2.5 degrees C and no cell's rainfall leaves the range of 0.4 to 1.6 times its baseline.
-- [ ] Climate differs between seeds and is identical for the same seed.
-- [ ] Between 2% and 25% of land cells change biome at least once in 5,000 years.
+- [x] At the start of a run the Sahara is desert, the Amazon is rainforest and Greenland's interior is ice.
+- [x] Over 5,000 years the worldwide temperature shift stays within 2.5 degrees C and no cell's rainfall leaves the range of 0.4 to 1.6 times its baseline. (Measured: largest world shift 0.6 to 1.5 degrees C; rainfall 0.73 to 1.38 times baseline.)
+- [x] Climate differs between seeds and is identical for the same seed.
+- [x] Between 2% and 25% of land cells change biome at least once in 5,000 years. (Measured: 19% to 23%. At any one time about 3% to 4% of land is in a different biome from the start.)
 
 Foragers
 - [ ] Starting world population is between 2 and 6 million.
@@ -145,8 +145,8 @@ Each step ends with a new development build you can download.
 
 1. Move to .NET 10 (done)
 2. Baseline climate, lakes and rivers in the world file, with their map modes (done)
-3. Saved state that is not per cell
-4. Changing climate, biomes and ice, with their map modes
+3. Saved state that is not per cell (done)
+4. Changing climate, biomes and ice, with their map modes (done)
 5. New-run settings and start screen
 6. Foragers and the population map mode
 7. Farming: crops, invention, yield, spread, harvest

@@ -48,6 +48,16 @@ public sealed class ClimateSystem : ISimSystem
     private double[] _regionTotalTemperature = Array.Empty<double>();
     private double[] _regionTotalRainfall = Array.Empty<double>();
 
+    // Baseline climate of each tracked land cell, by position in _cells. A temperature shift moves
+    // every month by the same amount and a rainfall factor scales every month, so a cell's current
+    // summary follows directly from these without going back to the monthly values.
+    private double[] _baseMean = Array.Empty<double>();
+    private double[] _baseWarmest = Array.Empty<double>();
+    private double[] _baseColdest = Array.Empty<double>();
+    private double[] _baseRain = Array.Empty<double>();
+    private double[] _baseDriest = Array.Empty<double>();
+    private double[] _summerShare = Array.Empty<double>();
+
     public ClimateSystem(ClimateParameters parameters, BiomeSet biomes)
     {
         _parameters = parameters;
@@ -135,6 +145,32 @@ public sealed class ClimateSystem : ISimSystem
             {
                 _blendWeight[i * MaxBlend + k] /= total;
             }
+        }
+
+        _baseMean = new double[_cells.Length];
+        _baseWarmest = new double[_cells.Length];
+        _baseColdest = new double[_cells.Length];
+        _baseRain = new double[_cells.Length];
+        _baseDriest = new double[_cells.Length];
+        _summerShare = new double[_cells.Length];
+        Span<double> temperature = stackalloc double[12];
+        Span<double> rainfall = stackalloc double[12];
+        for (int i = 0; i < _cells.Length; i++)
+        {
+            int cell = _cells[i];
+            for (int month = 0; month < 12; month++)
+            {
+                temperature[month] = map.TemperatureC(cell, month);
+                rainfall[month] = map.RainfallMm(cell, month);
+            }
+
+            ClimateSummary baseline = ClimateSummary.FromMonths(temperature, rainfall, map.Grid.Latitude(cell) >= 0.0);
+            _baseMean[i] = baseline.Mean;
+            _baseWarmest[i] = baseline.Warmest;
+            _baseColdest[i] = baseline.Coldest;
+            _baseRain[i] = baseline.Rain;
+            _baseDriest[i] = baseline.Driest;
+            _summerShare[i] = baseline.SummerShare;
         }
 
         Array.Fill(_biome, NoBiome);
@@ -245,9 +281,19 @@ public sealed class ClimateSystem : ISimSystem
 
     private void RecalculateBiomes()
     {
-        foreach (int cell in _cells)
+        for (int i = 0; i < _cells.Length; i++)
         {
-            _biome[cell] = Biomes.Classify(CurrentClimate(cell));
+            int cell = _cells[i];
+            double shift = _temperatureShift[cell];
+            double factor = _rainfallFactor[cell];
+            var climate = new ClimateSummary(
+                _baseMean[i] + shift,
+                _baseWarmest[i] + shift,
+                _baseColdest[i] + shift,
+                _baseRain[i] * factor,
+                _baseDriest[i] * factor,
+                _summerShare[i]);
+            _biome[cell] = Biomes.Classify(climate);
         }
     }
 

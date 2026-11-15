@@ -1,4 +1,7 @@
-// How climate changes during a run. Every value here is a first estimate, tuned in milestone 1 step 10.
+// How climate changes during a run. Values tuned 2026-11-14 so that over 5,000 years about 20% of
+// land changes biome at some point and about 3-4% differs from the start at any one time; the
+// world stays within about 1 degree C of today and regional rainfall within about 75-130%.
+// May be tuned again in milestone 1 step 10.
 //
 // The world is divided into regions, one per cell of a coarse grid of the same kind as the map
 // (frequency 4 gives 162 regions about 1,800 km across). Each region carries a temperature
@@ -12,16 +15,16 @@
   "regionGridFrequency": 4,
   "blendRadiusKm": 1000,
   "regionTemperature": [
-    { "years": 20, "spread": 0.4 },
-    { "years": 300, "spread": 0.6 }
+    { "years": 20, "spread": 0.12 },
+    { "years": 300, "spread": 0.3 }
   ],
   "regionRainfall": [
-    { "years": 15, "spread": 0.10 },
-    { "years": 250, "spread": 0.15 }
+    { "years": 15, "spread": 0.03 },
+    { "years": 250, "spread": 0.07 }
   ],
   "worldTemperature": [
-    { "years": 1500, "spread": 0.8 },
-    { "years": 150, "spread": 0.25 }
+    { "years": 1500, "spread": 0.4 },
+    { "years": 150, "spread": 0.1 }
   ],
   "worldTemperatureLimit": 2.0,
   "rainfallFactorMin": 0.5,

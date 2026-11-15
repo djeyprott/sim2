@@ -27,7 +27,6 @@ public sealed class ResourceSystem : ISimSystem
     private readonly OccupationSet _occupations;
     private Prices? _prices;
     private double[] _wanted = Array.Empty<double>();
-    private double[] _price = Array.Empty<double>();
     private int[] _good = Array.Empty<int>();
     private double[][] _fixedRichness = Array.Empty<double[]>();
     private double[][] _biomeRichness = Array.Empty<double[]>();
@@ -76,7 +75,6 @@ public sealed class ResourceSystem : ISimSystem
         GoodSet goods = _stockpiles.Goods;
         _prices = new Prices(state, map, PriceParameters.LoadDefault(), CraftRules.LoadDefault(goods), _occupations);
         _wanted = new double[goods.Count];
-        _price = new double[goods.Count];
         int count = _rules.Goods.Count;
         _good = _rules.Goods.Select(r => _stockpiles.Goods.IndexOf(r.Good)).ToArray();
         _fixedRichness = new double[count][];
@@ -242,7 +240,7 @@ public sealed class ResourceSystem : ISimSystem
                 continue;
             }
 
-            _prices!.Work(cell, context.Tick, _wanted, _price);
+            _prices!.Work(cell, context.Tick, _wanted);
             double timeValue = _prices.Parameters.GatherTimeValue;
             for (int r = 0; r < _good.Length; r++)
             {
@@ -251,7 +249,7 @@ public sealed class ResourceSystem : ISimSystem
                 double wanted = _wanted[good] - stockpiles.Stock(cell, good);
                 double richness = Richness(r, cell);
                 double perGatherer = rule.PerPerson * richness;
-                if (wanted <= 0.0 || perGatherer <= 0.0 || perGatherer * _price[good] < timeValue)
+                if (wanted <= 0.0 || perGatherer <= 0.0 || perGatherer * _prices.Price(good) < timeValue)
                 {
                     continue;
                 }

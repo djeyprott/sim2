@@ -52,6 +52,9 @@ public sealed class Prices
     private readonly int _craftsman;
     private readonly int _grain;
     private readonly double[] _wanted;
+    private readonly double[] _cached;
+    private int _cell = -1;
+    private double[]? _cellWanted;
 
     // For each material, the recipes that use it: (output, units of material per unit of output, share of that output's recipes).
     private readonly List<(int Output, double Amount, double Share)>[] _usedBy;
@@ -67,6 +70,7 @@ public sealed class Prices
         _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
         _grain = craft.Goods.IndexOf(GoodSet.Grain);
         _wanted = new double[craft.Goods.Count];
+        _cached = new double[craft.Goods.Count];
         _usedBy = new List<(int, double, double)>[craft.Goods.Count];
         for (int g = 0; g < _usedBy.Length; g++)
         {
@@ -150,6 +154,28 @@ public sealed class Prices
                 prices[g] = PriceOf(_craft.Goods.Get(g).Value, wanted[g], _stockpiles.Stock(cell, g), _parameters);
             }
         }
+
+        // Prices asked for through Price(good) are worked out lazily from these wanted amounts.
+        _cell = cell;
+        _cellWanted = wanted;
+        Array.Fill(_cached, double.NaN);
+    }
+
+    /// <summary>
+    /// A good's price in the settlement last passed to <see cref="Work"/>, from its stock now.
+    /// Worked out on first use and kept until the next call to Work, so call Work again after the
+    /// settlement's stock changes.
+    /// </summary>
+    public double Price(int good)
+    {
+        double price = _cached[good];
+        if (double.IsNaN(price))
+        {
+            price = PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good), _parameters);
+            _cached[good] = price;
+        }
+
+        return price;
     }
 
     /// <summary>One good's price in a cell's settlement at the given tick.</summary>

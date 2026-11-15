@@ -22,7 +22,7 @@ public sealed class CraftSystem : ISimSystem
     private readonly OccupationSet _occupations;
     private Prices? _prices;
     private readonly double[] _wanted;
-    private readonly double[] _price;
+    private readonly int _grain;
     private readonly Recipe?[] _best;
     private readonly int _farmer;
     private readonly int _craftsman;
@@ -39,7 +39,7 @@ public sealed class CraftSystem : ISimSystem
         _rules = rules;
         _occupations = occupations;
         _wanted = new double[rules.Goods.Count];
-        _price = new double[rules.Goods.Count];
+        _grain = rules.Goods.IndexOf(GoodSet.Grain);
         _best = new Recipe?[rules.Goods.Count];
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.IndexOf(OccupationSet.Craftsman);
@@ -127,12 +127,18 @@ public sealed class CraftSystem : ISimSystem
         // What the people are short of, and the craftsmen it would take to make it, counting only
         // work that pays: a year of a craftsman's output, less its inputs at local prices, must be
         // worth more than the grain he eats.
-        _prices!.Work(cell, tick, _wanted, _price);
-        double grainPrice = _price[_rules.Goods.IndexOf(GoodSet.Grain)];
+        _prices!.Work(cell, tick, _wanted);
+        double grainPrice = _prices.Price(_grain);
         double workersWanted = 0.0;
         foreach (int output in _rules.Outputs)
         {
             _shortfall[output] = Math.Max(0.0, _wanted[output] - stockpiles.Stock(cell, output));
+            if (_shortfall[output] <= 0.0)
+            {
+                _workers[output] = 0.0;
+                continue;
+            }
+
             _best[output] = BestRecipe(output, out double workerValue);
             _workers[output] = workerValue > grainPrice ? _shortfall[output] / _best[output]!.PerWorker : 0.0;
             workersWanted += _workers[output];
@@ -255,10 +261,10 @@ public sealed class CraftSystem : ISimSystem
                 continue;
             }
 
-            double margin = _price[output];
+            double margin = _prices!.Price(output);
             foreach ((int good, double amount) in recipe.Inputs)
             {
-                margin -= _price[good] * amount;
+                margin -= _prices.Price(good) * amount;
             }
 
             double value = margin * recipe.PerWorker;

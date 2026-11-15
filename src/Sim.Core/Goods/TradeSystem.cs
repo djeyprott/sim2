@@ -74,6 +74,10 @@ public sealed class TradeSystem : ISimSystem
     private double[] _stepCost = Array.Empty<double>();
 
     private bool _built;
+    private (double Cost, int Id)[]?[] _chosen = Array.Empty<(double, int)[]?>();
+
+    // Paths are costed by the cells entered, so the cost back can differ by up to this much.
+    private double _maxStepDifference;
     private bool[] _aliveWhenBuilt = Array.Empty<bool>();
     private int[] _linkA = Array.Empty<int>();
     private int[] _linkB = Array.Empty<int>();
@@ -142,6 +146,8 @@ public sealed class TradeSystem : ISimSystem
             };
         }
 
+        double cheapest = _parameters.TerrainCost.Values.Min() * Math.Min(1.0, _parameters.RiverFactor);
+        _maxStepDifference = _parameters.TerrainCost.Values.Max() - cheapest;
         _best = new double[cells];
         _seen = new int[cells];
     }
@@ -161,17 +167,21 @@ public sealed class TradeSystem : ISimSystem
         }
 
         int month = (int)(context.Tick % GameDate.MonthsPerYear);
+        long start = System.Diagnostics.Stopwatch.GetTimestamp();
         if (!_built || (month == 0 && SettlementsChanged()))
         {
             BuildLinks();
         }
 
+        BuildSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         if (_linkA.Length == 0)
         {
             return;
         }
 
+        start = System.Diagnostics.Stopwatch.GetTimestamp();
         WorkPrices(context.Tick);
+        PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         if (month == 0 || month == 3)
         {
             AddGaps(month == 0 ? _gapJanuary : _gapFebruary);
@@ -277,15 +287,72 @@ public sealed class TradeSystem : ISimSystem
     }
 
     // Each settlement chooses its cheapest-to-reach settlements; a link counts if either end chose it.
-    // Links are kept in (lower id, higher id) order so the result is the same however it was reached.
+    // A settlement's choice depends only on which settlements stand within its reach, so only the
+    // settlements near one that was founded or abandoned choose again. Links are kept in
+    // (lower id, higher id) order, so the result is the same as building everything afresh.
     private void BuildLinks()
     {
         EntityTable settlements = _settlements!;
-        var pairs = new SortedSet<(int A, int B)>();
-        var costs = new Dictionary<(int, int), double>();
+        int ids = settlements.IdCount;
+        if (_chosen.Length < ids)
+        {
+            Array.Resize(ref _chosen, ids);
+        }
+
+        var choose = new SortedSet<int>();
         var reached = new List<(double Cost, int Id)>();
-        _aliveWhenBuilt = new bool[settlements.IdCount];
-        for (int id = 0; id < settlements.IdCount; id++)
+        bool all = !_built;
+        for (int id = 0; id < ids; id++)
+        {
+            bool alive = settlements.IsAlive(id);
+            bool wasAlive = id < _aliveWhenBuilt.Length && _aliveWhenBuilt[id];
+            if (!alive)
+            {
+                _chosen[id] = null;
+            }
+
+            if (all)
+            {
+                if (alive)
+                {
+                    choose.Add(id);
+                }
+
+                continue;
+            }
+
+            if (alive == wasAlive)
+            {
+                continue;
+            }
+
+            // Founded or abandoned: it chooses (if alive), and so does every settlement that might reach it.
+            if (alive)
+            {
+                choose.Add(id);
+            }
+
+            Reach(_settlementCell![id], reached, _parameters.MaxLinkCost + _maxStepDifference);
+            foreach ((_, int other) in reached)
+            {
+                if (settlements.IsAlive(other))
+                {
+                    choose.Add(other);
+                }
+            }
+        }
+
+        foreach (int id in choose)
+        {
+            Reach(_settlementCell![id], reached, _parameters.MaxLinkCost);
+            reached.Sort();
+            int count = Math.Min(_parameters.LinksPerSettlement, reached.Count);
+            _chosen[id] = reached.GetRange(0, count).ToArray();
+        }
+
+        _aliveWhenBuilt = new bool[ids];
+        var pairs = new SortedDictionary<(int A, int B), double>();
+        for (int id = 0; id < ids; id++)
         {
             if (!settlements.IsAlive(id))
             {
@@ -293,15 +360,10 @@ public sealed class TradeSystem : ISimSystem
             }
 
             _aliveWhenBuilt[id] = true;
-            Reach(_settlementCell![id], reached);
-            reached.Sort();
-            int count = Math.Min(_parameters.LinksPerSettlement, reached.Count);
-            for (int i = 0; i < count; i++)
+            foreach ((double cost, int other) in _chosen[id] ?? Array.Empty<(double, int)>())
             {
-                (double cost, int other) = reached[i];
                 var key = id < other ? (id, other) : (other, id);
-                pairs.Add(key);
-                costs[key] = costs.TryGetValue(key, out double known) ? Math.Min(known, cost) : cost;
+                pairs[key] = pairs.TryGetValue(key, out double known) ? Math.Min(known, cost) : cost;
             }
         }
 
@@ -315,13 +377,14 @@ public sealed class TradeSystem : ISimSystem
         _linkB = new int[pairs.Count];
         _linkCost = new double[pairs.Count];
         _linkValue = new double[pairs.Count];
-        _degree = new int[settlements.IdCount];
+        _degree = new int[ids];
         int n = 0;
-        foreach ((int a, int b) in pairs)
+        foreach (KeyValuePair<(int A, int B), double> pair in pairs)
         {
+            (int a, int b) = pair.Key;
             _linkA[n] = a;
             _linkB[n] = b;
-            _linkCost[n] = costs[(a, b)];
+            _linkCost[n] = pair.Value;
             _linkValue[n] = oldValue.GetValueOrDefault((a, b));
             _degree[a]++;
             _degree[b]++;
@@ -331,8 +394,8 @@ public sealed class TradeSystem : ISimSystem
         _built = true;
     }
 
-    // The settlements reachable from a cell over land within the link cost limit, with their costs.
-    private void Reach(int start, List<(double Cost, int Id)> reached)
+    // The settlements reachable from a cell over land within a cost limit, with their costs.
+    private void Reach(int start, List<(double Cost, int Id)> reached, double maxCost)
     {
         reached.Clear();
         WorldMap map = _map!;
@@ -368,7 +431,7 @@ public sealed class TradeSystem : ISimSystem
                 }
 
                 double total = cost + step;
-                if (total > _parameters.MaxLinkCost || (_seen[next] == _stamp && total >= _best[next]))
+                if (total > maxCost || (_seen[next] == _stamp && total >= _best[next]))
                 {
                     continue;
                 }
@@ -396,6 +459,11 @@ public sealed class TradeSystem : ISimSystem
     }
 
     public int LinkCount => _linkA.Length;
+
+    /// <summary>Wall-clock seconds spent building links and working out prices (for profiling only).</summary>
+    public double BuildSeconds { get; private set; }
+
+    public double PriceSeconds { get; private set; }
 
     /// <summary>For each good, the run's summed average relative price gap along links before January's trade.</summary>
     public IReadOnlyList<double> GapBeforeTrade => _gapJanuary;

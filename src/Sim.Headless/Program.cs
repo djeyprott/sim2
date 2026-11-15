@@ -105,6 +105,10 @@ public static class Program
         for (int i = 0; i < simulation.Systems.Count; i++)
         {
             Console.WriteLine($"  {simulation.Systems[i].Name}: {simulation.SystemSeconds[i]:F1} s");
+            if (simulation.Systems[i] is Sim.Core.Goods.TradeSystem trade)
+            {
+                Console.WriteLine($"    of which links {trade.BuildSeconds:F1} s, prices {trade.PriceSeconds:F1} s");
+            }
         }
         Console.WriteLine($"Ended at {simulation.Date}");
         Console.WriteLine($"State checksum {simulation.StateChecksum()}");

@@ -52,9 +52,9 @@ public readonly record struct TradeRoute(int CellA, int CellB, double Value);
 /// <summary>
 /// Trade between settlements (milestone 2, step 5). Each settlement links to the few settlements
 /// it can reach most cheaply over land; links are rebuilt in January whenever settlements were
-/// founded or abandoned. Each month goods that arrived from last month's trade enter the stores;
-/// then, along each link, each good moves from the cheaper end to the dearer end when the price
-/// gap beats the carrying cost, arriving the next month. Links and route volumes are worked out
+/// founded or abandoned. Each season (every three months, for speed) goods sent last season enter
+/// the stores; then, along each link, each good moves from the cheaper end to the dearer end when
+/// the price gap beats the carrying cost, arriving the next season. Links and route volumes are worked out
 /// from the world state and are not saved: after a load they are rebuilt identically, and route
 /// volumes (for display only) start again from zero.
 /// </summary>
@@ -107,7 +107,7 @@ public sealed class TradeSystem : ISimSystem
 
     public string Name => SystemName;
 
-    public int IntervalMonths => 1;
+    public int IntervalMonths => 3;
 
     public TradeParameters Parameters => _parameters;
 
@@ -172,7 +172,7 @@ public sealed class TradeSystem : ISimSystem
         }
 
         WorkPrices(context.Tick);
-        if (month == 0 || month == 1)
+        if (month == 0 || month == 3)
         {
             AddGaps(month == 0 ? _gapJanuary : _gapFebruary);
         }
@@ -400,6 +400,6 @@ public sealed class TradeSystem : ISimSystem
     /// <summary>For each good, the run's summed average relative price gap along links before January's trade.</summary>
     public IReadOnlyList<double> GapBeforeTrade => _gapJanuary;
 
-    /// <summary>For each good, the same a month later, after January's goods arrived.</summary>
+    /// <summary>For each good, the same a season later (April), after January's goods arrived.</summary>
     public IReadOnlyList<double> GapAfterTrade => _gapFebruary;
 }

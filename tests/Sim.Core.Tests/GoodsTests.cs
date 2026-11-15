@@ -112,7 +112,7 @@ public class TradeRuleTests
         TradeParameters p = TradeParameters.LoadDefault();
         Assert.True(p.MaxLinkCost > 0.0 && p.LinksPerSettlement > 0);
         string text = ContentFiles.ReadText("trade.json");
-        Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"sendShare\": 0.05", "\"sendShare\": 1.5")));
+        Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"sendShare\": 0.15", "\"sendShare\": 1.5")));
         Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"hills\": 1.6, ", "")));
     }
 }

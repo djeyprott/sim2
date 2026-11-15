@@ -712,7 +712,7 @@ public partial class Main : Node2D
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
                 break;
             case TradeMode:
-                title = "Trade routes (food value carried a month)";
+                title = "Trade routes (food value carried a season)";
                 entries.Add((TradeRouteColour, "1 or more"));
                 entries.Add((TradeRouteColour, "10 or more (thicker)"));
                 entries.Add((TradeRouteColour, "100 or more (thickest)"));

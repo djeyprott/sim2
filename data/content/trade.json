@@ -3,17 +3,18 @@
 // over land, within maxLinkCost. Crossing one cell costs 1 on lowland, more on hills and
 // mountains, and riverFactor times as much where both cells are on a river (a cell is about
 // 51 km). Seas and lakes are not crossed. A link counts if either end chose it.
-// Trade: each month, along each link, a good moves from the cheaper end to the dearer end if
-// the price gap is larger than the carrying cost (the good's weight times costPerStep food for
-// each unit of link cost). The cheaper end sends sendShare of its stock of that good each
-// month, scaled down when the gap only just beats the cost. Goods arrive the next month.
-// A trade route is a link whose carried value (in food) averages at least routeValue a month.
+// Trade: each season (every three months), along each link, a good moves from the cheaper end
+// to the dearer end if the price gap is larger than the carrying cost (the good's weight times
+// costPerStep food for each unit of link cost). The cheaper end sends sendShare of its stock of
+// that good each season, shared among its links and scaled down when the gap only just beats
+// the cost. Goods arrive the next season.
+// A trade route is a link whose carried value (in food) averages at least routeValue a season.
 {
   "maxLinkCost": 4.0,
   "linksPerSettlement": 6,
   "terrainCost": { "lowland": 1.0, "hills": 1.6, "mountains": 3.0 },
   "riverFactor": 0.5,
   "costPerStep": 0.02,
-  "sendShare": 0.05,
+  "sendShare": 0.15,
   "routeValue": 1.0
 }

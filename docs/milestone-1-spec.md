@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
 
-Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) done 2026-11-15, all exit tests passing.
+Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) and step 8 (famine) done 2026-11-15, all exit tests passing.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -74,7 +74,7 @@ The import job adds these per cell, and the world file format moves to version 2
 - **Harvest**: computed once a year at the harvest season of the cell's hemisphere, with random good and bad years on top of the slower climate swings.
 - Farmers are a separate group from foragers in the same cell. Foragers taking up farming move from the forager group to the farmer group, so farming displaces foraging gradually. Farmland feeds many times more people than foraging.
 
-### 8. Famine
+### 8. Famine (done)
 
 - When a bad harvest or a drying climate leaves a group with less food than it needs, its food condition falls, and its people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
 
@@ -127,11 +127,11 @@ Farming
 - [x] The place and date of the first invention differ between seeds.
 - [x] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,960 to 4,731 km from a real homeland.)
 - [x] Farming spreads at an average of 0.3 to 3 km per year. (Measured: 0.48 to 0.96 km a year.)
-- [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured with real homelands: 18.6 to 30.4 million. Random homelands give 22.9 to 43.7 million; to be retuned with famine in step 8 or 10.)
+- [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured with famine: real homelands 13.1 to 27.0 million; random homelands 19.2 to 39.1 million.)
 - [x] No farming ever appears in ice, tundra or desert cells without a major river. (Farming also ends at once where the climate turns against its crop; the farmers go back to foraging.)
 
 Soundness
-- [x] Population is never negative and never an invalid number in any cell. (Holds so far with foragers and farmers; to be rechecked with famine.)
+- [x] Population is never negative and never an invalid number in any cell. (Holds with foragers, farmers and famine.)
 - [x] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits. (Holds with foragers and farmers: up to 2 groups in a cell so far.)
 - [x] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
 - [x] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate, foragers and farming: 18 to 52 seconds, varying with the build machine.)
@@ -142,7 +142,7 @@ By hand in the viewer:
 - [ ] Each new map mode is readable and matches the tooltip.
 - [ ] You can see a region dry out or cool over centuries, its biome change, and people leave it.
 - [ ] You can watch farming start, spread and found settlements, and tell which crop is where.
-- [ ] A famine is visible as a drop in population that later recovers.
+- [ ] A famine is visible as a drop in population that later recovers. (Automated support: with real homelands about 3% of farming cell-years see a harvest below 85% of needs, and 98% of famine-hit cells regain 90% of their people within 50 years.)
 - [ ] The frame rate stays smooth at every speed.
 
 ## Build order

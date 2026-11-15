@@ -10,6 +10,7 @@ using Sim.Core.Engine;
 using Sim.Core.Geo;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
+using Sim.Core.People;
 
 namespace Viewer;
 
@@ -31,6 +32,7 @@ public partial class Main : Node2D
     private const int RainfallMode = 4;
     private const int TemperatureChangeMode = 5;
     private const int RainfallChangeMode = 6;
+    private const int PopulationMode = 7;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -56,6 +58,8 @@ public partial class Main : Node2D
     // The climate system belongs to the simulation thread. The viewer only uses its biome list
     // directly; anything else is read through the host.
     private ClimateSystem? _climate;
+    private ForagerSystem? _foragers;
+    private double[] _areaKm2 = Array.Empty<double>();
     private Color[] _biomeColours = Array.Empty<Color>();
     private double[] _baselineMean = Array.Empty<double>();
     private double[] _baselineRain = Array.Empty<double>();
@@ -126,6 +130,12 @@ public partial class Main : Node2D
         string? worldFolder = Path.GetDirectoryName(worldPath);
         _mapView.Build(_map, worldFolder == null ? null : Path.Combine(worldFolder, "earth-rivers.bin"));
 
+        _areaKm2 = new double[_map.CellCount];
+        for (int cell = 0; cell < _map.CellCount; cell++)
+        {
+            _areaKm2[cell] = _map.Grid.AreaKm2(cell);
+        }
+
         _baselineMean = new double[_map.CellCount];
         _baselineRain = new double[_map.CellCount];
         for (int cell = 0; cell < _map.CellCount; cell++)
@@ -188,16 +198,19 @@ public partial class Main : Node2D
 
         _host?.Dispose();
         _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
+        _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
         _biomeColours = _climate == null
             ? Array.Empty<Color>()
             : _climate.Biomes.Biomes.Select(b => Color.FromHtml(b.Colour)).ToArray();
 
         _host = new SimulationHost(simulation);
         ClimateSystem? climate = _climate;
-        if (climate != null)
+        ForagerSystem? foragers = _foragers;
+        _host.SetSummaryExtractor(_ => new[]
         {
-            _host.SetSummaryExtractor(_ => new[] { climate.WorldTemperatureShift() });
-        }
+            climate?.WorldTemperatureShift() ?? double.NaN,
+            foragers?.WorldPopulation() ?? double.NaN,
+        });
 
         _hover = new LiveCell();
         _selected = new LiveCell();
@@ -233,9 +246,21 @@ public partial class Main : Node2D
 
         SimFrame frame = _host.LatestFrame;
         _hud.SetDate(frame.Date.ToString());
-        _hud.SetWorldInfo(frame.Summary is { Length: > 0 } summary
-            ? "World " + summary[0].ToString("+0.00;-0.00;0.00", CultureInfo.InvariantCulture) + " °C"
-            : "");
+        string worldInfo = "";
+        if (frame.Summary is { Length: >= 2 } summary)
+        {
+            if (!double.IsNaN(summary[0]))
+            {
+                worldInfo = "World " + summary[0].ToString("+0.00;-0.00;0.00", CultureInfo.InvariantCulture) + " °C";
+            }
+
+            if (!double.IsNaN(summary[1]))
+            {
+                worldInfo += "   " + (summary[1] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M people";
+            }
+        }
+
+        _hud.SetWorldInfo(worldInfo);
 
         if (_host.Fault != null && _speedIndex != 0)
         {
@@ -417,6 +442,22 @@ public partial class Main : Node2D
             };
         }
 
+        if (mode == PopulationMode && _foragers != null)
+        {
+            double[] area = _areaKm2;
+            extractor = sim =>
+            {
+                double[] people = sim.State.DoubleField(ForagerSystem.PopulationField);
+                var perHundredKm2 = new double[people.Length];
+                for (int cell = 0; cell < people.Length; cell++)
+                {
+                    perHundredKm2[cell] = people[cell] / area[cell] * 100.0;
+                }
+
+                return perHundredKm2;
+            };
+        }
+
         _host?.SetValueExtractor(extractor, mode);
 
         WorldMap map = _map;
@@ -491,6 +532,11 @@ public partial class Main : Node2D
             case RainfallChangeMode:
                 _mapView.SetColours(cell => map.IsLand(cell) ? Gradient(values[cell], RainfallChangeStops) : Neutral(cell));
                 break;
+            case PopulationMode:
+                _mapView.SetColours(cell => !map.IsLand(cell) ? Neutral(cell)
+                    : values[cell] <= 0.0 ? EmptyLand
+                    : Gradient(Math.Log10(values[cell]), PopulationStops));
+                break;
         }
     }
 
@@ -530,6 +576,11 @@ public partial class Main : Node2D
             case TemperatureChangeMode:
                 title = "Temperature vs present day";
                 entries.AddRange(TemperatureChangeStops.Select(s => (s.Colour, s.At.ToString("+0.0;-0.0;0", CultureInfo.InvariantCulture) + " °C")));
+                break;
+            case PopulationMode:
+                title = "People per 100 km²";
+                entries.Add((EmptyLand, "None"));
+                entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
                 break;
             case RainfallChangeMode:
                 title = "Rainfall vs present day";
@@ -605,6 +656,19 @@ public partial class Main : Node2D
         (1.0, Color.Color8(225, 225, 225)),
         (1.25, Color.Color8(120, 190, 170)),
         (1.5, Color.Color8(30, 110, 140)),
+    };
+
+    private static readonly Color EmptyLand = Color.Color8(70, 70, 74);
+
+    // Stops are powers of ten of people per 100 km².
+    private static readonly (double At, Color Colour)[] PopulationStops =
+    {
+        (-1.0, Color.Color8(60, 40, 90)),
+        (0.0, Color.Color8(110, 60, 140)),
+        (0.5, Color.Color8(180, 80, 120)),
+        (1.0, Color.Color8(235, 130, 70)),
+        (1.5, Color.Color8(250, 210, 90)),
+        (2.0, Color.Color8(255, 250, 200)),
     };
 
     private static Color TemperatureColour(double meanC) => Gradient(meanC, TemperatureStops);
@@ -812,10 +876,14 @@ public partial class Main : Node2D
         {
             int target = live.Cell;
             live.PendingCell = target;
+            ForagerSystem? foragers = _foragers;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
-                sim.State.IntField(ClimateSystem.BiomeField)[target]));
+                sim.State.IntField(ClimateSystem.BiomeField)[target],
+                foragers != null ? sim.State.DoubleField(ForagerSystem.PopulationField)[target] : double.NaN,
+                foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
+                foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;
         }
     }
@@ -865,6 +933,14 @@ public partial class Main : Node2D
         {
             text += $"\nVs present day: {shift.ToString("+0.0;-0.0;0.0", CultureInfo.InvariantCulture)} °C, "
                 + $"{(factor * 100.0).ToString("0", CultureInfo.InvariantCulture)}% rain";
+        }
+
+        if (live && now is { } people && !double.IsNaN(people.Foragers))
+        {
+            text += !people.Reachable
+                ? "\nNo people: not reached yet"
+                : $"\nForagers: {people.Foragers.ToString("N0", CultureInfo.InvariantCulture)} "
+                    + $"(land can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)})";
         }
 
         return text;
@@ -947,10 +1023,10 @@ public partial class Main : Node2D
                 break;
             case 85:
                 SaveScreenshot("-rainfall-change");
-                SetMapMode(TemperatureMode);
+                SetMapMode(PopulationMode);
                 break;
             case 100:
-                SaveScreenshot("-temperature");
+                SaveScreenshot("-population");
                 SetMapMode(BiomeMode);
 
                 // Zoom in on northeast Africa and the Middle East, with the pointer in the middle for the tooltip.
@@ -982,7 +1058,13 @@ public partial class Main : Node2D
         return result == Error.Ok;
     }
 
-    private readonly record struct CellNow(double TemperatureShift, double RainfallFactor, int Biome);
+    private readonly record struct CellNow(
+        double TemperatureShift,
+        double RainfallFactor,
+        int Biome,
+        double Foragers,
+        double Capacity,
+        bool Reachable);
 
     private sealed class LiveCell
     {

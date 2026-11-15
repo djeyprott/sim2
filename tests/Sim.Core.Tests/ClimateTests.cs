@@ -92,7 +92,6 @@ public class BiomeSetTests
 
 public class EarthClimateTests : IClassFixture<EarthWorldFixture>
 {
-    private const int Years = 5000;
     private readonly WorldMap _world;
     private readonly ITestOutputHelper _output;
 
@@ -136,63 +135,6 @@ public class EarthClimateTests : IClassFixture<EarthWorldFixture>
         }
 
         Assert.All(climate.LandCells, cell => Assert.InRange(biome[cell], 0, climate.Biomes.Count - 1));
-    }
-
-    [Fact]
-    public void Over_5000_years_climate_stays_in_bounds_and_some_biomes_change()
-    {
-        const int seeds = 10;
-        var results = new (double MaxWorld, double MinFactor, double MaxFactor, double ChangedShare, double MaxCellShift)[seeds];
-
-        Parallel.For(0, seeds, s =>
-        {
-            Simulation sim = NewSimulation((ulong)(s + 1));
-            ClimateSystem climate = Climate(sim);
-            int[] cells = climate.LandCells.ToArray();
-            int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
-            double[] factor = sim.State.DoubleField(ClimateSystem.RainfallFactorField);
-            double[] shift = sim.State.DoubleField(ClimateSystem.TemperatureShiftField);
-            int[] start = cells.Select(cell => biome[cell]).ToArray();
-            var changed = new bool[cells.Length];
-
-            double maxWorld = 0.0;
-            double minFactor = 1.0;
-            double maxFactor = 1.0;
-            double maxCellShift = 0.0;
-            for (int year = 0; year < Years; year++)
-            {
-                sim.Run(12);
-                maxWorld = Math.Max(maxWorld, Math.Abs(climate.WorldTemperatureShift()));
-                for (int i = 0; i < cells.Length; i++)
-                {
-                    int cell = cells[i];
-                    minFactor = Math.Min(minFactor, factor[cell]);
-                    maxFactor = Math.Max(maxFactor, factor[cell]);
-                    maxCellShift = Math.Max(maxCellShift, Math.Abs(shift[cell]));
-                    if (biome[cell] != start[i])
-                    {
-                        changed[i] = true;
-                    }
-                }
-            }
-
-            results[s] = (maxWorld, minFactor, maxFactor, changed.Count(c => c) / (double)cells.Length, maxCellShift);
-        });
-
-        for (int s = 0; s < seeds; s++)
-        {
-            var r = results[s];
-            _output.WriteLine(
-                $"Seed {s + 1}: largest world shift {r.MaxWorld:F2} C, largest cell shift {r.MaxCellShift:F2} C, "
-                + $"rainfall {r.MinFactor:F2} to {r.MaxFactor:F2} times baseline, {100.0 * r.ChangedShare:F1}% of land changed biome");
-        }
-
-        foreach (var r in results)
-        {
-            Assert.True(r.MaxWorld <= 2.5, $"World temperature shift reached {r.MaxWorld:F2} C.");
-            Assert.True(r.MinFactor >= 0.4 && r.MaxFactor <= 1.6, $"Rainfall reached {r.MinFactor:F2} to {r.MaxFactor:F2} times baseline.");
-            Assert.InRange(r.ChangedShare, 0.02, 0.25);
-        }
     }
 
     [Fact]

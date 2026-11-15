@@ -1,0 +1,70 @@
+// Foragers: how many people the land can feed before farming, how fast they grow and move,
+// and which land people had reached by 10,000 BCE. Numbers are first estimates; tuned in
+// milestone 1 step 10.
+{
+  // People per square km that each biome can feed by hunting and gathering.
+  // Chosen so the starting world population is about 4 million.
+  "density": {
+    "Ice": 0,
+    "Tundra": 0.006,
+    "Boreal forest": 0.015,
+    "Temperate forest": 0.048,
+    "Mediterranean": 0.06,
+    "Grassland": 0.03,
+    "Desert": 0.003,
+    "Savanna": 0.048,
+    "Tropical seasonal forest": 0.048,
+    "Rainforest": 0.03
+  },
+
+  // Multipliers for cells on a sea coast or lake shore (fish and shellfish), and on rivers.
+  "coastFactor": 1.6,
+  "lakeShoreFactor": 1.3,
+  "minorRiverFactor": 1.3,
+  "majorRiverFactor": 1.8,
+
+  // Share of the room to grow that a population fills in a year (logistic growth rate).
+  "growthRate": 0.03,
+
+  // Share of a cell's people who would leave in a year if every neighbour were empty.
+  // Movement is toward neighbouring land cells that are less full.
+  "migrationRate": 0.1,
+
+  // Share of people lost each year in a cell that can feed no one (for example, turned to ice).
+  "lossWhereNoFood": 0.2,
+
+  // Which land is inhabited at the start. Each landmass containing a seed point is reached, and
+  // so is any landmass within this many sea cells (about 51 km each) of a reached one, unless it
+  // is listed as unreached. Unreached land stays empty until seafaring (milestone 3).
+  "maxSeaCellsCrossed": 2,
+  "reached": [
+    { "name": "Africa", "lat": 0, "lon": 20 },
+    { "name": "Eurasia", "lat": 50, "lon": 90 },
+    { "name": "North America", "lat": 45, "lon": -100 },
+    { "name": "South America", "lat": -10, "lon": -55 },
+    { "name": "Australia", "lat": -25, "lon": 135 },
+    { "name": "New Guinea", "lat": -5, "lon": 142 },
+    { "name": "Honshu", "lat": 36, "lon": 138 },
+    { "name": "Great Britain", "lat": 53, "lon": -1.5 },
+    { "name": "Taiwan", "lat": 23.7, "lon": 121 },
+    { "name": "Tasmania", "lat": -42, "lon": 146.5 },
+    { "name": "Sri Lanka", "lat": 7.8, "lon": 80.7 },
+    { "name": "Borneo", "lat": 1, "lon": 114 },
+    { "name": "Sumatra", "lat": 0, "lon": 102 },
+    { "name": "Java", "lat": -7.5, "lon": 110 },
+    { "name": "Luzon", "lat": 16, "lon": 121 },
+    { "name": "Sulawesi", "lat": -2, "lon": 121 }
+  ],
+  "unreached": [
+    { "name": "Madagascar", "lat": -19, "lon": 47 },
+    { "name": "New Zealand North Island", "lat": -38.5, "lon": 176 },
+    { "name": "New Zealand South Island", "lat": -44, "lon": 170 },
+    { "name": "Iceland", "lat": 65, "lon": -18 },
+    { "name": "Greenland", "lat": 72, "lon": -40 },
+    { "name": "Antarctica", "lat": -80, "lon": 0 },
+    { "name": "Cuba", "lat": 21.5, "lon": -79 },
+    { "name": "Hispaniola", "lat": 19, "lon": -71 },
+    { "name": "Jamaica", "lat": 18.1, "lon": -77.3 },
+    { "name": "Puerto Rico", "lat": 18.2, "lon": -66.5 }
+  ]
+}

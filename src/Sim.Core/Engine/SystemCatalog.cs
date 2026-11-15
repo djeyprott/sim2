@@ -1,4 +1,5 @@
 using Sim.Core.Climate;
+using Sim.Core.People;
 
 namespace Sim.Core.Engine;
 
@@ -9,8 +10,13 @@ namespace Sim.Core.Engine;
 public static class SystemCatalog
 {
     /// <summary>The systems of the real simulation, in update order.</summary>
-    public static IReadOnlyList<ISimSystem> CreateDefault() => new ISimSystem[]
+    public static IReadOnlyList<ISimSystem> CreateDefault()
     {
-        ClimateSystem.CreateDefault(),
-    };
+        ClimateSystem climate = ClimateSystem.CreateDefault();
+        return new ISimSystem[]
+        {
+            climate,
+            ForagerSystem.CreateDefault(climate.Biomes),
+        };
+    }
 }

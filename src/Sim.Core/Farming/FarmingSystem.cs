@@ -30,6 +30,9 @@ public sealed class FarmingSystem : ISimSystem
     /// <summary>Months of food missing since the cell's last harvest, as a share of a year's needs.</summary>
     public const string HungerField = "farming.hunger";
 
+    /// <summary>People who have died of famine in the cell since the run began.</summary>
+    public const string FamineDeathsField = "farming.famineDeaths";
+
     /// <summary>Tick plus one of the cell's last famine (0: none yet).</summary>
     public const string LastFamineField = "farming.lastFamine";
     public const string WildCropsField = "farming.wildCrops";
@@ -55,6 +58,7 @@ public sealed class FarmingSystem : ISimSystem
     private double[] _landShare = Array.Empty<double>();
     private int[] _lastFaminePlusOne = Array.Empty<int>();
     private int[] _storeFed = Array.Empty<int>();
+    private double[] _famineDeaths = Array.Empty<double>();
     private double[] _hunger = Array.Empty<double>();
     private int[]? _settlementPlusOne;
     private Stockpiles? _stockpiles;
@@ -128,6 +132,7 @@ public sealed class FarmingSystem : ISimSystem
         _lastFaminePlusOne = state.AddIntField(LastFamineField);
         _storeFed = state.AddIntField(StoreFedField);
         _hunger = state.AddDoubleField(HungerField);
+        _famineDeaths = state.AddDoubleField(FamineDeathsField);
         _wildCrops = state.AddIntField(WildCropsField);
 
         _origins = state.AddTable(OriginTableName);
@@ -493,6 +498,7 @@ public sealed class FarmingSystem : ISimSystem
 
         double dying = _parameters.FamineDeathShare * shortfall * farmers * scale;
         double leaving = _parameters.FamineLeaveShare * shortfall * farmers * scale;
+        _famineDeaths[cell] += dying;
         farmers -= dying + leaving;
         if (leaving <= 0.0)
         {

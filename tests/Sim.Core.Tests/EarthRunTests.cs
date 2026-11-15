@@ -75,6 +75,26 @@ public sealed class EarthRunResult
 
     public double FamineShare => FarmingCellYears == 0 ? 0.0 : FamineCellYears / (double)FarmingCellYears;
 
+    /// <summary>Famine deaths and farmer-years in cells eating from a store, and in cells without one.</summary>
+    public double StoreFamineDeaths { get; set; }
+
+    public double StoreFarmerYears { get; set; }
+
+    public double NoStoreFamineDeaths { get; set; }
+
+    public double NoStoreFarmerYears { get; set; }
+
+    public double StoreDeathRate => StoreFarmerYears <= 0.0 ? 0.0 : StoreFamineDeaths / StoreFarmerYears;
+
+    public double NoStoreDeathRate => NoStoreFarmerYears <= 0.0 ? 0.0 : NoStoreFamineDeaths / NoStoreFarmerYears;
+
+    /// <summary>Farming cell-years with any famine deaths, and those where deaths passed 15% of the cell's farmers.</summary>
+    public long FamineDeathCellYears { get; set; }
+
+    public long SevereFamineCellYears { get; set; }
+
+    public double SevereShare => FamineDeathCellYears == 0 ? 0.0 : SevereFamineCellYears / (double)FamineDeathCellYears;
+
     /// <summary>Share of farming cells on grassland away from rivers after 5,000 years.</summary>
     public double OpenGrasslandFarmingShare { get; set; }
 
@@ -123,6 +143,8 @@ public sealed class EarthRunResult
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
+            + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
+            + $"{100.0 * SevereShare:F1}% of famine-death cell-years severe (over 15%); "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
@@ -163,6 +185,12 @@ public abstract class EarthRunFixtureBase
         int[]? cropPlusOne = farming ? sim.State.IntField(FarmingSystem.CropField) : null;
         int[]? sincePlusOne = farming ? sim.State.IntField(FarmingSystem.SinceField) : null;
         int[]? lastFaminePlusOne = farming ? sim.State.IntField(FarmingSystem.LastFamineField) : null;
+        double[]? famineDeaths = farming ? sim.State.DoubleField(FarmingSystem.FamineDeathsField) : null;
+        int[]? storeFed = farming ? sim.State.IntField(FarmingSystem.StoreFedField) : null;
+        int farmerOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        var farmersAtYearStart = new double[world.CellCount];
+        var deathsAtYearStart = new double[world.CellCount];
+        var storeFedAtYearStart = new int[world.CellCount];
         long lastCheck = -1;
         var previousPeople = new double[world.CellCount];
         var famineBefore = new double[world.CellCount];
@@ -225,6 +253,8 @@ public abstract class EarthRunFixtureBase
 
             if (farming)
             {
+                MeasureFamineDeaths(land, groups, farmerOccupation, famineDeaths!, storeFed!,
+                    farmersAtYearStart, deathsAtYearStart, storeFedAtYearStart, result);
                 groups.FillCellTotals(people);
                 MeasureFamines(land, people, previousPeople, lastFaminePlusOne!, lastCheck, year, famineBefore, famineLow, famineYear, result);
                 Array.Copy(people, previousPeople, people.Length);
@@ -322,6 +352,45 @@ public abstract class EarthRunFixtureBase
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    // Famine deaths over the year just run, by cell, split by whether the cell ate from a store
+    // at the start of the year; then records this year's start for the next call.
+    private static void MeasureFamineDeaths(int[] land, PopulationGroups groups, int farmer, double[] famineDeaths,
+        int[] storeFed, double[] farmersAtStart, double[] deathsAtStart, int[] storeFedAtStart, EarthRunResult result)
+    {
+        foreach (int cell in land)
+        {
+            double farmers = farmersAtStart[cell];
+            if (farmers > 0.0)
+            {
+                double deaths = famineDeaths[cell] - deathsAtStart[cell];
+                if (storeFedAtStart[cell] != 0)
+                {
+                    result.StoreFamineDeaths += deaths;
+                    result.StoreFarmerYears += farmers;
+                }
+                else
+                {
+                    result.NoStoreFamineDeaths += deaths;
+                    result.NoStoreFarmerYears += farmers;
+                }
+
+                if (deaths > 0.0)
+                {
+                    result.FamineDeathCellYears++;
+                    if (deaths > 0.15 * farmers)
+                    {
+                        result.SevereFamineCellYears++;
+                    }
+                }
+            }
+
+            deathsAtStart[cell] = famineDeaths[cell];
+            storeFedAtStart[cell] = storeFed[cell];
+        }
+
+        groups.FillCellTotals(farmersAtStart, farmer);
+    }
 
     private static void CheckGoods(Stockpiles stockpiles, EarthRunResult result)
     {
@@ -526,6 +595,26 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
             Assert.False(r.BadStock, $"Seed {r.Seed}: a stockpile went negative or invalid.");
             Assert.True(r.GrainInStoreAt5000 > 0.0, $"Seed {r.Seed}: no grain in store.");
         });
+    }
+
+    [Fact]
+    public void Shortages_hit_2_to_5_percent_of_farming_cell_years()
+    {
+        Assert.All(_results, r => Assert.InRange(r.FamineShare, 0.02, 0.05));
+    }
+
+    [Fact]
+    public void Famine_kills_at_most_half_as_many_where_people_eat_from_a_store()
+    {
+        Assert.All(_results, r => Assert.True(r.StoreDeathRate <= 0.5 * r.NoStoreDeathRate,
+            $"Seed {r.Seed}: {1000.0 * r.StoreDeathRate:F2} famine deaths per 1,000 farmer-years with a store, {1000.0 * r.NoStoreDeathRate:F2} without."));
+    }
+
+    [Fact]
+    public void Severe_famines_are_rare()
+    {
+        Assert.All(_results, r => Assert.True(r.SevereShare < 0.1,
+            $"Seed {r.Seed}: {100.0 * r.SevereShare:F1}% of famine-death cell-years killed over 15%."));
     }
 
     [Fact]

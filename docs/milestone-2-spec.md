@@ -1,10 +1,11 @@
-# Milestone 2 spec: Goods and trade (version 1.0, agreed)
+# Milestone 2 spec: Goods and trade (version 1.1, agreed)
 
-Status: agreed by the owner 2026-11-15. Feature list is frozen. Parent: `design-doc.md` version 0.9.
+Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: step 1 done 2026-11-15 (goods, ledger, stockpiles, harvests into stores, monthly eating). Ledger balances to about 1e-12 in every seed. Famine is at 2.7% to 3.0% of farming cell-years with real homelands, about the milestone 1 level; halving it is left to tuning in step 8.
+Progress: step 1 done 2026-11-15 (goods, ledger, stockpiles, harvests into stores, monthly eating). Ledger balances to about 1e-12 in every seed. Famine is at 2.7% to 3.0% of farming cell-years with real homelands, within the 2% to 5% range set in version 1.1.
 
 Change log:
+- 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
 - 1.0 (2026-11-15): agreed and frozen.
 - Draft 2 (2026-11-15): the owner settled the four open decisions: herding comes in this milestone; local prices measured in food; trade over land and rivers only; about ten goods.
 - Draft 1 (2026-11-15): first draft.
@@ -53,6 +54,7 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 
 - Each month every group eats from its settlement's food store. A group in a cell without a settlement eats from its own harvest, as in milestone 1.
 - Famine now happens when the store runs out, not when one harvest is short. Stores spoil at each good's rate.
+- Famine kills a fifth of the shortfall over a year and sends three tenths away: an ordinary famine (food at 75% to 85% of needs) kills 3% to 5%, and a whole year without food kills a fifth (see "Famine numbers").
 - Everyday and luxury goods are used up at a yearly rate per person. The share of these needs met is recorded on each group.
 
 ### 6. Prices and trade
@@ -109,7 +111,9 @@ Goods
 - [ ] Obsidian is found in stores more than 500 km from its nearest source in at least 8 of 10 seeds by 5,000 years.
 
 Food and famine
-- [ ] With stores, the share of farming cell-years that see famine falls by at least half compared with milestone 1 (about 3%).
+- [ ] Shortages (a month with food below 85% of needs) hit between 2% and 5% of farming cell-years, about once every 20 to 50 years in a cell.
+- [ ] Famine deaths per farmer-year in cells that eat from a store are at most half those in cells without one.
+- [ ] Severe famines are rare: in fewer than one in ten cell-years with famine deaths do those deaths pass 15% of the cell's farmers.
 - [ ] After 5,000 years, world population is between 5 and 40 million in every seed.
 
 Trade
@@ -147,6 +151,14 @@ Each step ends with a new development build you can download.
 6. Herding
 7. Goods map mode, tooltip and statistics file
 8. Tuning against the exit tests, release v0.3
+
+## Famine numbers
+
+Agreed by the owner 2026-11-15, from pre-modern records. There are no counts for the Neolithic itself; these come from medieval and early modern Europe and Japan, at the scale of regions or countries rather than single cells.
+
+- **How often:** Carolingian Europe (750 to 950) had a famine at least once every 20 years and a lesser shortage at least once every 17 years (Newfield). Tokugawa Japan recorded 154 famines in about 265 years, 21 of them widespread and serious. Early farmers were probably no better off: their skeletons show more signs of childhood stress than earlier foragers'. Shortages in 2% to 5% of farming cell-years (once every 20 to 50 years per cell) sit in this range. Milestone 1 already gave about 3%, so stores are not expected to cut how often shortages strike; they are expected to cut deaths.
+- **How deadly:** an ordinary European famine killed 2% to 5% of the population. Severe ones killed 15% to 25% (Finland 1696 to 1697, a quarter; Estonia and Latvia, a fifth; Ireland 1740 to 1741, 15% to 20%). The worst, Bengal 1770, killed a third. Before 1800, crises caused less than 5% of all deaths in England (Fogel). The worst famines followed back-to-back bad harvests (Campbell and Ó Gráda).
+- **Causes:** before about 1710, famine's deeper cause was population pressing on resources; the trigger was almost always the weather (Alfani and Ó Gráda). The simulation works the same way.
 
 ## Numbers that will need tuning
 

@@ -19,8 +19,6 @@ public sealed class ResourceRule
 
     public double PerPerson { get; set; }
 
-    public double StockPerPerson { get; set; }
-
     public Dictionary<string, double> Biomes { get; set; } = new Dictionary<string, double>();
 
     public Dictionary<string, double> Terrain { get; set; } = new Dictionary<string, double>();
@@ -74,9 +72,9 @@ public sealed class ResourceRules
                 throw new InvalidDataException($"{rule.Good}: richness factors must be between 0 and 1.");
             }
 
-            if (rule.PerPerson < 0.0 || rule.StockPerPerson < 0.0 || rule.SourceRadiusKm < 0.0)
+            if (rule.PerPerson < 0.0 || rule.SourceRadiusKm < 0.0)
             {
-                throw new InvalidDataException($"{rule.Good}: perPerson, stockPerPerson and sourceRadiusKm must not be negative.");
+                throw new InvalidDataException($"{rule.Good}: perPerson and sourceRadiusKm must not be negative.");
             }
 
             foreach (string terrain in rule.Terrain.Keys)

@@ -5,9 +5,11 @@ using Sim.Core.Settlements;
 namespace Sim.Core.Goods;
 
 /// <summary>
-/// Craftsmen, recipes and needs beyond food (milestone 2, step 3). Each January, in every
-/// settlement: craftsmen move toward the number its people's shortages call for (taken from
-/// or given back to the farmers); they make goods by recipe from what is in store; then the
+/// Craftsmen, recipes and needs beyond food (milestone 2, steps 3 and 4). Each January, in every
+/// settlement: craftsmen move toward the number needed to make what it is short of, counting
+/// only work that pays at local prices (what a craftsman makes, less his inputs, must be worth
+/// more than the food he eats); they are taken from or given back to the farmers. They make
+/// goods by the best-paying recipe from what is in store; then the
 /// store-fed people (farmers and craftsmen) use up their everyday and luxury needs, and the
 /// share met in each tier is recorded on their groups. Craftsmen left in a cell whose
 /// settlement has gone go back to farming.
@@ -17,6 +19,11 @@ public sealed class CraftSystem : ISimSystem
     public const string SystemName = "crafts";
 
     private readonly CraftRules _rules;
+    private readonly OccupationSet _occupations;
+    private Prices? _prices;
+    private readonly double[] _wanted;
+    private readonly double[] _price;
+    private readonly Recipe?[] _best;
     private readonly int _farmer;
     private readonly int _craftsman;
     private Stockpiles? _stockpiles;
@@ -30,6 +37,10 @@ public sealed class CraftSystem : ISimSystem
     public CraftSystem(CraftRules rules, OccupationSet occupations)
     {
         _rules = rules;
+        _occupations = occupations;
+        _wanted = new double[rules.Goods.Count];
+        _price = new double[rules.Goods.Count];
+        _best = new Recipe?[rules.Goods.Count];
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.IndexOf(OccupationSet.Craftsman);
         _shortfall = new double[rules.Goods.Count];
@@ -57,6 +68,7 @@ public sealed class CraftSystem : ISimSystem
         _settlements = state.Table(SettlementSystem.TableName);
         _settlementCell = _settlements.IntColumn("cell");
         _settlementPlusOne = state.IntField(SettlementSystem.SettlementField);
+        _prices = new Prices(state, context.Map, PriceParameters.LoadDefault(), _rules, _occupations);
     }
 
     public void Update(SimContext context)
@@ -67,7 +79,7 @@ public sealed class CraftSystem : ISimSystem
         {
             if (settlements.IsAlive(id))
             {
-                Settlement(_settlementCell![id]);
+                Settlement(_settlementCell![id], context.Tick);
             }
         }
     }
@@ -98,7 +110,7 @@ public sealed class CraftSystem : ISimSystem
         }
     }
 
-    private void Settlement(int cell)
+    private void Settlement(int cell, long tick)
     {
         PopulationGroups groups = _groups!;
         Stockpiles stockpiles = _stockpiles!;
@@ -112,14 +124,17 @@ public sealed class CraftSystem : ISimSystem
             return;
         }
 
-        // What the people are short of, and the craftsmen that would take to make it.
+        // What the people are short of, and the craftsmen it would take to make it, counting only
+        // work that pays: a year of a craftsman's output, less its inputs at local prices, must be
+        // worth more than the grain he eats.
+        _prices!.Work(cell, tick, _wanted, _price);
+        double grainPrice = _price[_rules.Goods.IndexOf(GoodSet.Grain)];
         double workersWanted = 0.0;
         foreach (int output in _rules.Outputs)
         {
-            double wanted = _rules.NeedPerPerson[output] * fed * (1.0 + _rules.ReserveYears) - stockpiles.Stock(cell, output);
-            _shortfall[output] = Math.Max(0.0, wanted);
-            Recipe first = FirstRecipe(output);
-            _workers[output] = _shortfall[output] / first.PerWorker;
+            _shortfall[output] = Math.Max(0.0, _wanted[output] - stockpiles.Stock(cell, output));
+            _best[output] = BestRecipe(output, out double workerValue);
+            _workers[output] = workerValue > grainPrice ? _shortfall[output] / _best[output]!.PerWorker : 0.0;
             workersWanted += _workers[output];
         }
 
@@ -157,11 +172,11 @@ public sealed class CraftSystem : ISimSystem
             foreach (int output in _rules.Outputs)
             {
                 double work = _workers[output] * share;
-                foreach (Recipe recipe in _rules.Recipes)
+                foreach (Recipe recipe in RecipesFor(output))
                 {
-                    if (recipe.Output != output || work <= 0.0)
+                    if (work <= 0.0)
                     {
-                        continue;
+                        break;
                     }
 
                     double units = work * recipe.PerWorker;
@@ -228,16 +243,46 @@ public sealed class CraftSystem : ISimSystem
         }
     }
 
-    private Recipe FirstRecipe(int output)
+    // The recipe for an output whose year of work is worth most at local prices, and that worth.
+    private Recipe BestRecipe(int output, out double workerValue)
     {
+        Recipe? best = null;
+        workerValue = double.NegativeInfinity;
         foreach (Recipe recipe in _rules.Recipes)
         {
-            if (recipe.Output == output)
+            if (recipe.Output != output)
             {
-                return recipe;
+                continue;
+            }
+
+            double margin = _price[output];
+            foreach ((int good, double amount) in recipe.Inputs)
+            {
+                margin -= _price[good] * amount;
+            }
+
+            double value = margin * recipe.PerWorker;
+            if (value > workerValue)
+            {
+                workerValue = value;
+                best = recipe;
             }
         }
 
-        throw new InvalidOperationException("Every output has a recipe.");
+        return best ?? throw new InvalidOperationException("Every output has a recipe.");
+    }
+
+    // An output's recipes, the best-paying first, then the rest in file order.
+    private IEnumerable<Recipe> RecipesFor(int output)
+    {
+        Recipe best = _best[output]!;
+        yield return best;
+        foreach (Recipe recipe in _rules.Recipes)
+        {
+            if (recipe.Output == output && !ReferenceEquals(recipe, best))
+            {
+                yield return recipe;
+            }
+        }
     }
 }

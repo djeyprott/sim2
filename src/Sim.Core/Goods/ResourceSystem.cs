@@ -11,7 +11,8 @@ namespace Sim.Core.Goods;
 /// Natural resources and gathering (milestone 2, step 2). Works out at the start of a run where
 /// each gathered good can be found, from terrain, rivers, coasts and a list of real sources;
 /// richness that depends on the biome or on farming is worked out each year. Each January the
-/// gatherers (farmers) of each settlement gather into its store, up to a stock per person.
+/// gatherers (farmers) of each settlement gather into its store what it wants (see
+/// <see cref="Prices"/>), but only goods worth their time at local prices.
 /// Nothing is gathered where there is no settlement, since there is nowhere to keep it.
 /// </summary>
 public sealed class ResourceSystem : ISimSystem
@@ -23,6 +24,10 @@ public sealed class ResourceSystem : ISimSystem
     private readonly ResourceRules _rules;
     private readonly BiomeSet _biomes;
     private readonly int[] _gatherers;
+    private readonly OccupationSet _occupations;
+    private Prices? _prices;
+    private double[] _wanted = Array.Empty<double>();
+    private double[] _price = Array.Empty<double>();
     private int[] _good = Array.Empty<int>();
     private double[][] _fixedRichness = Array.Empty<double[]>();
     private double[][] _biomeRichness = Array.Empty<double[]>();
@@ -37,6 +42,7 @@ public sealed class ResourceSystem : ISimSystem
     {
         _rules = rules;
         _biomes = biomes;
+        _occupations = occupations;
         _gatherers = rules.Gatherers.Select(occupations.IndexOf).ToArray();
     }
 
@@ -67,6 +73,10 @@ public sealed class ResourceSystem : ISimSystem
             _settlementCell = _settlements.IntColumn("cell");
         }
 
+        GoodSet goods = _stockpiles.Goods;
+        _prices = new Prices(state, map, PriceParameters.LoadDefault(), CraftRules.LoadDefault(goods), _occupations);
+        _wanted = new double[goods.Count];
+        _price = new double[goods.Count];
         int count = _rules.Goods.Count;
         _good = _rules.Goods.Select(r => _stockpiles.Goods.IndexOf(r.Good)).ToArray();
         _fixedRichness = new double[count][];
@@ -232,21 +242,21 @@ public sealed class ResourceSystem : ISimSystem
                 continue;
             }
 
-            double people = groups.CellTotal(cell);
+            _prices!.Work(cell, context.Tick, _wanted, _price);
+            double timeValue = _prices.Parameters.GatherTimeValue;
             for (int r = 0; r < _good.Length; r++)
             {
                 ResourceRule rule = _rules.Goods[r];
-                double wanted = rule.StockPerPerson * people - stockpiles.Stock(cell, _good[r]);
-                if (wanted <= 0.0)
+                int good = _good[r];
+                double wanted = _wanted[good] - stockpiles.Stock(cell, good);
+                double richness = Richness(r, cell);
+                double perGatherer = rule.PerPerson * richness;
+                if (wanted <= 0.0 || perGatherer <= 0.0 || perGatherer * _price[good] < timeValue)
                 {
                     continue;
                 }
 
-                double richness = Richness(r, cell);
-                if (richness > 0.0)
-                {
-                    stockpiles.Produce(cell, _good[r], Math.Min(wanted, gatherers * rule.PerPerson * richness));
-                }
+                stockpiles.Produce(cell, good, Math.Min(wanted, gatherers * perGatherer));
             }
         }
     }

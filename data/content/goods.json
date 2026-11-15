@@ -5,22 +5,24 @@
 // weight: how heavy one unit is to carry, relative to a person-year of grain (used by trade).
 // tier: the need it meets: life, everyday, luxury, or none for materials.
 // food: true if people can eat it.
+// value: the good's base price in food (person-years of grain); local prices rise above it
+// where the good is scarce and fall below it where it is plentiful (prices.json).
 {
   "goods": [
-    { "name": "Grain", "unit": "person-years", "spoilage": 0.10, "weight": 1.0, "tier": "life", "food": true, "colour": "#e0c050" },
-    { "name": "Wild food", "unit": "person-years", "spoilage": 0.50, "weight": 1.0, "tier": "life", "food": true, "colour": "#7aa860" },
-    { "name": "Meat and milk", "unit": "person-years", "spoilage": 0.40, "weight": 1.2, "tier": "life", "food": true, "colour": "#c06850" },
-    { "name": "Wood", "unit": "loads", "spoilage": 0.05, "weight": 1.0, "tier": "none", "food": false, "colour": "#8a6a40" },
-    { "name": "Flint", "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#a0a0a8" },
-    { "name": "Clay", "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#b07850" },
-    { "name": "Fibre", "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#d8d0a0" },
-    { "name": "Wool", "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#f0ece0" },
-    { "name": "Hides", "unit": "loads", "spoilage": 0.10, "weight": 0.8, "tier": "none", "food": false, "colour": "#906040" },
-    { "name": "Stone tools", "unit": "sets", "spoilage": 0.05, "weight": 0.3, "tier": "everyday", "food": false, "colour": "#707880" },
-    { "name": "Pottery", "unit": "sets", "spoilage": 0.08, "weight": 0.6, "tier": "everyday", "food": false, "colour": "#c06030" },
-    { "name": "Cloth", "unit": "sets", "spoilage": 0.10, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#d0b0e0" },
-    { "name": "Salt", "unit": "loads", "spoilage": 0.0, "weight": 0.5, "tier": "luxury", "food": false, "colour": "#f8f8f8" },
-    { "name": "Obsidian", "unit": "loads", "spoilage": 0.0, "weight": 0.3, "tier": "luxury", "food": false, "colour": "#202028" },
-    { "name": "Ornaments", "unit": "sets", "spoilage": 0.02, "weight": 0.05, "tier": "luxury", "food": false, "colour": "#e0a020" }
+    { "name": "Grain", "value": 1.0, "unit": "person-years", "spoilage": 0.10, "weight": 1.0, "tier": "life", "food": true, "colour": "#e0c050" },
+    { "name": "Wild food", "value": 1.0, "unit": "person-years", "spoilage": 0.50, "weight": 1.0, "tier": "life", "food": true, "colour": "#7aa860" },
+    { "name": "Meat and milk", "value": 1.5, "unit": "person-years", "spoilage": 0.40, "weight": 1.2, "tier": "life", "food": true, "colour": "#c06850" },
+    { "name": "Wood", "value": 0.05, "unit": "loads", "spoilage": 0.05, "weight": 1.0, "tier": "none", "food": false, "colour": "#8a6a40" },
+    { "name": "Flint", "value": 0.1, "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#a0a0a8" },
+    { "name": "Clay", "value": 0.05, "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#b07850" },
+    { "name": "Fibre", "value": 0.1, "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#d8d0a0" },
+    { "name": "Wool", "value": 0.15, "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#f0ece0" },
+    { "name": "Hides", "value": 0.2, "unit": "loads", "spoilage": 0.10, "weight": 0.8, "tier": "none", "food": false, "colour": "#906040" },
+    { "name": "Stone tools", "value": 0.3, "unit": "sets", "spoilage": 0.05, "weight": 0.3, "tier": "everyday", "food": false, "colour": "#707880" },
+    { "name": "Pottery", "value": 0.3, "unit": "sets", "spoilage": 0.08, "weight": 0.6, "tier": "everyday", "food": false, "colour": "#c06030" },
+    { "name": "Cloth", "value": 0.5, "unit": "sets", "spoilage": 0.10, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#d0b0e0" },
+    { "name": "Salt", "value": 2.0, "unit": "loads", "spoilage": 0.0, "weight": 0.5, "tier": "luxury", "food": false, "colour": "#f8f8f8" },
+    { "name": "Obsidian", "value": 3.0, "unit": "loads", "spoilage": 0.0, "weight": 0.3, "tier": "luxury", "food": false, "colour": "#202028" },
+    { "name": "Ornaments", "value": 1.0, "unit": "sets", "spoilage": 0.02, "weight": 0.05, "tier": "luxury", "food": false, "colour": "#e0a020" }
   ]
 }

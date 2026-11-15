@@ -26,6 +26,9 @@ public sealed class Good
     /// <summary>Weight of one unit to carry, relative to a person-year of grain.</summary>
     public double Weight { get; set; } = 1.0;
 
+    /// <summary>Base price in food (person-years of grain).</summary>
+    public double Value { get; set; } = 1.0;
+
     public string Tier { get; set; } = "none";
 
     public bool Food { get; set; }
@@ -84,9 +87,9 @@ public sealed class GoodSet
                 throw new InvalidDataException($"Good {i} has a missing or repeated name.");
             }
 
-            if (good.Spoilage < 0.0 || good.Spoilage >= 1.0 || double.IsNaN(good.Spoilage) || good.Weight <= 0.0)
+            if (good.Spoilage < 0.0 || good.Spoilage >= 1.0 || double.IsNaN(good.Spoilage) || good.Weight <= 0.0 || good.Value <= 0.0)
             {
-                throw new InvalidDataException($"{good.Name}: spoilage must be in [0, 1) and weight above 0.");
+                throw new InvalidDataException($"{good.Name}: spoilage must be in [0, 1), and weight and value above 0.");
             }
 
             good.NeedTier = good.Tier.ToLowerInvariant() switch

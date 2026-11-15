@@ -67,6 +67,21 @@ public class ResourceTests : IClassFixture<EarthWorldFixture>
     }
 }
 
+public class PriceTests
+{
+    [Fact]
+    public void Prices_rise_with_scarcity_and_stay_within_bounds()
+    {
+        PriceParameters p = PriceParameters.LoadDefault();
+        Assert.Equal(2.0, Prices.PriceOf(2.0, 100.0, 100.0, p), 9);
+        Assert.True(Prices.PriceOf(1.0, 100.0, 50.0, p) > Prices.PriceOf(1.0, 100.0, 100.0, p));
+        Assert.True(Prices.PriceOf(1.0, 100.0, 200.0, p) < 1.0);
+        Assert.Equal(p.MaxFactor, Prices.PriceOf(1.0, 100.0, 0.0, p), 9);
+        Assert.Equal(p.MinFactor, Prices.PriceOf(1.0, 1.0, 1e9, p), 9);
+        Assert.Equal(p.MinFactor, Prices.PriceOf(1.0, 0.0, 10.0, p), 9);
+    }
+}
+
 public class CraftRuleTests
 {
     [Fact]

@@ -308,6 +308,31 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         }
 
         Assert.True(craftsmen > 0.0, "There should be craftsmen.");
+
+        // Prices stay within their bounds, and gathering stops near what a settlement wants.
+        PriceParameters priceParameters = PriceParameters.LoadDefault();
+        var prices = new Prices(sim.State, sim.Map, priceParameters, CraftRules.LoadDefault(stockpiles.Goods), OccupationSet.LoadDefault());
+        var wanted = new double[stockpiles.Goods.Count];
+        var price = new double[stockpiles.Goods.Count];
+        int flint = stockpiles.Goods.IndexOf("Flint");
+        int clay = stockpiles.Goods.IndexOf("Clay");
+        for (int cell = 0; cell < settlement.Length; cell++)
+        {
+            if (settlement[cell] <= 0)
+            {
+                continue;
+            }
+
+            prices.Work(cell, sim.Tick, wanted, price);
+            foreach (Good good in stockpiles.Goods.Goods)
+            {
+                Assert.InRange(price[good.Index], good.Value * priceParameters.MinFactor * 0.999, good.Value * priceParameters.MaxFactor * 1.001);
+            }
+
+            double people = groups.CellTotal(cell);
+            Assert.True(stockpiles.Stock(cell, flint) <= wanted[flint] + 0.2 * people + 1.0, "Flint piled up past what was wanted.");
+            Assert.True(stockpiles.Stock(cell, clay) <= wanted[clay] + 0.2 * people + 1.0, "Clay piled up past what was wanted.");
+        }
         Assert.True(everydayMet > 0.5, "Some group should have most of its everyday needs met.");
     }
 

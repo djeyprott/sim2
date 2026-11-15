@@ -1,0 +1,16 @@
+// Prices (milestone 2, step 4). A settlement's price for a good, in food (person-years of
+// grain), is the good's base value (goods.json) times (wanted / in store) ^ elasticity, kept
+// between minFactor and maxFactor times the base value. Prices are worked out when needed,
+// never stored. What a settlement wants:
+//   food: enough for its store-fed people until the next harvest, plus foodReserveYears;
+//   everyday and luxury goods: a year of needs (needs.json) plus reserveYears (recipes.json);
+//   materials: what its craftsmen would use to make the goods it wants.
+// gatherTimeValue: the food a farmer gives up by spending their whole year's gathering share
+// (perPerson in resources.json) on a material; they gather it only if it is worth more.
+{
+  "elasticity": 0.7,
+  "minFactor": 0.2,
+  "maxFactor": 5.0,
+  "foodReserveYears": 0.5,
+  "gatherTimeValue": 0.005
+}

@@ -28,6 +28,8 @@ public partial class Main : Node2D
     private const double SettlementRefreshSeconds = 1.0;
     private const string GrainStockField = Stockpiles.StockFieldPrefix + "grain";
     private static readonly GoodSet ViewerGoods = GoodSet.LoadDefault();
+    private static readonly CraftRules ViewerCraftRules = CraftRules.LoadDefault(ViewerGoods);
+    private static readonly PriceParameters ViewerPriceParameters = PriceParameters.LoadDefault();
     private const float KeyPanPixelsPerSecond = 900f;
     private const float ClickSlopPixels = 5f;
 
@@ -1033,6 +1035,27 @@ public partial class Main : Node2D
         if (stock.Count > 0)
         {
             text += "\n  In store: " + string.Join(", ", stock);
+        }
+
+        // Prices in food, for the goods the settlement holds or wants.
+        var prices = new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault());
+        var wanted = new double[ViewerGoods.Count];
+        var price = new double[ViewerGoods.Count];
+        prices.Work(cell, sim.Tick, wanted, price);
+        var priced = new List<string>();
+        foreach (Good good in ViewerGoods.Goods)
+        {
+            string field = Stockpiles.StockFieldPrefix + good.Slug;
+            double amount = sim.State.HasField(field) ? sim.State.DoubleField(field)[cell] : 0.0;
+            if (wanted[good.Index] > 0.0 || amount >= 1.0)
+            {
+                priced.Add($"{good.Name.ToLowerInvariant()} {price[good.Index].ToString("0.###", CultureInfo.InvariantCulture)}");
+            }
+        }
+
+        if (priced.Count > 0)
+        {
+            text += "\n  Prices in food: " + string.Join(", ", priced);
         }
 
         return text;

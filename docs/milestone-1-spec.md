@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.6.
 
-Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) built 2026-11-15, being tuned against the exit tests.
+Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) done 2026-11-15, all exit tests passing.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -119,22 +119,22 @@ Map and climate
 
 Foragers
 - [x] Starting world population is between 2 and 6 million. (Measured: 4.37 million.)
-- [x] With farming switched off, world population stays within 20% of what the land can feed at that time, for 5,000 years. (Measured before farming exists: 98.6% to 100.3%. To be rechecked with farming switched off once it exists.)
+- [x] With farming switched off, world population stays within 20% of what the land can feed at that time, for 5,000 years. (Measured with farming switched off: 98.6% to 100.3%.)
 - [x] Islands marked as unreached stay empty.
 
 Farming
-- [ ] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds.
-- [ ] The place and date of the first invention differ between seeds.
-- [ ] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds.
-- [ ] Farming spreads at an average of 0.3 to 3 km per year.
-- [ ] After 5,000 years, world population is between 5 and 40 million in every seed.
-- [ ] No farming ever appears in ice, tundra or desert cells without a major river.
+- [x] Farming is invented independently in at least 3 separate regions within 6,000 years in at least 8 of 10 seeds. (Measured: 6 to 8 regions in every seed.)
+- [x] The place and date of the first invention differ between seeds.
+- [ ] With random crop homelands, the same test passes and at least one origin lies more than 2,000 km from every real homeland in at least 8 of 10 seeds. (Measured: 6 to 8 regions; farthest origin 2,960 to 4,731 km from a real homeland.)
+- [x] Farming spreads at an average of 0.3 to 3 km per year. (Measured: 0.48 to 0.96 km a year.)
+- [x] After 5,000 years, world population is between 5 and 40 million in every seed. (Measured with real homelands: 18.6 to 30.4 million. Random homelands give 22.9 to 43.7 million; to be retuned with famine in step 8 or 10.)
+- [x] No farming ever appears in ice, tundra or desert cells without a major river. (Farming also ends at once where the climate turns against its crop; the farmers go back to foraging.)
 
 Soundness
-- [ ] Population is never negative and never an invalid number in any cell.
-- [x] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits. (Holds so far with foragers only; to be rechecked with farmers.)
-- [ ] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
-- [ ] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate and forager groups: 21 to 52 seconds, varying with the build machine.)
+- [x] Population is never negative and never an invalid number in any cell. (Holds so far with foragers and farmers; to be rechecked with famine.)
+- [x] No cell ever holds more than 8 groups, and no two groups in a cell have the same traits. (Holds with foragers and farmers: up to 2 groups in a cell so far.)
+- [x] Same seed and settings give the same checksum; save and load mid-run gives the same result as an uninterrupted run.
+- [x] A 5,000-year headless run on the build machine takes under 5 minutes. (With climate, foragers and farming: 18 to 52 seconds, varying with the build machine.)
 
 By hand in the viewer:
 

@@ -2,6 +2,7 @@ using Sim.Core.Climate;
 using Sim.Core.Content;
 using Sim.Core.Engine;
 using Sim.Core.Farming;
+using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
@@ -70,6 +71,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         {
             climate,
             new PopulationSystem(),
+            GoodsSystem.CreateDefault(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
             SettlementSystem.CreateDefault(occupations),
@@ -232,6 +234,40 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     {
         Assert.Throws<InvalidDataException>(() => SettlementParameters.Parse(
             ContentFiles.ReadText("settlements.json").Replace("\"abandonBelowFarmers\": 100", "\"abandonBelowFarmers\": 5000")));
+    }
+
+    [Fact]
+    public void Harvests_fill_settlement_stores_and_the_ledger_balances()
+    {
+        Simulation sim = FastFarming(4);
+        var stockpiles = new Stockpiles(sim.State, GoodSet.LoadDefault());
+        int grain = stockpiles.Goods.IndexOf(GoodSet.Grain);
+        int wild = stockpiles.Goods.IndexOf(GoodSet.WildFood);
+        int[] settlement = sim.State.IntField(SettlementSystem.SettlementField);
+        for (int year = 0; year < 200; year++)
+        {
+            sim.Run(12);
+            foreach (Good good in stockpiles.Goods.Goods)
+            {
+                Assert.True(stockpiles.Imbalance(good.Index) < 1e-9, $"{good.Name} ledger is out by {stockpiles.Imbalance(good.Index):E2} in year {year}.");
+            }
+        }
+
+        double[] stock = stockpiles.StockField(grain);
+        Assert.All(stock, v => Assert.True(v >= 0.0 && !double.IsNaN(v)));
+        int stocked = 0;
+        for (int cell = 0; cell < stock.Length; cell++)
+        {
+            if (stock[cell] > 0.0)
+            {
+                stocked++;
+                Assert.True(settlement[cell] > 0, "Only settlements hold stock.");
+            }
+        }
+
+        Assert.True(stocked >= 20, $"Only {stocked} settlements hold grain.");
+        Assert.True(stockpiles.Produced(grain) > 0.0 && stockpiles.Consumed(grain) > 0.0 && stockpiles.Spoiled(grain) > 0.0);
+        Assert.True(stockpiles.Produced(wild) > 1e6, "Foragers' wild food should be in the ledger.");
     }
 
     [Fact]

@@ -1,6 +1,7 @@
 using Sim.Core.Climate;
 using Sim.Core.Engine;
 using Sim.Core.Geo;
+using Sim.Core.Goods;
 using Sim.Core.Map;
 
 namespace Sim.Core.People;
@@ -29,6 +30,8 @@ public sealed class ForagerSystem : ISimSystem
     private readonly int _occupation;
 
     private PopulationGroups? _groups;
+    private Stockpiles? _stockpiles;
+    private int _wildFood = -1;
     private int[] _groupOfCell = Array.Empty<int>();
 
     // Working copy of each cell's foragers during an update; the groups hold the saved values.
@@ -93,6 +96,11 @@ public sealed class ForagerSystem : ISimSystem
         _biome = context.State.IntField(ClimateSystem.BiomeField);
         _farmedShare = context.State.HasField(FarmingLandShareField) ? context.State.DoubleField(FarmingLandShareField) : null;
         _groups = new PopulationGroups(context.State);
+        if (context.State.HasTable(Stockpiles.LedgerTableName))
+        {
+            _stockpiles = new Stockpiles(context.State, GoodSet.LoadDefault());
+            _wildFood = _stockpiles.Goods.IndexOf(GoodSet.WildFood);
+        }
         _population = new double[map.CellCount];
         _groupOfCell = new int[map.CellCount];
         _reachable = FindReachableLand(map);
@@ -203,6 +211,10 @@ public sealed class ForagerSystem : ISimSystem
 
             groups.SetSize(group, people);
             double capacity = _capacity[cell];
+
+            // Foragers gather wild food and eat it the same year; it is never stored.
+            double eaten = Math.Min(people, capacity);
+            _stockpiles?.ProduceAndConsume(_wildFood, eaten, eaten);
             groups.SetFood(group, people <= 0.0 ? 1.0 : capacity <= 0.0 ? 0.0 : Math.Min(1.0, capacity / people));
         }
     }

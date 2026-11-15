@@ -1,0 +1,26 @@
+// Goods: bulk quantities held in settlement stockpiles (milestone 2).
+// unit: what one unit of the good is. Food goods are counted in person-years: one unit feeds
+// one person for a year.
+// spoilage: share of a stock lost per year in store.
+// weight: how heavy one unit is to carry, relative to a person-year of grain (used by trade).
+// tier: the need it meets: life, everyday, luxury, or none for materials.
+// food: true if people can eat it.
+{
+  "goods": [
+    { "name": "Grain", "unit": "person-years", "spoilage": 0.10, "weight": 1.0, "tier": "life", "food": true, "colour": "#e0c050" },
+    { "name": "Wild food", "unit": "person-years", "spoilage": 0.50, "weight": 1.0, "tier": "life", "food": true, "colour": "#7aa860" },
+    { "name": "Meat and milk", "unit": "person-years", "spoilage": 0.40, "weight": 1.2, "tier": "life", "food": true, "colour": "#c06850" },
+    { "name": "Wood", "unit": "loads", "spoilage": 0.05, "weight": 1.0, "tier": "none", "food": false, "colour": "#8a6a40" },
+    { "name": "Flint", "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#a0a0a8" },
+    { "name": "Clay", "unit": "loads", "spoilage": 0.0, "weight": 1.0, "tier": "none", "food": false, "colour": "#b07850" },
+    { "name": "Fibre", "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#d8d0a0" },
+    { "name": "Wool", "unit": "loads", "spoilage": 0.05, "weight": 0.5, "tier": "none", "food": false, "colour": "#f0ece0" },
+    { "name": "Hides", "unit": "loads", "spoilage": 0.10, "weight": 0.8, "tier": "none", "food": false, "colour": "#906040" },
+    { "name": "Stone tools", "unit": "sets", "spoilage": 0.05, "weight": 0.3, "tier": "everyday", "food": false, "colour": "#707880" },
+    { "name": "Pottery", "unit": "sets", "spoilage": 0.08, "weight": 0.6, "tier": "everyday", "food": false, "colour": "#c06030" },
+    { "name": "Cloth", "unit": "sets", "spoilage": 0.10, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#d0b0e0" },
+    { "name": "Salt", "unit": "loads", "spoilage": 0.0, "weight": 0.5, "tier": "luxury", "food": false, "colour": "#f8f8f8" },
+    { "name": "Obsidian", "unit": "loads", "spoilage": 0.0, "weight": 0.3, "tier": "luxury", "food": false, "colour": "#202028" },
+    { "name": "Ornaments", "unit": "sets", "spoilage": 0.02, "weight": 0.05, "tier": "luxury", "food": false, "colour": "#e0a020" }
+  ]
+}

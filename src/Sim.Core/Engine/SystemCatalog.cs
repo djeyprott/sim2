@@ -1,5 +1,6 @@
 using Sim.Core.Climate;
 using Sim.Core.Farming;
+using Sim.Core.Goods;
 using Sim.Core.People;
 using Sim.Core.Settlements;
 
@@ -21,6 +22,7 @@ public static class SystemCatalog
         {
             climate,
             new PopulationSystem(),
+            GoodsSystem.CreateDefault(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
         };
 

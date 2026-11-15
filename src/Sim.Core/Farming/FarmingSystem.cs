@@ -1,8 +1,10 @@
 using Sim.Core.Climate;
 using Sim.Core.Engine;
 using Sim.Core.Geo;
+using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Settlements;
 
 namespace Sim.Core.Farming;
 
@@ -21,6 +23,12 @@ public sealed class FarmingSystem : ISimSystem
     public const string SinceField = "farming.since";
     public const string CapacityField = "farming.capacity";
     public const string LandShareField = "farming.landShare";
+
+    /// <summary>1 where the cell's last harvest went into its settlement's store, so its farmers eat from it.</summary>
+    public const string StoreFedField = "farming.storeFed";
+
+    /// <summary>Months of food missing since the cell's last harvest, as a share of a year's needs.</summary>
+    public const string HungerField = "farming.hunger";
 
     /// <summary>Tick plus one of the cell's last famine (0: none yet).</summary>
     public const string LastFamineField = "farming.lastFamine";
@@ -46,6 +54,13 @@ public sealed class FarmingSystem : ISimSystem
     private double[] _capacity = Array.Empty<double>();
     private double[] _landShare = Array.Empty<double>();
     private int[] _lastFaminePlusOne = Array.Empty<int>();
+    private int[] _storeFed = Array.Empty<int>();
+    private double[] _hunger = Array.Empty<double>();
+    private int[]? _settlementPlusOne;
+    private Stockpiles? _stockpiles;
+    private int _grain = -1;
+    private EntityTable? _settlements;
+    private IntColumn? _settlementCell;
     private int[] _wildCrops = Array.Empty<int>();
     private EntityTable? _origins;
     private IntColumn? _originCrop;
@@ -97,7 +112,7 @@ public sealed class FarmingSystem : ISimSystem
 
     public string Name => SystemName;
 
-    public int IntervalMonths => 3;
+    public int IntervalMonths => 1;
 
     public CropSet Crops { get; }
 
@@ -111,6 +126,8 @@ public sealed class FarmingSystem : ISimSystem
         _capacity = state.AddDoubleField(CapacityField);
         _landShare = state.AddDoubleField(LandShareField);
         _lastFaminePlusOne = state.AddIntField(LastFamineField);
+        _storeFed = state.AddIntField(StoreFedField);
+        _hunger = state.AddDoubleField(HungerField);
         _wildCrops = state.AddIntField(WildCropsField);
 
         _origins = state.AddTable(OriginTableName);
@@ -133,6 +150,18 @@ public sealed class FarmingSystem : ISimSystem
         _biome = state.IntField(ClimateSystem.BiomeField);
         _foragerCapacity = state.DoubleField(ForagerSystem.CapacityField);
         _groups = new PopulationGroups(state);
+        if (state.HasTable(Stockpiles.LedgerTableName))
+        {
+            _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
+            _grain = _stockpiles.Goods.IndexOf(GoodSet.Grain);
+        }
+
+        if (state.HasField(SettlementSystem.SettlementField))
+        {
+            _settlementPlusOne = state.IntField(SettlementSystem.SettlementField);
+            _settlements = state.Table(SettlementSystem.TableName);
+            _settlementCell = _settlements.IntColumn("cell");
+        }
 
         int count = map.CellCount;
         _baseWarmest = new double[count];
@@ -195,19 +224,20 @@ public sealed class FarmingSystem : ISimSystem
     public void Update(SimContext context)
     {
         int month = (int)(context.Tick % GameDate.MonthsPerYear);
-        int[] cells;
         if (month == NorthernHarvestMonth)
         {
-            cells = _northCells;
+            HarvestSeason(_northCells, context);
         }
         else if (month == SouthernHarvestMonth)
         {
-            cells = _southCells;
+            HarvestSeason(_southCells, context);
         }
-        else
-        {
-            return;
-        }
+
+        Eat(context.Tick);
+    }
+
+    private void HarvestSeason(int[] cells, SimContext context)
+    {
 
         Rng rng = context.Rng;
         for (int region = 0; region < _harvestFactor.Length; region++)
@@ -334,14 +364,38 @@ public sealed class FarmingSystem : ISimSystem
             farmers += joining;
         }
 
-        double food = farmers <= 0.0 ? 1.0 : harvest <= 0.0 ? 0.0 : Math.Min(1.0, harvest / farmers);
-        if (food >= 1.0)
+        double food;
+        if (_stockpiles != null && _settlementPlusOne != null && _settlementPlusOne[cell] > 0)
         {
-            farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / harvest);
+            // The harvest goes into the settlement's store, which the farmers eat from month by month.
+            // They grow toward what the land feeds in an average year, but only when they did not go
+            // hungry since the last harvest and the store still held a safety margin when it came in.
+            bool margin = _stockpiles.Stock(cell, _grain) >= _parameters.GrowthReserve * farmers;
+            _stockpiles.Produce(cell, _grain, harvest);
+            food = groups.Food(farmerGroup);
+            if (margin && _hunger[cell] <= 0.0 && capacity > 0.0 && farmers < capacity)
+            {
+                farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / capacity);
+            }
+
+            _storeFed[cell] = 1;
+            _hunger[cell] = 0.0;
         }
         else
         {
-            farmers = Famine(cell, farmers, food, tick);
+            // No settlement: the farmers eat their harvest at once and whatever is left over is lost.
+            food = farmers <= 0.0 ? 1.0 : harvest <= 0.0 ? 0.0 : Math.Min(1.0, harvest / farmers);
+            _stockpiles?.ProduceAndConsume(_grain, harvest, Math.Min(harvest, farmers));
+            _storeFed[cell] = 0;
+            _hunger[cell] = 0.0;
+            if (food >= 1.0)
+            {
+                farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / harvest);
+            }
+            else
+            {
+                farmers = Famine(cell, farmers, food, tick, 1.0);
+            }
         }
 
         if (capacity <= 0.0)
@@ -361,6 +415,8 @@ public sealed class FarmingSystem : ISimSystem
             groups.SetSize(farmerGroup, 0.0);
             _cropPlusOne[cell] = 0;
             _sincePlusOne[cell] = 0;
+            _storeFed[cell] = 0;
+            _hunger[cell] = 0.0;
             _capacity[cell] = 0.0;
             _landShare[cell] = 0.0;
             return;
@@ -376,7 +432,53 @@ public sealed class FarmingSystem : ISimSystem
     /// the shortfall. Those leaving go to neighbouring farming cells that have room, weighted by that
     /// room; any who find none go back to foraging in their own cell. Returns the farmers who stay.
     /// </summary>
-    private double Famine(int cell, double farmers, double food, long tick)
+    // Each month, farmers whose last harvest went into their settlement's store eat a month's food from it.
+    // A store that runs short brings famine at a twelfth of the yearly rate for each hungry month.
+    private void Eat(long tick)
+    {
+        if (_stockpiles == null || _settlements == null)
+        {
+            return;
+        }
+
+        // Only cells with a settlement have a store, so visit the settlements, in id order.
+        PopulationGroups groups = _groups!;
+        for (int id = 0; id < _settlements.IdCount; id++)
+        {
+            if (!_settlements.IsAlive(id))
+            {
+                continue;
+            }
+
+            int cell = _settlementCell![id];
+            if (_storeFed[cell] == 0 || _cropPlusOne[cell] <= 0)
+            {
+                continue;
+            }
+
+            int group = groups.Find(cell, _farmer);
+            double farmers = group >= 0 ? groups.Size(group) : 0.0;
+            if (farmers <= 0.0)
+            {
+                continue;
+            }
+
+            double need = farmers / GameDate.MonthsPerYear;
+            double met = _stockpiles.Consume(cell, _grain, need) / need;
+            groups.SetFood(group, met);
+            if (met < 1.0)
+            {
+                _hunger[cell] += (1.0 - met) / GameDate.MonthsPerYear;
+                farmers = Famine(cell, farmers, met, tick, 1.0 / GameDate.MonthsPerYear);
+                group = groups.Find(cell, _farmer);
+                groups.SetSize(group, Math.Max(0.0, farmers));
+                double capacity = _capacity[cell];
+                _landShare[cell] = capacity > 0.0 ? Math.Min(1.0, farmers / capacity) : 0.0;
+            }
+        }
+    }
+
+    private double Famine(int cell, double farmers, double food, long tick, double scale)
     {
         double shortfall = 1.0 - food;
         if (food < _parameters.FamineRecordBelow)
@@ -384,8 +486,8 @@ public sealed class FarmingSystem : ISimSystem
             _lastFaminePlusOne[cell] = (int)tick + 1;
         }
 
-        double dying = _parameters.FamineDeathShare * shortfall * farmers;
-        double leaving = _parameters.FamineLeaveShare * shortfall * farmers;
+        double dying = _parameters.FamineDeathShare * shortfall * farmers * scale;
+        double leaving = _parameters.FamineLeaveShare * shortfall * farmers * scale;
         farmers -= dying + leaving;
         if (leaving <= 0.0)
         {

@@ -9,6 +9,7 @@ using Sim.Core.Climate;
 using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Geo;
+using Sim.Core.Goods;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
@@ -25,6 +26,7 @@ public partial class Main : Node2D
 {
     private const float MaxZoom = 40f;
     private const double SettlementRefreshSeconds = 1.0;
+    private const string GrainStockField = Stockpiles.StockFieldPrefix + "grain";
     private const float KeyPanPixelsPerSecond = 900f;
     private const float ClickSlopPixels = 5f;
 
@@ -234,6 +236,7 @@ public partial class Main : Node2D
             climate?.WorldTemperatureShift() ?? double.NaN,
             foragers != null ? new PopulationGroups(sim.State).WorldTotal() : double.NaN,
             farmingSystem?.WorldFarmers() ?? double.NaN,
+            sim.State.HasField(GrainStockField) ? sim.State.DoubleField(GrainStockField).Sum() : double.NaN,
         });
 
         _hover = new LiveCell();
@@ -286,6 +289,11 @@ public partial class Main : Node2D
             if (summary.Length >= 3 && !double.IsNaN(summary[2]))
             {
                 worldInfo += ", " + (summary[2] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M farmers";
+            }
+
+            if (summary.Length >= 4 && !double.IsNaN(summary[3]))
+            {
+                worldInfo += "   Food in store " + (summary[3] / 1e6).ToString("0.00", CultureInfo.InvariantCulture) + " M";
             }
         }
 
@@ -998,7 +1006,7 @@ public partial class Main : Node2D
     }
 
     // Runs on the simulation thread: the cell's settlement, if any.
-    private static string DescribeSettlement(int cell, SettlementSystem? settlements)
+    private static string DescribeSettlement(Simulation sim, int cell, SettlementSystem? settlements)
     {
         if (settlements?.InCell(cell) is not { } s)
         {
@@ -1006,8 +1014,15 @@ public partial class Main : Node2D
         }
 
         var founded = new GameDate(s.Founded);
-        return $"\nSettlement: {s.Name}, founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, "
+        string text = $"\nSettlement: {s.Name}, founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, "
             + $"{s.Population.ToString("N0", CultureInfo.InvariantCulture)} people";
+        if (sim.State.HasField(GrainStockField))
+        {
+            double grain = sim.State.DoubleField(GrainStockField)[cell];
+            text += $"\n  Grain in store: {grain.ToString("N0", CultureInfo.InvariantCulture)} person-years";
+        }
+
+        return text;
     }
 
     // Asks the simulation for a cell's current climate every so often, without waiting for the answer.
@@ -1047,7 +1062,7 @@ public partial class Main : Node2D
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeSettlement(target, settlementsForCell) + DescribeGroups(sim, target, occupations)
+                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeGroups(sim, target, occupations)
                     + DescribeFarming(sim, target, farmingForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));

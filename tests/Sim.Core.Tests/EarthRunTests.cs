@@ -3,6 +3,7 @@ using Sim.Core.Climate;
 using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Geo;
+using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
@@ -60,6 +61,20 @@ public sealed class EarthRunResult
 
     public int SettlementsAt5000 { get; set; }
 
+    /// <summary>Largest share by which any good's ledger failed to balance, checked every 100 years.</summary>
+    public double MaxLedgerImbalance { get; set; }
+
+    /// <summary>True if any stockpile ever held a negative or invalid amount.</summary>
+    public bool BadStock { get; set; }
+
+    /// <summary>Grain in store worldwide after 5,000 years.</summary>
+    public double GrainInStoreAt5000 { get; set; }
+
+    /// <summary>Farming cells counted once per year, for the share of farming cell-years with famine.</summary>
+    public long FarmingCellYears { get; set; }
+
+    public double FamineShare => FarmingCellYears == 0 ? 0.0 : FamineCellYears / (double)FarmingCellYears;
+
     /// <summary>Share of farming cells on grassland away from rivers after 5,000 years.</summary>
     public double OpenGrasslandFarmingShare { get; set; }
 
@@ -106,6 +121,8 @@ public sealed class EarthRunResult
             + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed "
             + $"({100.0 * PonticOpenGrasslandFarmedShare:F0}% of its {PonticOpenGrasslandCells} open grassland cells); "
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
+            + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
+            + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
@@ -159,6 +176,7 @@ public abstract class EarthRunFixtureBase
         }
 
         var groups = new PopulationGroups(sim.State);
+        var stockpiles = new Stockpiles(sim.State, GoodSet.LoadDefault());
         var people = new double[world.CellCount];
         int[] startBiome = land.Select(cell => biome[cell]).ToArray();
         var changed = new bool[land.Length];
@@ -192,6 +210,11 @@ public abstract class EarthRunFixtureBase
                     changed[i] = true;
                 }
 
+                if (cropPlusOne != null && cropPlusOne[cell] > 0)
+                {
+                    result.FarmingCellYears++;
+                }
+
                 // Farming that started since the last check on land where it may not.
                 if (cropPlusOne != null && cropPlusOne[cell] > 0 && sincePlusOne![cell] - 1 > lastCheck
                     && biome[cell] >= 0 && forbidden[biome[cell]] && world.River(cell) != RiverSize.Major)
@@ -217,9 +240,10 @@ public abstract class EarthRunFixtureBase
                 }
             }
 
-            if (year % 100 == 0)
+            if (year % 100 == 0 || year == years - 1)
             {
                 CheckGroups(world, groups, result);
+                CheckGoods(stockpiles, result);
             }
 
             double ratio = foragers.WorldPopulation() / foragerCapacity.Sum();
@@ -230,6 +254,7 @@ public abstract class EarthRunFixtureBase
             {
                 result.PopulationAt5000 = groups.WorldTotal();
                 result.FarmersAt5000 = farmingSystem?.WorldFarmers() ?? 0.0;
+                result.GrainInStoreAt5000 = stockpiles.InStore(stockpiles.Goods.IndexOf(GoodSet.Grain));
                 if (cropPlusOne != null)
                 {
                     int grassland = climate.Biomes.IndexOf("Grassland");
@@ -297,6 +322,21 @@ public abstract class EarthRunFixtureBase
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    private static void CheckGoods(Stockpiles stockpiles, EarthRunResult result)
+    {
+        foreach (Good good in stockpiles.Goods.Goods)
+        {
+            result.MaxLedgerImbalance = Math.Max(result.MaxLedgerImbalance, stockpiles.Imbalance(good.Index));
+            foreach (double v in stockpiles.StockField(good.Index))
+            {
+                if (v < 0.0 || double.IsNaN(v) || double.IsInfinity(v))
+                {
+                    result.BadStock = true;
+                }
+            }
+        }
+    }
 
     private static void MeasureFamines(int[] land, double[] people, double[] previousPeople, int[] lastFaminePlusOne,
         long lastCheck, int year, double[] before, double[] low, int[] start, EarthRunResult result)
@@ -474,6 +514,17 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         {
             Assert.True(r.SettlementsAt5000 > 0, $"Seed {r.Seed}: no settlements.");
             Assert.Equal(0, r.SettlementProblems);
+        });
+    }
+
+    [Fact]
+    public void Goods_ledger_balances_and_stocks_stay_valid()
+    {
+        Assert.All(_results, r =>
+        {
+            Assert.True(r.MaxLedgerImbalance < 1e-6, $"Seed {r.Seed}: ledger out by {r.MaxLedgerImbalance:E2}.");
+            Assert.False(r.BadStock, $"Seed {r.Seed}: a stockpile went negative or invalid.");
+            Assert.True(r.GrainInStoreAt5000 > 0.0, $"Seed {r.Seed}: no grain in store.");
         });
     }
 

@@ -86,6 +86,8 @@ public sealed class WorldState
         return table;
     }
 
+    public bool HasTable(string name) => _tables.Any(t => t.Name == name);
+
     public EntityTable Table(string name)
     {
         foreach (EntityTable table in _tables)

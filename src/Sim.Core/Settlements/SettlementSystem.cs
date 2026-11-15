@@ -1,4 +1,5 @@
 using Sim.Core.Engine;
+using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
 
@@ -30,6 +31,7 @@ public sealed class SettlementSystem : ISimSystem
     private DoubleColumn? _population;
     private StringColumn? _name;
     private PopulationGroups? _groups;
+    private Stockpiles? _stockpiles;
     private int[] _land = Array.Empty<int>();
     private int[] _farmerGroup = Array.Empty<int>();
 
@@ -62,6 +64,10 @@ public sealed class SettlementSystem : ISimSystem
     {
         WorldMap map = context.Map;
         _groups = new PopulationGroups(context.State);
+        if (context.State.HasTable(Stockpiles.LedgerTableName))
+        {
+            _stockpiles = new Stockpiles(context.State, GoodSet.LoadDefault());
+        }
         _land = Enumerable.Range(0, map.CellCount).Where(map.IsLand).ToArray();
         _farmerGroup = new int[map.CellCount];
     }
@@ -90,6 +96,7 @@ public sealed class SettlementSystem : ISimSystem
             {
                 _table!.Remove(id);
                 _settlementPlusOne[cell] = 0;
+                _stockpiles?.LoseAll(cell);
                 continue;
             }
 

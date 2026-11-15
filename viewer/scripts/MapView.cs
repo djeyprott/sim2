@@ -425,9 +425,12 @@ public partial class CellOutline : Node2D
 /// </summary>
 public partial class SettlementLayer : Node2D
 {
-    private const float NameMinZoom = 6f;
-    private const int MaxNames = 300;
-    private const int FontSize = 13;
+    private const float NameMinZoom = 7f;
+    private const int MaxNames = 60;
+    private const int FontSize = 12;
+
+    // A cell is about 0.46 degrees across, so this many screen pixels per unit of zoom.
+    private const float CellPixelsPerZoom = 0.46f * MapView.PixelsPerDegree;
 
     private Vector2[] _positions = Array.Empty<Vector2>();
     private string[] _names = Array.Empty<string>();
@@ -462,12 +465,20 @@ public partial class SettlementLayer : Node2D
             return;
         }
 
+        // Dots grow with the cells on screen, so at the world view they stay small marks that do not hide the map.
         float unit = 1f / _zoom;
+        float cellPixels = CellPixelsPerZoom * _zoom;
+        float baseHalf = Math.Clamp(0.12f * cellPixels, 0.5f, 2.5f);
+        bool outline = baseHalf >= 1.2f;
         for (int i = 0; i < _positions.Length; i++)
         {
-            float half = (_populations[i] >= 300f ? 2.5f : 1.5f) * unit;
+            float half = (_populations[i] >= 300f ? baseHalf : 0.7f * baseHalf) * unit;
             Vector2 p = _positions[i];
-            DrawRect(new Rect2(p.X - half - unit, p.Y - half - unit, 2f * (half + unit), 2f * (half + unit)), Colors.Black);
+            if (outline)
+            {
+                DrawRect(new Rect2(p.X - half - unit, p.Y - half - unit, 2f * (half + unit), 2f * (half + unit)), Colors.Black);
+            }
+
             DrawRect(new Rect2(p.X - half, p.Y - half, 2f * half, 2f * half), Colors.White);
         }
 

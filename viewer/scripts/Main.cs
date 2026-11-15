@@ -1270,7 +1270,7 @@ public partial class Main : Node2D
                 SetMapMode(PopulationMode);
                 SelectCell(-1);
                 _camera.Position = MapView.MapPosition(36.5, 40.0);
-                ZoomAt(MapView.MapPosition(36.5, 40.0), 4f);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 5f);
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
             case 225:

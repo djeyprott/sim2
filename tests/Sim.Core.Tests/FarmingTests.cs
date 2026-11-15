@@ -106,10 +106,13 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Simulation sim = FastFarming(5, harvestSpread: 0.4);
         int[] lastFamine = sim.State.IntField(FarmingSystem.LastFamineField);
         var groups = new PopulationGroups(sim.State);
-        double previous = 0.0;
-        bool dropped = false;
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        var previous = new double[_world.CellCount];
+        var now = new double[_world.CellCount];
+        int hitCellsThatLostFarmers = 0;
         for (int year = 0; year < 300; year++)
         {
+            long yearStart = sim.Tick;
             sim.Run(12);
             for (int group = 0; group < groups.IdCount; group++)
             {
@@ -119,17 +122,20 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
                 }
             }
 
-            double farmers = Farming(sim).WorldFarmers();
-            if (year > 100 && farmers < previous * 0.98)
+            groups.FillCellTotals(now, farmer);
+            for (int cell = 0; cell < now.Length; cell++)
             {
-                dropped = true;
+                if (lastFamine[cell] - 1 >= yearStart && previous[cell] > 0.0 && now[cell] < previous[cell])
+                {
+                    hitCellsThatLostFarmers++;
+                }
             }
 
-            previous = farmers;
+            (previous, now) = (now, previous);
         }
 
         Assert.True(lastFamine.Count(t => t > 0) > 0, "No famine was recorded.");
-        Assert.True(dropped, "World farmers never fell from one year to the next.");
+        Assert.True(hitCellsThatLostFarmers > 0, "No famine-hit cell lost farmers over the year.");
     }
 
     [Fact]

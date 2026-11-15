@@ -2,13 +2,14 @@
 
 Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: steps 1 to 3 done 2026-11-15.
+Progress: steps 1 to 4 done 2026-11-15.
 
 - Step 1: goods, the ledger and stockpiles; harvests go into settlement stores and farmers eat from them monthly. The ledger balances to about 1e-12 in every seed.
 - Step 2: wood, flint, clay, fibre, salt and obsidian are gathered by the farmers of each settlement, up to a stock per person until prices take over in step 4. Obsidian comes from 18 real sources; salt from 16 real deposits plus dry coasts and salt-lake shores.
 - Step 3: craftsmen (a new occupation living in settlements, up to a tenth of a settlement's store-fed people) make stone tools, pottery, cloth and ornaments by recipes. Farmers and craftsmen use up everyday and luxury goods; needs met adds up to 15% to farmers' growth. With craftsmen eating from the store, farmers now grow only while the store holds half a year's food (was a quarter).
-- Current results (real homelands, 10 seeds): shortages in 3.9% to 4.5% of farming cell-years; famine deaths with a store are 0.52 to 0.63 of those without, still short of the halving test, which trade (step 5) and tuning (step 8) are expected to close; severe famines under 0.1%; population 17.3 to 26.9 million after 5,000 years.
-- A 5,000-year headless run takes 55 to 95 seconds depending on the build machine; the runner prints each system's time.
+- Step 4: prices in food, worked out when needed (never stored): a good's base value (goods.json) times (wanted / in store) ^ 0.7, between a fifth and five times the base (prices.json). A settlement wants food to the next harvest plus half a year, a year of needs plus the craft reserve, and the materials its craftsmen would use. Craftsmen take up only work that pays more than the grain they eat, by the best-paying recipe; farmers gather only what is wanted and worth their time (this replaced step 2's stock-per-person cap). The tooltip shows prices.
+- Current results (real homelands, 10 seeds): shortages in 3.9% to 4.5% of farming cell-years; famine deaths with a store are 0.52 to 0.63 of those without, 0.47 to 0.68 after step 4, still short of the halving test, which trade (step 5) and tuning (step 8) are expected to close; severe famines under 0.1%; population 17.3 to 26.9 million after 5,000 years.
+- A 5,000-year headless run takes 55 to 95 seconds depending on the build machine (90 seconds after step 4, climate the largest part); the runner prints each system's time.
 
 Change log:
 - 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
@@ -152,7 +153,7 @@ Each step ends with a new development build you can download.
 1. Goods list, ledger and stockpiles; harvests go into stores; food eaten from stores (done)
 2. Natural resources and gathering (done)
 3. Craftsmen and recipes; everyday and luxury needs (done)
-4. Prices
+4. Prices (done)
 5. Trade links and trade; trade routes in the viewer
 6. Herding
 7. Goods map mode, tooltip and statistics file

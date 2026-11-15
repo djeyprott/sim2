@@ -31,6 +31,7 @@ public static class SystemCatalog
             systems.Add(FarmingSystem.CreateDefault(climate.Biomes, occupations));
             systems.Add(SettlementSystem.CreateDefault(occupations));
             systems.Add(ResourceSystem.CreateDefault(climate.Biomes, occupations));
+            systems.Add(CraftSystem.CreateDefault(occupations));
         }
 
         return systems;

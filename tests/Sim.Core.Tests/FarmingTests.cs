@@ -76,6 +76,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
             SettlementSystem.CreateDefault(occupations),
             ResourceSystem.CreateDefault(climate.Biomes, occupations),
+            CraftSystem.CreateDefault(occupations),
         };
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -278,8 +279,36 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         foreach (string gathered in new[] { "Wood", "Clay", "Fibre" })
         {
             int g = stockpiles.Goods.IndexOf(gathered);
-            Assert.True(stockpiles.InStore(g) > 0.0, $"No {gathered} was gathered into stores.");
+            Assert.True(stockpiles.Produced(g) > 0.0, $"No {gathered} was gathered into stores.");
         }
+
+        // Craftsmen make everyday goods, and people use them up.
+        foreach (string made in new[] { "Pottery", "Cloth", "Stone tools" })
+        {
+            int g = stockpiles.Goods.IndexOf(made);
+            Assert.True(stockpiles.Produced(g) > 0.0 && stockpiles.Consumed(g) > 0.0, $"No {made} was made and used.");
+        }
+
+        var groups = new PopulationGroups(sim.State);
+        int craftsman = OccupationSet.LoadDefault().IndexOf(OccupationSet.Craftsman);
+        double craftsmen = 0.0;
+        double everydayMet = 0.0;
+        for (int group = 0; group < groups.IdCount; group++)
+        {
+            if (groups.IsAlive(group) && groups.Occupation(group) == craftsman)
+            {
+                craftsmen += groups.Size(group);
+                Assert.True(settlement[groups.Cell(group)] > 0 || groups.Size(group) == 0.0, "Craftsmen live in settlements.");
+            }
+
+            if (groups.IsAlive(group))
+            {
+                everydayMet = Math.Max(everydayMet, groups.Everyday(group));
+            }
+        }
+
+        Assert.True(craftsmen > 0.0, "There should be craftsmen.");
+        Assert.True(everydayMet > 0.5, "Some group should have most of its everyday needs met.");
     }
 
     [Fact]

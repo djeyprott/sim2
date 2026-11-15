@@ -1,0 +1,21 @@
+// Craftsmen and recipes (milestone 2, step 3).
+// A recipe turns inputs into an output. perWorker: units of output one craftsman makes in a
+// year; inputs: units of each input used up per unit of output. Where an output has several
+// recipes, they are tried in order (for example cloth from fibre, then from wool).
+// Each January a settlement's craftsmen make what its people are short of: their needs for the
+// year ahead plus reserveYears more, less what is in store. The craftsmen's number moves toward
+// what that work takes, by craftsmanChangeRate of the gap a year, taking people from the
+// farmers or giving them back, and never above maxCraftsmanShare of the settlement's
+// store-fed people.
+{
+  "maxCraftsmanShare": 0.1,
+  "craftsmanChangeRate": 0.2,
+  "reserveYears": 0.5,
+  "recipes": [
+    { "output": "Stone tools", "perWorker": 4.0, "inputs": { "Flint": 0.5 } },
+    { "output": "Pottery", "perWorker": 4.0, "inputs": { "Clay": 0.5, "Wood": 0.3 } },
+    { "output": "Cloth", "perWorker": 3.0, "inputs": { "Fibre": 1.0 } },
+    { "output": "Cloth", "perWorker": 3.0, "inputs": { "Wool": 1.0 } },
+    { "output": "Ornaments", "perWorker": 5.0, "inputs": { "Flint": 0.1, "Wood": 0.1 } }
+  ]
+}

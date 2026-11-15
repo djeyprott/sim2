@@ -21,6 +21,8 @@ public sealed class PopulationGroups
     private readonly IntColumn _next;
     private readonly DoubleColumn _size;
     private readonly DoubleColumn _food;
+    private readonly DoubleColumn _everyday;
+    private readonly DoubleColumn _luxury;
 
     // Per cell: the first group's id plus one; 0 means the cell has no groups.
     private readonly int[] _firstPlusOne;
@@ -33,6 +35,8 @@ public sealed class PopulationGroups
         _next = _table.IntColumn("nextPlusOne");
         _size = _table.DoubleColumn("size");
         _food = _table.DoubleColumn("food");
+        _everyday = _table.DoubleColumn("everyday");
+        _luxury = _table.DoubleColumn("luxury");
         _firstPlusOne = state.IntField(FirstGroupField);
     }
 
@@ -48,6 +52,8 @@ public sealed class PopulationGroups
         table.AddIntColumn("nextPlusOne");
         table.AddDoubleColumn("size");
         table.AddDoubleColumn("food");
+        table.AddDoubleColumn("everyday");
+        table.AddDoubleColumn("luxury");
         state.AddIntField(FirstGroupField);
     }
 
@@ -74,6 +80,18 @@ public sealed class PopulationGroups
     }
 
     public void SetFood(int group, double food) => _food[group] = Math.Clamp(food, 0.0, 1.0);
+
+    /// <summary>Share of the group's everyday needs (tools, pottery, cloth) met last year, 0 to 1.</summary>
+    public double Everyday(int group) => _everyday[group];
+
+    /// <summary>Share of the group's luxury needs (salt, obsidian, ornaments) met last year, 0 to 1.</summary>
+    public double Luxury(int group) => _luxury[group];
+
+    public void SetNeedsMet(int group, double everyday, double luxury)
+    {
+        _everyday[group] = Math.Clamp(everyday, 0.0, 1.0);
+        _luxury[group] = Math.Clamp(luxury, 0.0, 1.0);
+    }
 
     /// <summary>The ids of a cell's groups, in list order.</summary>
     public CellGroups InCell(int cell) => new CellGroups(this, _firstPlusOne[cell] - 1);
@@ -126,6 +144,8 @@ public sealed class PopulationGroups
         _occupation[group] = occupation;
         _size[group] = 0.0;
         _food[group] = 1.0;
+        _everyday[group] = 0.0;
+        _luxury[group] = 0.0;
 
         // Append to the end of the cell's list, so older groups keep their place.
         int last = -1;
@@ -146,8 +166,11 @@ public sealed class PopulationGroups
         return group;
     }
 
-    /// <summary>Adds people to a group. Its food becomes the size-weighted average of the two.</summary>
-    public void AddPeople(int group, double people, double food)
+    /// <summary>
+    /// Adds people to a group. Its conditions become the size-weighted averages of the two; needs met
+    /// that are not given (negative) are taken to be the group's own.
+    /// </summary>
+    public void AddPeople(int group, double people, double food, double everyday = -1.0, double luxury = -1.0)
     {
         if (people <= 0.0)
         {
@@ -155,8 +178,19 @@ public sealed class PopulationGroups
         }
 
         double size = _size[group];
-        _food[group] = Math.Clamp((_food[group] * size + food * people) / (size + people), 0.0, 1.0);
-        _size[group] = size + people;
+        double total = size + people;
+        _food[group] = Math.Clamp((_food[group] * size + food * people) / total, 0.0, 1.0);
+        if (everyday >= 0.0)
+        {
+            _everyday[group] = Math.Clamp((_everyday[group] * size + everyday * people) / total, 0.0, 1.0);
+        }
+
+        if (luxury >= 0.0)
+        {
+            _luxury[group] = Math.Clamp((_luxury[group] * size + luxury * people) / total, 0.0, 1.0);
+        }
+
+        _size[group] = total;
     }
 
     /// <summary>Total people in a cell, over all its groups.</summary>
@@ -248,7 +282,7 @@ public sealed class PopulationGroups
             }
         }
 
-        AddPeople(target, _size[smallest], _food[smallest]);
+        AddPeople(target, _size[smallest], _food[smallest], _everyday[smallest], _luxury[smallest]);
         Remove(cell, smallest);
     }
 

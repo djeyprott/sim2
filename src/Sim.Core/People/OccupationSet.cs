@@ -35,6 +35,7 @@ public sealed class OccupationSet
 {
     public const string Forager = "Forager";
     public const string Farmer = "Farmer";
+    public const string Craftsman = "Craftsman";
 
     private readonly Occupation[] _occupations;
 
@@ -88,6 +89,8 @@ public sealed class OccupationSet
     }
 
     public Occupation Get(int index) => _occupations[index];
+
+    public bool Contains(string name) => _occupations.Any(o => o.Name == name);
 
     public int IndexOf(string name)
     {

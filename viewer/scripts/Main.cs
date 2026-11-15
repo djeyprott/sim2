@@ -1201,6 +1201,11 @@ public partial class Main : Node2D
             string name = occupations.Get(groups.Occupation(group)).Name;
             text.Append($"\n  {name}: {groups.Size(group).ToString("N0", CultureInfo.InvariantCulture)}, "
                 + $"food {(groups.Food(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%");
+            if (groups.Everyday(group) > 0.0 || groups.Luxury(group) > 0.0)
+            {
+                text.Append($", everyday {(groups.Everyday(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%"
+                    + $", luxury {(groups.Luxury(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%");
+            }
         }
 
         return text.ToString();

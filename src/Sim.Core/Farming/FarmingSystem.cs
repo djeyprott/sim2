@@ -58,6 +58,7 @@ public sealed class FarmingSystem : ISimSystem
     private double[] _landShare = Array.Empty<double>();
     private int[] _lastFaminePlusOne = Array.Empty<int>();
     private int[] _storeFed = Array.Empty<int>();
+    private readonly int _craftsman;
     private double[] _famineDeaths = Array.Empty<double>();
     private double[] _hunger = Array.Empty<double>();
     private int[]? _settlementPlusOne;
@@ -101,6 +102,7 @@ public sealed class FarmingSystem : ISimSystem
         Crops = crops;
         _forager = occupations.IndexOf(OccupationSet.Forager);
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
+        _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
         _noFarmingBiome = new bool[biomes.Count];
         _biomeFactor = Enumerable.Repeat(1.0, biomes.Count).ToArray();
         foreach (KeyValuePair<string, double> pair in parameters.BiomeFactors.OrderBy(p => p.Key, StringComparer.Ordinal))
@@ -362,7 +364,8 @@ public sealed class FarmingSystem : ISimSystem
         // Where the harvest goes into a store, the farmers grow (and take in foragers) only while the
         // store still held a safety margin when the harvest came in.
         bool stored = _stockpiles != null && _settlementPlusOne != null && _settlementPlusOne[cell] > 0;
-        bool margin = !stored || _stockpiles!.Stock(cell, _grain) >= _parameters.GrowthReserve * farmers;
+        double craftsmen = Craftsmen(cell);
+        bool margin = !stored || _stockpiles!.Stock(cell, _grain) >= _parameters.GrowthReserve * (farmers + craftsmen);
 
         // Foragers in the cell take up farming.
         int foragerGroup = groups.Find(cell, _forager);
@@ -382,10 +385,15 @@ public sealed class FarmingSystem : ISimSystem
             // but only when they did not go hungry since the last harvest and the store kept its margin.
             _stockpiles!.Produce(cell, _grain, harvest);
             food = groups.Food(farmerGroup);
+            // Craftsmen eat from the same store, so they count against what the land feeds; everyday
+            // and luxury needs met add a little to growth.
             double sustainable = capacity * (1.0 - _stockpiles.Goods.Get(_grain).Spoilage);
-            if (margin && _hunger[cell] <= 0.0 && sustainable > 0.0 && farmers < sustainable)
+            double fed = farmers + craftsmen;
+            if (margin && _hunger[cell] <= 0.0 && sustainable > 0.0 && fed < sustainable)
             {
-                farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / sustainable);
+                double bonus = 1.0 + _parameters.EverydayGrowthBonus * groups.Everyday(farmerGroup)
+                    + _parameters.LuxuryGrowthBonus * groups.Luxury(farmerGroup);
+                farmers += _parameters.GrowthRate * bonus * farmers * (1.0 - fed / sustainable);
             }
 
             _storeFed[cell] = 1;
@@ -473,19 +481,52 @@ public sealed class FarmingSystem : ISimSystem
                 continue;
             }
 
-            double need = farmers / GameDate.MonthsPerYear;
+            // Farmers and craftsmen eat from the store alike.
+            int craftsmanGroup = _craftsman >= 0 ? groups.Find(cell, _craftsman) : -1;
+            double craftsmen = craftsmanGroup >= 0 ? groups.Size(craftsmanGroup) : 0.0;
+            double need = (farmers + craftsmen) / GameDate.MonthsPerYear;
             double met = _stockpiles.Consume(cell, _grain, need) / need;
             groups.SetFood(group, met);
+            if (craftsmanGroup >= 0)
+            {
+                groups.SetFood(craftsmanGroup, met);
+            }
+
             if (met < 1.0)
             {
-                _hunger[cell] += (1.0 - met) / GameDate.MonthsPerYear;
-                farmers = Famine(cell, farmers, met, tick, 1.0 / GameDate.MonthsPerYear);
+                double scale = 1.0 / GameDate.MonthsPerYear;
+                _hunger[cell] += (1.0 - met) * scale;
+                farmers = Famine(cell, farmers, met, tick, scale);
                 group = groups.Find(cell, _farmer);
                 groups.SetSize(group, Math.Max(0.0, farmers));
+
+                // Hungry craftsmen die at the same rate; those who would leave go back to the fields.
+                if (craftsmen > 0.0)
+                {
+                    double dying = _parameters.FamineDeathShare * (1.0 - met) * craftsmen * scale;
+                    double toFields = _parameters.FamineLeaveShare * (1.0 - met) * craftsmen * scale;
+                    _famineDeaths[cell] += dying;
+                    craftsmanGroup = groups.Find(cell, _craftsman);
+                    groups.SetSize(craftsmanGroup, Math.Max(0.0, craftsmen - dying - toFields));
+                    groups.AddPeople(groups.Find(cell, _farmer), toFields, met);
+                    farmers += toFields;
+                }
+
                 double capacity = _capacity[cell];
                 _landShare[cell] = capacity > 0.0 ? Math.Min(1.0, farmers / capacity) : 0.0;
             }
         }
+    }
+
+    private double Craftsmen(int cell)
+    {
+        if (_craftsman < 0)
+        {
+            return 0.0;
+        }
+
+        int group = _groups!.Find(cell, _craftsman);
+        return group >= 0 ? _groups.Size(group) : 0.0;
     }
 
     private double Famine(int cell, double farmers, double food, long tick, double scale)

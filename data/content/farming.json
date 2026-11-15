@@ -51,6 +51,11 @@
   // held at least this share of a year's food when the new harvest came in (a safety margin).
   "growthReserve": 0.25,
 
+  // Farmers grow this much faster (as a share of growthRate) when their everyday needs (tools,
+  // pottery, cloth) are fully met, and this much more when their luxuries are (milestone 2).
+  "everydayGrowthBonus": 0.1,
+  "luxuryGrowthBonus": 0.05,
+
   // Once a farming cell is at least this full, each neighbouring cell where its crop grows at
   // least minSpreadSuitability well has spreadChance a year of taking up farming. A share of
   // the farmers (spreadShare) moves there.

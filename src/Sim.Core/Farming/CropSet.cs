@@ -189,6 +189,10 @@ public sealed class FarmingParameters
 
     public double GrowthReserve { get; set; } = 0.25;
 
+    public double EverydayGrowthBonus { get; set; } = 0.1;
+
+    public double LuxuryGrowthBonus { get; set; } = 0.05;
+
     public double SpreadWhenFull { get; set; } = 0.5;
 
     public double MinSpreadSuitability { get; set; } = 0.3;
@@ -217,7 +221,7 @@ public sealed class FarmingParameters
         double[] shares =
         {
             p.WildMinSuitability, p.RandomHomelandMinSuitability, p.InventionChance, p.ConversionRate, p.GrowthRate,
-            p.FamineDeathShare, p.FamineLeaveShare, p.FamineRecordBelow, p.GrowthReserve, p.SpreadWhenFull, p.MinSpreadSuitability, p.SpreadChance, p.SpreadShare, p.CropSwitchChance,
+            p.FamineDeathShare, p.FamineLeaveShare, p.FamineRecordBelow, p.GrowthReserve, p.EverydayGrowthBonus, p.LuxuryGrowthBonus, p.SpreadWhenFull, p.MinSpreadSuitability, p.SpreadChance, p.SpreadShare, p.CropSwitchChance,
         };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)))
         {

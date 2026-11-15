@@ -1,0 +1,14 @@
+// Needs beyond food (milestone 2, step 3): units of each good a person uses up in a year.
+// Each good's tier (everyday or luxury) comes from goods.json. Each January the store-fed
+// people of a settlement (farmers and craftsmen) take these from its store; the share met in
+// each tier is recorded on their groups and adds a little to farmers' growth (farming.json).
+{
+  "needs": {
+    "Stone tools": 0.1,
+    "Pottery": 0.1,
+    "Cloth": 0.1,
+    "Salt": 0.02,
+    "Obsidian": 0.01,
+    "Ornaments": 0.02
+  }
+}

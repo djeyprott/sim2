@@ -66,3 +66,25 @@ public class ResourceTests : IClassFixture<EarthWorldFixture>
         Assert.Throws<InvalidDataException>(() => ResourceRules.Parse(text.Replace("\"river\": 1.0", "\"river\": 2.0")));
     }
 }
+
+public class CraftRuleTests
+{
+    [Fact]
+    public void Recipes_and_needs_load()
+    {
+        GoodSet goods = GoodSet.LoadDefault();
+        CraftRules rules = CraftRules.LoadDefault(goods);
+        Assert.Contains(goods.IndexOf("Pottery"), rules.Outputs);
+        Assert.Equal(2, rules.Recipes.Count(r => r.Output == goods.IndexOf("Cloth")));
+        Assert.True(rules.NeedPerPerson[goods.IndexOf("Stone tools")] > 0.0);
+        Assert.Equal(0.0, rules.NeedPerPerson[goods.IndexOf("Grain")]);
+    }
+
+    [Fact]
+    public void A_need_for_a_material_is_rejected()
+    {
+        GoodSet goods = GoodSet.LoadDefault();
+        string needs = ContentFiles.ReadText("needs.json").Replace("\"Pottery\": 0.1", "\"Clay\": 0.1");
+        Assert.Throws<InvalidDataException>(() => CraftRules.Parse(ContentFiles.ReadText("recipes.json"), needs, goods));
+    }
+}

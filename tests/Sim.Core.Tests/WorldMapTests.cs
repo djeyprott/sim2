@@ -9,16 +9,24 @@ public class WorldMapTests
     private static WorldMap MakeSmallWorld(short firstElevation)
     {
         GeodesicGrid grid = GeodesicGrid.Create(4);
-        var elevation = new short[grid.CellCount];
-        var terrain = new TerrainClass[grid.CellCount];
+        var data = new WorldMapData("Test", grid);
         for (int cell = 0; cell < grid.CellCount; cell++)
         {
-            elevation[cell] = (short)(cell * 7 - 500);
-            terrain[cell] = (TerrainClass)(cell % 5);
+            data.ElevationMetres[cell] = (short)(cell * 7 - 500);
+            data.Terrain[cell] = (TerrainClass)(cell % 6);
+            data.River[cell] = (RiverSize)(cell % 3);
+            if (cell % 6 >= 2)
+            {
+                for (int month = 0; month < 12; month++)
+                {
+                    data.TemperatureTenths[cell * 12 + month] = (short)(cell + month * 10 - 200);
+                    data.RainfallMm[cell * 12 + month] = (short)(cell % 50 + month);
+                }
+            }
         }
 
-        elevation[0] = firstElevation;
-        return new WorldMap("Test", grid, elevation, terrain);
+        data.ElevationMetres[0] = firstElevation;
+        return new WorldMap(data);
     }
 
     [Fact]
@@ -37,7 +45,13 @@ public class WorldMapTests
         {
             Assert.Equal(world.ElevationMetres(cell), loaded.ElevationMetres(cell));
             Assert.Equal(world.Terrain(cell), loaded.Terrain(cell));
-            Assert.Equal(world.IsLand(cell), loaded.IsLand(cell));
+            Assert.Equal(world.River(cell), loaded.River(cell));
+            Assert.Equal(world.HasClimate(cell), loaded.HasClimate(cell));
+            for (int month = 0; month < 12; month++)
+            {
+                Assert.Equal(world.TemperatureC(cell, month), loaded.TemperatureC(cell, month));
+                Assert.Equal(world.RainfallMm(cell, month), loaded.RainfallMm(cell, month));
+            }
         }
     }
 
@@ -49,14 +63,30 @@ public class WorldMapTests
     }
 
     [Fact]
-    public void Land_is_lowland_hills_and_mountains()
+    public void Land_sea_and_lake_are_told_apart()
     {
         WorldMap world = MakeSmallWorld(0);
         for (int cell = 0; cell < world.CellCount; cell++)
         {
-            bool expected = world.Terrain(cell) != TerrainClass.Ocean && world.Terrain(cell) != TerrainClass.Coast;
-            Assert.Equal(expected, world.IsLand(cell));
+            TerrainClass terrain = world.Terrain(cell);
+            Assert.Equal(terrain == TerrainClass.Ocean || terrain == TerrainClass.Coast, world.IsSea(cell));
+            Assert.Equal(terrain == TerrainClass.Lake, world.IsLake(cell));
+            Assert.Equal(!world.IsSea(cell) && !world.IsLake(cell), world.IsLand(cell));
         }
+    }
+
+    [Fact]
+    public void Climate_is_read_per_month_and_summarised_per_year()
+    {
+        WorldMap world = MakeSmallWorld(0);
+        int cell = 8; // 8 % 6 = 2, so it has climate.
+        Assert.True(world.HasClimate(cell));
+        Assert.Equal(-19.2, world.TemperatureC(cell, 0), 9);
+        Assert.Equal(-8.2, world.TemperatureC(cell, 11), 9);
+        Assert.Equal(-13.7, world.MeanTemperatureC(cell), 9);
+        Assert.Equal(8.0, world.RainfallMm(cell, 0), 9);
+        Assert.Equal(12 * 8 + 66, world.AnnualRainfallMm(cell), 9);
+        Assert.False(world.HasClimate(0));
     }
 
     [Fact]
@@ -64,5 +94,11 @@ public class WorldMapTests
     {
         using var stream = new MemoryStream(new byte[64]);
         Assert.Throws<InvalidDataException>(() => WorldMap.Load(stream));
+
+        // A valid file cut short.
+        using var full = new MemoryStream();
+        MakeSmallWorld(1).Save(full);
+        byte[] bytes = full.ToArray();
+        Assert.Throws<InvalidDataException>(() => WorldMap.Load(new MemoryStream(bytes, 0, bytes.Length / 2)));
     }
 }

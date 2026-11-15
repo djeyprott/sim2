@@ -28,3 +28,9 @@ water 20.20 109.60  20.20 110.80   # Hainan Strait
 # Land bridges
 land   8.90 -79.90   9.30 -79.50   # Isthmus of Panama
 land  10.00  98.70  10.60  99.10   # Kra Isthmus
+
+# Inland seas below sea level that the lake data does not include.
+# Each line: inlandsea lat lon level
+# Starting at the point, every enclosed cell whose mean elevation is below the level (metres)
+# becomes lake. The level is the sea's surface height.
+inlandsea 41.0 51.0 -28   # Caspian Sea

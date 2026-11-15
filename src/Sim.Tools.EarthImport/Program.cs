@@ -68,7 +68,8 @@ public static class Program
 
         // 0 = no override, 1 = forced water, 2 = forced land.
         var forced = new byte[count];
-        int overrideCells = ApplyOverrides(grid, overridesPath, forced);
+        var inlandSeas = new List<(double Lat, double Lon, double Level)>();
+        int overrideCells = ApplyOverrides(grid, overridesPath, forced, inlandSeas);
         Console.WriteLine($"Overrides touched {overrideCells} cells.");
 
         // A cell is "low" when most of it is at or below sea level, or it is forced to water.
@@ -132,6 +133,46 @@ public static class Program
                 lake[cell] = true;
                 lakeCells++;
             }
+        }
+
+        // Inland seas below sea level that the lake data does not cover: flood outward from the
+        // given point through enclosed cells whose mean elevation is below the sea's surface level.
+        foreach (var inlandSea in inlandSeas)
+        {
+            int start = grid.FindCell(inlandSea.Lat, inlandSea.Lon);
+            bool Qualifies(int cell) =>
+                !sea[cell] && low[cell] && forced[cell] != 2
+                && (landSum[cell] + waterSum[cell]) / weight[cell] < inlandSea.Level;
+
+            if (!Qualifies(start))
+            {
+                throw new InvalidOperationException($"No enclosed basin found at {inlandSea.Lat}, {inlandSea.Lon}.");
+            }
+
+            int added = 0;
+            var basin = new Queue<int>();
+            var visited = new HashSet<int> { start };
+            basin.Enqueue(start);
+            while (basin.Count > 0)
+            {
+                int cell = basin.Dequeue();
+                if (!lake[cell])
+                {
+                    lake[cell] = true;
+                    lakeCells++;
+                    added++;
+                }
+
+                foreach (int other in grid.Neighbours(cell))
+                {
+                    if (Qualifies(other) && visited.Add(other))
+                    {
+                        basin.Enqueue(other);
+                    }
+                }
+            }
+
+            Console.WriteLine($"Inland sea at {inlandSea.Lat}, {inlandSea.Lon}: {added} cells.");
         }
 
         // Rivers: the largest river touching the cell.
@@ -571,8 +612,13 @@ public static class Program
         }
     }
 
-    // Each line: "water" or "land", then lat1 lon1 lat2 lon2. Every cell along the path is forced.
-    private static int ApplyOverrides(GeodesicGrid grid, string path, byte[] forced)
+    // Each line is either "water" or "land" followed by lat1 lon1 lat2 lon2 (every cell along the
+    // path is forced), or "inlandsea" followed by lat lon level.
+    private static int ApplyOverrides(
+        GeodesicGrid grid,
+        string path,
+        byte[] forced,
+        List<(double Lat, double Lon, double Level)> inlandSeas)
     {
         int touched = 0;
         int lineNumber = 0;
@@ -589,6 +635,12 @@ public static class Program
             string[] parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 0)
             {
+                continue;
+            }
+
+            if (parts[0] == "inlandsea" && parts.Length == 4)
+            {
+                inlandSeas.Add((Parse(parts[1]), Parse(parts[2]), Parse(parts[3])));
                 continue;
             }
 

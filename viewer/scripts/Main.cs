@@ -31,7 +31,11 @@ public partial class Main : Node2D
         Color.Color8(96, 150, 80),   // Lowland
         Color.Color8(176, 160, 100), // Hills
         Color.Color8(120, 96, 84),   // Mountains
+        Color.Color8(90, 170, 220),  // Lake
     };
+
+    private static readonly Color SeaNeutral = Color.Color8(30, 40, 62);
+    private static readonly Color LakeNeutral = Color.Color8(52, 66, 96);
 
     private WorldMap? _map;
     private SimulationHost? _host;
@@ -94,7 +98,8 @@ public partial class Main : Node2D
 
         GD.Print($"Loaded world '{_map.Name}' with {_map.CellCount} cells from {worldPath}");
 
-        _mapView.Build(_map);
+        string? worldFolder = Path.GetDirectoryName(worldPath);
+        _mapView.Build(_map, worldFolder == null ? null : Path.Combine(worldFolder, "earth-rivers.bin"));
         ApplyMapMode(0);
 
         var simulation = new Simulation(_map, DefaultSeed, SystemCatalog.CreateDefault());
@@ -300,15 +305,72 @@ public partial class Main : Node2D
         }
 
         WorldMap map = _map;
-        if (mode == 1)
+        switch (mode)
         {
-            _mapView.SetColours(cell => ElevationColour(map.IsLand(cell), map.ElevationMetres(cell)));
-        }
-        else
-        {
-            _mapView.SetColours(cell => TerrainColours[(int)map.Terrain(cell)]);
+            case 1:
+                _mapView.SetColours(cell => map.IsLake(cell)
+                    ? TerrainColours[(int)TerrainClass.Lake]
+                    : ElevationColour(map.IsLand(cell), map.ElevationMetres(cell)));
+                break;
+            case 2:
+                _mapView.SetColours(cell => map.IsLand(cell)
+                    ? TemperatureColour(map.MeanTemperatureC(cell))
+                    : map.IsLake(cell) ? LakeNeutral : SeaNeutral);
+                break;
+            case 3:
+                _mapView.SetColours(cell => map.IsLand(cell)
+                    ? RainfallColour(map.AnnualRainfallMm(cell))
+                    : map.IsLake(cell) ? LakeNeutral : SeaNeutral);
+                break;
+            default:
+                _mapView.SetColours(cell => TerrainColours[(int)map.Terrain(cell)]);
+                break;
         }
     }
+
+    // Blends through a list of (value, colour) stops.
+    private static Color Gradient(double value, (double At, Color Colour)[] stops)
+    {
+        if (value <= stops[0].At)
+        {
+            return stops[0].Colour;
+        }
+
+        for (int i = 1; i < stops.Length; i++)
+        {
+            if (value <= stops[i].At)
+            {
+                float t = (float)((value - stops[i - 1].At) / (stops[i].At - stops[i - 1].At));
+                return stops[i - 1].Colour.Lerp(stops[i].Colour, t);
+            }
+        }
+
+        return stops[stops.Length - 1].Colour;
+    }
+
+    private static readonly (double At, Color Colour)[] TemperatureStops =
+    {
+        (-40.0, Color.Color8(70, 40, 130)),
+        (-20.0, Color.Color8(60, 100, 200)),
+        (0.0, Color.Color8(170, 215, 235)),
+        (10.0, Color.Color8(120, 185, 110)),
+        (20.0, Color.Color8(240, 215, 90)),
+        (30.0, Color.Color8(200, 50, 40)),
+    };
+
+    private static readonly (double At, Color Colour)[] RainfallStops =
+    {
+        (0.0, Color.Color8(225, 200, 150)),
+        (250.0, Color.Color8(215, 205, 120)),
+        (750.0, Color.Color8(130, 190, 100)),
+        (1500.0, Color.Color8(40, 140, 110)),
+        (3000.0, Color.Color8(30, 70, 160)),
+        (6000.0, Color.Color8(70, 20, 110)),
+    };
+
+    private static Color TemperatureColour(double meanC) => Gradient(meanC, TemperatureStops);
+
+    private static Color RainfallColour(double annualMm) => Gradient(annualMm, RainfallStops);
 
     private static Color ElevationColour(bool land, int metres)
     {
@@ -478,8 +540,23 @@ public partial class Main : Node2D
         string latText = Math.Abs(latitude).ToString("F2", CultureInfo.InvariantCulture) + (latitude >= 0 ? "° N" : "° S");
         string lonText = Math.Abs(longitude).ToString("F2", CultureInfo.InvariantCulture) + (longitude >= 0 ? "° E" : "° W");
         string area = grid.AreaKm2(cell).ToString("N0", CultureInfo.InvariantCulture);
-        return $"Cell {cell}\n{latText}, {lonText}\nTerrain: {map.Terrain(cell)}\n"
+        string text = $"Cell {cell}\n{latText}, {lonText}\nTerrain: {map.Terrain(cell)}\n"
             + $"Elevation: {map.ElevationMetres(cell)} m\nArea: {area} km²";
+        if (map.River(cell) != RiverSize.None)
+        {
+            text += $"\nRiver: {map.River(cell)}";
+        }
+
+        if (map.HasClimate(cell))
+        {
+            string coldest = Math.Min(map.TemperatureC(cell, 0), map.TemperatureC(cell, 6)).ToString("F0", CultureInfo.InvariantCulture);
+            string warmest = Math.Max(map.TemperatureC(cell, 0), map.TemperatureC(cell, 6)).ToString("F0", CultureInfo.InvariantCulture);
+            string mean = map.MeanTemperatureC(cell).ToString("F1", CultureInfo.InvariantCulture);
+            string rain = map.AnnualRainfallMm(cell).ToString("N0", CultureInfo.InvariantCulture);
+            text += $"\nTemperature: {mean} °C (Jan/Jul {coldest} to {warmest})\nRainfall: {rain} mm a year";
+        }
+
+        return text;
     }
 
     private void FitWholeMap()
@@ -489,6 +566,7 @@ public partial class Main : Node2D
         _zoom = _minZoom;
         _camera.Zoom = new Vector2(_zoom, _zoom);
         _camera.Position = Vector2.Zero;
+        _mapView.SetZoom(_zoom);
     }
 
     private void OnViewportResized()
@@ -516,6 +594,7 @@ public partial class Main : Node2D
         _camera.Position = mapPoint + (_camera.Position - mapPoint) * (_zoom / newZoom);
         _zoom = newZoom;
         _camera.Zoom = new Vector2(_zoom, _zoom);
+        _mapView.SetZoom(_zoom);
         ClampCamera();
     }
 
@@ -530,30 +609,53 @@ public partial class Main : Node2D
         _camera.Position = position;
     }
 
-    // Used by the automated build: exercises the viewer, saves a picture of it and quits.
+    // Used by the automated build: exercises the viewer, saves pictures of it and quits.
     private void RunScreenshotScript(SimFrame frame)
     {
         _frame++;
-        if (_frame == 10)
+        switch (_frame)
         {
-            SetSpeed(3);
+            case 10:
+                SetSpeed(3);
+                break;
+            case 30:
+                SaveScreenshot("");
+                SetMapMode(2);
+                break;
+            case 50:
+                SaveScreenshot("-temperature");
+                SetMapMode(3);
+                break;
+            case 70:
+                SaveScreenshot("-rainfall");
+                SetMapMode(0);
+
+                // Zoom in on the Nile and Mesopotamia, with the pointer in the middle for the tooltip.
+                _camera.Position = MapView.MapPosition(31.0, 38.0);
+                ZoomAt(MapView.MapPosition(31.0, 38.0), 6f);
+                SelectCell(_map!.Grid.FindCell(30.6, 31.2));
+                GetViewport().WarpMouse(GetViewportRect().Size / 2f);
+                break;
+            case 100:
+                GD.Print($"Screenshot script: date {frame.Date}, tick {frame.Tick}, selected cell {_selectedCell}");
+                bool saved = SaveScreenshot("-detail");
+                GetTree().Quit(saved && frame.Tick > 0 ? 0 : 1);
+                break;
         }
-        else if (_frame == 60)
-        {
-            // Look across the edge of the map (the Bering Strait) to show that it wraps,
-            // and put the pointer in the middle so the tooltip appears.
-            _camera.Position = MapView.MapPosition(64.0, 180.0);
-            ZoomAt(MapView.MapPosition(64.0, 180.0), 5f);
-            SelectCell(_map!.Grid.FindCell(66.0, -169.0));
-            GetViewport().WarpMouse(GetViewportRect().Size / 2f);
-        }
-        else if (_frame == 90)
-        {
-            GD.Print($"Screenshot script: date {frame.Date}, tick {frame.Tick}, selected cell {_selectedCell}");
-            Image image = GetViewport().GetTexture().GetImage();
-            Error result = image.SavePng(_screenshotPath!);
-            GD.Print($"Screenshot saved to {_screenshotPath}: {result}");
-            GetTree().Quit(result == Error.Ok && frame.Tick > 0 ? 0 : 1);
-        }
+    }
+
+    private void SetMapMode(int mode)
+    {
+        ApplyMapMode(mode);
+        _hud.ShowMapMode(mode);
+    }
+
+    private bool SaveScreenshot(string suffix)
+    {
+        string path = Path.ChangeExtension(_screenshotPath!, null) + suffix + ".png";
+        Image image = GetViewport().GetTexture().GetImage();
+        Error result = image.SavePng(path);
+        GD.Print($"Screenshot saved to {path}: {result}");
+        return result == Error.Ok;
     }
 }

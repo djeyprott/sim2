@@ -10,7 +10,7 @@ internal static class TestWorlds
     public static WorldMap Small()
     {
         GeodesicGrid grid = GeodesicGrid.Create(2);
-        return new WorldMap("Test", grid, new short[grid.CellCount], new TerrainClass[grid.CellCount]);
+        return new WorldMap(new WorldMapData("Test", grid));
     }
 }
 

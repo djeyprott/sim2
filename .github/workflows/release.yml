@@ -8,6 +8,7 @@ on:
       - 'viewer/**'
       - 'src/**'
       - 'data/earth.world'
+      - 'data/earth-rivers.bin'
       - 'release-version.txt'
       - '.github/workflows/release.yml'
 
@@ -89,13 +90,14 @@ jobs:
           dotnet publish src/Sim.Headless -c Release -r win-x64 --self-contained true \
             -p:PublishSingleFile=true -p:DebugType=none -o build/headless
           cp build/headless/sim2-headless.exe build/windows/
-          cp data/earth.world build/windows/
+          cp data/earth.world data/earth-rivers.bin build/windows/
           cat > build/windows/README.txt <<'TXT'
           sim2 - human history simulator
 
           sim2.exe            The viewer. Double-click to start.
           sim2-headless.exe   Runs the simulation with no window, from a command prompt.
           earth.world         The Earth map. Keep it next to the programs.
+          earth-rivers.bin    River lines drawn on the map. Keep it next to the programs.
 
           Windows may warn that the program is from an unknown publisher,
           because it is not signed. Choose "More info" then "Run anyway".
@@ -137,7 +139,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/viewer-screenshot.png
+          git add docs/viewer-screenshot*.png
           git diff --cached --quiet && exit 0
           git commit -m "Update viewer screenshot"
           git pull --rebase

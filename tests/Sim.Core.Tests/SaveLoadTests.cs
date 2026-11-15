@@ -138,9 +138,9 @@ public class SaveLoadTests
 
         // Different map.
         GeodesicGrid grid = GeodesicGrid.Create(2);
-        var elevation = new short[grid.CellCount];
-        elevation[0] = 1;
-        var otherMap = new WorldMap("Other", grid, elevation, new TerrainClass[grid.CellCount]);
+        var otherData = new WorldMapData("Other", grid);
+        otherData.ElevationMetres[0] = 1;
+        var otherMap = new WorldMap(otherData);
         Simulation wrongMap = NewSimulation(5, otherMap);
         string untouched = wrongMap.StateChecksum();
         Assert.Throws<InvalidDataException>(() => wrongMap.Load(new MemoryStream(save)));

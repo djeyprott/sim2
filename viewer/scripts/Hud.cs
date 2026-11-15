@@ -6,9 +6,13 @@ namespace Viewer;
 /// <summary>The controls drawn over the map: date, time controls, map mode, save and load, cell details.</summary>
 public partial class Hud : CanvasLayer
 {
+    /// <summary>Map modes in the order of their index.</summary>
+    public static readonly string[] MapModeNames = { "Terrain", "Elevation", "Temperature", "Rainfall" };
+
     private static readonly string[] SpeedNames = { "Pause", "1 month/s", "1 year/s", "10 years/s", "Max" };
 
     private readonly Button[] _speedButtons = new Button[SpeedNames.Length];
+    private OptionButton _modeButton = null!;
     private Label _dateLabel = null!;
     private Label _statusLabel = null!;
     private Label _infoLabel = null!;
@@ -20,7 +24,7 @@ public partial class Hud : CanvasLayer
     /// <summary>Raised with the index of the chosen speed: 0 pause, 1 month/s, 2 year/s, 3 ten years/s, 4 maximum.</summary>
     public event Action<int>? SpeedChosen;
 
-    /// <summary>Raised with 0 for terrain or 1 for elevation.</summary>
+    /// <summary>Raised with the index of the chosen map mode, as in <see cref="MapModeNames"/>.</summary>
     public event Action<int>? MapModeChosen;
 
     public event Action? SaveRequested;
@@ -61,11 +65,14 @@ public partial class Hud : CanvasLayer
         row.AddChild(new VSeparator());
         row.AddChild(new Label { Text = "Map:" });
 
-        var mode = new OptionButton { FocusMode = Control.FocusModeEnum.None };
-        mode.AddItem("Terrain", 0);
-        mode.AddItem("Elevation", 1);
-        mode.ItemSelected += index => MapModeChosen?.Invoke((int)index);
-        row.AddChild(mode);
+        _modeButton = new OptionButton { FocusMode = Control.FocusModeEnum.None };
+        for (int i = 0; i < MapModeNames.Length; i++)
+        {
+            _modeButton.AddItem(MapModeNames[i], i);
+        }
+
+        _modeButton.ItemSelected += index => MapModeChosen?.Invoke((int)index);
+        row.AddChild(_modeButton);
 
         row.AddChild(new VSeparator());
 
@@ -155,6 +162,9 @@ public partial class Hud : CanvasLayer
     public void SetStatus(string text) => _statusLabel.Text = text;
 
     public void SetInfo(string text) => _infoLabel.Text = text;
+
+    /// <summary>Shows a map mode as chosen without raising the event.</summary>
+    public void ShowMapMode(int index) => _modeButton.Selected = index;
 
     /// <summary>Marks which speed button is active.</summary>
     public void ShowSpeed(int index)

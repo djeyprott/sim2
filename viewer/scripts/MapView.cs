@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Godot;
 using Sim.Core.Geo;
 using Sim.Core.Map;
@@ -28,6 +29,13 @@ public partial class MapView : Node2D
     // Three side-by-side copies of the map (west, centre, east) that share one mesh and one texture.
     private readonly Node2D[] _copies = new Node2D[3];
     private readonly CellOutline[] _outlines = new CellOutline[3];
+    private readonly List<MeshInstance2D> _minorRivers = new List<MeshInstance2D>();
+
+    private static readonly Color MajorRiverColour = Color.Color8(52, 104, 205);
+    private static readonly Color MinorRiverColour = Color.Color8(88, 140, 215);
+
+    // Minor rivers are hidden until the view is zoomed in this far, to keep the world view readable.
+    private const float MinorRiverMinZoom = 1.6f;
 
     public static float WorldWidth => 360f * PixelsPerDegree;
 
@@ -35,8 +43,8 @@ public partial class MapView : Node2D
 
     public static float HalfHeight => (float)MaxLatitude * PixelsPerDegree;
 
-    /// <summary>Builds the map polygons. Call once.</summary>
-    public void Build(WorldMap map)
+    /// <summary>Builds the map polygons and, if the file exists, the river lines. Call once.</summary>
+    public void Build(WorldMap map, string? riverLinesPath)
     {
         _map = map;
         GeodesicGrid grid = map.Grid;
@@ -85,6 +93,11 @@ public partial class MapView : Node2D
 
         FlushChunk(vertices, uvs, indices);
 
+        if (riverLinesPath != null && File.Exists(riverLinesPath))
+        {
+            BuildRivers(riverLinesPath);
+        }
+
         for (int k = 0; k < _copies.Length; k++)
         {
             _outlines[k] = new CellOutline();
@@ -117,6 +130,86 @@ public partial class MapView : Node2D
             float centre = (k - 1) * WorldWidth;
             float margin = 2f * PixelsPerDegree;
             _copies[k].Visible = right > centre - HalfWidth - margin && left < centre + HalfWidth + margin;
+        }
+    }
+
+    /// <summary>Shows or hides minor rivers to suit the zoom level.</summary>
+    public void SetZoom(float zoom)
+    {
+        bool show = zoom >= MinorRiverMinZoom;
+        foreach (MeshInstance2D rivers in _minorRivers)
+        {
+            rivers.Visible = show;
+        }
+    }
+
+    // Reads river lines (longitude and latitude pairs) and draws them over the cells.
+    private void BuildRivers(string path)
+    {
+        var major = new List<Vector2>();
+        var minor = new List<Vector2>();
+        try
+        {
+            using var reader = new BinaryReader(File.OpenRead(path));
+            string magic = System.Text.Encoding.ASCII.GetString(reader.ReadBytes(8));
+            if (magic != "SIM2RIVR")
+            {
+                GD.PrintErr("River file is not in the expected format.");
+                return;
+            }
+
+            int lineCount = reader.ReadInt32();
+            for (int line = 0; line < lineCount; line++)
+            {
+                byte size = reader.ReadByte();
+                int pointCount = reader.ReadInt32();
+                List<Vector2> target = size >= 2 ? major : minor;
+                float previousLon = 0f;
+                float previousLat = 0f;
+                for (int p = 0; p < pointCount; p++)
+                {
+                    float lon = reader.ReadSingle();
+                    float lat = reader.ReadSingle();
+                    if (p > 0 && Math.Abs(lon - previousLon) < 180f
+                        && Math.Abs(lat) <= MaxLatitude && Math.Abs(previousLat) <= MaxLatitude)
+                    {
+                        target.Add(MapPosition(previousLat, previousLon));
+                        target.Add(MapPosition(lat, lon));
+                    }
+
+                    previousLon = lon;
+                    previousLat = lat;
+                }
+            }
+        }
+        catch (Exception error) when (error is IOException or EndOfStreamException)
+        {
+            GD.PrintErr("Could not read river lines: " + error.Message);
+            return;
+        }
+
+        AddLineMesh(major, MajorRiverColour, null);
+        AddLineMesh(minor, MinorRiverColour, _minorRivers);
+    }
+
+    private void AddLineMesh(List<Vector2> points, Color colour, List<MeshInstance2D>? track)
+    {
+        if (points.Count == 0)
+        {
+            return;
+        }
+
+        var arrays = new Godot.Collections.Array();
+        arrays.Resize((int)Mesh.ArrayType.Max);
+        arrays[(int)Mesh.ArrayType.Vertex] = points.ToArray();
+        var mesh = new ArrayMesh();
+        mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Lines, arrays);
+
+        foreach (Node2D copy in _copies)
+        {
+            var instance = new MeshInstance2D { Mesh = mesh, Modulate = colour };
+            copy.AddChild(instance);
+            track?.Add(instance);
         }
     }
 

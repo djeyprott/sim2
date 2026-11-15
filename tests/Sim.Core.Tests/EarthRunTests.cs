@@ -66,6 +66,16 @@ public sealed class EarthRunResult
     /// <summary>Share of Pontic steppe land (45 to 52 N, 30 to 50 E) that is farmed after 5,000 years.</summary>
     public double PonticSteppeFarmedShare { get; set; }
 
+    /// <summary>Share of the open grassland in that box that is farmed, and how many such cells there are.</summary>
+    public double PonticOpenGrasslandFarmedShare { get; set; }
+
+    public int PonticOpenGrasslandCells { get; set; }
+
+    /// <summary>Share of all open grassland, and of all temperate forest, that is farmed after 5,000 years.</summary>
+    public double OpenGrasslandFarmedShare { get; set; }
+
+    public double TemperateForestFarmedShare { get; set; }
+
     /// <summary>Settlements whose cell does not point back at them, or cells sharing a settlement.</summary>
     public int SettlementProblems { get; set; }
 
@@ -93,7 +103,9 @@ public sealed class EarthRunResult
             + $"up to {MaxGroupsInACell} groups in a cell; {Regions6000} separate farming regions within 6,000 years; "
             + $"spread {SpreadKmPerYear:F2} km a year; farthest origin {FarthestOriginFromRealHomelandKm:F0} km from a real homeland; "
             + $"{SettlementsAt5000} settlements after 5,000 years; "
-            + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed; "
+            + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed "
+            + $"({100.0 * PonticOpenGrasslandFarmedShare:F0}% of its {PonticOpenGrasslandCells} open grassland cells); "
+            + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
@@ -225,12 +237,19 @@ public abstract class EarthRunFixtureBase
                     int open = 0;
                     int steppe = 0;
                     int steppeFarmed = 0;
+                    int forest = climate.Biomes.IndexOf("Temperate forest");
+                    int[] totals = new int[4];
+                    int[] farmedIn = new int[4];
                     foreach (int cell in land)
                     {
                         double lat = world.Grid.Latitude(cell);
                         double lon = world.Grid.Longitude(cell);
                         bool inSteppe = lat >= 45.0 && lat <= 52.0 && lon >= 30.0 && lon <= 50.0;
                         steppe += inSteppe ? 1 : 0;
+                        bool openGrass = biome[cell] == grassland && world.River(cell) == RiverSize.None;
+                        int kind = openGrass ? (inSteppe ? 0 : 1) : biome[cell] == forest ? 2 : 3;
+                        totals[kind]++;
+                        farmedIn[kind] += cropPlusOne[cell] > 0 ? 1 : 0;
                         if (cropPlusOne[cell] > 0)
                         {
                             farmed++;
@@ -241,6 +260,10 @@ public abstract class EarthRunFixtureBase
 
                     result.OpenGrasslandFarmingShare = farmed == 0 ? 0.0 : open / (double)farmed;
                     result.PonticSteppeFarmedShare = steppe == 0 ? 0.0 : steppeFarmed / (double)steppe;
+                    result.PonticOpenGrasslandCells = totals[0];
+                    result.PonticOpenGrasslandFarmedShare = totals[0] == 0 ? 0.0 : farmedIn[0] / (double)totals[0];
+                    result.OpenGrasslandFarmedShare = (farmedIn[0] + farmedIn[1]) / (double)Math.Max(1, totals[0] + totals[1]);
+                    result.TemperateForestFarmedShare = farmedIn[2] / (double)Math.Max(1, totals[2]);
                 }
 
                 SettlementSystem? settlementSystem = sim.Systems.OfType<SettlementSystem>().SingleOrDefault();

@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.4.
 
-Progress: steps 1 to 4 done 2026-11-14. Step 5 is next.
+Progress: steps 1 to 5 done 2026-11-14. Step 6 is next.
 
 Change log:
 - 1.0 (2026-11-14): agreed and frozen.
@@ -147,7 +147,7 @@ Each step ends with a new development build you can download.
 2. Baseline climate, lakes and rivers in the world file, with their map modes (done)
 3. Saved state that is not per cell (done)
 4. Changing climate, biomes and ice, with their map modes (done)
-5. New-run settings and start screen
+5. New-run settings and start screen (done)
 6. Foragers and the population map mode
 7. Farming: crops, invention, yield, spread, harvest
 8. Famine

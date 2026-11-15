@@ -23,7 +23,16 @@ public sealed class Simulation
     /// <param name="seed">World seed. The same seed gives the same history.</param>
     /// <param name="systems">Systems in their fixed update order.</param>
     public Simulation(WorldMap map, ulong seed, IReadOnlyList<ISimSystem> systems)
+        : this(map, new RunSettings { Seed = seed }, systems)
     {
+    }
+
+    /// <param name="map">The fixed physical map.</param>
+    /// <param name="settings">The choices for this run, including its seed. Systems can read them while initializing.</param>
+    /// <param name="systems">Systems in their fixed update order.</param>
+    public Simulation(WorldMap map, RunSettings settings, IReadOnlyList<ISimSystem> systems)
+    {
+        ulong seed = settings.Seed;
         Map = map;
         Seed = seed;
         State = new WorldState(map.CellCount);
@@ -63,6 +72,7 @@ public sealed class Simulation
         }
 
         State.Seal();
+        settings.WriteTo(State);
 
         for (int i = 0; i < _systems.Length; i++)
         {
@@ -74,6 +84,9 @@ public sealed class Simulation
     public WorldMap Map { get; }
 
     public ulong Seed { get; private set; }
+
+    /// <summary>The choices this run was started with. After a load, those of the loaded run.</summary>
+    public RunSettings Settings => RunSettings.ReadFrom(State);
 
     /// <summary>The changing state of the world.</summary>
     public WorldState State { get; }

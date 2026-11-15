@@ -16,6 +16,8 @@ The imported Earth map: ocean, coast, lowland, hills and mountains. Lakes and ic
 
 Get `sim2-windows.zip` from the [Releases page](https://github.com/djeyprott/sim2/releases), unzip it and run `sim2.exe`. Windows will warn that the program is unsigned: choose "More info", then "Run anyway".
 
+The program opens on a start screen: choose a seed and whether crops start in their real homelands or random ones, or load a save. "New run" returns to it.
+
 Controls: drag to move, mouse wheel to zoom, click a cell to select it, Space to pause or resume, keys 1 to 5 to set the speed.
 
 ## Layout
@@ -43,7 +45,7 @@ Tests also run on GitHub Actions on every push.
 dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 1 --years 1000 --save run.sav
 ```
 
-Options: `--world` (map file), `--seed` (whole number, default 1), `--years` (default 100), `--load` (continue from a save), `--save` (write a save at the end). It prints the final date, ticks per second and the state checksum.
+Options: `--world` (map file), `--seed` (whole number, default 1), `--homelands` (`real` or `random`, default `real`), `--years` (default 100), `--load` (continue from a save), `--save` (write a save at the end). It prints the final date, ticks per second and the state checksum.
 
 ## Data
 

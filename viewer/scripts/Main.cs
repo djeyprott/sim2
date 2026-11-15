@@ -20,7 +20,6 @@ namespace Viewer;
 /// </summary>
 public partial class Main : Node2D
 {
-    private const ulong DefaultSeed = 1;
     private const float MaxZoom = 40f;
     private const float KeyPanPixelsPerSecond = 900f;
     private const float ClickSlopPixels = 5f;
@@ -63,8 +62,10 @@ public partial class Main : Node2D
     private int _mode;
     private SimFrame? _colouredFrame;
     private double _sinceRecolour;
-    private readonly LiveCell _hover = new LiveCell();
-    private readonly LiveCell _selected = new LiveCell();
+    private LiveCell _hover = new LiveCell();
+    private LiveCell _selected = new LiveCell();
+    private StartScreen _startScreen = null!;
+    private string _runDescription = "";
     private MapView _mapView = null!;
     private Hud _hud = null!;
     private Camera2D _camera = null!;
@@ -80,7 +81,7 @@ public partial class Main : Node2D
     private int _speedIndex;
     private int _speedBeforePause = 2;
 
-    private Task? _pendingTask;
+    private Task<string?>? _pendingTask;
     private string _pendingDoneMessage = "";
     private bool _pendingIsLoad;
     private string _message = "";
@@ -136,21 +137,6 @@ public partial class Main : Node2D
             }
         }
 
-        IReadOnlyList<ISimSystem> systems = SystemCatalog.CreateDefault();
-        _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
-        if (_climate != null)
-        {
-            _biomeColours = _climate.Biomes.Biomes.Select(b => Color.FromHtml(b.Colour)).ToArray();
-        }
-
-        var simulation = new Simulation(_map, DefaultSeed, systems);
-        _host = new SimulationHost(simulation);
-        ClimateSystem? climate = _climate;
-        if (climate != null)
-        {
-            _host.SetSummaryExtractor(_ => new[] { climate.WorldTemperatureShift() });
-        }
-
         ApplyMapMode(TerrainMode);
         _hud.SpeedChosen += SetSpeed;
         _hud.MapModeChosen += ApplyMapMode;
@@ -162,6 +148,13 @@ public partial class Main : Node2D
         _loadDialog = NewFileDialog(FileDialog.FileModeEnum.OpenFile, "Load a saved simulation");
         _loadDialog.FileSelected += OnLoadPathChosen;
 
+        _startScreen = new StartScreen();
+        AddChild(_startScreen);
+        _startScreen.StartRequested += StartRun;
+        _startScreen.LoadRequested += () => _loadDialog.PopupCentered(new Vector2I(900, 600));
+        _startScreen.CancelRequested += () => _startScreen.Close();
+        _hud.NewRunRequested += OpenStartScreen;
+
         FitWholeMap();
         GetViewport().SizeChanged += OnViewportResized;
 
@@ -169,6 +162,50 @@ public partial class Main : Node2D
         {
             _screenshotPath = OS.GetEnvironment("SIM2_SCREENSHOT");
         }
+
+        _startScreen.Open(canCancel: false);
+    }
+
+    private void OpenStartScreen()
+    {
+        SetSpeed(0);
+        _startScreen.Open(canCancel: _host != null);
+    }
+
+    private void StartRun(RunSettings settings)
+    {
+        InstallSimulation(settings);
+        _startScreen.Close();
+        ShowMessage("Started a new run", 4.0);
+    }
+
+    // Replaces the running simulation, if any, with a new one built from the settings.
+    private void InstallSimulation(RunSettings settings)
+    {
+        IReadOnlyList<ISimSystem> systems = SystemCatalog.CreateDefault();
+        var simulation = new Simulation(_map!, settings, systems);
+        _runDescription = simulation.Settings.Describe();
+
+        _host?.Dispose();
+        _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
+        _biomeColours = _climate == null
+            ? Array.Empty<Color>()
+            : _climate.Biomes.Biomes.Select(b => Color.FromHtml(b.Colour)).ToArray();
+
+        _host = new SimulationHost(simulation);
+        ClimateSystem? climate = _climate;
+        if (climate != null)
+        {
+            _host.SetSummaryExtractor(_ => new[] { climate.WorldTemperatureShift() });
+        }
+
+        _hover = new LiveCell();
+        _selected = new LiveCell();
+        _speedIndex = 0;
+        _hud.ShowSpeed(0);
+        _pendingTask = null;
+        _hud.SetBusy(false);
+        ApplyMapMode(_mode);
     }
 
     public override void _ExitTree()
@@ -179,8 +216,18 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        if (_host == null || _map == null)
+        if (_map == null)
         {
+            return;
+        }
+
+        if (_host == null)
+        {
+            if (_screenshotPath != null)
+            {
+                RunScreenshotScript(null);
+            }
+
             return;
         }
 
@@ -605,22 +652,39 @@ public partial class Main : Node2D
 
         _pendingIsLoad = false;
         _pendingDoneMessage = "Saved " + Path.GetFileName(path);
-        _pendingTask = _host.SaveAsync(path);
+        string target = path;
+        _pendingTask = _host.InvokeAsync<string?>(sim =>
+        {
+            sim.Save(target);
+            return null;
+        });
         _hud.SetBusy(true);
         ShowMessage("Saving...", 600.0);
     }
 
     private void OnLoadPathChosen(string path)
     {
-        if (_host == null || _pendingTask != null)
+        if (_pendingTask != null)
         {
             return;
+        }
+
+        // From the start screen with no run yet, load into a fresh simulation.
+        // A save that does not load leaves the simulation it was loaded into unchanged.
+        if (_host == null)
+        {
+            InstallSimulation(new RunSettings());
         }
 
         SetSpeed(0);
         _pendingIsLoad = true;
         _pendingDoneMessage = "Loaded " + Path.GetFileName(path);
-        _pendingTask = _host.LoadAsync(path);
+        string source = path;
+        _pendingTask = _host!.InvokeAsync<string?>(sim =>
+        {
+            sim.Load(source);
+            return sim.Settings.Describe();
+        });
         _hud.SetBusy(true);
         ShowMessage("Loading...", 600.0);
     }
@@ -635,11 +699,20 @@ public partial class Main : Node2D
         if (_pendingTask.IsCompletedSuccessfully)
         {
             ShowMessage(_pendingDoneMessage, 6.0);
+            if (_pendingIsLoad && _pendingTask.Result is string description)
+            {
+                _runDescription = description;
+                _startScreen.Close();
+            }
         }
         else
         {
             string reason = _pendingTask.Exception?.GetBaseException().Message ?? "it was cancelled";
             ShowMessage((_pendingIsLoad ? "Could not load: " : "Could not save: ") + reason, 20.0);
+            if (_pendingIsLoad && _startScreen.Visible)
+            {
+                _startScreen.ShowError("Could not load: " + reason);
+            }
         }
 
         _pendingTask = null;
@@ -705,9 +778,9 @@ public partial class Main : Node2D
         Track(_selected, _selectedCell, delta);
 
         _hud.UpdateTooltip(hoverCell >= 0 ? DescribeCell(hoverCell, _hover.Latest) : null);
-        _hud.SetInfo(_selectedCell >= 0
+        _hud.SetInfo(_runDescription + "\n\n" + (_selectedCell >= 0
             ? "Selected\n" + DescribeCell(_selectedCell, _selected.Latest)
-            : "Click a cell to keep its details here.");
+            : "Click a cell to keep its details here."));
     }
 
     // Asks the simulation for a cell's current climate every so often, without waiting for the answer.
@@ -848,11 +921,15 @@ public partial class Main : Node2D
     }
 
     // Used by the automated build: exercises the viewer, saves pictures of it and quits.
-    private void RunScreenshotScript(SimFrame frame)
+    private void RunScreenshotScript(SimFrame? frame)
     {
         _frame++;
         switch (_frame)
         {
+            case 5:
+                SaveScreenshot("-start");
+                StartRun(new RunSettings { Seed = 42, CropHomelands = CropHomelands.Real });
+                break;
             case 10:
                 SetSpeed(4);
                 break;
@@ -883,9 +960,9 @@ public partial class Main : Node2D
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
             case 130:
-                GD.Print($"Screenshot script: date {frame.Date}, tick {frame.Tick}, selected cell {_selectedCell}");
+                GD.Print($"Screenshot script: {_runDescription}, date {frame?.Date}, tick {frame?.Tick}, selected cell {_selectedCell}");
                 bool saved = SaveScreenshot("-detail");
-                GetTree().Quit(saved && frame.Tick > 0 ? 0 : 1);
+                GetTree().Quit(saved && frame != null && frame.Tick > 0 ? 0 : 1);
                 break;
         }
     }

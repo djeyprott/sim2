@@ -29,7 +29,7 @@ public static class Program
             if (a + 1 >= args.Length || !args[a].StartsWith("--", StringComparison.Ordinal))
             {
                 throw new ArgumentException(
-                    "Usage: sim2-headless [--world FILE] [--seed N] [--years N] [--load FILE] [--save FILE]");
+                    "Usage: sim2-headless [--world FILE] [--seed N] [--homelands real|random] [--years N] [--load FILE] [--save FILE]");
             }
 
             options[args[a]] = args[a + 1];
@@ -53,14 +53,21 @@ public static class Program
         WorldMap map = WorldMap.Load(worldPath);
         Console.WriteLine($"World '{map.Name}', {map.CellCount} cells, checksum {map.Checksum}");
 
-        var simulation = new Simulation(map, seed, SystemCatalog.CreateDefault());
+        CropHomelands homelands = CropHomelands.Real;
+        if (options.TryGetValue("--homelands", out string? h) && !RunSettings.TryParseHomelands(h, out homelands))
+        {
+            throw new ArgumentException("--homelands must be real or random.");
+        }
+
+        var settings = new RunSettings { Seed = seed, CropHomelands = homelands };
+        var simulation = new Simulation(map, settings, SystemCatalog.CreateDefault());
         if (options.TryGetValue("--load", out string? loadPath))
         {
             simulation.Load(loadPath);
             Console.WriteLine($"Loaded {loadPath}");
         }
 
-        Console.WriteLine($"Seed {simulation.Seed}, starting at {simulation.Date}, {simulation.Systems.Count} systems");
+        Console.WriteLine($"{simulation.Settings.Describe()}, starting at {simulation.Date}, {simulation.Systems.Count} systems");
 
         long ticks = years * GameDate.MonthsPerYear;
         var watch = Stopwatch.StartNew();

@@ -34,6 +34,8 @@ public partial class Hud : CanvasLayer
     /// <summary>Raised with the index of the chosen map mode, as in <see cref="MapModeNames"/>.</summary>
     public event Action<int>? MapModeChosen;
 
+    public event Action? NewRunRequested;
+
     public event Action? SaveRequested;
 
     public event Action? LoadRequested;
@@ -84,6 +86,10 @@ public partial class Hud : CanvasLayer
         row.AddChild(_modeButton);
 
         row.AddChild(new VSeparator());
+
+        var newRun = new Button { Text = "New run", FocusMode = Control.FocusModeEnum.None };
+        newRun.Pressed += () => NewRunRequested?.Invoke();
+        row.AddChild(newRun);
 
         _saveButton = new Button { Text = "Save", FocusMode = Control.FocusModeEnum.None };
         _saveButton.Pressed += () => SaveRequested?.Invoke();

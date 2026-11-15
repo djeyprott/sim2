@@ -106,7 +106,10 @@ public class TableTests
         sim.State.SetSetting("zebra", "1");
         sim.State.SetSetting("apple", "2");
         sim.State.SetSetting("mode", "changed");
-        Assert.Equal(new[] { "apple", "mode", "zebra" }, sim.State.Settings.Select(s => s.Key));
+        string[] keys = sim.State.Settings.Select(s => s.Key).ToArray();
+        Assert.Equal(keys.OrderBy(k => k, StringComparer.Ordinal), keys);
+        Assert.Contains("apple", keys);
+        Assert.Contains("zebra", keys);
         Assert.Equal("changed", sim.State.GetSetting("mode"));
         Assert.Null(sim.State.GetSetting("missing"));
     }

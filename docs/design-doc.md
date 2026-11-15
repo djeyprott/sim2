@@ -83,6 +83,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 ## Backlog
 
 - Climate that follows Earth's real past (for example the green Sahara), as an option beside random climate. A published reconstruction in 1,000-year steps exists.
+- End-of-Ice-Age start: a colder north and remaining ice sheets (Canada, Scandinavia) that melt back over the first few thousand years. Considered for milestone 1 and declined by the owner on 2026-11-14 in favour of the modern baseline.
 - Climate change caused by people in later eras (consider with milestone 7).
 - Lower Ice Age sea level and changing coastlines.
 - Herd animals and pastoralism (decide in the milestone 2 or 3 spec).

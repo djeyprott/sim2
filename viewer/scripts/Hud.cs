@@ -53,7 +53,7 @@ public partial class Hud : CanvasLayer
         row.AddThemeConstantOverride("separation", 8);
         margin.AddChild(row);
 
-        _dateLabel = new Label { Text = "", CustomMinimumSize = new Vector2(190, 0) };
+        _dateLabel = new Label { Text = "", CustomMinimumSize = new Vector2(160, 0) };
         row.AddChild(_dateLabel);
         _worldLabel = new Label { Text = "", CustomMinimumSize = new Vector2(230, 0) };
         row.AddChild(_worldLabel);

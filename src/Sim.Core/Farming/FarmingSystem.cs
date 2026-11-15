@@ -21,6 +21,9 @@ public sealed class FarmingSystem : ISimSystem
     public const string SinceField = "farming.since";
     public const string CapacityField = "farming.capacity";
     public const string LandShareField = "farming.landShare";
+
+    /// <summary>Tick plus one of the cell's last famine (0: none yet).</summary>
+    public const string LastFamineField = "farming.lastFamine";
     public const string WildCropsField = "farming.wildCrops";
     public const string OriginTableName = "farming.origins";
     public const string HomelandTableName = "farming.homelands";
@@ -41,6 +44,7 @@ public sealed class FarmingSystem : ISimSystem
     private int[] _sincePlusOne = Array.Empty<int>();
     private double[] _capacity = Array.Empty<double>();
     private double[] _landShare = Array.Empty<double>();
+    private int[] _lastFaminePlusOne = Array.Empty<int>();
     private int[] _wildCrops = Array.Empty<int>();
     private EntityTable? _origins;
     private IntColumn? _originCrop;
@@ -99,6 +103,7 @@ public sealed class FarmingSystem : ISimSystem
         _sincePlusOne = state.AddIntField(SinceField);
         _capacity = state.AddDoubleField(CapacityField);
         _landShare = state.AddDoubleField(LandShareField);
+        _lastFaminePlusOne = state.AddIntField(LastFamineField);
         _wildCrops = state.AddIntField(WildCropsField);
 
         _origins = state.AddTable(OriginTableName);
@@ -207,7 +212,7 @@ public sealed class FarmingSystem : ISimSystem
         {
             if (_cropPlusOne[cell] > 0)
             {
-                Harvest(cell, rng);
+                Harvest(cell, context.Tick, rng);
             }
         }
 
@@ -274,7 +279,7 @@ public sealed class FarmingSystem : ISimSystem
         _map!.Grid.AreaKm2(cell) * _parameters.FarmDensity * suitability
         * (_map.River(cell) == RiverSize.Major ? _parameters.MajorRiverYield : 1.0);
 
-    private void Harvest(int cell, Rng rng)
+    private void Harvest(int cell, long tick, Rng rng)
     {
         PopulationGroups groups = _groups!;
         int crop = _cropPlusOne[cell] - 1;
@@ -322,14 +327,13 @@ public sealed class FarmingSystem : ISimSystem
         }
 
         double food = farmers <= 0.0 ? 1.0 : harvest <= 0.0 ? 0.0 : Math.Min(1.0, harvest / farmers);
-        if (harvest > 0.0)
+        if (food >= 1.0)
         {
-            double change = _parameters.GrowthRate * farmers * (1.0 - farmers / harvest);
-            farmers += Math.Max(change, -_parameters.MaxLoss * farmers);
+            farmers += _parameters.GrowthRate * farmers * (1.0 - farmers / harvest);
         }
         else
         {
-            farmers -= _parameters.MaxLoss * farmers;
+            farmers = Famine(cell, farmers, food, tick);
         }
 
         if (capacity <= 0.0)
@@ -357,6 +361,71 @@ public sealed class FarmingSystem : ISimSystem
         groups.SetSize(farmerGroup, Math.Max(0.0, farmers));
         groups.SetFood(farmerGroup, food);
         _landShare[cell] = capacity > 0.0 ? Math.Min(1.0, farmers / capacity) : 0.0;
+    }
+
+    /// <summary>
+    /// A harvest that feeds only part of a cell's farmers: some die and some leave, in proportion to
+    /// the shortfall. Those leaving go to neighbouring farming cells that have room, weighted by that
+    /// room; any who find none go back to foraging in their own cell. Returns the farmers who stay.
+    /// </summary>
+    private double Famine(int cell, double farmers, double food, long tick)
+    {
+        double shortfall = 1.0 - food;
+        if (food < _parameters.FamineRecordBelow)
+        {
+            _lastFaminePlusOne[cell] = (int)tick + 1;
+        }
+
+        double dying = _parameters.FamineDeathShare * shortfall * farmers;
+        double leaving = _parameters.FamineLeaveShare * shortfall * farmers;
+        farmers -= dying + leaving;
+        if (leaving <= 0.0)
+        {
+            return farmers;
+        }
+
+        PopulationGroups groups = _groups!;
+        double totalRoom = 0.0;
+        foreach (int other in _map!.Grid.Neighbours(cell))
+        {
+            totalRoom += Room(other);
+        }
+
+        if (totalRoom > 0.0)
+        {
+            double share = Math.Min(1.0, leaving / totalRoom);
+            foreach (int other in _map.Grid.Neighbours(cell))
+            {
+                double room = Room(other);
+                if (room > 0.0)
+                {
+                    int group = groups.FindOrAdd(other, _farmer);
+                    groups.AddPeople(group, room * share, food);
+                }
+            }
+
+            leaving -= Math.Min(leaving, totalRoom);
+        }
+
+        if (leaving > 0.0)
+        {
+            groups.AddPeople(groups.FindOrAdd(cell, _forager), leaving, food);
+        }
+
+        return farmers;
+    }
+
+    /// <summary>How many more farmers a farming cell's land could feed, from its last harvest.</summary>
+    private double Room(int cell)
+    {
+        if (_cropPlusOne[cell] <= 0 || _capacity[cell] <= 0.0)
+        {
+            return 0.0;
+        }
+
+        int group = _groups!.Find(cell, _farmer);
+        double farmers = group >= 0 ? _groups.Size(group) : 0.0;
+        return Math.Max(0.0, _capacity[cell] - farmers);
     }
 
     private void Spread(int cell, long tick, Rng rng)

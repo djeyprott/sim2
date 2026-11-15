@@ -31,8 +31,13 @@
   // Logistic growth rate of farmers toward what their farmland feeds.
   "growthRate": 0.04,
 
-  // Largest share of farmers lost in a year when the harvest falls below their needs.
-  "maxLoss": 0.2,
+  // Famine. When a harvest feeds only part of the farmers (food below 1), the shortfall
+  // (1 - food) times famineDeathShare of them die, and the shortfall times famineLeaveShare
+  // leave: to neighbouring farming cells with room, or else back to foraging in their own cell.
+  // A cell records a famine when food falls below famineRecordBelow.
+  "famineDeathShare": 0.5,
+  "famineLeaveShare": 0.3,
+  "famineRecordBelow": 0.85,
 
   // Once a farming cell is at least this full, each neighbouring cell where its crop grows at
   // least minSpreadSuitability well has spreadChance a year of taking up farming. A share of

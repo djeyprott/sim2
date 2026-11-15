@@ -1,4 +1,5 @@
 using Sim.Core.Climate;
+using Sim.Core.Content;
 using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Map;
@@ -54,12 +55,16 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     // A simulation where farming is first taken up almost at once, so short runs show it.
-    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real)
+    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real, double harvestSpread = -1.0)
     {
         ClimateSystem climate = ClimateSystem.CreateDefault();
         OccupationSet occupations = OccupationSet.LoadDefault();
         FarmingParameters parameters = FarmingParameters.LoadDefault();
         parameters.InventionChance = 0.02;
+        if (harvestSpread >= 0.0)
+        {
+            parameters.HarvestSpread = harvestSpread;
+        }
         var systems = new ISimSystem[]
         {
             climate,
@@ -89,6 +94,45 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         }
         Assert.Equal(crops.Count, Farming(sim).Homelands().Count);
         Assert.Equal(0, wild[_world.Grid.FindCell(23.0, 12.0)]);
+    }
+
+    [Fact]
+    public void Bad_harvests_cause_famines_that_kill_or_move_farmers_but_never_make_groups_negative()
+    {
+        Simulation sim = FastFarming(5, harvestSpread: 0.4);
+        int[] lastFamine = sim.State.IntField(FarmingSystem.LastFamineField);
+        var groups = new PopulationGroups(sim.State);
+        double previous = 0.0;
+        bool dropped = false;
+        for (int year = 0; year < 300; year++)
+        {
+            sim.Run(12);
+            for (int group = 0; group < groups.IdCount; group++)
+            {
+                if (groups.IsAlive(group))
+                {
+                    Assert.True(groups.Size(group) >= 0.0 && !double.IsNaN(groups.Size(group)));
+                }
+            }
+
+            double farmers = Farming(sim).WorldFarmers();
+            if (year > 100 && farmers < previous * 0.98)
+            {
+                dropped = true;
+            }
+
+            previous = farmers;
+        }
+
+        Assert.True(lastFamine.Count(t => t > 0) > 0, "No famine was recorded.");
+        Assert.True(dropped, "World farmers never fell from one year to the next.");
+    }
+
+    [Fact]
+    public void Famine_shares_must_not_exceed_one_together()
+    {
+        Assert.Throws<InvalidDataException>(() => FarmingParameters.Parse(
+            ContentFiles.ReadText("farming.json").Replace("\"famineDeathShare\": 0.5", "\"famineDeathShare\": 0.8")));
     }
 
     [Fact]

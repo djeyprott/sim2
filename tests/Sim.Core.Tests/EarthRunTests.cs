@@ -57,6 +57,20 @@ public sealed class EarthRunResult
 
     public int FarmingCells { get; set; }
 
+    /// <summary>Famines recorded, counted once per cell and year.</summary>
+    public int FamineCellYears { get; set; }
+
+    /// <summary>Famine-hit cells that regained 90% of their people within 50 years, and those that did not.</summary>
+    public int FaminesRecovered { get; set; }
+
+    public int FaminesNotRecovered { get; set; }
+
+    /// <summary>Largest share of a cell's people lost between the year before a famine and its low point.</summary>
+    public double DeepestFamineDrop { get; set; }
+
+    public double FamineRecoveredShare => FaminesRecovered + FaminesNotRecovered == 0
+        ? 0.0 : FaminesRecovered / (double)(FaminesRecovered + FaminesNotRecovered);
+
     public override string ToString()
     {
         string origins = string.Join(", ", Origins.Select(o => $"crop {o.Crop} at cell {o.Cell} in {new GameDate(o.Tick)}"));
@@ -66,6 +80,8 @@ public sealed class EarthRunResult
             + $"foragers {MinForagersToCapacity:F3} to {MaxForagersToCapacity:F3} of what their land feeds; "
             + $"up to {MaxGroupsInACell} groups in a cell; {Regions6000} separate farming regions within 6,000 years; "
             + $"spread {SpreadKmPerYear:F2} km a year; farthest origin {FarthestOriginFromRealHomelandKm:F0} km from a real homeland; "
+            + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
+            + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
             + $"origins: {origins}";
     }
 }
@@ -103,7 +119,13 @@ public abstract class EarthRunFixtureBase
         double[] foragerCapacity = sim.State.DoubleField(ForagerSystem.CapacityField);
         int[]? cropPlusOne = farming ? sim.State.IntField(FarmingSystem.CropField) : null;
         int[]? sincePlusOne = farming ? sim.State.IntField(FarmingSystem.SinceField) : null;
+        int[]? lastFaminePlusOne = farming ? sim.State.IntField(FarmingSystem.LastFamineField) : null;
         long lastCheck = -1;
+        var previousPeople = new double[world.CellCount];
+        var famineBefore = new double[world.CellCount];
+        var famineLow = new double[world.CellCount];
+        var famineYear = new int[world.CellCount];
+        Array.Fill(famineYear, -1);
         bool[] forbidden = new bool[climate.Biomes.Count];
         foreach (string name in FarmingParameters.LoadDefault().NoFarmingBiomes)
         {
@@ -152,6 +174,13 @@ public abstract class EarthRunFixtureBase
                 }
             }
 
+            if (farming)
+            {
+                groups.FillCellTotals(people);
+                MeasureFamines(land, people, previousPeople, lastFaminePlusOne!, lastCheck, year, famineBefore, famineLow, famineYear, result);
+                Array.Copy(people, previousPeople, people.Length);
+            }
+
             lastCheck = sim.Tick - 1;
             if (year % 10 == 0)
             {
@@ -197,6 +226,46 @@ public abstract class EarthRunFixtureBase
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    private static void MeasureFamines(int[] land, double[] people, double[] previousPeople, int[] lastFaminePlusOne,
+        long lastCheck, int year, double[] before, double[] low, int[] start, EarthRunResult result)
+    {
+        foreach (int cell in land)
+        {
+            if (lastFaminePlusOne[cell] - 1 > lastCheck)
+            {
+                result.FamineCellYears++;
+                if (start[cell] < 0 && previousPeople[cell] > 0.0)
+                {
+                    start[cell] = year;
+                    before[cell] = previousPeople[cell];
+                    low[cell] = people[cell];
+                }
+            }
+
+            if (start[cell] < 0)
+            {
+                continue;
+            }
+
+            low[cell] = Math.Min(low[cell], people[cell]);
+            if (people[cell] >= 0.9 * before[cell] && year > start[cell])
+            {
+                result.FaminesRecovered++;
+            }
+            else if (year - start[cell] >= 50)
+            {
+                result.FaminesNotRecovered++;
+            }
+            else
+            {
+                continue;
+            }
+
+            result.DeepestFamineDrop = Math.Max(result.DeepestFamineDrop, 1.0 - low[cell] / before[cell]);
+            start[cell] = -1;
+        }
+    }
 
     // How many origins are at least 1,000 km from every origin counted before them.
     private static int SeparateRegions(GeodesicGrid grid, List<int> cells)
@@ -325,6 +394,16 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     public void Between_2_and_25_percent_of_land_changes_biome()
     {
         Assert.All(_results, r => Assert.InRange(r.BiomeChangedShare, 0.02, 0.25));
+    }
+
+    [Fact]
+    public void Famines_happen_and_most_hit_cells_recover()
+    {
+        Assert.All(_results, r =>
+        {
+            Assert.True(r.FamineCellYears > 0, $"Seed {r.Seed}: no famines.");
+            Assert.True(r.FamineRecoveredShare >= 0.5, $"Seed {r.Seed}: only {100.0 * r.FamineRecoveredShare:F0}% of famine-hit cells recovered.");
+        });
     }
 
     [Fact]

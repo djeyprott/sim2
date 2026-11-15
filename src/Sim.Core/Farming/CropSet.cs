@@ -178,7 +178,11 @@ public sealed class FarmingParameters
 
     public double GrowthRate { get; set; } = 0.02;
 
-    public double MaxLoss { get; set; } = 0.2;
+    public double FamineDeathShare { get; set; } = 0.5;
+
+    public double FamineLeaveShare { get; set; } = 0.3;
+
+    public double FamineRecordBelow { get; set; } = 0.85;
 
     public double SpreadWhenFull { get; set; } = 0.5;
 
@@ -208,11 +212,16 @@ public sealed class FarmingParameters
         double[] shares =
         {
             p.WildMinSuitability, p.RandomHomelandMinSuitability, p.InventionChance, p.ConversionRate, p.GrowthRate,
-            p.MaxLoss, p.SpreadWhenFull, p.MinSpreadSuitability, p.SpreadChance, p.SpreadShare, p.CropSwitchChance,
+            p.FamineDeathShare, p.FamineLeaveShare, p.FamineRecordBelow, p.SpreadWhenFull, p.MinSpreadSuitability, p.SpreadChance, p.SpreadShare, p.CropSwitchChance,
         };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)))
         {
             throw new InvalidDataException("Farming chances, rates and shares must be between 0 and 1.");
+        }
+
+        if (p.FamineDeathShare + p.FamineLeaveShare > 1.0)
+        {
+            throw new InvalidDataException("famineDeathShare and famineLeaveShare together must not exceed 1.");
         }
 
         if (p.FarmDensity <= 0.0 || p.MajorRiverYield <= 0.0 || p.MinorRiverWater < 0.0 || p.MajorRiverWater < 0.0

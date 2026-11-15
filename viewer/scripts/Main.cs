@@ -1059,6 +1059,13 @@ public partial class Main : Node2D
                 + $"\nFarmland can feed {capacity.ToString("N0", CultureInfo.InvariantCulture)}";
         }
 
+        int faminePlusOne = sim.State.IntField(FarmingSystem.LastFamineField)[cell];
+        if (faminePlusOne > 0)
+        {
+            var famine = new GameDate(faminePlusOne - 1);
+            text += $"\nLast famine: {famine.Year} {(famine.IsBce ? "BCE" : "CE")}";
+        }
+
         int wild = sim.State.IntField(FarmingSystem.WildCropsField)[cell];
         if (wild != 0)
         {

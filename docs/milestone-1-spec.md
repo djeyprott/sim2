@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-14. Feature list is frozen. Parent: `design-doc.md` version 0.7.
 
-Progress: steps 1 to 6b done 2026-11-14; step 7 (farming) and step 8 (famine) done 2026-11-15, all exit tests passing.
+Progress: steps 1 to 6b done 2026-11-14; steps 7 (farming), 8 (famine) and 9 (settlements) done 2026-11-15, all exit tests passing.
 
 Change log:
 - 1.1 (2026-11-14, agreed by owner): people are held in population groups, following the design doc's population model. Step 6b moves foragers onto groups; farming turns foragers into farmers by moving people between groups; famine uses each group's food condition.
@@ -78,7 +78,7 @@ The import job adds these per cell, and the world file format moves to version 2
 
 - When a bad harvest or a drying climate leaves a group with less food than it needs, its food condition falls, and its people die or leave for neighbouring cells. There are no food stores yet; those come with goods in milestone 2.
 
-### 9. Settlements
+### 9. Settlements (done)
 
 - A settlement is founded when a cell's farmer population passes a threshold. It gets a generated name, a founding date and a population that is part of the cell's total.
 - Settlements grow, shrink, and are abandoned if their cell empties.
@@ -141,7 +141,7 @@ By hand in the viewer:
 - [ ] The start screen sets the seed and crop homelands, and a loaded save shows the settings it was started with.
 - [ ] Each new map mode is readable and matches the tooltip.
 - [ ] You can see a region dry out or cool over centuries, its biome change, and people leave it.
-- [ ] You can watch farming start, spread and found settlements, and tell which crop is where.
+- [ ] You can watch farming start, spread and found settlements, and tell which crop is where. (Automated support: after 5,000 years with real homelands there are 3,800 to 9,300 settlements, at most one per cell, each in a land cell that points back to it. A settlement is founded at 1,000 farmers, holds 15% of its cell's people and is abandoned below 100 farmers; numbers in `data/content/settlements.json`.)
 - [ ] A famine is visible as a drop in population that later recovers. (Automated support: with real homelands about 3% of farming cell-years see a harvest below 85% of needs, and 98% of famine-hit cells regain 90% of their people within 50 years.)
 - [ ] The frame rate stays smooth at every speed.
 

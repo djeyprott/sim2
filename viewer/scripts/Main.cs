@@ -508,7 +508,7 @@ public partial class Main : Node2D
         }
 
         _mode = mode;
-        _mapView.SetRoutesVisible(mode == TradeMode || mode == GoodsMode);
+        _mapView.SetRoutesVisible(mode == TradeMode || mode == GoodsMode, mode == GoodsMode ? GoodRouteColour : TradeRouteColour);
         _hud.ShowGoodsPicker(mode == GoodsMode, _goodIndex, _goodPrice ? 1 : 0);
         _colouredFrame = null;
         _sinceRecolour = RecolourSeconds;
@@ -897,13 +897,13 @@ public partial class Main : Node2D
                 {
                     title = $"{goodName} held per person in settlements ({ViewerGoods.Get(_goodIndex).Unit})";
                     entries.Add((NoneHeld, "None"));
-                    entries.AddRange(HeldStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.###", CultureInfo.InvariantCulture))));
+                    entries.AddRange(HeldStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.####", CultureInfo.InvariantCulture))));
                 }
 
                 entries.Add((NoFarming, "No settlement"));
-                entries.Add((new Color(TradeRouteColour, 0.3f), $"Route carrying {goodName.ToLowerInvariant()}: 0.02 food a season"));
-                entries.Add((new Color(TradeRouteColour, 0.75f), "0.2 or more (thicker)"));
-                entries.Add((TradeRouteColour, "2 or more (thickest)"));
+                entries.Add((new Color(GoodRouteColour, 0.3f), $"Route carrying {goodName.ToLowerInvariant()}: 0.02 food a season"));
+                entries.Add((new Color(GoodRouteColour, 0.75f), "0.2 or more (thicker)"));
+                entries.Add((GoodRouteColour, "2 or more (thickest)"));
                 break;
             case HerdingMode:
                 title = "Herding (brighter: more of the people herd)";
@@ -1675,6 +1675,9 @@ public partial class Main : Node2D
     }
 
     private static readonly Color TradeRouteColour = new Color(0.95f, 0.55f, 0.15f);
+
+    // Over the goods map's purple-to-yellow colours, routes are drawn in cyan.
+    private static readonly Color GoodRouteColour = new Color(0.35f, 0.9f, 1.0f);
 
     private void SetMapMode(int mode)
     {

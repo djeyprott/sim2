@@ -127,11 +127,11 @@ public partial class MapView : Node2D
         }
     }
 
-    public void SetRoutesVisible(bool visible)
+    public void SetRoutesVisible(bool visible, Color colour)
     {
         foreach (SettlementLayer layer in _settlementLayers)
         {
-            layer?.SetRoutesVisible(visible);
+            layer?.SetRoutesVisible(visible, colour);
         }
     }
 
@@ -453,7 +453,7 @@ public partial class SettlementLayer : Node2D
     private Vector2[] _routeEnds = Array.Empty<Vector2>();
     private float[] _routeValues = Array.Empty<float>();
     private bool _routesVisible;
-    private static readonly Color RouteColour = new Color(0.95f, 0.55f, 0.15f);
+    private Color _routeColour = new Color(0.95f, 0.55f, 0.15f);
     private string[] _names = Array.Empty<string>();
     private float[] _populations = Array.Empty<float>();
     private float _zoom = 1f;
@@ -477,11 +477,12 @@ public partial class SettlementLayer : Node2D
         }
     }
 
-    public void SetRoutesVisible(bool visible)
+    public void SetRoutesVisible(bool visible, Color colour)
     {
-        if (visible != _routesVisible)
+        if (visible != _routesVisible || colour != _routeColour)
         {
             _routesVisible = visible;
+            _routeColour = colour;
             QueueRedraw();
         }
     }
@@ -523,7 +524,7 @@ public partial class SettlementLayer : Node2D
                 float v = _routeValues[i];
                 float width = (v >= 20f ? 3.5f : v >= 2f ? 2f : 1f) * unit;
                 float alpha = v >= 20f ? 1f : v >= 2f ? 0.75f : 0.3f;
-                DrawLine(a, b, new Color(RouteColour, alpha), width);
+                DrawLine(a, b, new Color(_routeColour, alpha), width);
             }
         }
 

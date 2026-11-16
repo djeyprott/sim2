@@ -20,5 +20,5 @@
   // sends at most sendShare (0.15) of a stock each season, about 0.6 of it a year, so a seller
   // can sustain yearly sales A only if 0.6 times salesWanted times about 2A exceeds A: above
   // about 0.85, stock grows with sales and demand, not this figure, limits trade.
-  "salesWanted": 2.0
+  "salesWanted": 0.75
 }

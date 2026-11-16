@@ -58,6 +58,7 @@ public sealed class Prices
     private readonly int _farmer;
     private readonly int _craftsman;
     private readonly int _grain;
+    private readonly int[] _foodGoods;
     private readonly double[] _wanted;
     private readonly double[] _cached;
     private int _cell = -1;
@@ -76,6 +77,7 @@ public sealed class Prices
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
         _grain = craft.Goods.IndexOf(GoodSet.Grain);
+        _foodGoods = craft.Goods.Goods.Where(g => g.Food).Select(g => g.Index).ToArray();
         _wanted = new double[craft.Goods.Count];
         _cached = new double[craft.Goods.Count];
         _usedBy = new List<(int, double, double)>[craft.Goods.Count];
@@ -100,6 +102,13 @@ public sealed class Prices
     public static double PriceOf(double value, double wanted, double stock, PriceParameters p) =>
         PriceOf(value, wanted, stock, p, p.MaxFactor);
 
+    /// <summary>
+    /// x to the power e, without calling Math.Pow for the common powers 1, 2 and 0.5: on some build
+    /// machines Math.Pow is ten times slower than on others, and these run hundreds of millions of times.
+    /// </summary>
+    public static double Power(double x, double e) =>
+        e == 1.0 ? x : e == 2.0 ? x * x : e == 0.5 ? Math.Sqrt(x) : Math.Pow(x, e);
+
     /// <summary>The highest price of a good as a multiple of its value.</summary>
     public static double MaxFactorOf(Good good, PriceParameters p) =>
         good.NeedTier == NeedTier.Luxury ? p.LuxuryMaxFactor : p.MaxFactor;
@@ -113,7 +122,7 @@ public sealed class Prices
         }
 
         double ratio = wanted / Math.Max(stock, 1e-6);
-        double factor = p.Elasticity == 1.0 ? ratio : Math.Pow(ratio, p.Elasticity);
+        double factor = Power(ratio, p.Elasticity);
         return value * Math.Clamp(factor, p.MinFactor, maxFactor);
     }
 
@@ -185,6 +194,38 @@ public sealed class Prices
         _cellWanted = wanted;
         Array.Fill(_cached, double.NaN);
     }
+
+    /// <summary>
+    /// Fills <paramref name="prices"/> for the food goods only (others are left as they are), as
+    /// <see cref="Work"/> would: food is wanted until the next harvest plus a reserve, and for any
+    /// need or recipe that uses it. Much cheaper than Work, for trade's seasons between Januaries.
+    /// </summary>
+    public void WorkFood(int cell, long tick, double[] prices)
+    {
+        double fed = StoreFed(cell);
+        int month = (int)(tick % GameDate.MonthsPerYear);
+        int harvest = _map.Grid.Latitude(cell) >= 0.0 ? NorthernHarvestMonth : SouthernHarvestMonth;
+        int months = (harvest - month + GameDate.MonthsPerYear) % GameDate.MonthsPerYear;
+        foreach (int g in _foodGoods)
+        {
+            double wanted = _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
+            if (g == _grain)
+            {
+                wanted += fed * (months / (double)GameDate.MonthsPerYear + _parameters.FoodReserveYears);
+            }
+
+            if (_usedBy[g].Count > 0)
+            {
+                throw new InvalidOperationException("WorkFood does not handle food used in recipes.");
+            }
+
+            Good good = _craft.Goods.Get(g);
+            prices[g] = PriceOf(good.Value, wanted, _stockpiles.Stock(cell, g), _parameters, MaxFactorOf(good, _parameters));
+        }
+    }
+
+    /// <summary>The food goods, by index.</summary>
+    public IReadOnlyList<int> FoodGoods => _foodGoods;
 
     /// <summary>
     /// A good's price in the settlement last passed to <see cref="Work"/>, from its stock now.

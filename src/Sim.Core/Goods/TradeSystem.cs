@@ -57,8 +57,9 @@ public readonly record struct TradeRoute(int CellA, int CellB, double Value);
 /// Trade between settlements (milestone 2, step 5). Each settlement links to the few settlements
 /// it can reach most cheaply over land; links are rebuilt every few Januaries (trade.json), around
 /// settlements founded or abandoned since. Each season (every three months, for speed) goods sent last season enter
-/// the stores; then, along each link, each good moves from the cheaper end to the dearer end when
-/// the price gap beats the carrying cost, arriving the next season. Links and route volumes are worked out
+/// the stores; then, along each link, food moves from the cheaper end to the dearer end when the
+/// price gap beats the carrying cost, arriving the next season. Other goods move the same way once a
+/// year, in January, sending what four seasons would (also for speed: they change slowly). Links and route volumes are worked out
 /// from the world state and are not saved: after a load they are rebuilt identically, and route
 /// volumes (for display only) start again from zero.
 /// </summary>
@@ -101,6 +102,9 @@ public sealed class TradeSystem : ISimSystem
     private double[] _price = Array.Empty<double>();
     private double[] _wanted = Array.Empty<double>();
     private double[] _carry = Array.Empty<double>();
+    private int[] _allGoods = Array.Empty<int>();
+    private int[] _foodGoods = Array.Empty<int>();
+    private double _yearlySendShare;
 
     // Search scratch space for building links.
     private double[] _best = Array.Empty<double>();
@@ -156,6 +160,11 @@ public sealed class TradeSystem : ISimSystem
         _settlementCell = _settlements.IntColumn("cell");
         _wanted = new double[_goods.Count];
         _carry = _goods.Goods.Select(g => g.Weight * _parameters.CostPerStep).ToArray();
+        _allGoods = Enumerable.Range(0, _goods.Count).ToArray();
+        _foodGoods = _goods.Goods.Where(g => g.Food).Select(g => g.Index).ToArray();
+
+        // Goods other than food move once a year, sending what four seasons of sendShare would.
+        _yearlySendShare = 1.0 - Math.Pow(1.0 - _parameters.SendShare, 4.0);
         _gapJanuary = new double[_goods.Count];
         _gapFebruary = new double[_goods.Count];
         _sentJanuary = new double[_goods.Count];
@@ -235,11 +244,11 @@ public sealed class TradeSystem : ISimSystem
         }
 
         start = System.Diagnostics.Stopwatch.GetTimestamp();
-        WorkPrices(context.Tick);
+        WorkPrices(context.Tick, _january = month == 0);
         PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         _destinationRound++;
         int goods = _goods.Count;
-        _january = month == 0;
+        int[] traded = _january ? _allGoods : _foodGoods;
         start = System.Diagnostics.Stopwatch.GetTimestamp();
         for (int link = 0; link < _linkA.Length; link++)
         {
@@ -254,7 +263,7 @@ public sealed class TradeSystem : ISimSystem
             int cellB = _settlementCell[b];
             double cost = _linkCost[link];
             double value = 0.0;
-            for (int g = 0; g < goods; g++)
+            foreach (int g in traded)
             {
                 double pa = _price[a * goods + g];
                 double pb = _price[b * goods + g];
@@ -283,7 +292,7 @@ public sealed class TradeSystem : ISimSystem
             }
 
             _linkValue[link] = 0.9 * _linkValue[link] + 0.1 * value;
-            LinkGoodVisits += goods;
+            LinkGoodVisits += traded.Length;
         }
 
         _season++;
@@ -351,7 +360,7 @@ public sealed class TradeSystem : ISimSystem
             return 0.0;
         }
 
-        double amount = _parameters.SendShare * scale * stock / fromDegree;
+        double amount = (_goods.Get(good).Food ? _parameters.SendShare : _yearlySendShare) * scale * stock / fromDegree;
         if (amount * dear < MinimumSendValue)
         {
             return 0.0;
@@ -373,7 +382,8 @@ public sealed class TradeSystem : ISimSystem
         return sent * 0.5 * (cheap + dear);
     }
 
-    private void WorkPrices(long tick)
+    // Every season, food prices; each January, all prices.
+    private void WorkPrices(long tick, bool all)
     {
         int goods = _goods.Count;
         EntityTable settlements = _settlements!;
@@ -388,8 +398,18 @@ public sealed class TradeSystem : ISimSystem
         {
             if (id < _degree.Length && _degree[id] > 0 && settlements.IsAlive(id))
             {
-                _prices!.Work(_settlementCell![id], tick, _wanted, row);
-                row.CopyTo(prices.Slice(id * goods, goods));
+                if (all)
+                {
+                    _prices!.Work(_settlementCell![id], tick, _wanted, row);
+                    row.CopyTo(prices.Slice(id * goods, goods));
+                }
+                else
+                {
+                    Span<double> slice = prices.Slice(id * goods, goods);
+                    slice.CopyTo(row);
+                    _prices!.WorkFood(_settlementCell![id], tick, row);
+                    row.CopyTo(slice);
+                }
             }
         }
     }

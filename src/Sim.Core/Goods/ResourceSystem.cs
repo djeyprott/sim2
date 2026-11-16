@@ -259,7 +259,7 @@ public sealed class ResourceSystem : ISimSystem
                 }
 
                 double pays = perGatherer * stockpiles.Goods.Get(good).Value / parameters.GatherTimeValue;
-                double target = wanted * Math.Min(Math.Pow(pays, 1.0 / parameters.Elasticity), 1.0 / parameters.MinFactor);
+                double target = wanted * Math.Min(Prices.Power(pays, 1.0 / parameters.Elasticity), 1.0 / parameters.MinFactor);
                 double gather = target - stockpiles.Stock(cell, good);
                 if (gather > 0.0)
                 {

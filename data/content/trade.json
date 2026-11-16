@@ -15,6 +15,8 @@
   "terrainCost": { "lowland": 1.0, "hills": 1.6, "mountains": 3.0 },
   "riverFactor": 0.5,
   "costPerStep": 0.02,
+  // Food sends this share each season; other goods move once a year (January) and send what
+  // four seasons of it would, 1 - (1 - sendShare)^4.
   "sendShare": 0.15,
   "routeValue": 0.2,
 

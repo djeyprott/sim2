@@ -1,8 +1,10 @@
-# Milestone 3 spec: Technology (draft 1)
+# Milestone 3 spec: Technology (draft 2)
 
 Status: draft for the owner, 2026-11-16. Not yet agreed; no code is written until it is. Parent: `design-doc.md` version 1.0.
 
-Open decisions for the owner are listed at the end ("Open decisions"). Where this draft takes a side, the recommended choice is written into the text and marked *(open)*.
+Change log:
+- Draft 2 (2026-11-16): the owner chose the Bronze Age as the end of the list, sea trade and settling islands both in this milestone, and that small isolated groups can lose knowledge. The owner asked whether population groups could hold knowledge; this draft proposes that in place of knowledge per cell (decision 2, awaiting the owner's confirmation).
+- Draft 1 (2026-11-16): first draft.
 
 ## Purpose
 
@@ -11,12 +13,12 @@ Give the world technology you can watch arise and spread. When this milestone is
 ## Decisions
 
 1. **What a technology is.** A named piece of know-how, listed in `data/content/technologies.json` with what it needs before it can be discovered, how readily it is discovered, and what it changes. Technologies are not research projects: nobody chooses to research them; they are found where the conditions are right.
-2. **Knowledge is held per cell** *(open)*. Each land cell with people records which technologies its people know. Since knowledge spreads to neighbouring cells, regions of shared knowledge form on their own. The design doc says technology is held "per culture or region"; culture arrives in milestone 5 and can then add spread within a language. Holding it per cell keeps to the "state in flat arrays by cell" rule and needs no region boundaries.
+2. **Knowledge is held by population groups** (proposed in draft 2, awaiting the owner's confirmation). Each group carries, for each technology, the share of its people who know it, as one more condition in the population model: it is averaged by size when groups merge, carried along when people move, and passed between the groups of a cell (farmers to herders, for example) and to neighbouring cells. A technology is in use where a group's share is at least a half. So foragers living beside ploughing farmers do not plough until they take up farming, herders who move carry riding with them, and a small group that loses touch can forget. The design doc's "per culture or region" becomes: held by groups, so regions of shared know-how form on their own, and in milestone 5 it can also spread within a language.
 3. **Discovery is local and needs the right conditions.** A technology can be discovered only where its prerequisites are known and its conditions are met (for example the plough needs farmers who keep cattle; bronze needs copper working and tin in store). The yearly chance grows with the number of people in reach, so dense farming regions discover more than thin foraging country.
 4. **Knowledge spreads three ways:** to neighbouring cells with people, along trade routes (the more a link carries, the faster), and with people who move (farmers, herders and later seafarers take what they know with them).
-5. **Knowledge is not lost** *(open)*, except when a cell empties. Real loss (as in Tasmania) happened, but it would add a hard-to-test system for little to watch.
-6. **Scope ends with the Bronze Age** *(open)*: the list stops before iron and writing. Exit runs extend to 7,000 years (3000 BCE), where the bronze-age technologies have had time to appear.
-7. **Seafaring opens the sea in two stages** *(open)*. From the start, every coastal people can paddle along coasts and across short straits (people had reached Cyprus and fetched Melos obsidian by boat before 10,000 BCE). The sail lets trade cross wider seas cheaply. Outrigger canoes let people reach remote islands across open ocean. Sea trade and the settling of unreached islands both come in this milestone.
+5. **Small isolated groups can lose knowledge** (decided by the owner 2026-11-16). A group's share of a technology drifts down each year unless enough people in reach (its own size and the groups it is in contact with, in its cell, neighbouring cells and along trade links) keep it alive; below a set number of people in contact, the share falls. Large or well-connected populations never lose it. Losses are recorded, so a run can show, for example, an island people forgetting the sail.
+6. **Scope ends with the Bronze Age** (decided by the owner 2026-11-16): the list stops before iron and writing. Exit runs extend to 7,000 years (3000 BCE), where the bronze-age technologies have had time to appear.
+7. **Seafaring opens the sea in two stages** (sea trade and settling islands both, decided by the owner 2026-11-16). From the start, every coastal people can paddle along coasts and across short straits (people had reached Cyprus and fetched Melos obsidian by boat before 10,000 BCE). The sail lets trade cross wider seas cheaply. Outrigger canoes let people reach remote islands across open ocean. Sea trade and the settling of unreached islands both come in this milestone.
 8. **Horses come in this milestone**, as the milestone 2 spec promised: wild on the western Eurasian steppe, first herded there, and later ridden.
 
 ## What gets built
@@ -44,14 +46,16 @@ Boats (coastal paddling) are known everywhere on coasts from the start and are n
 
 ### 2. Discovery
 
-- Each year, for each technology a cell does not know, if its prerequisites and conditions are met: chance = the technology's base chance × how well its conditions are met × people within reach (the cell and its neighbours), scaled so a dense farming region finds it in centuries rather than millennia.
+- Each year, for each technology a group does not know, if the group's occupation, its cell and its known technologies meet the conditions: chance = the technology's base chance × how well its conditions are met × people within reach (the cell and its neighbours), scaled so a dense farming region finds it in centuries rather than millennia. A discovering group starts with a small share that grows over the following years.
 - The first discovery of each technology anywhere, and each later independent discovery at least 1,000 km from earlier ones, is recorded (technology, cell, date), like farming origins.
 
 ### 3. Spread
 
-- **Neighbours:** each year a known technology passes to a neighbouring cell with people at a chance set per technology (some ideas travel more easily than others), and only where the neighbour meets its conditions (no irrigation without a river; the plough only where cattle are kept).
-- **Trade:** along each trade link, at a chance that grows with what the link carries.
-- **Migration:** people who move (farmers spreading, herders moving, famine refugees, settlers by sea) bring what their home cell knew.
+- **Within a cell:** each year a group's share moves toward that of the other groups in its cell that use the technology, where the group can use it (herders learn the wheel from farmers; foragers do not learn the plough).
+- **Neighbours:** the same, more slowly, toward groups of the same or a related occupation in neighbouring cells, at a rate set per technology (some ideas travel more easily than others), and only where the conditions are met (no irrigation without a river; the plough only where cattle are kept).
+- **Trade:** settlements' groups learn from the settlements they trade with, faster along busier links.
+- **Migration:** people who move (farmers spreading, herders moving, famine refugees, settlers by sea) carry their shares with them, and they are averaged into the group they join.
+- **Loss:** as in decision 5.
 
 ### 4. Effects
 
@@ -70,13 +74,13 @@ Effects change numbers the existing systems already use, through the shared worl
 
 ### 6. Viewer
 
-- **Technology map mode:** pick a technology; cells that know it are coloured, with where it was first discovered marked.
-- The tooltip and pinned panel list the technologies a cell knows.
+- **Technology map mode:** pick a technology; cells are coloured by the share of their people who know it, with where it was first discovered marked.
+- The tooltip and pinned panel list each group's known technologies.
 - Sea routes are drawn like land routes in the Trade and Goods modes.
 
 ### 7. Headless runner
 
-- The statistics file adds, for each technology, the share of people who know it each year, and a further file lists every recorded discovery (technology, place, date).
+- The statistics file adds, for each technology, the share of people who know it each year, and a further file lists every recorded discovery and loss (technology, place, date).
 
 ### 8. Speed first
 
@@ -84,9 +88,8 @@ Effects change numbers the existing systems already use, through the shared worl
 
 ## Not in this milestone
 
-- Iron, writing, the alphabet and later technologies *(open: see decision 6)*.
+- Iron, writing, the alphabet and later technologies (decision 6).
 - Choosing what to research; research by states (milestone 4).
-- Losing knowledge, except when a place empties *(open)*.
 - Ideas tied to language or religion (milestone 5).
 - Inventors and named people (milestone 6).
 - Chariots and warfare effects (milestone 4).
@@ -104,6 +107,8 @@ Discovery
 Spread
 - [ ] A technology known in a region spreads: 1,000 years after its first discovery, it is known at least 1,000 km away in at least 8 of 10 seeds (for those that can spread that far).
 - [ ] Spread follows trade: of two otherwise alike settlements, the one on busier routes learns new technologies sooner (measured as the average delay by route traffic).
+- [ ] Knowledge is lost only by small or cut-off groups: no group of more than 10,000 people in contact with others loses a technology, and losses happen in at least some seeds.
+- [ ] Group knowledge stays valid: every share is between 0 and 1, and merging and moving keep the total number of people who know a technology.
 
 Effects
 - [ ] Farming cells with the plough feed more people per km² than like cells without it, and open grassland is farmed again where the plough is known.
@@ -132,7 +137,7 @@ By hand in the viewer:
 Each step ends with a new development build you can download.
 
 1. Speed: faster trade and prices
-2. Technology list, knowledge per cell, discovery and spread; technology map mode
+2. Technology list, knowledge held by groups, discovery, spread and loss; technology map mode
 3. Farming and herding effects (granaries, irrigation, plough, terraces, milk and wool)
 4. Metals: copper ore and tin sources, copper and bronze goods and recipes
 5. Horses: horse herding and riding
@@ -146,8 +151,5 @@ Base discovery chances, spread chances along borders and trade, effect sizes, me
 
 ## Open decisions
 
-1. **Where knowledge lives:** per cell (recommended; regions form on their own) or per fixed region (a coarse grid, cheaper but with arbitrary borders).
-2. **How far the milestone goes:** to the Bronze Age, about 3000 BCE (recommended; exit runs of 7,000 years), or on into the Iron Age and writing, about 1000 BCE (runs of 9,000 years, which take about 30% longer to test).
-3. **Can knowledge be lost?** Only when a place empties (recommended), or also in small isolated populations.
-4. **Seafaring:** sea trade and settling islands both in this milestone (recommended), or sea trade only, with island settling left for later.
-5. **Backlog items to fold in:** making when animals are first herded more historical (for example herding needing farming nearby for a few centuries first). Recommended to fold in, since horses add a herd animal in step 5 anyway.
+1. **Knowledge held by population groups** (decision 2), as the owner asked about in reply to draft 1. It costs more memory and time than knowledge per cell (a share for each of about a dozen technologies on each group, instead of one number per cell), but fits the population model, lets migrants carry what they know and makes loss in small groups natural. To confirm.
+2. **Backlog item to fold in:** making when animals are first herded more historical (for example herding needing farming nearby for a few centuries first). Recommended, since horses add a herd animal in step 5 anyway.

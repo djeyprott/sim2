@@ -240,21 +240,31 @@ public sealed class ResourceSystem : ISimSystem
                 continue;
             }
 
+            // Farmers gather a good while it pays: until the price falls to what their time is worth
+            // (gatherTimeValue for a year's gathering share), but never past the stock at which the
+            // price bottoms out (wanted over minFactor). So a source of a valuable good such as
+            // obsidian keeps several times its own needs in store for its trade partners.
             _prices!.Work(cell, context.Tick, _wanted);
-            double timeValue = _prices.Parameters.GatherTimeValue;
+            PriceParameters parameters = _prices.Parameters;
             for (int r = 0; r < _good.Length; r++)
             {
                 ResourceRule rule = _rules.Goods[r];
                 int good = _good[r];
-                double wanted = _wanted[good] - stockpiles.Stock(cell, good);
                 double richness = Richness(r, cell);
                 double perGatherer = rule.PerPerson * richness;
-                if (wanted <= 0.0 || perGatherer <= 0.0 || perGatherer * _prices.Price(good) < timeValue)
+                double wanted = _wanted[good];
+                if (wanted <= 0.0 || perGatherer <= 0.0)
                 {
                     continue;
                 }
 
-                stockpiles.Produce(cell, good, Math.Min(wanted, gatherers * perGatherer));
+                double pays = perGatherer * stockpiles.Goods.Get(good).Value / parameters.GatherTimeValue;
+                double target = wanted * Math.Min(Math.Pow(pays, 1.0 / parameters.Elasticity), 1.0 / parameters.MinFactor);
+                double gather = target - stockpiles.Stock(cell, good);
+                if (gather > 0.0)
+                {
+                    stockpiles.Produce(cell, good, Math.Min(gather, gatherers * perGatherer));
+                }
             }
         }
     }

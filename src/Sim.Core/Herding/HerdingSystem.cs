@@ -552,6 +552,13 @@ public sealed class HerdingSystem : ISimSystem
                     fullness = farmers > 0.0 ? 1.0 : 0.0;
                 }
 
+                // Animals were mostly first kept by settled farming people; foragers take them up far
+                // less readily where no farmers live in or beside the cell.
+                if (!FarmersNear(cell))
+                {
+                    fullness *= _parameters.ForagerInventionFactor;
+                }
+
                 double suitability = Suitability(cell, animal);
                 if (fullness <= 0.0 || !rng.Chance(_parameters.InventionChance * suitability * fullness))
                 {
@@ -572,6 +579,24 @@ public sealed class HerdingSystem : ISimSystem
                 }
             }
         }
+    }
+
+    private bool FarmersNear(int cell)
+    {
+        if (SizeOf(cell, _farmer) > 0.0)
+        {
+            return true;
+        }
+
+        foreach (int other in _map!.Grid.Neighbours(cell))
+        {
+            if (SizeOf(other, _farmer) > 0.0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // Records each homeland's centre and marks the cells where its animal lives wild.

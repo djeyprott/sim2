@@ -28,6 +28,11 @@
   // Sheep, goats and cattle were herded in Southwest Asia by about 8500 BCE; at 0.000003 sheep
   // and goats came as late as 6400 BCE in some runs.
   "inventionChance": 0.000006,
+  // Most animals were first kept by settled farmers (sheep, goats, cattle and pigs in Southwest
+  // Asia soon after its first farming; llamas as Andean farming began); where no farmers live in
+  // or beside the cell, the chance is this much smaller. Cattle in the eastern Sahel may be the
+  // exception, herded by foragers before farming came.
+  "foragerInventionFactor": 0.1,
   "wildMinSuitability": 0.5,
   "randomHomelandMinSuitability": 0.7,
 
@@ -50,7 +55,8 @@
   // spreadChance a year.
   "spreadWhenFull": 0.4,
   "minSpreadSuitability": 0.3,
-  "spreadChance": 0.05,
+  // At 0.05 herders reached the steppe east of the Caspian by about 7000 BCE, some 2,500 years early.
+  "spreadChance": 0.02,
   "spreadShare": 0.1,
 
   // Goods each herder, and each farmer in a cell where animals are kept, puts into a settlement's

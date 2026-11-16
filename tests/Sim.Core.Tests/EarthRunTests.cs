@@ -101,6 +101,50 @@ public sealed class EarthRunResult
 
     public double StoreDeathRate => StoreFarmerYears <= 0.0 ? 0.0 : StoreFamineDeaths / StoreFarmerYears;
 
+    /// <summary>
+    /// Famine deaths and farmer-years by how full the cell was at the start of the year (farmers over
+    /// what its land feeds: under 0.6, 0.6 to 0.85, 0.85 to 1, 1 or more), with a store [0] and without [1].
+    /// </summary>
+    public double[,] DeathsByFullness { get; } = new double[2, 4];
+
+    public double[,] YearsByFullness { get; } = new double[2, 4];
+
+    /// <summary>
+    /// The store death rate over the no-store one, comparing like with like: each fullness band's
+    /// store rate weighted by the no-store farmer-years in that band.
+    /// </summary>
+    public double LikeForLikeStoreRatio
+    {
+        get
+        {
+            double expected = 0.0;
+            double actual = 0.0;
+            for (int band = 0; band < 4; band++)
+            {
+                if (YearsByFullness[0, band] > 0.0)
+                {
+                    expected += DeathsByFullness[0, band] / YearsByFullness[0, band] * YearsByFullness[1, band];
+                    actual += DeathsByFullness[1, band];
+                }
+            }
+
+            return actual <= 0.0 ? double.NaN : expected / actual;
+        }
+    }
+
+    public string FullnessTable()
+    {
+        var parts = new List<string>();
+        string[] names = { "<0.6", "0.6-0.85", "0.85-1", ">=1" };
+        for (int band = 0; band < 4; band++)
+        {
+            double Rate(int kind) => YearsByFullness[kind, band] <= 0.0 ? 0.0 : 1000.0 * DeathsByFullness[kind, band] / YearsByFullness[kind, band];
+            parts.Add($"{names[band]}: store {Rate(0):F2}/1000 over {YearsByFullness[0, band] / 1e6:F0} M yrs, none {Rate(1):F2}/1000 over {YearsByFullness[1, band] / 1e6:F0} M yrs");
+        }
+
+        return string.Join("; ", parts);
+    }
+
     public double NoStoreDeathRate => NoStoreFarmerYears <= 0.0 ? 0.0 : NoStoreFamineDeaths / NoStoreFarmerYears;
 
     /// <summary>Farming cell-years with any famine deaths, and those where deaths passed 15% of the cell's farmers.</summary>
@@ -173,6 +217,7 @@ public sealed class EarthRunResult
             + $"{RegionsWithoutRoutes} linked regions without routes, {100.0 * ShareOnRoutes:F0}% of settlements on a route; "
             + $"herding: {HerdersAt5000 / 1e6:F2} M herders after 5,000 years, {HerdersOnOpenGrassland / 1e6:F2} M on open grassland against {FarmersOnOpenGrassland / 1e6:F2} M farmers; "
             + $"{HerdingRegions6000} herding regions within 6,000 years [{string.Join(", ", HerdingOrigins)}]; "
+            + $"famine deaths by fullness [{FullnessTable()}], like-for-like store ratio {LikeForLikeStoreRatio:F2}; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
@@ -286,7 +331,7 @@ public abstract class EarthRunFixtureBase
             if (farming)
             {
                 MeasureFamineDeaths(land, groups, farmerOccupation, famineDeaths!, storeFed!,
-                    farmersAtYearStart, deathsAtYearStart, storeFedAtYearStart, result);
+                    farmersAtYearStart, deathsAtYearStart, storeFedAtYearStart, sim.State.DoubleField(FarmingSystem.CapacityField), result);
                 groups.FillCellTotals(people);
                 MeasureFamines(land, people, previousPeople, lastFaminePlusOne!, lastCheck, year, famineBefore, famineLow, famineYear, result);
                 Array.Copy(people, previousPeople, people.Length);
@@ -415,7 +460,7 @@ public abstract class EarthRunFixtureBase
     // Famine deaths over the year just run, by cell, split by whether the cell ate from a store
     // at the start of the year; then records this year's start for the next call.
     private static void MeasureFamineDeaths(int[] land, PopulationGroups groups, int farmer, double[] famineDeaths,
-        int[] storeFed, double[] farmersAtStart, double[] deathsAtStart, int[] storeFedAtStart, EarthRunResult result)
+        int[] storeFed, double[] farmersAtStart, double[] deathsAtStart, int[] storeFedAtStart, double[] capacity, EarthRunResult result)
     {
         foreach (int cell in land)
         {
@@ -423,6 +468,11 @@ public abstract class EarthRunFixtureBase
             if (farmers > 0.0)
             {
                 double deaths = famineDeaths[cell] - deathsAtStart[cell];
+                double fullness = capacity[cell] > 0.0 ? farmers / capacity[cell] : 1.0;
+                int band = fullness < 0.6 ? 0 : fullness < 0.85 ? 1 : fullness < 1.0 ? 2 : 3;
+                int kind = storeFedAtStart[cell] != 0 ? 0 : 1;
+                result.DeathsByFullness[kind, band] += deaths;
+                result.YearsByFullness[kind, band] += farmers;
                 if (storeFedAtStart[cell] != 0)
                 {
                     result.StoreFamineDeaths += deaths;

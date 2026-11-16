@@ -366,7 +366,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(trade.Routes().Count > 0, "No trade routes.");
         Assert.True(Enumerable.Range(0, stockpiles.Goods.Count).Any(g => stockpiles.InTransit(g) > 0.0), "Nothing is in transit.");
 
-        // Prices stay within their bounds, and gathering stops near what a settlement wants.
+        // Prices stay within their bounds, and gathering stops by the stock at which prices bottom out.
         PriceParameters priceParameters = PriceParameters.LoadDefault();
         var prices = new Prices(sim.State, sim.Map, priceParameters, CraftRules.LoadDefault(stockpiles.Goods), OccupationSet.LoadDefault());
         var wanted = new double[stockpiles.Goods.Count];
@@ -387,8 +387,9 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             }
 
             double people = groups.CellTotal(cell);
-            Assert.True(stockpiles.Stock(cell, flint) <= wanted[flint] + 0.2 * people + 1.0, "Flint piled up past what was wanted.");
-            Assert.True(stockpiles.Stock(cell, clay) <= wanted[clay] + 0.2 * people + 1.0, "Clay piled up past what was wanted.");
+            double most = 1.0 / priceParameters.MinFactor;
+            Assert.True(stockpiles.Stock(cell, flint) <= most * wanted[flint] + 0.2 * people + 1.0, "Flint piled up past where its price bottoms out.");
+            Assert.True(stockpiles.Stock(cell, clay) <= most * wanted[clay] + 0.2 * people + 1.0, "Clay piled up past where its price bottoms out.");
         }
         Assert.True(everydayMet > 0.5, "Some group should have most of its everyday needs met.");
     }

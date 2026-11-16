@@ -187,6 +187,8 @@ public sealed class HerdingParameters
 
     public double InventionChance { get; set; }
 
+    public double ForagerInventionFactor { get; set; } = 1.0;
+
     public double WildMinSuitability { get; set; } = 0.5;
 
     public double RandomHomelandMinSuitability { get; set; } = 0.7;
@@ -224,7 +226,7 @@ public sealed class HerdingParameters
         HerdingParameters p = ContentFiles.Parse<HerdingParameters>(json, "herding");
         double[] shares =
         {
-            p.MinPasture, p.InventionChance, p.WildMinSuitability, p.RandomHomelandMinSuitability, p.ConversionRate, p.FirstHerderShare,
+            p.MinPasture, p.InventionChance, p.ForagerInventionFactor, p.WildMinSuitability, p.RandomHomelandMinSuitability, p.ConversionRate, p.FirstHerderShare,
             p.GrowthRate, p.DeathShare, p.LeaveShare, p.SpreadWhenFull, p.MinSpreadSuitability, p.SpreadChance, p.SpreadShare,
         };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)) || p.Pasture.Values.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)))

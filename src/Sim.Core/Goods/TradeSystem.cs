@@ -284,7 +284,7 @@ public sealed class TradeSystem : ISimSystem
                     _goodValue[slot] = GoodValue(slot) * 0.9 + 0.1 * moved;
                     _goodSeason[slot] = _season + 1;
                     value += moved;
-                    if (_january)
+                    if (_january && MeasureGaps)
                     {
                         _tradedPairs.Add((link, g));
                     }
@@ -692,6 +692,13 @@ public sealed class TradeSystem : ISimSystem
     public double LoopSeconds { get; private set; }
 
     public double GapSeconds { get; private set; }
+
+    /// <summary>
+    /// When set (by the exit tests), each January's price gaps along the links that traded are
+    /// measured before and after the trade (<see cref="GapBeforeTrade"/>). Off by default: it
+    /// works out every settlement's prices a second time each year, for no effect on the run.
+    /// </summary>
+    public bool MeasureGaps { get; set; }
 
     /// <summary>How many sends trade has made (for profiling).</summary>
     public long Sends { get; private set; }

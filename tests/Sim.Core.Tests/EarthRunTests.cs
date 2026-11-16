@@ -249,6 +249,10 @@ public abstract class EarthRunFixtureBase
     {
         var watch = Stopwatch.StartNew();
         var sim = new Simulation(world, new RunSettings { Seed = seed, CropHomelands = homelands }, SystemCatalog.CreateDefault(farming));
+        foreach (TradeSystem trade in sim.Systems.OfType<TradeSystem>())
+        {
+            trade.MeasureGaps = true;
+        }
         ClimateSystem climate = sim.Systems.OfType<ClimateSystem>().Single();
         ForagerSystem foragers = sim.Systems.OfType<ForagerSystem>().Single();
         FarmingSystem? farmingSystem = sim.Systems.OfType<FarmingSystem>().SingleOrDefault();

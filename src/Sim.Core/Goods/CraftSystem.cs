@@ -141,7 +141,7 @@ public sealed class CraftSystem : ISimSystem
             }
 
             _best[output] = BestRecipe(output, out double workerValue);
-            _workers[output] = workerValue > grainPrice ? _shortfall[output] / _best[output]!.PerWorker : 0.0;
+            _workers[output] = _best[output] != null && workerValue > grainPrice ? _shortfall[output] / _best[output]!.PerWorker : 0.0;
             workersWanted += _workers[output];
         }
 
@@ -214,20 +214,29 @@ public sealed class CraftSystem : ISimSystem
         // The store-fed people use up their everyday and luxury needs. The dearer a good is here, the
         // less of it they use (its base value over its price, at most all of the need), so a scarce
         // good is not all used up by the first village it reaches and can be traded further.
+        // Where better goods meet a need (metal tools for stone), they use the best first, each by
+        // its own price, and the lesser ones for the rest.
         _prices.Work(cell, tick, _wanted);
         double everydayWanted = 0.0, everydayTaken = 0.0, luxuryWanted = 0.0, luxuryTaken = 0.0;
-        for (int good = 0; good < _rules.NeedPerPerson.Length; good++)
+        for (int need = 0; need < _rules.NeedPerPerson.Length; need++)
         {
-            double perPerson = _rules.NeedPerPerson[good];
+            double perPerson = _rules.NeedPerPerson[need];
             if (perPerson <= 0.0)
             {
                 continue;
             }
 
             double wanted = perPerson * fed;
-            double use = Math.Min(1.0, Prices.Power(_rules.Goods.Get(good).Value / _prices.Price(good), _prices.Parameters.NeedElasticity));
-            double taken = stockpiles.Consume(cell, good, wanted * use);
-            if (_rules.Goods.Get(good).NeedTier == NeedTier.Everyday)
+            double remaining = wanted;
+            foreach (int good in _rules.NeedGoods[need])
+            {
+                double counts = _rules.Counts(good);
+                double use = Math.Min(1.0, Prices.Power(_rules.Goods.Get(good).Value / _prices.Price(good), _prices.Parameters.NeedElasticity));
+                remaining -= counts * stockpiles.Consume(cell, good, remaining / counts * use);
+            }
+
+            double taken = wanted - remaining;
+            if (_rules.Goods.Get(need).NeedTier == NeedTier.Everyday)
             {
                 everydayWanted += wanted;
                 everydayTaken += taken;
@@ -254,14 +263,15 @@ public sealed class CraftSystem : ISimSystem
         }
     }
 
-    // The recipe for an output whose year of work is worth most at local prices, and that worth.
-    private Recipe BestRecipe(int output, out double workerValue)
+    // The recipe for an output whose year of work is worth most at local prices, and that worth,
+    // among those the settlement knows how to follow (null if none).
+    private Recipe? BestRecipe(int output, out double workerValue)
     {
         Recipe? best = null;
         workerValue = double.NegativeInfinity;
         foreach (Recipe recipe in _rules.Recipes)
         {
-            if (recipe.Output != output)
+            if (recipe.Output != output || !_prices!.Allowed(recipe))
             {
                 continue;
             }
@@ -280,17 +290,22 @@ public sealed class CraftSystem : ISimSystem
             }
         }
 
-        return best ?? throw new InvalidOperationException("Every output has a recipe.");
+        return best;
     }
 
-    // An output's recipes, the best-paying first, then the rest in file order.
+    // An output's recipes the settlement can follow, the best-paying first, then the rest in file order.
     private IEnumerable<Recipe> RecipesFor(int output)
     {
-        Recipe best = _best[output]!;
+        Recipe? best = _best[output];
+        if (best == null)
+        {
+            yield break;
+        }
+
         yield return best;
         foreach (Recipe recipe in _rules.Recipes)
         {
-            if (recipe.Output == output && !ReferenceEquals(recipe, best))
+            if (recipe.Output == output && !ReferenceEquals(recipe, best) && _prices!.Allowed(recipe))
             {
                 yield return recipe;
             }

@@ -7,7 +7,10 @@
 //   where crops are farmed; sources: within sourceRadiusKm of a listed place.
 // Each January the farmers of a settled cell can gather perPerson units each times richness
 // into the settlement's store. They gather a good only up to what the settlement wants, and only
-// if that much is worth at least gatherTimeValue at local prices (prices.json).
+// if that much is worth at least gatherTimeValue at local prices (prices.json). keepPerPerson:
+// where the good can be gathered, they also keep this much per gatherer in store to sell, even
+// when they have no use for it themselves (ore and tin at their sources, before the people there
+// know how to work them), so trade can carry it to those who do.
 {
   "gatherers": [ "Farmer" ],
   "dryRainMm": 600,
@@ -74,6 +77,57 @@
         { "name": "Obsidian Cliff (Yellowstone)", "lat": 44.8, "lon": -110.7 },
         { "name": "Shirataki (Hokkaido)", "lat": 43.9, "lon": 143.2 },
         { "name": "Paektu (Changbai)", "lat": 42.0, "lon": 128.1 }
+      ]
+    },
+    {
+      // Copper ore (malachite and other oxidised ores, native copper) from mining districts worked
+      // in the Copper and Bronze Ages; places are approximate.
+      "good": "Copper ore", "perPerson": 0.1, "keepPerPerson": 0.02,
+      "sourceRadiusKm": 80,
+      "sources": [
+        { "name": "Ergani (Anatolia)", "lat": 38.27, "lon": 39.75 },
+        { "name": "Faynan", "lat": 30.63, "lon": 35.49 },
+        { "name": "Timna", "lat": 29.78, "lon": 34.98 },
+        { "name": "Sinai (Wadi Maghara)", "lat": 28.9, "lon": 33.4 },
+        { "name": "Troodos (Cyprus)", "lat": 35.0, "lon": 33.0 },
+        { "name": "Kvemo Kartli (Caucasus)", "lat": 41.4, "lon": 44.5 },
+        { "name": "Anarak (Iran)", "lat": 33.3, "lon": 53.7 },
+        { "name": "Oman (Magan)", "lat": 24.2, "lon": 56.5 },
+        { "name": "Ai Bunar (Thrace)", "lat": 42.43, "lon": 25.62 },
+        { "name": "Rudna Glava (Serbia)", "lat": 44.3, "lon": 22.0 },
+        { "name": "Mitterberg (Alps)", "lat": 47.4, "lon": 13.1 },
+        { "name": "Rio Tinto (Iberia)", "lat": 37.7, "lon": -6.6 },
+        { "name": "Ross Island (Ireland)", "lat": 52.05, "lon": -9.53 },
+        { "name": "Great Orme (Wales)", "lat": 53.33, "lon": -3.85 },
+        { "name": "Kargaly (Urals)", "lat": 52.0, "lon": 55.0 },
+        { "name": "Altai", "lat": 50.5, "lon": 84.5 },
+        { "name": "Khetri (India)", "lat": 28.0, "lon": 75.8 },
+        { "name": "Zhongtiao mountains", "lat": 35.2, "lon": 111.6 },
+        { "name": "Tonglushan", "lat": 30.1, "lon": 115.0 },
+        { "name": "Akjoujt (Mauritania)", "lat": 19.75, "lon": -14.4 },
+        { "name": "Copperbelt", "lat": -12.8, "lon": 28.2 },
+        { "name": "Keweenaw (Lake Superior)", "lat": 47.2, "lon": -88.4 },
+        { "name": "Atacama", "lat": -22.3, "lon": -68.9 }
+      ]
+    },
+    {
+      // Tin (cassiterite, mostly from streams) from the sources known or argued for the Bronze
+      // Age; places are approximate.
+      "good": "Tin", "perPerson": 0.05, "keepPerPerson": 0.01,
+      "sourceRadiusKm": 80,
+      "sources": [
+        { "name": "Kestel (Taurus)", "lat": 37.7, "lon": 34.8 },
+        { "name": "Erzgebirge", "lat": 50.6, "lon": 13.0 },
+        { "name": "Cornwall", "lat": 50.3, "lon": -5.2 },
+        { "name": "Brittany", "lat": 47.8, "lon": -2.8 },
+        { "name": "Galicia", "lat": 42.5, "lon": -8.0 },
+        { "name": "Campiglia (Tuscany)", "lat": 43.1, "lon": 10.6 },
+        { "name": "Western Afghanistan", "lat": 34.0, "lon": 62.5 },
+        { "name": "Zeravshan (Central Asia)", "lat": 39.3, "lon": 67.5 },
+        { "name": "Gejiu (Yunnan)", "lat": 23.4, "lon": 103.2 },
+        { "name": "Kinta (Malaya)", "lat": 4.6, "lon": 101.1 },
+        { "name": "Jos plateau", "lat": 9.9, "lon": 8.9 },
+        { "name": "Bolivian Andes", "lat": -18.5, "lon": -66.5 }
       ]
     }
   ]

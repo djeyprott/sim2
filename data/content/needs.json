@@ -1,6 +1,7 @@
 // Needs beyond food (milestone 2, step 3): units of each good a person uses up in a year.
 // Each good's tier (everyday or luxury) comes from goods.json. Each January the store-fed
-// people of a settlement (farmers and craftsmen) take these from its store; the share met in
+// people of a settlement (farmers and craftsmen) take these from its store (or better goods
+// that meet the same need, below); the share met in
 // each tier is recorded on their groups and adds a little to farmers' growth (farming.json).
 {
   "needs": {
@@ -10,5 +11,14 @@
     "Salt": 0.02,
     "Obsidian": 0.01,
     "Ornaments": 0.02
+  },
+
+  // Better goods that meet another good's need: one unit counts as this many of it (metal tools
+  // last longer and cut better than stone). People use the best they can get first, each by its
+  // price as for any need, and stone for the rest; what a settlement wants of each follows from
+  // what the better ones in store already cover.
+  "substitutes": {
+    "Copper tools": { "for": "Stone tools", "counts": 3.0 },
+    "Bronze tools": { "for": "Stone tools", "counts": 5.0 }
   }
 }

@@ -384,6 +384,84 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     [Fact]
+    public void Copper_is_worked_only_where_known_and_metal_tools_stand_in_for_stone()
+    {
+        Simulation with = FastFarming(8);
+        with.Run(300 * 12);
+        var save = new MemoryStream();
+        with.Save(save);
+        Simulation without = FastFarming(8);
+        without.Load(new MemoryStream(save.ToArray()));
+
+        TechnologySet set = with.Systems.OfType<TechnologySystem>().Single().Technologies;
+        int copperWorking = set.IndexOf("Copper working");
+        int bronze = set.IndexOf("Bronze");
+        void Teach(Simulation sim, double share)
+        {
+            EntityTable table = sim.State.Table(PopulationGroups.TableName);
+            table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(copperWorking).Slug).Values.Fill(share);
+            table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(bronze).Slug).Values.Fill(0.0);
+        }
+
+        Teach(with, 1.0);
+        Teach(without, 0.0);
+        GoodSet goods = GoodSet.LoadDefault();
+        int copper = goods.IndexOf("Copper");
+        int copperTools = goods.IndexOf("Copper tools");
+        int bronzeTools = goods.IndexOf("Bronze tools");
+        int stoneTools = goods.IndexOf("Stone tools");
+        var stockWith = new Stockpiles(with.State, goods);
+        var stockWithout = new Stockpiles(without.State, goods);
+        double copperBefore = stockWith.Produced(copper), toolsBefore = stockWith.Produced(copperTools);
+        Assert.Equal(toolsBefore, stockWithout.Produced(copperTools));
+
+        with.Run(36);
+        without.Run(36);
+
+        // Where everyone knows copper working, ore near the sources is smelted and made into tools;
+        // where nobody does, no copper or copper tools are made at all.
+        Assert.True(stockWith.Produced(copper) > copperBefore && stockWith.Produced(copperTools) > toolsBefore,
+            $"Copper made {stockWith.Produced(copper) - copperBefore:F1}, copper tools {stockWith.Produced(copperTools) - toolsBefore:F1} in 3 years.");
+        Assert.Equal(copperBefore, stockWithout.Produced(copper));
+        Assert.Equal(toolsBefore, stockWithout.Produced(copperTools));
+
+        // Wants follow the better tools in store: bronze tools for the whole need, copper tools for
+        // what bronze does not cover, and stone for the rest; and copper only where it is known.
+        OccupationSet occupations = OccupationSet.LoadDefault();
+        CraftRules rules = CraftRules.LoadDefault(goods);
+        PriceParameters parameters = PriceParameters.LoadDefault();
+        int[] settlement = with.State.IntField(SettlementSystem.SettlementField);
+        foreach ((Simulation sim, Stockpiles stock, bool known) in new[] { (with, stockWith, true), (without, stockWithout, false) })
+        {
+            var prices = new Prices(sim.State, _world, parameters, rules, occupations);
+            var wanted = new double[goods.Count];
+            int checkedCells = 0;
+            for (int cell = 0; cell < _world.CellCount && checkedCells < 50; cell++)
+            {
+                if (settlement[cell] <= 0 || prices.StoreFed(cell) <= 0.0)
+                {
+                    continue;
+                }
+
+                checkedCells++;
+                prices.Work(cell, sim.Tick, wanted);
+                double need = rules.NeedPerPerson[stoneTools] * prices.StoreFed(cell) * (1.0 + rules.ReserveYears);
+                double Sales(int good) => parameters.SalesWanted * stock.Sold(cell, good);
+                Assert.Equal(need / 5.0 + Sales(bronzeTools), wanted[bronzeTools], 6);
+                double afterBronze = Math.Max(0.0, need - 5.0 * stock.Stock(cell, bronzeTools));
+                Assert.Equal(afterBronze / 3.0 + Sales(copperTools), wanted[copperTools], 6);
+                Assert.Equal(Math.Max(0.0, afterBronze - 3.0 * stock.Stock(cell, copperTools)) + Sales(stoneTools), wanted[stoneTools], 6);
+                if (!known)
+                {
+                    Assert.Equal(Sales(copper), wanted[copper], 9);
+                }
+            }
+
+            Assert.True(checkedCells > 0);
+        }
+    }
+
+    [Fact]
     public void Herding_is_taken_up_in_its_homelands_and_spreads()
     {
         Simulation sim = FastFarming(7);

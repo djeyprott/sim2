@@ -66,6 +66,16 @@ public sealed class EarthRunResult
     /// <summary>Farthest a settlement holding obsidian lies from the nearest obsidian source, after 5,000 years.</summary>
     public double ObsidianReachKm { get; set; }
 
+    /// <summary>At the end: the farthest settlement holding tin from every tin source (km).</summary>
+    public double TinReachKm { get; set; }
+
+    /// <summary>Copper and bronze tools made over the whole run, and settlements holding any metal tools at the end.</summary>
+    public double CopperToolsMade { get; set; }
+
+    public double BronzeToolsMade { get; set; }
+
+    public int MetalToolSettlements { get; set; }
+
     /// <summary>Goods whose average price gap along links was not smaller after a season's trade, by name.</summary>
     public List<string> GapsNotShrinking { get; set; } = new List<string>();
 
@@ -247,7 +257,9 @@ public sealed class EarthRunResult
             + $"{100.0 * OpenGrasslandFarmingShare:F1}% of farming on open grassland, {100.0 * PonticSteppeFarmedShare:F0}% of the Pontic steppe farmed "
             + $"({100.0 * PonticOpenGrasslandFarmedShare:F0}% of its {PonticOpenGrasslandCells} open grassland cells); "
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
-            + $"obsidian up to {ObsidianReachKm:F0} km from a source; {TradedGoods} goods traded, gaps not shrinking: [{string.Join(", ", GapsNotShrinking)}]; "
+            + $"obsidian up to {ObsidianReachKm:F0} km from a source; "
+            + $"metals: tin up to {TinReachKm:F0} km from a source at the end, {CopperToolsMade / 1e3:F0} k copper and {BronzeToolsMade / 1e3:F0} k bronze tools made, {MetalToolSettlements} settlements with metal tools at the end; "
+            + $"{TradedGoods} goods traded, gaps not shrinking: [{string.Join(", ", GapsNotShrinking)}]; "
             + $"{RegionsWithoutRoutes} linked regions without routes, {100.0 * ShareOnRoutes:F0}% of settlements on a route; "
             + $"herding: {HerdersAt5000 / 1e6:F2} M herders after 5,000 years, {HerdersOnOpenGrassland / 1e6:F2} M on open grassland against {FarmersOnOpenGrassland / 1e6:F2} M farmers; "
             + $"{HerdingRegions6000} herding regions within 6,000 years [{string.Join(", ", HerdingOrigins)}]; "
@@ -522,6 +534,11 @@ public abstract class EarthRunFixtureBase
                 crops.Crops.Min(c => Km(world.Grid, o.Cell, world.Grid.FindCell(c.HomelandLat, c.HomelandLon))));
         }
 
+        if (farmingSystem != null)
+        {
+            MeasureMetals(sim, world, stockpiles, result);
+        }
+
         result.Seconds = watch.Elapsed.TotalSeconds;
         return result;
     }
@@ -645,6 +662,49 @@ public abstract class EarthRunFixtureBase
         groups.FillCellTotals(farmersAtStart, farmer);
     }
 
+    // The farthest settlement holding a gathered good (in store or on its way) from all of the good's listed sources.
+    private static double ReachKm(Simulation sim, WorldMap world, Stockpiles stockpiles, ResourceSystem resources, string name)
+    {
+        int good = stockpiles.Goods.IndexOf(name);
+        ResourceRule rule = resources.Rules.Goods.Single(r => r.Good == name);
+        int[] sources = rule.Sources.Select(s => world.Grid.FindCell(s.Lat, s.Lon)).ToArray();
+        int[] settlementPlusOne = sim.State.IntField(SettlementSystem.SettlementField);
+        double reach = 0.0;
+        for (int cell = 0; cell < world.CellCount; cell++)
+        {
+            if (settlementPlusOne[cell] > 0 && stockpiles.Stock(cell, good) + stockpiles.Incoming(cell, good) > 0.01)
+            {
+                reach = Math.Max(reach, sources.Min(source => world.Grid.DistanceKm(cell, source)));
+            }
+        }
+
+        return reach;
+    }
+
+    // Tin's reach and metal tools, at the end of the run.
+    private static void MeasureMetals(Simulation sim, WorldMap world, Stockpiles stockpiles, EarthRunResult result)
+    {
+        ResourceSystem? resources = sim.Systems.OfType<ResourceSystem>().SingleOrDefault();
+        if (resources == null || !resources.Rules.Goods.Any(r => r.Good == "Tin"))
+        {
+            return;
+        }
+
+        result.TinReachKm = ReachKm(sim, world, stockpiles, resources, "Tin");
+        int copperTools = stockpiles.Goods.IndexOf("Copper tools");
+        int bronzeTools = stockpiles.Goods.IndexOf("Bronze tools");
+        result.CopperToolsMade = stockpiles.Produced(copperTools);
+        result.BronzeToolsMade = stockpiles.Produced(bronzeTools);
+        int[] settlementPlusOne = sim.State.IntField(SettlementSystem.SettlementField);
+        for (int cell = 0; cell < world.CellCount; cell++)
+        {
+            if (settlementPlusOne[cell] > 0 && stockpiles.Stock(cell, copperTools) + stockpiles.Stock(cell, bronzeTools) > 0.01)
+            {
+                result.MetalToolSettlements++;
+            }
+        }
+    }
+
     private static void MeasureTrade(Simulation sim, WorldMap world, Stockpiles stockpiles, EarthRunResult result)
     {
         TradeSystem? trade = sim.Systems.OfType<TradeSystem>().SingleOrDefault();
@@ -655,18 +715,7 @@ public abstract class EarthRunFixtureBase
         }
 
         // Obsidian's reach.
-        int obsidian = stockpiles.Goods.IndexOf("Obsidian");
-        ResourceRule rule = resources.Rules.Goods.Single(r => r.Good == "Obsidian");
-        int[] sources = rule.Sources.Select(s => world.Grid.FindCell(s.Lat, s.Lon)).ToArray();
-        int[] settlementPlusOne = sim.State.IntField(SettlementSystem.SettlementField);
-        for (int cell = 0; cell < world.CellCount; cell++)
-        {
-            if (settlementPlusOne[cell] > 0 && stockpiles.Stock(cell, obsidian) + stockpiles.Incoming(cell, obsidian) > 0.01)
-            {
-                double nearest = sources.Min(source => world.Grid.DistanceKm(cell, source));
-                result.ObsidianReachKm = Math.Max(result.ObsidianReachKm, nearest);
-            }
-        }
+        result.ObsidianReachKm = ReachKm(sim, world, stockpiles, resources, "Obsidian");
 
         // Price gaps before and after a season's trade.
         for (int g = 0; g < stockpiles.Goods.Count; g++)
@@ -924,6 +973,13 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
             Assert.True(r.SettlementsAt5000 > 0, $"Seed {r.Seed}: no settlements.");
             Assert.Equal(0, r.SettlementProblems);
         });
+    }
+
+    [Fact]
+    public void Tin_travels_more_than_1000_km_from_its_sources_in_6_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.TinReachKm > 1000.0) >= 6,
+            "Tin reach: " + string.Join(", ", _results.Select(r => $"{r.TinReachKm:F0} km ({r.BronzeToolsMade / 1e3:F0} k bronze tools made)")));
     }
 
     [Fact]

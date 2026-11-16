@@ -88,12 +88,12 @@ public sealed class ResourceSystem : ISimSystem
                 _biomeRichness[r][_biomes.IndexOf(pair.Key)] = pair.Value;
             }
 
-            _fixedRichness[r] = FixedRichness(map, rule);
+            _fixedRichness[r] = FixedRichness(map, rule, _rules.DryRainMm);
         }
     }
 
-    // Richness that does not change during a run: terrain, rivers, coasts, lake shores and listed sources.
-    private double[] FixedRichness(WorldMap map, ResourceRule rule)
+    /// <summary>Richness that does not change during a run: terrain, rivers, coasts, lake shores and listed sources.</summary>
+    public static double[] FixedRichness(WorldMap map, ResourceRule rule, double dryRainMm)
     {
         var richness = new double[map.CellCount];
         double terrainLowland = rule.Terrain.GetValueOrDefault("lowland");
@@ -128,7 +128,7 @@ public sealed class ResourceSystem : ISimSystem
                     lakeShore |= map.IsLake(other);
                 }
 
-                bool dry = map.HasClimate(cell) && map.AnnualRainfallMm(cell) < _rules.DryRainMm;
+                bool dry = map.HasClimate(cell) && map.AnnualRainfallMm(cell) < dryRainMm;
                 if (coast)
                 {
                     r = Math.Max(r, dry ? Math.Max(rule.DryCoast, rule.Coast) : rule.Coast);
@@ -253,13 +253,15 @@ public sealed class ResourceSystem : ISimSystem
                 double richness = Richness(r, cell);
                 double perGatherer = rule.PerPerson * richness;
                 double wanted = _wanted[good];
-                if (wanted <= 0.0 || perGatherer <= 0.0)
+                double keep = richness > 0.0 ? rule.KeepPerPerson * gatherers : 0.0;
+                if ((wanted <= 0.0 && keep <= 0.0) || perGatherer <= 0.0)
                 {
                     continue;
                 }
 
                 double pays = perGatherer * stockpiles.Goods.Get(good).Value / parameters.GatherTimeValue;
                 double target = wanted * Math.Min(Prices.Power(pays, 1.0 / parameters.Elasticity), 1.0 / parameters.MinFactor);
+                target = Math.Max(target, keep);
                 double gather = target - stockpiles.Stock(cell, good);
                 if (gather > 0.0)
                 {

@@ -1,5 +1,6 @@
 using Sim.Core.Climate;
 using Sim.Core.Engine;
+using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
@@ -8,8 +9,9 @@ namespace Sim.Core.Technologies;
 
 /// <summary>
 /// Whether a cell meets a technology's conditions (river, dry climate, coast, terrain, animals
-/// kept), not counting who knows what. Shared by the technology system and the systems that
-/// apply technologies' effects, so both use the same rules.
+/// kept), not counting who knows what, and for discovery whether the goods it needs are near.
+/// Shared by the technology system and the systems that apply technologies' effects, so both use
+/// the same rules.
 /// </summary>
 public sealed class TechnologyConditions
 {
@@ -20,6 +22,11 @@ public sealed class TechnologyConditions
     private readonly bool[] _coast;
     private readonly double[] _baseRain;
     private readonly int[] _animalMask;
+
+    // Per technology with near goods: the cells where one of them can be gathered, and the goods.
+    private readonly bool[]?[] _goodsSource;
+    private readonly int[][] _nearGoods;
+    private readonly Stockpiles? _stockpiles;
 
     public TechnologyConditions(WorldState state, WorldMap map, TechnologySet technologies)
     {
@@ -39,6 +46,38 @@ public sealed class TechnologyConditions
 
             return mask;
         }).ToArray();
+
+        _stockpiles = state.HasTable(Stockpiles.LedgerTableName) ? new Stockpiles(state, GoodSet.LoadDefault()) : null;
+        _goodsSource = new bool[]?[technologies.Count];
+        _nearGoods = new int[technologies.Count][];
+        ResourceRules? resources = technologies.Technologies.Any(t => t.NearGoods.Count > 0) ? ResourceRules.LoadDefault() : null;
+        GoodSet goods = GoodSet.LoadDefault();
+        foreach (Technology t in technologies.Technologies)
+        {
+            _nearGoods[t.Index] = t.NearGoods.Select(goods.IndexOf).ToArray();
+            if (t.NearGoods.Count == 0)
+            {
+                continue;
+            }
+
+            var source = new bool[map.CellCount];
+            foreach (string name in t.NearGoods)
+            {
+                ResourceRule? rule = resources!.Goods.FirstOrDefault(r => r.Good == name);
+                if (rule == null)
+                {
+                    continue;
+                }
+
+                double[] richness = ResourceSystem.FixedRichness(map, rule, resources.DryRainMm);
+                for (int cell = 0; cell < source.Length; cell++)
+                {
+                    source[cell] |= richness[cell] > 0.0;
+                }
+            }
+
+            _goodsSource[t.Index] = source;
+        }
 
         int count = map.CellCount;
         _coast = new bool[count];
@@ -91,6 +130,37 @@ public sealed class TechnologyConditions
 
         int animals = _animalMask[technology];
         return animals == 0 || (_animals != null && (_animals[cell] & animals) != 0);
+    }
+
+    /// <summary>
+    /// For discovery: whether one of the technology's near goods can be gathered in the cell or is
+    /// in its store (true when it lists none).
+    /// </summary>
+    public bool GoodsNear(int cell, int technology)
+    {
+        bool[]? source = _goodsSource[technology];
+        if (source == null)
+        {
+            return true;
+        }
+
+        if (source[cell])
+        {
+            return true;
+        }
+
+        if (_stockpiles != null)
+        {
+            foreach (int good in _nearGoods[technology])
+            {
+                if (_stockpiles.Stock(cell, good) > 0.0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 
@@ -158,6 +228,25 @@ public sealed class TechnologyUse
     /// <summary>Whether at least the in-use share of a group's people know a technology (ignoring the cell).</summary>
     public bool Knows(int group, int technology) =>
         group >= 0 && _groups.IsAlive(group) && _knowledge[technology][group] >= _inUse;
+
+    /// <summary>
+    /// Whether some group in a cell, of an occupation that can use the technology, knows it (at
+    /// least the in-use share), whatever the cell's conditions. Recipes go by this.
+    /// </summary>
+    public bool KnownInCell(int cell, int technology)
+    {
+        IReadOnlyList<bool> canUse = Technologies.Get(technology).CanUse;
+        DoubleColumn knowledge = _knowledge[technology];
+        foreach (int group in _groups.InCell(cell))
+        {
+            if (canUse[_groups.Occupation(group)] && _groups.Size(group) > 0.0 && knowledge[group] >= _inUse)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>Whether a group uses a technology in a cell: it knows it, and the cell meets its conditions.</summary>
     public bool Uses(int group, int cell, int technology) => Knows(group, technology) && Conditions.Allows(cell, technology);

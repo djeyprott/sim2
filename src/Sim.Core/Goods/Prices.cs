@@ -2,6 +2,7 @@ using Sim.Core.Content;
 using Sim.Core.Engine;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Goods;
 
@@ -64,8 +65,14 @@ public sealed class Prices
     private int _cell = -1;
     private double[]? _cellWanted;
 
-    // For each material, the recipes that use it: (output, units of material per unit of output, share of that output's recipes).
-    private readonly List<(int Output, double Amount, double Share)>[] _usedBy;
+    // For each material, the recipes that use it: (output, units of material per unit of output, share of that output's recipes, recipe).
+    private readonly List<(int Output, double Amount, double Share, int Recipe)>[] _usedBy;
+
+    // Per recipe: the technology it needs (-1: none; -2: one this simulation does not have), and
+    // whether the settlement last passed to Work may follow it.
+    private readonly TechnologyUse? _technology;
+    private readonly int[] _recipeTechnology;
+    private readonly bool[] _allowed;
 
     public Prices(WorldState state, WorldMap map, PriceParameters parameters, CraftRules craft, OccupationSet occupations)
     {
@@ -80,20 +87,27 @@ public sealed class Prices
         _seasonalGoods = craft.Goods.Goods.Where(g => g.Food || g.NeedTier == NeedTier.Luxury).Select(g => g.Index).ToArray();
         _wanted = new double[craft.Goods.Count];
         _cached = new double[craft.Goods.Count];
-        _usedBy = new List<(int, double, double)>[craft.Goods.Count];
+        _usedBy = new List<(int, double, double, int)>[craft.Goods.Count];
         for (int g = 0; g < _usedBy.Length; g++)
         {
-            _usedBy[g] = new List<(int, double, double)>();
+            _usedBy[g] = new List<(int, double, double, int)>();
         }
 
-        foreach (Recipe recipe in craft.Recipes)
+        for (int r = 0; r < craft.Recipes.Length; r++)
         {
-            double share = 1.0 / craft.Recipes.Count(r => r.Output == recipe.Output);
+            Recipe recipe = craft.Recipes[r];
+            double share = 1.0 / craft.Recipes.Count(other => other.Output == recipe.Output);
             foreach ((int good, double amount) in recipe.Inputs)
             {
-                _usedBy[good].Add((recipe.Output, amount, share));
+                _usedBy[good].Add((recipe.Output, amount, share, r));
             }
         }
+
+        _technology = craft.Recipes.Any(r => r.Requires.Length > 0) ? TechnologyUse.TryCreate(state, map) : null;
+        _recipeTechnology = craft.Recipes
+            .Select(r => r.Requires.Length == 0 ? -1 : _technology == null ? -2 : _technology.Technologies.IndexOf(r.Requires))
+            .ToArray();
+        _allowed = new bool[craft.Recipes.Length];
 
         if (_seasonalGoods.Any(g => _usedBy[g].Count > 0))
         {
@@ -102,6 +116,20 @@ public sealed class Prices
     }
 
     public PriceParameters Parameters => _parameters;
+
+    /// <summary>Whether the settlement last passed to <see cref="Work"/> may follow a recipe (it uses the technology the recipe needs).</summary>
+    public bool Allowed(Recipe recipe)
+    {
+        for (int r = 0; r < _allowed.Length; r++)
+        {
+            if (ReferenceEquals(_craft.Recipes[r], recipe))
+            {
+                return _allowed[r];
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>The price from a base value, what is wanted and what is in store.</summary>
     public static double PriceOf(double value, double wanted, double stock, PriceParameters p) =>
@@ -160,10 +188,30 @@ public sealed class Prices
         int months = (harvest - month + GameDate.MonthsPerYear) % GameDate.MonthsPerYear;
         wanted[_grain] = fed * (months / (double)GameDate.MonthsPerYear + _parameters.FoodReserveYears);
 
-        // A year of needs plus the craft reserve.
+        // Which recipes the settlement's people know how to follow.
+        for (int r = 0; r < _allowed.Length; r++)
+        {
+            int technology = _recipeTechnology[r];
+            _allowed[r] = technology == -1 || (technology >= 0 && _technology!.KnownInCell(cell, technology));
+        }
+
+        // A year of needs plus the craft reserve. Where better goods meet a need (metal tools for
+        // stone), the best is wanted for the whole need, and each lesser one for what the better
+        // ones in store do not already cover.
         for (int g = 0; g < wanted.Length; g++)
         {
-            wanted[g] += _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
+            double need = _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
+            if (need <= 0.0)
+            {
+                continue;
+            }
+
+            foreach (int good in _craft.NeedGoods[g])
+            {
+                double counts = _craft.Counts(good);
+                wanted[good] += need / counts;
+                need = Math.Max(0.0, need - _stockpiles.Stock(cell, good) * counts);
+            }
         }
 
         // Stock to keep selling what it has lately sold to its trade partners (not food: farmers
@@ -176,11 +224,18 @@ public sealed class Prices
             }
         }
 
-        // Materials for what the craftsmen would make: the shortfall of each output, by its recipes.
-        for (int g = 0; g < wanted.Length; g++)
+        // Materials for what the craftsmen would make: the shortfall of each output, by the recipes
+        // they can follow. Outputs come after their inputs in the goods list, so going backwards
+        // gives each output its full want (copper for copper tools) before its inputs (copper ore).
+        for (int g = wanted.Length - 1; g >= 0; g--)
         {
-            foreach ((int output, double amount, double share) in _usedBy[g])
+            foreach ((int output, double amount, double share, int recipe) in _usedBy[g])
             {
+                if (!_allowed[recipe])
+                {
+                    continue;
+                }
+
                 double shortfall = Math.Max(0.0, wanted[output] - _stockpiles.Stock(cell, output));
                 wanted[g] += shortfall * amount * share;
             }

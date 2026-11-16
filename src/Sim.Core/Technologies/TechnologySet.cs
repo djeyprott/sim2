@@ -19,6 +19,7 @@ public sealed class Technology
         Coast = entry.Coast;
         Terrain = terrain;
         Animals = entry.Animals.ToArray();
+        NearGoods = entry.NearGoods.ToArray();
         Chance = entry.Chance;
         Spread = entry.Spread;
         History = entry.History;
@@ -52,6 +53,9 @@ public sealed class Technology
 
     /// <summary>Animal names, at least one of which must be kept in the cell; empty for none needed.</summary>
     public IReadOnlyList<string> Animals { get; }
+
+    /// <summary>For discovery only: goods (by name), one of which must be gatherable in the cell or in its store; empty for none.</summary>
+    public IReadOnlyList<string> NearGoods { get; }
 
     public double Chance { get; }
 
@@ -205,6 +209,8 @@ internal sealed class TechnologyEntry
     public List<string> Terrain { get; set; } = new List<string>();
 
     public List<string> Animals { get; set; } = new List<string>();
+
+    public List<string> NearGoods { get; set; } = new List<string>();
 
     public double Chance { get; set; }
 

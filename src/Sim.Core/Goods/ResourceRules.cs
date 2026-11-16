@@ -19,6 +19,9 @@ public sealed class ResourceRule
 
     public double PerPerson { get; set; }
 
+    /// <summary>Units per gatherer kept in store to sell where the good can be gathered, even when not wanted locally.</summary>
+    public double KeepPerPerson { get; set; }
+
     public Dictionary<string, double> Biomes { get; set; } = new Dictionary<string, double>();
 
     public Dictionary<string, double> Terrain { get; set; } = new Dictionary<string, double>();
@@ -72,9 +75,9 @@ public sealed class ResourceRules
                 throw new InvalidDataException($"{rule.Good}: richness factors must be between 0 and 1.");
             }
 
-            if (rule.PerPerson < 0.0 || rule.SourceRadiusKm < 0.0)
+            if (rule.PerPerson < 0.0 || rule.SourceRadiusKm < 0.0 || rule.KeepPerPerson < 0.0)
             {
-                throw new InvalidDataException($"{rule.Good}: perPerson and sourceRadiusKm must not be negative.");
+                throw new InvalidDataException($"{rule.Good}: perPerson, keepPerPerson and sourceRadiusKm must not be negative.");
             }
 
             foreach (string terrain in rule.Terrain.Keys)

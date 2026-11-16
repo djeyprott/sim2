@@ -9,6 +9,8 @@
 //   coast         the cell must touch the sea
 //   terrain       the cell's terrain must be one of these
 //   animals       the cell must keep at least one of these animals (livestock.json)
+//   nearGoods     for discovery only: one of these goods can be gathered in the cell or is in
+//                 its settlement's store (once known, it spreads without them)
 //   chance        a group's yearly chance of discovering it, when the conditions are met and the
 //                 people in reach (its cell and the neighbouring cells) number at least
 //                 technology.json's "discoveryPeople"; smaller in reach, smaller chance
@@ -23,8 +25,9 @@
 //                   grainSpoilage     multiplies grain spoilage in the settlement's store
 //                   herdDensity       multiplies the herders pasture feeds (herders' technology)
 //                   wool              multiplies the wool herders and farmers bring in
-// Effect sizes are first estimates, tuned in milestone 3 step 8. Metals come in step 4, horses in
-// step 5 and the sea in step 6; copper working, bronze and horses are added with them.
+// Copper working and bronze have no effects listed here: they open recipes (recipes.json).
+// Effect sizes are first estimates, tuned in milestone 3 step 8. Horses come in step 5 and the
+// sea in step 6.
 {
   "technologies": [
     {
@@ -84,6 +87,20 @@
       // Terraces hold soil and water on slopes that would otherwise wash away.
       "effects": { "farmYield": 1.3 },
       "history": "3000 BCE, several places"
+    },
+    {
+      // Smelting copper from its ores, and casting and hammering copper tools.
+      "name": "Copper working", "colour": "#c87533", "occupations": [ "Craftsman", "Farmer" ],
+      "nearGoods": [ "Copper ore" ],
+      "chance": 0.00001, "spread": 0.01,
+      "history": "5000 BCE, Balkans (Belovode); perhaps soon after 6000 BCE in northern Iraq"
+    },
+    {
+      // Alloying copper with tin.
+      "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
+      "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
+      "chance": 0.00001, "spread": 0.01,
+      "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     }
   ]
 }

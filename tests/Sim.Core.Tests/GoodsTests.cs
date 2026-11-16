@@ -103,6 +103,29 @@ public class CraftRuleTests
         string needs = ContentFiles.ReadText("needs.json").Replace("\"Pottery\": 0.1", "\"Clay\": 0.1");
         Assert.Throws<InvalidDataException>(() => CraftRules.Parse(ContentFiles.ReadText("recipes.json"), needs, goods));
     }
+
+    [Fact]
+    public void Metal_tools_stand_in_for_stone_and_metal_recipes_need_known_technologies()
+    {
+        GoodSet goods = GoodSet.LoadDefault();
+        CraftRules rules = CraftRules.LoadDefault(goods);
+        int stone = goods.IndexOf("Stone tools");
+        Assert.Equal(new[] { goods.IndexOf("Bronze tools"), goods.IndexOf("Copper tools"), stone }, rules.NeedGoods[stone]);
+        Assert.Equal(3.0, rules.Counts(goods.IndexOf("Copper tools")));
+        Assert.Equal(1.0, rules.Counts(stone));
+
+        // Every recipe's technology exists, and metal recipes need one.
+        var technologies = Sim.Core.Technologies.TechnologySet.LoadDefault(Sim.Core.People.OccupationSet.LoadDefault());
+        Assert.All(rules.Recipes.Where(r => r.Requires.Length > 0), r => technologies.IndexOf(r.Requires));
+        Assert.Equal("Bronze", rules.Recipes.Single(r => r.Output == goods.IndexOf("Bronze")).Requires);
+
+        // A substitute that is itself a need, or one for a material, is rejected; so is an input listed after its output.
+        string needs = ContentFiles.ReadText("needs.json");
+        string recipes = ContentFiles.ReadText("recipes.json");
+        Assert.Throws<InvalidDataException>(() => CraftRules.Parse(recipes, needs.Replace("\"Copper tools\": { \"for\": \"Stone tools\"", "\"Pottery\": { \"for\": \"Stone tools\""), goods));
+        Assert.Throws<InvalidDataException>(() => CraftRules.Parse(recipes, needs.Replace("\"for\": \"Stone tools\", \"counts\": 3.0", "\"for\": \"Flint\", \"counts\": 3.0"), goods));
+        Assert.Throws<InvalidDataException>(() => CraftRules.Parse(recipes.Replace("\"inputs\": { \"Copper\": 0.5 }", "\"inputs\": { \"Bronze tools\": 0.5 }"), needs, goods));
+    }
 }
 
 public class TradeRuleTests

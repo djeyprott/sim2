@@ -313,7 +313,7 @@ public sealed class TechnologySystem : ISimSystem
                             continue;
                         }
 
-                        if (t.Chance <= 0.0)
+                        if (t.Chance <= 0.0 || !_conditions!.GoodsNear(cell, tech))
                         {
                             continue;
                         }

@@ -45,6 +45,11 @@ public partial class Main : Node2D
     private const int FarmingMode = 8;
     private const int TradeMode = 9;
     private const int HerdingMode = 10;
+    private const int GoodsMode = 11;
+
+    // The goods map mode's choices: which good, and whether to show the amount held or the price.
+    private int _goodIndex = ViewerGoods.IndexOf(GoodSet.Grain);
+    private bool _goodPrice;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -175,6 +180,23 @@ public partial class Main : Node2D
         ApplyMapMode(TerrainMode);
         _hud.SpeedChosen += SetSpeed;
         _hud.MapModeChosen += ApplyMapMode;
+        _hud.SetGoods(ViewerGoods.Goods.Select(g => g.Name).ToList());
+        _hud.GoodChosen += index =>
+        {
+            _goodIndex = index;
+            if (_mode == GoodsMode)
+            {
+                ApplyMapMode(GoodsMode);
+            }
+        };
+        _hud.GoodMeasureChosen += measure =>
+        {
+            _goodPrice = measure == 1;
+            if (_mode == GoodsMode)
+            {
+                ApplyMapMode(GoodsMode);
+            }
+        };
         _hud.SaveRequested += () => _saveDialog.PopupCentered(new Vector2I(900, 600));
         _hud.LoadRequested += () => _loadDialog.PopupCentered(new Vector2I(900, 600));
 
@@ -483,6 +505,8 @@ public partial class Main : Node2D
         }
 
         _mode = mode;
+        _mapView.SetRoutesVisible(mode == TradeMode);
+        _hud.ShowGoodsPicker(mode == GoodsMode, _goodIndex, _goodPrice ? 1 : 0);
         _colouredFrame = null;
         _sinceRecolour = RecolourSeconds;
 
@@ -502,6 +526,14 @@ public partial class Main : Node2D
         {
             int cellCount = _map.CellCount;
             extractor = sim => ExtractFarming(sim, cellCount);
+        }
+
+        if (mode == GoodsMode && _settlementSystem != null)
+        {
+            int cellCount = _map.CellCount;
+            int good = _goodIndex;
+            bool price = _goodPrice;
+            extractor = sim => ExtractGoods(sim, good, price, cellCount);
         }
 
         if (mode == HerdingMode && _herding != null)
@@ -583,6 +615,43 @@ public partial class Main : Node2D
             else
             {
                 values[cell] = -100.0;
+            }
+        }
+
+        return values;
+    }
+
+    // Per settlement cell: how much of the good it holds (with what is on its way) per person, or its
+    // price as a multiple of the good's base value; -1 for cells without a settlement.
+    private static double[] ExtractGoods(Simulation sim, int good, bool price, int cellCount)
+    {
+        var values = new double[cellCount];
+        Array.Fill(values, -1.0);
+        EntityTable settlements = sim.State.Table(SettlementSystem.TableName);
+        IntColumn settlementCell = settlements.IntColumn("cell");
+        var stockpiles = new Stockpiles(sim.State, ViewerGoods);
+        var groups = new PopulationGroups(sim.State);
+        Prices? prices = price ? new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault()) : null;
+        var wanted = new double[ViewerGoods.Count];
+        var prices1 = new double[ViewerGoods.Count];
+        double value = ViewerGoods.Get(good).Value;
+        for (int id = 0; id < settlements.IdCount; id++)
+        {
+            if (!settlements.IsAlive(id))
+            {
+                continue;
+            }
+
+            int cell = settlementCell[id];
+            if (prices != null)
+            {
+                prices.Work(cell, sim.Tick, wanted, prices1);
+                values[cell] = prices1[good] / value;
+            }
+            else
+            {
+                double people = groups.CellTotal(cell);
+                values[cell] = people > 0.0 ? (stockpiles.Stock(cell, good) + stockpiles.Incoming(cell, good)) / people : 0.0;
             }
         }
 
@@ -705,6 +774,29 @@ public partial class Main : Node2D
                     : values[cell] <= 0.0 ? EmptyLand
                     : Gradient(Math.Log10(values[cell]), PopulationStops));
                 break;
+            case GoodsMode:
+                bool showPrice = _goodPrice;
+                _mapView.SetColours(cell =>
+                {
+                    if (!map.IsLand(cell))
+                    {
+                        return Neutral(cell);
+                    }
+
+                    double v = values[cell];
+                    if (v < 0.0)
+                    {
+                        return NoFarming;
+                    }
+
+                    if (showPrice)
+                    {
+                        return Gradient(Math.Log10(Math.Max(v, 1e-6)), PriceStops);
+                    }
+
+                    return v <= 0.0 ? NoneHeld : Gradient(Math.Log10(v), HeldStops);
+                });
+                break;
             case HerdingMode:
                 _mapView.SetColours(cell =>
                 {
@@ -790,6 +882,22 @@ public partial class Main : Node2D
                 title = "People per 100 km²";
                 entries.Add((EmptyLand, "None"));
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
+                break;
+            case GoodsMode:
+                string goodName = ViewerGoods.Get(_goodIndex).Name;
+                if (_goodPrice)
+                {
+                    title = $"{goodName}: price in settlements, against its usual value";
+                    entries.AddRange(PriceStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture) + " times")));
+                }
+                else
+                {
+                    title = $"{goodName} held per person in settlements ({ViewerGoods.Get(_goodIndex).Unit})";
+                    entries.Add((NoneHeld, "None"));
+                    entries.AddRange(HeldStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.###", CultureInfo.InvariantCulture))));
+                }
+
+                entries.Add((NoFarming, "No settlement"));
                 break;
             case HerdingMode:
                 title = "Herding (brighter: more of the people herd)";
@@ -889,6 +997,28 @@ public partial class Main : Node2D
     private static readonly int HerderOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder);
 
     // Stops are powers of ten of people per 100 km².
+    private static readonly Color NoneHeld = Color.Color8(40, 30, 60);
+
+    // Amount held per person, as a power of ten: 0.001 to 10.
+    private static readonly (double At, Color Colour)[] HeldStops =
+    {
+        (-3.0, Color.Color8(60, 40, 90)),
+        (-2.0, Color.Color8(110, 60, 140)),
+        (-1.0, Color.Color8(180, 80, 120)),
+        (0.0, Color.Color8(235, 130, 70)),
+        (1.0, Color.Color8(255, 240, 170)),
+    };
+
+    // Price against the good's base value, as a power of ten: a fifth (cheap, blue) to five times (dear, red).
+    private static readonly (double At, Color Colour)[] PriceStops =
+    {
+        (-0.69897, Color.Color8(60, 110, 200)),
+        (-0.30103, Color.Color8(130, 170, 220)),
+        (0.0, Color.Color8(225, 225, 215)),
+        (0.30103, Color.Color8(230, 150, 110)),
+        (0.69897, Color.Color8(200, 60, 50)),
+    };
+
     private static readonly (double At, Color Colour)[] PopulationStops =
     {
         (-1.0, Color.Color8(60, 40, 90)),
@@ -1510,12 +1640,21 @@ public partial class Main : Node2D
             case 230:
                 _screenshotOk &= SaveScreenshot("-herding");
 
+                // How far obsidian has spread from its sources.
+                _goodIndex = ViewerGoods.IndexOf("Obsidian");
+                _goodPrice = false;
+                SetMapMode(GoodsMode);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 2f);
+                break;
+            case 245:
+                _screenshotOk &= SaveScreenshot("-goods");
+
                 // Close in on the Fertile Crescent to show settlement names.
                 SetMapMode(PopulationMode);
-                ZoomAt(MapView.MapPosition(36.5, 40.0), 5f);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 2.5f);
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
-            case 255:
+            case 270:
                 bool savedSettlements = SaveScreenshot("-settlements");
                 GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
                 break;
@@ -1526,7 +1665,6 @@ public partial class Main : Node2D
 
     private void SetMapMode(int mode)
     {
-        _mapView.SetRoutesVisible(mode == TradeMode);
         ApplyMapMode(mode);
         _hud.ShowMapMode(mode);
     }

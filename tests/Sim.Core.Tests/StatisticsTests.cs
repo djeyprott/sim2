@@ -32,10 +32,18 @@ public class StatisticsTests : IClassFixture<EarthWorldFixture>
         Assert.True(double.Parse(later[2], System.Globalization.CultureInfo.InvariantCulture) > 1e6);
 
         // Biome shares add up to about one.
-        double share = later.Skip(Array.IndexOf(header, "world_temperature_shift") + 1)
-            .Sum(v => double.Parse(v, System.Globalization.CultureInfo.InvariantCulture));
+        double Value(string column) => double.Parse(later[Array.IndexOf(header, column)], System.Globalization.CultureInfo.InvariantCulture);
+        double share = header.Where(h => h.StartsWith("land_", StringComparison.Ordinal)).Sum(Value);
         Assert.InRange(share, 0.98, 1.0001);
 
+        // Goods: wild food is eaten as it is gathered, so over the 20 years produced equals consumed plus lost.
+        Assert.Contains("grain_traded", header);
+        Assert.Contains("obsidian_in_transit", header);
+        Assert.True(Value("wild_food_produced") > 1e6);
+        Assert.InRange(Value("wild_food_consumed") + Value("wild_food_lost"), 0.999 * Value("wild_food_produced"), 1.001 * Value("wild_food_produced"));
+        Assert.Contains("herders", header);
+
         Assert.StartsWith("crop,cell,latitude,longitude,year,date", stats.Origins());
+        Assert.StartsWith("animal,homeland,cell,latitude,longitude,year,date", stats.HerdingOrigins());
     }
 }

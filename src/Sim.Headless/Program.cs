@@ -91,7 +91,10 @@ public static class Program
             string originsPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
                 Path.GetFileNameWithoutExtension(statsPath) + "-origins.csv");
             File.WriteAllText(originsPath, statistics.Origins());
-            Console.WriteLine($"Wrote yearly statistics to {statsPath} and farming origins to {originsPath}");
+            string herdingPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
+                Path.GetFileNameWithoutExtension(statsPath) + "-herding-origins.csv");
+            File.WriteAllText(herdingPath, statistics.HerdingOrigins());
+            Console.WriteLine($"Wrote yearly statistics to {statsPath}, farming origins to {originsPath} and herding origins to {herdingPath}");
         }
         else
         {

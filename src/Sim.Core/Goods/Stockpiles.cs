@@ -38,6 +38,7 @@ public sealed class Stockpiles
     private readonly DoubleColumn _spoiled;
     private readonly DoubleColumn _lost;
     private readonly DoubleColumn _transit;
+    private readonly DoubleColumn _traded;
 
     public Stockpiles(WorldState state, GoodSet goods)
     {
@@ -52,6 +53,7 @@ public sealed class Stockpiles
         _spoiled = _ledger.DoubleColumn("spoiled");
         _lost = _ledger.DoubleColumn("lost");
         _transit = _ledger.DoubleColumn("transit");
+        _traded = _ledger.DoubleColumn("traded");
     }
 
     public GoodSet Goods => _goods;
@@ -72,6 +74,9 @@ public sealed class Stockpiles
         ledger.AddDoubleColumn("spoiled");
         ledger.AddDoubleColumn("lost");
         ledger.AddDoubleColumn("transit");
+
+        // Everything ever sent in trade (a running total for statistics, not part of the balance).
+        ledger.AddDoubleColumn("traded");
     }
 
     /// <summary>Adds one ledger row per good. Called once, by the goods system, for a new run.</summary>
@@ -175,6 +180,7 @@ public sealed class Stockpiles
         _stock[good][from] -= sent;
         _incoming[good][to] += sent;
         _transit[good] += sent;
+        _traded[good] += sent;
         _selling[good][from] += sent;
         return sent;
     }
@@ -228,6 +234,9 @@ public sealed class Stockpiles
     public double Lost(int good) => _lost[good];
 
     public double InTransit(int good) => _transit[good];
+
+    /// <summary>Everything of the good ever sent in trade since the run began.</summary>
+    public double Traded(int good) => _traded[good];
 
     /// <summary>The world's total stock of a good.</summary>
     public double InStore(int good)

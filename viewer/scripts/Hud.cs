@@ -10,7 +10,7 @@ public partial class Hud : CanvasLayer
     /// <summary>Map modes in the order of their index.</summary>
     public static readonly string[] MapModeNames =
     {
-        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming", "Trade", "Herding",
+        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming", "Trade", "Herding", "Goods",
     };
 
     private static readonly string[] SpeedNames = { "Pause", "1 month/s", "1 year/s", "10 years/s", "Max" };
@@ -27,6 +27,10 @@ public partial class Hud : CanvasLayer
     private Label _tooltipLabel = null!;
     private Button _saveButton = null!;
     private Button _loadButton = null!;
+    private PanelContainer _topPanel = null!;
+    private PanelContainer _goodsPanel = null!;
+    private OptionButton _goodButton = null!;
+    private OptionButton _measureButton = null!;
 
     /// <summary>Raised with the index of the chosen speed: 0 pause, 1 month/s, 2 year/s, 3 ten years/s, 4 maximum.</summary>
     public event Action<int>? SpeedChosen;
@@ -36,6 +40,12 @@ public partial class Hud : CanvasLayer
 
     public event Action? NewRunRequested;
 
+    /// <summary>Raised with the index of the good chosen for the goods map mode.</summary>
+    public event Action<int>? GoodChosen;
+
+    /// <summary>Raised with 0 to show how much of the good settlements hold, 1 to show its price.</summary>
+    public event Action<int>? GoodMeasureChosen;
+
     public event Action? SaveRequested;
 
     public event Action? LoadRequested;
@@ -43,6 +53,7 @@ public partial class Hud : CanvasLayer
     public override void _Ready()
     {
         var topPanel = new PanelContainer();
+        _topPanel = topPanel;
         AddChild(topPanel);
         topPanel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopWide);
 
@@ -103,6 +114,24 @@ public partial class Hud : CanvasLayer
 
         _statusLabel = new Label { Text = "" };
         row.AddChild(_statusLabel);
+
+        // The goods map mode's choices, shown under the top bar only in that mode.
+        _goodsPanel = new PanelContainer { Visible = false };
+        AddChild(_goodsPanel);
+        var goodsMargin = NewMargin(8);
+        _goodsPanel.AddChild(goodsMargin);
+        var goodsRow = new HBoxContainer();
+        goodsRow.AddThemeConstantOverride("separation", 8);
+        goodsMargin.AddChild(goodsRow);
+        goodsRow.AddChild(new Label { Text = "Good:" });
+        _goodButton = new OptionButton { FocusMode = Control.FocusModeEnum.None };
+        _goodButton.ItemSelected += index => GoodChosen?.Invoke((int)index);
+        goodsRow.AddChild(_goodButton);
+        _measureButton = new OptionButton { FocusMode = Control.FocusModeEnum.None };
+        _measureButton.AddItem("Amount held", 0);
+        _measureButton.AddItem("Price", 1);
+        _measureButton.ItemSelected += index => GoodMeasureChosen?.Invoke((int)index);
+        goodsRow.AddChild(_measureButton);
 
         var infoPanel = new PanelContainer();
         AddChild(infoPanel);
@@ -193,6 +222,15 @@ public partial class Hud : CanvasLayer
 
     public override void _Process(double delta)
     {
+        // Keep the goods choices under the right end of the top bar.
+        if (_goodsPanel.Visible)
+        {
+            Vector2 screen = GetViewport().GetVisibleRect().Size;
+            Vector2 size = _goodsPanel.GetCombinedMinimumSize();
+            _goodsPanel.Size = size;
+            _goodsPanel.Position = new Vector2(screen.X - size.X - 12f, _topPanel.Size.Y + 6f);
+        }
+
         // Keep the legend in the bottom-right corner as its contents and the window change size.
         if (_legendPanel.Visible)
         {
@@ -248,6 +286,28 @@ public partial class Hud : CanvasLayer
         {
             _infoLabel.Text = text;
         }
+    }
+
+    /// <summary>Fills the list of goods for the goods map mode.</summary>
+    public void SetGoods(IReadOnlyList<string> names)
+    {
+        _goodButton.Clear();
+        for (int i = 0; i < names.Count; i++)
+        {
+            _goodButton.AddItem(names[i], i);
+        }
+    }
+
+    /// <summary>Shows or hides the goods choices, showing the given good and measure as chosen.</summary>
+    public void ShowGoodsPicker(bool visible, int good, int measure)
+    {
+        _goodsPanel.Visible = visible;
+        if (good >= 0 && good < _goodButton.ItemCount)
+        {
+            _goodButton.Selected = good;
+        }
+
+        _measureButton.Selected = measure;
     }
 
     /// <summary>Shows a map mode as chosen without raising the event.</summary>

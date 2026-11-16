@@ -88,8 +88,13 @@ public sealed class TradeSystem : ISimSystem
     private double[] _linkCost = Array.Empty<double>();
     private double[] _linkValue = Array.Empty<double>();
 
-    // The same for each good separately: [link * goods + good].
+    // The same for each good separately: [link * goods + good], as of the season in _goodSeason,
+    // decayed only when the link next carries the good or is read (most link-goods carry nothing
+    // most seasons, and decaying them all each season cost about a third of trade's time).
     private double[] _goodValue = Array.Empty<double>();
+    private int[] _goodSeason = Array.Empty<int>();
+    private int _season;
+    private static readonly double[] Decay = Enumerable.Range(0, 400).Select(k => Math.Pow(0.9, k)).ToArray();
     private int[] _degree = Array.Empty<int>();
 
     // Prices of the linked settlements this month, by settlement id then good.
@@ -264,10 +269,11 @@ public sealed class TradeSystem : ISimSystem
                     moved = Move(cellB, cellA, _degree[b], g, pb, pa, carry);
                 }
 
-                ref double goodValue = ref _goodValue[link * goods + g];
-                goodValue = 0.9 * goodValue + 0.1 * moved;
                 if (moved > 0.0)
                 {
+                    int slot = link * goods + g;
+                    _goodValue[slot] = GoodValue(slot) * 0.9 + 0.1 * moved;
+                    _goodSeason[slot] = _season + 1;
                     value += moved;
                     if (_january)
                     {
@@ -279,6 +285,8 @@ public sealed class TradeSystem : ISimSystem
             _linkValue[link] = 0.9 * _linkValue[link] + 0.1 * value;
             LinkGoodVisits += goods;
         }
+
+        _season++;
 
         LoopSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
 
@@ -516,11 +524,13 @@ public sealed class TradeSystem : ISimSystem
         int goods = _goods.Count;
         double[] oldValue = _linkValue;
         double[] oldGoodValue = _goodValue;
+        int[] oldGoodSeason = _goodSeason;
         _linkA = new int[pairs.Count];
         _linkB = new int[pairs.Count];
         _linkCost = new double[pairs.Count];
         _linkValue = new double[pairs.Count];
         _goodValue = new double[pairs.Count * goods];
+        _goodSeason = new int[pairs.Count * goods];
         _degree = new int[ids];
         int n = 0;
         foreach (KeyValuePair<(int A, int B), double> pair in pairs)
@@ -533,6 +543,7 @@ public sealed class TradeSystem : ISimSystem
             {
                 _linkValue[n] = oldValue[old];
                 Array.Copy(oldGoodValue, old * goods, _goodValue, n * goods, goods);
+                Array.Copy(oldGoodSeason, old * goods, _goodSeason, n * goods, goods);
             }
 
             _degree[a]++;
@@ -634,7 +645,7 @@ public sealed class TradeSystem : ISimSystem
         double least = 0.1 * _parameters.RouteValue;
         for (int link = 0; link < _linkA.Length; link++)
         {
-            double value = _goodValue[link * goods + good];
+            double value = GoodValue(link * goods + good);
             if (value >= least && _settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
             {
                 routes.Add(new TradeRoute(_settlementCell![_linkA[link]], _settlementCell[_linkB[link]], value));
@@ -642,6 +653,13 @@ public sealed class TradeSystem : ISimSystem
         }
 
         return routes;
+    }
+
+    // A link-good's average value as of the latest season traded (the next to come is _season).
+    private double GoodValue(int slot)
+    {
+        int age = _season - _goodSeason[slot];
+        return age <= 0 ? _goodValue[slot] : age < Decay.Length ? _goodValue[slot] * Decay[age] : 0.0;
     }
 
     public int LinkCount => _linkA.Length;

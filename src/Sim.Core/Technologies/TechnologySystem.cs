@@ -38,6 +38,7 @@ public sealed class TechnologySystem : ISimSystem
 {
     public const string SystemName = "technology";
     public const string EventTableName = "technology.events";
+    public const string StatusTableName = "technology.status";
 
     private readonly TechnologyParameters _parameters;
     private readonly TradeSystem? _trade;
@@ -71,6 +72,15 @@ public sealed class TechnologySystem : ISimSystem
     // Work arrays, per cell.
     private double[] _people = Array.Empty<double>();
     private readonly List<int> _peopled = new List<int>();
+    private int[] _firstGroupPlusOne = Array.Empty<int>();
+    private bool[][] _canUse = Array.Empty<bool[]>();
+    private bool[] _anyUse = Array.Empty<bool>();
+
+    // Saved: one row per technology, 1 where some group that can use it knew any of it after last
+    // year (so the next year must count who knows it). Saved because groups can hold knowledge
+    // unseen (people who changed occupation), so it cannot be worked out again after a load.
+    private EntityTable? _status;
+    private IntColumn? _statusKnown;
     private double[] _best = Array.Empty<double>();
     private double[] _users = Array.Empty<double>();
     private double[] _tradeBest = Array.Empty<double>();
@@ -114,6 +124,8 @@ public sealed class TechnologySystem : ISimSystem
         _eventTick = _events.AddIntColumn("tick");
         _eventGroup = _events.AddDoubleColumn("group");
         _eventContact = _events.AddDoubleColumn("contact");
+        _status = state.AddTable(StatusTableName);
+        _statusKnown = _status.AddIntColumn("knownAnywhere");
     }
 
     public void Initialize(SimContext context)
@@ -170,6 +182,14 @@ public sealed class TechnologySystem : ISimSystem
         }
 
         _cells = cells.ToArray();
+        _firstGroupPlusOne = state.IntField(PopulationGroups.FirstGroupField);
+        _canUse = Technologies.Technologies.Select(t => t.CanUse.ToArray()).ToArray();
+        int occupations = _canUse.Length == 0 ? 0 : _canUse[0].Length;
+        _anyUse = Enumerable.Range(0, occupations).Select(o => _canUse.Any(c => c[o])).ToArray();
+        for (int t = 0; t < Technologies.Count; t++)
+        {
+            _statusKnown![_status!.Add()] = 0;
+        }
         _people = new double[count];
         _best = new double[count];
         _users = new double[count];
@@ -230,22 +250,31 @@ public sealed class TechnologySystem : ISimSystem
         GeodesicGrid grid = _map!.Grid;
         groups.FillCellTotals(_people);
         Span<int> occupationOf = table.IntColumn("occupation").Values;
+        Span<int> nextPlusOne = table.IntColumn("nextPlusOne").Values;
         Span<double> sizeOf = table.DoubleColumn("size").Values;
+        int[] firstPlusOne = _firstGroupPlusOne;
         List<(int CellA, int CellB)> links = _trade?.LinksByCell() ?? new List<(int, int)>();
         FillSoldValue(links);
         double inUse = _parameters.InUse;
 
-        // Only cells with people are visited, through their own lists of groups.
+        // Only cells holding a group that could use some technology are visited, through their own
+        // lists of groups (raw arrays, for speed: this runs over every such group for every
+        // technology every year). Other cells count as knowing and using nothing, for their neighbours.
         _peopled.Clear();
         foreach (int cell in _cells)
         {
-            if (_people[cell] > 0.0)
+            bool relevant = false;
+            for (int g = firstPlusOne[cell] - 1; g >= 0 && !relevant; g = nextPlusOne[g] - 1)
+            {
+                relevant = _anyUse[occupationOf[g]] && sizeOf[g] > 0.0;
+            }
+
+            if (relevant)
             {
                 _peopled.Add(cell);
             }
             else
             {
-                // Empty cells count as knowing nothing and using nothing, for their neighbours.
                 _best[cell] = 0.0;
                 _users[cell] = 0.0;
             }
@@ -256,19 +285,24 @@ public sealed class TechnologySystem : ISimSystem
             Technology t = Technologies.Get(tech);
             Span<double> share = _knowledgeColumns[tech].Values;
 
-            // Per cell: the highest share among groups that can use it, and the people using it.
+            // Per cell: the highest share among groups that can use it, and the people using it. If
+            // nobody anywhere knew it last year, that is all zero and needs no counting.
+            bool[] canUse = _canUse[tech];
             bool anyKnown = false;
             foreach (int cell in _peopled)
             {
                 double best = 0.0;
                 double users = 0.0;
-                foreach (int g in groups.InCell(cell))
+                if (_statusKnown![tech] != 0)
                 {
-                    if (t.CanUse[occupationOf[g]])
+                    for (int g = firstPlusOne[cell] - 1; g >= 0; g = nextPlusOne[g] - 1)
                     {
-                        double s = share[g];
-                        best = Math.Max(best, s);
-                        users += s >= inUse ? sizeOf[g] : 0.0;
+                        if (canUse[occupationOf[g]])
+                        {
+                            double s = share[g];
+                            best = Math.Max(best, s);
+                            users += s >= inUse ? sizeOf[g] : 0.0;
+                        }
                     }
                 }
 
@@ -286,14 +320,21 @@ public sealed class TechnologySystem : ISimSystem
             FillTrade(links);
 
             // Each group that can use it: discover, learn, or forget.
+            bool knownAfter = false;
             foreach (int cell in _peopled)
             {
+                // Where nobody near knows it and the cell does not allow it, nothing can happen.
                 bool cellAllows = CellAllows(cell, tech);
+                if (!cellAllows && _best[cell] <= 0.0)
+                {
+                    continue;
+                }
+
                 double neighbourBest = -1.0;
-                foreach (int g in groups.InCell(cell))
+                for (int g = firstPlusOne[cell] - 1; g >= 0; g = nextPlusOne[g] - 1)
                 {
                     double size = sizeOf[g];
-                    if (!t.CanUse[occupationOf[g]] || size <= 0.0)
+                    if (!canUse[occupationOf[g]] || size <= 0.0)
                     {
                         continue;
                     }
@@ -327,6 +368,7 @@ public sealed class TechnologySystem : ISimSystem
                         if (pull > 0.0)
                         {
                             share[g] = Math.Min(1.0, pull);
+                            knownAfter = true;
                             continue;
                         }
 
@@ -346,6 +388,7 @@ public sealed class TechnologySystem : ISimSystem
                         if (context.Rng.Chance(chance))
                         {
                             share[g] = _parameters.DiscoveryShare;
+                            knownAfter = true;
                             RecordDiscovery(tech, cell, context.Tick, size);
                         }
 
@@ -379,8 +422,12 @@ public sealed class TechnologySystem : ISimSystem
                     }
 
                     share[g] = s;
+                    knownAfter |= s > 0.0;
                 }
             }
+
+            // Whether any group that can use it held some, for next year.
+            _statusKnown![tech] = knownAfter || anyKnown ? 1 : 0;
         }
     }
 

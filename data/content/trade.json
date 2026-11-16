@@ -20,5 +20,10 @@
 
   // Links are rebuilt every this many years (in January), around settlements founded or
   // abandoned since; a new settlement may wait that long to be linked.
-  "rebuildYears": 5
+  "rebuildYears": 5,
+
+  // A good moves only when the dear end's price beats the cheap end's plus the carrying cost by at
+  // least this share of the dear price: traders want a margin, and without one goods shuffled back
+  // and forth over tiny gaps (590 million sends in 5,000 years).
+  "minMargin": 0.05
 }

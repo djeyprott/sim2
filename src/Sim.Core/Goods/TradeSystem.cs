@@ -25,13 +25,15 @@ public sealed class TradeParameters
 
     public int RebuildYears { get; set; } = 5;
 
+    public double MinMargin { get; set; } = 0.05;
+
     public static TradeParameters LoadDefault() => Parse(ContentFiles.ReadText("trade.json"));
 
     public static TradeParameters Parse(string json)
     {
         TradeParameters p = ContentFiles.Parse<TradeParameters>(json, "trade");
         if (p.MaxLinkCost <= 0.0 || p.LinksPerSettlement < 1 || p.RiverFactor <= 0.0 || p.CostPerStep < 0.0
-            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0 || p.RebuildYears < 1)
+            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0 || p.RebuildYears < 1 || p.MinMargin < 0.0 || p.MinMargin >= 1.0)
         {
             throw new InvalidDataException("trade.json: maxLinkCost, linksPerSettlement and riverFactor must be above 0, sendShare 0 to 1, and no negative costs.");
         }
@@ -320,6 +322,11 @@ public sealed class TradeSystem : ISimSystem
         }
 
         double scale = Math.Min(1.0, (dear - cheap - carry) / dear);
+        if (scale < _parameters.MinMargin)
+        {
+            return 0.0;
+        }
+
         double amount = _parameters.SendShare * scale * stock / fromDegree;
         if (amount * dear < MinimumSendValue)
         {

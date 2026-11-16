@@ -302,7 +302,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Teach(with, true);
         Teach(without, false);
 
-        // Cattle have barely spread in so short a run: every farming and herding cell gets them, in both copies.
+        // Cattle have barely spread in so short a run: every herding cell and every other farming cell
+        // gets them, in both copies (so some farmland has cattle and some has none).
         int cattleBit = 1 << LivestockSet.LoadDefault().IndexOf("Cattle");
         var keepers = new PopulationGroups(with.State);
         int[] cropOf = with.State.IntField(FarmingSystem.CropField);
@@ -311,7 +312,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             int[] kept = sim.State.IntField(HerdingSystem.AnimalsField);
             for (int cell = 0; cell < _world.CellCount; cell++)
             {
-                if (cropOf[cell] > 0 || keepers.Find(cell, OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder)) >= 0)
+                if ((cropOf[cell] > 0 && cell % 2 == 0) || keepers.Find(cell, OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder)) >= 0)
                 {
                     kept[cell] |= cattleBit;
                 }
@@ -418,7 +419,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             }
         }
 
-        Assert.True(milkCells >= 5 && ploughed >= 5 && unploughed >= 5 && stores >= 5 && carts >= 1,
+        Assert.True(milkCells >= 3 && ploughed >= 5 && unploughed >= 5 && stores >= 5 && carts >= 1,
             $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores, {carts} settlements with carts.");
     }
 

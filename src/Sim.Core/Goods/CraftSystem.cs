@@ -224,7 +224,7 @@ public sealed class CraftSystem : ISimSystem
             }
 
             double wanted = perPerson * fed;
-            double use = Math.Min(1.0, _rules.Goods.Get(good).Value / _prices.Price(good));
+            double use = Math.Min(1.0, Math.Pow(_rules.Goods.Get(good).Value / _prices.Price(good), _prices.Parameters.NeedElasticity));
             double taken = stockpiles.Consume(cell, good, wanted * use);
             if (_rules.Goods.Get(good).NeedTier == NeedTier.Everyday)
             {

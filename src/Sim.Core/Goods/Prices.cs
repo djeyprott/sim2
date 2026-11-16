@@ -20,13 +20,15 @@ public sealed class PriceParameters
 
     public double SalesWanted { get; set; } = 1.5;
 
+    public double NeedElasticity { get; set; } = 1.0;
+
     public static PriceParameters LoadDefault() => Parse(ContentFiles.ReadText("prices.json"));
 
     public static PriceParameters Parse(string json)
     {
         PriceParameters p = ContentFiles.Parse<PriceParameters>(json, "prices");
         if (p.Elasticity <= 0.0 || p.MinFactor <= 0.0 || p.MaxFactor < 1.0 || p.MinFactor > 1.0
-            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0 || p.SalesWanted < 0.0)
+            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0 || p.SalesWanted < 0.0 || p.NeedElasticity < 0.0)
         {
             throw new InvalidDataException("prices.json: elasticity above 0, 0 < minFactor <= 1 <= maxFactor, and no negative reserve or time value.");
         }

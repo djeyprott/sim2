@@ -554,7 +554,11 @@ public sealed class HerdingSystem : ISimSystem
 
                 // Animals were mostly first kept by settled farming people; foragers take them up far
                 // less readily where no farmers live in or beside the cell.
-                if (!FarmersNear(cell))
+                if (FarmersNear(cell))
+                {
+                    fullness = 1.0;
+                }
+                else
                 {
                     fullness *= _parameters.ForagerInventionFactor;
                 }

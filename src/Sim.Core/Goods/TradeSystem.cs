@@ -110,6 +110,8 @@ public sealed class TradeSystem : ISimSystem
     // February's (after January's goods arrived), summed over the run; for exit tests only.
     private double[] _gapJanuary = Array.Empty<double>();
     private double[] _gapFebruary = Array.Empty<double>();
+    private double[] _sentJanuary = Array.Empty<double>();
+    private bool _january;
 
     public TradeSystem(TradeParameters parameters, OccupationSet occupations)
     {
@@ -147,6 +149,7 @@ public sealed class TradeSystem : ISimSystem
         _carry = _goods.Goods.Select(g => g.Weight * _parameters.CostPerStep).ToArray();
         _gapJanuary = new double[_goods.Count];
         _gapFebruary = new double[_goods.Count];
+        _sentJanuary = new double[_goods.Count];
 
         int cells = _map.CellCount;
         _stepCost = new double[cells];
@@ -232,6 +235,7 @@ public sealed class TradeSystem : ISimSystem
         }
 
         int goods = _goods.Count;
+        _january = month == 0;
         start = System.Diagnostics.Stopwatch.GetTimestamp();
         for (int link = 0; link < _linkA.Length; link++)
         {
@@ -335,6 +339,11 @@ public sealed class TradeSystem : ISimSystem
 
         Sends++;
         double sent = _stockpiles.Send(from, to, good, amount);
+        if (_january)
+        {
+            _sentJanuary[good] += sent;
+        }
+
         if (_destinationStamp[to] != _destinationRound)
         {
             _destinationStamp[to] = _destinationRound;
@@ -635,4 +644,7 @@ public sealed class TradeSystem : ISimSystem
 
     /// <summary>For each good, the same straight after January's trade, counting goods on their way as arrived.</summary>
     public IReadOnlyList<double> GapAfterTrade => _gapFebruary;
+
+    /// <summary>For each good, how much was sent in the Januaries whose gaps are measured (since this object was made).</summary>
+    public IReadOnlyList<double> SentInJanuary => _sentJanuary;
 }

@@ -68,7 +68,7 @@ public sealed class EarthRunResult
     /// <summary>Goods whose average price gap along links was not smaller after a season's trade, by name.</summary>
     public List<string> GapsNotShrinking { get; set; } = new List<string>();
 
-    /// <summary>Goods traded at all (some price gap along links).</summary>
+    /// <summary>Goods sent along links in the measured Januaries.</summary>
     public int TradedGoods { get; set; }
 
     /// <summary>Groups of five or more linked settlements with no trade route, and settlements on a route, after 5,000 years.</summary>
@@ -529,7 +529,7 @@ public abstract class EarthRunFixtureBase
         {
             double before = trade.GapBeforeTrade[g];
             double after = trade.GapAfterTrade[g];
-            if (before > 1e-6)
+            if (before > 1e-6 && trade.SentInJanuary[g] > 0.0)
             {
                 result.TradedGoods++;
                 if (after >= before)

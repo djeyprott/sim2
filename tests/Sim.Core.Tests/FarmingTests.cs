@@ -3,6 +3,7 @@ using Sim.Core.Content;
 using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Goods;
+using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
@@ -67,6 +68,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         {
             parameters.HarvestSpread = harvestSpread;
         }
+        HerdingParameters herding = HerdingParameters.LoadDefault();
+        herding.InventionChance = 0.02;
         var systems = new ISimSystem[]
         {
             climate,
@@ -74,6 +77,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             GoodsSystem.CreateDefault(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
+            new HerdingSystem(herding, LivestockSet.LoadDefault(), FarmingParameters.LoadDefault(), climate.Biomes, occupations),
             SettlementSystem.CreateDefault(occupations),
             ResourceSystem.CreateDefault(climate.Biomes, occupations),
             CraftSystem.CreateDefault(occupations),
@@ -193,6 +197,52 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.NotEqual(real, a);
         Assert.NotEqual(a, Centres(2));
         Assert.Equal(a, Centres(1));
+    }
+
+    [Fact]
+    public void Herding_is_taken_up_in_its_homelands_and_spreads()
+    {
+        Simulation sim = FastFarming(7);
+        HerdingSystem herding = sim.Systems.OfType<HerdingSystem>().Single();
+        sim.Run(300 * 12);
+
+        // Animals are first herded inside their homelands, once per homeland at most.
+        var origins = herding.Origins();
+        Assert.True(origins.Count >= 3, $"Only {origins.Count} first herdings in 300 years.");
+        Assert.Equal(origins.Count, origins.Select(o => o.Homeland).Distinct().Count());
+        foreach ((int animal, int homeland, int cell, long _) in origins)
+        {
+            AnimalHomeland h = herding.Livestock.Homelands[homeland];
+            Assert.Equal(h.Animal, animal);
+            Assert.True(_world.Grid.DistanceKm(cell, _world.Grid.FindCell(h.Lat, h.Lon)) <= h.RadiusKm + 60.0,
+                $"{herding.Livestock.Get(animal).Name} was first herded outside its homeland.");
+        }
+
+        // Herders live and grow on pasture, and animals reach farmers beyond where they were first kept.
+        var groups = new PopulationGroups(sim.State);
+        int herder = OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder);
+        Assert.True(herding.WorldHerders() > 10_000, $"Only {herding.WorldHerders():F0} herders after 300 years.");
+        int[] animals = sim.State.IntField(HerdingSystem.AnimalsField);
+        int keptCells = animals.Count(a => a != 0);
+        Assert.True(keptCells > 3 * origins.Count, $"Animals are kept in only {keptCells} cells.");
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            int group = groups.Find(cell, herder);
+            if (group >= 0 && groups.Size(group) > 0.0)
+            {
+                Assert.True(animals[cell] != 0, $"Cell {cell} has herders but no animals.");
+                Assert.True(herding.Pasture(cell) > 0.0, $"Cell {cell} has herders but no pasture.");
+            }
+        }
+
+        // Wool and hides reach settlement stores, and the ledger still balances.
+        var stockpiles = new Stockpiles(sim.State, GoodSet.LoadDefault());
+        Assert.True(stockpiles.Produced(stockpiles.Goods.IndexOf("Hides")) > 0.0, "No hides were produced.");
+        Assert.True(stockpiles.Produced(stockpiles.Goods.IndexOf("Meat and milk")) > 0.0, "Herders ate nothing.");
+        foreach (Good good in stockpiles.Goods.Goods)
+        {
+            Assert.True(stockpiles.Imbalance(good.Index) < 1e-6, $"{good.Name} ledger is out by {stockpiles.Imbalance(good.Index):E2}.");
+        }
     }
 
     [Fact]

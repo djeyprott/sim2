@@ -4,6 +4,7 @@ using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Geo;
 using Sim.Core.Goods;
+using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
@@ -109,6 +110,19 @@ public sealed class EarthRunResult
 
     public double SevereShare => FamineDeathCellYears == 0 ? 0.0 : SevereFamineCellYears / (double)FamineDeathCellYears;
 
+    /// <summary>Separate regions (1,000 km apart) where an animal was first herded within 6,000 years.</summary>
+    public int HerdingRegions6000 { get; set; }
+
+    /// <summary>Herders, and farmers, living on grassland away from rivers after 5,000 years.</summary>
+    public double HerdersOnOpenGrassland { get; set; }
+
+    public double FarmersOnOpenGrassland { get; set; }
+
+    public double HerdersAt5000 { get; set; }
+
+    /// <summary>Each first herding: animal name and year after the start.</summary>
+    public List<string> HerdingOrigins { get; set; } = new List<string>();
+
     /// <summary>Share of farming cells on grassland away from rivers after 5,000 years.</summary>
     public double OpenGrasslandFarmingShare { get; set; }
 
@@ -157,6 +171,8 @@ public sealed class EarthRunResult
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
             + $"obsidian up to {ObsidianReachKm:F0} km from a source; {TradedGoods} goods traded, gaps not shrinking: [{string.Join(", ", GapsNotShrinking)}]; "
             + $"{RegionsWithoutRoutes} linked regions without routes, {100.0 * ShareOnRoutes:F0}% of settlements on a route; "
+            + $"herding: {HerdersAt5000 / 1e6:F2} M herders after 5,000 years, {HerdersOnOpenGrassland / 1e6:F2} M on open grassland against {FarmersOnOpenGrassland / 1e6:F2} M farmers; "
+            + $"{HerdingRegions6000} herding regions within 6,000 years [{string.Join(", ", HerdingOrigins)}]; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
@@ -335,6 +351,24 @@ public abstract class EarthRunFixtureBase
                     result.PonticOpenGrasslandFarmedShare = totals[0] == 0 ? 0.0 : farmedIn[0] / (double)totals[0];
                     result.OpenGrasslandFarmedShare = (farmedIn[0] + farmedIn[1]) / (double)Math.Max(1, totals[0] + totals[1]);
                     result.TemperateForestFarmedShare = farmedIn[2] / (double)Math.Max(1, totals[2]);
+
+                    var occupations = OccupationSet.LoadDefault();
+                    if (occupations.Contains(OccupationSet.Herder))
+                    {
+                        var herders = new double[world.CellCount];
+                        var farmers = new double[world.CellCount];
+                        groups.FillCellTotals(herders, occupations.IndexOf(OccupationSet.Herder));
+                        groups.FillCellTotals(farmers, occupations.IndexOf(OccupationSet.Farmer));
+                        result.HerdersAt5000 = herders.Sum();
+                        foreach (int cell in land)
+                        {
+                            if (biome[cell] == grassland && world.River(cell) == RiverSize.None)
+                            {
+                                result.HerdersOnOpenGrassland += herders[cell];
+                                result.FarmersOnOpenGrassland += farmers[cell];
+                            }
+                        }
+                    }
                 }
 
                 MeasureTrade(sim, world, stockpiles, result);
@@ -352,6 +386,14 @@ public abstract class EarthRunFixtureBase
 
         result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
         CheckGroups(world, groups, result);
+
+        HerdingSystem? herding = sim.Systems.OfType<HerdingSystem>().SingleOrDefault();
+        if (herding != null)
+        {
+            var origins = herding.Origins();
+            result.HerdingRegions6000 = SeparateRegions(world.Grid, origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
+            result.HerdingOrigins = origins.Select(o => $"{herding.Livestock.Get(o.Animal).Name} year {o.Tick / 12}").ToList();
+        }
 
         if (farmingSystem != null)
         {
@@ -755,6 +797,19 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     public void Farming_starts_in_at_least_3_separate_regions_within_6000_years_in_8_of_10_seeds()
     {
         Assert.True(_results.Count(r => r.Regions6000 >= 3) >= 8, string.Join(", ", _results.Select(r => r.Regions6000)));
+    }
+
+    [Fact]
+    public void Herding_is_first_taken_up_in_at_least_2_separate_regions_within_6000_years_in_8_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.HerdingRegions6000 >= 2) >= 8, string.Join(", ", _results.Select(r => r.HerdingRegions6000)));
+    }
+
+    [Fact]
+    public void After_5000_years_herders_outnumber_farmers_on_open_grassland()
+    {
+        Assert.All(_results, r => Assert.True(r.HerdersOnOpenGrassland > r.FarmersOnOpenGrassland,
+            $"Seed {r.Seed}: {r.HerdersOnOpenGrassland:F0} herders against {r.FarmersOnOpenGrassland:F0} farmers on open grassland."));
     }
 
     [Fact]

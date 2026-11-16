@@ -1,6 +1,7 @@
 using Sim.Core.Climate;
 using Sim.Core.Farming;
 using Sim.Core.Goods;
+using Sim.Core.Herding;
 using Sim.Core.People;
 using Sim.Core.Settlements;
 
@@ -29,6 +30,7 @@ public static class SystemCatalog
         if (farming)
         {
             systems.Add(FarmingSystem.CreateDefault(climate.Biomes, occupations));
+            systems.Add(HerdingSystem.CreateDefault(climate.Biomes, occupations));
             systems.Add(SettlementSystem.CreateDefault(occupations));
             systems.Add(ResourceSystem.CreateDefault(climate.Biomes, occupations));
             systems.Add(CraftSystem.CreateDefault(occupations));

@@ -1,11 +1,12 @@
 // Occupations: the way of life of a population group. Each occupation belongs to a class and
 // lives either in the countryside or in its cell's settlement. storeFed: eats from the
 // settlement's store and uses up everyday and luxury goods from it (milestone 2).
-// More occupations (herder, trader, soldier, priest and so on) arrive in later steps and milestones.
+// More occupations (trader, soldier, priest and so on) arrive in later milestones.
 {
   "occupations": [
     { "name": "Forager", "class": "lower", "livesIn": "countryside" },
     { "name": "Farmer", "class": "lower", "livesIn": "countryside" },
-    { "name": "Craftsman", "class": "middle", "livesIn": "settlement" }
+    { "name": "Craftsman", "class": "middle", "livesIn": "settlement" },
+    { "name": "Herder", "class": "lower", "livesIn": "countryside" }
   ]
 }

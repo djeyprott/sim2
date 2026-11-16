@@ -36,6 +36,7 @@ public sealed class OccupationSet
     public const string Forager = "Forager";
     public const string Farmer = "Farmer";
     public const string Craftsman = "Craftsman";
+    public const string Herder = "Herder";
 
     private readonly Occupation[] _occupations;
 

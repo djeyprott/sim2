@@ -1,0 +1,43 @@
+// Herd animals: where each lived wild on the real Earth, the climate it tolerates, and what it gives.
+//
+// Climate ranges work as for crops (crops.json): four numbers; below the first the animal cannot
+// be kept, from the second to the third it does best, above the fourth it cannot be kept.
+//   warmest  mean temperature of the warmest month, degrees C
+//   coldest  mean temperature of the coldest month, degrees C
+//   water    rainfall over the year plus what a river adds (farming.json), mm
+// An animal can have more than one homeland, each a circle on the real Earth; it can first be
+// herded in each of them separately (cattle in Southwest Asia and in the eastern Sahel).
+//   herded  true: kept by herders on open pasture (herding.json); false: kept only by farmers
+//           around their villages (pigs), and first taken up by farmers.
+//   wool    whether it gives wool; every animal gives meat, milk and hides.
+// Horses are left to milestone 3.
+{
+  "animals": [
+    {
+      "name": "Sheep and goats", "colour": "#e8e2c8", "herded": true, "wool": true,
+      "homelands": [ { "lat": 36.0, "lon": 45.0, "radiusKm": 600 } ],
+      "warmest": [10, 15, 34, 42], "coldest": [-30, -15, 20, 30], "water": [80, 250, 900, 1800]
+    },
+    {
+      "name": "Cattle", "colour": "#b0703c", "herded": true, "wool": false,
+      "homelands": [
+        { "lat": 38.5, "lon": 38.5, "radiusKm": 600 },
+        { "lat": 15.0, "lon": 26.0, "radiusKm": 900 }
+      ],
+      "warmest": [12, 17, 34, 40], "coldest": [-25, -10, 26, 32], "water": [200, 450, 1600, 3000]
+    },
+    {
+      "name": "Pigs", "colour": "#e59ab0", "herded": false, "wool": false,
+      "homelands": [
+        { "lat": 38.0, "lon": 40.0, "radiusKm": 600 },
+        { "lat": 34.0, "lon": 110.0, "radiusKm": 600 }
+      ],
+      "warmest": [14, 18, 32, 38], "coldest": [-20, -8, 26, 32], "water": [350, 600, 2500, 4500]
+    },
+    {
+      "name": "Llamas and alpacas", "colour": "#8c6fd1", "herded": true, "wool": true,
+      "homelands": [ { "lat": -16.0, "lon": -69.0, "radiusKm": 500 } ],
+      "warmest": [4, 8, 17, 24], "coldest": [-20, -8, 12, 18], "water": [150, 300, 1100, 2000]
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 using Sim.Core.Content;
 using Sim.Core.Goods;
+using Sim.Core.Herding;
 using Xunit;
 
 namespace Sim.Core.Tests;
@@ -114,5 +115,33 @@ public class TradeRuleTests
         string text = ContentFiles.ReadText("trade.json");
         Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"sendShare\": 0.15", "\"sendShare\": 1.5")));
         Assert.Throws<InvalidDataException>(() => TradeParameters.Parse(text.Replace("\"hills\": 1.6, ", "")));
+    }
+}
+
+public class LivestockTests
+{
+    [Fact]
+    public void Livestock_loads_with_every_homeland_numbered_and_bad_files_are_rejected()
+    {
+        LivestockSet livestock = LivestockSet.LoadDefault();
+        Assert.Contains(livestock.Animals, a => a.Name == "Sheep and goats" && a.Herded && a.Wool);
+        Assert.Contains(livestock.Animals, a => a.Name == "Pigs" && !a.Herded);
+        Assert.Equal(2, livestock.Get(livestock.IndexOf("Cattle")).HomelandCount);
+        for (int i = 0; i < livestock.Homelands.Count; i++)
+        {
+            Assert.Equal(i, livestock.Homelands[i].Index);
+            Animal animal = livestock.Get(livestock.Homelands[i].Animal);
+            Assert.InRange(i, animal.FirstHomeland, animal.FirstHomeland + animal.HomelandCount - 1);
+        }
+
+        string text = ContentFiles.ReadText("livestock.json");
+        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"warmest\": [10, 15, 34, 42]", "\"warmest\": [15, 10, 34, 42]")));
+        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600 } ]", "\"homelands\": [ ]")));
+
+        HerdingParameters p = HerdingParameters.LoadDefault();
+        Assert.True(p.HerdDensity > 0.0 && p.Pasture["Grassland"] >= p.MinPasture);
+        string herding = ContentFiles.ReadText("herding.json");
+        Assert.Throws<InvalidDataException>(() => HerdingParameters.Parse(herding.Replace("\"deathShare\": 0.2", "\"deathShare\": 0.9")));
+        Assert.Throws<InvalidDataException>(() => HerdingParameters.Parse(herding.Replace("\"Grassland\": 1.0", "\"Grassland\": 1.5")));
     }
 }

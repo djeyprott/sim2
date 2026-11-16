@@ -39,6 +39,9 @@ public sealed class FarmingSystem : ISimSystem
     public const string OriginTableName = "farming.origins";
     public const string HomelandTableName = "farming.homelands";
 
+    // Herders the cell's pasture would feed (the herding system's field; farming comes first in the update order).
+    private const string HerdingCapacityField = "herding.capacity";
+
     private const int NorthernHarvestMonth = 9;  // October, counting January as 0
     private const int SouthernHarvestMonth = 3;  // April
 
@@ -59,6 +62,8 @@ public sealed class FarmingSystem : ISimSystem
     private int[] _lastFaminePlusOne = Array.Empty<int>();
     private int[] _storeFed = Array.Empty<int>();
     private readonly int _craftsman;
+    private readonly int _herder;
+    private double[]? _herdingCapacity;
     private double[] _famineDeaths = Array.Empty<double>();
     private double[] _hunger = Array.Empty<double>();
     private int[]? _settlementPlusOne;
@@ -103,6 +108,7 @@ public sealed class FarmingSystem : ISimSystem
         _forager = occupations.IndexOf(OccupationSet.Forager);
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
+        _herder = occupations.Contains(OccupationSet.Herder) ? occupations.IndexOf(OccupationSet.Herder) : -1;
         _noFarmingBiome = new bool[biomes.Count];
         _biomeFactor = Enumerable.Repeat(1.0, biomes.Count).ToArray();
         foreach (KeyValuePair<string, double> pair in parameters.BiomeFactors.OrderBy(p => p.Key, StringComparer.Ordinal))
@@ -161,6 +167,11 @@ public sealed class FarmingSystem : ISimSystem
         {
             _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
             _grain = _stockpiles.Goods.IndexOf(GoodSet.Grain);
+        }
+
+        if (_herder >= 0 && state.HasField(HerdingCapacityField))
+        {
+            _herdingCapacity = state.DoubleField(HerdingCapacityField);
         }
 
         if (state.HasField(SettlementSystem.SettlementField))
@@ -618,6 +629,16 @@ public sealed class FarmingSystem : ISimSystem
             if (suitability < _parameters.MinSpreadSuitability || !rng.Chance(_parameters.SpreadChance))
             {
                 continue;
+            }
+
+            // Herders keep land that their herds feed better than crops would.
+            if (_herdingCapacity != null && _herdingCapacity[other] > FarmCapacity(other, suitability))
+            {
+                int herderGroup = groups.Find(other, _herder);
+                if (herderGroup >= 0 && groups.Size(herderGroup) > 0.0)
+                {
+                    continue;
+                }
             }
 
             double moving = _parameters.SpreadShare * farmers;

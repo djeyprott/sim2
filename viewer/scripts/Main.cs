@@ -10,6 +10,7 @@ using Sim.Core.Engine;
 using Sim.Core.Farming;
 using Sim.Core.Geo;
 using Sim.Core.Goods;
+using Sim.Core.Herding;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
@@ -43,6 +44,7 @@ public partial class Main : Node2D
     private const int PopulationMode = 7;
     private const int FarmingMode = 8;
     private const int TradeMode = 9;
+    private const int HerdingMode = 10;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -70,6 +72,8 @@ public partial class Main : Node2D
     private ClimateSystem? _climate;
     private ForagerSystem? _foragers;
     private FarmingSystem? _farming;
+    private HerdingSystem? _herding;
+    private Color[] _animalColours = Array.Empty<Color>();
     private SettlementSystem? _settlementSystem;
     private ResourceSystem? _resourceSystem;
     private Task<(List<SettlementInfo> Settlements, List<TradeRoute> Routes)>? _settlementTask;
@@ -221,6 +225,10 @@ public partial class Main : Node2D
         _climate = systems.OfType<ClimateSystem>().FirstOrDefault();
         _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
+        _herding = systems.OfType<HerdingSystem>().FirstOrDefault();
+        _animalColours = _herding == null
+            ? Array.Empty<Color>()
+            : _herding.Livestock.Animals.Select(a => Color.FromHtml(a.Colour)).ToArray();
         _settlementSystem = systems.OfType<SettlementSystem>().FirstOrDefault();
         _resourceSystem = systems.OfType<ResourceSystem>().FirstOrDefault();
         _tradeSystem = systems.OfType<TradeSystem>().FirstOrDefault();
@@ -496,6 +504,13 @@ public partial class Main : Node2D
             extractor = sim => ExtractFarming(sim, cellCount);
         }
 
+        if (mode == HerdingMode && _herding != null)
+        {
+            int cellCount = _map.CellCount;
+            HerdingSystem herding = _herding;
+            extractor = sim => ExtractHerding(sim, herding, cellCount);
+        }
+
         if ((mode == PopulationMode || mode == TradeMode) && _foragers != null)
         {
             double[] area = _areaKm2;
@@ -568,6 +583,46 @@ public partial class Main : Node2D
             else
             {
                 values[cell] = -100.0;
+            }
+        }
+
+        return values;
+    }
+
+    // Per cell: the main animal's index plus the herders' share of the cell's people (0 to 0.998);
+    // or, where animals are kept only by farmers, minus one minus the main animal's index; or -100.
+    private static double[] ExtractHerding(Simulation sim, HerdingSystem herding, int cellCount)
+    {
+        int[] animals = sim.State.IntField(HerdingSystem.AnimalsField);
+        var groups = new PopulationGroups(sim.State);
+        var totals = new double[cellCount];
+        groups.FillCellTotals(totals);
+        var herders = new double[cellCount];
+        groups.FillCellTotals(herders, HerderOccupation);
+        var values = new double[cellCount];
+        for (int cell = 0; cell < cellCount; cell++)
+        {
+            int mask = animals[cell];
+            if (mask == 0)
+            {
+                values[cell] = -100.0;
+                continue;
+            }
+
+            int main = herding.BestHerded(cell, mask).Animal;
+            if (main < 0)
+            {
+                main = System.Numerics.BitOperations.TrailingZeroCount(mask);
+            }
+
+            if (herders[cell] > 0.0)
+            {
+                double share = totals[cell] > 0.0 ? herders[cell] / totals[cell] : 0.0;
+                values[cell] = main + 0.001 + 0.998 * Math.Clamp(share, 0.0, 1.0);
+            }
+            else
+            {
+                values[cell] = -1 - main;
             }
         }
 
@@ -650,6 +705,31 @@ public partial class Main : Node2D
                     : values[cell] <= 0.0 ? EmptyLand
                     : Gradient(Math.Log10(values[cell]), PopulationStops));
                 break;
+            case HerdingMode:
+                _mapView.SetColours(cell =>
+                {
+                    if (!map.IsLand(cell))
+                    {
+                        return Neutral(cell);
+                    }
+
+                    double v = values[cell];
+                    if (v >= 0.0)
+                    {
+                        int animal = (int)v;
+                        double share = v - animal;
+                        return animal < _animalColours.Length ? NoFarming.Lerp(_animalColours[animal], (float)(0.45 + 0.55 * share)) : NoFarming;
+                    }
+
+                    if (v > -99.0)
+                    {
+                        int animal = (int)(-v) - 1;
+                        return animal < _animalColours.Length ? NoFarming.Lerp(_animalColours[animal], 0.22f) : NoFarming;
+                    }
+
+                    return NoFarming;
+                });
+                break;
             case TradeMode:
                 // Population, faded, under the trade routes.
                 _mapView.SetColours(cell => !map.IsLand(cell) ? Neutral(cell)
@@ -710,6 +790,16 @@ public partial class Main : Node2D
                 title = "People per 100 km²";
                 entries.Add((EmptyLand, "None"));
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
+                break;
+            case HerdingMode:
+                title = "Herding (brighter: more of the people herd)";
+                if (_herding != null)
+                {
+                    entries.AddRange(_herding.Livestock.Animals.Select(a => (_animalColours[a.Index], a.Name)));
+                    entries.Add((NoFarming.Lerp(_animalColours[0], 0.22f), "Kept only by farmers"));
+                }
+
+                entries.Add((NoFarming, "No animals"));
                 break;
             case TradeMode:
                 title = "Trade routes (food value carried a season)";
@@ -796,6 +886,7 @@ public partial class Main : Node2D
     private static readonly Color EmptyLand = Color.Color8(70, 70, 74);
     private static readonly Color NoFarming = Color.Color8(62, 64, 68);
     private static readonly int FarmerOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+    private static readonly int HerderOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder);
 
     // Stops are powers of ten of people per 100 km².
     private static readonly (double At, Color Colour)[] PopulationStops =
@@ -1146,6 +1237,7 @@ public partial class Main : Node2D
             ForagerSystem? foragers = _foragers;
             OccupationSet occupations = _occupations;
             FarmingSystem? farmingForCell = _farming;
+            HerdingSystem? herdingForCell = _herding;
             SettlementSystem? settlementsForCell = _settlementSystem;
             ResourceSystem? resourcesForCell = _resourceSystem;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
@@ -1153,7 +1245,7 @@ public partial class Main : Node2D
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
                 foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeGroups(sim, target, occupations)
-                    + DescribeFarming(sim, target, farmingForCell) + DescribeResources(target, resourcesForCell) : null,
+                    + DescribeFarming(sim, target, farmingForCell) + DescribeHerding(sim, target, herdingForCell) + DescribeResources(target, resourcesForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
             live.Age = 0.0;
@@ -1213,6 +1305,31 @@ public partial class Main : Node2D
                 ? "\nNo people: not reached yet"
                 : $"\nLand can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)} foragers"
                     + (people.Groups.Length > 0 ? "\nGroups:" + people.Groups : "\nGroups: none");
+        }
+
+        return text;
+    }
+
+    // Runs on the simulation thread: the animals kept in the cell and what its pasture can feed.
+    private static string DescribeHerding(Simulation sim, int cell, HerdingSystem? herding)
+    {
+        if (herding == null)
+        {
+            return "";
+        }
+
+        int mask = sim.State.IntField(HerdingSystem.AnimalsField)[cell];
+        if (mask == 0)
+        {
+            return "";
+        }
+
+        var names = herding.Livestock.Animals.Where(a => (mask & (1 << a.Index)) != 0).Select(a => a.Name);
+        string text = "\nAnimals: " + string.Join(", ", names);
+        double capacity = sim.State.DoubleField(HerdingSystem.CapacityField)[cell];
+        if (capacity > 0.0)
+        {
+            text += $"\nPasture can feed {capacity.ToString("N0", CultureInfo.InvariantCulture)} herders";
         }
 
         return text;
@@ -1386,12 +1503,19 @@ public partial class Main : Node2D
             case 215:
                 _screenshotOk &= SaveScreenshot("-trade");
 
+                // Herding, zoomed out over Southwest Asia and the steppe.
+                SetMapMode(HerdingMode);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 0.5f);
+                break;
+            case 230:
+                _screenshotOk &= SaveScreenshot("-herding");
+
                 // Close in on the Fertile Crescent to show settlement names.
                 SetMapMode(PopulationMode);
-                ZoomAt(MapView.MapPosition(36.5, 40.0), 2.5f);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 5f);
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
-            case 240:
+            case 255:
                 bool savedSettlements = SaveScreenshot("-settlements");
                 GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
                 break;

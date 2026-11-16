@@ -1,0 +1,61 @@
+// Herding (milestone 2, step 6). Runs once a year.
+//
+// pasture: how much of a biome's land feeds herds, 0 to 1 (biomes not listed: 0). Herders live
+//   only where it is at least minPasture; elsewhere animals are kept only by farmers.
+// herdDensity: herders a square kilometre of full pasture feeds, with the best herded animal
+//   kept in the cell growing at its best. Farmers feed farmDensity (farming.json) times their
+//   crop's suitability, halved on grassland away from rivers, so herders feed more people on open
+//   grassland and farmers more in good farmland.
+// The land goes to whichever way of life feeds more people there: farming does not spread into a
+//   cell that herders hold and that herds would feed better, and there farmers take up herding at
+//   conversionRate a year. Herders use the land their cell's farmers leave unused.
+{
+  "pasture": {
+    "Grassland": 1.0,
+    "Savanna": 1.0,
+    "Mediterranean": 0.7,
+    "Desert": 0.5,
+    "Tundra": 0.5,
+    "Temperate forest": 0.3,
+    "Tropical seasonal forest": 0.3,
+    "Boreal forest": 0.1
+  },
+  "minPasture": 0.5,
+  "herdDensity": 1.0,
+
+  // A year's chance that people in a cell where an animal lives wild first take up herding it,
+  // times how well it does there and how full of foragers the cell is (as farming's inventionChance).
+  "inventionChance": 0.000003,
+  "wildMinSuitability": 0.5,
+  "randomHomelandMinSuitability": 0.7,
+
+  // Share of a cell's foragers (or farmers, where herding feeds more) who take up herding each year
+  // once animals are kept in the cell.
+  "conversionRate": 0.03,
+  // Share of the foragers who become the first herders when an animal is first herded.
+  "firstHerderShare": 0.1,
+
+  "growthRate": 0.03,
+
+  // Herders whose pasture feeds only part of them: of the shortfall, deathShare die and leaveShare
+  // go back to foraging, each year.
+  "deathShare": 0.2,
+  "leaveShare": 0.3,
+
+  // Herders at least spreadWhenFull of their pasture's capacity send spreadShare of themselves, with
+  // a yearly chance of spreadChance, into each neighbouring cell with pasture where nobody herds yet.
+  // Animals pass to each neighbouring farming cell where they do well enough with chance
+  // spreadChance a year.
+  "spreadWhenFull": 0.4,
+  "minSpreadSuitability": 0.3,
+  "spreadChance": 0.05,
+  "spreadShare": 0.1,
+
+  // Goods each herder, and each farmer in a cell where animals are kept, puts into a settlement's
+  // store each year (wool only from animals that give it). Herders without a settlement in their
+  // own or a neighbouring cell keep nothing.
+  "woolPerHerder": 0.2,
+  "hidesPerHerder": 0.1,
+  "woolPerFarmer": 0.02,
+  "hidesPerFarmer": 0.02
+}

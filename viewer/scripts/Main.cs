@@ -997,16 +997,17 @@ public partial class Main : Node2D
     private static readonly int HerderOccupation = OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder);
 
     // Stops are powers of ten of people per 100 km².
-    private static readonly Color NoneHeld = Color.Color8(40, 30, 60);
+    private static readonly Color NoneHeld = Color.Color8(24, 24, 30);
 
-    // Amount held per person, as a power of ten: 0.001 to 10.
+    // Amount held per person, as a power of ten: 0.0001 to 10.
     private static readonly (double At, Color Colour)[] HeldStops =
     {
-        (-3.0, Color.Color8(60, 40, 90)),
-        (-2.0, Color.Color8(110, 60, 140)),
-        (-1.0, Color.Color8(180, 80, 120)),
-        (0.0, Color.Color8(235, 130, 70)),
-        (1.0, Color.Color8(255, 240, 170)),
+        (-4.0, Color.Color8(80, 55, 130)),
+        (-3.0, Color.Color8(130, 65, 160)),
+        (-2.0, Color.Color8(195, 80, 125)),
+        (-1.0, Color.Color8(240, 135, 70)),
+        (0.0, Color.Color8(255, 215, 110)),
+        (1.0, Color.Color8(255, 255, 220)),
     };
 
     // Price against the good's base value, as a power of ten: a fifth (cheap, blue) to five times (dear, red).

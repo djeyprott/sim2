@@ -61,7 +61,7 @@ public partial class Hud : CanvasLayer
         topPanel.AddChild(margin);
 
         var row = new HBoxContainer();
-        row.AddThemeConstantOverride("separation", 8);
+        row.AddThemeConstantOverride("separation", 6);
         margin.AddChild(row);
 
         _dateLabel = new Label { Text = "", CustomMinimumSize = new Vector2(160, 0) };

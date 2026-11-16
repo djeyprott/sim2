@@ -25,7 +25,9 @@
 
   // A year's chance that people in a cell where an animal lives wild first take up herding it,
   // times how well it does there and how full of foragers the cell is (as farming's inventionChance).
-  "inventionChance": 0.000003,
+  // Sheep, goats and cattle were herded in Southwest Asia by about 8500 BCE; at 0.000003 sheep
+  // and goats came as late as 6400 BCE in some runs.
+  "inventionChance": 0.000006,
   "wildMinSuitability": 0.5,
   "randomHomelandMinSuitability": 0.7,
 

@@ -17,16 +17,21 @@ public sealed class Stockpiles
     public const string IncomingFieldPrefix = "goods.incoming.";
 
     /// <summary>
-    /// Goods a cell's settlement has sent away in trade lately: each January the figure is halved,
-    /// and every unit sent is added. Prices count it as demand, so places that export gather more.
+    /// Goods a cell's settlement has sent away in trade lately, as of last January: each January
+    /// the figure is halved and the year's sales are added. Prices count it as demand, so places
+    /// that export gather more. It changes only in January, so prices do not jump as goods are sent.
     /// </summary>
     public const string SoldFieldPrefix = "goods.sold.";
+
+    /// <summary>Goods a cell's settlement has sent away in trade since last January.</summary>
+    public const string SellingFieldPrefix = "goods.selling.";
     public const string LedgerTableName = "goods.ledger";
 
     private readonly GoodSet _goods;
     private readonly double[][] _stock;
     private readonly double[][] _incoming;
     private readonly double[][] _sold;
+    private readonly double[][] _selling;
     private readonly EntityTable _ledger;
     private readonly DoubleColumn _produced;
     private readonly DoubleColumn _consumed;
@@ -40,6 +45,7 @@ public sealed class Stockpiles
         _stock = goods.Goods.Select(g => state.DoubleField(StockFieldPrefix + g.Slug)).ToArray();
         _incoming = goods.Goods.Select(g => state.DoubleField(IncomingFieldPrefix + g.Slug)).ToArray();
         _sold = goods.Goods.Select(g => state.DoubleField(SoldFieldPrefix + g.Slug)).ToArray();
+        _selling = goods.Goods.Select(g => state.DoubleField(SellingFieldPrefix + g.Slug)).ToArray();
         _ledger = state.Table(LedgerTableName);
         _produced = _ledger.DoubleColumn("produced");
         _consumed = _ledger.DoubleColumn("consumed");
@@ -57,6 +63,7 @@ public sealed class Stockpiles
             state.AddDoubleField(StockFieldPrefix + good.Slug);
             state.AddDoubleField(IncomingFieldPrefix + good.Slug);
             state.AddDoubleField(SoldFieldPrefix + good.Slug);
+            state.AddDoubleField(SellingFieldPrefix + good.Slug);
         }
 
         EntityTable ledger = state.AddTable(LedgerTableName);
@@ -168,7 +175,7 @@ public sealed class Stockpiles
         _stock[good][from] -= sent;
         _incoming[good][to] += sent;
         _transit[good] += sent;
-        _sold[good][from] += sent;
+        _selling[good][from] += sent;
         return sent;
     }
 
@@ -192,12 +199,13 @@ public sealed class Stockpiles
     /// <summary>What the cell's settlement has sent away lately (see <see cref="SoldFieldPrefix"/>).</summary>
     public double Sold(int cell, int good) => _sold[good][cell];
 
-    /// <summary>Halves every settlement's record of goods sent away lately. Called each January.</summary>
+    /// <summary>Halves a settlement's record of goods sent away lately and adds the past year's sales. Called each January.</summary>
     public void AgeSales(int cell)
     {
         for (int g = 0; g < _sold.Length; g++)
         {
-            _sold[g][cell] *= 0.5;
+            _sold[g][cell] = 0.5 * _sold[g][cell] + _selling[g][cell];
+            _selling[g][cell] = 0.0;
         }
     }
 
@@ -207,6 +215,7 @@ public sealed class Stockpiles
         for (int g = 0; g < _sold.Length; g++)
         {
             _sold[g][cell] = 0.0;
+            _selling[g][cell] = 0.0;
         }
     }
 

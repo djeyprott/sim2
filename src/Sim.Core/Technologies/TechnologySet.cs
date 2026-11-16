@@ -98,7 +98,13 @@ public sealed class TechnologySet
     /// <summary>Trade: multiplies the cost of carrying goods over land on links where both settlements use it.</summary>
     public const string LandCarrying = "landCarrying";
 
-    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool, HerderSpread, LandCarrying };
+    /// <summary>Seafaring and trade: how many sea cells in a row people's boats can cross (the largest known counts).</summary>
+    public const string SeaRange = "seaRange";
+
+    /// <summary>Trade: the cost of carrying goods across one sea cell, against 1 for a cell of lowland (the smallest known counts).</summary>
+    public const string SeaCost = "seaCost";
+
+    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool, HerderSpread, LandCarrying, SeaRange, SeaCost };
 
     private readonly Technology[] _technologies;
 

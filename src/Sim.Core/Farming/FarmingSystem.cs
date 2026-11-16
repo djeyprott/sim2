@@ -95,6 +95,13 @@ public sealed class FarmingSystem : ISimSystem
     private TechnologyEffect[] _liftEffects = Array.Empty<TechnologyEffect>();
     private TechnologyEffect[] _spoilageEffects = Array.Empty<TechnologyEffect>();
 
+    // Landings by sea (the seafaring system's table): settlers from farmland bring their crop.
+    private EntityTable? _landings;
+    private IntColumn? _landingCell;
+    private IntColumn? _landingTick;
+    private IntColumn? _landingCrop;
+    private DoubleColumn? _landingSettlers;
+
     // Derived from the map when initializing.
     private WorldMap? _map;
     private int[] _northCells = Array.Empty<int>();
@@ -244,6 +251,15 @@ public sealed class FarmingSystem : ISimSystem
         }
 
         _harvestFactor = new double[regions.CellCount];
+        if (state.HasTable(ForagerSystem.LandingTableName))
+        {
+            _landings = state.Table(ForagerSystem.LandingTableName);
+            _landingCell = _landings.IntColumn("cell");
+            _landingTick = _landings.IntColumn("tick");
+            _landingCrop = _landings.IntColumn("crop");
+            _landingSettlers = _landings.DoubleColumn("settlers");
+        }
+
         _technology = TechnologyUse.TryCreate(state, map);
         if (_technology != null)
         {
@@ -260,14 +276,51 @@ public sealed class FarmingSystem : ISimSystem
         int month = (int)(context.Tick % GameDate.MonthsPerYear);
         if (month == NorthernHarvestMonth)
         {
+            SowLandings(context.Tick, north: true);
             HarvestSeason(_northCells, context);
         }
         else if (month == SouthernHarvestMonth)
         {
+            SowLandings(context.Tick, north: false);
             HarvestSeason(_southCells, context);
         }
 
         Eat(context.Tick);
+    }
+
+    // Settlers who landed by sea in the past year from farmland start farming their crop where it
+    // grows well enough to spread to: up to all of them take it up, from the foragers there.
+    private void SowLandings(long tick, bool north)
+    {
+        if (_landings == null)
+        {
+            return;
+        }
+
+        PopulationGroups groups = _groups!;
+        for (int id = 0; id < _landings.IdCount; id++)
+        {
+            int cell = _landingCell![id];
+            int crop = _landingCrop![id] - 1;
+            if (tick - _landingTick![id] >= GameDate.MonthsPerYear || crop < 0 || _cropPlusOne[cell] > 0
+                || (_map!.Grid.Latitude(cell) >= 0.0) != north)
+            {
+                continue;
+            }
+
+            int foragerGroup = groups.Find(cell, _forager);
+            double suitability = Suitability(cell, crop, Lift(foragerGroup, cell));
+            if (foragerGroup < 0 || suitability < _parameters.MinSpreadSuitability)
+            {
+                continue;
+            }
+
+            StartFarming(cell, crop, tick, FarmCapacity(cell, suitability, foragerGroup));
+            double foragers = groups.Size(foragerGroup);
+            double sowing = Math.Min(foragers, _landingSettlers![id]);
+            groups.SetSize(foragerGroup, foragers - sowing);
+            groups.AddPeople(groups.FindOrAdd(cell, _farmer), sowing, groups.Food(foragerGroup), from: foragerGroup);
+        }
     }
 
     private void HarvestSeason(int[] cells, SimContext context)

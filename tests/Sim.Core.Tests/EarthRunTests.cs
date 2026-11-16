@@ -7,6 +7,7 @@ using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
 using Xunit;
@@ -44,6 +45,14 @@ public sealed class EarthRunResult
     public bool BadPopulation { get; set; }
 
     public double MaxUnreachedPopulation { get; set; }
+
+    /// <summary>Landings by sea on land not reached at the start (where and when), over the whole run.</summary>
+    public List<string> Landings { get; set; } = new List<string>();
+
+    /// <summary>At the end, per sea region (Aegean, Gulf, Red Sea): trade links across the sea there, and settlements there knowing the sail.</summary>
+    public Dictionary<string, int> SeaLinks { get; set; } = new Dictionary<string, int>();
+
+    public Dictionary<string, int> SailSettlements { get; set; } = new Dictionary<string, int>();
 
     public int MaxGroupsInACell { get; set; }
 
@@ -263,6 +272,7 @@ public sealed class EarthRunResult
             + $"({100.0 * PonticOpenGrasslandFarmedShare:F0}% of its {PonticOpenGrasslandCells} open grassland cells); "
             + $"farmed: {100.0 * OpenGrasslandFarmedShare:F0}% of all open grassland, {100.0 * TemperateForestFarmedShare:F0}% of temperate forest; "
             + $"obsidian up to {ObsidianReachKm:F0} km from a source; "
+            + $"sea: {Landings.Count} landings [{string.Join(", ", Landings.Take(8))}], sea links {string.Join(", ", SeaLinks.Select(p => $"{p.Key} {p.Value} ({SailSettlements.GetValueOrDefault(p.Key)} settlements with the sail)"))}; "
             + $"metals: tin up to {TinReachKm:F0} km from a source at the end, {CopperToolsMade / 1e3:F0} k copper and {BronzeToolsMade / 1e3:F0} k bronze tools made, {MetalToolSettlements} settlements with metal tools at the end; "
             + $"{TradedGoods} goods traded, gaps not shrinking: [{string.Join(", ", GapsNotShrinking)}]; "
             + $"{RegionsWithoutRoutes} linked regions without routes, {100.0 * ShareOnRoutes:F0}% of settlements on a route; "
@@ -312,6 +322,8 @@ public abstract class EarthRunFixtureBase
 
         int[] land = climate.LandCells.ToArray();
         int[] unreached = land.Where(cell => !foragers.IsReachable(cell)).ToArray();
+        SeafaringSystem? seafaring = sim.Systems.OfType<SeafaringSystem>().SingleOrDefault();
+        SeaMap sea = SeaMap.Of(world);
         int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
         double[] factor = sim.State.DoubleField(ClimateSystem.RainfallFactorField);
         double[] shift = sim.State.DoubleField(ClimateSystem.TemperatureShiftField);
@@ -403,10 +415,14 @@ public abstract class EarthRunFixtureBase
             lastCheck = sim.Tick - 1;
             if (year % 10 == 0)
             {
+                // Land not reached at the start must stay empty until people land on it by sea.
                 groups.FillCellTotals(people);
                 foreach (int cell in unreached)
                 {
-                    result.MaxUnreachedPopulation = Math.Max(result.MaxUnreachedPopulation, people[cell]);
+                    if (seafaring == null || !seafaring.Reached(sea.Landmass[cell]))
+                    {
+                        result.MaxUnreachedPopulation = Math.Max(result.MaxUnreachedPopulation, people[cell]);
+                    }
                 }
             }
 
@@ -550,6 +566,7 @@ public abstract class EarthRunFixtureBase
         if (farmingSystem != null)
         {
             MeasureMetals(sim, world, stockpiles, result);
+            MeasureSea(sim, world, result);
         }
 
         result.Seconds = watch.Elapsed.TotalSeconds;
@@ -692,6 +709,46 @@ public abstract class EarthRunFixtureBase
         }
 
         return reach;
+    }
+
+    // Landings, and trade links across three seas where the sail was known, at the end of the run.
+    private static void MeasureSea(Simulation sim, WorldMap world, EarthRunResult result)
+    {
+        SeafaringSystem? seafaring = sim.Systems.OfType<SeafaringSystem>().SingleOrDefault();
+        TradeSystem? trade = sim.Systems.OfType<TradeSystem>().SingleOrDefault();
+        if (seafaring == null || trade == null)
+        {
+            return;
+        }
+
+        foreach (Landing landing in seafaring.Landings())
+        {
+            result.Landings.Add($"year {landing.Tick / 12} at {world.Grid.Latitude(landing.Cell):F0},{world.Grid.Longitude(landing.Cell):F0} "
+                + $"from {world.Grid.DistanceKm(landing.From, landing.Cell):F0} km");
+        }
+
+        var regions = new (string Name, double South, double North, double West, double East)[]
+        {
+            ("Aegean", 34.5, 41.5, 22.0, 29.0),
+            ("Gulf", 23.5, 31.0, 47.5, 57.0),
+            ("Red Sea", 12.0, 30.0, 32.0, 44.0),
+        };
+        bool In((string Name, double South, double North, double West, double East) r, int cell)
+        {
+            double lat = world.Grid.Latitude(cell), lon = world.Grid.Longitude(cell);
+            return lat >= r.South && lat <= r.North && lon >= r.West && lon <= r.East;
+        }
+
+        TechnologyUse? use = TechnologyUse.TryCreate(sim.State, world);
+        int sail = use?.Technologies.IndexOf("The sail") ?? -1;
+        int[] settlement = sim.State.IntField(SettlementSystem.SettlementField);
+        var seaLinks = trade.SeaLinksByCell();
+        foreach (var region in regions)
+        {
+            result.SeaLinks[region.Name] = seaLinks.Count(l => In(region, l.CellA) && In(region, l.CellB));
+            result.SailSettlements[region.Name] = use == null ? 0 : Enumerable.Range(0, world.CellCount)
+                .Count(c => settlement[c] > 0 && In(region, c) && use.KnownInCell(c, sail));
+        }
     }
 
     // Tin's reach and metal tools, at the end of the run.
@@ -989,6 +1046,24 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     }
 
     [Fact]
+    public void Trade_crosses_the_Aegean_the_Gulf_and_the_Red_Sea_once_the_sail_is_known_there()
+    {
+        foreach (string region in new[] { "Aegean", "Gulf", "Red Sea" })
+        {
+            var sailing = _results.Where(r => r.SailSettlements.GetValueOrDefault(region) > 0).ToList();
+            Assert.True(sailing.Count(r => r.SeaLinks.GetValueOrDefault(region) > 0) >= Math.Ceiling(0.8 * sailing.Count),
+                $"{region}: " + string.Join(", ", _results.Select(r => $"{r.SeaLinks.GetValueOrDefault(region)} sea links, {r.SailSettlements.GetValueOrDefault(region)} with the sail")));
+        }
+    }
+
+    [Fact]
+    public void Islands_are_settled_by_sea_in_at_least_half_the_seeds()
+    {
+        Assert.True(_results.Count(r => r.Landings.Count > 0) >= 5,
+            "Landings: " + string.Join("; ", _results.Select(r => $"{r.Landings.Count} [{string.Join(", ", r.Landings.Take(5))}]")));
+    }
+
+    [Fact]
     public void Tin_travels_more_than_1000_km_from_its_sources_in_6_of_10_seeds()
     {
         Assert.True(_results.Count(r => r.TinReachKm > 1000.0) >= 6,
@@ -1214,7 +1289,7 @@ public class EarthNoFarmingTests : IClassFixture<NoFarmingRunFixture>
     }
 
     [Fact]
-    public void Unreached_islands_stay_empty()
+    public void Unreached_islands_stay_empty_until_settled_by_sea()
     {
         Assert.All(_results, r => Assert.Equal(0.0, r.MaxUnreachedPopulation));
     }

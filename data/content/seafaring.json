@@ -1,0 +1,23 @@
+// Settling by sea (milestone 3). Runs once a year, after technology.
+// Land not reached at the start (foragers.json "unreached", and remote islands beyond a short
+// crossing) can be settled only by people whose boats reach it: technologies with the
+// "seaRange" effect (technologies.json) set how many sea cells (about 51 km each) their boats
+// can cross; paddling, known to every coastal people, reaches only what was reached at the start.
+{
+  // Each year, each shore cell of reached land whose people's boats reach an unreached landmass
+  // has this chance of sending settlers there (times how full its largest group is of
+  // fullSourcePeople, at most 1). A landing makes the whole landmass reached land.
+  "settleChance": 0.01,
+  "fullSourcePeople": 2000,
+
+  // Settlers: this share of the sending cell's largest group, at most maxSettlers people. They
+  // land as foragers (fishing and gathering) carrying what they know; where they came from
+  // farmland, the farming system starts farming their crop where it grows (farming.json).
+  "settlerShare": 0.05,
+  "maxSettlers": 200,
+
+  // The nearest this many shore cells of other land are kept as starting points for each
+  // unreached landmass, and only those within maxRange sea cells (the longest boat range).
+  "startsPerLandmass": 64,
+  "maxRange": 60
+}

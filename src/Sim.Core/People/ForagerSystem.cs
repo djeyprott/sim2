@@ -52,6 +52,15 @@ public sealed class ForagerSystem : ISimSystem
     private double[] _flowIn = Array.Empty<double>();
     private double[] _fullness = Array.Empty<double>();
 
+    // Landmasses reached at the start, and the landings by sea since (the seafaring system's saved
+    // table: landmass reached, cell and tick); the reached cells are rebuilt when a landing is added
+    // or a run is loaded.
+    public const string LandingTableName = "seafaring.landings";
+    private bool[] _startLandmass = Array.Empty<bool>();
+    private EntityTable? _landings;
+    private IntColumn? _landingCell;
+    private int _builtLandings = -1;
+
     public ForagerSystem(ForagerParameters parameters, BiomeSet biomes, OccupationSet occupations)
     {
         _parameters = parameters;
@@ -103,13 +112,54 @@ public sealed class ForagerSystem : ISimSystem
         }
         _population = new double[map.CellCount];
         _groupOfCell = new int[map.CellCount];
-        _reachable = FindReachableLand(map);
+        _flowIn = new double[map.CellCount];
+        _fullness = new double[map.CellCount];
+        _startLandmass = ReachedAtStart(map, _parameters);
+        if (context.State.HasTable(LandingTableName))
+        {
+            _landings = context.State.Table(LandingTableName);
+            _landingCell = _landings.IntColumn("cell");
+        }
 
+        BuildReach();
+
+        // Start every reached cell with a full forager group.
+        UpdateCapacity();
+        foreach (int cell in _cells)
+        {
+            if (_capacity[cell] > 0.0)
+            {
+                int group = _groups.FindOrAdd(cell, _occupation);
+                _groups.SetSize(group, _capacity[cell]);
+                _groups.SetFood(group, 1.0);
+            }
+        }
+    }
+
+    /// <summary>The landmasses people had reached at the start of a run (by <see cref="SeaMap"/> landmass).</summary>
+    public bool[] StartLandmasses => _startLandmass;
+
+    // The reached land cells (reached at the start, or on a landmass landed on by sea since), their
+    // fixed shares of capacity, and the reached neighbours people can move to.
+    private void BuildReach()
+    {
+        WorldMap map = _map!;
+        int[] landmass = SeaMap.Of(map).Landmass;
+        var reachedLandmass = (bool[])_startLandmass.Clone();
+        int landings = _landings?.IdCount ?? 0;
+        for (int id = 0; id < landings; id++)
+        {
+            reachedLandmass[landmass[_landingCell![id]]] = true;
+        }
+
+        _builtLandings = landings;
+        _reachable = new bool[map.CellCount];
         var cells = new List<int>();
         for (int cell = 0; cell < map.CellCount; cell++)
         {
-            if (_reachable[cell])
+            if (map.IsLand(cell) && reachedLandmass[landmass[cell]])
             {
+                _reachable[cell] = true;
                 cells.Add(cell);
             }
         }
@@ -164,24 +214,15 @@ public sealed class ForagerSystem : ISimSystem
         starts[map.CellCount] = list.Count;
         _neighbourStart = starts;
         _neighbours = list.ToArray();
-        _flowIn = new double[map.CellCount];
-        _fullness = new double[map.CellCount];
-
-        // Start every reached cell with a full forager group.
-        UpdateCapacity();
-        foreach (int cell in _cells)
-        {
-            if (_capacity[cell] > 0.0)
-            {
-                int group = _groups.FindOrAdd(cell, _occupation);
-                _groups.SetSize(group, _capacity[cell]);
-                _groups.SetFood(group, 1.0);
-            }
-        }
     }
 
     public void Update(SimContext context)
     {
+        if ((_landings?.IdCount ?? 0) != _builtLandings)
+        {
+            BuildReach();
+        }
+
         PopulationGroups groups = _groups!;
         groups.FillGroupIndex(_groupOfCell, _occupation);
         foreach (int cell in _cells)
@@ -327,41 +368,17 @@ public sealed class ForagerSystem : ISimSystem
         }
     }
 
-    // Land people had reached at the start: landmasses holding a reached place, plus any landmass
-    // within a short sea crossing of a reached one, except landmasses listed as unreached.
-    private bool[] FindReachableLand(WorldMap map)
+    /// <summary>
+    /// Land people had reached at the start, by landmass: landmasses holding a reached place, plus
+    /// any landmass within a short sea crossing of a reached one, except landmasses listed as unreached.
+    /// </summary>
+    public static bool[] ReachedAtStart(WorldMap map, ForagerParameters parameters)
     {
         GeodesicGrid grid = map.Grid;
         int count = map.CellCount;
-
-        var landmass = new int[count];
-        Array.Fill(landmass, -1);
-        int landmassCount = 0;
-        var stack = new Stack<int>();
-        for (int cell = 0; cell < count; cell++)
-        {
-            if (!map.IsLand(cell) || landmass[cell] >= 0)
-            {
-                continue;
-            }
-
-            landmass[cell] = landmassCount;
-            stack.Push(cell);
-            while (stack.Count > 0)
-            {
-                int current = stack.Pop();
-                foreach (int other in grid.Neighbours(current))
-                {
-                    if (map.IsLand(other) && landmass[other] < 0)
-                    {
-                        landmass[other] = landmassCount;
-                        stack.Push(other);
-                    }
-                }
-            }
-
-            landmassCount++;
-        }
+        SeaMap sea = SeaMap.Of(map);
+        int[] landmass = sea.Landmass;
+        int landmassCount = sea.LandmassCount;
 
         int LandmassAt(Place place)
         {
@@ -375,13 +392,13 @@ public sealed class ForagerSystem : ISimSystem
         }
 
         var blocked = new bool[landmassCount];
-        foreach (Place place in _parameters.Unreached)
+        foreach (Place place in parameters.Unreached)
         {
             blocked[LandmassAt(place)] = true;
         }
 
         var reached = new bool[landmassCount];
-        foreach (Place place in _parameters.Reached)
+        foreach (Place place in parameters.Reached)
         {
             int index = LandmassAt(place);
             if (blocked[index])
@@ -394,6 +411,15 @@ public sealed class ForagerSystem : ISimSystem
 
         // Breadth-first search from reached land. seaSteps is how many sea or lake cells in a row
         // lead to a cell; reaching land of a new landmass marks the whole landmass as reached.
+        var members = new List<int>[landmassCount];
+        for (int cell = 0; cell < count; cell++)
+        {
+            if (landmass[cell] >= 0)
+            {
+                (members[landmass[cell]] ??= new List<int>()).Add(cell);
+            }
+        }
+
         var seaSteps = new int[count];
         Array.Fill(seaSteps, int.MaxValue);
         var queue = new Queue<int>();
@@ -406,7 +432,7 @@ public sealed class ForagerSystem : ISimSystem
             }
         }
 
-        int maxSea = _parameters.MaxSeaCellsCrossed;
+        int maxSea = parameters.MaxSeaCellsCrossed;
         while (queue.Count > 0)
         {
             int cell = queue.Dequeue();
@@ -421,13 +447,10 @@ public sealed class ForagerSystem : ISimSystem
                     }
 
                     reached[index] = true;
-                    for (int c = 0; c < count; c++)
+                    foreach (int c in members[index])
                     {
-                        if (landmass[c] == index)
-                        {
-                            seaSteps[c] = 0;
-                            queue.Enqueue(c);
-                        }
+                        seaSteps[c] = 0;
+                        queue.Enqueue(c);
                     }
                 }
                 else
@@ -442,12 +465,6 @@ public sealed class ForagerSystem : ISimSystem
             }
         }
 
-        var result = new bool[count];
-        for (int cell = 0; cell < count; cell++)
-        {
-            result[cell] = map.IsLand(cell) && reached[landmass[cell]];
-        }
-
-        return result;
+        return reached;
     }
 }

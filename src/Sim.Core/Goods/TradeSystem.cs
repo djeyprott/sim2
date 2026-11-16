@@ -1,5 +1,6 @@
 using Sim.Core.Content;
 using Sim.Core.Engine;
+using Sim.Core.Geo;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
@@ -28,13 +29,22 @@ public sealed class TradeParameters
 
     public double MinMargin { get; set; } = 0.05;
 
+    /// <summary>Sea cells in a row anyone's boats cross (paddling), and the cost of each against a cell of lowland.</summary>
+    public int PaddleSeaCells { get; set; } = 2;
+
+    public double PaddleSeaCost { get; set; } = 1.0;
+
+    /// <summary>The most sea cells in a row a trade link crosses, whatever the boats.</summary>
+    public int MaxSeaCells { get; set; } = 10;
+
     public static TradeParameters LoadDefault() => Parse(ContentFiles.ReadText("trade.json"));
 
     public static TradeParameters Parse(string json)
     {
         TradeParameters p = ContentFiles.Parse<TradeParameters>(json, "trade");
         if (p.MaxLinkCost <= 0.0 || p.LinksPerSettlement < 1 || p.RiverFactor <= 0.0 || p.CostPerStep < 0.0
-            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0 || p.RebuildYears < 1 || p.MinMargin < 0.0 || p.MinMargin >= 1.0)
+            || p.SendShare < 0.0 || p.SendShare > 1.0 || p.RouteValue < 0.0 || p.RebuildYears < 1 || p.MinMargin < 0.0 || p.MinMargin >= 1.0
+            || p.PaddleSeaCells < 0 || p.PaddleSeaCost <= 0.0 || p.MaxSeaCells < p.PaddleSeaCells)
         {
             throw new InvalidDataException("trade.json: maxLinkCost, linksPerSettlement and riverFactor must be above 0, sendShare 0 to 1, and no negative costs.");
         }
@@ -77,13 +87,25 @@ public sealed class TradeSystem : ISimSystem
     private EntityTable? _settlements;
     private IntColumn? _settlementCell;
     private int[] _linkedPlusOne = Array.Empty<int>();
+
+    // Saved: the boats each settlement had when it last chose its links (sea cells in a row, and
+    // the cost of each), so links come out the same after a load.
+    private int[] _boatRange = Array.Empty<int>();
+    private double[] _boatCost = Array.Empty<double>();
+    private Crossings? _crossings;
+    private bool[] _shore = Array.Empty<bool>();
+    private TechnologyEffect[] _rangeEffects = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _seaCostEffects = Array.Empty<TechnologyEffect>();
+    private bool[] _viaSea = Array.Empty<bool>();
+    private bool[] _linkSea = Array.Empty<bool>();
     private double[] _stepCost = Array.Empty<double>();
 
     private bool _built;
-    private (double Cost, int Id)[]?[] _chosen = Array.Empty<(double, int)[]?>();
+    private (double Cost, int Id, bool Sea)[]?[] _chosen = Array.Empty<(double, int, bool)[]?>();
 
     // Paths are costed by the cells entered, so the cost back can differ by up to this much.
     private double _maxStepDifference;
+    private double _bestSeaCost = 1.0;
     private bool[] _aliveWhenBuilt = Array.Empty<bool>();
     private int[] _linkA = Array.Empty<int>();
     private int[] _linkB = Array.Empty<int>();
@@ -154,7 +176,14 @@ public sealed class TradeSystem : ISimSystem
     public void Register(WorldState state)
     {
         _linkedPlusOne = state.AddIntField(LinkedSettlementField);
+        _boatRange = state.AddIntField(BoatRangeField);
+        _boatCost = state.AddDoubleField(BoatCostField);
     }
+
+    /// <summary>Sea cells in a row, and the cost of each, of each settlement's boats when it last chose its links.</summary>
+    public const string BoatRangeField = "trade.boatRange";
+
+    public const string BoatCostField = "trade.boatCost";
 
     public void Initialize(SimContext context)
     {
@@ -176,7 +205,14 @@ public sealed class TradeSystem : ISimSystem
         if (_technology != null)
         {
             _carryingEffects = _technology.WithEffect(TechnologySet.LandCarrying);
+            _rangeEffects = _technology.WithEffect(TechnologySet.SeaRange);
+            _seaCostEffects = _technology.WithEffect(TechnologySet.SeaCost);
         }
+
+        SeaMap sea = SeaMap.Of(_map);
+        _shore = sea.Shore;
+        _crossings = _parameters.MaxSeaCells > 0 ? sea.CrossingsWithin(_parameters.MaxSeaCells) : null;
+        _viaSea = new bool[_map.CellCount];
 
         _gapJanuary = new double[_goods.Count];
         _gapFebruary = new double[_goods.Count];
@@ -194,6 +230,7 @@ public sealed class TradeSystem : ISimSystem
             };
         }
 
+        _bestSeaCost = Math.Min(_parameters.PaddleSeaCost, _seaCostEffects.Select(e => e.Size).DefaultIfEmpty(_parameters.PaddleSeaCost).Min());
         double cheapest = _parameters.TerrainCost.Values.Min() * Math.Min(1.0, _parameters.RiverFactor);
         _maxStepDifference = _parameters.TerrainCost.Values.Max() - cheapest;
         _best = new double[cells];
@@ -242,12 +279,16 @@ public sealed class TradeSystem : ISimSystem
         long start = System.Diagnostics.Stopwatch.GetTimestamp();
         if (!_built)
         {
-            BuildLinks(update: false);
+            BuildLinks(update: false, new List<int>());
         }
 
-        if (month == 0 && year % _parameters.RebuildYears == 0 && SettlementsChanged())
+        if (month == 0 && year % _parameters.RebuildYears == 0)
         {
-            BuildLinks(update: true);
+            List<int> newBoats = BoatsChanged();
+            if (newBoats.Count > 0 || SettlementsChanged())
+            {
+                BuildLinks(update: true, newBoats);
+            }
         }
 
         BuildSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
@@ -435,6 +476,60 @@ public sealed class TradeSystem : ISimSystem
         }
     }
 
+    // A standing settlement's boats now: the paddling everyone has, or better from the technology
+    // its people know (the longest range and the cheapest crossing).
+    private (int Range, double Cost) Boats(int cell)
+    {
+        int range = _parameters.PaddleSeaCells;
+        double cost = _parameters.PaddleSeaCost;
+        if (_technology != null)
+        {
+            foreach (TechnologyEffect e in _rangeEffects)
+            {
+                if (e.Size > range && _technology.Conditions.Allows(cell, e.Technology) && _technology.KnownInCell(cell, e.Technology))
+                {
+                    range = (int)e.Size;
+                }
+            }
+
+            foreach (TechnologyEffect e in _seaCostEffects)
+            {
+                if (e.Size < cost && _technology.Conditions.Allows(cell, e.Technology) && _technology.KnownInCell(cell, e.Technology))
+                {
+                    cost = e.Size;
+                }
+            }
+        }
+
+        return (Math.Min(range, _parameters.MaxSeaCells), cost);
+    }
+
+    // Standing settlements recorded at the last rebuild whose boats have changed since: their new
+    // boats are recorded, and they choose their links again.
+    private List<int> BoatsChanged()
+    {
+        var changed = new List<int>();
+        EntityTable settlements = _settlements!;
+        for (int id = 0; id < settlements.IdCount && id < _aliveWhenBuilt.Length; id++)
+        {
+            if (!settlements.IsAlive(id) || !_aliveWhenBuilt[id])
+            {
+                continue;
+            }
+
+            int cell = _settlementCell![id];
+            (int range, double cost) = Boats(cell);
+            if (range != _boatRange[cell] || cost != _boatCost[cell])
+            {
+                _boatRange[cell] = range;
+                _boatCost[cell] = cost;
+                changed.Add(id);
+            }
+        }
+
+        return changed;
+    }
+
     private bool SettlementsChanged()
     {
         EntityTable settlements = _settlements!;
@@ -476,7 +571,7 @@ public sealed class TradeSystem : ISimSystem
     // choice depends only on which settlements stand within its reach, so on a rebuild only those
     // near one founded or abandoned since choose again. Links are kept in (lower id, higher id)
     // order, so the result does not depend on how it was reached.
-    private void BuildLinks(bool update)
+    private void BuildLinks(bool update, List<int> newBoats)
     {
         EntityTable settlements = _settlements!;
         int ids = settlements.IdCount;
@@ -485,8 +580,8 @@ public sealed class TradeSystem : ISimSystem
             Array.Resize(ref _chosen, ids);
         }
 
-        var choose = new SortedSet<int>();
-        var reached = new List<(double Cost, int Id)>();
+        var choose = new SortedSet<int>(newBoats);
+        var reached = new List<(double Cost, int Id, bool Sea)>();
         if (!update)
         {
             // Everything recorded at the last rebuild chooses afresh.
@@ -518,6 +613,7 @@ public sealed class TradeSystem : ISimSystem
                 if (alive)
                 {
                     _linkedPlusOne[cell] = id + 1;
+                    (_boatRange[cell], _boatCost[cell]) = Boats(cell);
                     choose.Add(id);
                 }
                 else
@@ -539,10 +635,12 @@ public sealed class TradeSystem : ISimSystem
                 _aliveWhenBuilt[id] = settlements.IsAlive(id);
             }
 
+            // Whoever could reach a changed place may choose differently: searched with the best boats
+            // anyone may have, so none is missed.
             foreach (int cell in changed)
             {
-                Reach(cell, reached, _parameters.MaxLinkCost + _maxStepDifference);
-                foreach ((_, int other) in reached)
+                Reach(cell, reached, _parameters.MaxLinkCost + _maxStepDifference, _parameters.MaxSeaCells, _bestSeaCost);
+                foreach ((_, int other, _) in reached)
                 {
                     choose.Add(other);
                 }
@@ -551,13 +649,14 @@ public sealed class TradeSystem : ISimSystem
 
         foreach (int id in choose)
         {
-            Reach(_settlementCell![id], reached, _parameters.MaxLinkCost);
+            int from = _settlementCell![id];
+            Reach(from, reached, _parameters.MaxLinkCost, _boatRange[from], _boatCost[from]);
             reached.Sort();
             int count = Math.Min(_parameters.LinksPerSettlement, reached.Count);
             _chosen[id] = reached.GetRange(0, count).ToArray();
         }
 
-        var pairs = new SortedDictionary<(int A, int B), double>();
+        var pairs = new SortedDictionary<(int A, int B), (double Cost, bool Sea)>();
         for (int id = 0; id < ids; id++)
         {
             if (!_aliveWhenBuilt[id])
@@ -565,10 +664,13 @@ public sealed class TradeSystem : ISimSystem
                 continue;
             }
 
-            foreach ((double cost, int other) in _chosen[id] ?? Array.Empty<(double, int)>())
+            foreach ((double cost, int other, bool sea) in _chosen[id] ?? Array.Empty<(double, int, bool)>())
             {
                 var key = id < other ? (id, other) : (other, id);
-                pairs[key] = pairs.TryGetValue(key, out double known) ? Math.Min(known, cost) : cost;
+                if (!pairs.TryGetValue(key, out var known) || cost < known.Cost || (cost == known.Cost && sea && !known.Sea))
+                {
+                    pairs[key] = (cost, sea);
+                }
             }
         }
 
@@ -585,17 +687,19 @@ public sealed class TradeSystem : ISimSystem
         _linkA = new int[pairs.Count];
         _linkB = new int[pairs.Count];
         _linkCost = new double[pairs.Count];
+        _linkSea = new bool[pairs.Count];
         _linkValue = new double[pairs.Count];
         _goodValue = new double[pairs.Count * goods];
         _goodSeason = new int[pairs.Count * goods];
         _degree = new int[ids];
         int n = 0;
-        foreach (KeyValuePair<(int A, int B), double> pair in pairs)
+        foreach (KeyValuePair<(int A, int B), (double Cost, bool Sea)> pair in pairs)
         {
             (int a, int b) = pair.Key;
             _linkA[n] = a;
             _linkB[n] = b;
-            _linkCost[n] = pair.Value;
+            _linkCost[n] = pair.Value.Cost;
+            _linkSea[n] = pair.Value.Sea;
             if (oldLink.TryGetValue((a, b), out int old))
             {
                 _linkValue[n] = oldValue[old];
@@ -611,8 +715,10 @@ public sealed class TradeSystem : ISimSystem
         _built = true;
     }
 
-    // The settlements reachable from a cell over land within a cost limit, with their costs.
-    private void Reach(int start, List<(double Cost, int Id)> reached, double maxCost)
+    // The settlements reachable from a cell within a cost limit, over land and across runs of at
+    // most seaRange sea cells (each costing seaCost), with their costs and whether the cheapest way
+    // crosses the sea.
+    private void Reach(int start, List<(double Cost, int Id, bool Sea)> reached, double maxCost, int seaRange, double seaCost)
     {
         reached.Clear();
         WorldMap map = _map!;
@@ -621,6 +727,7 @@ public sealed class TradeSystem : ISimSystem
         queue.Clear();
         _best[start] = 0.0;
         _seen[start] = _stamp;
+        _viaSea[start] = false;
         queue.Enqueue(start, 0.0);
         while (queue.TryDequeue(out int cell, out double cost))
         {
@@ -629,9 +736,34 @@ public sealed class TradeSystem : ISimSystem
                 continue;
             }
 
+            bool sea = _viaSea[cell];
             if (cell != start && _linkedPlusOne[cell] > 0)
             {
-                reached.Add((cost, _linkedPlusOne[cell] - 1));
+                reached.Add((cost, _linkedPlusOne[cell] - 1, sea));
+            }
+
+            if (seaRange > 0 && _shore[cell] && _crossings != null)
+            {
+                for (int k = _crossings.Start[cell]; k < _crossings.Start[cell + 1]; k++)
+                {
+                    int steps = _crossings.Steps[k];
+                    if (steps > seaRange)
+                    {
+                        continue;
+                    }
+
+                    int next = _crossings.Target[k];
+                    double total = cost + steps * seaCost;
+                    if (total > maxCost || (_seen[next] == _stamp && total >= _best[next]))
+                    {
+                        continue;
+                    }
+
+                    _seen[next] = _stamp;
+                    _best[next] = total;
+                    _viaSea[next] = true;
+                    queue.Enqueue(next, total);
+                }
             }
 
             bool river = map.River(cell) != RiverSize.None;
@@ -656,6 +788,7 @@ public sealed class TradeSystem : ISimSystem
 
                 _seen[next] = _stamp;
                 _best[next] = total;
+                _viaSea[next] = sea;
                 queue.Enqueue(next, total);
             }
         }
@@ -673,6 +806,21 @@ public sealed class TradeSystem : ISimSystem
         for (int link = 0; link < _linkA.Length; link++)
         {
             if (_settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
+            {
+                links.Add((_settlementCell![_linkA[link]], _settlementCell[_linkB[link]]));
+            }
+        }
+
+        return links;
+    }
+
+    /// <summary>Links between standing settlements whose cheapest way crosses the sea, by their cells.</summary>
+    public List<(int CellA, int CellB)> SeaLinksByCell()
+    {
+        var links = new List<(int, int)>();
+        for (int link = 0; link < _linkA.Length; link++)
+        {
+            if (_linkSea[link] && _settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
             {
                 links.Add((_settlementCell![_linkA[link]], _settlementCell[_linkB[link]]));
             }

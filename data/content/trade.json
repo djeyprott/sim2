@@ -28,5 +28,14 @@
   // A good moves only when the dear end's price beats the cheap end's plus the carrying cost by at
   // least this share of the dear price: traders want a margin, and without one goods shuffled back
   // and forth over tiny gaps (590 million sends in 5,000 years).
-  "minMargin": 0.05
+  "minMargin": 0.05,
+
+  // Links also cross the sea (milestone 3): from a shore, a run of sea cells to another shore.
+  // Every coastal people can paddle paddleSeaCells in a row, each costing paddleSeaCost (against 1
+  // for a cell of lowland); better boats (technologies.json "seaRange", "seaCost") go further and
+  // cost less, up to maxSeaCells in a row. A settlement links by the boats it had when it last
+  // chose its links (rechosen at a rebuild when its boats have changed).
+  "paddleSeaCells": 2,
+  "paddleSeaCost": 1.0,
+  "maxSeaCells": 10
 }

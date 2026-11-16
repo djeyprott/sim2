@@ -30,9 +30,14 @@
 //                   herderSpread      multiplies herders' yearly chance of moving onto new pasture
 //                   landCarrying      multiplies the cost of carrying goods over land, on trade
 //                                     links where both settlements use it (trade.json)
+//                   seaRange          sea cells in a row people's boats can cross, for trade
+//                                     links (trade.json) and settling new land (seafaring.json);
+//                                     the largest known counts, paddling (trade.json) without
+//                   seaCost           the cost of carrying goods across a sea cell, against 1 for
+//                                     a cell of lowland; the smallest known counts
 // Copper working and bronze have no effects listed here: they open recipes (recipes.json); horse
 // herding has none either: it brings horses (livestock.json).
-// Effect sizes are first estimates, tuned in milestone 3 step 8. The sea comes in step 6.
+// Effect sizes are first estimates, tuned in milestone 3 step 8.
 {
   "technologies": [
     {
@@ -79,12 +84,16 @@
       "name": "The sail", "colour": "#ecf0f1", "occupations": [ "Farmer", "Craftsman" ],
       "coast": true,
       "chance": 0.000002, "spread": 0.01,
+      // Sailing boats cross a few hundred km of open sea, and carry loads more cheaply than land.
+      "effects": { "seaRange": 8, "seaCost": 0.4 },
       "history": "5500 to 5000 BCE, the Gulf; 3500 BCE, the Nile"
     },
     {
       "name": "Outrigger canoes", "colour": "#16a085", "occupations": [ "Farmer", "Craftsman" ],
       "requires": [ "The sail" ], "coast": true,
       "chance": 0.000002, "spread": 0.01,
+      // Stable sailing canoes that cross thousands of km of open ocean to remote islands.
+      "effects": { "seaRange": 50, "seaCost": 0.4 },
       "history": "1500 BCE, Island Southeast Asia"
     },
     {

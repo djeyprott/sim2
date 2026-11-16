@@ -6,6 +6,7 @@ using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
 using Xunit;
@@ -59,7 +60,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     // A simulation where farming is first taken up almost at once, so short runs show it.
-    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real, double harvestSpread = -1.0)
+    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real, double harvestSpread = -1.0, SeafaringParameters? seafaring = null)
     {
         ClimateSystem climate = ClimateSystem.CreateDefault();
         OccupationSet occupations = OccupationSet.LoadDefault();
@@ -86,6 +87,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         var trade = TradeSystem.CreateDefault(occupations);
         systems = systems.Append(trade)
             .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), TechnologySet.LoadDefault(occupations), trade, chanceScale: 200.0))
+            .Append(new SeafaringSystem(seafaring ?? SeafaringParameters.LoadDefault(), climate.Biomes))
             .ToArray();
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -570,6 +572,98 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True((animals[steppe] & (1 << horses)) != 0, "Horses are not kept where they live wild and herders know horse herding.");
         Assert.True((animals[outside] & (1 << horses)) == 0, "Horses are kept where they never lived wild.");
         Assert.Contains(herding.Origins(), o => o.Animal == horses && o.Cell == steppe);
+    }
+
+    [Fact]
+    public void Unreached_land_is_settled_only_by_boats_that_reach_it()
+    {
+        // Settlers set out whenever boats reach, so one year shows what happens.
+        var parameters = SeafaringParameters.LoadDefault();
+        parameters.SettleChance = 1.0;
+        Simulation sim = FastFarming(3, seafaring: parameters);
+        SeafaringSystem seafaring = sim.Systems.OfType<SeafaringSystem>().Single();
+        ForagerSystem foragers = sim.Systems.OfType<ForagerSystem>().Single();
+        TechnologySet set = sim.Systems.OfType<TechnologySystem>().Single().Technologies;
+        SeaMap sea = SeaMap.Of(_world);
+        Assert.Contains(seafaring.Targets(), t => t.Landmass == sea.Landmass[_world.Grid.FindCell(-19, 47)]);
+        Assert.False(foragers.IsReachable(_world.Grid.FindCell(-19, 47)), "Madagascar was reached at the start.");
+
+        // Clear any boats people found by themselves, then put sailors (range 8) beside an island
+        // whose nearest shore is farther, and canoe people (range 50) beside one that is nearer.
+        var groups = new PopulationGroups(sim.State);
+        EntityTable table = sim.State.Table(PopulationGroups.TableName);
+        foreach (Technology t in set.Technologies)
+        {
+            table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + t.Slug).Values.Fill(0.0);
+        }
+
+        // Starting points on reached land, landing where people can live.
+        int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
+        BiomeSet biomes = sim.Systems.OfType<ClimateSystem>().Single().Biomes;
+        ForagerParameters foragerFile = ForagerParameters.LoadDefault();
+        bool Usable((int From, int To, int Steps) start) => seafaring.Reached(sea.Landmass[start.From])
+            && biome[start.To] >= 0 && foragerFile.Density[biomes.Get(biome[start.To]).Name] > 0.0;
+        var targets = seafaring.Targets().Where(t => !seafaring.Reached(t.Landmass))
+            .Select(t => (t.Landmass, Starts: t.Starts.Where(Usable).ToArray())).Where(t => t.Starts.Length > 0).ToList();
+        var far = targets.First(t => t.Starts[0].Steps > 8 && t.Starts[0].Steps <= 50);
+        var near = targets.First(t => t.Landmass != far.Landmass && t.Starts[0].Steps <= 50
+            && !far.Starts.Any(s => s.From == t.Starts[0].From) && !t.Starts.Any(s => s.From == far.Starts[0].From && s.Steps <= 8));
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        void Sailors(int cell, string boats)
+        {
+            int group = groups.FindOrAdd(cell, farmer);
+            groups.AddPeople(group, 5000.0, 1.0);
+            table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(set.IndexOf(boats)).Slug)[group] = 1.0;
+            table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(set.IndexOf("The sail")).Slug)[group] = 1.0;
+        }
+
+        Sailors(far.Starts[0].From, "The sail");
+        Sailors(near.Starts[0].From, "Outrigger canoes");
+        int before = seafaring.Landings().Count;
+        sim.Run(12);
+        var landings = seafaring.Landings().Skip(before).ToList();
+        Assert.Contains(landings, l => l.Landmass == near.Landmass && l.From == near.Starts[0].From);
+        Assert.DoesNotContain(landings, l => l.Landmass == far.Landmass);
+        Assert.True(seafaring.Reached(near.Landmass) && !seafaring.Reached(far.Landmass));
+
+        // The next year the foragers count the new land as theirs and live on it.
+        sim.Run(12);
+        Landing landing = landings.First(l => l.Landmass == near.Landmass);
+        Assert.True(foragers.IsReachable(landing.Cell));
+        Assert.True(groups.CellTotal(landing.Cell) > 0.0, "Nobody lives where the settlers landed.");
+    }
+
+    [Fact]
+    public void Sea_crossings_follow_the_sea()
+    {
+        SeaMap sea = SeaMap.Of(_world);
+        Crossings crossings = sea.CrossingsWithin(10);
+        int ShoreNear(double lat, double lon)
+        {
+            int cell = _world.Grid.FindCell(lat, lon);
+            return sea.ShoreCells.OrderBy(c => _world.Grid.DistanceKm(c, cell)).ThenBy(c => c).First();
+        }
+
+        int Steps(double latA, double lonA, double latB, double lonB)
+        {
+            int a = ShoreNear(latA, lonA), b = ShoreNear(latB, lonB);
+            int best = int.MaxValue;
+            for (int k = crossings.Start[a]; k < crossings.Start[a + 1]; k++)
+            {
+                if (crossings.Target[k] == b)
+                {
+                    best = Math.Min(best, crossings.Steps[k]);
+                }
+            }
+
+            return best;
+        }
+
+        // Dover and Calais are a short crossing apart; Dover and New York are not within 10 sea cells.
+        Assert.InRange(Steps(51.13, 1.31, 50.95, 1.85), 1, 2);
+        Assert.Equal(int.MaxValue, Steps(51.13, 1.31, 40.7, -74.0));
+        Assert.NotEqual(sea.Landmass[_world.Grid.FindCell(52, 0)], sea.Landmass[_world.Grid.FindCell(48, 2)]);
+        Assert.Equal(-1, sea.Landmass[_world.Grid.FindCell(45, -30)]);
     }
 
     [Fact]

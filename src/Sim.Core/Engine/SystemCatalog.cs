@@ -3,6 +3,7 @@ using Sim.Core.Farming;
 using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.People;
+using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
 
@@ -40,6 +41,9 @@ public static class SystemCatalog
 
             // Technology reads trade's links (rebuilt from the world state), so it is handed the system.
             systems.Add(TechnologySystem.CreateDefault(occupations, trade));
+
+            // Settling by sea goes by the boats people know, so it comes after technology.
+            systems.Add(SeafaringSystem.CreateDefault(climate.Biomes));
         }
 
         return systems;

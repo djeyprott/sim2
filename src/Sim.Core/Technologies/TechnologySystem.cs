@@ -58,15 +58,11 @@ public sealed class TechnologySystem : ISimSystem
     private WorldMap? _map;
     private EntityTable? _groupTable;
     private PopulationGroups? _groups;
-    private double[] _rainfallFactor = Array.Empty<double>();
-    private int[]? _animals;
     private int[]? _settlementPlusOne;
     private Stockpiles? _stockpiles;
 
     // Derived when initializing.
-    private bool[] _coast = Array.Empty<bool>();
-    private double[] _baseRain = Array.Empty<double>();
-    private int[] _animalMask = Array.Empty<int>();
+    private TechnologyConditions? _conditions;
     private int[] _cells = Array.Empty<int>();
 
     // Work arrays, per cell.
@@ -135,49 +131,20 @@ public sealed class TechnologySystem : ISimSystem
         _map = map;
         _groupTable = state.Table(PopulationGroups.TableName);
         _groups = new PopulationGroups(state);
-        _rainfallFactor = state.DoubleField(ClimateSystem.RainfallFactorField);
-        _animals = state.HasField(HerdingSystem.AnimalsField) ? state.IntField(HerdingSystem.AnimalsField) : null;
         _settlementPlusOne = state.HasField(SettlementSystem.SettlementField) ? state.IntField(SettlementSystem.SettlementField) : null;
         if (state.HasTable(Stockpiles.LedgerTableName))
         {
             _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
         }
 
-        LivestockSet livestock = LivestockSet.LoadDefault();
-        _animalMask = Technologies.Technologies.Select(t =>
-        {
-            int mask = 0;
-            foreach (string name in t.Animals)
-            {
-                mask |= 1 << livestock.IndexOf(name);
-            }
-
-            return mask;
-        }).ToArray();
-
+        _conditions = new TechnologyConditions(state, map, Technologies);
         int count = map.CellCount;
-        _coast = new bool[count];
-        _baseRain = new double[count];
         var cells = new List<int>();
         for (int cell = 0; cell < count; cell++)
         {
-            if (!map.IsLand(cell))
+            if (map.IsLand(cell))
             {
-                continue;
-            }
-
-            cells.Add(cell);
-            foreach (int other in map.Grid.Neighbours(cell))
-            {
-                _coast[cell] |= map.IsSea(other);
-            }
-
-            if (map.HasClimate(cell))
-            {
-                for (int month = 0; month < 12; month++)
-                {
-                    _baseRain[cell] += map.RainfallMm(cell, month);
-                }
+                cells.Add(cell);
             }
         }
 
@@ -200,33 +167,7 @@ public sealed class TechnologySystem : ISimSystem
     }
 
     /// <summary>Whether a cell meets a technology's conditions (not counting who knows what).</summary>
-    public bool CellAllows(int cell, int technology)
-    {
-        Technology t = Technologies.Get(technology);
-        WorldMap map = _map!;
-        if (t.River && map.River(cell) == RiverSize.None)
-        {
-            return false;
-        }
-
-        if (t.MaxRainMm > 0.0 && _baseRain[cell] * _rainfallFactor[cell] > t.MaxRainMm)
-        {
-            return false;
-        }
-
-        if (t.Coast && !_coast[cell])
-        {
-            return false;
-        }
-
-        if (t.Terrain.Count > 0 && !t.Terrain.Contains(map.Terrain(cell)))
-        {
-            return false;
-        }
-
-        int animals = _animalMask[technology];
-        return animals == 0 || (_animals != null && (_animals[cell] & animals) != 0);
-    }
+    public bool CellAllows(int cell, int technology) => _conditions!.Allows(cell, technology);
 
     /// <summary>Every recorded discovery and loss, in the order they happened.</summary>
     public IReadOnlyList<TechnologyEvent> Events()

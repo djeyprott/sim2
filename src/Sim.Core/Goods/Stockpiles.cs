@@ -156,14 +156,18 @@ public sealed class Stockpiles
     }
 
     /// <summary>Spoils one year's share of every stock in a cell.</summary>
-    public void SpoilYear(int cell)
+    public void SpoilYear(int cell) => SpoilYear(cell, -1, 1.0);
+
+    /// <summary>Spoils one year's share of every stock in a cell, one good at its rate times a factor.</summary>
+    public void SpoilYear(int cell, int good, double factor)
     {
         for (int g = 0; g < _stock.Length; g++)
         {
             double stock = _stock[g][cell];
             if (stock > 0.0)
             {
-                double spoiled = stock * _goods.Get(g).Spoilage;
+                double rate = _goods.Get(g).Spoilage;
+                double spoiled = stock * (g == good ? Math.Min(1.0, rate * factor) : rate);
                 _stock[g][cell] = stock - spoiled;
                 _spoiled[g] += spoiled;
             }

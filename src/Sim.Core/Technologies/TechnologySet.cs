@@ -22,6 +22,7 @@ public sealed class Technology
         Chance = entry.Chance;
         Spread = entry.Spread;
         History = entry.History;
+        Effects = new Dictionary<string, double>(entry.Effects, StringComparer.Ordinal);
     }
 
     public int Index { get; }
@@ -57,12 +58,33 @@ public sealed class Technology
     public double Spread { get; }
 
     public string History { get; }
+
+    /// <summary>What it changes where it is used: effect name (see <see cref="TechnologySet.EffectNames"/>) and size.</summary>
+    public IReadOnlyDictionary<string, double> Effects { get; }
 }
 
 /// <summary>The technologies, read from technologies.json.</summary>
 public sealed class TechnologySet
 {
     public const int MaxTechnologies = 30;
+
+    // Effect names, and the systems that apply them.
+    /// <summary>Farming: multiplies what a farming cell's land feeds.</summary>
+    public const string FarmYield = "farmYield";
+
+    /// <summary>Farming: the share (0 to 1) of a biome's farming penalty (farming.json "biomeFactors") lifted.</summary>
+    public const string BiomePenaltyLift = "biomePenaltyLift";
+
+    /// <summary>Goods: multiplies how much grain spoils in a settlement's store each year.</summary>
+    public const string GrainSpoilage = "grainSpoilage";
+
+    /// <summary>Herding: multiplies how many herders a cell's pasture feeds.</summary>
+    public const string HerdDensity = "herdDensity";
+
+    /// <summary>Herding: multiplies the wool herders and farmers bring to a store.</summary>
+    public const string Wool = "wool";
+
+    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool };
 
     private readonly Technology[] _technologies;
 
@@ -101,6 +123,15 @@ public sealed class TechnologySet
                 || entry.Chance < 0.0 || entry.Chance > 1.0 || entry.Spread < 0.0 || entry.Spread > 1.0 || entry.MaxRainMm < 0.0)
             {
                 throw new InvalidDataException($"Technology '{entry.Name}' needs a colour like #RRGGBB, occupations, and chance and spread between 0 and 1.");
+            }
+
+            foreach (KeyValuePair<string, double> effect in entry.Effects)
+            {
+                if (!EffectNames.Contains(effect.Key) || effect.Value < 0.0 || double.IsNaN(effect.Value) || double.IsInfinity(effect.Value)
+                    || (effect.Key == BiomePenaltyLift && effect.Value > 1.0))
+                {
+                    throw new InvalidDataException($"Technology '{entry.Name}' has effect '{effect.Key}' = {effect.Value}; effects are {string.Join(", ", EffectNames)}, at least 0 ({BiomePenaltyLift} at most 1).");
+                }
             }
 
             var canUse = new bool[occupations.Count];
@@ -180,6 +211,8 @@ internal sealed class TechnologyEntry
     public double Spread { get; set; }
 
     public string History { get; set; } = "";
+
+    public Dictionary<string, double> Effects { get; set; } = new Dictionary<string, double>();
 }
 
 /// <summary>How technology spreads and is lost, read from technology.json.</summary>

@@ -262,6 +262,128 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     [Fact]
+    public void Technologies_change_farm_yields_spoilage_and_herds_where_used()
+    {
+        // Two copies of the same world: in one every group knows the plough, granaries, and milk and
+        // wool; in the other nobody knows any technology that changes farming or herding.
+        Simulation with = FastFarming(8);
+        with.Run(300 * 12);
+        var save = new MemoryStream();
+        with.Save(save);
+        Simulation without = FastFarming(8);
+        without.Load(new MemoryStream(save.ToArray()));
+
+        TechnologySystem technology = with.Systems.OfType<TechnologySystem>().Single();
+        TechnologySet set = technology.Technologies;
+        int plough = set.IndexOf("The plough");
+        int granaries = set.IndexOf("Granaries");
+        int milk = set.IndexOf("Milk and wool");
+        void Teach(Simulation sim, bool known)
+        {
+            EntityTable table = sim.State.Table(PopulationGroups.TableName);
+            foreach (Technology t in set.Technologies)
+            {
+                bool taught = known && (t.Index == plough || t.Index == granaries || t.Index == milk);
+                Span<double> shares = table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + t.Slug).Values;
+                for (int g = 0; g < shares.Length; g++)
+                {
+                    shares[g] = taught ? 1.0 : 0.0;
+                }
+            }
+        }
+
+        Teach(with, true);
+        Teach(without, false);
+        int[] animalsBefore = (int[])with.State.IntField(HerdingSystem.AnimalsField).Clone();
+        var groups = new PopulationGroups(with.State);
+        OccupationSet occupations = OccupationSet.LoadDefault();
+        int herder = occupations.IndexOf(OccupationSet.Herder);
+        int farmer = occupations.IndexOf(OccupationSet.Farmer);
+        bool[] hadHerders = Enumerable.Range(0, _world.CellCount).Select(c => groups.Find(c, herder) >= 0).ToArray();
+
+        // Herding runs in January, before the technology system; each hemisphere's harvest follows.
+        with.Run(10);
+        without.Run(10);
+
+        // Milk and wool: herders on pasture with sheep, goats or cattle feed 1.4 times as many.
+        HerdingSystem herding = with.Systems.OfType<HerdingSystem>().Single();
+        int milkAnimals = (1 << herding.Livestock.IndexOf("Sheep and goats")) | (1 << herding.Livestock.IndexOf("Cattle"));
+        double[] herdWith = with.State.DoubleField(HerdingSystem.CapacityField);
+        double[] herdWithout = without.State.DoubleField(HerdingSystem.CapacityField);
+        int milkCells = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            if (herdWithout[cell] <= 0.0 || !hadHerders[cell] || (animalsBefore[cell] & milkAnimals) == 0)
+            {
+                continue;
+            }
+
+            milkCells++;
+            Assert.Equal(1.4, herdWith[cell] / herdWithout[cell], 6);
+        }
+
+        // The plough: farmland with cattle feeds 1.25 times as many, and open grassland away from
+        // rivers twice that again (its penalty lifted); without cattle, nothing changes.
+        double[] farmWith = with.State.DoubleField(FarmingSystem.CapacityField);
+        double[] farmWithout = without.State.DoubleField(FarmingSystem.CapacityField);
+        int[] cropWith = with.State.IntField(FarmingSystem.CropField);
+        int[] cropWithout = without.State.IntField(FarmingSystem.CropField);
+        int[] sinceWith = with.State.IntField(FarmingSystem.SinceField);
+        int[] animalsWith = with.State.IntField(HerdingSystem.AnimalsField);
+        int[] animalsWithout = without.State.IntField(HerdingSystem.AnimalsField);
+        int[] biome = with.State.IntField(ClimateSystem.BiomeField);
+        int grassland = with.Systems.OfType<ClimateSystem>().Single().Biomes.IndexOf("Grassland");
+        int ploughed = 0, ploughedGrassland = 0, unploughed = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            if (farmWithout[cell] <= 0.0 || farmWith[cell] <= 0.0 || cropWith[cell] != cropWithout[cell]
+                || sinceWith[cell] - 1 >= 300 * 12 || animalsWith[cell] != animalsWithout[cell])
+            {
+                continue;
+            }
+
+            int group = groups.Find(cell, farmer);
+            if (group < 0 || technology.Knowledge(group, plough) < 0.5)
+            {
+                continue;
+            }
+
+            double ratio = farmWith[cell] / farmWithout[cell];
+            if (!technology.CellAllows(cell, plough))
+            {
+                unploughed++;
+                Assert.Equal(1.0, ratio, 6);
+                continue;
+            }
+
+            bool open = biome[cell] == grassland && _world.River(cell) == RiverSize.None;
+            Assert.Equal(open ? 2.5 : 1.25, ratio, 6);
+            ploughed++;
+            ploughedGrassland += open ? 1 : 0;
+        }
+
+        // Granaries halve the grain that spoils in store where the farmers use them.
+        FarmingSystem farmingWith = Farming(with);
+        FarmingSystem farmingWithout = Farming(without);
+        double grainSpoilage = GoodSet.LoadDefault().Goods.Single(g => g.Name == GoodSet.Grain).Spoilage;
+        int[] settlement = with.State.IntField(SettlementSystem.SettlementField);
+        int stores = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            int group = groups.Find(cell, farmer);
+            if (settlement[cell] > 0 && group >= 0 && technology.Knowledge(group, granaries) >= 0.5)
+            {
+                stores++;
+                Assert.Equal(grainSpoilage * 0.5, farmingWith.GrainSpoilage(cell), 9);
+                Assert.Equal(grainSpoilage, farmingWithout.GrainSpoilage(cell), 9);
+            }
+        }
+
+        Assert.True(milkCells >= 5 && ploughed >= 5 && unploughed >= 5 && stores >= 5,
+            $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores.");
+    }
+
+    [Fact]
     public void Herding_is_taken_up_in_its_homelands_and_spreads()
     {
         Simulation sim = FastFarming(7);

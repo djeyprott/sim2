@@ -15,31 +15,48 @@
 //   spread        how readily it passes to groups in neighbouring cells (a share of the gap a year)
 //   history       where and when it was first seen in the real record (for reference only;
 //                 see docs/milestone-3-spec.md, "Sources for the dates")
-// Effects come in later steps of milestone 3 (farming and herding in step 3, metals in step 4,
-// horses in step 5, the sea in step 6); copper working, bronze and horses are added with them.
+//   effects       what it changes where a group uses it (at least "inUse" of its people know it
+//                 and its cell meets the conditions above); the same effect from two technologies
+//                 multiplies:
+//                   farmYield         multiplies what farmland feeds (farmers' technology)
+//                   biomePenaltyLift  share (0 to 1) of farming.json's biome penalty lifted
+//                   grainSpoilage     multiplies grain spoilage in the settlement's store
+//                   herdDensity       multiplies the herders pasture feeds (herders' technology)
+//                   wool              multiplies the wool herders and farmers bring in
+// Effect sizes are first estimates, tuned in milestone 3 step 8. Metals come in step 4, horses in
+// step 5 and the sea in step 6; copper working, bronze and horses are added with them.
 {
   "technologies": [
     {
       "name": "Granaries", "colour": "#d9b26a", "occupations": [ "Farmer" ],
       "chance": 0.0002, "spread": 0.02,
+      // Sealed, raised stores keep out damp and pests: grain loses half as much a year.
+      "effects": { "grainSpoilage": 0.5 },
       "history": "9500 BCE, Jordan valley"
     },
     {
       "name": "Irrigation", "colour": "#4fa3d9", "occupations": [ "Farmer" ],
       "river": true, "maxRainMm": 600,
       "chance": 0.00002, "spread": 0.01,
+      // Canals carry river water across dry fields beyond the flood plain.
+      "effects": { "farmYield": 1.5 },
       "history": "6000 BCE, Mesopotamia"
     },
     {
       "name": "Milk and wool", "colour": "#f0ecd8", "occupations": [ "Herder", "Farmer" ],
       "animals": [ "Sheep and goats", "Cattle" ],
       "chance": 0.00001, "spread": 0.015,
+      // Milk feeds people from the living herd (more people per head than meat alone), and
+      // woolly sheep give far more fibre than hair sheep.
+      "effects": { "herdDensity": 1.4, "wool": 2.0 },
       "history": "milk 6500 BCE, Anatolia; wool 4000 BCE, Southwest Asia"
     },
     {
       "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
       "animals": [ "Cattle" ],
       "chance": 0.000004, "spread": 0.01,
+      // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
+      "effects": { "farmYield": 1.25, "biomePenaltyLift": 1.0 },
       "history": "5000 BCE, the Alps; early 4th millennium BCE, northern Mesopotamia"
     },
     {
@@ -64,6 +81,8 @@
       "name": "Terraced fields", "colour": "#7cb342", "occupations": [ "Farmer" ],
       "terrain": [ "hills", "mountains" ],
       "chance": 0.000005, "spread": 0.01,
+      // Terraces hold soil and water on slopes that would otherwise wash away.
+      "effects": { "farmYield": 1.3 },
       "history": "3000 BCE, several places"
     }
   ]

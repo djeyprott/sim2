@@ -5,6 +5,7 @@ using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Farming;
 
@@ -86,6 +87,13 @@ public sealed class FarmingSystem : ISimSystem
     private int[] _biome = Array.Empty<int>();
     private double[] _foragerCapacity = Array.Empty<double>();
     private PopulationGroups? _groups;
+
+    // Technologies the farmers use (null when the simulation has no technology): what raises
+    // yields, what lifts the grassland penalty, and what keeps grain from spoiling.
+    private TechnologyUse? _technology;
+    private TechnologyEffect[] _yieldEffects = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _liftEffects = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _spoilageEffects = Array.Empty<TechnologyEffect>();
 
     // Derived from the map when initializing.
     private WorldMap? _map;
@@ -236,6 +244,14 @@ public sealed class FarmingSystem : ISimSystem
         }
 
         _harvestFactor = new double[regions.CellCount];
+        _technology = TechnologyUse.TryCreate(state, map);
+        if (_technology != null)
+        {
+            _yieldEffects = _technology.WithEffect(TechnologySet.FarmYield);
+            _liftEffects = _technology.WithEffect(TechnologySet.BiomePenaltyLift);
+            _spoilageEffects = _technology.WithEffect(TechnologySet.GrainSpoilage);
+        }
+
         PlaceHomelands(context);
     }
 
@@ -282,8 +298,14 @@ public sealed class FarmingSystem : ISimSystem
         Invent(cells, context.Tick, rng);
     }
 
-    /// <summary>How well a crop grows in a land cell's current climate, 0 to 1.</summary>
-    public double Suitability(int cell, int crop)
+    /// <summary>How well a crop grows in a land cell's current climate, 0 to 1, without technology.</summary>
+    public double Suitability(int cell, int crop) => Suitability(cell, crop, 0.0);
+
+    /// <summary>
+    /// How well a crop grows in a land cell's current climate, 0 to 1, for farmers who lift this
+    /// share of the biome's farming penalty (the plough on open grassland).
+    /// </summary>
+    private double Suitability(int cell, int crop, double lift)
     {
         int biome = _biome[cell];
         if (biome < 0 || (_noFarmingBiome[biome] && _map!.River(cell) != RiverSize.Major))
@@ -301,7 +323,30 @@ public sealed class FarmingSystem : ISimSystem
             _baseDriest[cell] * factor,
             _summerShare[cell]);
         double suitability = Crops.Get(crop).Suitability(climate, climate.Rain + _riverWater[cell]);
-        return _map!.River(cell) == RiverSize.None ? suitability * _biomeFactor[biome] : suitability;
+        if (_map!.River(cell) != RiverSize.None)
+        {
+            return suitability;
+        }
+
+        double biomeFactor = _biomeFactor[biome];
+        return suitability * (biomeFactor + (1.0 - biomeFactor) * lift);
+    }
+
+    // The share of the biome penalty a group's technology lifts in a cell (it may live in another
+    // cell: farmers spreading to new land bring what they know).
+    private double Lift(int group, int cell) =>
+        _technology == null || group < 0 ? 0.0 : _technology.Largest(group, cell, _liftEffects);
+
+    /// <summary>The share of the grain in a cell's store that spoils in a year, given its farmers' technology.</summary>
+    public double GrainSpoilage(int cell)
+    {
+        double spoilage = _stockpiles!.Goods.Get(_grain).Spoilage;
+        if (_technology == null)
+        {
+            return spoilage;
+        }
+
+        return Math.Min(1.0, spoilage * _technology.Factor(_groups!.Find(cell, _farmer), cell, _spoilageEffects));
     }
 
     /// <summary>Every first farming of a crop so far: which crop, where and when (tick).</summary>
@@ -331,17 +376,21 @@ public sealed class FarmingSystem : ISimSystem
     /// <summary>Total farmers in the world.</summary>
     public double WorldFarmers() => _groups?.WorldTotal(_farmer) ?? 0.0;
 
-    private double FarmCapacity(int cell, double suitability) =>
+    // What a cell's land feeds, farmed by a group with its technology (-1: none).
+    private double FarmCapacity(int cell, double suitability, int group) =>
         _map!.Grid.AreaKm2(cell) * _parameters.FarmDensity * suitability
-        * (_map.River(cell) == RiverSize.Major ? _parameters.MajorRiverYield : 1.0);
+        * (_map.River(cell) == RiverSize.Major ? _parameters.MajorRiverYield : 1.0)
+        * (_technology == null || group < 0 ? 1.0 : _technology.Factor(group, cell, _yieldEffects));
 
     private void Harvest(int cell, long tick, Rng rng)
     {
         PopulationGroups groups = _groups!;
         int crop = _cropPlusOne[cell] - 1;
+        int farmerGroup = groups.FindOrAdd(cell, _farmer);
+        double lift = Lift(farmerGroup, cell);
 
         // Switch to a neighbour's crop if it grows clearly better here.
-        double suitability = Suitability(cell, crop);
+        double suitability = Suitability(cell, crop, lift);
         int bestCrop = crop;
         double bestSuitability = suitability + _parameters.CropSwitchMargin;
         foreach (int other in _map!.Grid.Neighbours(cell))
@@ -349,7 +398,7 @@ public sealed class FarmingSystem : ISimSystem
             int otherCrop = _cropPlusOne[other] - 1;
             if (otherCrop >= 0 && otherCrop != crop)
             {
-                double s = Suitability(cell, otherCrop);
+                double s = Suitability(cell, otherCrop, lift);
                 if (s > bestSuitability)
                 {
                     bestCrop = otherCrop;
@@ -362,14 +411,13 @@ public sealed class FarmingSystem : ISimSystem
         {
             crop = bestCrop;
             _cropPlusOne[cell] = crop + 1;
-            suitability = Suitability(cell, crop);
+            suitability = Suitability(cell, crop, lift);
         }
 
-        double capacity = FarmCapacity(cell, suitability);
+        double capacity = FarmCapacity(cell, suitability, farmerGroup);
         _capacity[cell] = capacity;
         double harvest = capacity * _harvestFactor[_harvestRegion[cell]];
 
-        int farmerGroup = groups.FindOrAdd(cell, _farmer);
         double farmers = groups.Size(farmerGroup);
 
         // Where the harvest goes into a store, the farmers grow (and take in foragers) only while the
@@ -398,7 +446,7 @@ public sealed class FarmingSystem : ISimSystem
             food = groups.Food(farmerGroup);
             // Craftsmen eat from the same store, so they count against what the land feeds; everyday
             // and luxury needs met add a little to growth.
-            double sustainable = capacity * (1.0 - _stockpiles.Goods.Get(_grain).Spoilage);
+            double sustainable = capacity * (1.0 - GrainSpoilage(cell));
             double fed = farmers + craftsmen;
             if (margin && _hunger[cell] <= 0.0 && sustainable > 0.0 && fed < sustainable)
             {
@@ -626,14 +674,15 @@ public sealed class FarmingSystem : ISimSystem
                 continue;
             }
 
-            double suitability = Suitability(other, crop);
+            double suitability = Suitability(other, crop, Lift(farmerGroup, other));
             if (suitability < _parameters.MinSpreadSuitability || !rng.Chance(_parameters.SpreadChance))
             {
                 continue;
             }
 
             // Herders keep land that their herds feed better than crops would.
-            if (_herdingCapacity != null && _herdingCapacity[other] > FarmCapacity(other, suitability))
+            double capacityThere = FarmCapacity(other, suitability, farmerGroup);
+            if (_herdingCapacity != null && _herdingCapacity[other] > capacityThere)
             {
                 int herderGroup = groups.Find(other, _herder);
                 if (herderGroup >= 0 && groups.Size(herderGroup) > 0.0)
@@ -645,7 +694,7 @@ public sealed class FarmingSystem : ISimSystem
             double moving = _parameters.SpreadShare * farmers;
             farmers -= moving;
             groups.SetSize(farmerGroup, farmers);
-            StartFarming(other, crop, tick, suitability);
+            StartFarming(other, crop, tick, capacityThere);
             groups.AddPeople(groups.FindOrAdd(other, _farmer), moving, groups.Food(farmerGroup), from: farmerGroup);
         }
     }
@@ -694,7 +743,7 @@ public sealed class FarmingSystem : ISimSystem
                 _originTick![origin] = (int)tick;
                 invented |= 1 << crop;
 
-                StartFarming(cell, crop, tick, suitability);
+                StartFarming(cell, crop, tick, FarmCapacity(cell, suitability, -1));
                 double foragers = groups.Size(foragerGroup);
                 double first = FirstFarmerShare * foragers;
                 groups.SetSize(foragerGroup, foragers - first);
@@ -704,11 +753,11 @@ public sealed class FarmingSystem : ISimSystem
         }
     }
 
-    private void StartFarming(int cell, int crop, long tick, double suitability)
+    private void StartFarming(int cell, int crop, long tick, double capacity)
     {
         _cropPlusOne[cell] = crop + 1;
         _sincePlusOne[cell] = (int)tick + 1;
-        _capacity[cell] = FarmCapacity(cell, suitability);
+        _capacity[cell] = capacity;
     }
 
     // Records each crop's homeland and marks the cells where it grows wild.

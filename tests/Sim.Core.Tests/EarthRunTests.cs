@@ -168,6 +168,23 @@ public sealed class EarthRunResult
     /// <summary>For each technology discovered at least 1,000 years before the end: how far from its first discovery a group used it 1,000 years later (km).</summary>
     public List<string> TechnologyReach1000 { get; set; } = new List<string>();
 
+    /// <summary>
+    /// After 5,000 years: farmers per km² in farming cells whose farmers use the plough over those in
+    /// like cells (same crop, river and suitability without technology, open grassland left out) that
+    /// do not, averaged over the kinds of cell with both; 0 when there are none to compare.
+    /// </summary>
+    public double PloughDensityRatio { get; set; }
+
+    /// <summary>How many like-cell kinds the plough ratio compares, and how many ploughing cells they hold.</summary>
+    public int PloughKinds { get; set; }
+
+    public int PloughCells { get; set; }
+
+    /// <summary>After 5,000 years: open grassland farming cells (away from rivers) whose farmers use the plough, and all farmed.</summary>
+    public int PloughedOpenGrassland { get; set; }
+
+    public int FarmedOpenGrassland { get; set; }
+
     /// <summary>True if any group's share of a technology left 0 to 1.</summary>
     public bool BadKnowledge { get; set; }
 
@@ -236,6 +253,7 @@ public sealed class EarthRunResult
             + $"{HerdingRegions6000} herding regions within 6,000 years [{string.Join(", ", HerdingOrigins)}]; "
             + $"famine deaths by fullness [{FullnessTable()}], like-for-like store ratio {LikeForLikeStoreRatio:F2}; "
             + $"technology: firsts [{string.Join(", ", TechnologyFirsts)}], {IndependentDiscoveries} independent discoveries, {TechnologyLosses} losses (contact at most {MaxContactAtLoss:F0}), reach after 1,000 years [{string.Join(", ", TechnologyReach1000)}]; "
+            + $"plough: {PloughDensityRatio:F2} times the farmers per km2 of like cells ({PloughKinds} kinds, {PloughCells} cells), {PloughedOpenGrassland} of {FarmedOpenGrassland} farmed open grassland cells ploughed; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
@@ -424,6 +442,10 @@ public abstract class EarthRunFixtureBase
                     result.PonticOpenGrasslandFarmedShare = totals[0] == 0 ? 0.0 : farmedIn[0] / (double)totals[0];
                     result.OpenGrasslandFarmedShare = (farmedIn[0] + farmedIn[1]) / (double)Math.Max(1, totals[0] + totals[1]);
                     result.TemperateForestFarmedShare = farmedIn[2] / (double)Math.Max(1, totals[2]);
+                    if (technology != null)
+                    {
+                        MeasurePlough(world, groups, technology, farmingSystem!, cropPlusOne, biome, grassland, land, result);
+                    }
 
                     var occupations = OccupationSet.LoadDefault();
                     if (occupations.Contains(OccupationSet.Herder))
@@ -505,6 +527,55 @@ public abstract class EarthRunFixtureBase
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    // Farmers per km² where the farmers plough against like cells where they do not, and ploughed open grassland.
+    private static void MeasurePlough(WorldMap world, PopulationGroups groups, TechnologySystem technology, FarmingSystem farming,
+        int[] cropPlusOne, int[] biome, int grassland, int[] land, EarthRunResult result)
+    {
+        int plough = technology.Technologies.IndexOf("The plough");
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        var kinds = new SortedDictionary<long, (double PloughDensity, int Ploughed, double OtherDensity, int Other)>();
+        foreach (int cell in land)
+        {
+            if (cropPlusOne[cell] <= 0)
+            {
+                continue;
+            }
+
+            int crop = cropPlusOne[cell] - 1;
+            int group = groups.Find(cell, farmer);
+            bool ploughs = group >= 0 && technology.Knowledge(group, plough) >= technology.Parameters.InUse && technology.CellAllows(cell, plough);
+            bool open = biome[cell] == grassland && world.River(cell) == RiverSize.None;
+            if (open)
+            {
+                result.FarmedOpenGrassland++;
+                result.PloughedOpenGrassland += ploughs ? 1 : 0;
+                continue;
+            }
+
+            double density = (group >= 0 ? groups.Size(group) : 0.0) / world.Grid.AreaKm2(cell);
+            int band = (int)Math.Floor(farming.Suitability(cell, crop) * 10.0);
+            long key = (crop * 10L + (int)world.River(cell)) * 100L + band;
+            kinds.TryGetValue(key, out var k);
+            kinds[key] = ploughs ? (k.PloughDensity + density, k.Ploughed + 1, k.OtherDensity, k.Other) : (k.PloughDensity, k.Ploughed, k.OtherDensity + density, k.Other + 1);
+        }
+
+        double weighted = 0.0;
+        double weights = 0.0;
+        foreach (var k in kinds.Values)
+        {
+            if (k.Ploughed > 0 && k.Other > 0 && k.OtherDensity > 0.0)
+            {
+                double w = Math.Min(k.Ploughed, k.Other);
+                weighted += w * (k.PloughDensity / k.Ploughed) / (k.OtherDensity / k.Other);
+                weights += w;
+                result.PloughKinds++;
+                result.PloughCells += k.Ploughed;
+            }
+        }
+
+        result.PloughDensityRatio = weights > 0.0 ? weighted / weights : 0.0;
+    }
 
     // 1,000 years after a technology's first discovery: the farthest a group using it lies from there.
     private static void MeasureTechnologyReach(WorldMap world, PopulationGroups groups, TechnologySystem technology, int year, bool[] measured, EarthRunResult result)
@@ -940,6 +1011,17 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     public void Herding_is_first_taken_up_in_at_least_2_separate_regions_within_6000_years_in_8_of_10_seeds()
     {
         Assert.True(_results.Count(r => r.HerdingRegions6000 >= 2) >= 8, string.Join(", ", _results.Select(r => r.HerdingRegions6000)));
+    }
+
+    [Fact]
+    public void Ploughing_farmers_feed_more_people_and_farm_open_grassland()
+    {
+        var compared = _results.Where(r => r.PloughKinds > 0).ToList();
+        Assert.True(compared.Count >= 8, $"Only {compared.Count} seeds have ploughing and other farming cells to compare after 5,000 years.");
+        Assert.True(compared.Count(r => r.PloughDensityRatio > 1.0) >= 8,
+            string.Join(", ", compared.Select(r => $"{r.PloughDensityRatio:F2} ({r.PloughKinds} kinds, {r.PloughCells} cells)")));
+        Assert.True(_results.Count(r => r.PloughedOpenGrassland > 0) >= 8,
+            string.Join(", ", _results.Select(r => $"{r.PloughedOpenGrassland} of {r.FarmedOpenGrassland}")));
     }
 
     [Fact]

@@ -6,6 +6,7 @@ using Sim.Core.Goods;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Herding;
 
@@ -71,6 +72,11 @@ public sealed class HerdingSystem : ISimSystem
     private int _meat = -1;
     private int _wool = -1;
     private int _hides = -1;
+
+    // Technologies herders and farmers use (null when the simulation has no technology).
+    private TechnologyUse? _technology;
+    private TechnologyEffect[] _densityEffects = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _woolEffects = Array.Empty<TechnologyEffect>();
 
     // Derived from the map when initializing.
     private WorldMap? _map;
@@ -200,6 +206,13 @@ public sealed class HerdingSystem : ISimSystem
         }
 
         _cells = cells.ToArray();
+        _technology = TechnologyUse.TryCreate(state, map);
+        if (_technology != null)
+        {
+            _densityEffects = _technology.WithEffect(TechnologySet.HerdDensity);
+            _woolEffects = _technology.WithEffect(TechnologySet.Wool);
+        }
+
         PlaceHomelands(context);
     }
 
@@ -268,9 +281,15 @@ public sealed class HerdingSystem : ISimSystem
         return (best, bestSuitability);
     }
 
-    /// <summary>Herders a cell would feed with this suitability if farmers used none of its land.</summary>
-    private double FullCapacity(int cell, double suitability) =>
-        _map!.Grid.AreaKm2(cell) * _parameters.HerdDensity * Pasture(cell) * suitability;
+    /// <summary>
+    /// Herders a cell would feed with this suitability if farmers used none of its land, herded by
+    /// a group with its technology (-1: none; the group may live in a neighbouring cell).
+    /// </summary>
+    private double FullCapacity(int cell, double suitability, int group) =>
+        _map!.Grid.AreaKm2(cell) * _parameters.HerdDensity * Pasture(cell) * suitability * Factor(group, cell, _densityEffects);
+
+    private double Factor(int group, int cell, TechnologyEffect[] effects) =>
+        _technology == null || group < 0 ? 1.0 : _technology.Factor(group, cell, effects);
 
     /// <summary>Every first herding of an animal in one of its homelands: animal, homeland, cell and tick.</summary>
     public IReadOnlyList<(int Animal, int Homeland, int Cell, long Tick)> Origins()
@@ -335,7 +354,7 @@ public sealed class HerdingSystem : ISimSystem
         PopulationGroups groups = _groups!;
         int mask = _animals[cell];
         (_, double suitability) = BestHerded(cell, mask);
-        double full = FullCapacity(cell, suitability);
+        double full = FullCapacity(cell, suitability, groups.Find(cell, _herder));
         _capacity[cell] = full;
         double landShare = _crop[cell] > 0 ? Math.Clamp(_farmLandShare[cell], 0.0, 1.0) : 0.0;
         double usable = full * (1.0 - landShare);
@@ -396,7 +415,8 @@ public sealed class HerdingSystem : ISimSystem
         {
             if ((mask & _herdedWoolMask) != 0)
             {
-                _stockpiles.Produce(store, _wool, herders * _parameters.WoolPerHerder);
+                double wool = Factor(groups.Find(cell, _herder), cell, _woolEffects);
+                _stockpiles.Produce(store, _wool, herders * _parameters.WoolPerHerder * wool);
             }
 
             _stockpiles.Produce(store, _hides, herders * _parameters.HidesPerHerder);
@@ -408,7 +428,8 @@ public sealed class HerdingSystem : ISimSystem
         {
             if ((mask & _woolMask) != 0)
             {
-                _stockpiles.Produce(cell, _wool, farmers * _parameters.WoolPerFarmer);
+                double wool = Factor(groups.Find(cell, _farmer), cell, _woolEffects);
+                _stockpiles.Produce(cell, _wool, farmers * _parameters.WoolPerFarmer * wool);
             }
 
             _stockpiles.Produce(cell, _hides, farmers * _parameters.HidesPerFarmer);
@@ -449,7 +470,8 @@ public sealed class HerdingSystem : ISimSystem
 
             double herders = SizeOf(cell, _herder);
             (int herded, double suitability) = BestHerded(cell, mask);
-            double usable = FullCapacity(cell, suitability) * (1.0 - (_crop[cell] > 0 ? Math.Clamp(_farmLandShare[cell], 0.0, 1.0) : 0.0));
+            int herderGroup = groups.Find(cell, _herder);
+            double usable = FullCapacity(cell, suitability, herderGroup) * (1.0 - (_crop[cell] > 0 ? Math.Clamp(_farmLandShare[cell], 0.0, 1.0) : 0.0));
             bool herdersSpread = herded >= 0 && herders > 0.0 && usable > 0.0 && herders >= _parameters.SpreadWhenFull * usable;
             bool keepers = herders > 0.0 || SizeOf(cell, _farmer) > 0.0;
             if (!keepers)
@@ -469,7 +491,7 @@ public sealed class HerdingSystem : ISimSystem
                 {
                     double s = Suitability(other, herded);
                     double farmCapacity = _crop[other] > 0 ? _farmCapacity[other] : 0.0;
-                    if (s >= _parameters.MinSpreadSuitability && FullCapacity(other, s) > farmCapacity && rng.Chance(_parameters.SpreadChance))
+                    if (s >= _parameters.MinSpreadSuitability && FullCapacity(other, s, herderGroup) > farmCapacity && rng.Chance(_parameters.SpreadChance))
                     {
                         double moving = _parameters.SpreadShare * SizeOf(cell, _herder);
                         double food = groups.Food(groups.Find(cell, _herder));

@@ -166,6 +166,14 @@ public class TechnologyFileTests
         Assert.Throws<KeyNotFoundException>(() => Sim.Core.Technologies.TechnologySet.Parse(
             text.Replace("\"occupations\": [ \"Farmer\" ],\n      \"chance\": 0.0002", "\"occupations\": [ \"Smith\" ],\n      \"chance\": 0.0002"), occupations));
 
+        // Effects: known names only, and a lifted penalty share of at most 1.
+        Assert.Equal(1.25, set.Get(set.IndexOf("The plough")).Effects["farmYield"]);
+        Assert.Equal(0.5, set.Get(set.IndexOf("Granaries")).Effects["grainSpoilage"]);
+        Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
+            text.Replace("\"grainSpoilage\": 0.5", "\"grainSpoilige\": 0.5"), occupations));
+        Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
+            text.Replace("\"biomePenaltyLift\": 1.0", "\"biomePenaltyLift\": 1.5"), occupations));
+
         var p = Sim.Core.Technologies.TechnologyParameters.LoadDefault();
         Assert.InRange(p.InUse, 0.01, 1.0);
         Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologyParameters.Parse(

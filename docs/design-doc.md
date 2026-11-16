@@ -1,8 +1,9 @@
-# sim2 design doc (version 0.9)
+# sim2 design doc (version 1.0)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is in progress (`milestone-2-spec.md`, agreed 2026-11-15).
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 (technology) is next; its spec is not yet drafted.
 
 Change log:
+- 1.0 (2026-11-16): milestone 2 complete, released as v0.3; backlog items on when animals are first herded and on the speed of trade.
 - 0.9 (2026-11-15): milestone 2 spec agreed: herding comes in milestone 2, so the herding backlog item moves into it.
 - 0.8 (2026-11-15): milestone 1 complete, released as v0.2.
 - 0.7 (2026-11-15): backlog item on farming open grassland before the plough.
@@ -88,7 +89,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 |---|-----------|------|-------|
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
-| 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | In progress |
+| 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | Complete, v0.3 |
 | 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
@@ -113,3 +114,5 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - The Aral Sea at its historical size, and small straits that are currently closed (for example Bali joined to Java).
 - Globe view.
 - Charts in the viewer.
+- When an animal is first herded varies a lot between runs: in milestone 2 sheep and goats came between about 9900 and 7300 BCE (history: about 8500 BCE) and llamas as early as 9600 BCE (history: about 4000 BCE). Herding could depend on how long farming has stood nearby, or each animal could have its own earliest likely date.
+- Trade is the slowest system (about a third to a half of a 5,000-year run in milestone 2, mostly goods moving along hundreds of millions of link-seasons). Worth a closer look before states and more goods add to it.

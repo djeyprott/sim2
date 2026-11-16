@@ -1,8 +1,8 @@
-# Milestone 2 spec: Goods and trade (version 1.3, agreed; 1.2 awaits the owner's confirmation)
+# Milestone 2 spec: Goods and trade (version 1.3, complete)
 
 Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1) and 2026-11-16 (1.2, 1.3). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: steps 1 to 7 done 2026-11-15; step 8's tuning done 2026-11-16, and every automated exit test passes. Release v0.3 waits for the owner to confirm change 1.2 and check the viewer by hand.
+Progress: complete 2026-11-16 and released as v0.3. Every automated exit test passes; the owner checked the viewer by hand and confirmed change 1.2.
 
 - Step 1: goods, the ledger and stockpiles; harvests go into settlement stores and farmers eat from them monthly. The ledger balances to about 1e-12 in every seed.
 - Step 2: wood, flint, clay, fibre, salt and obsidian are gathered by the farmers of each settlement, up to a stock per person until prices take over in step 4. Obsidian comes from 18 real sources; salt from 16 real deposits plus dry coasts and salt-lake shores.
@@ -18,7 +18,7 @@ Progress: steps 1 to 7 done 2026-11-15; step 8's tuning done 2026-11-16, and eve
 
 Change log:
 - 1.3 (2026-11-16, added by the owner): the goods map mode also draws the trade routes of the chosen good, thicker for routes that carry more of it.
-- 1.2 (2026-11-16, the owner said to go ahead with the planned fix; awaits confirmation before release): the test that stores at least halve famine deaths compares like with like. Cells with stores are mostly long-settled cells near what their land feeds, and cells without are mostly young or small ones with room to spare, so the raw rates compared different kinds of cells (stores left 0.44 to 0.82 of deaths overall, but 0.30 to 0.50 within each band of fullness). Each band of fullness (farmers over what the land feeds: under 0.6, 0.6 to 0.85, 0.85 to 1, 1 or more) now has its store death rate weighed by the farmer-years without a store in that band.
+- 1.2 (2026-11-16, confirmed by the owner): the test that stores at least halve famine deaths compares like with like. Cells with stores are mostly long-settled cells near what their land feeds, and cells without are mostly young or small ones with room to spare, so the raw rates compared different kinds of cells (stores left 0.44 to 0.82 of deaths overall, but 0.30 to 0.50 within each band of fullness). Each band of fullness (farmers over what the land feeds: under 0.6, 0.6 to 0.85, 0.85 to 1, 1 or more) now has its store death rate weighed by the farmer-years without a store in that band.
 - 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
 - 1.0 (2026-11-15): agreed and frozen.
 - Draft 2 (2026-11-15): the owner settled the four open decisions: herding comes in this milestone; local prices measured in food; trade over land and rivers only; about ten goods.
@@ -146,12 +146,12 @@ Soundness (as in milestone 1)
 
 By hand in the viewer:
 
-- [ ] The goods map mode is readable, and you can follow a rare good spreading out from its source over centuries.
-- [ ] Trade routes are visible and grow as settlements fill a region.
-- [ ] A bad harvest in one area is softened by stores, and you can see grain move in from neighbours.
-- [ ] The tooltip shows a settlement's stockpile and prices, and groups' needs met.
-- [ ] Herders spread over the steppe and farmers keep to the valleys and forest edges.
-- [ ] The frame rate stays smooth at every speed.
+- [x] The goods map mode is readable, and you can follow a rare good spreading out from its source over centuries.
+- [x] Trade routes are visible and grow as settlements fill a region.
+- [x] A bad harvest in one area is softened by stores, and you can see grain move in from neighbours.
+- [x] The tooltip shows a settlement's stockpile and prices, and groups' needs met.
+- [x] Herders spread over the steppe and farmers keep to the valleys and forest edges.
+- [x] The frame rate stays smooth at every speed.
 
 ## Build order
 
@@ -164,7 +164,7 @@ Each step ends with a new development build you can download.
 5. Trade links and trade; trade routes in the viewer (done)
 6. Herding (done)
 7. Goods map mode, tooltip and statistics file (done)
-8. Tuning against the exit tests (done), release v0.3 (waits for the owner)
+8. Tuning against the exit tests, release v0.3 (done)
 
 ## Famine numbers
 

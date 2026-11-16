@@ -96,7 +96,9 @@ public sealed class TradeSystem : ISimSystem
     private double[] _best = Array.Empty<double>();
     private int[] _seen = Array.Empty<int>();
     private int _stamp;
-    private const double MinimumSend = 0.001;
+    // Sends worth less than this much food are not made: they move almost nothing and were four
+    // fifths of trade's time (800 million sends in 5,000 years).
+    private const double MinimumSendValue = 0.05;
     private readonly List<int> _destinations = new List<int>();
     private int[] _destinationStamp = Array.Empty<int>();
     private int _destinationRound = 1;
@@ -319,7 +321,7 @@ public sealed class TradeSystem : ISimSystem
 
         double scale = Math.Min(1.0, (dear - cheap - carry) / dear);
         double amount = _parameters.SendShare * scale * stock / fromDegree;
-        if (amount < MinimumSend)
+        if (amount * dear < MinimumSendValue)
         {
             return 0.0;
         }

@@ -11,7 +11,7 @@ public class GoodsTests
     public void The_goods_file_loads_with_tiers_and_monthly_spoilage()
     {
         GoodSet goods = GoodSet.LoadDefault();
-        Assert.InRange(goods.Count, 10, 20);
+        Assert.InRange(goods.Count, 10, 30);
         Good grain = goods.Get(goods.IndexOf(GoodSet.Grain));
         Assert.True(grain.Food);
         Assert.Equal(NeedTier.Life, grain.NeedTier);

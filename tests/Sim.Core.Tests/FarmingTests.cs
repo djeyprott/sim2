@@ -420,8 +420,33 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
 
         // Where everyone knows copper working, ore near the sources is smelted and made into tools;
         // where nobody does, no copper or copper tools are made at all.
+        string Diagnosis()
+        {
+            int ore = goods.IndexOf("Copper ore");
+            ResourceSystem resources = with.Systems.OfType<ResourceSystem>().Single();
+            int rule = resources.Rules.Goods.FindIndex(r => r.Good == "Copper ore");
+            int[] settled = with.State.IntField(SettlementSystem.SettlementField);
+            var near = Enumerable.Range(0, _world.CellCount).Where(c => settled[c] > 0 && resources.Richness(rule, c) > 0.0).ToList();
+            CraftRules craft = CraftRules.LoadDefault(goods);
+            var prices = new Prices(with.State, _world, PriceParameters.LoadDefault(), craft, OccupationSet.LoadDefault());
+            var wanted = new double[goods.Count];
+            var priceOf = new double[goods.Count];
+            string sample = "";
+            if (near.Count > 0)
+            {
+                int cell = near[0];
+                prices.Work(cell, with.Tick, wanted, priceOf);
+                Recipe smelt = craft.Recipes.First(r => r.Output == copper);
+                sample = $"cell {cell}: fed {prices.StoreFed(cell):F0}, smelting allowed {prices.Allowed(smelt)}, "
+                    + string.Join(", ", new[] { "Copper ore", "Wood", "Copper", "Copper tools", "Stone tools", "Grain" }
+                        .Select(n => $"{n} wanted {wanted[goods.IndexOf(n)]:F1} stock {stockWith.Stock(cell, goods.IndexOf(n)):F1} price {priceOf[goods.IndexOf(n)]:F2}"));
+            }
+
+            return $"{near.Count} settlements by copper ore; ore gathered {stockWith.Produced(ore):F1}, in store {stockWith.InStore(ore):F1}; {sample}";
+        }
+
         Assert.True(stockWith.Produced(copper) > copperBefore && stockWith.Produced(copperTools) > toolsBefore,
-            $"Copper made {stockWith.Produced(copper) - copperBefore:F1}, copper tools {stockWith.Produced(copperTools) - toolsBefore:F1} in 3 years.");
+            $"Copper made {stockWith.Produced(copper) - copperBefore:F1}, copper tools {stockWith.Produced(copperTools) - toolsBefore:F1} in 3 years. {Diagnosis()}");
         Assert.Equal(copperBefore, stockWithout.Produced(copper));
         Assert.Equal(toolsBefore, stockWithout.Produced(copperTools));
 

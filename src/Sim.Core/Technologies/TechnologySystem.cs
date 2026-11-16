@@ -317,7 +317,8 @@ public sealed class TechnologySystem : ISimSystem
                 }
 
                 // Too few people in contact: the share falls.
-                double contact = Contact(g, cell, size, s >= inUse);
+                // (The cell's users were counted from last year's shares, so whether this group was one of them goes by those too.)
+                double contact = Contact(g, cell, size, before >= inUse);
                 if (contact < _parameters.KeepPeople)
                 {
                     s -= _parameters.LossRate * (1.0 - contact / _parameters.KeepPeople) * s;

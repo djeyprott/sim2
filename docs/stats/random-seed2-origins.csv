@@ -1,8 +1,9 @@
 crop,cell,latitude,longitude,year,date
 "Wheat and barley",214436,-30.58,26.62,-9916,April 9916 BCE
 "Maize, beans and squash",66541,-5.37,22.29,-9734,April 9734 BCE
-"Rice",161291,-3.89,11.68,-9603,April 9603 BCE
-"Sorghum and pearl millet",162958,11.88,-5.07,-9336,October 9336 BCE
-"Potato and quinoa",11679,52.55,0.66,-9067,October 9067 BCE
-"Yams and oil palm",111811,0.88,-52.16,-8759,October 8759 BCE
-"Taro and banana",149706,-13.23,-52.58,-8612,April 8612 BCE
+"Yams and oil palm",111578,-0.61,-51.72,-9367,April 9367 BCE
+"Millet",50579,34.54,-6.39,-9102,October 9102 BCE
+"Rice",160625,-2.23,13.12,-8926,April 8926 BCE
+"Taro and banana",150239,-13.85,-54.18,-8565,April 8565 BCE
+"Sorghum and pearl millet",161853,12.62,-1.02,-8283,October 8283 BCE
+"Potato and quinoa",55519,52.06,-1.97,-7307,October 7307 BCE

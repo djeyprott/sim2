@@ -77,6 +77,12 @@ public sealed class HerdingSystem : ISimSystem
     private TechnologyUse? _technology;
     private TechnologyEffect[] _densityEffects = Array.Empty<TechnologyEffect>();
     private TechnologyEffect[] _woolEffects = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _spreadEffects = Array.Empty<TechnologyEffect>();
+
+    // Animals kept through a technology (horses), with that technology's index; -1 where the
+    // simulation has no such technology.
+    private int[] _tamedBy = Array.Empty<int>();
+    private int[] _farmingSincePlusOne = Array.Empty<int>();
 
     // Derived from the map when initializing.
     private WorldMap? _map;
@@ -151,6 +157,7 @@ public sealed class HerdingSystem : ISimSystem
         _crop = state.IntField(FarmingSystem.CropField);
         _farmCapacity = state.DoubleField(FarmingSystem.CapacityField);
         _farmLandShare = state.DoubleField(FarmingSystem.LandShareField);
+        _farmingSincePlusOne = state.IntField(FarmingSystem.SinceField);
         _groups = new PopulationGroups(state);
         if (state.HasTable(Stockpiles.LedgerTableName))
         {
@@ -211,7 +218,12 @@ public sealed class HerdingSystem : ISimSystem
         {
             _densityEffects = _technology.WithEffect(TechnologySet.HerdDensity);
             _woolEffects = _technology.WithEffect(TechnologySet.Wool);
+            _spreadEffects = _technology.WithEffect(TechnologySet.HerderSpread);
         }
+
+        _tamedBy = Livestock.Animals
+            .Select(a => a.TamedBy.Length == 0 || _technology == null ? -1 : _technology.Technologies.IndexOf(a.TamedBy))
+            .ToArray();
 
         PlaceHomelands(context);
     }
@@ -220,6 +232,7 @@ public sealed class HerdingSystem : ISimSystem
     {
         Rng rng = context.Rng;
         Invent(context.Tick, rng);
+        Tame(context.Tick);
         foreach (int cell in _cells)
         {
             if (_animals[cell] != 0)
@@ -491,7 +504,8 @@ public sealed class HerdingSystem : ISimSystem
                 {
                     double s = Suitability(other, herded);
                     double farmCapacity = _crop[other] > 0 ? _farmCapacity[other] : 0.0;
-                    if (s >= _parameters.MinSpreadSuitability && FullCapacity(other, s, herderGroup) > farmCapacity && rng.Chance(_parameters.SpreadChance))
+                    if (s >= _parameters.MinSpreadSuitability && FullCapacity(other, s, herderGroup) > farmCapacity
+                        && rng.Chance(Math.Min(1.0, _parameters.SpreadChance * Factor(herderGroup, cell, _spreadEffects))))
                     {
                         double moving = _parameters.SpreadShare * SizeOf(cell, _herder);
                         double food = groups.Food(groups.Find(cell, _herder));
@@ -524,8 +538,11 @@ public sealed class HerdingSystem : ISimSystem
         }
     }
 
-    // Animals are first herded in their homelands: herded animals by foragers on pasture (or by
-    // farmers where there are no foragers), farm animals by farmers.
+    // Animals are first herded in their homelands where farming has stood nearby long enough
+    // (livestock.json "afterFarmingYears"): herded animals by the people of a cell on pasture or
+    // beside farmland, farm animals (pigs) by farmers in the cell itself. In a homeland marked for
+    // foragers (eastern Sahel cattle), foragers on pasture far from farmers may also, less readily.
+    // Animals kept through a technology (horses) are not first herded this way (see Tame).
     private void Invent(long tick, Rng rng)
     {
         int invented = 0;
@@ -556,27 +573,33 @@ public sealed class HerdingSystem : ISimSystem
                     continue;
                 }
 
-                int animal = Livestock.Homelands[homeland].Animal;
+                AnimalHomeland place = Livestock.Homelands[homeland];
+                int animal = place.Animal;
                 Animal kind = Livestock.Get(animal);
-                // Animals were mostly first kept by settled farming people, wherever they lived; foragers
-                // take herd animals up far less readily, and only on pasture, where no farmers live in
-                // or beside the cell. Farm animals (pigs) need farmers in the cell itself.
+                if (kind.TamedBy.Length > 0)
+                {
+                    continue;
+                }
+
                 double fullness;
-                bool farmersNear = FarmersNear(cell);
                 if (!kind.Herded)
                 {
-                    fullness = farmers > 0.0 ? 1.0 : 0.0;
+                    fullness = farmers > 0.0 && FarmingStood(cell, place.AfterFarmingYears, tick, neighbours: false) ? 1.0 : 0.0;
                 }
-                else if (farmersNear)
+                else if (FarmingStood(cell, place.AfterFarmingYears, tick, neighbours: true))
                 {
                     fullness = 1.0;
                 }
-                else
+                else if (place.Foragers && !FarmersNear(cell))
                 {
                     double foragerCapacity = _foragerCapacity[cell];
                     fullness = Pasture(cell) > 0.0 && foragers > 0.0 && foragerCapacity > 0.0
                         ? _parameters.ForagerInventionFactor * Math.Min(1.0, foragers / foragerCapacity)
                         : 0.0;
+                }
+                else
+                {
+                    fullness = 0.0;
                 }
 
                 double suitability = Suitability(cell, animal);
@@ -585,17 +608,101 @@ public sealed class HerdingSystem : ISimSystem
                     continue;
                 }
 
-                int origin = _origins.Add();
-                _originAnimal![origin] = animal;
-                _originHomeland![origin] = homeland;
-                _originCell![origin] = cell;
-                _originTick![origin] = (int)tick;
+                RecordOrigin(animal, homeland, cell, tick);
                 invented |= 1 << homeland;
                 _animals[cell] |= 1 << animal;
                 if (kind.Herded && Pasture(cell) > 0.0)
                 {
                     int from = foragers > 0.0 ? _forager : _farmer;
                     Move(cell, from, _herder, _parameters.FirstHerderShare * SizeOf(cell, from));
+                }
+            }
+        }
+    }
+
+    private void RecordOrigin(int animal, int homeland, int cell, long tick)
+    {
+        int origin = _origins!.Add();
+        _originAnimal![origin] = animal;
+        _originHomeland![origin] = homeland;
+        _originCell![origin] = cell;
+        _originTick![origin] = (int)tick;
+    }
+
+    // Whether farming has stood in the cell (or a neighbour) for at least this many years.
+    private bool FarmingStood(int cell, double years, long tick, bool neighbours)
+    {
+        long ticks = (long)Math.Round(years * GameDate.MonthsPerYear);
+        if (Stood(cell))
+        {
+            return true;
+        }
+
+        if (neighbours)
+        {
+            foreach (int other in _map!.Grid.Neighbours(cell))
+            {
+                if (Stood(other))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+        bool Stood(int c) => _farmingSincePlusOne[c] > 0 && SizeOf(c, _farmer) > 0.0 && tick - (_farmingSincePlusOne[c] - 1) >= ticks;
+    }
+
+    // Animals kept through a technology (horses): where they live wild and some group in the cell
+    // knows the technology, the cell keeps them; from there they spread with herders and to
+    // farmers like any animal. The first such cell of each homeland is recorded as its origin.
+    private void Tame(long tick)
+    {
+        if (_technology == null)
+        {
+            return;
+        }
+
+        int recorded = 0;
+        for (int id = 0; id < _origins!.IdCount; id++)
+        {
+            recorded |= 1 << _originHomeland![id];
+        }
+
+        for (int animal = 0; animal < _tamedBy.Length; animal++)
+        {
+            int technology = _tamedBy[animal];
+            if (technology < 0)
+            {
+                continue;
+            }
+
+            Animal kind = Livestock.Get(animal);
+            int homelands = 0;
+            for (int h = kind.FirstHomeland; h < kind.FirstHomeland + kind.HomelandCount; h++)
+            {
+                homelands |= 1 << h;
+            }
+
+            int bit = 1 << animal;
+            foreach (int cell in _cells)
+            {
+                int wild = _wild[cell] & homelands;
+                if (wild == 0 || (_animals[cell] & bit) != 0 || !_technology.KnownInCell(cell, technology)
+                    || Suitability(cell, animal) < _parameters.MinSpreadSuitability)
+                {
+                    continue;
+                }
+
+                _animals[cell] |= bit;
+                for (int h = kind.FirstHomeland; h < kind.FirstHomeland + kind.HomelandCount; h++)
+                {
+                    if ((wild & (1 << h)) != 0 && (recorded & (1 << h)) == 0)
+                    {
+                        RecordOrigin(animal, h, cell, tick);
+                        recorded |= 1 << h;
+                    }
                 }
             }
         }

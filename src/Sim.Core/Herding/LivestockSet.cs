@@ -18,7 +18,14 @@ public sealed class Animal
         Warmest = entry.Warmest.ToArray();
         Coldest = entry.Coldest.ToArray();
         Water = entry.Water.ToArray();
+        TamedBy = entry.TamedBy;
     }
+
+    /// <summary>
+    /// A technology (technologies.json) through which it comes to be kept, in place of being first
+    /// herded by chance in its homelands (horses); empty for none.
+    /// </summary>
+    public string TamedBy { get; }
 
     public int Index { get; }
 
@@ -55,8 +62,12 @@ public sealed class Animal
     }
 }
 
-/// <summary>One of an animal's homelands: a circle on the real Earth.</summary>
-public sealed record AnimalHomeland(int Index, int Animal, double Lat, double Lon, double RadiusKm);
+/// <summary>
+/// One of an animal's homelands: a circle on the real Earth. It is first herded there only where
+/// farming has stood in the cell or a neighbour for at least <paramref name="AfterFarmingYears"/>,
+/// or, if <paramref name="Foragers"/>, also by foragers on pasture far from farmers (less readily).
+/// </summary>
+public sealed record AnimalHomeland(int Index, int Animal, double Lat, double Lon, double RadiusKm, double AfterFarmingYears = 0.0, bool Foragers = false);
 
 /// <summary>The herd animals, read from livestock.json.</summary>
 public sealed class LivestockSet
@@ -109,7 +120,7 @@ public sealed class LivestockSet
                 }
             }
 
-            if (entry.Homelands.Count == 0 || entry.Homelands.Any(h => h.RadiusKm <= 0.0) || entry.Colour.Length != 7 || entry.Colour[0] != '#')
+            if (entry.Homelands.Count == 0 || entry.Homelands.Any(h => h.RadiusKm <= 0.0 || h.AfterFarmingYears < 0.0) || entry.Colour.Length != 7 || entry.Colour[0] != '#')
             {
                 throw new InvalidDataException($"Animal '{entry.Name}' needs at least one homeland with a radius, and a colour like #RRGGBB.");
             }
@@ -117,7 +128,7 @@ public sealed class LivestockSet
             animals[i] = new Animal(i, entry, homelands.Count);
             foreach (HomelandCircle circle in entry.Homelands)
             {
-                homelands.Add(new AnimalHomeland(homelands.Count, i, circle.Lat, circle.Lon, circle.RadiusKm));
+                homelands.Add(new AnimalHomeland(homelands.Count, i, circle.Lat, circle.Lon, circle.RadiusKm, circle.AfterFarmingYears, circle.Foragers));
             }
         }
 
@@ -165,6 +176,8 @@ internal sealed class AnimalEntry
     public List<double> Coldest { get; set; } = new List<double>();
 
     public List<double> Water { get; set; } = new List<double>();
+
+    public string TamedBy { get; set; } = "";
 }
 
 internal sealed class HomelandCircle
@@ -174,6 +187,10 @@ internal sealed class HomelandCircle
     public double Lon { get; set; }
 
     public double RadiusKm { get; set; }
+
+    public double AfterFarmingYears { get; set; }
+
+    public bool Foragers { get; set; }
 }
 
 /// <summary>How herding works, read from herding.json.</summary>

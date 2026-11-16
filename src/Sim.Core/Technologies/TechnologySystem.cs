@@ -289,7 +289,7 @@ public sealed class TechnologySystem : ISimSystem
 
                 // Nobody here, next door or among its trade partners knows it, and the goods it
                 // needs to be discovered are not near: nobody here can learn or find it.
-                if (_best[cell] <= 0.0 && _tradeBest[cell] <= 0.0 && !_conditions!.GoodsNear(cell, tech) && !NeighbourKnows(cell))
+                if (_best[cell] <= 0.0 && _tradeBest[cell] <= 0.0 && !_conditions!.NearForDiscovery(cell, tech) && !NeighbourKnows(cell))
                 {
                     continue;
                 }
@@ -336,7 +336,7 @@ public sealed class TechnologySystem : ISimSystem
                             continue;
                         }
 
-                        if (t.Chance <= 0.0 || !_conditions!.GoodsNear(cell, tech))
+                        if (t.Chance <= 0.0 || !_conditions!.NearForDiscovery(cell, tech))
                         {
                             continue;
                         }

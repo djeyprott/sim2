@@ -20,6 +20,7 @@ public sealed class Technology
         Terrain = terrain;
         Animals = entry.Animals.ToArray();
         NearGoods = entry.NearGoods.ToArray();
+        NearWild = entry.NearWild.ToArray();
         Chance = entry.Chance;
         Spread = entry.Spread;
         History = entry.History;
@@ -57,6 +58,9 @@ public sealed class Technology
     /// <summary>For discovery only: goods (by name), one of which must be gatherable in the cell or in its store; empty for none.</summary>
     public IReadOnlyList<string> NearGoods { get; }
 
+    /// <summary>For discovery only: animals (by name), one of which must live wild in the cell; empty for none.</summary>
+    public IReadOnlyList<string> NearWild { get; }
+
     public double Chance { get; }
 
     public double Spread { get; }
@@ -88,7 +92,13 @@ public sealed class TechnologySet
     /// <summary>Herding: multiplies the wool herders and farmers bring to a store.</summary>
     public const string Wool = "wool";
 
-    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool };
+    /// <summary>Herding: multiplies herders' yearly chance of moving onto new pasture.</summary>
+    public const string HerderSpread = "herderSpread";
+
+    /// <summary>Trade: multiplies the cost of carrying goods over land on links where both settlements use it.</summary>
+    public const string LandCarrying = "landCarrying";
+
+    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool, HerderSpread, LandCarrying };
 
     private readonly Technology[] _technologies;
 
@@ -211,6 +221,8 @@ internal sealed class TechnologyEntry
     public List<string> Animals { get; set; } = new List<string>();
 
     public List<string> NearGoods { get; set; } = new List<string>();
+
+    public List<string> NearWild { get; set; } = new List<string>();
 
     public double Chance { get; set; }
 

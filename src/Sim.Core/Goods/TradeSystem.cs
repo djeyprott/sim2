@@ -3,6 +3,7 @@ using Sim.Core.Engine;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Goods;
 
@@ -106,6 +107,12 @@ public sealed class TradeSystem : ISimSystem
     private int[] _seasonalGoods = Array.Empty<int>();
     private double _yearlySendShare;
 
+    // Land carrying technology (the wheel, riding): each settlement's factor on carrying costs,
+    // worked out every season from the world state; a link costs the larger of its two ends'.
+    private TechnologyUse? _technology;
+    private TechnologyEffect[] _carryingEffects = Array.Empty<TechnologyEffect>();
+    private double[] _carryFactor = Array.Empty<double>();
+
     // Search scratch space for building links.
     private double[] _best = Array.Empty<double>();
     private int[] _seen = Array.Empty<int>();
@@ -165,6 +172,12 @@ public sealed class TradeSystem : ISimSystem
 
         // Everyday goods and materials move once a year, sending what four seasons of sendShare would.
         _yearlySendShare = 1.0 - Math.Pow(1.0 - _parameters.SendShare, 4.0);
+        _technology = TechnologyUse.TryCreate(state, _map);
+        if (_technology != null)
+        {
+            _carryingEffects = _technology.WithEffect(TechnologySet.LandCarrying);
+        }
+
         _gapJanuary = new double[_goods.Count];
         _gapFebruary = new double[_goods.Count];
         _sentJanuary = new double[_goods.Count];
@@ -244,6 +257,7 @@ public sealed class TradeSystem : ISimSystem
             return;
         }
 
+        FillCarryFactors();
         start = System.Diagnostics.Stopwatch.GetTimestamp();
         WorkPrices(context.Tick, _january = month == 0);
         PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
@@ -262,7 +276,7 @@ public sealed class TradeSystem : ISimSystem
 
             int cellA = _settlementCell![a];
             int cellB = _settlementCell[b];
-            double cost = _linkCost[link];
+            double cost = _linkCost[link] * Math.Max(_carryFactor[a], _carryFactor[b]);
             double value = 0.0;
             foreach (int g in traded)
             {
@@ -438,6 +452,22 @@ public sealed class TradeSystem : ISimSystem
         }
 
         return false;
+    }
+
+    // Each linked settlement's land carrying factor from the technology its people use (1: none).
+    private void FillCarryFactors()
+    {
+        EntityTable settlements = _settlements!;
+        if (_carryFactor.Length < settlements.IdCount)
+        {
+            _carryFactor = new double[settlements.IdCount];
+        }
+
+        for (int id = 0; id < settlements.IdCount; id++)
+        {
+            _carryFactor[id] = _carryingEffects.Length == 0 || !settlements.IsAlive(id)
+                ? 1.0 : _technology!.CellFactor(_settlementCell![id], _carryingEffects);
+        }
     }
 
     // Each settlement chooses its cheapest-to-reach settlements; a link counts if either end chose it.

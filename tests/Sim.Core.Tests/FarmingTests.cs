@@ -78,7 +78,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             GoodsSystem.CreateDefault(),
             ForagerSystem.CreateDefault(climate.Biomes, occupations),
             new FarmingSystem(parameters, CropSet.LoadDefault(), climate.Biomes, occupations),
-            new HerdingSystem(herding, LivestockSet.LoadDefault(), FarmingParameters.LoadDefault(), climate.Biomes, occupations),
+            new HerdingSystem(herding, FastLivestock(), FarmingParameters.LoadDefault(), climate.Biomes, occupations),
             SettlementSystem.CreateDefault(occupations),
             ResourceSystem.CreateDefault(climate.Biomes, occupations),
             CraftSystem.CreateDefault(occupations),
@@ -91,6 +91,12 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     private static FarmingSystem Farming(Simulation sim) => sim.Systems.OfType<FarmingSystem>().Single();
+
+    // Animals wait only 50 years after farming nearby (500 in the real file), so short runs show herding.
+    private const double FastHerdingWait = 50.0;
+
+    private static LivestockSet FastLivestock() =>
+        LivestockSet.Parse(ContentFiles.ReadText("livestock.json").Replace("\"afterFarmingYears\": 500", $"\"afterFarmingYears\": {FastHerdingWait}"));
 
     [Fact]
     public void Real_homelands_put_wild_crops_where_they_grew()
@@ -278,12 +284,13 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         int plough = set.IndexOf("The plough");
         int granaries = set.IndexOf("Granaries");
         int milk = set.IndexOf("Milk and wool");
+        int wheel = set.IndexOf("The wheel");
         void Teach(Simulation sim, bool known)
         {
             EntityTable table = sim.State.Table(PopulationGroups.TableName);
             foreach (Technology t in set.Technologies)
             {
-                bool taught = known && (t.Index == plough || t.Index == granaries || t.Index == milk);
+                bool taught = known && (t.Index == plough || t.Index == granaries || t.Index == milk || t.Index == wheel);
                 Span<double> shares = table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + t.Slug).Values;
                 for (int g = 0; g < shares.Length; g++)
                 {
@@ -379,6 +386,22 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             }
         }
 
+        // The wheel makes land carrying cheaper for settlements whose farmers keep cattle (0.7 of the cost).
+        TechnologyUse use = TechnologyUse.TryCreate(with.State, _world)!;
+        TechnologyEffect[] carrying = use.WithEffect(TechnologySet.LandCarrying);
+        int carts = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            int farmers = groups.Find(cell, farmer);
+            if (settlement[cell] > 0 && farmers >= 0 && groups.Size(farmers) > 0.0)
+            {
+                bool cattle = technology.CellAllows(cell, wheel);
+                carts += cattle ? 1 : 0;
+                Assert.Equal(cattle ? 0.7 : 1.0, use.CellFactor(cell, carrying), 9);
+            }
+        }
+
+        Assert.True(carts >= 5, $"Only {carts} settlements with carts.");
         Assert.True(milkCells >= 5 && ploughed >= 5 && unploughed >= 5 && stores >= 5,
             $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores.");
     }
@@ -496,6 +519,43 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     [Fact]
+    public void Horses_are_kept_where_people_know_horse_herding_and_horses_live_wild()
+    {
+        Simulation sim = FastFarming(7);
+        sim.Run(300 * 12);
+        HerdingSystem herding = sim.Systems.OfType<HerdingSystem>().Single();
+        TechnologySet set = sim.Systems.OfType<TechnologySystem>().Single().Technologies;
+        int horses = herding.Livestock.IndexOf("Horses");
+        int horseHomeland = herding.Livestock.Get(horses).FirstHomeland;
+        int[] wild = sim.State.IntField(HerdingSystem.WildField);
+        int[] animals = sim.State.IntField(HerdingSystem.AnimalsField);
+        Assert.DoesNotContain(herding.Origins(), o => o.Animal == horses);
+        Assert.DoesNotContain(Enumerable.Range(0, _world.CellCount), c => (animals[c] & (1 << horses)) != 0);
+
+        // Herders who know horse herding move into the wild horses' best cell, and one far outside.
+        int steppe = Enumerable.Range(0, _world.CellCount).Where(c => (wild[c] & (1 << horseHomeland)) != 0)
+            .OrderByDescending(c => herding.Suitability(c, horses)).ThenBy(c => c).First();
+        int outside = Enumerable.Range(0, _world.CellCount)
+            .Where(c => _world.IsLand(c) && wild[c] == 0 && herding.Suitability(c, horses) > 0.5 && _world.Grid.DistanceKm(c, steppe) > 2000.0)
+            .OrderBy(c => c).First();
+        var groups = new PopulationGroups(sim.State);
+        int herder = OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder);
+        DoubleColumn knowledge = sim.State.Table(PopulationGroups.TableName)
+            .DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(set.IndexOf("Horse herding")).Slug);
+        foreach (int cell in new[] { steppe, outside })
+        {
+            int group = groups.FindOrAdd(cell, herder);
+            groups.AddPeople(group, 2000.0, 1.0);
+            knowledge[group] = 1.0;
+        }
+
+        sim.Run(12);
+        Assert.True((animals[steppe] & (1 << horses)) != 0, "Horses are not kept where they live wild and herders know horse herding.");
+        Assert.True((animals[outside] & (1 << horses)) == 0, "Horses are kept where they never lived wild.");
+        Assert.Contains(herding.Origins(), o => o.Animal == horses && o.Cell == steppe);
+    }
+
+    [Fact]
     public void Herding_is_taken_up_in_its_homelands_and_spreads()
     {
         Simulation sim = FastFarming(7);
@@ -506,12 +566,18 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         var origins = herding.Origins();
         Assert.True(origins.Count >= 3, $"Only {origins.Count} first herdings in 300 years.");
         Assert.Equal(origins.Count, origins.Select(o => o.Homeland).Distinct().Count());
-        foreach ((int animal, int homeland, int cell, long _) in origins)
+        long firstFarming = Farming(sim).Origins().Min(o => o.Tick);
+        foreach ((int animal, int homeland, int cell, long tick) in origins)
         {
             AnimalHomeland h = herding.Livestock.Homelands[homeland];
             Assert.Equal(h.Animal, animal);
             Assert.True(_world.Grid.DistanceKm(cell, _world.Grid.FindCell(h.Lat, h.Lon)) <= h.RadiusKm + 60.0,
                 $"{herding.Livestock.Get(animal).Name} was first herded outside its homeland.");
+
+            // Outside forager homelands, only where farming has stood for the wait.
+            Assert.True(h.Foragers || tick >= firstFarming + (long)(FastHerdingWait * 12),
+                $"{herding.Livestock.Get(animal).Name} was first herded in month {tick}, before farming had stood {FastHerdingWait} years (first farming in month {firstFarming}).");
+            Assert.Equal("", herding.Livestock.Get(animal).TamedBy);
         }
 
         // Herders live and grow on pasture, and animals reach farmers beyond where they were first kept.

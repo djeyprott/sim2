@@ -150,6 +150,9 @@ public class LivestockTests
         Assert.Contains(livestock.Animals, a => a.Name == "Sheep and goats" && a.Herded && a.Wool);
         Assert.Contains(livestock.Animals, a => a.Name == "Pigs" && !a.Herded);
         Assert.Equal(2, livestock.Get(livestock.IndexOf("Cattle")).HomelandCount);
+        Assert.Equal("Horse herding", livestock.Get(livestock.IndexOf("Horses")).TamedBy);
+        Assert.Contains(livestock.Homelands, h => h.Foragers && h.Animal == livestock.IndexOf("Cattle"));
+        Assert.All(livestock.Homelands.Where(h => livestock.Get(h.Animal).TamedBy.Length == 0), h => Assert.True(h.AfterFarmingYears > 0.0));
         for (int i = 0; i < livestock.Homelands.Count; i++)
         {
             Assert.Equal(i, livestock.Homelands[i].Index);
@@ -159,7 +162,7 @@ public class LivestockTests
 
         string text = ContentFiles.ReadText("livestock.json");
         Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"warmest\": [10, 15, 34, 42]", "\"warmest\": [15, 10, 34, 42]")));
-        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600 } ]", "\"homelands\": [ ]")));
+        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600, \"afterFarmingYears\": 500 } ]", "\"homelands\": [ ]")));
 
         HerdingParameters p = HerdingParameters.LoadDefault();
         Assert.True(p.HerdDensity > 0.0 && p.Pasture["Grassland"] >= p.MinPasture);

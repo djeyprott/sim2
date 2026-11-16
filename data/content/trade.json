@@ -7,7 +7,8 @@
 // to the dearer end if the price gap is larger than the carrying cost (the good's weight times
 // costPerStep food for each unit of link cost). The cheaper end sends sendShare of its stock of
 // that good each season, shared among its links and scaled down when the gap only just beats
-// the cost. Goods arrive the next season.
+// the cost. Goods arrive the next season. Technology that makes land carrying cheaper (the wheel,
+// riding; technologies.json "landCarrying") lowers a link's cost where both its settlements use it.
 // A trade route is a link whose carried value (in food) averages at least routeValue a season.
 {
   "maxLinkCost": 4.0,

@@ -28,6 +28,10 @@ public sealed class TechnologyConditions
     private readonly int[][] _nearGoods;
     private readonly Stockpiles? _stockpiles;
 
+    // Per technology: the bits of the animal homelands one of which must hold the cell (0: none needed).
+    private readonly int[] _wildMask;
+    private readonly int[]? _wild;
+
     public TechnologyConditions(WorldState state, WorldMap map, TechnologySet technologies)
     {
         _technologies = technologies;
@@ -36,6 +40,21 @@ public sealed class TechnologyConditions
         _animals = state.HasField(HerdingSystem.AnimalsField) ? state.IntField(HerdingSystem.AnimalsField) : null;
 
         LivestockSet livestock = LivestockSet.LoadDefault();
+        _wild = state.HasField(HerdingSystem.WildField) ? state.IntField(HerdingSystem.WildField) : null;
+        _wildMask = technologies.Technologies.Select(t =>
+        {
+            int mask = 0;
+            foreach (string name in t.NearWild)
+            {
+                Animal animal = livestock.Get(livestock.IndexOf(name));
+                for (int h = animal.FirstHomeland; h < animal.FirstHomeland + animal.HomelandCount; h++)
+                {
+                    mask |= 1 << h;
+                }
+            }
+
+            return mask;
+        }).ToArray();
         _animalMask = technologies.Technologies.Select(t =>
         {
             int mask = 0;
@@ -134,10 +153,16 @@ public sealed class TechnologyConditions
 
     /// <summary>
     /// For discovery: whether one of the technology's near goods can be gathered in the cell or is
-    /// in its store (true when it lists none).
+    /// in its store, and one of its wild animals lives in the cell (each true when it lists none).
     /// </summary>
-    public bool GoodsNear(int cell, int technology)
+    public bool NearForDiscovery(int cell, int technology)
     {
+        int wild = _wildMask[technology];
+        if (wild != 0 && (_wild == null || (_wild[cell] & wild) == 0))
+        {
+            return false;
+        }
+
         bool[]? source = _goodsSource[technology];
         if (source == null)
         {
@@ -246,6 +271,24 @@ public sealed class TechnologyUse
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// The product of the effect sizes of the technologies some group in a cell knows, where the
+    /// cell meets their conditions (1 when none): for effects on a whole settlement, such as trade.
+    /// </summary>
+    public double CellFactor(int cell, TechnologyEffect[] effects)
+    {
+        double factor = 1.0;
+        foreach (TechnologyEffect e in effects)
+        {
+            if (Conditions.Allows(cell, e.Technology) && KnownInCell(cell, e.Technology))
+            {
+                factor *= e.Size;
+            }
+        }
+
+        return factor;
     }
 
     /// <summary>Whether a group uses a technology in a cell: it knows it, and the cell meets its conditions.</summary>

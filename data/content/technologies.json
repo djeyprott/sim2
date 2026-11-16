@@ -11,6 +11,8 @@
 //   animals       the cell must keep at least one of these animals (livestock.json)
 //   nearGoods     for discovery only: one of these goods can be gathered in the cell or is in
 //                 its settlement's store (once known, it spreads without them)
+//   nearWild      for discovery only: one of these animals lives wild in the cell (livestock.json
+//                 homelands); an animal "tamedBy" this technology is then kept there
 //   chance        a group's yearly chance of discovering it, when the conditions are met and the
 //                 people in reach (its cell and the neighbouring cells) number at least
 //                 technology.json's "discoveryPeople"; smaller in reach, smaller chance
@@ -25,9 +27,12 @@
 //                   grainSpoilage     multiplies grain spoilage in the settlement's store
 //                   herdDensity       multiplies the herders pasture feeds (herders' technology)
 //                   wool              multiplies the wool herders and farmers bring in
-// Copper working and bronze have no effects listed here: they open recipes (recipes.json).
-// Effect sizes are first estimates, tuned in milestone 3 step 8. Horses come in step 5 and the
-// sea in step 6.
+//                   herderSpread      multiplies herders' yearly chance of moving onto new pasture
+//                   landCarrying      multiplies the cost of carrying goods over land, on trade
+//                                     links where both settlements use it (trade.json)
+// Copper working and bronze have no effects listed here: they open recipes (recipes.json); horse
+// herding has none either: it brings horses (livestock.json).
+// Effect sizes are first estimates, tuned in milestone 3 step 8. The sea comes in step 6.
 {
   "technologies": [
     {
@@ -66,6 +71,8 @@
       "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The plough" ], "animals": [ "Cattle" ],
       "chance": 0.00001, "spread": 0.015,
+      // Ox carts carry loads over land far more cheaply than people and pack animals.
+      "effects": { "landCarrying": 0.7 },
       "history": "3500 BCE, Mesopotamia and the steppe"
     },
     {
@@ -101,6 +108,22 @@
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
       "chance": 0.00001, "spread": 0.01,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
+    },
+    {
+      // Keeping horses for meat and milk where they roamed wild. Found by herders and farmers on
+      // the steppe (foragers where horses are kept then take up herding, as with any herd).
+      "name": "Horse herding", "colour": "#7a5230", "occupations": [ "Herder", "Farmer" ],
+      "nearWild": [ "Horses" ],
+      "chance": 0.00001, "spread": 0.015,
+      "history": "3500 BCE, Botai (northern Kazakhstan)"
+    },
+    {
+      // Riding: herders move their herds far faster, and pack and riding horses carry goods.
+      "name": "Horse riding", "colour": "#b5651d", "occupations": [ "Herder", "Farmer" ],
+      "requires": [ "Horse herding" ], "animals": [ "Horses" ],
+      "chance": 0.00001, "spread": 0.02,
+      "effects": { "herderSpread": 2.0, "landCarrying": 0.85 },
+      "history": "2200 BCE, widespread from the Pontic-Caspian steppe (earlier riding debated)"
     }
   ]
 }

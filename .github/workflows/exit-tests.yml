@@ -1,16 +1,10 @@
 name: Exit tests
 
 # The milestone exit tests: long runs of the full simulation on Earth with 10 seeds each.
-# They run separately from CI so ordinary changes get quick results.
+# They run separately from CI so ordinary changes get quick results, and only when started by
+# hand (gh workflow run exit-tests.yml), since each run takes about 40 minutes a suite.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'src/**'
-      - 'tests/**'
-      - 'data/**'
-      - '.github/workflows/exit-tests.yml'
 
 jobs:
   exit-tests:

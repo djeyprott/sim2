@@ -364,6 +364,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         TradeSystem trade = sim.Systems.OfType<TradeSystem>().Single();
         Assert.True(trade.LinkCount > 10, $"Only {trade.LinkCount} trade links.");
         Assert.True(trade.Routes().Count > 0, "No trade routes.");
+        Assert.True(Enumerable.Range(0, stockpiles.Goods.Count).Any(g => trade.Routes(g).Count > 0), "No good has routes of its own.");
+        Assert.True(trade.Routes(stockpiles.Goods.IndexOf(GoodSet.Grain)).All(r => r.Value > 0.0));
         Assert.True(Enumerable.Range(0, stockpiles.Goods.Count).Any(g => stockpiles.InTransit(g) > 0.0), "Nothing is in transit.");
 
         // Prices stay within their bounds, and gathering stops by the stock at which prices bottom out.

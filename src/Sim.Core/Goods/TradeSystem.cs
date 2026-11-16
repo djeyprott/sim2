@@ -87,6 +87,9 @@ public sealed class TradeSystem : ISimSystem
     private int[] _linkB = Array.Empty<int>();
     private double[] _linkCost = Array.Empty<double>();
     private double[] _linkValue = Array.Empty<double>();
+
+    // The same for each good separately: [link * goods + good].
+    private double[] _goodValue = Array.Empty<double>();
     private int[] _degree = Array.Empty<int>();
 
     // Prices of the linked settlements this month, by settlement id then good.
@@ -261,6 +264,8 @@ public sealed class TradeSystem : ISimSystem
                     moved = Move(cellB, cellA, _degree[b], g, pb, pa, carry);
                 }
 
+                ref double goodValue = ref _goodValue[link * goods + g];
+                goodValue = 0.9 * goodValue + 0.1 * moved;
                 if (moved > 0.0)
                 {
                     value += moved;
@@ -502,16 +507,20 @@ public sealed class TradeSystem : ISimSystem
             }
         }
 
-        var oldValue = new Dictionary<(int, int), double>();
+        var oldLink = new Dictionary<(int, int), int>();
         for (int link = 0; link < _linkA.Length; link++)
         {
-            oldValue[(_linkA[link], _linkB[link])] = _linkValue[link];
+            oldLink[(_linkA[link], _linkB[link])] = link;
         }
 
+        int goods = _goods.Count;
+        double[] oldValue = _linkValue;
+        double[] oldGoodValue = _goodValue;
         _linkA = new int[pairs.Count];
         _linkB = new int[pairs.Count];
         _linkCost = new double[pairs.Count];
         _linkValue = new double[pairs.Count];
+        _goodValue = new double[pairs.Count * goods];
         _degree = new int[ids];
         int n = 0;
         foreach (KeyValuePair<(int A, int B), double> pair in pairs)
@@ -520,7 +529,12 @@ public sealed class TradeSystem : ISimSystem
             _linkA[n] = a;
             _linkB[n] = b;
             _linkCost[n] = pair.Value;
-            _linkValue[n] = oldValue.GetValueOrDefault((a, b));
+            if (oldLink.TryGetValue((a, b), out int old))
+            {
+                _linkValue[n] = oldValue[old];
+                Array.Copy(oldGoodValue, old * goods, _goodValue, n * goods, goods);
+            }
+
             _degree[a]++;
             _degree[b]++;
             n++;
@@ -603,6 +617,27 @@ public sealed class TradeSystem : ISimSystem
             if (_linkValue[link] >= _parameters.RouteValue && _settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
             {
                 routes.Add(new TradeRoute(_settlementCell![_linkA[link]], _settlementCell[_linkB[link]], _linkValue[link]));
+            }
+        }
+
+        return routes;
+    }
+
+    /// <summary>
+    /// Links that carry at least a tenth of the route value of one good a season on average, by their
+    /// settlements' cells, with the food value of that good they carry.
+    /// </summary>
+    public List<TradeRoute> Routes(int good)
+    {
+        var routes = new List<TradeRoute>();
+        int goods = _goods.Count;
+        double least = 0.1 * _parameters.RouteValue;
+        for (int link = 0; link < _linkA.Length; link++)
+        {
+            double value = _goodValue[link * goods + good];
+            if (value >= least && _settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
+            {
+                routes.Add(new TradeRoute(_settlementCell![_linkA[link]], _settlementCell[_linkB[link]], value));
             }
         }
 

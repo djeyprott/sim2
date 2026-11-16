@@ -1,6 +1,6 @@
-# Milestone 2 spec: Goods and trade (version 1.2, agreed; 1.2 awaits the owner's confirmation)
+# Milestone 2 spec: Goods and trade (version 1.3, agreed; 1.2 awaits the owner's confirmation)
 
-Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1) and 2026-11-16 (1.2). Feature list is frozen. Parent: `design-doc.md` version 0.9.
+Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1) and 2026-11-16 (1.2, 1.3). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
 Progress: steps 1 to 7 done 2026-11-15; step 8's tuning done 2026-11-16, and every automated exit test passes. Release v0.3 waits for the owner to confirm change 1.2 and check the viewer by hand.
 
@@ -17,6 +17,7 @@ Progress: steps 1 to 7 done 2026-11-15; step 8's tuning done 2026-11-16, and eve
 - A 5,000-year headless run takes 55 to 95 seconds depending on the build machine (90 seconds after step 4, climate the largest part; 136 to 161 seconds with trade, of which trade 42 to 69; 115 to 210 seconds after step 8, with trade 54 to 107); the runner prints each system's time. Each exit-test suite takes 15 to 40 minutes and runs only when started by hand. The repository was made public on 2026-11-15 so GitHub Actions stays free.
 
 Change log:
+- 1.3 (2026-11-16, added by the owner): the goods map mode also draws the trade routes of the chosen good, thicker for routes that carry more of it.
 - 1.2 (2026-11-16, the owner said to go ahead with the planned fix; awaits confirmation before release): the test that stores at least halve famine deaths compares like with like. Cells with stores are mostly long-settled cells near what their land feeds, and cells without are mostly young or small ones with room to spare, so the raw rates compared different kinds of cells (stores left 0.44 to 0.82 of deaths overall, but 0.30 to 0.50 within each band of fullness). Each band of fullness (farmers over what the land feeds: under 0.6, 0.6 to 0.85, 0.85 to 1, 1 or more) now has its store death rate weighed by the farmer-years without a store in that band.
 - 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
 - 1.0 (2026-11-15): agreed and frozen.
@@ -93,7 +94,7 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 
 ### 9. Viewer
 
-- **Goods map mode**: pick a good; settlements are coloured by how much they hold, or by its price there.
+- **Goods map mode**: pick a good; settlements are coloured by how much they hold, or by its price there, and the routes that carry that good are drawn over them (1.3).
 - **Trade map mode**: trade routes drawn as lines, thicker for more goods carried.
 - A **herding map mode** showing which animals are kept where.
 - The tooltip and the pinned cell panel list a settlement's stockpile and prices, and each group's needs met.

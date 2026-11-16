@@ -83,6 +83,9 @@ public partial class Main : Node2D
     private ResourceSystem? _resourceSystem;
     private Task<(List<SettlementInfo> Settlements, List<TradeRoute> Routes)>? _settlementTask;
     private TradeSystem? _tradeSystem;
+
+    // The good whose routes were last asked for (-1: all goods).
+    private int _routeGood = -1;
     private double _settlementAge = double.MaxValue;
     private long _settlementTick = -1;
     private Color[] _cropColours = Array.Empty<Color>();
@@ -505,7 +508,7 @@ public partial class Main : Node2D
         }
 
         _mode = mode;
-        _mapView.SetRoutesVisible(mode == TradeMode);
+        _mapView.SetRoutesVisible(mode == TradeMode || mode == GoodsMode);
         _hud.ShowGoodsPicker(mode == GoodsMode, _goodIndex, _goodPrice ? 1 : 0);
         _colouredFrame = null;
         _sinceRecolour = RecolourSeconds;
@@ -898,6 +901,9 @@ public partial class Main : Node2D
                 }
 
                 entries.Add((NoFarming, "No settlement"));
+                entries.Add((new Color(TradeRouteColour, 0.3f), $"Route carrying {goodName.ToLowerInvariant()}: 0.02 food a season"));
+                entries.Add((new Color(TradeRouteColour, 0.75f), "0.2 or more (thicker)"));
+                entries.Add((TradeRouteColour, "2 or more (thickest)"));
                 break;
             case HerdingMode:
                 title = "Herding (brighter: more of the people herd)";
@@ -1251,11 +1257,17 @@ public partial class Main : Node2D
 
         SettlementSystem? settlements = _settlementSystem;
         TradeSystem? trade = _tradeSystem;
-        if (_host != null && settlements != null && _settlementAge >= SettlementRefreshSeconds && frame.Tick != _settlementTick)
+        int routeGood = _mode == GoodsMode ? _goodIndex : -1;
+        if (_host != null && settlements != null && (_settlementAge >= SettlementRefreshSeconds || routeGood != _routeGood)
+            && (frame.Tick != _settlementTick || routeGood != _routeGood))
         {
             _settlementTick = frame.Tick;
             _settlementAge = 0.0;
-            _settlementTask = _host.InvokeAsync(_ => (settlements.All(), trade?.Routes() ?? new List<TradeRoute>()));
+            _routeGood = routeGood;
+            _settlementTask = _host.InvokeAsync(_ => (settlements.All(), trade == null ? new List<TradeRoute>()
+                : routeGood < 0 ? trade.Routes()
+                // One good's routes carry far less; scaled tenfold so the same line widths apply.
+                : trade.Routes(routeGood).Select(r => r with { Value = 10.0 * r.Value }).ToList()));
         }
     }
 

@@ -208,6 +208,11 @@ public sealed class EarthRunResult
 
     public double HerdersAt5000 { get; set; }
 
+    /// <summary>Year after the start when sheep and goats, and llamas, were first herded (-1: never).</summary>
+    public int FirstSheepYear { get; set; } = -1;
+
+    public int FirstLlamaYear { get; set; } = -1;
+
     /// <summary>Each first herding: animal name and year after the start.</summary>
     public List<string> HerdingOrigins { get; set; } = new List<string>();
 
@@ -521,6 +526,14 @@ public abstract class EarthRunFixtureBase
             var origins = herding.Origins();
             result.HerdingRegions6000 = SeparateRegions(world.Grid, origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
             result.HerdingOrigins = origins.Select(o => $"{herding.Livestock.Get(o.Animal).Name} year {o.Tick / 12}").ToList();
+            int FirstYear(string name)
+            {
+                int animal = herding.Livestock.IndexOf(name);
+                return origins.Where(o => o.Animal == animal).Select(o => (int)(o.Tick / 12)).DefaultIfEmpty(-1).Min();
+            }
+
+            result.FirstSheepYear = FirstYear("Sheep and goats");
+            result.FirstLlamaYear = FirstYear("Llamas and alpacas");
         }
 
         if (farmingSystem != null)
@@ -1078,6 +1091,16 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
             string.Join(", ", compared.Select(r => $"{r.PloughDensityRatio:F2} ({r.PloughKinds} kinds, {r.PloughCells} cells)")));
         Assert.True(_results.Count(r => r.PloughedOpenGrassland > 0) >= 8,
             string.Join(", ", _results.Select(r => $"{r.PloughedOpenGrassland} of {r.FarmedOpenGrassland}")));
+    }
+
+    [Fact]
+    public void Sheep_and_goats_come_near_8500_BCE_and_llamas_not_before_6000_BCE_in_7_of_10_seeds()
+    {
+        // The run starts in 10,000 BCE: 8500 BCE is year 1,500, and 6000 BCE year 4,000.
+        Assert.True(_results.Count(r => r.FirstSheepYear >= 0 && r.FirstSheepYear <= 3000) >= 7,
+            "First sheep and goats: " + string.Join(", ", _results.Select(r => r.FirstSheepYear)));
+        Assert.True(_results.Count(r => r.FirstLlamaYear < 0 || r.FirstLlamaYear >= 4000) >= 7,
+            "First llamas: " + string.Join(", ", _results.Select(r => r.FirstLlamaYear)));
     }
 
     [Fact]

@@ -2,7 +2,9 @@
 
 Status: agreed by the owner 2026-11-16. Feature list is frozen. Parent: `design-doc.md` version 1.1.
 
-Progress: not started.
+Progress: step 1 done 2026-11-16.
+
+- Step 1 (speed): a 5,000-year headless run takes about 115 to 150 seconds on CI's machines, against 165 to 210 before (the 2-minute target is met on the faster machines, not yet on the slowest). Changes: climate's yearly rainfall factors and the needs and gathering rules no longer call Math.Exp and Math.Pow, which were about ten times slower on some build machines; food and luxuries still trade every season, but everyday goods and materials trade once a year in January, sending what four seasons would, with a cheap price path for the goods traded between Januaries; the price-gap measurement runs only in the exit tests; trade's ledger changes are batched. Trade went from about 55 to 107 seconds to about 40 to 57. Exit tests after the change: every milestone 2 test passes except herders outnumbering farmers on open grassland, which failed in 2 of 10 seeds (0.30 against 0.39 and 0.11 against 0.21 million); trading everyday goods yearly changed each run's course, and the result still hangs on when sheep and goats are first herded, which step 5 reworks.
 
 Change log:
 - 1.0 (2026-11-16): agreed. The owner confirmed knowledge held by population groups and folding in the backlog item on when animals are first herded. Historical dates in the technology table checked against sources (see "Sources for the dates").

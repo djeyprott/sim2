@@ -58,7 +58,7 @@ public sealed class Prices
     private readonly int _farmer;
     private readonly int _craftsman;
     private readonly int _grain;
-    private readonly int[] _foodGoods;
+    private readonly int[] _seasonalGoods;
     private readonly double[] _wanted;
     private readonly double[] _cached;
     private int _cell = -1;
@@ -77,7 +77,7 @@ public sealed class Prices
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
         _grain = craft.Goods.IndexOf(GoodSet.Grain);
-        _foodGoods = craft.Goods.Goods.Where(g => g.Food).Select(g => g.Index).ToArray();
+        _seasonalGoods = craft.Goods.Goods.Where(g => g.Food || g.NeedTier == NeedTier.Luxury).Select(g => g.Index).ToArray();
         _wanted = new double[craft.Goods.Count];
         _cached = new double[craft.Goods.Count];
         _usedBy = new List<(int, double, double)>[craft.Goods.Count];
@@ -93,6 +93,11 @@ public sealed class Prices
             {
                 _usedBy[good].Add((recipe.Output, amount, share));
             }
+        }
+
+        if (_seasonalGoods.Any(g => _usedBy[g].Count > 0))
+        {
+            throw new InvalidDataException("Food and luxuries must not be recipe inputs: trade prices them between Januaries without recipes.");
         }
     }
 
@@ -196,36 +201,34 @@ public sealed class Prices
     }
 
     /// <summary>
-    /// Fills <paramref name="prices"/> for the food goods only (others are left as they are), as
-    /// <see cref="Work"/> would: food is wanted until the next harvest plus a reserve, and for any
-    /// need or recipe that uses it. Much cheaper than Work, for trade's seasons between Januaries.
+    /// Fills <paramref name="prices"/> for food and luxuries only (others are left as they are), as
+    /// <see cref="Work"/> would. Neither is used in recipes, so what is wanted needs no recipe
+    /// shortfalls: food until the next harvest plus a reserve, needs, and for luxuries what was sold
+    /// lately. Much cheaper than Work, for trade's seasons between Januaries.
     /// </summary>
-    public void WorkFood(int cell, long tick, double[] prices)
+    public void WorkSeasonal(int cell, long tick, double[] prices)
     {
         double fed = StoreFed(cell);
         int month = (int)(tick % GameDate.MonthsPerYear);
         int harvest = _map.Grid.Latitude(cell) >= 0.0 ? NorthernHarvestMonth : SouthernHarvestMonth;
         int months = (harvest - month + GameDate.MonthsPerYear) % GameDate.MonthsPerYear;
-        foreach (int g in _foodGoods)
+        foreach (int g in _seasonalGoods)
         {
+            Good good = _craft.Goods.Get(g);
             double wanted = _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
             if (g == _grain)
             {
                 wanted += fed * (months / (double)GameDate.MonthsPerYear + _parameters.FoodReserveYears);
             }
 
-            if (_usedBy[g].Count > 0)
+            if (!good.Food)
             {
-                throw new InvalidOperationException("WorkFood does not handle food used in recipes.");
+                wanted += _parameters.SalesWanted * _stockpiles.Sold(cell, g);
             }
 
-            Good good = _craft.Goods.Get(g);
             prices[g] = PriceOf(good.Value, wanted, _stockpiles.Stock(cell, g), _parameters, MaxFactorOf(good, _parameters));
         }
     }
-
-    /// <summary>The food goods, by index.</summary>
-    public IReadOnlyList<int> FoodGoods => _foodGoods;
 
     /// <summary>
     /// A good's price in the settlement last passed to <see cref="Work"/>, from its stock now.

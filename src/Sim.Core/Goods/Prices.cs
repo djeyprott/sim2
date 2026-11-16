@@ -18,13 +18,15 @@ public sealed class PriceParameters
 
     public double GatherTimeValue { get; set; } = 0.005;
 
+    public double SalesWanted { get; set; } = 1.5;
+
     public static PriceParameters LoadDefault() => Parse(ContentFiles.ReadText("prices.json"));
 
     public static PriceParameters Parse(string json)
     {
         PriceParameters p = ContentFiles.Parse<PriceParameters>(json, "prices");
         if (p.Elasticity <= 0.0 || p.MinFactor <= 0.0 || p.MaxFactor < 1.0 || p.MinFactor > 1.0
-            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0)
+            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0 || p.SalesWanted < 0.0)
         {
             throw new InvalidDataException("prices.json: elasticity above 0, 0 < minFactor <= 1 <= maxFactor, and no negative reserve or time value.");
         }
@@ -137,10 +139,14 @@ public sealed class Prices
             wanted[g] += _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
         }
 
-        // What it has been selling to its trade partners: about a year's worth.
+        // Stock to keep selling what it has lately sold to its trade partners (not food: farmers
+        // grow for themselves, and selling grain should not make a settlement hoard it).
         for (int g = 0; g < wanted.Length; g++)
         {
-            wanted[g] += 0.5 * _stockpiles.Sold(cell, g);
+            if (!_craft.Goods.Get(g).Food)
+            {
+                wanted[g] += _parameters.SalesWanted * _stockpiles.Sold(cell, g);
+            }
         }
 
         // Materials for what the craftsmen would make: the shortfall of each output, by its recipes.

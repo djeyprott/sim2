@@ -12,5 +12,12 @@
   "minFactor": 0.2,
   "maxFactor": 5.0,
   "foodReserveYears": 0.5,
-  "gatherTimeValue": 0.005
+  "gatherTimeValue": 0.005,
+
+  // A settlement also wants this many times its recent sales (goods.sold: each January halved,
+  // then added to; about one to two years of sales) of each good other than food, so a source
+  // of obsidian or salt keeps enough in store to go on supplying its trade partners. Trade
+  // sends at most sendShare of a stock each season, so this must be large enough that stock
+  // grows with sales; demand, not this figure, should limit trade.
+  "salesWanted": 1.5
 }

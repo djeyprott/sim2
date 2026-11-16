@@ -108,6 +108,15 @@ public static class Program
         for (int i = 0; i < simulation.Systems.Count; i++)
         {
             Console.WriteLine($"  {simulation.Systems[i].Name}: {simulation.SystemSeconds[i]:F1} s");
+            if (simulation.Systems[i] is Sim.Core.Technologies.TechnologySystem technology)
+            {
+                var events = technology.Events();
+                Console.WriteLine($"    {events.Count(e => e.Kind == Sim.Core.Technologies.TechnologyEventKind.First)} first discoveries, "
+                    + $"{events.Count(e => e.Kind == Sim.Core.Technologies.TechnologyEventKind.Independent)} independent, "
+                    + $"{events.Count(e => e.Kind == Sim.Core.Technologies.TechnologyEventKind.Lost)} losses; "
+                    + $"{technology.DiscoveryChecks:N0} discovery checks, {technology.GroupVisits:N0} group visits");
+            }
+
             if (simulation.Systems[i] is Sim.Core.Goods.TradeSystem trade)
             {
                 Console.WriteLine($"    of which links {trade.BuildSeconds:F1} s, prices {trade.PriceSeconds:F1} s, trading {trade.LoopSeconds:F1} s ({trade.Sends:N0} sends over {trade.LinkGoodVisits:N0} link-goods), gap measure {trade.GapSeconds:F1} s");

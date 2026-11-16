@@ -95,6 +95,11 @@ public sealed class TechnologySystem : ISimSystem
 
     public TechnologyParameters Parameters => _parameters;
 
+    /// <summary>For profiling: discovery draws and group visits made so far.</summary>
+    public long DiscoveryChecks { get; private set; }
+
+    public long GroupVisits { get; private set; }
+
     public static TechnologySystem CreateDefault(OccupationSet occupations, TradeSystem? trade) =>
         new TechnologySystem(TechnologyParameters.LoadDefault(), TechnologySet.LoadDefault(occupations), trade);
 
@@ -293,6 +298,7 @@ public sealed class TechnologySystem : ISimSystem
                         continue;
                     }
 
+                    GroupVisits++;
                     double s = share[g];
                     if (s <= 0.0 && !cellAllows)
                     {
@@ -336,6 +342,7 @@ public sealed class TechnologySystem : ISimSystem
                         }
 
                         double chance = Math.Min(1.0, _chanceScale * t.Chance) * Math.Min(1.0, reach / _parameters.DiscoveryPeople);
+                        DiscoveryChecks++;
                         if (context.Rng.Chance(chance))
                         {
                             share[g] = _parameters.DiscoveryShare;

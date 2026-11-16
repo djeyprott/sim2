@@ -82,6 +82,10 @@ public sealed class TechnologySystem : ISimSystem
     private double[] _tradeBest = Array.Empty<double>();
     private double[] _tradeRate = Array.Empty<double>();
     private double[] _tradeUsers = Array.Empty<double>();
+
+    // Cells whose trade values were set last year, cleared before this year's links are filled in
+    // (links are rebuilt every few years, and a cell that lost its links must not keep old values).
+    private readonly List<int> _tradeCells = new List<int>();
     private double[] _soldValue = Array.Empty<double>();
 
     /// <param name="chanceScale">Multiplies every discovery chance (tests use it to see discoveries in short runs).</param>
@@ -195,6 +199,18 @@ public sealed class TechnologySystem : ISimSystem
         Span<double> sizeOf = table.DoubleColumn("size").Values;
         int[] firstPlusOne = _firstGroupPlusOne;
         List<(int CellA, int CellB)> links = _trade?.LinksByCell() ?? new List<(int, int)>();
+        foreach (int cell in _tradeCells)
+        {
+            _tradeBest[cell] = _tradeRate[cell] = _tradeUsers[cell] = 0.0;
+        }
+
+        _tradeCells.Clear();
+        foreach ((int a, int b) in links)
+        {
+            _tradeCells.Add(a);
+            _tradeCells.Add(b);
+        }
+
         FillSoldValue(links);
         double inUse = _parameters.InUse;
 
@@ -267,6 +283,13 @@ public sealed class TechnologySystem : ISimSystem
                 // Where nobody near knows it and the cell does not allow it, nothing can happen.
                 bool cellAllows = CellAllows(cell, tech);
                 if (!cellAllows && _best[cell] <= 0.0)
+                {
+                    continue;
+                }
+
+                // Nobody here, next door or among its trade partners knows it, and the goods it
+                // needs to be discovered are not near: nobody here can learn or find it.
+                if (_best[cell] <= 0.0 && _tradeBest[cell] <= 0.0 && !_conditions!.GoodsNear(cell, tech) && !NeighbourKnows(cell))
                 {
                     continue;
                 }
@@ -370,6 +393,19 @@ public sealed class TechnologySystem : ISimSystem
             // Whether any group that can use it held some, for next year.
             _statusKnown![tech] = knownAfter || anyKnown ? 1 : 0;
         }
+    }
+
+    private bool NeighbourKnows(int cell)
+    {
+        foreach (int other in _map!.Grid.Neighbours(cell))
+        {
+            if (_best[other] > 0.0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // How far a group with share s moves toward those around it this year (for s = 0, the share it

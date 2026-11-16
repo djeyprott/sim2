@@ -73,6 +73,7 @@ public sealed class Prices
     private readonly TechnologyUse? _technology;
     private readonly int[] _recipeTechnology;
     private readonly bool[] _allowed;
+    private readonly sbyte[] _known;
 
     public Prices(WorldState state, WorldMap map, PriceParameters parameters, CraftRules craft, OccupationSet occupations)
     {
@@ -108,6 +109,7 @@ public sealed class Prices
             .Select(r => r.Requires.Length == 0 ? -1 : _technology == null ? -2 : _technology.Technologies.IndexOf(r.Requires))
             .ToArray();
         _allowed = new bool[craft.Recipes.Length];
+        _known = new sbyte[_technology?.Technologies.Count ?? 0];
 
         if (_seasonalGoods.Any(g => _usedBy[g].Count > 0))
         {
@@ -188,11 +190,17 @@ public sealed class Prices
         int months = (harvest - month + GameDate.MonthsPerYear) % GameDate.MonthsPerYear;
         wanted[_grain] = fed * (months / (double)GameDate.MonthsPerYear + _parameters.FoodReserveYears);
 
-        // Which recipes the settlement's people know how to follow.
+        // Which recipes the settlement's people know how to follow (each technology looked up once).
+        Array.Fill(_known, (sbyte)-1);
         for (int r = 0; r < _allowed.Length; r++)
         {
             int technology = _recipeTechnology[r];
-            _allowed[r] = technology == -1 || (technology >= 0 && _technology!.KnownInCell(cell, technology));
+            if (technology >= 0 && _known[technology] < 0)
+            {
+                _known[technology] = _technology!.KnownInCell(cell, technology) ? (sbyte)1 : (sbyte)0;
+            }
+
+            _allowed[r] = technology == -1 || (technology >= 0 && _known[technology] == 1);
         }
 
         // A year of needs plus the craft reserve. Where better goods meet a need (metal tools for

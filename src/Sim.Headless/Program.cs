@@ -110,7 +110,7 @@ public static class Program
             Console.WriteLine($"  {simulation.Systems[i].Name}: {simulation.SystemSeconds[i]:F1} s");
             if (simulation.Systems[i] is Sim.Core.Goods.TradeSystem trade)
             {
-                Console.WriteLine($"    of which links {trade.BuildSeconds:F1} s, prices {trade.PriceSeconds:F1} s");
+                Console.WriteLine($"    of which links {trade.BuildSeconds:F1} s, prices {trade.PriceSeconds:F1} s, trading {trade.LoopSeconds:F1} s ({trade.Sends:N0} sends over {trade.LinkGoodVisits:N0} link-goods), gap measure {trade.GapSeconds:F1} s");
             }
         }
         Console.WriteLine($"Ended at {simulation.Date}");

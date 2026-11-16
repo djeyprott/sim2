@@ -228,6 +228,7 @@ public sealed class TradeSystem : ISimSystem
         }
 
         int goods = _goods.Count;
+        start = System.Diagnostics.Stopwatch.GetTimestamp();
         for (int link = 0; link < _linkA.Length; link++)
         {
             int a = _linkA[link];
@@ -257,12 +258,17 @@ public sealed class TradeSystem : ISimSystem
             }
 
             _linkValue[link] = 0.9 * _linkValue[link] + 0.1 * value;
+            LinkGoodVisits += goods;
         }
+
+        LoopSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
 
         // In January, the gaps again, counting goods on their way as already there.
         if (month == 0)
         {
+            start = System.Diagnostics.Stopwatch.GetTimestamp();
             AddGapsAfterTrade(context.Tick);
+            GapSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         }
     }
 
@@ -318,6 +324,7 @@ public sealed class TradeSystem : ISimSystem
             return 0.0;
         }
 
+        Sends++;
         double sent = _stockpiles.Send(from, to, good, amount);
         if (_destinationStamp[to] != _destinationRound)
         {
@@ -604,6 +611,15 @@ public sealed class TradeSystem : ISimSystem
     public double BuildSeconds { get; private set; }
 
     public double PriceSeconds { get; private set; }
+
+    public double LoopSeconds { get; private set; }
+
+    public double GapSeconds { get; private set; }
+
+    /// <summary>How many sends trade has made (for profiling).</summary>
+    public long Sends { get; private set; }
+
+    public long LinkGoodVisits { get; private set; }
 
     /// <summary>For each good, the run's summed average relative price gap along links before January's trade.</summary>
     public IReadOnlyList<double> GapBeforeTrade => _gapJanuary;

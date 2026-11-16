@@ -40,6 +40,12 @@ public sealed class Stockpiles
     private readonly DoubleColumn _transit;
     private readonly DoubleColumn _traded;
 
+    // Changes to the ledger's transit and traded totals made by Send and Arrive, kept in plain arrays
+    // and added to the ledger by FlushTrade (trade calls it at the end of each update), because the
+    // ledger's checked columns were a noticeable part of trade's time.
+    private readonly double[] _pendingTransit;
+    private readonly double[] _pendingTraded;
+
     public Stockpiles(WorldState state, GoodSet goods)
     {
         _goods = goods;
@@ -54,6 +60,27 @@ public sealed class Stockpiles
         _lost = _ledger.DoubleColumn("lost");
         _transit = _ledger.DoubleColumn("transit");
         _traded = _ledger.DoubleColumn("traded");
+        _pendingTransit = new double[goods.Count];
+        _pendingTraded = new double[goods.Count];
+    }
+
+    /// <summary>Adds the transit and traded changes made by Send and Arrive to the ledger.</summary>
+    public void FlushTrade()
+    {
+        for (int g = 0; g < _pendingTransit.Length; g++)
+        {
+            if (_pendingTransit[g] != 0.0)
+            {
+                _transit[g] += _pendingTransit[g];
+                _pendingTransit[g] = 0.0;
+            }
+
+            if (_pendingTraded[g] != 0.0)
+            {
+                _traded[g] += _pendingTraded[g];
+                _pendingTraded[g] = 0.0;
+            }
+        }
     }
 
     public GoodSet Goods => _goods;
@@ -179,8 +206,8 @@ public sealed class Stockpiles
 
         _stock[good][from] -= sent;
         _incoming[good][to] += sent;
-        _transit[good] += sent;
-        _traded[good] += sent;
+        _pendingTransit[good] += sent;
+        _pendingTraded[good] += sent;
         _selling[good][from] += sent;
         return sent;
     }
@@ -194,7 +221,7 @@ public sealed class Stockpiles
             if (incoming != 0.0)
             {
                 _stock[g][cell] += incoming;
-                _transit[g] -= incoming;
+                _pendingTransit[g] -= incoming;
                 _incoming[g][cell] = 0.0;
             }
         }

@@ -240,6 +240,7 @@ public sealed class TradeSystem : ISimSystem
         BuildSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         if (_linkA.Length == 0)
         {
+            stockpiles.FlushTrade();
             return;
         }
 
@@ -298,6 +299,7 @@ public sealed class TradeSystem : ISimSystem
         _season++;
 
         LoopSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
+        _stockpiles!.FlushTrade();
 
         // In January, the gaps again, counting goods on their way as already there.
         if (month == 0)

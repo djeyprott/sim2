@@ -49,7 +49,8 @@
 
   // Where the harvest goes into a settlement's store, farmers grow only when the store still
   // held at least this share of a year's food when the new harvest came in (a safety margin).
-  "growthReserve": 0.5,
+  // At 0.5 stores left 0.31 to 0.50 of the famine deaths, like for like (milestone 2, step 8).
+  "growthReserve": 0.75,
 
   // Farmers grow this much faster (as a share of growthRate) when their everyday needs (tools,
   // pottery, cloth) are fully met, and this much more when their luxuries are (milestone 2).

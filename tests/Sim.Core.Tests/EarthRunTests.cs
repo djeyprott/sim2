@@ -822,8 +822,12 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     [Fact]
     public void Famine_kills_at_most_half_as_many_where_people_eat_from_a_store()
     {
-        Assert.All(_results, r => Assert.True(r.StoreDeathRate <= 0.5 * r.NoStoreDeathRate,
-            $"Seed {r.Seed}: {1000.0 * r.StoreDeathRate:F2} famine deaths per 1,000 farmer-years with a store, {1000.0 * r.NoStoreDeathRate:F2} without."));
+        // Compared like with like (spec 1.2): cells with stores are mostly long-settled cells near what
+        // their land feeds, and cells without are mostly young or small ones with room to spare, so
+        // each fullness band's store death rate is weighed by the no-store farmer-years in that band.
+        Assert.All(_results, r => Assert.True(r.LikeForLikeStoreRatio <= 0.5,
+            $"Seed {r.Seed}: like for like, stores leave {r.LikeForLikeStoreRatio:F2} of the famine deaths "
+            + $"(overall {1000.0 * r.StoreDeathRate:F2} per 1,000 farmer-years with a store, {1000.0 * r.NoStoreDeathRate:F2} without; {r.FullnessTable()})."));
     }
 
     [Fact]

@@ -14,6 +14,9 @@ public sealed class PriceParameters
 
     public double MaxFactor { get; set; } = 5.0;
 
+    /// <summary>The highest price of a luxury, as a multiple of its value (rare goods far from their source).</summary>
+    public double LuxuryMaxFactor { get; set; } = 5.0;
+
     public double FoodReserveYears { get; set; } = 0.5;
 
     public double GatherTimeValue { get; set; } = 0.005;
@@ -28,7 +31,7 @@ public sealed class PriceParameters
     {
         PriceParameters p = ContentFiles.Parse<PriceParameters>(json, "prices");
         if (p.Elasticity <= 0.0 || p.MinFactor <= 0.0 || p.MaxFactor < 1.0 || p.MinFactor > 1.0
-            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0 || p.SalesWanted < 0.0 || p.NeedElasticity < 0.0)
+            || p.FoodReserveYears < 0.0 || p.GatherTimeValue < 0.0 || p.SalesWanted < 0.0 || p.NeedElasticity < 0.0 || p.LuxuryMaxFactor < 1.0)
         {
             throw new InvalidDataException("prices.json: elasticity above 0, 0 < minFactor <= 1 <= maxFactor, and no negative reserve or time value.");
         }
@@ -94,7 +97,15 @@ public sealed class Prices
     public PriceParameters Parameters => _parameters;
 
     /// <summary>The price from a base value, what is wanted and what is in store.</summary>
-    public static double PriceOf(double value, double wanted, double stock, PriceParameters p)
+    public static double PriceOf(double value, double wanted, double stock, PriceParameters p) =>
+        PriceOf(value, wanted, stock, p, p.MaxFactor);
+
+    /// <summary>The highest price of a good as a multiple of its value.</summary>
+    public static double MaxFactorOf(Good good, PriceParameters p) =>
+        good.NeedTier == NeedTier.Luxury ? p.LuxuryMaxFactor : p.MaxFactor;
+
+    /// <summary>The price from a base value, what is wanted and what is in store, with its own ceiling.</summary>
+    public static double PriceOf(double value, double wanted, double stock, PriceParameters p, double maxFactor)
     {
         if (wanted <= 0.0)
         {
@@ -103,7 +114,7 @@ public sealed class Prices
 
         double ratio = wanted / Math.Max(stock, 1e-6);
         double factor = p.Elasticity == 1.0 ? ratio : Math.Pow(ratio, p.Elasticity);
-        return value * Math.Clamp(factor, p.MinFactor, p.MaxFactor);
+        return value * Math.Clamp(factor, p.MinFactor, maxFactor);
     }
 
     /// <summary>The settlement's store-fed people: its farmers and craftsmen.</summary>
@@ -165,7 +176,7 @@ public sealed class Prices
         {
             for (int g = 0; g < wanted.Length; g++)
             {
-                prices[g] = PriceOf(_craft.Goods.Get(g).Value, wanted[g], _stockpiles.Stock(cell, g), _parameters);
+                prices[g] = PriceOf(_craft.Goods.Get(g).Value, wanted[g], _stockpiles.Stock(cell, g), _parameters, MaxFactorOf(_craft.Goods.Get(g), _parameters));
             }
         }
 
@@ -185,7 +196,7 @@ public sealed class Prices
         double price = _cached[good];
         if (double.IsNaN(price))
         {
-            price = PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good), _parameters);
+            price = PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good), _parameters, MaxFactorOf(_craft.Goods.Get(good), _parameters));
             _cached[good] = price;
         }
 
@@ -194,12 +205,12 @@ public sealed class Prices
 
     /// <summary>A good's price in the settlement last passed to <see cref="Work"/>, counting goods on their way there as in store.</summary>
     public double PriceWithIncoming(int good) =>
-        PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good) + _stockpiles.Incoming(_cell, good), _parameters);
+        PriceOf(_craft.Goods.Get(good).Value, _cellWanted![good], _stockpiles.Stock(_cell, good) + _stockpiles.Incoming(_cell, good), _parameters, MaxFactorOf(_craft.Goods.Get(good), _parameters));
 
     /// <summary>One good's price in a cell's settlement at the given tick.</summary>
     public double Price(int cell, int good, long tick)
     {
         Work(cell, tick, _wanted);
-        return PriceOf(_craft.Goods.Get(good).Value, _wanted[good], _stockpiles.Stock(cell, good), _parameters);
+        return PriceOf(_craft.Goods.Get(good).Value, _wanted[good], _stockpiles.Stock(cell, good), _parameters, MaxFactorOf(_craft.Goods.Get(good), _parameters));
     }
 }

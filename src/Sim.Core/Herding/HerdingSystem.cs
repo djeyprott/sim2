@@ -536,31 +536,25 @@ public sealed class HerdingSystem : ISimSystem
 
                 int animal = Livestock.Homelands[homeland].Animal;
                 Animal kind = Livestock.Get(animal);
+                // Animals were mostly first kept by settled farming people, wherever they lived; foragers
+                // take herd animals up far less readily, and only on pasture, where no farmers live in
+                // or beside the cell. Farm animals (pigs) need farmers in the cell itself.
                 double fullness;
-                if (kind.Herded)
-                {
-                    if (Pasture(cell) <= 0.0)
-                    {
-                        continue;
-                    }
-
-                    double foragerCapacity = _foragerCapacity[cell];
-                    fullness = foragers > 0.0 && foragerCapacity > 0.0 ? Math.Min(1.0, foragers / foragerCapacity) : farmers > 0.0 ? 1.0 : 0.0;
-                }
-                else
+                bool farmersNear = FarmersNear(cell);
+                if (!kind.Herded)
                 {
                     fullness = farmers > 0.0 ? 1.0 : 0.0;
                 }
-
-                // Animals were mostly first kept by settled farming people; foragers take them up far
-                // less readily where no farmers live in or beside the cell.
-                if (FarmersNear(cell))
+                else if (farmersNear)
                 {
                     fullness = 1.0;
                 }
                 else
                 {
-                    fullness *= _parameters.ForagerInventionFactor;
+                    double foragerCapacity = _foragerCapacity[cell];
+                    fullness = Pasture(cell) > 0.0 && foragers > 0.0 && foragerCapacity > 0.0
+                        ? _parameters.ForagerInventionFactor * Math.Min(1.0, foragers / foragerCapacity)
+                        : 0.0;
                 }
 
                 double suitability = Suitability(cell, animal);
@@ -576,7 +570,7 @@ public sealed class HerdingSystem : ISimSystem
                 _originTick![origin] = (int)tick;
                 invented |= 1 << homeland;
                 _animals[cell] |= 1 << animal;
-                if (kind.Herded)
+                if (kind.Herded && Pasture(cell) > 0.0)
                 {
                     int from = foragers > 0.0 ? _forager : _farmer;
                     Move(cell, from, _herder, _parameters.FirstHerderShare * SizeOf(cell, from));

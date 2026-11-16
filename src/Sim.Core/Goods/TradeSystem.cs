@@ -112,6 +112,7 @@ public sealed class TradeSystem : ISimSystem
     private double[] _gapFebruary = Array.Empty<double>();
     private double[] _sentJanuary = Array.Empty<double>();
     private bool _january;
+    private readonly List<(int Link, int Good)> _tradedPairs = new List<(int, int)>();
 
     public TradeSystem(TradeParameters parameters, OccupationSet occupations)
     {
@@ -229,11 +230,6 @@ public sealed class TradeSystem : ISimSystem
         WorkPrices(context.Tick);
         PriceSeconds += System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
         _destinationRound++;
-        if (month == 0)
-        {
-            AddGaps(_gapJanuary);
-        }
-
         int goods = _goods.Count;
         _january = month == 0;
         start = System.Diagnostics.Stopwatch.GetTimestamp();
@@ -255,13 +251,23 @@ public sealed class TradeSystem : ISimSystem
                 double pa = _price[a * goods + g];
                 double pb = _price[b * goods + g];
                 double carry = _carry[g] * cost;
+                double moved = 0.0;
                 if (pb - pa > carry)
                 {
-                    value += Move(cellA, cellB, _degree[a], g, pa, pb, carry);
+                    moved = Move(cellA, cellB, _degree[a], g, pa, pb, carry);
                 }
                 else if (pa - pb > carry)
                 {
-                    value += Move(cellB, cellA, _degree[b], g, pb, pa, carry);
+                    moved = Move(cellB, cellA, _degree[b], g, pb, pa, carry);
+                }
+
+                if (moved > 0.0)
+                {
+                    value += moved;
+                    if (_january)
+                    {
+                        _tradedPairs.Add((link, g));
+                    }
                 }
             }
 
@@ -282,6 +288,11 @@ public sealed class TradeSystem : ISimSystem
 
     private void AddGapsAfterTrade(long tick)
     {
+        if (_tradedPairs.Count == 0)
+        {
+            return;
+        }
+
         int goods = _goods.Count;
         EntityTable settlements = _settlements!;
         double[] row = new double[goods];
@@ -298,22 +309,18 @@ public sealed class TradeSystem : ISimSystem
             }
         }
 
-        for (int g = 0; g < goods; g++)
+        // Along each link that carried a good this January: its price gap before the trade, and after
+        // it (counting goods on their way as arrived), relative to the good's value.
+        foreach ((int link, int g) in _tradedPairs)
         {
+            int a = _linkA[link] * goods + g;
+            int b = _linkB[link] * goods + g;
             double value = _goods.Get(g).Value;
-            double total = 0.0;
-            int counted = 0;
-            for (int link = 0; link < _linkA.Length; link++)
-            {
-                if (settlements.IsAlive(_linkA[link]) && settlements.IsAlive(_linkB[link]))
-                {
-                    total += Math.Abs(after[_linkA[link] * goods + g] - after[_linkB[link] * goods + g]) / value;
-                    counted++;
-                }
-            }
-
-            _gapFebruary[g] += counted == 0 ? 0.0 : total / counted;
+            _gapJanuary[g] += Math.Abs(_price[a] - _price[b]) / value;
+            _gapFebruary[g] += Math.Abs(after[a] - after[b]) / value;
         }
+
+        _tradedPairs.Clear();
     }
 
     // Sends a share of the cheaper end's stock toward the dearer end; returns the food value sent.
@@ -371,27 +378,6 @@ public sealed class TradeSystem : ISimSystem
                 _prices!.Work(_settlementCell![id], tick, _wanted, row);
                 row.CopyTo(prices.Slice(id * goods, goods));
             }
-        }
-    }
-
-    private void AddGaps(double[] gaps)
-    {
-        int goods = _goods.Count;
-        for (int g = 0; g < goods; g++)
-        {
-            double value = _goods.Get(g).Value;
-            double total = 0.0;
-            int counted = 0;
-            for (int link = 0; link < _linkA.Length; link++)
-            {
-                if (_settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
-                {
-                    total += Math.Abs(_price[_linkA[link] * goods + g] - _price[_linkB[link] * goods + g]) / value;
-                    counted++;
-                }
-            }
-
-            gaps[g] += counted == 0 ? 0.0 : total / counted;
         }
     }
 
@@ -639,10 +625,10 @@ public sealed class TradeSystem : ISimSystem
 
     public long LinkGoodVisits { get; private set; }
 
-    /// <summary>For each good, the run's summed average relative price gap along links before January's trade.</summary>
+    /// <summary>For each good, the run's summed relative price gap, before January's trade, along the links that carried it then.</summary>
     public IReadOnlyList<double> GapBeforeTrade => _gapJanuary;
 
-    /// <summary>For each good, the same straight after January's trade, counting goods on their way as arrived.</summary>
+    /// <summary>For each good, the same gaps straight after January's trade, counting goods on their way as arrived.</summary>
     public IReadOnlyList<double> GapAfterTrade => _gapFebruary;
 
     /// <summary>For each good, how much was sent in the Januaries whose gaps are measured (since this object was made).</summary>

@@ -26,5 +26,10 @@
   // use is (base value / price) to this power, at most all of it. At 2, a good at five times its
   // value is used at a twenty-fifth of the need, so a rare good such as obsidian is not all used
   // up by the first villages it reaches and can travel on.
-  "needElasticity": 2.0
+  "needElasticity": 2.0,
+
+  // Luxuries (salt, obsidian, ornaments) may cost up to this many times their value far from where
+  // they come from. With the ordinary ceiling of 5, every settlement past a rare good's frontier
+  // priced it the same, so it could not be traded on.
+  "luxuryMaxFactor": 20.0
 }

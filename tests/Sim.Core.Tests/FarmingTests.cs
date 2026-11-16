@@ -383,7 +383,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             prices.Work(cell, sim.Tick, wanted, price);
             foreach (Good good in stockpiles.Goods.Goods)
             {
-                Assert.InRange(price[good.Index], good.Value * priceParameters.MinFactor * 0.999, good.Value * priceParameters.MaxFactor * 1.001);
+                Assert.InRange(price[good.Index], good.Value * priceParameters.MinFactor * 0.999, good.Value * Prices.MaxFactorOf(good, priceParameters) * 1.001);
             }
 
             double people = groups.CellTotal(cell);

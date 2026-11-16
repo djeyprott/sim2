@@ -238,7 +238,19 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             }
         }
 
-        Assert.True(users > 20, $"Only {users} farmer groups use granaries after 300 years.");
+        double most = 0.0;
+        int some = 0;
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            if (groups.IsAlive(g) && technology.Knowledge(g, granaries) > 0.0)
+            {
+                some++;
+                most = Math.Max(most, technology.Knowledge(g, granaries));
+            }
+        }
+
+        Assert.True(users > 20, $"Only {users} farmer groups use granaries after 300 years; {some} know some, at most {most:F3}; "
+            + $"events: {string.Join("; ", events.Take(12).Select(e => $"{e.Technology} {e.Kind} year {e.Tick / 12} group {e.Group:F0}"))}.");
 
         // Discoveries happen only where a technology's conditions are met.
         foreach (TechnologyEvent e in events.Where(e => e.Kind != TechnologyEventKind.Lost))

@@ -301,6 +301,23 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
 
         Teach(with, true);
         Teach(without, false);
+
+        // Cattle have barely spread in so short a run: every farming and herding cell gets them, in both copies.
+        int cattleBit = 1 << LivestockSet.LoadDefault().IndexOf("Cattle");
+        var keepers = new PopulationGroups(with.State);
+        int[] cropOf = with.State.IntField(FarmingSystem.CropField);
+        foreach (Simulation sim in new[] { with, without })
+        {
+            int[] kept = sim.State.IntField(HerdingSystem.AnimalsField);
+            for (int cell = 0; cell < _world.CellCount; cell++)
+            {
+                if (cropOf[cell] > 0 || keepers.Find(cell, OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder)) >= 0)
+                {
+                    kept[cell] |= cattleBit;
+                }
+            }
+        }
+
         int[] animalsBefore = (int[])with.State.IntField(HerdingSystem.AnimalsField).Clone();
         var groups = new PopulationGroups(with.State);
         OccupationSet occupations = OccupationSet.LoadDefault();

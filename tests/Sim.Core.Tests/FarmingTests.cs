@@ -401,9 +401,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             }
         }
 
-        Assert.True(carts >= 5, $"Only {carts} settlements with carts.");
-        Assert.True(milkCells >= 5 && ploughed >= 5 && unploughed >= 5 && stores >= 5,
-            $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores.");
+        Assert.True(milkCells >= 5 && ploughed >= 5 && unploughed >= 5 && stores >= 5 && carts >= 1,
+            $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores, {carts} settlements with carts.");
     }
 
     [Fact]

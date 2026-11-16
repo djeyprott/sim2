@@ -45,7 +45,9 @@
     },
     {
       "name": "Llamas and alpacas", "colour": "#8c6fd1", "herded": true, "wool": true,
-      "homelands": [ { "lat": -16.0, "lon": -69.0, "radiusKm": 500, "afterFarmingYears": 500 } ],
+      // Llamas and alpacas were kept from about 4000 BCE, some three thousand years after Andean
+      // farming began (and runs can start Andean farming early).
+      "homelands": [ { "lat": -16.0, "lon": -69.0, "radiusKm": 500, "afterFarmingYears": 3000 } ],
       "warmest": [4, 8, 17, 24], "coldest": [-20, -8, 12, 18], "water": [150, 300, 1100, 2000]
     },
     {

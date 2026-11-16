@@ -25,15 +25,15 @@
 
   // A year's chance that people in a cell where an animal lives wild first take up herding it,
   // times how well it does there and how full of foragers the cell is (as farming's inventionChance).
-  // Sheep, goats and cattle were herded in Southwest Asia by about 8500 BCE, soon after its first
-  // farming. Only the few cells where an animal lives wild and farmers live close by count, so the
-  // chance is high: at 0.000006 sheep and goats came as late as 4000 BCE in some runs.
-  "inventionChance": 0.00005,
-  // Most animals were first kept by settled farmers (sheep, goats, cattle and pigs in Southwest
-  // Asia soon after its first farming; llamas as Andean farming began); where no farmers live in
-  // or beside the cell, the chance is this much smaller. Cattle in the eastern Sahel may be the
-  // exception, herded by foragers before farming came.
-  "foragerInventionFactor": 0.02,
+  // Sheep, goats and cattle were herded in Southwest Asia by about 8500 BCE, about a thousand years
+  // after its first farming. Only cells where an animal lives wild and farming has stood nearby
+  // long enough count (livestock.json "afterFarmingYears"), so the chance is high: at 0.00005 with
+  // a 500-year wait, sheep and goats came 1,500 to 3,800 years into the run (8500 to 6200 BCE).
+  "inventionChance": 0.0002,
+  // In a homeland marked for foragers (eastern Sahel cattle, perhaps herded before farming came
+  // there), foragers on pasture with no farmers in or beside the cell take it up this much less
+  // readily. A quarter of the 0.02 used with the lower inventionChance above.
+  "foragerInventionFactor": 0.005,
   "wildMinSuitability": 0.5,
   "randomHomelandMinSuitability": 0.7,
 

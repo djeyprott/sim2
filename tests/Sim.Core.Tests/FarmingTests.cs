@@ -412,6 +412,19 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         int stoneTools = goods.IndexOf("Stone tools");
         var stockWith = new Stockpiles(with.State, goods);
         var stockWithout = new Stockpiles(without.State, goods);
+        // No settlement stands by copper ore yet in this short run, so every settlement is given the
+        // same ore in both copies (as if traded in).
+        int ore = goods.IndexOf("Copper ore");
+        int[] settled = with.State.IntField(SettlementSystem.SettlementField);
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            if (settled[cell] > 0)
+            {
+                stockWith.Produce(cell, ore, 20.0);
+                stockWithout.Produce(cell, ore, 20.0);
+            }
+        }
+
         double copperBefore = stockWith.Produced(copper), toolsBefore = stockWith.Produced(copperTools);
         Assert.Equal(toolsBefore, stockWithout.Produced(copperTools));
 
@@ -422,11 +435,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // where nobody does, no copper or copper tools are made at all.
         string Diagnosis()
         {
-            int ore = goods.IndexOf("Copper ore");
-            ResourceSystem resources = with.Systems.OfType<ResourceSystem>().Single();
-            int rule = resources.Rules.Goods.FindIndex(r => r.Good == "Copper ore");
-            int[] settled = with.State.IntField(SettlementSystem.SettlementField);
-            var near = Enumerable.Range(0, _world.CellCount).Where(c => settled[c] > 0 && resources.Richness(rule, c) > 0.0).ToList();
+            var near = Enumerable.Range(0, _world.CellCount).Where(c => settled[c] > 0 && stockWith.Stock(c, ore) > 0.0).ToList();
             CraftRules craft = CraftRules.LoadDefault(goods);
             var prices = new Prices(with.State, _world, PriceParameters.LoadDefault(), craft, OccupationSet.LoadDefault());
             var wanted = new double[goods.Count];
@@ -442,7 +451,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
                         .Select(n => $"{n} wanted {wanted[goods.IndexOf(n)]:F1} stock {stockWith.Stock(cell, goods.IndexOf(n)):F1} price {priceOf[goods.IndexOf(n)]:F2}"));
             }
 
-            return $"{near.Count} settlements by copper ore; ore gathered {stockWith.Produced(ore):F1}, in store {stockWith.InStore(ore):F1}; {sample}";
+            return $"{near.Count} settlements holding ore; ore gathered {stockWith.Produced(ore):F1}, in store {stockWith.InStore(ore):F1}; {sample}";
         }
 
         Assert.True(stockWith.Produced(copper) > copperBefore && stockWith.Produced(copperTools) > toolsBefore,

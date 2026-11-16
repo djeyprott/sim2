@@ -924,7 +924,7 @@ public partial class Main : Node2D
     private void ShowLegend(int mode)
     {
         var entries = new List<(Color, string)>();
-        string title;
+        string title = "";
         switch (mode)
         {
             case ElevationMode:

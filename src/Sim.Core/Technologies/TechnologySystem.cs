@@ -70,6 +70,7 @@ public sealed class TechnologySystem : ISimSystem
 
     // Work arrays, per cell.
     private double[] _people = Array.Empty<double>();
+    private readonly List<int> _peopled = new List<int>();
     private double[] _best = Array.Empty<double>();
     private double[] _users = Array.Empty<double>();
     private double[] _tradeBest = Array.Empty<double>();
@@ -223,13 +224,27 @@ public sealed class TechnologySystem : ISimSystem
         EntityTable table = _groupTable!;
         GeodesicGrid grid = _map!.Grid;
         groups.FillCellTotals(_people);
-        Span<int> cellOf = table.IntColumn("cell").Values;
         Span<int> occupationOf = table.IntColumn("occupation").Values;
         Span<double> sizeOf = table.DoubleColumn("size").Values;
         List<(int CellA, int CellB)> links = _trade?.LinksByCell() ?? new List<(int, int)>();
         FillSoldValue(links);
-        int groupCount = table.IdCount;
         double inUse = _parameters.InUse;
+
+        // Only cells with people are visited, through their own lists of groups.
+        _peopled.Clear();
+        foreach (int cell in _cells)
+        {
+            if (_people[cell] > 0.0)
+            {
+                _peopled.Add(cell);
+            }
+            else
+            {
+                // Empty cells count as knowing nothing and using nothing, for their neighbours.
+                _best[cell] = 0.0;
+                _users[cell] = 0.0;
+            }
+        }
 
         for (int tech = 0; tech < Technologies.Count; tech++)
         {
@@ -237,129 +252,141 @@ public sealed class TechnologySystem : ISimSystem
             Span<double> share = _knowledgeColumns[tech].Values;
 
             // Per cell: the highest share among groups that can use it, and the people using it.
-            foreach (int cell in _cells)
+            bool anyKnown = false;
+            foreach (int cell in _peopled)
             {
-                _best[cell] = 0.0;
-                _users[cell] = 0.0;
+                double best = 0.0;
+                double users = 0.0;
+                foreach (int g in groups.InCell(cell))
+                {
+                    if (t.CanUse[occupationOf[g]])
+                    {
+                        double s = share[g];
+                        best = Math.Max(best, s);
+                        users += s >= inUse ? sizeOf[g] : 0.0;
+                    }
+                }
+
+                _best[cell] = best;
+                _users[cell] = users;
+                anyKnown |= best > 0.0;
             }
 
-            for (int g = 0; g < groupCount; g++)
+            // Nobody knows it and nobody could discover it: nothing to do this year.
+            if (!anyKnown && t.Chance <= 0.0)
             {
-                if (!table.IsAlive(g) || !t.CanUse[occupationOf[g]])
-                {
-                    continue;
-                }
-
-                double s = share[g];
-                int cell = cellOf[g];
-                if (s > _best[cell])
-                {
-                    _best[cell] = s;
-                }
-
-                if (s >= inUse)
-                {
-                    _users[cell] += sizeOf[g];
-                }
+                continue;
             }
 
             FillTrade(links);
 
             // Each group that can use it: discover, learn, or forget.
-            for (int g = 0; g < groupCount; g++)
+            foreach (int cell in _peopled)
             {
-                if (!table.IsAlive(g) || !t.CanUse[occupationOf[g]] || sizeOf[g] <= 0.0)
+                bool cellAllows = CellAllows(cell, tech);
+                double neighbourBest = -1.0;
+                foreach (int g in groups.InCell(cell))
                 {
-                    continue;
-                }
-
-                int cell = cellOf[g];
-                double s = share[g];
-                double size = sizeOf[g];
-                bool usable = CellAllows(cell, tech) && UsesAll(g, t.Requires);
-
-                if (s <= 0.0)
-                {
-                    if (!usable || t.Chance <= 0.0)
+                    double size = sizeOf[g];
+                    if (!t.CanUse[occupationOf[g]] || size <= 0.0)
                     {
                         continue;
                     }
 
-                    // Learning from others comes first; otherwise, a chance to discover it.
-                    double pull = PullFrom(cell, tech);
-                    if (pull > 0.0)
+                    double s = share[g];
+                    if (s <= 0.0 && !cellAllows)
                     {
-                        share[g] = Math.Min(1.0, pull);
                         continue;
                     }
 
-                    double reach = _people[cell];
-                    foreach (int other in grid.Neighbours(cell))
+                    bool usable = cellAllows && UsesAll(g, t.Requires);
+                    if (neighbourBest < 0.0)
                     {
-                        reach += _people[other];
+                        neighbourBest = 0.0;
+                        foreach (int other in grid.Neighbours(cell))
+                        {
+                            neighbourBest = Math.Max(neighbourBest, _best[other]);
+                        }
                     }
 
-                    double chance = Math.Min(1.0, _chanceScale * t.Chance) * Math.Min(1.0, reach / _parameters.DiscoveryPeople);
-                    if (context.Rng.Chance(chance))
+                    if (s <= 0.0)
                     {
-                        share[g] = _parameters.DiscoveryShare;
-                        RecordDiscovery(tech, cell, context.Tick, size);
+                        if (!usable)
+                        {
+                            continue;
+                        }
+
+                        // Learning from others comes first; otherwise, a chance to discover it.
+                        double pull = Pull(cell, tech, neighbourBest, 0.0);
+                        if (pull > 0.0)
+                        {
+                            share[g] = Math.Min(1.0, pull);
+                            continue;
+                        }
+
+                        if (t.Chance <= 0.0)
+                        {
+                            continue;
+                        }
+
+                        double reach = _people[cell];
+                        foreach (int other in grid.Neighbours(cell))
+                        {
+                            reach += _people[other];
+                        }
+
+                        double chance = Math.Min(1.0, _chanceScale * t.Chance) * Math.Min(1.0, reach / _parameters.DiscoveryPeople);
+                        if (context.Rng.Chance(chance))
+                        {
+                            share[g] = _parameters.DiscoveryShare;
+                            RecordDiscovery(tech, cell, context.Tick, size);
+                        }
+
+                        continue;
                     }
 
-                    continue;
-                }
+                    double before = s;
+                    if (usable)
+                    {
+                        s += _parameters.Adoption * s * (1.0 - s);
+                        s += Pull(cell, tech, neighbourBest, s);
+                    }
 
-                double before = s;
-                if (usable)
-                {
-                    s += _parameters.Adoption * s * (1.0 - s);
-                    s += PullFrom(cell, tech, s);
-                }
+                    // Too few people in contact: the share falls. (The cell's users were counted from
+                    // last year's shares, so whether this group was one of them goes by those too.)
+                    double contact = Contact(cell, size, before >= inUse);
+                    if (contact < _parameters.KeepPeople)
+                    {
+                        s -= _parameters.LossRate * (1.0 - contact / _parameters.KeepPeople) * s;
+                    }
 
-                // Too few people in contact: the share falls.
-                // (The cell's users were counted from last year's shares, so whether this group was one of them goes by those too.)
-                double contact = Contact(g, cell, size, before >= inUse);
-                if (contact < _parameters.KeepPeople)
-                {
-                    s -= _parameters.LossRate * (1.0 - contact / _parameters.KeepPeople) * s;
-                }
+                    s = Math.Clamp(s, 0.0, 1.0);
+                    if (s < 0.001)
+                    {
+                        s = 0.0;
+                    }
 
-                s = Math.Clamp(s, 0.0, 1.0);
-                if (s < 0.001)
-                {
-                    s = 0.0;
-                }
+                    if (before >= inUse && s < inUse)
+                    {
+                        Record(tech, TechnologyEventKind.Lost, cell, context.Tick, size, contact);
+                    }
 
-                if (before >= inUse && s < inUse)
-                {
-                    Record(tech, TechnologyEventKind.Lost, cell, context.Tick, size, contact);
+                    share[g] = s;
                 }
-
-                share[g] = s;
             }
         }
     }
 
     // How far a group with share s moves toward those around it this year (for s = 0, the share it
     // picks up from them).
-    private double PullFrom(int cell, int tech, double s = 0.0)
-    {
-        GeodesicGrid grid = _map!.Grid;
-        double neighbourBest = 0.0;
-        foreach (int other in grid.Neighbours(cell))
-        {
-            neighbourBest = Math.Max(neighbourBest, _best[other]);
-        }
-
-        double pull = _parameters.WithinCell * Math.Max(0.0, _best[cell] - s)
-            + Technologies.Get(tech).Spread * Math.Max(0.0, neighbourBest - s)
-            + _tradeRate[cell] * Math.Max(0.0, _tradeBest[cell] - s);
-        return pull;
-    }
+    private double Pull(int cell, int tech, double neighbourBest, double s) =>
+        _parameters.WithinCell * Math.Max(0.0, _best[cell] - s)
+        + Technologies.Get(tech).Spread * Math.Max(0.0, neighbourBest - s)
+        + _tradeRate[cell] * Math.Max(0.0, _tradeBest[cell] - s);
 
     // The people keeping a group's knowledge alive: the group, the other users in its cell and in
     // neighbouring cells, and its settlement's trade partners' users.
-    private double Contact(int group, int cell, double size, bool usesIt)
+    private double Contact(int cell, double size, bool usesIt)
     {
         double contact = size + _users[cell] - (usesIt ? size : 0.0) + _tradeUsers[cell];
         foreach (int other in _map!.Grid.Neighbours(cell))

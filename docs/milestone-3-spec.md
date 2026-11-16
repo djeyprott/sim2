@@ -1,8 +1,11 @@
-# Milestone 3 spec: Technology (draft 2)
+# Milestone 3 spec: Technology (version 1.0, agreed)
 
-Status: draft for the owner, 2026-11-16. Not yet agreed; no code is written until it is. Parent: `design-doc.md` version 1.0.
+Status: agreed by the owner 2026-11-16. Feature list is frozen. Parent: `design-doc.md` version 1.1.
+
+Progress: not started.
 
 Change log:
+- 1.0 (2026-11-16): agreed. The owner confirmed knowledge held by population groups and folding in the backlog item on when animals are first herded. Historical dates in the technology table checked against sources (see "Sources for the dates").
 - Draft 2 (2026-11-16): the owner chose the Bronze Age as the end of the list, sea trade and settling islands both in this milestone, and that small isolated groups can lose knowledge. The owner asked whether population groups could hold knowledge; this draft proposes that in place of knowledge per cell (decision 2, awaiting the owner's confirmation).
 - Draft 1 (2026-11-16): first draft.
 
@@ -13,33 +16,34 @@ Give the world technology you can watch arise and spread. When this milestone is
 ## Decisions
 
 1. **What a technology is.** A named piece of know-how, listed in `data/content/technologies.json` with what it needs before it can be discovered, how readily it is discovered, and what it changes. Technologies are not research projects: nobody chooses to research them; they are found where the conditions are right.
-2. **Knowledge is held by population groups** (proposed in draft 2, awaiting the owner's confirmation). Each group carries, for each technology, the share of its people who know it, as one more condition in the population model: it is averaged by size when groups merge, carried along when people move, and passed between the groups of a cell (farmers to herders, for example) and to neighbouring cells. A technology is in use where a group's share is at least a half. So foragers living beside ploughing farmers do not plough until they take up farming, herders who move carry riding with them, and a small group that loses touch can forget. The design doc's "per culture or region" becomes: held by groups, so regions of shared know-how form on their own, and in milestone 5 it can also spread within a language.
+2. **Knowledge is held by population groups** (decided by the owner 2026-11-16). Each group carries, for each technology, the share of its people who know it, as one more condition in the population model: it is averaged by size when groups merge, carried along when people move, and passed between the groups of a cell (farmers to herders, for example) and to neighbouring cells. A technology is in use where a group's share is at least a half. So foragers living beside ploughing farmers do not plough until they take up farming, herders who move carry riding with them, and a small group that loses touch can forget. The design doc's "per culture or region" becomes: held by groups, so regions of shared know-how form on their own, and in milestone 5 it can also spread within a language.
 3. **Discovery is local and needs the right conditions.** A technology can be discovered only where its prerequisites are known and its conditions are met (for example the plough needs farmers who keep cattle; bronze needs copper working and tin in store). The yearly chance grows with the number of people in reach, so dense farming regions discover more than thin foraging country.
 4. **Knowledge spreads three ways:** to neighbouring cells with people, along trade routes (the more a link carries, the faster), and with people who move (farmers, herders and later seafarers take what they know with them).
 5. **Small isolated groups can lose knowledge** (decided by the owner 2026-11-16). A group's share of a technology drifts down each year unless enough people in reach (its own size and the groups it is in contact with, in its cell, neighbouring cells and along trade links) keep it alive; below a set number of people in contact, the share falls. Large or well-connected populations never lose it. Losses are recorded, so a run can show, for example, an island people forgetting the sail.
 6. **Scope ends with the Bronze Age** (decided by the owner 2026-11-16): the list stops before iron and writing. Exit runs extend to 7,000 years (3000 BCE), where the bronze-age technologies have had time to appear.
 7. **Seafaring opens the sea in two stages** (sea trade and settling islands both, decided by the owner 2026-11-16). From the start, every coastal people can paddle along coasts and across short straits (people had reached Cyprus and fetched Melos obsidian by boat before 10,000 BCE). The sail lets trade cross wider seas cheaply. Outrigger canoes let people reach remote islands across open ocean. Sea trade and the settling of unreached islands both come in this milestone.
 8. **Horses come in this milestone**, as the milestone 2 spec promised: wild on the western Eurasian steppe, first herded there, and later ridden.
+9. **When animals are first herded is made more historical** (design doc backlog, folded in by the owner 2026-11-16). In milestone 2 sheep and goats were first herded anywhere from about 9900 to 7300 BCE and llamas as early as 9600 BCE, against about 8500 and 4000 BCE in history. An animal is first herded only where farming has stood nearby for some time (a set number of centuries per animal), so herding follows farming as it did in Southwest Asia and the Andes; eastern Sahel cattle keep a forager path, since they may have come before farming there.
 
 ## What gets built
 
 ### 1. Technologies
 
-About a dozen, from the Neolithic to the Bronze Age. Dates and places are where they first appear in the real record, for comparison only; the simulation does not use them. They are approximate and will be checked against sources before this spec is agreed.
+About a dozen, from the Neolithic to the Bronze Age. Dates and places are where they first appear in the real record, for comparison only; the simulation does not use them. Most are debated by some centuries; see "Sources for the dates".
 
 | Technology | Needs | First in history (about) | What it changes |
 |---|---|---|---|
 | Granaries | farming | 9500 BCE, Jordan valley | Grain spoils more slowly in store |
 | Irrigation | farming, a river | 6000 BCE, Mesopotamia | Higher yields in dry cells on rivers |
-| Milk and wool (secondary products) | sheep, goats or cattle | 4000 BCE, Southwest Asia | Herds feed more people; more wool |
-| Copper working | copper ore within reach | 5000 BCE, Balkans, Anatolia, Iran | Copper and copper tools (new goods) |
-| Bronze | copper working, tin in store | 3300 BCE, Southwest Asia | Bronze and bronze tools; tin trade |
-| The plough | farming, cattle | 4000 BCE, Mesopotamia | Higher yields; ends the open-grassland penalty |
+| Milk and wool (secondary products) | sheep, goats or cattle | milk 6500 BCE, Anatolia; wool 4000 BCE, Southwest Asia | Herds feed more people; more wool |
+| Copper working | copper ore within reach | 5000 BCE, Balkans (Belovode); perhaps soon after 6000 BCE in northern Iraq | Copper and copper tools (new goods) |
+| Bronze | copper working, tin in store | 3300 to 3000 BCE, Southwest Asia and the Balkans | Bronze and bronze tools; tin trade |
+| The plough | farming, cattle | 5000 BCE, the Alps (plough marks); early 4th millennium BCE, northern Mesopotamia | Higher yields; ends the open-grassland penalty |
 | The wheel | cattle, the plough | 3500 BCE, Mesopotamia and the steppe | Land carrying is cheaper |
-| Horse herding | horses wild nearby | 3500 BCE, Pontic-Caspian steppe | Horses join the herd animals |
-| Horse riding | horse herding | 2000 BCE, steppe | Herders spread faster; land carrying is cheaper |
-| The sail | boats, a coast | 3500 BCE, Nile and the Gulf | Sea trade crosses wider seas cheaply |
-| Outrigger canoes | the sail | 1500 BCE, Island Southeast Asia | People reach remote islands over open sea |
+| Horse herding | horses wild nearby | 3500 BCE, Botai (northern Kazakhstan) | Horses join the herd animals |
+| Horse riding | horse herding | 2200 BCE, widespread from the Pontic-Caspian steppe (earlier riding debated) | Herders spread faster; land carrying is cheaper |
+| The sail | boats, a coast | 5500 to 5000 BCE, the Gulf (Ubaid); 3500 BCE, the Nile | Sea trade crosses wider seas cheaply |
+| Outrigger canoes | the sail | 1500 BCE, Island Southeast Asia (the Caribbean was reached by canoe about 4000 BCE) | People reach remote islands over open sea |
 | Terraced fields | farming, hills or mountains | 3000 BCE, several places | Higher yields on hills |
 
 Boats (coastal paddling) are known everywhere on coasts from the start and are not discovered.
@@ -100,8 +104,8 @@ Effects change numbers the existing systems already use, through the shared worl
 Automated, on the Earth map with real homelands, across 10 seeds over 7,000 years unless stated:
 
 Discovery
-- [ ] Every technology on the list is discovered somewhere in at least 7 of 10 seeds within 7,000 years (outrigger canoes excepted, within 9,000 years in a separate check if runs are extended).
-- [ ] With real homelands, the first irrigation, copper working, the plough and bronze each come within 1,500 years of their real date in at least 6 of 10 seeds, and in a different place or year between seeds.
+- [ ] Every technology first seen before 3000 BCE in history is discovered somewhere in at least 7 of 10 seeds within 7,000 years. Horse riding and outrigger canoes, first seen later, may come or not.
+- [ ] With real homelands, the first irrigation (history 6000 BCE), copper working (5000 BCE), the plough (4500 BCE, between the two dates above) and bronze (3300 BCE) each come within 1,500 years of that date in at least 6 of 10 seeds, and in a different place or year between seeds.
 - [ ] The plough, bronze and the wheel are each discovered independently in at least 2 regions 1,000 km apart in at least half the seeds where they appear.
 
 Spread
@@ -114,6 +118,9 @@ Effects
 - [ ] Farming cells with the plough feed more people per km² than like cells without it, and open grassland is farmed again where the plough is known.
 - [ ] Bronze tools are made only where copper and tin both reach, and tin travels at least 1,000 km from its sources in at least 6 of 10 seeds.
 - [ ] After 7,000 years (3000 BCE), world population is between 15 and 60 million in every seed. Estimates for 3000 BCE run from about 15 to 45 million.
+
+Herding
+- [ ] With real homelands, sheep and goats are first herded within 1,500 years of 8500 BCE, and llamas not before 6000 BCE, in at least 7 of 10 seeds; the milestone 2 herding tests still pass.
 
 Seafaring
 - [ ] Sea trade links exist across the Aegean, the Gulf and the Red Sea once the sail is known there.
@@ -140,7 +147,7 @@ Each step ends with a new development build you can download.
 2. Technology list, knowledge held by groups, discovery, spread and loss; technology map mode
 3. Farming and herding effects (granaries, irrigation, plough, terraces, milk and wool)
 4. Metals: copper ore and tin sources, copper and bronze goods and recipes
-5. Horses: horse herding and riding
+5. Horses: horse herding and riding; first herding follows farming
 6. Seafaring: sea links, the sail, settling islands, outrigger canoes
 7. Statistics file, tooltip and viewer polish
 8. Tuning against the exit tests, release v0.4
@@ -149,7 +156,14 @@ Each step ends with a new development build you can download.
 
 Base discovery chances, spread chances along borders and trade, effect sizes, metal source richness, sea carrying costs and boat ranges. They start as estimates in data files and are tuned in the last step.
 
-## Open decisions
+## Sources for the dates
 
-1. **Knowledge held by population groups** (decision 2), as the owner asked about in reply to draft 1. It costs more memory and time than knowledge per cell (a share for each of about a dozen technologies on each group, instead of one number per cell), but fits the population model, lets migrants carry what they know and makes loss in small groups natural. To confirm.
-2. **Backlog item to fold in:** making when animals are first herded more historical (for example herding needing farming nearby for a few centuries first). Recommended, since horses add a herd animal in step 5 anyway.
+Checked 2026-11-16; dates are the earliest widely accepted evidence and are debated.
+
+- Irrigation: canal irrigation at Choga Mami, eastern Iraq, about 6000 BCE (Oates; Helbaek 1972).
+- Copper: smelting at Belovode, Serbia, about 5000 BCE, the earliest securely dated (Radivojević et al. 2010); possibly soon after 6000 BCE at Yarim Tepe, Iraq.
+- The plough: plough marks at Sion, Switzerland, from the start of the 5th millennium BCE (van Willigen et al. 2024); in Mesopotamia thought to begin in the early 4th millennium BCE.
+- Bronze: tin bronze in the Near East and the Balkans from about 3300 to 3000 BCE; arsenical bronze earlier. Tin sources include the Taurus mountains (Kestel), the Erzgebirge (mined from about 2500 BCE) and Southeast Asia.
+- Horses: husbandry, milking and probably riding at Botai about 3500 BCE; the modern domestic line (DOM2) and widespread horse mobility from about 2200 BCE (Librado et al. 2024); riding by Yamnaya herders around 3000 BCE is argued but disputed.
+- The sail: a painted disc showing a sailing boat and seagoing reed-boat remains at H3, As-Sabiyah, Kuwait, 5500 to 5000 BCE (Carter 2006); sails on the Nile by about 3500 BCE.
+- Granaries (Dhra', Jordan, about 9500 BCE), milk (pottery residues in northwest Anatolia, 7th millennium BCE), the wheel (about 3500 BCE) and outrigger canoes (Austronesian voyaging, about 1500 BCE) are from general knowledge and were not re-checked.

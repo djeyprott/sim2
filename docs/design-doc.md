@@ -1,8 +1,9 @@
-# sim2 design doc (version 1.0)
+# sim2 design doc (version 1.1)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 (technology) is next; its spec is not yet drafted.
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 (technology) is in progress (`milestone-3-spec.md`, agreed 2026-11-16).
 
 Change log:
+- 1.1 (2026-11-16): milestone 3 spec agreed: technology is held by population groups; the backlog items on when animals are first herded and on the speed of trade move into milestone 3.
 - 1.0 (2026-11-16): milestone 2 complete, released as v0.3; backlog items on when animals are first herded and on the speed of trade.
 - 0.9 (2026-11-15): milestone 2 spec agreed: herding comes in milestone 2, so the herding backlog item moves into it.
 - 0.8 (2026-11-15): milestone 1 complete, released as v0.2.
@@ -42,7 +43,7 @@ A desktop program in which you watch human civilization develop from the Neolith
 - **Settlements**: villages and cities sit in cells and hold population, stockpiles and buildings.
 - **Goods**: tracked as quantities per settlement stockpile. Every unit is produced, moved by trade, consumed or destroyed, so totals always balance.
 - **Populations**: population groups (see the population model) that grow, starve, sicken, migrate and change occupation, language and religion.
-- **Technology**: discovered locally and spread through contact.
+- **Technology**: discovered locally, held by population groups and spread through contact, trade and migration.
 - **Organizations**: states and other bodies that hold territory or resources, fight wars, split and collapse.
 - **Culture**: languages, religions and ideas that spread and split.
 - **Historical figures**: named individuals with personalities, family ties, goals and life events. Ordinary people stay as population numbers.
@@ -61,7 +62,8 @@ People are held in **population groups**, in the manner of Victoria 2's pops. Ag
   - Later: savings, literacy, unrest, and political views as a percentage mix.
 - **Merging:** groups in the same cell with identical traits are always one group. When a cell would go over the limit, its smallest group joins the most similar group.
 - **How people change group:** birth and death within a group; changing occupation (for example foragers taking up farming); moving to another cell, keeping their traits; changing language (assimilation); changing religion (conversion).
-- **Held elsewhere, not on groups:** customs and values belong to a language's culture or a religion; technology is held per culture or region; which state a group belongs to comes from who rules its cell.
+- **Knowledge:** from milestone 3, each group carries the share of its people who know each technology, averaged by size when groups merge (agreed 2026-11-16).
+- **Held elsewhere, not on groups:** customs and values belong to a language's culture or a religion; which state a group belongs to comes from who rules its cell.
 - **Not tracked:** individual ordinary people, households and families, ages and sexes, and ancestry separate from language. Named historical figures are a separate system, linked to the groups and organisations they come from.
 - **Storage:** groups are rows in a world-state table with stable ids, with a per-cell index. Speed is measured from the start against the 5-minute limit for a 5,000-year run.
 
@@ -90,7 +92,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
 | 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | Complete, v0.3 |
-| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | |
+| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | In progress |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
 | 6 | Historical figures | Named actors with personalities and agendas, dynasties, life events, a readable chronicle | |
@@ -114,5 +116,3 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - The Aral Sea at its historical size, and small straits that are currently closed (for example Bali joined to Java).
 - Globe view.
 - Charts in the viewer.
-- When an animal is first herded varies a lot between runs: in milestone 2 sheep and goats came between about 9900 and 7300 BCE (history: about 8500 BCE) and llamas as early as 9600 BCE (history: about 4000 BCE). Herding could depend on how long farming has stood nearby, or each animal could have its own earliest likely date.
-- Trade is the slowest system (about a third to a half of a 5,000-year run in milestone 2, mostly goods moving along hundreds of millions of link-seasons). Worth a closer look before states and more goods add to it.

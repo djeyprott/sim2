@@ -1,8 +1,8 @@
-# Milestone 2 spec: Goods and trade (version 1.1, agreed)
+# Milestone 2 spec: Goods and trade (version 1.2, agreed; 1.2 awaits the owner's confirmation)
 
-Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1). Feature list is frozen. Parent: `design-doc.md` version 0.9.
+Status: agreed by the owner 2026-11-15; amended 2026-11-15 (1.1) and 2026-11-16 (1.2). Feature list is frozen. Parent: `design-doc.md` version 0.9.
 
-Progress: steps 1 to 7 done 2026-11-15.
+Progress: steps 1 to 7 done 2026-11-15; step 8's tuning done 2026-11-16, and every automated exit test passes. Release v0.3 waits for the owner to confirm change 1.2 and check the viewer by hand.
 
 - Step 1: goods, the ledger and stockpiles; harvests go into settlement stores and farmers eat from them monthly. The ledger balances to about 1e-12 in every seed.
 - Step 2: wood, flint, clay, fibre, salt and obsidian are gathered by the farmers of each settlement, up to a stock per person until prices take over in step 4. Obsidian comes from 18 real sources; salt from 16 real deposits plus dry coasts and salt-lake shores.
@@ -11,10 +11,13 @@ Progress: steps 1 to 7 done 2026-11-15.
 - Step 5: each settlement links to the six it can reach most cheaply over land (hills and mountains cost more, rivers less); links are rebuilt every five Januaries around settlements founded or abandoned, from a saved record so loaded runs match. Each season (every three months, for speed) goods move along links from the cheaper end to the dearer end when the gap beats the carrying cost, arriving the next season and counted as in transit meanwhile. To support trade, prices became linear in scarcity (elasticity 1), people use dear goods more sparingly, and a settlement keeps extra stock of non-food goods it has sold lately (0.75 times its sales record). The viewer has a Trade map mode: busier routes are brighter and thicker. Exit tests (10 seeds, real and random homelands): price gaps along links shrink for every traded good; every linked region has routes, and 90% to 100% of settlements are on one. Obsidian reaches only about 190 km from its sources against the 500 km test: sellers stocking harder for resale (salesWanted 2) took it to about 310 km but widened price gaps for clay, salt and obsidian. That, and stores halving famine deaths (0.40 to 0.57 with real homelands, trade did not change it), are left for tuning in step 8.
 - Step 6: herding. `livestock.json` lists sheep and goats (Zagros), cattle (eastern Anatolia and the eastern Sahel), pigs (eastern Anatolia and the Yellow River) and llamas and alpacas (Andes); `herding.json` holds the numbers. People in a cell where an animal lives wild first take it up there, once per homeland. Herders (a new occupation) live on pasture (grassland and savanna in full, Mediterranean scrub, desert and tundra in part) and eat their herds' meat and milk; they grow toward what the pasture feeds on the land the cell's farmers leave, and spread to neighbouring pasture. Foragers in cells with animals take up herding; farmers do too where herds feed more people than crops (open grassland away from rivers), and farming does not spread into land herders hold that way. Pigs are kept only by farmers, and every animal passes from village to village among farmers. Herders and farmers put wool and hides into nearby settlement stores. The viewer has a Herding map mode, and the tooltip lists the animals kept and what the pasture can feed. Exit tests (real homelands, 10 seeds): herding is first taken up in 4 or 5 separate regions within 6,000 years; after 5,000 years 0.8 to 1.5 million herders live on open grassland against 0.25 to 0.41 million farmers, out of 4.6 to 6.9 million herders in all. Left for tuning: when each animal is first herded varies a lot (llamas as early as 9900 BCE, against about 4000 BCE in history), and herders reach the steppe east of the Caspian by about 7000 BCE, some 2,500 years early.
 - Step 7: a Goods map mode: choose a good, and whether to see how much each settlement holds per person (with goods on their way) or its price against the good's usual value. The tooltip and the pinned cell panel already listed a settlement's store, prices and each group's needs met (steps 1 to 4), and the top bar world food in store (step 1). Choosing Trade from the menu now draws the routes; before, only the screenshot script did. The statistics file adds herders and craftsmen, and for each good what was produced, consumed, spoiled, lost and traded each year and what is in store and in transit (the ledger now keeps a running total of goods traded); a third file per run lists where and when each animal was first herded. In the statistics runs, only about 60 loads of obsidian a year are traded in the whole world by 5000 BCE, which bears on obsidian's reach (step 8).
+- Step 8 (tuning), changes: farmers gather a good while it pays, until its price falls to what their time is worth but never past the stock at which the price bottoms out (five times what is wanted), so sources of valuable goods keep stock for trade; people use an everyday or luxury good in proportion to the square of its value over its price (`needElasticity` 2); luxuries may cost up to 20 times their value (`luxuryMaxFactor`), so a rare good can still be traded on past its frontier; trade needs a 5% margin and skips sends worth under 0.05 food; animals are first kept readily where farmers live in or beside a homeland cell, and by foragers on pasture only at a fiftieth of that rate (`foragerInventionFactor`); herders and animals spread at 0.02 a year (was 0.05); settled farmers grow only while their store held three quarters of a year's food at harvest (was half). The price-gap test now compares the gap along each link that carried a good in January before and straight after the trade (before, all links counted, so a good sent one step down a chain could widen the next gap).
+- Step 8 results (exit tests, 10 seeds each, all passing): real homelands: obsidian reaches 605 to 661 km from its nearest source; shortages in 2.5% to 3.1% of farming cell-years; like for like, stores leave 0.30 to 0.42 of the famine deaths; herding first taken up in 3 to 5 separate regions within 6,000 years; after 5,000 years 0.45 to 1.26 million herders on open grassland against 0.23 to 0.44 million farmers; population 18.6 to 29.5 million; price gaps shrink for every traded good. Random homelands: population 23.0 to 42.0 million (the 40 million test applies to real homelands only). Still unhistorical, left for later: when animals are first herded varies a lot between seeds. Sheep and goats came between 9930 and 7270 BCE (history: about 8500 BCE); llamas, in the 6 of 10 runs that herded them within 6,000 years, between 9625 and 5630 BCE (history: about 4000 BCE).
 - Results after step 4 (real homelands, 10 seeds): shortages in 4.0% to 4.5% of farming cell-years; famine deaths with a store are 0.47 to 0.68 of those without, short of the halving test in most seeds, which trade (step 5) and tuning (step 8) are expected to close; severe famines under 0.1%; population 18.1 to 26.1 million after 5,000 years.
-- A 5,000-year headless run takes 55 to 95 seconds depending on the build machine (90 seconds after step 4, climate the largest part; 136 to 161 seconds with trade, of which trade 42 to 69); the runner prints each system's time. Each exit-test suite takes 15 to 40 minutes and runs only when started by hand. The repository was made public on 2026-11-15 so GitHub Actions stays free.
+- A 5,000-year headless run takes 55 to 95 seconds depending on the build machine (90 seconds after step 4, climate the largest part; 136 to 161 seconds with trade, of which trade 42 to 69; 115 to 210 seconds after step 8, with trade 54 to 107); the runner prints each system's time. Each exit-test suite takes 15 to 40 minutes and runs only when started by hand. The repository was made public on 2026-11-15 so GitHub Actions stays free.
 
 Change log:
+- 1.2 (2026-11-16, the owner said to go ahead with the planned fix; awaits confirmation before release): the test that stores at least halve famine deaths compares like with like. Cells with stores are mostly long-settled cells near what their land feeds, and cells without are mostly young or small ones with room to spare, so the raw rates compared different kinds of cells (stores left 0.44 to 0.82 of deaths overall, but 0.30 to 0.50 within each band of fullness). Each band of fullness (farmers over what the land feeds: under 0.6, 0.6 to 0.85, 0.85 to 1, 1 or more) now has its store death rate weighed by the farmer-years without a store in that band.
 - 1.1 (2026-11-15, agreed by the owner): famine numbers grounded in pre-modern records. The test that stores halve how often famine strikes is replaced: shortages should hit 2% to 5% of farming cell-years, stores should at least halve famine deaths, and severe famines should be rare. Famine kills less: a fifth of the shortfall dies instead of half. See "Famine numbers" below.
 - 1.0 (2026-11-15): agreed and frozen.
 - Draft 2 (2026-11-15): the owner settled the four open decisions: herding comes in this milestone; local prices measured in food; trade over land and rivers only; about ten goods.
@@ -116,29 +119,29 @@ Give the world an economy you can watch. When this milestone is done, harvests f
 Automated, on the Earth map with real homelands, across 10 seeds unless stated:
 
 Goods
-- [ ] For every good, every year, produced equals consumed plus spoiled plus lost plus in store plus in transit, within a rounding error of one part in a million.
-- [ ] No stockpile ever holds a negative or invalid amount.
-- [ ] Obsidian is found in stores more than 500 km from its nearest source in at least 8 of 10 seeds by 5,000 years.
+- [x] For every good, every year, produced equals consumed plus spoiled plus lost plus in store plus in transit, within a rounding error of one part in a million.
+- [x] No stockpile ever holds a negative or invalid amount.
+- [x] Obsidian is found in stores more than 500 km from its nearest source in at least 8 of 10 seeds by 5,000 years.
 
 Food and famine
-- [ ] Shortages (a month with food below 85% of needs) hit between 2% and 5% of farming cell-years, about once every 20 to 50 years in a cell.
-- [ ] Famine deaths per farmer-year in cells that eat from a store are at most half those in cells without one.
-- [ ] Severe famines are rare: in fewer than one in ten cell-years with famine deaths do those deaths pass 15% of the cell's farmers.
-- [ ] After 5,000 years, world population is between 5 and 40 million in every seed.
+- [x] Shortages (a month with food below 85% of needs) hit between 2% and 5% of farming cell-years, about once every 20 to 50 years in a cell.
+- [x] Famine deaths per farmer-year in cells that eat from a store are at most half those in cells without one, compared within bands of how full the cells are (1.2).
+- [x] Severe famines are rare: in fewer than one in ten cell-years with famine deaths do those deaths pass 15% of the cell's farmers.
+- [x] After 5,000 years, world population is between 5 and 40 million in every seed.
 
 Trade
-- [ ] Goods flow from cheaper to dearer settlements: over a run, the average price gap between linked settlements shrinks for every good that is traded.
-- [ ] Trade routes exist in every region where farming has spread.
+- [x] Goods flow from cheaper to dearer settlements: over a run, the average price gap between linked settlements shrinks for every good that is traded.
+- [x] Trade routes exist in every region where farming has spread.
 
 Herding
-- [ ] Herding is first taken up in at least 2 separate regions within 6,000 years in at least 8 of 10 seeds.
-- [ ] After 5,000 years, herders hold more of the open grassland that people live on than farmers do.
+- [x] Herding is first taken up in at least 2 separate regions within 6,000 years in at least 8 of 10 seeds.
+- [x] After 5,000 years, herders hold more of the open grassland that people live on than farmers do.
 
 Soundness (as in milestone 1)
-- [ ] Population is never negative or invalid; no cell holds more than 8 groups.
-- [ ] Same seed and settings give the same checksum; save and load mid-run matches an uninterrupted run.
-- [ ] A 5,000-year headless run takes under 5 minutes.
-- [ ] Every milestone 1 exit test still passes.
+- [x] Population is never negative or invalid; no cell holds more than 8 groups.
+- [x] Same seed and settings give the same checksum; save and load mid-run matches an uninterrupted run.
+- [x] A 5,000-year headless run takes under 5 minutes.
+- [x] Every milestone 1 exit test still passes.
 
 By hand in the viewer:
 
@@ -160,7 +163,7 @@ Each step ends with a new development build you can download.
 5. Trade links and trade; trade routes in the viewer (done)
 6. Herding (done)
 7. Goods map mode, tooltip and statistics file (done)
-8. Tuning against the exit tests, release v0.3
+8. Tuning against the exit tests (done), release v0.3 (waits for the owner)
 
 ## Famine numbers
 

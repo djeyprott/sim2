@@ -632,6 +632,25 @@ public sealed class TradeSystem : ISimSystem
     }
 
     /// <summary>Every link between standing settlements, by their ids, with the food value it carries a season on average.</summary>
+    /// <summary>
+    /// Every link between standing settlements, by their cells. Links are derived from the world
+    /// state and rebuilt identically after a load (route values are not, so they are left out); the
+    /// technology system reads this to let knowledge travel along trade.
+    /// </summary>
+    public List<(int CellA, int CellB)> LinksByCell()
+    {
+        var links = new List<(int, int)>(_linkA.Length);
+        for (int link = 0; link < _linkA.Length; link++)
+        {
+            if (_settlements!.IsAlive(_linkA[link]) && _settlements.IsAlive(_linkB[link]))
+            {
+                links.Add((_settlementCell![_linkA[link]], _settlementCell[_linkB[link]]));
+            }
+        }
+
+        return links;
+    }
+
     public List<(int A, int B, double Value)> Links()
     {
         var links = new List<(int, int, double)>(_linkA.Length);

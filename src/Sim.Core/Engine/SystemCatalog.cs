@@ -4,6 +4,7 @@ using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Engine;
 
@@ -34,7 +35,11 @@ public static class SystemCatalog
             systems.Add(SettlementSystem.CreateDefault(occupations));
             systems.Add(ResourceSystem.CreateDefault(climate.Biomes, occupations));
             systems.Add(CraftSystem.CreateDefault(occupations));
-            systems.Add(TradeSystem.CreateDefault(occupations));
+            TradeSystem trade = TradeSystem.CreateDefault(occupations);
+            systems.Add(trade);
+
+            // Technology reads trade's links (rebuilt from the world state), so it is handed the system.
+            systems.Add(TechnologySystem.CreateDefault(occupations, trade));
         }
 
         return systems;

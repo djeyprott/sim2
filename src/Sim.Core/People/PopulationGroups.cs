@@ -15,6 +15,9 @@ public sealed class PopulationGroups
     public const string FirstGroupField = "people.firstGroup";
     public const int MaxGroupsPerCell = 8;
 
+    /// <summary>Columns of the groups table named with this prefix hold, per technology, the share of a group's people who know it.</summary>
+    public const string KnowledgeColumnPrefix = "know.";
+
     private readonly EntityTable _table;
     private readonly IntColumn _cell;
     private readonly IntColumn _occupation;
@@ -23,6 +26,7 @@ public sealed class PopulationGroups
     private readonly DoubleColumn _food;
     private readonly DoubleColumn _everyday;
     private readonly DoubleColumn _luxury;
+    private readonly DoubleColumn[] _knowledge;
 
     // Per cell: the first group's id plus one; 0 means the cell has no groups.
     private readonly int[] _firstPlusOne;
@@ -37,8 +41,17 @@ public sealed class PopulationGroups
         _food = _table.DoubleColumn("food");
         _everyday = _table.DoubleColumn("everyday");
         _luxury = _table.DoubleColumn("luxury");
+        _knowledge = _table.ColumnNames.Where(n => n.StartsWith(KnowledgeColumnPrefix, StringComparison.Ordinal))
+            .Select(n => _table.DoubleColumn(n)).ToArray();
         _firstPlusOne = state.IntField(FirstGroupField);
     }
+
+    /// <summary>Adds a knowledge column for a technology. Called by the technology system while registering.</summary>
+    public static DoubleColumn AddKnowledgeColumn(WorldState state, string slug) =>
+        state.Table(TableName).AddDoubleColumn(KnowledgeColumnPrefix + slug);
+
+    /// <summary>How many knowledge columns (technologies) the groups carry.</summary>
+    public int KnowledgeCount => _knowledge.Length;
 
     /// <summary>How many group ids have been given out, alive or removed. Ids run from 0 to this minus one.</summary>
     public int IdCount => _table.IdCount;
@@ -146,6 +159,10 @@ public sealed class PopulationGroups
         _food[group] = 1.0;
         _everyday[group] = 0.0;
         _luxury[group] = 0.0;
+        foreach (DoubleColumn column in _knowledge)
+        {
+            column[group] = 0.0;
+        }
 
         // Append to the end of the cell's list, so older groups keep their place.
         int last = -1;
@@ -168,9 +185,10 @@ public sealed class PopulationGroups
 
     /// <summary>
     /// Adds people to a group. Its conditions become the size-weighted averages of the two; needs met
-    /// that are not given (negative) are taken to be the group's own.
+    /// that are not given (negative) are taken to be the group's own. The newcomers' knowledge of each
+    /// technology is that of the group <paramref name="from"/> they come from, or none if not given.
     /// </summary>
-    public void AddPeople(int group, double people, double food, double everyday = -1.0, double luxury = -1.0)
+    public void AddPeople(int group, double people, double food, double everyday = -1.0, double luxury = -1.0, int from = -1)
     {
         if (people <= 0.0)
         {
@@ -179,6 +197,12 @@ public sealed class PopulationGroups
 
         double size = _size[group];
         double total = size + people;
+        foreach (DoubleColumn column in _knowledge)
+        {
+            double arriving = from >= 0 ? column[from] : 0.0;
+            column[group] = Math.Clamp((column[group] * size + arriving * people) / total, 0.0, 1.0);
+        }
+
         _food[group] = Math.Clamp((_food[group] * size + food * people) / total, 0.0, 1.0);
         if (everyday >= 0.0)
         {
@@ -282,7 +306,7 @@ public sealed class PopulationGroups
             }
         }
 
-        AddPeople(target, _size[smallest], _food[smallest], _everyday[smallest], _luxury[smallest]);
+        AddPeople(target, _size[smallest], _food[smallest], _everyday[smallest], _luxury[smallest], smallest);
         Remove(cell, smallest);
     }
 

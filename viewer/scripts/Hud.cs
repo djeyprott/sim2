@@ -10,7 +10,7 @@ public partial class Hud : CanvasLayer
     /// <summary>Map modes in the order of their index.</summary>
     public static readonly string[] MapModeNames =
     {
-        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming", "Trade", "Herding", "Goods",
+        "Terrain", "Elevation", "Biome", "Temperature", "Rainfall", "Temperature change", "Rainfall change", "Population", "Farming", "Trade", "Herding", "Goods", "Technology",
     };
 
     private static readonly string[] SpeedNames = { "Pause", "1 month/s", "1 year/s", "10 years/s", "Max" };
@@ -31,6 +31,7 @@ public partial class Hud : CanvasLayer
     private PanelContainer _goodsPanel = null!;
     private OptionButton _goodButton = null!;
     private OptionButton _measureButton = null!;
+    private Label _pickerLabel = null!;
 
     /// <summary>Raised with the index of the chosen speed: 0 pause, 1 month/s, 2 year/s, 3 ten years/s, 4 maximum.</summary>
     public event Action<int>? SpeedChosen;
@@ -40,7 +41,7 @@ public partial class Hud : CanvasLayer
 
     public event Action? NewRunRequested;
 
-    /// <summary>Raised with the index of the good chosen for the goods map mode.</summary>
+    /// <summary>Raised with the index of the item chosen in the picker under the top bar (a good or a technology).</summary>
     public event Action<int>? GoodChosen;
 
     /// <summary>Raised with 0 to show how much of the good settlements hold, 1 to show its price.</summary>
@@ -123,7 +124,8 @@ public partial class Hud : CanvasLayer
         var goodsRow = new HBoxContainer();
         goodsRow.AddThemeConstantOverride("separation", 8);
         goodsMargin.AddChild(goodsRow);
-        goodsRow.AddChild(new Label { Text = "Good:" });
+        _pickerLabel = new Label { Text = "Good:" };
+        goodsRow.AddChild(_pickerLabel);
         _goodButton = new OptionButton { FocusMode = Control.FocusModeEnum.None };
         _goodButton.ItemSelected += index => GoodChosen?.Invoke((int)index);
         goodsRow.AddChild(_goodButton);
@@ -288,25 +290,40 @@ public partial class Hud : CanvasLayer
         }
     }
 
-    /// <summary>Fills the list of goods for the goods map mode.</summary>
-    public void SetGoods(IReadOnlyList<string> names)
-    {
-        _goodButton.Clear();
-        for (int i = 0; i < names.Count; i++)
-        {
-            _goodButton.AddItem(names[i], i);
-        }
-    }
-
-    /// <summary>Shows or hides the goods choices, showing the given good and measure as chosen.</summary>
-    public void ShowGoodsPicker(bool visible, int good, int measure)
+    /// <summary>
+    /// Shows or hides the picker under the top bar: a label, a list (goods or technologies) with one
+    /// chosen, and for goods the choice between amount held and price.
+    /// </summary>
+    public void ShowPicker(bool visible, string label = "", IReadOnlyList<string>? items = null, int selected = 0, bool showMeasure = false, int measure = 0)
     {
         _goodsPanel.Visible = visible;
-        if (good >= 0 && good < _goodButton.ItemCount)
+        if (!visible || items == null)
         {
-            _goodButton.Selected = good;
+            return;
         }
 
+        _pickerLabel.Text = label;
+        bool same = _goodButton.ItemCount == items.Count;
+        for (int i = 0; same && i < items.Count; i++)
+        {
+            same = _goodButton.GetItemText(i) == items[i];
+        }
+
+        if (!same)
+        {
+            _goodButton.Clear();
+            for (int i = 0; i < items.Count; i++)
+            {
+                _goodButton.AddItem(items[i], i);
+            }
+        }
+
+        if (selected >= 0 && selected < _goodButton.ItemCount)
+        {
+            _goodButton.Selected = selected;
+        }
+
+        _measureButton.Visible = showMeasure;
         _measureButton.Selected = measure;
     }
 

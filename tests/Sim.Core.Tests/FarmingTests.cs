@@ -7,6 +7,7 @@ using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 using Xunit;
 
 namespace Sim.Core.Tests;
@@ -81,8 +82,11 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             SettlementSystem.CreateDefault(occupations),
             ResourceSystem.CreateDefault(climate.Biomes, occupations),
             CraftSystem.CreateDefault(occupations),
-            TradeSystem.CreateDefault(occupations),
         };
+        var trade = TradeSystem.CreateDefault(occupations);
+        systems = systems.Append(trade)
+            .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), TechnologySet.LoadDefault(occupations), trade, chanceScale: 200.0))
+            .ToArray();
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
 
@@ -197,6 +201,52 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.NotEqual(real, a);
         Assert.NotEqual(a, Centres(2));
         Assert.Equal(a, Centres(1));
+    }
+
+    [Fact]
+    public void Technologies_are_discovered_spread_and_held_by_groups()
+    {
+        Simulation sim = FastFarming(8);
+        TechnologySystem technology = sim.Systems.OfType<TechnologySystem>().Single();
+        sim.Run(300 * 12);
+
+        int granaries = technology.Technologies.IndexOf("Granaries");
+        var events = technology.Events();
+        Assert.Contains(events, e => e.Technology == granaries && e.Kind == TechnologyEventKind.First);
+        Assert.All(events.Where(e => e.Kind == TechnologyEventKind.First).GroupBy(e => e.Technology), g => Assert.Single(g));
+
+        // Shares stay between 0 and 1, and granaries are in use by many farmer groups, not just the first.
+        var groups = new PopulationGroups(sim.State);
+        OccupationSet occupations = OccupationSet.LoadDefault();
+        int farmer = occupations.IndexOf(OccupationSet.Farmer);
+        int users = 0;
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            if (!groups.IsAlive(g))
+            {
+                continue;
+            }
+
+            for (int t = 0; t < technology.Technologies.Count; t++)
+            {
+                Assert.InRange(technology.Knowledge(g, t), 0.0, 1.0);
+            }
+
+            if (groups.Occupation(g) == farmer && technology.Knowledge(g, granaries) >= technology.Parameters.InUse)
+            {
+                users++;
+            }
+        }
+
+        Assert.True(users > 20, $"Only {users} farmer groups use granaries after 300 years.");
+
+        // Discoveries happen only where a technology's conditions are met.
+        foreach (TechnologyEvent e in events.Where(e => e.Kind != TechnologyEventKind.Lost))
+        {
+            Technology t = technology.Technologies.Get(e.Technology);
+            Assert.True(!t.River || _world.River(e.Cell) != RiverSize.None, $"{t.Name} discovered away from a river.");
+            Assert.True(t.Terrain.Count == 0 || t.Terrain.Contains(_world.Terrain(e.Cell)), $"{t.Name} discovered on the wrong terrain.");
+        }
     }
 
     [Fact]

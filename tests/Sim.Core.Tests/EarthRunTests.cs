@@ -8,6 +8,7 @@ using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -154,6 +155,22 @@ public sealed class EarthRunResult
 
     public double SevereShare => FamineDeathCellYears == 0 ? 0.0 : SevereFamineCellYears / (double)FamineDeathCellYears;
 
+    /// <summary>Each technology's first discovery: name, year after the start and cell; and how many independent discoveries followed.</summary>
+    public List<string> TechnologyFirsts { get; set; } = new List<string>();
+
+    public int IndependentDiscoveries { get; set; }
+
+    /// <summary>Recorded losses, and the most people in contact with a group when it lost a technology.</summary>
+    public int TechnologyLosses { get; set; }
+
+    public double MaxContactAtLoss { get; set; }
+
+    /// <summary>For each technology discovered at least 1,000 years before the end: how far from its first discovery a group used it 1,000 years later (km).</summary>
+    public List<string> TechnologyReach1000 { get; set; } = new List<string>();
+
+    /// <summary>True if any group's share of a technology left 0 to 1.</summary>
+    public bool BadKnowledge { get; set; }
+
     /// <summary>Separate regions (1,000 km apart) where an animal was first herded within 6,000 years.</summary>
     public int HerdingRegions6000 { get; set; }
 
@@ -218,6 +235,7 @@ public sealed class EarthRunResult
             + $"herding: {HerdersAt5000 / 1e6:F2} M herders after 5,000 years, {HerdersOnOpenGrassland / 1e6:F2} M on open grassland against {FarmersOnOpenGrassland / 1e6:F2} M farmers; "
             + $"{HerdingRegions6000} herding regions within 6,000 years [{string.Join(", ", HerdingOrigins)}]; "
             + $"famine deaths by fullness [{FullnessTable()}], like-for-like store ratio {LikeForLikeStoreRatio:F2}; "
+            + $"technology: firsts [{string.Join(", ", TechnologyFirsts)}], {IndependentDiscoveries} independent discoveries, {TechnologyLosses} losses (contact at most {MaxContactAtLoss:F0}), reach after 1,000 years [{string.Join(", ", TechnologyReach1000)}]; "
             + $"ledger out by at most {MaxLedgerImbalance:E1}, {GrainInStoreAt5000 / 1e6:F2} M person-years of grain in store; "
             + $"famine in {100.0 * FamineShare:F2}% of farming cell-years; "
             + $"famine deaths per 1,000 farmer-years {1000.0 * StoreDeathRate:F2} with a store, {1000.0 * NoStoreDeathRate:F2} without; "
@@ -291,9 +309,15 @@ public abstract class EarthRunFixtureBase
         var changed = new bool[land.Length];
 
         var result = new EarthRunResult { Seed = seed, StartPopulation = groups.WorldTotal() };
+        TechnologySystem? technology = sim.Systems.OfType<TechnologySystem>().SingleOrDefault();
+        var reachMeasured = new bool[technology?.Technologies.Count ?? 0];
         for (int year = 0; year < years; year++)
         {
             sim.Run(12);
+            if (technology != null)
+            {
+                MeasureTechnologyReach(world, groups, technology, year, reachMeasured, result);
+            }
             for (int group = 0; group < groups.IdCount; group++)
             {
                 if (groups.IsAlive(group))
@@ -436,6 +460,27 @@ public abstract class EarthRunFixtureBase
         result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
         CheckGroups(world, groups, result);
 
+        if (technology != null)
+        {
+            var events = technology.Events();
+            foreach (TechnologyEvent e in events.Where(e => e.Kind == TechnologyEventKind.First))
+            {
+                result.TechnologyFirsts.Add($"{technology.Technologies.Get(e.Technology).Name} year {e.Tick / 12} at {world.Grid.Latitude(e.Cell):F0},{world.Grid.Longitude(e.Cell):F0}");
+            }
+
+            result.IndependentDiscoveries = events.Count(e => e.Kind == TechnologyEventKind.Independent);
+            result.TechnologyLosses = events.Count(e => e.Kind == TechnologyEventKind.Lost);
+            result.MaxContactAtLoss = events.Where(e => e.Kind == TechnologyEventKind.Lost).Select(e => e.Contact).DefaultIfEmpty(0.0).Max();
+            for (int g = 0; g < groups.IdCount; g++)
+            {
+                for (int t = 0; groups.IsAlive(g) && t < technology.Technologies.Count; t++)
+                {
+                    double share = technology.Knowledge(g, t);
+                    result.BadKnowledge |= double.IsNaN(share) || share < 0.0 || share > 1.0;
+                }
+            }
+        }
+
         HerdingSystem? herding = sim.Systems.OfType<HerdingSystem>().SingleOrDefault();
         if (herding != null)
         {
@@ -460,6 +505,30 @@ public abstract class EarthRunFixtureBase
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
+
+    // 1,000 years after a technology's first discovery: the farthest a group using it lies from there.
+    private static void MeasureTechnologyReach(WorldMap world, PopulationGroups groups, TechnologySystem technology, int year, bool[] measured, EarthRunResult result)
+    {
+        foreach (TechnologyEvent e in technology.Events())
+        {
+            if (e.Kind != TechnologyEventKind.First || measured[e.Technology] || e.Tick / 12 + 1000 != year)
+            {
+                continue;
+            }
+
+            measured[e.Technology] = true;
+            double farthest = 0.0;
+            for (int g = 0; g < groups.IdCount; g++)
+            {
+                if (groups.IsAlive(g) && technology.Knowledge(g, e.Technology) >= technology.Parameters.InUse)
+                {
+                    farthest = Math.Max(farthest, world.Grid.DistanceKm(e.Cell, groups.Cell(g)));
+                }
+            }
+
+            result.TechnologyReach1000.Add($"{technology.Technologies.Get(e.Technology).Name} {farthest:F0} km");
+        }
+    }
 
     // Famine deaths over the year just run, by cell, split by whether the cell ate from a store
     // at the start of the year; then records this year's start for the next call.
@@ -855,6 +924,16 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     public void Farming_starts_in_at_least_3_separate_regions_within_6000_years_in_8_of_10_seeds()
     {
         Assert.True(_results.Count(r => r.Regions6000 >= 3) >= 8, string.Join(", ", _results.Select(r => r.Regions6000)));
+    }
+
+    [Fact]
+    public void Group_knowledge_stays_valid_and_only_small_contact_loses_it()
+    {
+        Assert.All(_results, r =>
+        {
+            Assert.False(r.BadKnowledge, $"Seed {r.Seed}: a knowledge share left 0 to 1.");
+            Assert.True(r.MaxContactAtLoss <= 10000.0, $"Seed {r.Seed}: a group in contact with {r.MaxContactAtLoss:F0} people lost a technology.");
+        });
     }
 
     [Fact]

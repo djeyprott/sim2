@@ -438,7 +438,7 @@ public sealed class FarmingSystem : ISimSystem
 
             if (foragerGroup >= 0)
             {
-                groups.AddPeople(foragerGroup, farmers, food);
+                groups.AddPeople(foragerGroup, farmers, food, from: farmerGroup);
             }
 
             groups.SetSize(farmerGroup, 0.0);
@@ -519,7 +519,7 @@ public sealed class FarmingSystem : ISimSystem
                     _famineDeaths[cell] += dying;
                     craftsmanGroup = groups.Find(cell, _craftsman);
                     groups.SetSize(craftsmanGroup, Math.Max(0.0, craftsmen - dying - toFields));
-                    groups.AddPeople(groups.Find(cell, _farmer), toFields, met);
+                    groups.AddPeople(groups.Find(cell, _farmer), toFields, met, from: craftsmanGroup);
                     farmers += toFields;
                 }
 
@@ -558,6 +558,7 @@ public sealed class FarmingSystem : ISimSystem
         }
 
         PopulationGroups groups = _groups!;
+        int leavers = groups.Find(cell, _farmer);
         double totalRoom = 0.0;
         foreach (int other in _map!.Grid.Neighbours(cell))
         {
@@ -573,7 +574,7 @@ public sealed class FarmingSystem : ISimSystem
                 if (room > 0.0)
                 {
                     int group = groups.FindOrAdd(other, _farmer);
-                    groups.AddPeople(group, room * share, food);
+                    groups.AddPeople(group, room * share, food, from: leavers);
                 }
             }
 
@@ -582,7 +583,7 @@ public sealed class FarmingSystem : ISimSystem
 
         if (leaving > 0.0)
         {
-            groups.AddPeople(groups.FindOrAdd(cell, _forager), leaving, food);
+            groups.AddPeople(groups.FindOrAdd(cell, _forager), leaving, food, from: leavers);
         }
 
         return farmers;
@@ -645,7 +646,7 @@ public sealed class FarmingSystem : ISimSystem
             farmers -= moving;
             groups.SetSize(farmerGroup, farmers);
             StartFarming(other, crop, tick, suitability);
-            groups.AddPeople(groups.FindOrAdd(other, _farmer), moving, groups.Food(farmerGroup));
+            groups.AddPeople(groups.FindOrAdd(other, _farmer), moving, groups.Food(farmerGroup), from: farmerGroup);
         }
     }
 
@@ -697,7 +698,7 @@ public sealed class FarmingSystem : ISimSystem
                 double foragers = groups.Size(foragerGroup);
                 double first = FirstFarmerShare * foragers;
                 groups.SetSize(foragerGroup, foragers - first);
-                groups.AddPeople(groups.FindOrAdd(cell, _farmer), first, groups.Food(foragerGroup));
+                groups.AddPeople(groups.FindOrAdd(cell, _farmer), first, groups.Food(foragerGroup), from: foragerGroup);
                 break;
             }
         }

@@ -15,6 +15,7 @@ using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Viewer;
 
@@ -29,6 +30,7 @@ public partial class Main : Node2D
     private const double SettlementRefreshSeconds = 1.0;
     private const string GrainStockField = Stockpiles.StockFieldPrefix + "grain";
     private static readonly GoodSet ViewerGoods = GoodSet.LoadDefault();
+    private static readonly TechnologySet ViewerTechnologies = TechnologySet.LoadDefault(OccupationSet.LoadDefault());
     private static readonly CraftRules ViewerCraftRules = CraftRules.LoadDefault(ViewerGoods);
     private static readonly PriceParameters ViewerPriceParameters = PriceParameters.LoadDefault();
     private const float KeyPanPixelsPerSecond = 900f;
@@ -46,6 +48,10 @@ public partial class Main : Node2D
     private const int TradeMode = 9;
     private const int HerdingMode = 10;
     private const int GoodsMode = 11;
+    private const int TechnologyMode = 12;
+    private int _techIndex;
+    private TechnologySystem? _technology;
+    private Color[] _techColours = Array.Empty<Color>();
 
     // The goods map mode's choices: which good, and whether to show the amount held or the price.
     private int _goodIndex = ViewerGoods.IndexOf(GoodSet.Grain);
@@ -183,13 +189,17 @@ public partial class Main : Node2D
         ApplyMapMode(TerrainMode);
         _hud.SpeedChosen += SetSpeed;
         _hud.MapModeChosen += ApplyMapMode;
-        _hud.SetGoods(ViewerGoods.Goods.Select(g => g.Name).ToList());
         _hud.GoodChosen += index =>
         {
-            _goodIndex = index;
             if (_mode == GoodsMode)
             {
+                _goodIndex = index;
                 ApplyMapMode(GoodsMode);
+            }
+            else if (_mode == TechnologyMode)
+            {
+                _techIndex = index;
+                ApplyMapMode(TechnologyMode);
             }
         };
         _hud.GoodMeasureChosen += measure =>
@@ -251,6 +261,10 @@ public partial class Main : Node2D
         _foragers = systems.OfType<ForagerSystem>().FirstOrDefault();
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
         _herding = systems.OfType<HerdingSystem>().FirstOrDefault();
+        _technology = systems.OfType<TechnologySystem>().FirstOrDefault();
+        _techColours = _technology == null
+            ? Array.Empty<Color>()
+            : _technology.Technologies.Technologies.Select(t => Color.FromHtml(t.Colour)).ToArray();
         _animalColours = _herding == null
             ? Array.Empty<Color>()
             : _herding.Livestock.Animals.Select(a => Color.FromHtml(a.Colour)).ToArray();
@@ -509,7 +523,18 @@ public partial class Main : Node2D
 
         _mode = mode;
         _mapView.SetRoutesVisible(mode == TradeMode || mode == GoodsMode, mode == GoodsMode ? GoodRouteColour : TradeRouteColour);
-        _hud.ShowGoodsPicker(mode == GoodsMode, _goodIndex, _goodPrice ? 1 : 0);
+        if (mode == GoodsMode)
+        {
+            _hud.ShowPicker(true, "Good:", ViewerGoods.Goods.Select(g => g.Name).ToList(), _goodIndex, true, _goodPrice ? 1 : 0);
+        }
+        else if (mode == TechnologyMode && _technology != null)
+        {
+            _hud.ShowPicker(true, "Technology:", _technology.Technologies.Technologies.Select(t => t.Name).ToList(), _techIndex);
+        }
+        else
+        {
+            _hud.ShowPicker(false);
+        }
         _colouredFrame = null;
         _sinceRecolour = RecolourSeconds;
 
@@ -537,6 +562,15 @@ public partial class Main : Node2D
             int good = _goodIndex;
             bool price = _goodPrice;
             extractor = sim => ExtractGoods(sim, good, price, cellCount);
+        }
+
+        if (mode == TechnologyMode && _technology != null)
+        {
+            int cellCount = _map.CellCount;
+            int tech = _techIndex;
+            string column = PopulationGroups.KnowledgeColumnPrefix + _technology.Technologies.Get(tech).Slug;
+            TechnologySystem technology = _technology;
+            extractor = sim => ExtractTechnology(sim, technology, tech, column, cellCount);
         }
 
         if (mode == HerdingMode && _herding != null)
@@ -661,6 +695,42 @@ public partial class Main : Node2D
         return values;
     }
 
+    // Per cell: the share of its people who know the technology (0 to 1), -1 where nobody lives,
+    // and 2 where it was first discovered or independently discovered again.
+    private static double[] ExtractTechnology(Simulation sim, TechnologySystem technology, int tech, string column, int cellCount)
+    {
+        var values = new double[cellCount];
+        var people = new double[cellCount];
+        var knowing = new double[cellCount];
+        EntityTable table = sim.State.Table(PopulationGroups.TableName);
+        IntColumn cellOf = table.IntColumn("cell");
+        DoubleColumn size = table.DoubleColumn("size");
+        DoubleColumn share = table.DoubleColumn(column);
+        for (int g = 0; g < table.IdCount; g++)
+        {
+            if (table.IsAlive(g))
+            {
+                people[cellOf[g]] += size[g];
+                knowing[cellOf[g]] += size[g] * share[g];
+            }
+        }
+
+        for (int cell = 0; cell < cellCount; cell++)
+        {
+            values[cell] = people[cell] > 0.0 ? knowing[cell] / people[cell] : -1.0;
+        }
+
+        foreach (TechnologyEvent e in technology.Events())
+        {
+            if (e.Technology == tech && e.Kind != TechnologyEventKind.Lost)
+            {
+                values[e.Cell] = 2.0;
+            }
+        }
+
+        return values;
+    }
+
     // Per cell: the main animal's index plus the herders' share of the cell's people (0 to 0.998);
     // or, where animals are kept only by farmers, minus one minus the main animal's index; or -100.
     private static double[] ExtractHerding(Simulation sim, HerdingSystem herding, int cellCount)
@@ -777,6 +847,21 @@ public partial class Main : Node2D
                     : values[cell] <= 0.0 ? EmptyLand
                     : Gradient(Math.Log10(values[cell]), PopulationStops));
                 break;
+            case TechnologyMode:
+                Color techColour = _techIndex < _techColours.Length ? _techColours[_techIndex] : Colors.White;
+                _mapView.SetColours(cell =>
+                {
+                    if (!map.IsLand(cell))
+                    {
+                        return Neutral(cell);
+                    }
+
+                    double v = values[cell];
+                    return v < 0.0 ? EmptyLand
+                        : v > 1.5 ? DiscoveryColour
+                        : NoFarming.Lerp(techColour, (float)(v <= 0.0 ? 0.0 : 0.25 + 0.75 * v));
+                });
+                break;
             case GoodsMode:
                 bool showPrice = _goodPrice;
                 _mapView.SetColours(cell =>
@@ -885,6 +970,21 @@ public partial class Main : Node2D
                 title = "People per 100 km²";
                 entries.Add((EmptyLand, "None"));
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
+                break;
+            case TechnologyMode:
+                if (_technology != null)
+                {
+                    Technology t = _technology.Technologies.Get(_techIndex);
+                    Color colour = _techIndex < _techColours.Length ? _techColours[_techIndex] : Colors.White;
+                    title = $"{t.Name}: share of people who know it (first seen {t.History})";
+                    entries.Add((NoFarming, "Nobody"));
+                    entries.Add((NoFarming.Lerp(colour, 0.25f), "A few"));
+                    entries.Add((NoFarming.Lerp(colour, 0.625f), "Half"));
+                    entries.Add((colour, "Everyone"));
+                    entries.Add((DiscoveryColour, "Discovered here"));
+                    entries.Add((EmptyLand, "No people"));
+                }
+
                 break;
             case GoodsMode:
                 string goodName = ViewerGoods.Get(_goodIndex).Name;
@@ -1004,6 +1104,7 @@ public partial class Main : Node2D
 
     // Stops are powers of ten of people per 100 km².
     private static readonly Color NoneHeld = Color.Color8(24, 24, 30);
+    private static readonly Color DiscoveryColour = Color.Color8(255, 60, 200);
 
     // Amount held per person, as a power of ten: 0.0001 to 10.
     private static readonly (double At, Color Colour)[] HeldStops =
@@ -1528,6 +1629,33 @@ public partial class Main : Node2D
                 text.Append($", everyday {(groups.Everyday(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%"
                     + $", luxury {(groups.Luxury(group) * 100.0).ToString("0", CultureInfo.InvariantCulture)}%");
             }
+
+            // Technologies the group uses, and any it is still learning or forgetting.
+            var known = new List<string>();
+            foreach (Technology t in ViewerTechnologies.Technologies)
+            {
+                string column = PopulationGroups.KnowledgeColumnPrefix + t.Slug;
+                EntityTable table = sim.State.Table(PopulationGroups.TableName);
+                if (!table.ColumnNames.Contains(column))
+                {
+                    continue;
+                }
+
+                double share = table.DoubleColumn(column)[group];
+                if (share >= 0.5)
+                {
+                    known.Add(t.Name.ToLowerInvariant());
+                }
+                else if (share > 0.0)
+                {
+                    known.Add($"{t.Name.ToLowerInvariant()} ({(share * 100.0).ToString("0", CultureInfo.InvariantCulture)}%)");
+                }
+            }
+
+            if (known.Count > 0)
+            {
+                text.Append("\n    knows " + string.Join(", ", known));
+            }
         }
 
         return text.ToString();
@@ -1662,12 +1790,20 @@ public partial class Main : Node2D
             case 245:
                 _screenshotOk &= SaveScreenshot("-goods");
 
+                // Who knows of granaries, zoomed out a little.
+                _techIndex = 0;
+                SetMapMode(TechnologyMode);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 0.5f);
+                break;
+            case 260:
+                _screenshotOk &= SaveScreenshot("-technology");
+
                 // Close in on the Fertile Crescent to show settlement names.
                 SetMapMode(PopulationMode);
-                ZoomAt(MapView.MapPosition(36.5, 40.0), 2.5f);
+                ZoomAt(MapView.MapPosition(36.5, 40.0), 5f);
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
-            case 270:
+            case 285:
                 bool savedSettlements = SaveScreenshot("-settlements");
                 GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
                 break;

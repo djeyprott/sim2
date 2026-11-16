@@ -253,6 +253,9 @@ public sealed class IntColumn : TableColumn
     {
     }
 
+    /// <summary>The column's values for ids 0 to IdCount - 1, without the per-access check. Valid only until the next row is added.</summary>
+    public Span<int> Values => _values.AsSpan(0, Table.IdCount);
+
     public int this[int id]
     {
         get
@@ -300,6 +303,12 @@ public sealed class DoubleColumn : TableColumn
         : base(name, table)
     {
     }
+
+    /// <summary>
+    /// The column's values for ids 0 to IdCount - 1, without the per-access check, for loops over
+    /// many rows. Valid only until the next row is added to the table.
+    /// </summary>
+    public Span<double> Values => _values.AsSpan(0, Table.IdCount);
 
     public double this[int id]
     {

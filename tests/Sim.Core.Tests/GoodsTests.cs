@@ -145,3 +145,30 @@ public class LivestockTests
         Assert.Throws<InvalidDataException>(() => HerdingParameters.Parse(herding.Replace("\"Grassland\": 1.0", "\"Grassland\": 1.5")));
     }
 }
+
+public class TechnologyFileTests
+{
+    [Fact]
+    public void Technologies_load_and_bad_files_are_rejected()
+    {
+        var occupations = Sim.Core.People.OccupationSet.LoadDefault();
+        var set = Sim.Core.Technologies.TechnologySet.LoadDefault(occupations);
+        var wheel = set.Get(set.IndexOf("The wheel"));
+        Assert.Contains(set.IndexOf("The plough"), wheel.Requires);
+        Assert.False(set.Get(set.IndexOf("Granaries")).CanUse[occupations.IndexOf("Forager")]);
+
+        string text = ContentFiles.ReadText("technologies.json");
+        // A requirement listed after the technology that needs it.
+        Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
+            text.Replace("\"requires\": [ \"The sail\" ]", "\"requires\": [ \"Terraced fields\" ]"), occupations));
+        Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
+            text.Replace("\"terrain\": [ \"hills\", \"mountains\" ]", "\"terrain\": [ \"ocean\" ]"), occupations));
+        Assert.Throws<KeyNotFoundException>(() => Sim.Core.Technologies.TechnologySet.Parse(
+            text.Replace("\"occupations\": [ \"Farmer\" ],\n      \"chance\": 0.0002", "\"occupations\": [ \"Smith\" ],\n      \"chance\": 0.0002"), occupations));
+
+        var p = Sim.Core.Technologies.TechnologyParameters.LoadDefault();
+        Assert.InRange(p.InUse, 0.01, 1.0);
+        Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologyParameters.Parse(
+            ContentFiles.ReadText("technology.json").Replace("\"lossRate\": 0.03", "\"lossRate\": 3")));
+    }
+}

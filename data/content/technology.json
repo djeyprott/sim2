@@ -1,0 +1,35 @@
+// How technology spreads and is lost (milestone 3). The list of technologies is technologies.json.
+// Runs once a year, after trade.
+{
+  // A group uses a technology when at least this share of its people know it.
+  "inUse": 0.5,
+
+  // A group that discovers a technology starts with this share knowing it.
+  "discoveryShare": 0.1,
+
+  // A discovery chance is full when the people in reach (the group's cell and its neighbours)
+  // number at least this many; with fewer, it is that much smaller.
+  "discoveryPeople": 20000,
+
+  // Each year a group's share grows by adoption * share * (1 - share) on its own, and moves
+  // withinCell of the way toward the highest share among the other groups in its cell that can
+  // use it, the technology's "spread" of the way toward the highest share among the groups of its
+  // occupations in neighbouring cells, and, in a settlement, tradeSpread times how busy its trade is
+  // (the food value of what it and its partner sold lately, over busyTrade, at most 1) of the way
+  // toward the highest share among its trade partners.
+  "adoption": 0.05,
+  "withinCell": 0.2,
+  "tradeSpread": 0.02,
+  "busyTrade": 50,
+
+  // Knowledge is kept alive by the people in contact: the group, the other groups in its cell and
+  // in the neighbouring cells that use the technology, and its trade partners' settlements. With
+  // fewer than keepPeople, a group's share falls by lossRate times (1 - contact / keepPeople) a
+  // year. A group that falls below "inUse" this way has lost the technology, and it is recorded.
+  "keepPeople": 3000,
+  "lossRate": 0.03,
+
+  // A later discovery of a technology is recorded as independent when it is at least this far
+  // from every earlier discovery of it.
+  "independentKm": 1000
+}

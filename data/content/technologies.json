@@ -1,0 +1,70 @@
+// Technologies (milestone 3). Population groups hold, for each technology, the share of their
+// people who know it; a group uses a technology when that share is at least technology.json's
+// "inUse" (technology.json in this folder holds the shared numbers).
+//
+// For each technology:
+//   occupations   who can discover and use it (others never learn it)
+//   requires      technologies the group must already use
+//   river         the cell must be on a river (true) / climate: dry, at most maxRainMm a year
+//   coast         the cell must touch the sea
+//   terrain       the cell's terrain must be one of these
+//   animals       the cell must keep at least one of these animals (livestock.json)
+//   chance        a group's yearly chance of discovering it, when the conditions are met and the
+//                 people in reach (its cell and the neighbouring cells) number at least
+//                 technology.json's "discoveryPeople"; smaller in reach, smaller chance
+//   spread        how readily it passes to groups in neighbouring cells (a share of the gap a year)
+//   history       where and when it was first seen in the real record (for reference only;
+//                 see docs/milestone-3-spec.md, "Sources for the dates")
+// Effects come in later steps of milestone 3 (farming and herding in step 3, metals in step 4,
+// horses in step 5, the sea in step 6); copper working, bronze and horses are added with them.
+{
+  "technologies": [
+    {
+      "name": "Granaries", "colour": "#d9b26a", "occupations": [ "Farmer" ],
+      "chance": 0.0002, "spread": 0.02,
+      "history": "9500 BCE, Jordan valley"
+    },
+    {
+      "name": "Irrigation", "colour": "#4fa3d9", "occupations": [ "Farmer" ],
+      "river": true, "maxRainMm": 600,
+      "chance": 0.00002, "spread": 0.01,
+      "history": "6000 BCE, Mesopotamia"
+    },
+    {
+      "name": "Milk and wool", "colour": "#f0ecd8", "occupations": [ "Herder", "Farmer" ],
+      "animals": [ "Sheep and goats", "Cattle" ],
+      "chance": 0.00001, "spread": 0.015,
+      "history": "milk 6500 BCE, Anatolia; wool 4000 BCE, Southwest Asia"
+    },
+    {
+      "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
+      "animals": [ "Cattle" ],
+      "chance": 0.000004, "spread": 0.01,
+      "history": "5000 BCE, the Alps; early 4th millennium BCE, northern Mesopotamia"
+    },
+    {
+      "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
+      "requires": [ "The plough" ], "animals": [ "Cattle" ],
+      "chance": 0.00001, "spread": 0.015,
+      "history": "3500 BCE, Mesopotamia and the steppe"
+    },
+    {
+      "name": "The sail", "colour": "#ecf0f1", "occupations": [ "Farmer", "Craftsman" ],
+      "coast": true,
+      "chance": 0.000002, "spread": 0.01,
+      "history": "5500 to 5000 BCE, the Gulf; 3500 BCE, the Nile"
+    },
+    {
+      "name": "Outrigger canoes", "colour": "#16a085", "occupations": [ "Farmer", "Craftsman" ],
+      "requires": [ "The sail" ], "coast": true,
+      "chance": 0.000002, "spread": 0.01,
+      "history": "1500 BCE, Island Southeast Asia"
+    },
+    {
+      "name": "Terraced fields", "colour": "#7cb342", "occupations": [ "Farmer" ],
+      "terrain": [ "hills", "mountains" ],
+      "chance": 0.000005, "spread": 0.01,
+      "history": "3000 BCE, several places"
+    }
+  ]
+}

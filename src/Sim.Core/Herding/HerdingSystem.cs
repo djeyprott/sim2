@@ -326,7 +326,7 @@ public sealed class HerdingSystem : ISimSystem
         double food = groups.Food(source);
         groups.SetSize(source, size - people);
         target = groups.Find(cell, to);
-        groups.AddPeople(target, people, food);
+        groups.AddPeople(target, people, food, from: source);
     }
 
     // One cell's year: people take up herding, herders eat and grow, and wool and hides go to a store.
@@ -476,7 +476,7 @@ public sealed class HerdingSystem : ISimSystem
                         int target = groups.FindOrAdd(other, _herder);
                         int source = groups.Find(cell, _herder);
                         groups.SetSize(source, groups.Size(source) - moving);
-                        groups.AddPeople(target, moving, food);
+                        groups.AddPeople(target, moving, food, from: source);
                         gained.Add((other, herded));
                     }
                 }

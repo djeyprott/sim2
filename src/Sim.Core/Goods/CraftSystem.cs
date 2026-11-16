@@ -105,8 +105,9 @@ public sealed class CraftSystem : ISimSystem
             double food = groups.Food(group);
             double everydayMet = groups.Everyday(group);
             double luxuryMet = groups.Luxury(group);
+            int farmers = groups.FindOrAdd(cell, _farmer);
             groups.SetSize(group, 0.0);
-            groups.AddPeople(groups.FindOrAdd(cell, _farmer), people, food, everydayMet, luxuryMet);
+            groups.AddPeople(farmers, people, food, everydayMet, luxuryMet, group);
         }
     }
 
@@ -156,7 +157,7 @@ public sealed class CraftSystem : ISimSystem
             craftsmanGroup = groups.FindOrAdd(cell, _craftsman);
             farmerGroup = groups.Find(cell, _farmer);
             groups.SetSize(farmerGroup, farmers - change);
-            groups.AddPeople(craftsmanGroup, change, food, everydayMet, luxuryMet);
+            groups.AddPeople(craftsmanGroup, change, food, everydayMet, luxuryMet, farmerGroup);
             craftsmen += change;
         }
         else if (change < 0.0 && craftsmanGroup >= 0)
@@ -167,7 +168,7 @@ public sealed class CraftSystem : ISimSystem
             double luxuryMet = groups.Luxury(craftsmanGroup);
             groups.SetSize(craftsmanGroup, craftsmen - leaving);
             farmerGroup = groups.FindOrAdd(cell, _farmer);
-            groups.AddPeople(farmerGroup, leaving, food, everydayMet, luxuryMet);
+            groups.AddPeople(farmerGroup, leaving, food, everydayMet, luxuryMet, craftsmanGroup);
             craftsmen -= leaving;
         }
 

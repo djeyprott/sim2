@@ -36,9 +36,9 @@
   "unusedLoss": 0.03,
 
   // Goods a technology needs (copper working: copper ore or copper; bronze: tin) count as near a
-  // settlement that holds or gathers them, or lies this many trade links from one that does. At 1,
-  // copper and tin met almost nowhere in the Old World and bronze arose only in the Andes.
-  "supplyLinks": 2,
+  // settlement that holds or gathers them, or lies this many trade links from one that does. At 1
+  // and 2, copper and tin met almost nowhere in the Old World and bronze arose only in the Andes.
+  "supplyLinks": 3,
 
   // A later discovery of a technology is recorded as independent when it is at least this far
   // from every earlier discovery of it.

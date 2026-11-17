@@ -1300,8 +1300,12 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     [Fact]
     public void Settlements_on_busier_routes_learn_new_technologies_sooner()
     {
-        // Where nearly all or none use it yet, there is nothing to compare.
-        var all = _results.SelectMany(r => r.SpreadByTrade).Where(x => Math.Max(x.Busy, x.Quiet) >= 0.05 && Math.Min(x.Busy, x.Quiet) <= 0.95).ToList();
+        // Where nearly all or none use it yet, there is nothing to compare. Technologies herders use
+        // (milk and wool, the wheel, horses) are carried by herders across open country, away from settlements
+        // and their trade, so they are left out.
+        var herderTechnologies = new HashSet<string> { "Milk and wool", "Horse herding", "Horse riding", "The wheel" };
+        var all = _results.SelectMany(r => r.SpreadByTrade)
+            .Where(x => !herderTechnologies.Contains(x.Technology) && Math.Max(x.Busy, x.Quiet) >= 0.05 && Math.Min(x.Busy, x.Quiet) <= 0.95).ToList();
         Assert.True(all.Count >= 10 && all.Count(x => x.Busy > x.Quiet) >= 2.0 / 3.0 * all.Count,
             string.Join(", ", all.Select(x => $"{x.Technology} {x.Busy:F2}/{x.Quiet:F2}")));
     }

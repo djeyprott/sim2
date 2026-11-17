@@ -10,7 +10,9 @@
 //   afterFarmingYears  it is first herded in this homeland only where farming has stood in the
 //                      cell or a neighbour at least this long (milestone 3): animals were first
 //                      kept by settled farmers, sheep and goats about a thousand years after the
-//                      first farming in Southwest Asia, llamas as Andean farming took hold.
+//                      first farming in Southwest Asia, llamas as Andean farming took hold. Sheep,
+//                      goats and Southwest Asian cattle wait 300 years: farming starts there later
+//                      in some runs, and at 500 they came as late as 5800 BCE.
 //   foragers           foragers on pasture far from farmers may also first herd it, less readily
 //                      (herding.json "foragerInventionFactor"): eastern Sahel cattle may have been
 //                      kept before farming came there.
@@ -24,13 +26,13 @@
   "animals": [
     {
       "name": "Sheep and goats", "colour": "#e8e2c8", "herded": true, "wool": true,
-      "homelands": [ { "lat": 36.0, "lon": 45.0, "radiusKm": 600, "afterFarmingYears": 500 } ],
+      "homelands": [ { "lat": 36.0, "lon": 45.0, "radiusKm": 600, "afterFarmingYears": 300 } ],
       "warmest": [10, 15, 34, 42], "coldest": [-30, -15, 20, 30], "water": [80, 250, 900, 1800]
     },
     {
       "name": "Cattle", "colour": "#b0703c", "herded": true, "wool": false,
       "homelands": [
-        { "lat": 38.5, "lon": 38.5, "radiusKm": 600, "afterFarmingYears": 500 },
+        { "lat": 38.5, "lon": 38.5, "radiusKm": 600, "afterFarmingYears": 300 },
         { "lat": 15.0, "lon": 26.0, "radiusKm": 900, "afterFarmingYears": 500, "foragers": true }
       ],
       "warmest": [12, 17, 34, 40], "coldest": [-25, -10, 26, 32], "water": [200, 450, 1600, 3000]

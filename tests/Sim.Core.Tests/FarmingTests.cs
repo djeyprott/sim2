@@ -99,11 +99,10 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         TechnologySet.Parse(System.Text.RegularExpressions.Regex.Replace(ContentFiles.ReadText("technologies.json"),
             "\"settledYears\": ([0-9]+)", m => $"\"settledYears\": {int.Parse(m.Groups[1].Value) / 50}"), occupations);
 
-    // Animals wait only 50 years after farming nearby (500 in the real file), so short runs show herding.
-    private const double FastHerdingWait = 50.0;
-
+    // Animals wait only a tenth as long after farming nearby as in the real file, so short runs show herding.
     private static LivestockSet FastLivestock() =>
-        LivestockSet.Parse(ContentFiles.ReadText("livestock.json").Replace("\"afterFarmingYears\": 500", $"\"afterFarmingYears\": {FastHerdingWait}"));
+        LivestockSet.Parse(System.Text.RegularExpressions.Regex.Replace(ContentFiles.ReadText("livestock.json"),
+            "\"afterFarmingYears\": ([0-9]+)", m => $"\"afterFarmingYears\": {int.Parse(m.Groups[1].Value) / 10}"));
 
     [Fact]
     public void Real_homelands_put_wild_crops_where_they_grew()
@@ -691,8 +690,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
                 $"{herding.Livestock.Get(animal).Name} was first herded outside its homeland.");
 
             // Outside forager homelands, only where farming has stood for the wait.
-            Assert.True(h.Foragers || tick >= firstFarming + (long)(FastHerdingWait * 12),
-                $"{herding.Livestock.Get(animal).Name} was first herded in month {tick}, before farming had stood {FastHerdingWait} years (first farming in month {firstFarming}).");
+            Assert.True(h.Foragers || tick >= firstFarming + (long)(h.AfterFarmingYears * 12),
+                $"{herding.Livestock.Get(animal).Name} was first herded in month {tick}, before farming had stood {h.AfterFarmingYears} years (first farming in month {firstFarming}).");
             Assert.Equal("", herding.Livestock.Get(animal).TamedBy);
         }
 

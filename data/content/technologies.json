@@ -48,8 +48,9 @@
     {
       "name": "Granaries", "colour": "#d9b26a", "occupations": [ "Farmer" ],
       "chance": 0.0002, "spread": 0.02,
-      // Sealed, raised stores keep out damp and pests: grain loses half as much a year.
-      "effects": { "grainSpoilage": 0.5 },
+      // Sealed, raised stores keep out damp and pests: grain loses less each year (0.5 left famine
+      // too rare once granaries were found, as in history, by about 9500 BCE).
+      "effects": { "grainSpoilage": 0.7 },
       "history": "9500 BCE, Jordan valley"
     },
     {
@@ -74,7 +75,7 @@
     {
       "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
       "animals": [ "Cattle" ],
-      "chance": 0.000004, "spread": 0.01,
+      "chance": 0.00001, "spread": 0.01,
       "settledYears": 4000,
       // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
       "effects": { "farmYield": 1.25, "biomePenaltyLift": 1.0 },
@@ -83,7 +84,7 @@
     {
       "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The plough" ], "animals": [ "Cattle" ],
-      "chance": 0.00001, "spread": 0.015,
+      "chance": 0.00002, "spread": 0.015,
       "settledYears": 5500,
       // Ox carts carry loads over land far more cheaply than people and pack animals.
       "effects": { "landCarrying": 0.7 },
@@ -128,8 +129,8 @@
       // Alloying copper with tin.
       "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
-      "chance": 0.00005, "spread": 0.01,
-      "settledYears": 4500,
+      "chance": 0.0002, "spread": 0.02,
+      "settledYears": 3500,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },
     {

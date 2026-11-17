@@ -139,7 +139,7 @@
       "name": "Horse herding", "colour": "#7a5230", "occupations": [ "Herder", "Farmer" ],
       // Botai's people milked their mares: horses were kept by herders who already milked their herds.
       "requires": [ "Milk and wool" ], "nearWild": [ "Horses" ],
-      "chance": 0.000003, "spread": 0.015,
+      "chance": 0.00001, "spread": 0.015,
       "history": "3500 BCE, Botai (northern Kazakhstan)"
     },
     {

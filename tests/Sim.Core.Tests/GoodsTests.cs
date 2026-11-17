@@ -162,7 +162,7 @@ public class LivestockTests
 
         string text = ContentFiles.ReadText("livestock.json");
         Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"warmest\": [10, 15, 34, 42]", "\"warmest\": [15, 10, 34, 42]")));
-        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600, \"afterFarmingYears\": 500 } ]", "\"homelands\": [ ]")));
+        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600, \"afterFarmingYears\": 300 } ]", "\"homelands\": [ ]")));
 
         HerdingParameters p = HerdingParameters.LoadDefault();
         Assert.True(p.HerdDensity > 0.0 && p.Pasture["Grassland"] >= p.MinPasture);
@@ -194,9 +194,9 @@ public class TechnologyFileTests
 
         // Effects: known names only, and a lifted penalty share of at most 1.
         Assert.Equal(1.25, set.Get(set.IndexOf("The plough")).Effects["farmYield"]);
-        Assert.Equal(0.5, set.Get(set.IndexOf("Granaries")).Effects["grainSpoilage"]);
+        Assert.Equal(0.7, set.Get(set.IndexOf("Granaries")).Effects["grainSpoilage"]);
         Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
-            text.Replace("\"grainSpoilage\": 0.5", "\"grainSpoilige\": 0.5"), occupations));
+            text.Replace("\"grainSpoilage\": 0.7", "\"grainSpoilige\": 0.7"), occupations));
         Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
             text.Replace("\"biomePenaltyLift\": 1.0", "\"biomePenaltyLift\": 1.5"), occupations));
 

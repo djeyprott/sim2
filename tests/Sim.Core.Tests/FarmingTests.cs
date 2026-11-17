@@ -393,7 +393,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             ploughedGrassland += open ? 1 : 0;
         }
 
-        // Granaries halve the grain that spoils in store where the farmers use them.
+        // Granaries cut the grain that spoils in store where the farmers use them (to 0.7).
         FarmingSystem farmingWith = Farming(with);
         FarmingSystem farmingWithout = Farming(without);
         double grainSpoilage = GoodSet.LoadDefault().Goods.Single(g => g.Name == GoodSet.Grain).Spoilage;
@@ -405,7 +405,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             if (settlement[cell] > 0 && group >= 0 && technology.Knowledge(group, granaries) >= 0.5)
             {
                 stores++;
-                Assert.Equal(grainSpoilage * 0.5, farmingWith.GrainSpoilage(cell), 9);
+                Assert.Equal(grainSpoilage * 0.7, farmingWith.GrainSpoilage(cell), 9);
                 Assert.Equal(grainSpoilage, farmingWithout.GrainSpoilage(cell), 9);
             }
         }

@@ -553,7 +553,16 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         int copperWorking = set.IndexOf("Copper working");
         DoubleColumn known = sim.State.Table(PopulationGroups.TableName)
             .DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(copperWorking).Slug);
-        known.Values.Fill(1.0);
+        var groups = new PopulationGroups(sim.State);
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        int craftsman = OccupationSet.LoadDefault().IndexOf(OccupationSet.Craftsman);
+
+        // Farmers and craftsmen know it (foragers and herders cannot use it, so they would keep it
+        // and bring it back whenever they took up farming).
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            known[g] = groups.IsAlive(g) && (groups.Occupation(g) == farmer || groups.Occupation(g) == craftsman) ? 1.0 : 0.0;
+        }
 
         // Every fourth settlement holds plenty of copper (as if smelted there); the rest none.
         GoodSet goods = GoodSet.LoadDefault();
@@ -571,8 +580,6 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // Farmers who still use it live where copper or ore is near: held or gathered in their own
         // cell or by a trade partner; elsewhere they have mostly forgotten it.
         TechnologyConditions conditions = TechnologyUse.TryCreate(sim.State, _world)!.Conditions;
-        var groups = new PopulationGroups(sim.State);
-        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
         int keptAllowed = 0, keptElsewhere = 0, byPartner = 0, unsupplied = 0;
         double unsuppliedShare = 0.0;
         for (int g = 0; g < groups.IdCount; g++)

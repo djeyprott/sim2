@@ -1,21 +1,43 @@
 technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",first,77403,24.22,112.44,-9411,January 9411 BCE,0
-"Granaries",independent,15583,32.12,107.25,-9075,January 9075 BCE,0
-"Granaries",independent,131901,-7.48,142.04,-8655,January 8655 BCE,0
-"Granaries",independent,97530,18.39,-97.49,-8051,January 8051 BCE,0
-"Granaries",independent,5545,34.46,47.64,-7935,January 7935 BCE,0
-"Granaries",independent,162587,7.85,-0.75,-7300,January 7300 BCE,0
-"Irrigation",first,17824,38.70,106.56,-5798,January 5798 BCE,0
-"Granaries",lost,163308,11.51,-6.33,-5775,January 5775 BCE,23
-"Granaries",independent,153825,-19.13,-66.60,-5494,January 5494 BCE,0
-"Granaries",lost,163308,11.51,-6.33,-5409,January 5409 BCE,16
-"The sail",first,132481,-7.01,138.85,-5321,January 5321 BCE,0
-"The sail",independent,97423,16.35,-98.23,-5002,January 5002 BCE,0
-"Irrigation",independent,6525,37.85,38.54,-4988,January 4988 BCE,0
-"Granaries",lost,163308,11.51,-6.33,-4974,January 4974 BCE,16
-"Milk and wool",first,6242,36.69,45.67,-4926,January 4926 BCE,0
-"Granaries",lost,163308,11.51,-6.33,-4821,January 4821 BCE,16
-"Milk and wool",independent,163181,7.48,-3.01,-4746,January 4746 BCE,0
-"Copper working",first,16586,34.92,111.72,-4698,January 4698 BCE,0
-"Bronze",first,78907,23.80,103.32,-4482,January 4482 BCE,0
-"Terraced fields",first,76931,22.89,114.15,-4026,January 4026 BCE,0
+"Granaries",independent,6929,39.13,34.84,-8489,January 8489 BCE,0
+"Granaries",independent,161581,7.11,3.75,-8052,January 8052 BCE,0
+"Granaries",independent,131803,-6.66,142.03,-7982,January 7982 BCE,0
+"Irrigation",first,7185,39.97,37.18,-6331,January 6331 BCE,0
+"Milk and wool",first,6130,36.57,32.15,-5896,January 5896 BCE,0
+"The sail",first,77222,21.72,111.94,-5889,January 5889 BCE,0
+"Granaries",independent,97962,20.96,-97.95,-5709,January 5709 BCE,0
+"Horse herding",first,9338,47.43,42.29,-5541,January 5541 BCE,0
+"Irrigation",independent,18340,40.39,108.89,-5392,January 5392 BCE,0
+"Milk and wool",lost,10290,50.86,47.80,-5213,January 5213 BCE,1033
+"Milk and wool",independent,160515,7.86,7.24,-5205,January 5205 BCE,0
+"Horse herding",lost,10290,50.86,47.80,-5191,January 5191 BCE,1594
+"Milk and wool",lost,10289,50.80,48.55,-5168,January 5168 BCE,1421
+"Milk and wool",lost,10391,51.24,48.30,-5148,January 5148 BCE,1466
+"Horse riding",first,9566,48.42,36.71,-5041,January 5041 BCE,0
+"Horse herding",lost,8898,45.87,33.98,-4734,January 4734 BCE,2622
+"Horse riding",lost,8898,45.87,33.98,-4734,January 4734 BCE,2622
+"Milk and wool",lost,11268,55.38,42.43,-4362,January 4362 BCE,2089
+"Milk and wool",lost,11347,54.92,53.01,-4331,January 4331 BCE,1166
+"The plough",first,5992,36.17,32.46,-4307,January 4307 BCE,0
+"Horse herding",lost,11347,54.92,53.01,-4302,January 4302 BCE,2063
+"Milk and wool",lost,11254,54.37,54.02,-4297,January 4297 BCE,768
+"Horse herding",lost,11254,54.37,54.02,-4277,January 4277 BCE,1217
+"Horse herding",lost,11254,54.37,54.02,-4275,January 4275 BCE,1238
+"Horse herding",lost,11348,55.01,52.19,-4268,January 4268 BCE,1103
+"Horse riding",lost,11438,55.36,52.79,-4268,January 4268 BCE,1442
+"Horse riding",lost,11254,54.37,54.02,-4251,January 4251 BCE,1646
+"Horse riding",lost,11538,56.54,43.98,-4244,January 4244 BCE,1634
+"Horse riding",lost,11346,54.81,53.82,-4240,January 4240 BCE,2195
+"The sail",lost,81053,21.22,84.42,-4221,January 4221 BCE,1663
+"Horse riding",lost,9960,47.79,60.96,-4173,January 4173 BCE,1309
+"Milk and wool",lost,11616,56.14,53.17,-4123,January 4123 BCE,2358
+"Milk and wool",lost,11617,56.24,52.33,-4097,January 4097 BCE,2849
+"Horse riding",lost,11544,56.74,38.67,-4085,January 4085 BCE,2392
+"Milk and wool",lost,11633,57.16,38.25,-4047,January 4047 BCE,2196
+"The sail",lost,81088,21.13,83.97,-4047,January 4047 BCE,1680
+"Milk and wool",lost,160612,-7.14,16.14,-4034,January 4034 BCE,1053
+"Milk and wool",lost,160612,-7.14,16.14,-4033,January 4033 BCE,1050
+"The plough",lost,9021,46.08,28.21,-4028,January 4028 BCE,2023
+"Horse riding",lost,11721,57.57,37.82,-4025,January 4025 BCE,1031
+"Horse herding",lost,11721,57.57,37.82,-4006,January 4006 BCE,1562

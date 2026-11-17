@@ -27,13 +27,12 @@ technology,event,cell,latitude,longitude,year,date,contact
 "The sail",lost,109048,-3.32,-40.71,-4651,January 4651 BCE,2285
 "Copper working",first,9921,47.82,13.57,-4620,January 4620 BCE,0
 "The plough",first,148015,-9.84,-48.82,-4603,January 4603 BCE,0
-"The sail",independent,9279,44.08,7.39,-4535,January 4535 BCE,0
-"Bronze",first,10738,50.76,11.08,-4491,January 4491 BCE,0
+"The sail",independent,11403,52.82,6.76,-4535,January 4535 BCE,0
+"Bronze",first,10638,50.57,12.37,-4528,January 4528 BCE,0
 "Milk and wool",lost,151428,3.69,-69.51,-4405,January 4405 BCE,1398
 "Granaries",lost,162373,-27.71,22.22,-4354,January 4354 BCE,115
-"Irrigation",independent,9482,46.93,18.99,-4299,January 4299 BCE,0
 "Granaries",lost,214733,-32.19,22.59,-4275,January 4275 BCE,211
-"Terraced fields",first,214864,-31.44,28.42,-4232,January 4232 BCE,0
-"Terraced fields",independent,109685,-7.15,-46.17,-4194,January 4194 BCE,0
+"Terraced fields",first,215154,-33.02,24.88,-4275,January 4275 BCE,0
+"Irrigation",independent,163661,-28.17,16.71,-4159,January 4159 BCE,0
 "Milk and wool",lost,151309,5.21,-70.00,-4078,January 4078 BCE,2579
 "Granaries",lost,160393,13.68,3.84,-4047,January 4047 BCE,80

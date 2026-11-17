@@ -207,18 +207,31 @@ public sealed class TechnologySystem : ISimSystem
             return;
         }
 
-        foreach ((int a, int b) in links)
+        // Each pass reaches one link further: partners of supplied cells, then their partners.
+        var added = new List<int>();
+        for (int hop = 0; hop < _parameters.SupplyLinks; hop++)
         {
-            if (!partner[b] && _conditions!.SuppliedHere(a, tech))
+            added.Clear();
+            foreach ((int a, int b) in links)
             {
-                partner[b] = true;
-                marked.Add(b);
+                if (!partner[b] && (partner[a] || _conditions!.SuppliedHere(a, tech)))
+                {
+                    added.Add(b);
+                }
+
+                if (!partner[a] && (partner[b] || _conditions!.SuppliedHere(b, tech)))
+                {
+                    added.Add(a);
+                }
             }
 
-            if (!partner[a] && _conditions!.SuppliedHere(b, tech))
+            foreach (int cell in added)
             {
-                partner[a] = true;
-                marked.Add(a);
+                if (!partner[cell])
+                {
+                    partner[cell] = true;
+                    marked.Add(cell);
+                }
             }
         }
     }

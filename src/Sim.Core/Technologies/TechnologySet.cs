@@ -62,8 +62,8 @@ public sealed class Technology
 
     /// <summary>
     /// Goods (by name), one of which must be within reach: to discover it, gatherable in the cell or
-    /// in its store; to learn, use and keep it, also in the store of, or gatherable by, a trade
-    /// partner. Empty for none.
+    /// in its store; to learn, use and keep it, also in the store of, or gatherable by, a settlement
+    /// a few trade links away (technology.json "supplyLinks"). Empty for none.
     /// </summary>
     public IReadOnlyList<string> NearGoods { get; }
 
@@ -287,6 +287,9 @@ public sealed class TechnologyParameters
     /// <summary>The share of what a group knows of a technology that it forgets each year where its cell does not meet the technology's conditions.</summary>
     public double UnusedLoss { get; set; }
 
+    /// <summary>How many trade links away goods count as near, for learning, using and keeping a technology that needs them.</summary>
+    public int SupplyLinks { get; set; } = 1;
+
     public double IndependentKm { get; set; } = 1000.0;
 
     public static TechnologyParameters LoadDefault() => Parse(ContentFiles.ReadText("technology.json"));
@@ -296,7 +299,7 @@ public sealed class TechnologyParameters
         TechnologyParameters p = ContentFiles.Parse<TechnologyParameters>(json, "technology");
         double[] shares = { p.InUse, p.DiscoveryShare, p.Adoption, p.WithinCell, p.TradeSpread, p.LossRate, p.UnusedLoss };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)) || p.InUse <= 0.0
-            || p.DiscoveryPeople <= 0.0 || p.BusyTrade <= 0.0 || p.KeepPeople < 0.0 || p.IndependentKm < 0.0)
+            || p.SupplyLinks < 0 || p.DiscoveryPeople <= 0.0 || p.BusyTrade <= 0.0 || p.KeepPeople < 0.0 || p.IndependentKm < 0.0)
         {
             throw new InvalidDataException("A technology number is out of range.");
         }

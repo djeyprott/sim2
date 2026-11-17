@@ -13,7 +13,8 @@
 //                 and barley farming; hoe farmers of sorghum, millet, rice or yams did without it
 //   nearGoods     one of these goods must be near: to discover it, gatherable in the cell or in
 //                 its settlement's store; to learn, use and keep it, also held or gathered by a
-//                 trade partner (copper working near ore or copper, bronze near tin)
+//                 settlement up to technology.json's "supplyLinks" trade links away (copper
+//                 working near ore or copper, bronze near tin)
 //   nearWild      one of these animals must be near: to discover it, living wild in the cell
 //                 (livestock.json homelands; an animal "tamedBy" this technology is then kept
 //                 there); to learn, use and keep it, wild or kept in the cell
@@ -83,8 +84,8 @@
     {
       "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
       "animals": [ "Cattle" ], "crops": [ "Wheat and barley" ],
-      // 0.00004 since 0.4.1 (0.00001 before, when it could also be found by African hoe farmers).
-      "chance": 0.00004, "spread": 0.01,
+      // 0.00008 since 0.4.1 (0.00001 before, when it could also be found by African hoe farmers).
+      "chance": 0.00008, "spread": 0.01,
       "settledYears": 4000,
       // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
       "effects": { "farmYield": 1.25, "biomePenaltyLift": 1.0 },
@@ -93,8 +94,8 @@
     {
       "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The plough" ], "animals": [ "Cattle" ],
-      "chance": 0.0001, "spread": 0.015,
-      "settledYears": 5500,
+      "chance": 0.0003, "spread": 0.015,
+      "settledYears": 5000,
       // Ox carts carry loads over land far more cheaply than people and pack animals.
       "effects": { "landCarrying": 0.7 },
       "history": "3500 BCE, Mesopotamia and the steppe"

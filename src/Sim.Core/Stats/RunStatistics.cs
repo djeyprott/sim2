@@ -287,6 +287,7 @@ public sealed class RunStatistics
             {
                 columns.Add("know_" + t.Slug);
                 columns.Add("use_" + t.Slug);
+                columns.Add("findable_" + t.Slug);
             }
         }
 
@@ -311,7 +312,7 @@ public sealed class RunStatistics
     /// One row per broad region (see <see cref="RegionOf"/>) for the state now: people by
     /// occupation, settlements; for each technology the share of the region's people who know it
     /// and the share in groups that use it (at least the in-use share knowing it, where the cell
-    /// meets its conditions); what is in store of each good; what its craftsmen made last January;
+    /// meets its conditions), and the farmed cells where it could be discovered now; what is in store of each good; what its craftsmen made last January;
     /// and how many settlements have a group using bronze, and of those how many hold tin, copper and both. Each row ends with a newline.
     /// </summary>
     public string RegionRows()
@@ -327,6 +328,7 @@ public sealed class RunStatistics
         var settlements = new int[regions];
         var know = new double[regions, techs];
         var use = new double[regions, techs];
+        var findable = new int[regions, techs];
         var store = new double[regions, goods];
         List<Good> madeGoods = MadeGoods();
         double[][] madeFields = madeGoods.Select(g => _simulation.State.DoubleField(CraftSystem.MadeFieldPrefix + g.Slug)).ToArray();
@@ -379,6 +381,30 @@ public sealed class RunStatistics
                 if (known[t][g] >= inUse && _technology!.CellAllows(cell, t))
                 {
                     use[r, t] += size;
+                }
+            }
+        }
+
+        // Cells with farmers where each technology could be discovered now: its conditions met
+        // (goods near in the cell itself) and farming has stood long enough.
+        TechnologyConditions? conditions = techs > 0 ? TechnologyUse.TryCreate(_simulation.State, _simulation.Map)?.Conditions : null;
+        if (conditions != null && occupationColumn[0] >= 0)
+        {
+            foreach (int cell in _land)
+            {
+                int farmerGroup = groups.Find(cell, occupationColumn[0]);
+                if (farmerGroup < 0 || groups.Size(farmerGroup) <= 0.0)
+                {
+                    continue;
+                }
+
+                int r = Region(cell);
+                for (int t = 0; t < techs; t++)
+                {
+                    if (conditions.Allows(cell, t) && conditions.NearForDiscovery(cell, t, _simulation.Tick))
+                    {
+                        findable[r, t]++;
+                    }
                 }
             }
         }
@@ -461,6 +487,7 @@ public sealed class RunStatistics
             {
                 values.Add((know[r, t] / people[r, 0]).ToString("F4", CultureInfo.InvariantCulture));
                 values.Add((use[r, t] / people[r, 0]).ToString("F4", CultureInfo.InvariantCulture));
+                values.Add(findable[r, t].ToString(CultureInfo.InvariantCulture));
             }
 
             if (_stockpiles != null)

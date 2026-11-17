@@ -437,7 +437,9 @@ public sealed class TechnologySystem : ISimSystem
                         s = 0.0;
                     }
 
-                    if (before >= inUse && s < inUse)
+                    // Recorded only where it could still be used: forgetting what the cell does not
+                    // allow (no copper near, no river) is not a loss of knowledge kept alive by contact.
+                    if (before >= inUse && s < inUse && cellAllows)
                     {
                         Record(tech, TechnologyEventKind.Lost, cell, context.Tick, size, contact);
                     }

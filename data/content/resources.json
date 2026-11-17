@@ -107,7 +107,16 @@
         { "name": "Akjoujt (Mauritania)", "lat": 19.75, "lon": -14.4 },
         { "name": "Copperbelt", "lat": -12.8, "lon": 28.2 },
         { "name": "Keweenaw (Lake Superior)", "lat": 47.2, "lon": -88.4 },
-        { "name": "Atacama", "lat": -22.3, "lon": -68.9 }
+        { "name": "Atacama", "lat": -22.3, "lon": -68.9 },
+        // Copper worked in the Copper or Bronze Age near tin sources, added in 0.4.1 so that copper
+        // and tin can meet: with copper working kept near copper only, the listed copper lay too far
+        // from any tin for bronze ever to arise.
+        { "name": "Colline Metallifere (Tuscany)", "lat": 43.15, "lon": 10.9 },
+        { "name": "Cornwall and Devon", "lat": 50.45, "lon": -4.3 },
+        { "name": "El Aramo (Asturias)", "lat": 43.2, "lon": -5.9 },
+        { "name": "Almalyk (Tashkent)", "lat": 40.85, "lon": 69.6 },
+        { "name": "Dongchuan (Yunnan)", "lat": 26.1, "lon": 103.1 },
+        { "name": "Corocoro (Bolivia)", "lat": -17.2, "lon": -68.45 }
       ]
     },
     {

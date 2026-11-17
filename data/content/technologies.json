@@ -83,7 +83,8 @@
     {
       "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
       "animals": [ "Cattle" ], "crops": [ "Wheat and barley" ],
-      "chance": 0.00001, "spread": 0.01,
+      // 0.00004 since 0.4.1 (0.00001 before, when it could also be found by African hoe farmers).
+      "chance": 0.00004, "spread": 0.01,
       "settledYears": 4000,
       // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
       "effects": { "farmYield": 1.25, "biomePenaltyLift": 1.0 },

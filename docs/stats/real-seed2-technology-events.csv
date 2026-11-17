@@ -2,81 +2,1997 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",first,163181,7.48,-3.01,-9349,January 9349 BCE,0
 "Granaries",independent,77113,27.39,115.90,-9339,January 9339 BCE,0
 "Granaries",independent,6524,37.84,39.11,-8931,January 8931 BCE,0
-"Granaries",independent,98593,19.52,-101.86,-8254,January 8254 BCE,0
-"Granaries",independent,68602,12.05,20.30,-8076,January 8076 BCE,0
-"Granaries",independent,130964,-7.88,146.70,-7273,January 7273 BCE,0
-"Milk and wool",first,163296,7.10,-3.26,-6231,January 6231 BCE,0
-"Milk and wool",independent,6656,38.23,39.99,-5908,January 5908 BCE,0
-"The sail",first,163633,5.22,-3.49,-5814,January 5814 BCE,0
-"Copper working",first,77571,30.30,115.19,-5665,January 5665 BCE,0
-"Milk and wool",lost,10488,51.38,51.07,-5597,January 5597 BCE,1189
-"Milk and wool",lost,8180,43.27,40.44,-5471,January 5471 BCE,1170
-"Horse herding",first,8295,43.53,43.99,-5259,January 5259 BCE,0
-"Irrigation",first,160937,12.98,2.30,-5215,January 5215 BCE,0
-"Irrigation",independent,6390,37.43,38.80,-5207,January 5207 BCE,0
-"The plough",first,162587,7.85,-0.75,-5063,January 5063 BCE,0
-"The sail",independent,7696,41.65,35.39,-4952,January 4952 BCE,0
-"Copper working",independent,6523,37.83,39.67,-4897,January 4897 BCE,0
-"The plough",independent,6790,38.67,39.16,-4858,January 4858 BCE,0
-"Milk and wool",lost,10381,50.37,55.65,-4839,January 4839 BCE,679
-"Milk and wool",lost,5868,35.31,24.70,-4834,January 4834 BCE,345
-"Milk and wool",lost,11525,55.48,55.04,-4832,January 4832 BCE,1302
-"Horse herding",lost,5868,35.31,24.70,-4824,January 4824 BCE,488
-"Horse herding",lost,10381,50.37,55.65,-4823,January 4823 BCE,1289
-"Milk and wool",lost,10380,50.27,56.37,-4819,January 4819 BCE,933
-"Horse herding",lost,11613,55.81,55.66,-4808,January 4808 BCE,581
-"Horse herding",lost,10380,50.27,56.37,-4801,January 4801 BCE,1365
-"Bronze",first,6665,38.29,34.86,-4790,January 4790 BCE,0
-"Milk and wool",lost,11701,56.25,55.47,-4749,January 4749 BCE,695
-"Milk and wool",lost,12132,59.05,48.93,-4579,January 4579 BCE,872
-"Horse riding",first,8783,45.44,33.67,-4573,January 4573 BCE,0
-"Horse herding",lost,12132,59.05,48.93,-4565,January 4565 BCE,1135
-"The plough",lost,12146,59.62,35.51,-4364,January 4364 BCE,1163
-"Horse riding",lost,12148,59.60,33.57,-4205,January 4205 BCE,2492
-"The wheel",first,163523,6.36,-3.75,-4189,January 4189 BCE,0
-"Terraced fields",first,76920,27.32,116.89,-4171,January 4171 BCE,0
-"Horse riding",lost,11558,56.44,26.27,-4079,January 4079 BCE,2293
-"Milk and wool",lost,64827,0.21,34.02,-4046,January 4046 BCE,73
-"Milk and wool",lost,64827,0.21,34.02,-4045,January 4045 BCE,79
-"Milk and wool",lost,64827,0.21,34.02,-4025,January 4025 BCE,32
-"Milk and wool",lost,64827,0.21,34.02,-4024,January 4024 BCE,38
-"Milk and wool",lost,64827,0.21,34.02,-4008,January 4008 BCE,16
-"Milk and wool",lost,64827,0.21,34.02,-4007,January 4007 BCE,21
-"The plough",lost,8179,43.25,41.08,-4000,January 4000 BCE,1673
-"Bronze",independent,78983,22.92,102.34,-3961,January 3961 BCE,0
-"The plough",lost,12458,61.03,43.64,-3929,January 3929 BCE,2255
-"Horse riding",lost,12458,61.03,43.64,-3924,January 3924 BCE,2452
-"Horse riding",lost,12457,60.98,44.65,-3884,January 3884 BCE,1158
-"Horse riding",lost,12545,61.61,33.93,-3873,January 3873 BCE,1326
-"Milk and wool",lost,12469,61.18,32.42,-3808,January 3808 BCE,1302
-"The plough",lost,12469,61.18,32.42,-3808,January 3808 BCE,1302
-"Horse riding",lost,12469,61.18,32.42,-3808,January 3808 BCE,1302
-"Horse herding",lost,12547,61.57,31.86,-3783,January 3783 BCE,963
-"Horse herding",lost,12469,61.18,32.42,-3780,January 3780 BCE,1764
-"Horse riding",lost,12547,61.57,31.86,-3779,January 3779 BCE,1069
-"The plough",lost,12622,62.00,33.37,-3730,January 3730 BCE,1366
-"Horse riding",lost,12698,62.39,32.80,-3643,January 3643 BCE,2480
-"Terraced fields",independent,7058,39.55,35.71,-3559,January 3559 BCE,0
-"Horse riding",lost,10359,47.36,70.21,-3544,January 3544 BCE,2518
-"Horse riding",lost,12688,62.25,43.43,-3537,January 3537 BCE,2145
-"Horse riding",lost,12695,62.42,36.00,-3527,January 3527 BCE,2488
-"Horse riding",lost,12770,62.82,35.46,-3527,January 3527 BCE,870
-"The wheel",lost,161012,-9.17,15.91,-3481,January 3481 BCE,180
-"The wheel",lost,161012,-9.17,15.91,-3480,January 3480 BCE,198
-"The wheel",lost,161011,-9.55,16.15,-3479,January 3479 BCE,151
-"Terraced fields",lost,19425,43.01,125.81,-3393,January 3393 BCE,1320
-"The plough",lost,12922,63.45,28.80,-3390,January 3390 BCE,1641
-"The wheel",lost,161012,-9.17,15.91,-3380,January 3380 BCE,1563
-"Granaries",lost,37626,32.07,-104.24,-3377,January 3377 BCE,420
-"Horse riding",lost,12922,63.45,28.80,-3377,January 3377 BCE,2070
-"Granaries",lost,37774,32.48,-104.46,-3372,January 3372 BCE,196
-"The wheel",independent,6253,36.99,39.61,-3351,January 3351 BCE,0
-"Horse riding",lost,12994,63.81,28.14,-3304,January 3304 BCE,1860
-"The plough",lost,13066,64.11,26.34,-3158,January 3158 BCE,1224
-"Milk and wool",lost,13066,64.11,26.34,-3156,January 3156 BCE,1255
-"Granaries",lost,37774,32.48,-104.46,-3120,January 3120 BCE,196
-"The plough",lost,160873,-11.02,17.55,-3096,January 3096 BCE,1488
-"The wheel",lost,12853,62.84,25.14,-3029,January 3029 BCE,1039
-"Horse riding",lost,21379,47.10,74.38,-3014,January 3014 BCE,2067
-"Horse riding",lost,21277,46.67,74.36,-3008,January 3008 BCE,2014
-"The wheel",lost,12926,63.19,24.45,-3005,January 3005 BCE,1480
+"Granaries",independent,68205,8.88,21.26,-8298,January 8298 BCE,0
+"Granaries",independent,98890,20.82,-102.59,-8112,January 8112 BCE,0
+"Granaries",independent,153730,-16.63,-67.58,-7414,January 7414 BCE,0
+"Granaries",independent,131597,-7.90,143.75,-7247,January 7247 BCE,0
+"Copper working",first,77482,29.49,115.18,-6679,January 6679 BCE,0
+"Irrigation",first,6928,39.13,35.42,-6669,January 6669 BCE,0
+"Copper working",lost,548,31.50,115.45,-6584,January 6584 BCE,15900
+"Copper working",lost,548,31.50,115.45,-6584,January 6584 BCE,15900
+"Copper working",lost,77108,29.36,117.15,-6547,January 6547 BCE,20479
+"Copper working",lost,77108,29.36,117.15,-6547,January 6547 BCE,20479
+"Copper working",lost,545,31.58,113.96,-6504,January 6504 BCE,14351
+"Copper working",lost,548,31.50,115.45,-6498,January 6498 BCE,17884
+"Copper working",lost,548,31.50,115.45,-6498,January 6498 BCE,17884
+"Copper working",lost,77478,31.05,116.18,-6470,January 6470 BCE,19204
+"Copper working",lost,77478,31.05,116.18,-6470,January 6470 BCE,19204
+"Copper working",lost,77206,28.21,115.91,-6465,January 6465 BCE,28088
+"Copper working",lost,77206,28.21,115.91,-6465,January 6465 BCE,28088
+"Copper working",lost,77300,28.24,115.42,-6465,January 6465 BCE,33835
+"Copper working",lost,77301,27.84,115.17,-6465,January 6465 BCE,22547
+"Copper working",lost,77301,27.84,115.17,-6465,January 6465 BCE,22547
+"Copper working",lost,77300,28.24,115.42,-6464,January 6464 BCE,22085
+"Copper working",lost,77478,31.05,116.18,-6457,January 6457 BCE,19088
+"Copper working",lost,77478,31.05,116.18,-6457,January 6457 BCE,19088
+"Copper working",lost,548,31.50,115.45,-6444,January 6444 BCE,17337
+"Copper working",lost,548,31.50,115.45,-6444,January 6444 BCE,17337
+"Irrigation",lost,7570,41.23,35.70,-6403,January 6403 BCE,12847
+"Irrigation",lost,7572,41.23,34.48,-6403,January 6403 BCE,26412
+"Irrigation",lost,7571,41.23,35.09,-6392,January 6392 BCE,11789
+"Copper working",lost,548,31.50,115.45,-6374,January 6374 BCE,17869
+"Copper working",lost,548,31.50,115.45,-6374,January 6374 BCE,17869
+"Copper working",lost,548,31.50,115.45,-6347,January 6347 BCE,17306
+"Copper working",lost,548,31.50,115.45,-6346,January 6346 BCE,15086
+"Irrigation",lost,7571,41.23,35.09,-6342,January 6342 BCE,11664
+"Copper working",lost,545,31.58,113.96,-6339,January 6339 BCE,14197
+"Copper working",lost,545,31.58,113.96,-6338,January 6338 BCE,12453
+"Copper working",lost,77108,29.36,117.15,-6328,January 6328 BCE,19804
+"Copper working",lost,77108,29.36,117.15,-6328,January 6328 BCE,19804
+"Copper working",lost,77108,29.36,117.15,-6306,January 6306 BCE,20312
+"Copper working",lost,77108,29.36,117.15,-6306,January 6306 BCE,20312
+"Irrigation",lost,7570,41.23,35.70,-6303,January 6303 BCE,13773
+"Irrigation",lost,7572,41.23,34.48,-6301,January 6301 BCE,23506
+"Copper working",lost,77108,29.36,117.15,-6301,January 6301 BCE,20415
+"Copper working",lost,77108,29.36,117.15,-6301,January 6301 BCE,20415
+"Copper working",lost,548,31.50,115.45,-6280,January 6280 BCE,19521
+"Copper working",lost,548,31.50,115.45,-6280,January 6280 BCE,19521
+"Copper working",lost,548,31.50,115.45,-6246,January 6246 BCE,19746
+"Copper working",lost,548,31.50,115.45,-6246,January 6246 BCE,19746
+"Copper working",lost,545,31.58,113.96,-6124,January 6124 BCE,14214
+"Copper working",lost,545,31.58,113.96,-6124,January 6124 BCE,14214
+"Copper working",lost,548,31.50,115.45,-6122,January 6122 BCE,18347
+"Copper working",lost,548,31.50,115.45,-6122,January 6122 BCE,18347
+"Copper working",lost,77108,29.36,117.15,-6120,January 6120 BCE,20025
+"Copper working",lost,77108,29.36,117.15,-6120,January 6120 BCE,20025
+"Milk and wool",first,6654,38.20,41.12,-6112,January 6112 BCE,0
+"Copper working",lost,545,31.58,113.96,-6102,January 6102 BCE,12832
+"Copper working",lost,548,31.50,115.45,-6102,January 6102 BCE,18793
+"Copper working",lost,548,31.50,115.45,-6102,January 6102 BCE,18793
+"Copper working",lost,545,31.58,113.96,-6089,January 6089 BCE,14884
+"Copper working",lost,545,31.58,113.96,-6089,January 6089 BCE,14884
+"Copper working",lost,548,31.50,115.45,-6089,January 6089 BCE,18890
+"Copper working",lost,548,31.50,115.45,-6089,January 6089 BCE,18890
+"Copper working",lost,77108,29.36,117.15,-6088,January 6088 BCE,20642
+"Copper working",lost,77108,29.36,117.15,-6088,January 6088 BCE,20642
+"Irrigation",lost,6658,38.26,38.85,-6001,January 6001 BCE,40770
+"Copper working",lost,77478,31.05,116.18,-5991,January 5991 BCE,19457
+"Copper working",lost,77478,31.05,116.18,-5990,January 5990 BCE,19199
+"Irrigation",lost,6923,39.11,38.32,-5980,January 5980 BCE,13348
+"Irrigation",lost,7570,41.23,35.70,-5976,January 5976 BCE,15393
+"Copper working",lost,77478,31.05,116.18,-5972,January 5972 BCE,19210
+"Copper working",lost,77478,31.05,116.18,-5972,January 5972 BCE,19210
+"Copper working",lost,77478,31.05,116.18,-5960,January 5960 BCE,18307
+"Copper working",lost,77478,31.05,116.18,-5960,January 5960 BCE,18307
+"Copper working",lost,77478,31.05,116.18,-5951,January 5951 BCE,18476
+"Copper working",lost,77478,31.05,116.18,-5951,January 5951 BCE,18476
+"Irrigation",lost,6923,39.11,38.32,-5934,January 5934 BCE,13179
+"Copper working",lost,77108,29.36,117.15,-5928,January 5928 BCE,20027
+"Copper working",lost,77108,29.36,117.15,-5927,January 5927 BCE,17485
+"Copper working",lost,548,31.50,115.45,-5925,January 5925 BCE,18216
+"Copper working",lost,548,31.50,115.45,-5925,January 5925 BCE,18216
+"Milk and wool",lost,9233,47.14,37.73,-5924,January 5924 BCE,2394
+"Copper working",lost,545,31.58,113.96,-5917,January 5917 BCE,14982
+"Copper working",lost,545,31.58,113.96,-5917,January 5917 BCE,14982
+"Milk and wool",lost,9344,47.56,38.10,-5898,January 5898 BCE,6036
+"Copper working",lost,545,31.58,113.96,-5878,January 5878 BCE,16016
+"Copper working",lost,545,31.58,113.96,-5878,January 5878 BCE,16016
+"Milk and wool",lost,10092,50.41,41.63,-5872,January 5872 BCE,2192
+"Milk and wool",independent,163861,7.11,-5.75,-5867,January 5867 BCE,0
+"Copper working",lost,545,31.58,113.96,-5858,January 5858 BCE,15705
+"Copper working",lost,545,31.58,113.96,-5858,January 5858 BCE,15705
+"Copper working",lost,545,31.58,113.96,-5849,January 5849 BCE,15847
+"Copper working",lost,545,31.58,113.96,-5849,January 5849 BCE,15847
+"Milk and wool",lost,10091,50.38,42.38,-5847,January 5847 BCE,3810
+"Copper working",lost,545,31.58,113.96,-5844,January 5844 BCE,15933
+"Copper working",lost,545,31.58,113.96,-5844,January 5844 BCE,15933
+"Horse herding",first,8648,44.68,45.85,-5828,January 5828 BCE,0
+"Milk and wool",lost,9778,49.22,39.64,-5823,January 5823 BCE,4934
+"Copper working",lost,77478,31.05,116.18,-5798,January 5798 BCE,19119
+"Copper working",lost,77478,31.05,116.18,-5798,January 5798 BCE,19119
+"Copper working",lost,77478,31.05,116.18,-5789,January 5789 BCE,19173
+"Copper working",lost,77478,31.05,116.18,-5789,January 5789 BCE,19173
+"Milk and wool",lost,10194,50.78,42.83,-5782,January 5782 BCE,2630
+"Milk and wool",lost,9234,47.15,37.04,-5776,January 5776 BCE,4690
+"Milk and wool",lost,10090,50.34,43.13,-5775,January 5775 BCE,7401
+"Copper working",lost,548,31.50,115.45,-5772,January 5772 BCE,18528
+"Copper working",lost,548,31.50,115.45,-5772,January 5772 BCE,18528
+"Irrigation",lost,6656,38.23,39.99,-5763,January 5763 BCE,15180
+"Milk and wool",lost,9981,49.72,46.35,-5738,January 5738 BCE,5778
+"Irrigation",lost,6656,38.23,39.99,-5735,January 5735 BCE,17816
+"Milk and wool",lost,10094,50.47,40.14,-5730,January 5730 BCE,2851
+"Irrigation",lost,6656,38.23,39.99,-5725,January 5725 BCE,18293
+"Milk and wool",lost,9885,49.65,39.32,-5708,January 5708 BCE,6652
+"Milk and wool",lost,9779,49.23,38.92,-5696,January 5696 BCE,7551
+"Irrigation",lost,6385,37.34,41.59,-5670,January 5670 BCE,7001
+"Irrigation",lost,7179,39.89,40.72,-5658,January 5658 BCE,20063
+"Irrigation",lost,7180,39.91,40.13,-5658,January 5658 BCE,18088
+"Copper working",lost,548,31.50,115.45,-5658,January 5658 BCE,19110
+"Copper working",lost,548,31.50,115.45,-5657,January 5657 BCE,16547
+"Copper working",lost,77108,29.36,117.15,-5657,January 5657 BCE,20548
+"Copper working",lost,77108,29.36,117.15,-5657,January 5657 BCE,20548
+"Irrigation",lost,6656,38.23,39.99,-5651,January 5651 BCE,17917
+"Irrigation",lost,6790,38.67,39.16,-5648,January 5648 BCE,30216
+"Irrigation",lost,7053,39.52,38.63,-5648,January 5648 BCE,19094
+"Irrigation",lost,7181,39.92,39.54,-5646,January 5646 BCE,2715
+"Irrigation",lost,7179,39.89,40.72,-5617,January 5617 BCE,17768
+"Milk and wool",lost,10095,50.49,39.38,-5616,January 5616 BCE,6381
+"Irrigation",lost,7180,39.91,40.13,-5613,January 5613 BCE,11209
+"Copper working",lost,77478,31.05,116.18,-5608,January 5608 BCE,19554
+"Copper working",lost,77478,31.05,116.18,-5608,January 5608 BCE,19554
+"Irrigation",lost,7181,39.92,39.54,-5606,January 5606 BCE,3056
+"Irrigation",lost,6790,38.67,39.16,-5604,January 5604 BCE,33223
+"Irrigation",lost,7181,39.92,39.54,-5604,January 5604 BCE,3055
+"Irrigation",lost,7053,39.52,38.63,-5602,January 5602 BCE,17011
+"Copper working",lost,77478,31.05,116.18,-5599,January 5599 BCE,19554
+"Copper working",lost,77478,31.05,116.18,-5599,January 5599 BCE,19554
+"Copper working",lost,545,31.58,113.96,-5582,January 5582 BCE,15695
+"Copper working",lost,545,31.58,113.96,-5581,January 5581 BCE,13831
+"Irrigation",lost,6384,37.32,42.15,-5572,January 5572 BCE,11512
+"Milk and wool",lost,9348,47.57,35.30,-5568,January 5568 BCE,5146
+"Horse herding",lost,9567,48.42,36.00,-5563,January 5563 BCE,5282
+"Milk and wool",lost,9124,46.73,35.31,-5561,January 5561 BCE,5536
+"Copper working",lost,548,31.50,115.45,-5549,January 5549 BCE,19934
+"Copper working",lost,548,31.50,115.45,-5549,January 5549 BCE,19934
+"Irrigation",lost,6385,37.34,41.59,-5530,January 5530 BCE,8714
+"Irrigation",lost,6656,38.23,39.99,-5529,January 5529 BCE,21321
+"Irrigation",lost,7179,39.89,40.72,-5528,January 5528 BCE,18681
+"Copper working",lost,545,31.58,113.96,-5522,January 5522 BCE,16442
+"Copper working",lost,545,31.58,113.96,-5522,January 5522 BCE,16442
+"Milk and wool",lost,10290,50.86,47.80,-5520,January 5520 BCE,1115
+"Milk and wool",lost,10187,50.42,48.05,-5516,January 5516 BCE,1940
+"Copper working",lost,545,31.58,113.96,-5490,January 5490 BCE,15648
+"Copper working",lost,545,31.58,113.96,-5490,January 5490 BCE,15648
+"Horse herding",lost,9238,47.14,34.27,-5489,January 5489 BCE,1837
+"Horse herding",lost,9782,49.26,36.73,-5488,January 5488 BCE,7571
+"Horse herding",lost,10302,51.34,38.69,-5488,January 5488 BCE,2684
+"Irrigation",lost,6656,38.23,39.99,-5480,January 5480 BCE,19554
+"Milk and wool",lost,10598,52.44,43.12,-5479,January 5479 BCE,2072
+"Copper working",lost,545,31.58,113.96,-5477,January 5477 BCE,15535
+"Copper working",lost,545,31.58,113.96,-5477,January 5477 BCE,15535
+"Horse herding",lost,9888,49.68,37.11,-5477,January 5477 BCE,6226
+"Horse herding",lost,10200,50.93,38.28,-5473,January 5473 BCE,4756
+"Horse herding",lost,9993,50.10,37.49,-5462,January 5462 BCE,5360
+"Horse herding",lost,10097,50.51,37.88,-5461,January 5461 BCE,5108
+"Horse herding",lost,9568,48.42,35.29,-5459,January 5459 BCE,7610
+"Irrigation",lost,6656,38.23,39.99,-5455,January 5455 BCE,19994
+"Horse herding",lost,9125,46.72,34.63,-5455,January 5455 BCE,7117
+"Milk and wool",lost,10697,52.87,42.80,-5447,January 5447 BCE,2030
+"Milk and wool",lost,10403,51.75,39.11,-5422,January 5422 BCE,3983
+"Milk and wool",lost,10501,52.11,41.10,-5420,January 5420 BCE,7218
+"Copper working",lost,77478,31.05,116.18,-5412,January 5412 BCE,19955
+"Copper working",lost,77478,31.05,116.18,-5412,January 5412 BCE,19955
+"Copper working",lost,77478,31.05,116.18,-5407,January 5407 BCE,19955
+"Copper working",lost,77478,31.05,116.18,-5407,January 5407 BCE,19955
+"Copper working",independent,6788,38.64,40.31,-5405,January 5405 BCE,0
+"Horse herding",lost,10303,51.35,37.92,-5400,January 5400 BCE,4853
+"Horse herding",lost,10404,51.77,38.33,-5399,January 5399 BCE,3266
+"Milk and wool",lost,9569,48.41,34.57,-5388,January 5388 BCE,8082
+"Copper working",lost,77478,31.05,116.18,-5372,January 5372 BCE,18169
+"Copper working",lost,77478,31.05,116.18,-5372,January 5372 BCE,18169
+"Horse herding",lost,9239,47.13,33.57,-5361,January 5361 BCE,5624
+"Milk and wool",lost,9890,49.69,35.63,-5358,January 5358 BCE,6160
+"Horse herding",lost,9890,49.69,35.63,-5358,January 5358 BCE,6160
+"Copper working",lost,548,31.50,115.45,-5355,January 5355 BCE,19128
+"Copper working",lost,548,31.50,115.45,-5354,January 5354 BCE,16693
+"Copper working",lost,77108,29.36,117.15,-5349,January 5349 BCE,19860
+"Copper working",lost,77108,29.36,117.15,-5349,January 5349 BCE,19860
+"Milk and wool",lost,10389,51.10,49.80,-5338,January 5338 BCE,1595
+"Copper working",lost,548,31.50,115.45,-5337,January 5337 BCE,19621
+"Copper working",lost,548,31.50,115.45,-5336,January 5336 BCE,17103
+"Horse herding",lost,8898,45.87,33.98,-5335,January 5335 BCE,2305
+"The sail",first,76412,30.21,121.34,-5330,January 5330 BCE,0
+"Milk and wool",lost,10694,52.74,45.18,-5322,January 5322 BCE,2370
+"Horse herding",lost,10099,50.53,36.38,-5322,January 5322 BCE,4593
+"Milk and wool",lost,10591,52.05,48.56,-5317,January 5317 BCE,1171
+"Horse herding",lost,10304,51.36,37.15,-5314,January 5314 BCE,4217
+"Irrigation",lost,6385,37.34,41.59,-5311,January 5311 BCE,11003
+"Irrigation",lost,7179,39.89,40.72,-5311,January 5311 BCE,17641
+"Irrigation",lost,7180,39.91,40.13,-5311,January 5311 BCE,16117
+"Copper working",lost,7178,39.87,41.31,-5310,January 5310 BCE,15362
+"Copper working",lost,7178,39.87,41.31,-5310,January 5310 BCE,15362
+"Copper working",lost,7179,39.89,40.72,-5310,January 5310 BCE,26948
+"Copper working",lost,7179,39.89,40.72,-5310,January 5310 BCE,26948
+"Copper working",lost,7180,39.91,40.13,-5310,January 5310 BCE,25963
+"Copper working",lost,7180,39.91,40.13,-5310,January 5310 BCE,25963
+"Irrigation",lost,6656,38.23,39.99,-5309,January 5309 BCE,20662
+"Irrigation",lost,7179,39.89,40.72,-5306,January 5306 BCE,17625
+"Irrigation",lost,7180,39.91,40.13,-5306,January 5306 BCE,16096
+"Irrigation",independent,17416,37.43,110.80,-5303,January 5303 BCE,0
+"Copper working",lost,77108,29.36,117.15,-5303,January 5303 BCE,20491
+"Copper working",lost,77108,29.36,117.15,-5303,January 5303 BCE,20491
+"Horse herding",lost,9461,47.98,33.52,-5302,January 5302 BCE,4550
+"Milk and wool",lost,10695,52.79,44.39,-5296,January 5296 BCE,5995
+"Horse herding",lost,10590,51.98,49.33,-5283,January 5283 BCE,1567
+"Horse herding",lost,10591,52.05,48.56,-5283,January 5283 BCE,2179
+"Milk and wool",lost,10796,53.34,41.67,-5279,January 5279 BCE,5148
+"Milk and wool",lost,10797,53.37,40.86,-5276,January 5276 BCE,1581
+"Copper working",lost,548,31.50,115.45,-5271,January 5271 BCE,18487
+"Copper working",lost,548,31.50,115.45,-5270,January 5270 BCE,16040
+"Copper working",lost,77108,29.36,117.15,-5270,January 5270 BCE,20011
+"Copper working",lost,77108,29.36,117.15,-5269,January 5269 BCE,17467
+"Horse herding",lost,10202,50.95,36.76,-5266,January 5266 BCE,8194
+"Copper working",lost,548,31.50,115.45,-5264,January 5264 BCE,16150
+"Milk and wool",lost,10406,51.78,36.78,-5260,January 5260 BCE,3605
+"Irrigation",independent,69251,11.41,15.24,-5259,January 5259 BCE,0
+"Milk and wool",lost,10305,51.37,36.38,-5252,January 5252 BCE,2577
+"Horse herding",lost,10305,51.37,36.38,-5252,January 5252 BCE,3053
+"Irrigation",lost,6655,38.22,40.55,-5249,January 5249 BCE,30884
+"Milk and wool",lost,10790,53.06,46.47,-5241,January 5241 BCE,1452
+"Horse herding",lost,8783,45.44,33.67,-5237,January 5237 BCE,3286
+"Irrigation",lost,6922,39.10,38.90,-5234,January 5234 BCE,51767
+"The sail",independent,6127,36.61,33.80,-5233,January 5233 BCE,0
+"Irrigation",lost,6384,37.32,42.15,-5227,January 5227 BCE,15600
+"Irrigation",lost,6657,38.25,39.42,-5227,January 5227 BCE,46895
+"Horse herding",lost,9786,49.25,33.81,-5226,January 5226 BCE,6862
+"Copper working",lost,7182,39.94,38.95,-5213,January 5213 BCE,27385
+"Copper working",lost,7182,39.94,38.95,-5213,January 5213 BCE,27385
+"Milk and wool",lost,10388,51.02,50.55,-5206,January 5206 BCE,2026
+"Horse herding",lost,10507,52.20,36.39,-5203,January 5203 BCE,1739
+"Horse herding",lost,9014,46.27,32.94,-5200,January 5200 BCE,8325
+"Copper working",lost,77108,29.36,117.15,-5197,January 5197 BCE,20737
+"Copper working",lost,77108,29.36,117.15,-5197,January 5197 BCE,20737
+"Milk and wool",lost,10887,53.50,46.19,-5195,January 5195 BCE,2126
+"Irrigation",lost,6922,39.10,38.90,-5191,January 5191 BCE,50899
+"Copper working",lost,77108,29.36,117.15,-5191,January 5191 BCE,20780
+"Copper working",lost,77108,29.36,117.15,-5191,January 5191 BCE,20780
+"Milk and wool",lost,10888,53.56,45.38,-5188,January 5188 BCE,2235
+"Irrigation",lost,6657,38.25,39.42,-5184,January 5184 BCE,47485
+"Irrigation",lost,6384,37.32,42.15,-5183,January 5183 BCE,16343
+"Irrigation",lost,16720,35.19,115.22,-5179,January 5179 BCE,23256
+"Milk and wool",lost,10306,51.37,35.62,-5178,January 5178 BCE,2224
+"Horse herding",lost,10306,51.37,35.62,-5178,January 5178 BCE,2224
+"Horse herding",lost,9680,48.80,32.75,-5175,January 5175 BCE,3447
+"Milk and wool",lost,10889,53.61,44.58,-5164,January 5164 BCE,4774
+"Milk and wool",lost,10985,54.05,44.26,-5164,January 5164 BCE,1578
+"Irrigation",lost,6384,37.32,42.15,-5163,January 5163 BCE,17043
+"Milk and wool",lost,10488,51.38,51.07,-5159,January 5159 BCE,3228
+"Copper working",lost,77108,29.36,117.15,-5153,January 5153 BCE,20439
+"Irrigation",lost,16720,35.19,115.22,-5152,January 5152 BCE,27142
+"Copper working",lost,77108,29.36,117.15,-5152,January 5152 BCE,17823
+"Irrigation",lost,16446,34.53,110.90,-5150,January 5150 BCE,20329
+"Irrigation",lost,16447,34.54,110.37,-5150,January 5150 BCE,17448
+"Copper working",lost,548,31.50,115.45,-5150,January 5150 BCE,19031
+"Horse herding",lost,8784,45.43,33.00,-5150,January 5150 BCE,3217
+"Copper working",lost,548,31.50,115.45,-5149,January 5149 BCE,16485
+"Irrigation",lost,17270,36.77,116.58,-5147,January 5147 BCE,10514
+"Copper working",lost,7182,39.94,38.95,-5145,January 5145 BCE,24851
+"Copper working",lost,7178,39.87,41.31,-5143,January 5143 BCE,17678
+"Copper working",lost,7178,39.87,41.31,-5143,January 5143 BCE,17678
+"The sail",lost,5868,35.31,24.70,-5142,January 5142 BCE,217
+"Milk and wool",lost,5868,35.31,24.70,-5141,January 5141 BCE,225
+"Irrigation",lost,16581,34.82,114.37,-5140,January 5140 BCE,22276
+"Milk and wool",lost,10387,50.94,51.29,-5137,January 5137 BCE,2417
+"Horse herding",lost,10799,53.42,39.25,-5135,January 5135 BCE,4716
+"Copper working",lost,77108,29.36,117.15,-5131,January 5131 BCE,20665
+"Copper working",lost,77108,29.36,117.15,-5131,January 5131 BCE,20665
+"Copper working",lost,548,31.50,115.45,-5130,January 5130 BCE,19507
+"Milk and wool",lost,10203,50.95,36.00,-5129,January 5129 BCE,10269
+"Copper working",lost,7182,39.94,38.95,-5128,January 5128 BCE,25190
+"Copper working",lost,7182,39.94,38.95,-5128,January 5128 BCE,25190
+"Horse herding",lost,10407,51.79,36.00,-5123,January 5123 BCE,6951
+"Milk and wool",lost,9129,46.67,31.88,-5122,January 5122 BCE,4359
+"Horse herding",lost,9129,46.67,31.88,-5122,January 5122 BCE,4359
+"Horse herding",lost,10895,53.82,39.69,-5118,January 5118 BCE,2857
+"Horse herding",lost,10307,51.36,34.85,-5117,January 5117 BCE,1940
+"Copper working",lost,6917,39.01,41.79,-5116,January 5116 BCE,17103
+"Copper working",lost,6917,39.01,41.79,-5116,January 5116 BCE,17103
+"Copper working",lost,7048,39.44,41.55,-5116,January 5116 BCE,20606
+"Copper working",lost,7178,39.87,41.31,-5116,January 5116 BCE,21351
+"Copper working",lost,7178,39.87,41.31,-5116,January 5116 BCE,21351
+"Copper working",lost,7179,39.89,40.72,-5116,January 5116 BCE,29327
+"Copper working",lost,7179,39.89,40.72,-5116,January 5116 BCE,29327
+"Copper working",lost,7180,39.91,40.13,-5116,January 5116 BCE,28528
+"Copper working",lost,7180,39.91,40.13,-5116,January 5116 BCE,28528
+"Copper working",lost,7048,39.44,41.55,-5115,January 5115 BCE,10573
+"Horse riding",first,6536,37.83,32.33,-5112,January 5112 BCE,0
+"Copper working",lost,5706,35.38,36.80,-5108,January 5108 BCE,14628
+"Copper working",lost,5706,35.38,36.80,-5108,January 5108 BCE,14628
+"Copper working",lost,6120,36.62,37.65,-5108,January 5108 BCE,41250
+"Copper working",lost,6120,36.62,37.65,-5108,January 5108 BCE,41250
+"Milk and wool",lost,10984,54.00,45.08,-5102,January 5102 BCE,4007
+"Horse herding",lost,9463,47.94,32.11,-5101,January 5101 BCE,3467
+"Horse herding",lost,9681,48.79,32.03,-5096,January 5096 BCE,3353
+"Irrigation",lost,17270,36.77,116.58,-5093,January 5093 BCE,10683
+"Irrigation",lost,6385,37.34,41.59,-5086,January 5086 BCE,12052
+"Irrigation",lost,6385,37.34,41.59,-5085,January 5085 BCE,12009
+"Milk and wool",lost,9353,47.51,31.80,-5085,January 5085 BCE,4481
+"Copper working",lost,545,31.58,113.96,-5085,January 5085 BCE,15521
+"Copper working",lost,545,31.58,113.96,-5085,January 5085 BCE,15521
+"Irrigation",lost,7179,39.89,40.72,-5083,January 5083 BCE,16259
+"Irrigation",lost,7180,39.91,40.13,-5083,January 5083 BCE,14328
+"Copper working",lost,7178,39.87,41.31,-5083,January 5083 BCE,15761
+"Copper working",lost,7178,39.87,41.31,-5083,January 5083 BCE,15761
+"Copper working",lost,7179,39.89,40.72,-5083,January 5083 BCE,26177
+"Copper working",lost,7179,39.89,40.72,-5083,January 5083 BCE,26177
+"Copper working",lost,7180,39.91,40.13,-5083,January 5083 BCE,24354
+"Copper working",lost,7180,39.91,40.13,-5083,January 5083 BCE,24354
+"Irrigation",lost,17270,36.77,116.58,-5082,January 5082 BCE,11152
+"Copper working",lost,77108,29.36,117.15,-5081,January 5081 BCE,20607
+"Copper working",lost,77108,29.36,117.15,-5081,January 5081 BCE,20607
+"Irrigation",lost,6656,38.23,39.99,-5080,January 5080 BCE,21848
+"Copper working",lost,548,31.50,115.45,-5080,January 5080 BCE,19858
+"Copper working",lost,548,31.50,115.45,-5080,January 5080 BCE,19858
+"Irrigation",lost,7180,39.91,40.13,-5079,January 5079 BCE,14753
+"Milk and wool",lost,10981,53.82,47.51,-5078,January 5078 BCE,2307
+"Milk and wool",lost,11084,54.63,40.61,-5077,January 5077 BCE,1824
+"Irrigation",lost,16859,35.58,115.55,-5075,January 5075 BCE,18438
+"Milk and wool",lost,11076,54.25,47.23,-5075,January 5075 BCE,1182
+"Milk and wool",lost,10802,53.45,36.81,-5074,January 5074 BCE,2989
+"Irrigation",lost,7180,39.91,40.13,-5071,January 5071 BCE,15258
+"Irrigation",lost,7179,39.89,40.72,-5070,January 5070 BCE,12162
+"Copper working",lost,77108,29.36,117.15,-5069,January 5069 BCE,20705
+"Copper working",lost,77108,29.36,117.15,-5069,January 5069 BCE,20705
+"Irrigation",lost,6790,38.67,39.16,-5068,January 5068 BCE,35249
+"Milk and wool",lost,11082,54.56,42.28,-5066,January 5066 BCE,3667
+"Milk and wool",lost,11081,54.52,43.11,-5062,January 5062 BCE,1981
+"Copper working",lost,548,31.50,115.45,-5060,January 5060 BCE,19859
+"Copper working",lost,548,31.50,115.45,-5060,January 5060 BCE,19859
+"Horse herding",lost,8549,44.60,33.71,-5055,January 5055 BCE,3571
+"Milk and wool",lost,10508,52.20,35.61,-5054,January 5054 BCE,6413
+"Horse herding",lost,9998,50.09,33.77,-5054,January 5054 BCE,7726
+"Horse herding",lost,10508,52.20,35.61,-5054,January 5054 BCE,6413
+"Horse herding",lost,9573,48.35,31.72,-5050,January 5050 BCE,5032
+"Milk and wool",lost,11077,54.32,46.42,-5045,January 5045 BCE,2249
+"Horse herding",lost,10308,51.35,34.08,-5044,January 5044 BCE,2487
+"Milk and wool",lost,10979,53.67,49.12,-5043,January 5043 BCE,1762
+"Irrigation",lost,6384,37.32,42.15,-5039,January 5039 BCE,13841
+"Milk and wool",lost,10884,53.31,48.58,-5038,January 5038 BCE,3237
+"Irrigation",lost,16581,34.82,114.37,-5033,January 5033 BCE,20982
+"Milk and wool",lost,10885,53.38,47.79,-5032,January 5032 BCE,1335
+"Irrigation",lost,6657,38.25,39.42,-5030,January 5030 BCE,43841
+"Horse herding",lost,9788,49.22,32.36,-5030,January 5030 BCE,9239
+"Horse herding",lost,10102,50.51,34.12,-5021,January 5021 BCE,7744
+"Horse herding",lost,10409,51.78,34.45,-5013,January 5013 BCE,5168
+"Irrigation",lost,6385,37.34,41.59,-5012,January 5012 BCE,10435
+"Milk and wool",lost,11178,55.05,40.24,-5007,January 5007 BCE,2026
+"Irrigation",lost,7179,39.89,40.72,-5004,January 5004 BCE,19553
+"Irrigation",lost,7180,39.91,40.13,-5002,January 5002 BCE,11839
+"Irrigation",lost,6656,38.23,39.99,-5001,January 5001 BCE,22381
+"Irrigation",lost,16447,34.54,110.37,-5001,January 5001 BCE,18303
+"Copper working",lost,77108,29.36,117.15,-4993,January 4993 BCE,20627
+"Copper working",lost,77108,29.36,117.15,-4993,January 4993 BCE,20627
+"Copper working",lost,5706,35.38,36.80,-4990,January 4990 BCE,13556
+"Milk and wool",lost,10706,53.04,35.60,-4989,January 4989 BCE,2285
+"Copper working",lost,5706,35.38,36.80,-4989,January 4989 BCE,13002
+"Copper working",lost,6120,36.62,37.65,-4989,January 4989 BCE,37983
+"Copper working",lost,6120,36.62,37.65,-4989,January 4989 BCE,37983
+"Horse herding",lost,10706,53.04,35.60,-4989,January 4989 BCE,2285
+"Copper working",lost,548,31.50,115.45,-4982,January 4982 BCE,19393
+"Copper working",lost,548,31.50,115.45,-4982,January 4982 BCE,19393
+"Copper working",lost,7178,39.87,41.31,-4982,January 4982 BCE,17328
+"Copper working",lost,7178,39.87,41.31,-4982,January 4982 BCE,17328
+"Milk and wool",lost,11171,54.75,46.12,-4981,January 4981 BCE,2691
+"Copper working",lost,7179,39.89,40.72,-4981,January 4981 BCE,23318
+"Copper working",lost,7179,39.89,40.72,-4981,January 4981 BCE,23318
+"Copper working",lost,7180,39.91,40.13,-4981,January 4981 BCE,24606
+"Copper working",lost,7180,39.91,40.13,-4981,January 4981 BCE,24606
+"Milk and wool",lost,8548,44.60,34.37,-4979,January 4979 BCE,9248
+"Horse herding",lost,8548,44.60,34.37,-4979,January 4979 BCE,9248
+"Horse herding",lost,9682,48.76,31.31,-4973,January 4973 BCE,6101
+"Irrigation",lost,16447,34.54,110.37,-4971,January 4971 BCE,18168
+"Irrigation",lost,16446,34.53,110.90,-4970,January 4970 BCE,16587
+"Irrigation",lost,7179,39.89,40.72,-4967,January 4967 BCE,20190
+"Irrigation",lost,7180,39.91,40.13,-4964,January 4964 BCE,13202
+"Irrigation",lost,6790,38.67,39.16,-4960,January 4960 BCE,34984
+"Irrigation",lost,7053,39.52,38.63,-4954,January 4954 BCE,17418
+"Milk and wool",lost,11179,55.08,39.40,-4953,January 4953 BCE,1729
+"Milk and wool",lost,11271,55.48,39.86,-4953,January 4953 BCE,1741
+"Horse herding",lost,11179,55.08,39.40,-4952,January 4952 BCE,1783
+"Horse herding",lost,10899,53.87,36.41,-4951,January 4951 BCE,3691
+"Irrigation",lost,7181,39.92,39.54,-4950,January 4950 BCE,3777
+"Copper working",lost,77108,29.36,117.15,-4944,January 4944 BCE,20481
+"Horse herding",lost,9856,47.59,59.75,-4944,January 4944 BCE,3503
+"Copper working",lost,77108,29.36,117.15,-4943,January 4943 BCE,17864
+"Milk and wool",lost,10976,53.43,51.50,-4942,January 4942 BCE,2575
+"Horse herding",lost,10993,54.28,37.66,-4940,January 4940 BCE,3915
+"Milk and wool",lost,10410,51.77,33.67,-4939,January 4939 BCE,6025
+"Horse herding",lost,10309,51.34,33.31,-4933,January 4933 BCE,4861
+"Horse herding",lost,9130,46.65,31.20,-4925,January 4925 BCE,7681
+"Milk and wool",lost,10001,50.03,31.54,-4922,January 4922 BCE,4074
+"Horse herding",lost,10207,50.91,32.96,-4917,January 4917 BCE,5677
+"Irrigation",lost,69199,10.60,15.26,-4911,January 4911 BCE,22084
+"Copper working",lost,7178,39.87,41.31,-4911,January 4911 BCE,16268
+"Copper working",lost,7178,39.87,41.31,-4911,January 4911 BCE,16268
+"Copper working",lost,7179,39.89,40.72,-4911,January 4911 BCE,26965
+"Copper working",lost,7179,39.89,40.72,-4911,January 4911 BCE,26965
+"Copper working",lost,7180,39.91,40.13,-4911,January 4911 BCE,24378
+"Irrigation",lost,16446,34.53,110.90,-4910,January 4910 BCE,20470
+"Irrigation",lost,16447,34.54,110.37,-4910,January 4910 BCE,17695
+"Irrigation",independent,98485,21.94,-99.89,-4910,January 4910 BCE,0
+"Copper working",lost,7180,39.91,40.13,-4910,January 4910 BCE,17115
+"Irrigation",lost,16720,35.19,115.22,-4909,January 4909 BCE,29340
+"Copper working",lost,545,31.58,113.96,-4908,January 4908 BCE,14827
+"Irrigation",lost,16581,34.82,114.37,-4907,January 4907 BCE,23431
+"Copper working",lost,545,31.58,113.96,-4907,January 4907 BCE,13092
+"Irrigation",lost,69199,10.60,15.26,-4906,January 4906 BCE,22157
+"Copper working",lost,548,31.50,115.45,-4903,January 4903 BCE,19528
+"Copper working",lost,548,31.50,115.45,-4903,January 4903 BCE,19528
+"Copper working",lost,77108,29.36,117.15,-4903,January 4903 BCE,20765
+"Copper working",lost,77108,29.36,117.15,-4903,January 4903 BCE,20765
+"Copper working",lost,545,31.58,113.96,-4902,January 4902 BCE,15082
+"Copper working",lost,545,31.58,113.96,-4902,January 4902 BCE,15082
+"Irrigation",independent,163080,13.30,-6.62,-4901,January 4901 BCE,0
+"Horse herding",lost,9790,49.17,30.90,-4895,January 4895 BCE,5806
+"Milk and wool",lost,11361,55.85,41.21,-4891,January 4891 BCE,2139
+"Horse herding",lost,9961,47.92,60.30,-4888,January 4888 BCE,2364
+"Horse herding",lost,11180,55.09,38.55,-4887,January 4887 BCE,2623
+"Milk and wool",lost,10974,53.24,53.06,-4886,January 4886 BCE,1599
+"Milk and wool",lost,11180,55.09,38.55,-4884,January 4884 BCE,2841
+"Horse herding",lost,9131,46.62,30.52,-4884,January 4884 BCE,4522
+"Milk and wool",lost,11070,53.78,52.06,-4880,January 4880 BCE,1384
+"Horse herding",lost,10994,54.29,36.83,-4877,January 4877 BCE,6276
+"Horse herding",lost,10995,54.29,36.00,-4871,January 4871 BCE,2416
+"Copper working",lost,7178,39.87,41.31,-4867,January 4867 BCE,15832
+"Copper working",lost,7178,39.87,41.31,-4867,January 4867 BCE,15832
+"Copper working",lost,7179,39.89,40.72,-4867,January 4867 BCE,26231
+"Copper working",lost,7179,39.89,40.72,-4867,January 4867 BCE,26231
+"Copper working",lost,7180,39.91,40.13,-4867,January 4867 BCE,23652
+"Copper working",lost,7180,39.91,40.13,-4867,January 4867 BCE,23652
+"Milk and wool",lost,11165,54.31,51.03,-4861,January 4861 BCE,1717
+"Irrigation",lost,69144,10.67,15.71,-4860,January 4860 BCE,25604
+"Irrigation",lost,16581,34.82,114.37,-4848,January 4848 BCE,22089
+"Horse herding",lost,10106,50.44,31.11,-4845,January 4845 BCE,5520
+"Horse riding",lost,9244,47.03,30.12,-4845,January 4845 BCE,6990
+"Horse herding",lost,10310,51.32,32.54,-4842,January 4842 BCE,6620
+"Milk and wool",lost,10208,50.90,32.20,-4840,January 4840 BCE,8768
+"Milk and wool",lost,11272,55.50,39.01,-4836,January 4836 BCE,6392
+"Copper working",lost,545,31.58,113.96,-4836,January 4836 BCE,15578
+"Copper working",lost,545,31.58,113.96,-4836,January 4836 BCE,15578
+"Irrigation",lost,6521,37.79,40.80,-4835,January 4835 BCE,10871
+"Irrigation",lost,6658,38.26,38.85,-4834,January 4834 BCE,40265
+"Milk and wool",lost,11259,54.84,49.97,-4834,January 4834 BCE,2649
+"Irrigation",lost,16586,34.92,111.72,-4832,January 4832 BCE,26635
+"Irrigation",lost,69199,10.60,15.26,-4828,January 4828 BCE,23088
+"Milk and wool",lost,11164,54.22,51.84,-4827,January 4827 BCE,2278
+"Copper working",lost,545,31.58,113.96,-4824,January 4824 BCE,15657
+"Copper working",lost,545,31.58,113.96,-4824,January 4824 BCE,15657
+"Horse herding",lost,11452,56.27,40.83,-4823,January 4823 BCE,2007
+"Horse herding",lost,10900,53.87,35.59,-4818,January 4818 BCE,9042
+"Horse riding",lost,9575,48.30,30.29,-4815,January 4815 BCE,9103
+"Milk and wool",lost,10682,51.81,54.41,-4814,January 4814 BCE,1299
+"Horse herding",lost,9575,48.30,30.29,-4813,January 4813 BCE,9260
+"Copper working",lost,7178,39.87,41.31,-4811,January 4811 BCE,16038
+"Copper working",lost,7178,39.87,41.31,-4810,January 4810 BCE,13481
+"Copper working",lost,7179,39.89,40.72,-4810,January 4810 BCE,21380
+"Copper working",lost,7179,39.89,40.72,-4810,January 4810 BCE,21380
+"Copper working",lost,7180,39.91,40.13,-4810,January 4810 BCE,21274
+"Copper working",lost,7180,39.91,40.13,-4810,January 4810 BCE,21274
+"Horse riding",lost,9466,47.87,30.00,-4809,January 4809 BCE,6628
+"Horse herding",lost,9466,47.87,30.00,-4808,January 4808 BCE,6708
+"Horse herding",lost,11364,55.92,38.61,-4803,January 4803 BCE,2662
+"Milk and wool",lost,11364,55.92,38.61,-4802,January 4802 BCE,2713
+"Irrigation",lost,6521,37.79,40.80,-4799,January 4799 BCE,10453
+"Irrigation",lost,69144,10.67,15.71,-4799,January 4799 BCE,26942
+"Horse herding",lost,10412,51.73,32.12,-4797,January 4797 BCE,3819
+"Horse herding",lost,9897,49.58,30.48,-4789,January 4789 BCE,6819
+"Horse riding",lost,9897,49.58,30.48,-4789,January 4789 BCE,6819
+"Horse riding",lost,11442,55.72,49.45,-4782,January 4782 BCE,1201
+"Milk and wool",lost,11090,54.70,35.58,-4781,January 4781 BCE,2651
+"Milk and wool",lost,11442,55.72,49.45,-4781,January 4781 BCE,1215
+"Horse herding",lost,11442,55.72,49.45,-4781,January 4781 BCE,1215
+"Horse herding",lost,10169,48.68,60.76,-4777,January 4777 BCE,5598
+"Horse herding",lost,10512,52.16,32.47,-4776,January 4776 BCE,5302
+"Horse riding",lost,10512,52.16,32.47,-4776,January 4776 BCE,5302
+"Horse herding",lost,9245,47.00,29.43,-4775,January 4775 BCE,5847
+"Horse riding",lost,9245,47.00,29.43,-4775,January 4775 BCE,5847
+"Horse herding",lost,10681,51.71,55.15,-4768,January 4768 BCE,1065
+"Copper working",lost,548,31.50,115.45,-4764,January 4764 BCE,18655
+"Copper working",lost,548,31.50,115.45,-4763,January 4763 BCE,16163
+"Irrigation",lost,6521,37.79,40.80,-4759,January 4759 BCE,10590
+"Milk and wool",lost,11447,56.06,45.18,-4758,January 4758 BCE,1199
+"Horse herding",lost,11447,56.06,45.18,-4758,January 4758 BCE,1199
+"Horse riding",lost,11447,56.06,45.18,-4758,January 4758 BCE,1199
+"Irrigation",lost,6658,38.26,38.85,-4756,January 4756 BCE,39780
+"Milk and wool",lost,11534,56.31,47.46,-4756,January 4756 BCE,1700
+"The sail",independent,164183,5.24,-5.97,-4754,January 4754 BCE,0
+"Horse herding",lost,9018,46.19,30.23,-4754,January 4754 BCE,5656
+"Horse herding",lost,10583,51.37,54.59,-4754,January 4754 BCE,2481
+"Horse riding",lost,9018,46.19,30.23,-4754,January 4754 BCE,5656
+"Horse herding",lost,11538,56.54,43.98,-4743,January 4743 BCE,1341
+"Horse riding",lost,11538,56.54,43.98,-4743,January 4743 BCE,1341
+"Milk and wool",lost,11629,57.06,41.84,-4737,January 4737 BCE,840
+"Horse riding",lost,11629,57.06,41.84,-4736,January 4736 BCE,871
+"Horse herding",lost,11629,57.06,41.84,-4735,January 4735 BCE,899
+"Horse riding",lost,10681,51.71,55.15,-4734,January 4734 BCE,2430
+"Horse herding",lost,9019,46.16,29.56,-4732,January 4732 BCE,3361
+"Horse riding",lost,9019,46.16,29.56,-4732,January 4732 BCE,3361
+"Irrigation",lost,163197,13.30,-7.12,-4730,January 4730 BCE,5715
+"Milk and wool",lost,11349,55.11,51.37,-4729,January 4729 BCE,2063
+"Irrigation",lost,163080,13.30,-6.62,-4727,January 4727 BCE,6051
+"Horse herding",lost,9133,46.56,29.15,-4727,January 4727 BCE,4808
+"Horse herding",lost,11091,54.70,34.74,-4727,January 4727 BCE,3146
+"Horse herding",lost,11536,56.44,45.73,-4727,January 4727 BCE,878
+"Horse riding",lost,9133,46.56,29.15,-4727,January 4727 BCE,4808
+"Milk and wool",lost,10902,53.86,33.95,-4722,January 4722 BCE,5707
+"Horse herding",lost,11542,56.70,40.45,-4721,January 4721 BCE,3578
+"Horse riding",lost,11091,54.70,34.74,-4721,January 4721 BCE,3590
+"Horse riding",lost,11542,56.70,40.45,-4721,January 4721 BCE,3578
+"Horse herding",lost,10271,48.99,61.33,-4719,January 4719 BCE,1851
+"Horse herding",lost,10210,50.85,30.68,-4718,January 4718 BCE,6008
+"Horse riding",lost,10210,50.85,30.68,-4718,January 4718 BCE,6008
+"Horse herding",lost,10107,50.41,30.37,-4717,January 4717 BCE,8252
+"Horse riding",lost,10107,50.41,30.37,-4717,January 4717 BCE,8252
+"Milk and wool",lost,11623,56.74,47.16,-4709,January 4709 BCE,1190
+"Milk and wool",lost,11184,55.11,35.15,-4707,January 4707 BCE,2923
+"Milk and wool",lost,11439,55.46,51.96,-4706,January 4706 BCE,711
+"Copper working",lost,77108,29.36,117.15,-4705,January 4705 BCE,20529
+"Copper working",lost,77108,29.36,117.15,-4705,January 4705 BCE,20529
+"Milk and wool",lost,11160,53.82,55.01,-4702,January 4702 BCE,849
+"Horse herding",lost,10710,52.99,32.39,-4698,January 4698 BCE,4309
+"Horse riding",lost,10710,52.99,32.39,-4698,January 4698 BCE,4309
+"Horse riding",lost,11366,55.94,36.87,-4692,January 4692 BCE,1765
+"Irrigation",lost,69144,10.67,15.71,-4691,January 4691 BCE,29848
+"Milk and wool",lost,11545,56.75,37.78,-4689,January 4689 BCE,1262
+"Milk and wool",lost,11627,56.97,43.63,-4688,January 4688 BCE,1714
+"Milk and wool",lost,11626,56.92,44.52,-4685,January 4685 BCE,1617
+"Horse herding",lost,11626,56.92,44.52,-4684,January 4684 BCE,1657
+"Milk and wool",lost,9577,48.24,28.88,-4682,January 4682 BCE,3886
+"Horse herding",lost,11439,55.46,51.96,-4682,January 4682 BCE,1475
+"Horse herding",lost,11439,55.46,51.96,-4680,January 4680 BCE,1560
+"Horse herding",lost,9020,46.12,28.88,-4674,January 4674 BCE,4328
+"Horse riding",lost,9020,46.12,28.88,-4674,January 4674 BCE,4328
+"Milk and wool",lost,9020,46.12,28.88,-4673,January 4673 BCE,4404
+"Copper working",lost,77108,29.36,117.15,-4671,January 4671 BCE,20067
+"Horse herding",lost,11631,57.12,40.05,-4665,January 4665 BCE,1867
+"Horse riding",lost,11631,57.12,40.05,-4665,January 4665 BCE,1867
+"Milk and wool",lost,9246,46.96,28.74,-4661,January 4661 BCE,8407
+"Horse herding",lost,10612,52.57,32.03,-4653,January 4653 BCE,7408
+"Horse riding",lost,10612,52.57,32.03,-4653,January 4653 BCE,7408
+"Irrigation",lost,6656,38.23,39.99,-4645,January 4645 BCE,19607
+"Milk and wool",lost,11347,54.92,53.01,-4641,January 4641 BCE,2676
+"Milk and wool",lost,11709,57.03,48.61,-4641,January 4641 BCE,1353
+"Milk and wool",lost,11528,55.80,52.56,-4639,January 4639 BCE,1263
+"Milk and wool",lost,10806,53.44,33.56,-4637,January 4637 BCE,11046
+"Copper working",lost,77108,29.36,117.15,-4637,January 4637 BCE,20036
+"Copper working",lost,77108,29.36,117.15,-4637,January 4637 BCE,20036
+"Horse riding",lost,11632,57.14,39.15,-4636,January 4636 BCE,1943
+"Horse herding",lost,8905,45.72,29.29,-4635,January 4635 BCE,3343
+"Horse herding",lost,11632,57.14,39.15,-4635,January 4635 BCE,1988
+"Horse riding",lost,8905,45.72,29.29,-4635,January 4635 BCE,3343
+"Milk and wool",lost,10680,51.60,55.89,-4634,January 4634 BCE,1418
+"Copper working",lost,545,31.58,113.96,-4634,January 4634 BCE,16742
+"Copper working",lost,545,31.58,113.96,-4634,January 4634 BCE,16742
+"Milk and wool",lost,11710,57.11,47.73,-4625,January 4625 BCE,2815
+"Irrigation",lost,7053,39.52,38.63,-4624,January 4624 BCE,17740
+"Irrigation",lost,69144,10.67,15.71,-4619,January 4619 BCE,29560
+"Horse herding",lost,11715,57.40,43.27,-4619,January 4619 BCE,2352
+"Copper working",lost,77108,29.36,117.15,-4617,January 4617 BCE,20421
+"Copper working",lost,77108,29.36,117.15,-4617,January 4617 BCE,20421
+"Copper working",lost,7178,39.87,41.31,-4615,January 4615 BCE,14752
+"Copper working",lost,7179,39.89,40.72,-4615,January 4615 BCE,24379
+"Copper working",lost,7179,39.89,40.72,-4615,January 4615 BCE,24379
+"Copper working",lost,7180,39.91,40.13,-4615,January 4615 BCE,25387
+"Copper working",lost,7180,39.91,40.13,-4615,January 4615 BCE,25387
+"Horse herding",lost,11528,55.80,52.56,-4614,January 4614 BCE,2296
+"Horse herding",lost,11367,55.94,36.00,-4608,January 4608 BCE,3909
+"Horse riding",lost,11367,55.94,36.00,-4608,January 4608 BCE,3909
+"Copper working",lost,7178,39.87,41.31,-4603,January 4603 BCE,18025
+"Copper working",lost,7180,39.91,40.13,-4603,January 4603 BCE,29629
+"Copper working",lost,7178,39.87,41.31,-4602,January 4602 BCE,12452
+"Copper working",lost,7179,39.89,40.72,-4602,January 4602 BCE,19499
+"Copper working",lost,7179,39.89,40.72,-4602,January 4602 BCE,19499
+"Copper working",lost,7180,39.91,40.13,-4602,January 4602 BCE,24099
+"Irrigation",lost,6657,38.25,39.42,-4601,January 4601 BCE,41373
+"Horse herding",lost,10415,51.65,29.80,-4600,January 4600 BCE,2723
+"Horse herding",lost,10581,51.16,56.05,-4600,January 4600 BCE,1019
+"Horse riding",lost,10415,51.65,29.80,-4600,January 4600 BCE,2723
+"Milk and wool",lost,11527,55.70,53.39,-4595,January 4595 BCE,1675
+"Horse herding",lost,10372,49.30,61.91,-4592,January 4592 BCE,3146
+"Milk and wool",lost,11795,57.39,49.21,-4590,January 4590 BCE,1135
+"Milk and wool",lost,11796,57.47,48.32,-4588,January 4588 BCE,1594
+"Irrigation",lost,69144,10.67,15.71,-4586,January 4586 BCE,28720
+"Horse herding",lost,11720,57.56,38.74,-4584,January 4584 BCE,1310
+"Horse herding",lost,9358,47.36,28.32,-4582,January 4582 BCE,8806
+"Horse riding",lost,9358,47.36,28.32,-4582,January 4582 BCE,8806
+"Horse herding",lost,11093,54.67,33.06,-4580,January 4580 BCE,4194
+"Horse riding",lost,11093,54.67,33.06,-4580,January 4580 BCE,4194
+"Irrigation",lost,69199,10.60,15.26,-4579,January 4579 BCE,24294
+"Milk and wool",lost,11803,57.87,41.99,-4576,January 4576 BCE,1620
+"Horse herding",lost,10414,51.68,30.57,-4576,January 4576 BCE,8333
+"Horse riding",lost,10414,51.68,30.57,-4576,January 4576 BCE,8333
+"Horse herding",lost,9247,46.92,28.06,-4573,January 4573 BCE,5280
+"Horse riding",lost,9247,46.92,28.06,-4573,January 4573 BCE,5280
+"Horse riding",lost,10581,51.16,56.05,-4573,January 4573 BCE,1851
+"Milk and wool",lost,9578,48.20,28.17,-4572,January 4572 BCE,6724
+"Copper working",lost,545,31.58,113.96,-4568,January 4568 BCE,17617
+"Copper working",lost,545,31.58,113.96,-4568,January 4568 BCE,17617
+"Copper working",lost,6120,36.62,37.65,-4567,January 4567 BCE,38779
+"Copper working",lost,6120,36.62,37.65,-4567,January 4567 BCE,38779
+"Irrigation",lost,6922,39.10,38.90,-4566,January 4566 BCE,49154
+"Horse herding",lost,11719,57.54,39.65,-4564,January 4564 BCE,3376
+"Horse riding",lost,11719,57.54,39.65,-4564,January 4564 BCE,3376
+"Milk and wool",lost,10314,51.21,29.48,-4561,January 4561 BCE,7731
+"Horse herding",lost,10314,51.21,29.48,-4561,January 4561 BCE,6342
+"Horse riding",lost,10314,51.21,29.48,-4561,January 4561 BCE,6342
+"Irrigation",lost,6657,38.25,39.42,-4560,January 4560 BCE,44182
+"Milk and wool",lost,10212,50.78,29.17,-4560,January 4560 BCE,5403
+"Horse herding",lost,10212,50.78,29.17,-4560,January 4560 BCE,5403
+"Horse riding",lost,10212,50.78,29.17,-4560,January 4560 BCE,5403
+"Irrigation",lost,6384,37.32,42.15,-4558,January 4558 BCE,11617
+"Copper working",lost,545,31.58,113.96,-4556,January 4556 BCE,17620
+"Copper working",lost,545,31.58,113.96,-4556,January 4556 BCE,17620
+"Irrigation",lost,6385,37.34,41.59,-4551,January 4551 BCE,10220
+"Horse herding",lost,11278,55.51,33.85,-4548,January 4548 BCE,4011
+"Horse riding",lost,11278,55.51,33.85,-4548,January 4548 BCE,4011
+"Horse herding",lost,8790,45.28,29.02,-4547,January 4547 BCE,4522
+"Horse riding",lost,8790,45.28,29.02,-4547,January 4547 BCE,4522
+"Milk and wool",lost,11888,58.25,42.53,-4541,January 4541 BCE,889
+"Milk and wool",lost,11546,56.76,36.89,-4537,January 4537 BCE,5479
+"Horse herding",lost,11718,57.51,40.56,-4537,January 4537 BCE,2160
+"Horse riding",lost,11718,57.51,40.56,-4537,January 4537 BCE,2160
+"Irrigation",lost,6656,38.23,39.99,-4534,January 4534 BCE,22171
+"Copper working",lost,545,31.58,113.96,-4534,January 4534 BCE,17862
+"Copper working",lost,545,31.58,113.96,-4534,January 4534 BCE,17862
+"Irrigation",independent,66501,10.76,32.08,-4532,January 4532 BCE,0
+"Milk and wool",lost,10416,51.61,29.03,-4532,January 4532 BCE,3928
+"Milk and wool",lost,10481,50.71,56.21,-4531,January 4531 BCE,938
+"Copper working",lost,7182,39.94,38.95,-4525,January 4525 BCE,22774
+"Copper working",lost,545,31.58,113.96,-4521,January 4521 BCE,17863
+"Copper working",lost,545,31.58,113.96,-4521,January 4521 BCE,17863
+"Horse herding",lost,9359,47.32,27.63,-4520,January 4520 BCE,6394
+"Horse riding",lost,9359,47.32,27.63,-4520,January 4520 BCE,6394
+"Irrigation",lost,6790,38.67,39.16,-4517,January 4517 BCE,34311
+"Horse herding",lost,10809,53.37,31.14,-4517,January 4517 BCE,3969
+"Horse riding",lost,10809,53.37,31.14,-4517,January 4517 BCE,3969
+"Irrigation",lost,17133,36.34,116.78,-4516,January 4516 BCE,28006
+"Milk and wool",lost,11707,56.87,50.36,-4516,January 4516 BCE,2167
+"Milk and wool",lost,9579,48.15,27.46,-4514,January 4514 BCE,4490
+"Copper working",lost,7182,39.94,38.95,-4512,January 4512 BCE,23585
+"Copper working",lost,7182,39.94,38.95,-4512,January 4512 BCE,23585
+"Horse herding",lost,11186,55.09,33.45,-4511,January 4511 BCE,4952
+"Horse riding",lost,11186,55.09,33.45,-4511,January 4511 BCE,4952
+"Copper working",lost,7178,39.87,41.31,-4509,January 4509 BCE,17533
+"Copper working",lost,7178,39.87,41.31,-4509,January 4509 BCE,17533
+"Copper working",lost,7179,39.89,40.72,-4509,January 4509 BCE,29836
+"Copper working",lost,7179,39.89,40.72,-4509,January 4509 BCE,29836
+"Copper working",lost,7180,39.91,40.13,-4509,January 4509 BCE,28541
+"Copper working",lost,7180,39.91,40.13,-4509,January 4509 BCE,28541
+"Horse herding",lost,9248,46.88,27.37,-4509,January 4509 BCE,3608
+"Horse riding",lost,9248,46.88,27.37,-4509,January 4509 BCE,2929
+"Irrigation",lost,6385,37.34,41.59,-4499,January 4499 BCE,9024
+"Copper working",lost,545,31.58,113.96,-4491,January 4491 BCE,17792
+"Copper working",lost,545,31.58,113.96,-4491,January 4491 BCE,17792
+"Milk and wool",lost,10679,51.49,56.62,-4489,January 4489 BCE,3936
+"Milk and wool",lost,9900,49.47,28.29,-4485,January 4485 BCE,4809
+"Horse herding",lost,11369,55.93,34.26,-4481,January 4481 BCE,4410
+"Horse riding",lost,11369,55.93,34.26,-4481,January 4481 BCE,4410
+"The sail",lost,80506,22.68,90.71,-4478,January 4478 BCE,7076
+"Copper working",lost,77108,29.36,117.15,-4477,January 4477 BCE,20402
+"Copper working",lost,77108,29.36,117.15,-4477,January 4477 BCE,20402
+"Horse herding",lost,11459,56.35,34.68,-4476,January 4476 BCE,2137
+"Horse riding",lost,11459,56.35,34.68,-4476,January 4476 BCE,2137
+"Milk and wool",lost,11525,55.48,55.04,-4474,January 4474 BCE,1708
+"Irrigation",lost,17269,36.73,117.13,-4470,January 4470 BCE,25527
+"Copper working",lost,545,31.58,113.96,-4470,January 4470 BCE,17864
+"Copper working",lost,545,31.58,113.96,-4470,January 4470 BCE,17864
+"Horse herding",lost,10471,49.47,63.16,-4467,January 4467 BCE,1413
+"Horse riding",lost,10516,52.05,29.34,-4466,January 4466 BCE,6847
+"Horse herding",lost,10516,52.05,29.34,-4464,January 4464 BCE,7014
+"Horse riding",lost,10417,51.57,28.26,-4464,January 4464 BCE,2290
+"Milk and wool",lost,10417,51.57,28.26,-4463,January 4463 BCE,2335
+"Horse herding",lost,10417,51.57,28.26,-4463,January 4463 BCE,2335
+"Milk and wool",lost,11973,58.68,42.14,-4461,January 4461 BCE,1278
+"Copper working",lost,77108,29.36,117.15,-4457,January 4457 BCE,20637
+"Copper working",lost,77108,29.36,117.15,-4457,January 4457 BCE,20637
+"Horse riding",lost,10517,52.01,28.56,-4444,January 4444 BCE,3688
+"Horse herding",lost,10517,52.01,28.56,-4443,January 4443 BCE,3762
+"Milk and wool",lost,10517,52.01,28.56,-4441,January 4441 BCE,3686
+"Horse riding",lost,11892,58.37,38.80,-4439,January 4439 BCE,1460
+"Horse riding",lost,11972,58.64,43.07,-4435,January 4435 BCE,1698
+"Milk and wool",lost,11893,58.39,37.87,-4434,January 4434 BCE,1850
+"Milk and wool",lost,11879,57.65,50.70,-4433,January 4433 BCE,1343
+"Horse herding",lost,11892,58.37,38.80,-4433,January 4433 BCE,1636
+"Irrigation",lost,6922,39.10,38.90,-4426,January 4426 BCE,50672
+"Irrigation",lost,6657,38.25,39.42,-4424,January 4424 BCE,46455
+"Horse herding",lost,10713,52.91,29.99,-4423,January 4423 BCE,4313
+"Horse riding",lost,10713,52.91,29.99,-4423,January 4423 BCE,4313
+"Irrigation",lost,6384,37.32,42.15,-4422,January 4422 BCE,13248
+"Irrigation",lost,69252,10.97,15.02,-4417,January 4417 BCE,25884
+"Milk and wool",lost,11613,55.81,55.66,-4417,January 4417 BCE,1139
+"Irrigation",lost,6385,37.34,41.59,-4414,January 4414 BCE,11021
+"Milk and wool",lost,9688,48.55,27.02,-4403,January 4403 BCE,6144
+"Irrigation",lost,17269,36.73,117.13,-4399,January 4399 BCE,22784
+"Irrigation",lost,162962,13.31,-6.12,-4397,January 4397 BCE,16945
+"Horse herding",lost,10214,50.70,27.67,-4397,January 4397 BCE,3067
+"Horse riding",lost,10214,50.70,27.67,-4397,January 4397 BCE,3067
+"Irrigation",lost,6656,38.23,39.99,-4395,January 4395 BCE,23072
+"Irrigation",lost,162844,13.67,-5.87,-4395,January 4395 BCE,12513
+"Milk and wool",lost,8908,45.61,27.29,-4394,January 4394 BCE,7376
+"Copper working",lost,77108,29.36,117.15,-4387,January 4387 BCE,20239
+"Copper working",lost,77108,29.36,117.15,-4387,January 4387 BCE,20239
+"Irrigation",lost,6790,38.67,39.16,-4386,January 4386 BCE,35788
+"Irrigation",lost,7179,39.89,40.72,-4384,January 4384 BCE,19550
+"Irrigation",lost,17269,36.73,117.13,-4384,January 4384 BCE,23409
+"Copper working",lost,7054,39.53,38.05,-4383,January 4383 BCE,26610
+"Copper working",lost,7183,39.95,38.36,-4383,January 4383 BCE,22960
+"Irrigation",lost,7180,39.91,40.13,-4382,January 4382 BCE,13047
+"Copper working",lost,7178,39.87,41.31,-4381,January 4381 BCE,17776
+"Copper working",lost,7178,39.87,41.31,-4381,January 4381 BCE,17776
+"Copper working",lost,7179,39.89,40.72,-4381,January 4381 BCE,29866
+"Copper working",lost,7179,39.89,40.72,-4381,January 4381 BCE,29866
+"Copper working",lost,7180,39.91,40.13,-4381,January 4381 BCE,28274
+"Copper working",lost,7180,39.91,40.13,-4381,January 4381 BCE,28274
+"Irrigation",lost,7053,39.52,38.63,-4378,January 4378 BCE,17163
+"Irrigation",lost,66219,12.06,34.28,-4378,January 4378 BCE,21073
+"Copper working",lost,7054,39.53,38.05,-4371,January 4371 BCE,23424
+"Copper working",lost,7054,39.53,38.05,-4371,January 4371 BCE,23424
+"Copper working",lost,7183,39.95,38.36,-4371,January 4371 BCE,20498
+"Horse herding",lost,6789,38.66,39.73,-4371,January 4371 BCE,49065
+"Horse riding",lost,6789,38.66,39.73,-4371,January 4371 BCE,49065
+"Irrigation",lost,7181,39.92,39.54,-4370,January 4370 BCE,2509
+"Horse herding",lost,9471,47.67,26.50,-4369,January 4369 BCE,7071
+"Horse riding",lost,9471,47.67,26.50,-4369,January 4369 BCE,7071
+"Copper working",lost,77108,29.36,117.15,-4368,January 4368 BCE,20503
+"Copper working",lost,77108,29.36,117.15,-4368,January 4368 BCE,20503
+"Horse herding",lost,9361,47.23,26.25,-4367,January 4367 BCE,2929
+"Horse herding",lost,10615,52.48,29.66,-4367,January 4367 BCE,9117
+"Horse riding",lost,9361,47.23,26.25,-4367,January 4367 BCE,2929
+"Horse riding",lost,10418,51.53,27.49,-4367,January 4367 BCE,3301
+"Horse riding",lost,10615,52.48,29.66,-4367,January 4367 BCE,9117
+"Horse herding",lost,10418,51.53,27.49,-4366,January 4366 BCE,3360
+"Irrigation",lost,66219,12.06,34.28,-4365,January 4365 BCE,21779
+"Irrigation",lost,7181,39.92,39.54,-4362,January 4362 BCE,2542
+"Milk and wool",lost,10811,53.31,29.52,-4361,January 4361 BCE,3210
+"Milk and wool",lost,10480,50.60,56.93,-4360,January 4360 BCE,2195
+"Irrigation",lost,7181,39.92,39.54,-4356,January 4356 BCE,2692
+"Copper working",lost,7182,39.94,38.95,-4355,January 4355 BCE,19594
+"Copper working",lost,7182,39.94,38.95,-4355,January 4355 BCE,19594
+"Horse herding",lost,12138,59.44,43.25,-4354,January 4354 BCE,1125
+"Irrigation",lost,69198,11.04,15.48,-4353,January 4353 BCE,20072
+"Milk and wool",lost,12049,58.62,49.24,-4349,January 4349 BCE,911
+"Irrigation",lost,69198,11.04,15.48,-4348,January 4348 BCE,20197
+"Copper working",lost,7178,39.87,41.31,-4348,January 4348 BCE,15962
+"Copper working",lost,7178,39.87,41.31,-4348,January 4348 BCE,15962
+"Copper working",lost,7179,39.89,40.72,-4348,January 4348 BCE,26378
+"Copper working",lost,7179,39.89,40.72,-4348,January 4348 BCE,26378
+"Copper working",lost,7180,39.91,40.13,-4348,January 4348 BCE,23727
+"Copper working",lost,7180,39.91,40.13,-4348,January 4348 BCE,23727
+"Copper working",lost,77108,29.36,117.15,-4347,January 4347 BCE,20686
+"Copper working",lost,77108,29.36,117.15,-4347,January 4347 BCE,20686
+"Horse herding",lost,9902,49.38,26.84,-4342,January 4342 BCE,4588
+"Horse riding",lost,9902,49.38,26.84,-4342,January 4342 BCE,4588
+"Horse herding",lost,11976,58.77,39.31,-4340,January 4340 BCE,4068
+"Horse riding",lost,11976,58.77,39.31,-4340,January 4340 BCE,4068
+"Horse herding",lost,8793,45.17,27.04,-4337,January 4337 BCE,5994
+"Horse riding",lost,8793,45.17,27.04,-4337,January 4337 BCE,5994
+"Milk and wool",lost,11095,54.63,31.39,-4336,January 4336 BCE,8295
+"Horse herding",lost,8674,44.84,28.76,-4335,January 4335 BCE,10935
+"Horse riding",lost,8674,44.84,28.76,-4335,January 4335 BCE,10935
+"Horse herding",lost,8674,44.84,28.76,-4334,January 4334 BCE,11013
+"Horse riding",lost,8674,44.84,28.76,-4334,January 4334 BCE,11013
+"Horse herding",lost,11979,58.81,36.47,-4333,January 4333 BCE,997
+"Milk and wool",lost,11969,58.48,45.87,-4332,January 4332 BCE,2053
+"Horse herding",lost,8674,44.84,28.76,-4330,January 4330 BCE,11068
+"Horse herding",lost,10215,50.65,26.92,-4330,January 4330 BCE,2559
+"Horse riding",lost,8674,44.84,28.76,-4330,January 4330 BCE,11068
+"Horse riding",lost,10215,50.65,26.92,-4330,January 4330 BCE,2559
+"Horse herding",lost,11724,57.58,35.09,-4329,January 4329 BCE,3255
+"Horse riding",lost,12060,59.18,38.88,-4326,January 4326 BCE,1180
+"Horse herding",lost,12049,58.62,49.24,-4325,January 4325 BCE,1324
+"Milk and wool",lost,10518,51.96,27.79,-4323,January 4323 BCE,7907
+"Horse herding",lost,11895,58.40,36.00,-4323,January 4323 BCE,1636
+"Horse herding",lost,9796,48.94,26.57,-4322,January 4322 BCE,4990
+"Horse riding",lost,9796,48.94,26.57,-4322,January 4322 BCE,4990
+"Horse herding",lost,8909,45.56,26.62,-4319,January 4319 BCE,3295
+"Horse riding",lost,8909,45.56,26.62,-4319,January 4319 BCE,3295
+"Copper working",lost,77108,29.36,117.15,-4316,January 4316 BCE,20373
+"Copper working",lost,77108,29.36,117.15,-4316,January 4316 BCE,20373
+"Horse riding",lost,10419,51.48,26.73,-4315,January 4315 BCE,2665
+"Copper working",lost,545,31.58,113.96,-4314,January 4314 BCE,16636
+"Copper working",lost,545,31.58,113.96,-4314,January 4314 BCE,16636
+"Milk and wool",lost,11895,58.40,36.00,-4313,January 4313 BCE,2104
+"Horse herding",lost,10419,51.48,26.73,-4313,January 4313 BCE,2800
+"Milk and wool",lost,12048,58.53,50.15,-4311,January 4311 BCE,1746
+"Horse riding",lost,12219,59.82,43.83,-4309,January 4309 BCE,717
+"Milk and wool",lost,12219,59.82,43.83,-4303,January 4303 BCE,956
+"Irrigation",lost,17269,36.73,117.13,-4298,January 4298 BCE,24270
+"Horse herding",lost,12058,59.13,40.79,-4293,January 4293 BCE,4440
+"Horse riding",lost,12058,59.13,40.79,-4293,January 4293 BCE,4440
+"Milk and wool",lost,11789,56.81,54.42,-4290,January 4290 BCE,3315
+"Horse herding",lost,9689,48.50,26.31,-4290,January 4290 BCE,6315
+"Horse riding",lost,9689,48.50,26.31,-4290,January 4290 BCE,6315
+"Horse herding",lost,8676,44.77,27.45,-4285,January 4285 BCE,9711
+"Horse riding",lost,8676,44.77,27.45,-4285,January 4285 BCE,9711
+"Milk and wool",lost,11962,57.90,52.22,-4281,January 4281 BCE,2263
+"Horse herding",lost,10616,52.44,28.88,-4279,January 4279 BCE,12425
+"Horse riding",lost,10616,52.44,28.88,-4279,January 4279 BCE,12425
+"Milk and wool",lost,9362,47.18,25.57,-4277,January 4277 BCE,3630
+"Milk and wool",lost,10579,50.93,57.50,-4277,January 4277 BCE,2313
+"Horse herding",lost,9362,47.18,25.57,-4277,January 4277 BCE,3630
+"Horse riding",lost,9362,47.18,25.57,-4277,January 4277 BCE,3630
+"Irrigation",lost,17269,36.73,117.13,-4276,January 4276 BCE,24893
+"Horse herding",lost,11896,58.40,35.06,-4263,January 4263 BCE,1595
+"Irrigation",lost,163312,12.94,-7.37,-4262,January 4262 BCE,8519
+"Horse herding",lost,11980,58.81,35.53,-4261,January 4261 BCE,2318
+"Horse herding",lost,12059,59.16,39.83,-4260,January 4260 BCE,4295
+"Horse riding",lost,12059,59.16,39.83,-4260,January 4260 BCE,4295
+"Horse herding",lost,10715,52.83,28.40,-4256,January 4256 BCE,5743
+"Horse herding",lost,10908,53.70,29.04,-4256,January 4256 BCE,4060
+"Horse riding",lost,10715,52.83,28.40,-4256,January 4256 BCE,5743
+"Horse riding",lost,10908,53.70,29.04,-4256,January 4256 BCE,4060
+"Horse riding",lost,11551,56.72,32.44,-4252,January 4252 BCE,1851
+"Irrigation",lost,66410,10.35,32.32,-4251,January 4251 BCE,22015
+"Horse riding",lost,12142,59.58,39.40,-4250,January 4250 BCE,1348
+"Horse herding",lost,12142,59.58,39.40,-4249,January 4249 BCE,1379
+"Horse riding",lost,9797,48.89,25.86,-4249,January 4249 BCE,4547
+"Horse herding",lost,9797,48.89,25.86,-4247,January 4247 BCE,4694
+"Horse herding",lost,11551,56.72,32.44,-4247,January 4247 BCE,2057
+"Irrigation",lost,69252,10.97,15.02,-4243,January 4243 BCE,24255
+"Irrigation",lost,7179,39.89,40.72,-4239,January 4239 BCE,16480
+"Horse riding",lost,11282,55.42,30.42,-4239,January 4239 BCE,1907
+"Horse riding",lost,11726,57.56,33.26,-4238,January 4238 BCE,2786
+"Horse herding",lost,8557,44.41,28.50,-4234,January 4234 BCE,7560
+"Horse herding",lost,11282,55.42,30.42,-4234,January 4234 BCE,2112
+"Horse riding",lost,8557,44.41,28.50,-4234,January 4234 BCE,7560
+"Milk and wool",lost,12140,59.52,41.33,-4231,January 4231 BCE,3265
+"Milk and wool",lost,9024,45.95,26.20,-4229,January 4229 BCE,7200
+"Horse herding",lost,9024,45.95,26.20,-4229,January 4229 BCE,7200
+"Horse riding",lost,9024,45.95,26.20,-4229,January 4229 BCE,7200
+"Horse herding",lost,11726,57.56,33.26,-4228,January 4228 BCE,3337
+"Milk and wool",lost,10677,51.26,58.07,-4227,January 4227 BCE,1592
+"Milk and wool",lost,11610,55.44,58.10,-4220,January 4220 BCE,1379
+"Milk and wool",lost,12062,59.21,36.96,-4215,January 4215 BCE,5319
+"Horse herding",lost,12062,59.21,36.96,-4215,January 4215 BCE,5319
+"Horse riding",lost,12062,59.21,36.96,-4215,January 4215 BCE,5319
+"Milk and wool",lost,12136,59.33,45.17,-4210,January 4210 BCE,3313
+"Irrigation",lost,6657,38.25,39.42,-4207,January 4207 BCE,39937
+"Milk and wool",lost,9138,46.35,25.77,-4206,January 4206 BCE,5411
+"Horse herding",lost,11372,55.88,31.66,-4202,January 4202 BCE,5569
+"Horse riding",lost,11372,55.88,31.66,-4202,January 4202 BCE,5569
+"Irrigation",lost,6384,37.32,42.15,-4198,January 4198 BCE,8650
+"Horse herding",lost,11004,54.09,28.56,-4198,January 4198 BCE,3103
+"Horse riding",lost,11004,54.09,28.56,-4198,January 4198 BCE,3103
+"The sail",lost,78148,8.51,99.45,-4196,January 4196 BCE,6367
+"Milk and wool",lost,9363,47.12,24.88,-4194,January 4194 BCE,1823
+"Irrigation",lost,16580,34.79,114.90,-4193,January 4193 BCE,28975
+"Milk and wool",lost,12135,59.27,46.11,-4191,January 4191 BCE,1112
+"Irrigation",lost,66410,10.35,32.32,-4190,January 4190 BCE,22615
+"Irrigation",lost,69252,10.97,15.02,-4189,January 4189 BCE,25236
+"Milk and wool",lost,12217,59.70,45.76,-4189,January 4189 BCE,603
+"Irrigation",lost,16446,34.53,110.90,-4182,January 4182 BCE,21010
+"Irrigation",lost,16447,34.54,110.37,-4182,January 4182 BCE,18053
+"Irrigation",lost,16720,35.19,115.22,-4182,January 4182 BCE,27918
+"Copper working",lost,77478,31.05,116.18,-4181,January 4181 BCE,18570
+"Copper working",lost,77478,31.05,116.18,-4181,January 4181 BCE,18570
+"Horse herding",lost,11462,56.30,32.04,-4179,January 4179 BCE,5571
+"Horse herding",lost,12217,59.70,45.76,-4179,January 4179 BCE,1036
+"Horse riding",lost,11462,56.30,32.04,-4179,January 4179 BCE,5571
+"Horse riding",lost,12217,59.70,45.76,-4172,January 4172 BCE,1253
+"Horse herding",lost,9025,45.90,25.53,-4171,January 4171 BCE,3982
+"Horse riding",lost,9025,45.90,25.53,-4171,January 4171 BCE,3982
+"Irrigation",lost,16581,34.82,114.37,-4169,January 4169 BCE,23351
+"Milk and wool",lost,10717,52.74,26.82,-4166,January 4166 BCE,2193
+"Horse herding",lost,10717,52.74,26.82,-4166,January 4166 BCE,2193
+"Horse riding",lost,10717,52.74,26.82,-4166,January 4166 BCE,2193
+"Copper working",lost,545,31.58,113.96,-4163,January 4163 BCE,13894
+"Copper working",lost,545,31.58,113.96,-4163,January 4163 BCE,13894
+"Horse herding",lost,10420,51.42,25.97,-4163,January 4163 BCE,7193
+"Horse riding",lost,10420,51.42,25.97,-4163,January 4163 BCE,7193
+"Irrigation",lost,17270,36.77,116.58,-4162,January 4162 BCE,8750
+"Irrigation",lost,17403,37.08,118.03,-4162,January 4162 BCE,22003
+"Horse herding",lost,12225,60.01,37.97,-4162,January 4162 BCE,1634
+"Horse riding",lost,12225,60.01,37.97,-4162,January 4162 BCE,1634
+"Milk and wool",lost,11432,54.68,57.63,-4161,January 4161 BCE,3359
+"Copper working",lost,548,31.50,115.45,-4161,January 4161 BCE,17976
+"Copper working",lost,548,31.50,115.45,-4161,January 4161 BCE,17976
+"Milk and wool",lost,9582,48.01,25.36,-4160,January 4160 BCE,6825
+"The sail",lost,80692,22.40,88.82,-4160,January 4160 BCE,5711
+"Horse herding",lost,9582,48.01,25.36,-4160,January 4160 BCE,6825
+"Horse riding",lost,9582,48.01,25.36,-4160,January 4160 BCE,6825
+"Milk and wool",lost,11640,57.12,31.95,-4159,January 4159 BCE,3306
+"Copper working",lost,77108,29.36,117.15,-4159,January 4159 BCE,20063
+"Copper working",lost,77108,29.36,117.15,-4158,January 4158 BCE,17511
+"Irrigation",lost,17134,36.37,116.23,-4157,January 4157 BCE,8730
+"Horse riding",lost,9252,46.68,24.65,-4157,January 4157 BCE,1363
+"Horse herding",lost,9252,46.68,24.65,-4156,January 4156 BCE,2251
+"Milk and wool",lost,9252,46.68,24.65,-4154,January 4154 BCE,2362
+"Horse herding",lost,9904,49.28,25.39,-4153,January 4153 BCE,3127
+"Horse riding",lost,9904,49.28,25.39,-4153,January 4153 BCE,3127
+"Horse herding",lost,8795,45.07,25.73,-4152,January 4152 BCE,3189
+"Horse riding",lost,8795,45.07,25.73,-4152,January 4152 BCE,3189
+"Milk and wool",lost,11813,57.96,32.77,-4151,January 4151 BCE,3048
+"Milk and wool",lost,10813,53.22,27.92,-4149,January 4149 BCE,5187
+"Copper working",lost,77108,29.36,117.15,-4147,January 4147 BCE,20348
+"Horse herding",lost,8678,44.68,26.15,-4147,January 4147 BCE,5322
+"Horse riding",lost,8678,44.68,26.15,-4147,January 4147 BCE,5322
+"Copper working",lost,545,31.58,113.96,-4144,January 4144 BCE,14413
+"Copper working",lost,545,31.58,113.96,-4144,January 4144 BCE,14413
+"Horse herding",lost,11190,54.99,30.07,-4142,January 4142 BCE,8299
+"Horse riding",lost,11190,54.99,30.07,-4142,January 4142 BCE,8299
+"Copper working",lost,548,31.50,115.45,-4141,January 4141 BCE,18766
+"Copper working",lost,548,31.50,115.45,-4141,January 4141 BCE,18766
+"Copper working",lost,548,31.50,115.45,-4136,January 4136 BCE,18937
+"Copper working",lost,548,31.50,115.45,-4136,January 4136 BCE,18937
+"Horse herding",lost,10619,52.30,26.53,-4134,January 4134 BCE,8414
+"Horse riding",lost,10619,52.30,26.53,-4134,January 4134 BCE,8414
+"Horse herding",lost,10009,49.72,25.65,-4130,January 4130 BCE,5679
+"Horse riding",lost,10009,49.72,25.65,-4130,January 4130 BCE,5679
+"Irrigation",lost,66219,12.06,34.28,-4122,January 4122 BCE,28693
+"Milk and wool",lost,11958,57.46,55.72,-4117,January 4117 BCE,1890
+"Horse herding",lost,12139,59.48,42.29,-4117,January 4117 BCE,6451
+"Horse riding",lost,12139,59.48,42.29,-4117,January 4117 BCE,6451
+"Horse riding",lost,12306,60.42,37.50,-4117,January 4117 BCE,1031
+"Horse herding",lost,12306,60.42,37.50,-4112,January 4112 BCE,1263
+"Copper working",lost,548,31.50,115.45,-4109,January 4109 BCE,19257
+"Copper working",lost,548,31.50,115.45,-4109,January 4109 BCE,19257
+"Irrigation",lost,16720,35.19,115.22,-4108,January 4108 BCE,27631
+"Milk and wool",lost,12306,60.42,37.50,-4106,January 4106 BCE,1442
+"Horse riding",lost,10815,53.12,26.32,-4106,January 4106 BCE,2094
+"Copper working",lost,548,31.50,115.45,-4103,January 4103 BCE,19351
+"Copper working",lost,548,31.50,115.45,-4103,January 4103 BCE,19351
+"Irrigation",lost,162962,13.31,-6.12,-4102,January 4102 BCE,16138
+"Horse herding",lost,10815,53.12,26.32,-4102,January 4102 BCE,2313
+"Irrigation",lost,16446,34.53,110.90,-4101,January 4101 BCE,21264
+"Irrigation",lost,17403,37.08,118.03,-4101,January 4101 BCE,25034
+"Irrigation",lost,16447,34.54,110.37,-4100,January 4100 BCE,13826
+"Irrigation",lost,17270,36.77,116.58,-4100,January 4100 BCE,11504
+"Irrigation",lost,162844,13.67,-5.87,-4098,January 4098 BCE,12534
+"Milk and wool",lost,10815,53.12,26.32,-4097,January 4097 BCE,2597
+"Irrigation",lost,6657,38.25,39.42,-4095,January 4095 BCE,45361
+"Milk and wool",lost,11982,58.79,33.63,-4095,January 4095 BCE,2901
+"Irrigation",lost,16581,34.82,114.37,-4093,January 4093 BCE,22881
+"Irrigation",lost,17404,37.12,117.48,-4091,January 4091 BCE,11614
+"Horse herding",lost,11191,54.95,29.22,-4089,January 4089 BCE,4287
+"Horse riding",lost,11191,54.95,29.22,-4089,January 4089 BCE,4287
+"Irrigation",lost,17134,36.37,116.23,-4087,January 4087 BCE,8424
+"Milk and wool",lost,64826,0.61,34.27,-4086,January 4086 BCE,7368
+"Horse herding",lost,9364,47.06,24.20,-4078,January 4078 BCE,4599
+"Horse riding",lost,9364,47.06,24.20,-4078,January 4078 BCE,4599
+"Irrigation",lost,66219,12.06,34.28,-4075,January 4075 BCE,27259
+"Milk and wool",lost,9474,47.51,24.43,-4074,January 4074 BCE,2564
+"Horse herding",lost,9474,47.51,24.43,-4074,January 4074 BCE,2043
+"Horse riding",lost,9474,47.51,24.43,-4074,January 4074 BCE,2043
+"Milk and wool",lost,8561,44.24,25.92,-4071,January 4071 BCE,6130
+"Copper working",lost,545,31.58,113.96,-4071,January 4071 BCE,15247
+"Copper working",lost,545,31.58,113.96,-4071,January 4071 BCE,15247
+"Horse herding",lost,10114,50.10,25.17,-4071,January 4071 BCE,6872
+"Horse riding",lost,10114,50.10,25.17,-4071,January 4071 BCE,6872
+"Horse herding",lost,9253,46.62,23.97,-4070,January 4070 BCE,2570
+"Horse riding",lost,9253,46.62,23.97,-4070,January 4070 BCE,2570
+"Milk and wool",lost,9253,46.62,23.97,-4068,January 4068 BCE,3308
+"Copper working",lost,545,31.58,113.96,-4066,January 4066 BCE,15247
+"Copper working",lost,545,31.58,113.96,-4066,January 4066 BCE,15247
+"Horse herding",lost,12220,59.86,42.86,-4062,January 4062 BCE,6024
+"Horse riding",lost,12220,59.86,42.86,-4062,January 4062 BCE,6024
+"Copper working",lost,545,31.58,113.96,-4056,January 4056 BCE,15266
+"Copper working",lost,545,31.58,113.96,-4056,January 4056 BCE,15266
+"Horse riding",lost,12383,60.77,40.04,-4052,January 4052 BCE,1323
+"Horse herding",lost,9799,48.78,24.43,-4043,January 4043 BCE,2573
+"Horse riding",lost,9799,48.78,24.43,-4043,January 4043 BCE,2573
+"Horse herding",lost,11099,54.48,28.06,-4040,January 4040 BCE,5854
+"Horse riding",lost,11099,54.48,28.06,-4040,January 4040 BCE,5854
+"Irrigation",lost,17270,36.77,116.58,-4039,January 4039 BCE,10924
+"Irrigation",lost,69252,10.97,15.02,-4038,January 4038 BCE,27450
+"Horse herding",lost,12298,60.13,45.40,-4036,January 4036 BCE,2326
+"Horse riding",lost,12298,60.13,45.40,-4036,January 4036 BCE,2326
+"Irrigation",lost,6655,38.22,40.55,-4035,January 4035 BCE,28504
+"Copper working",lost,545,31.58,113.96,-4033,January 4033 BCE,15208
+"Copper working",lost,545,31.58,113.96,-4033,January 4033 BCE,15208
+"Horse herding",lost,9691,48.39,24.90,-4030,January 4030 BCE,7819
+"Horse riding",lost,9691,48.39,24.90,-4030,January 4030 BCE,7819
+"Irrigation",lost,69252,10.97,15.02,-4028,January 4028 BCE,27563
+"Copper working",lost,548,31.50,115.45,-4027,January 4027 BCE,19310
+"Copper working",lost,548,31.50,115.45,-4027,January 4027 BCE,19310
+"Copper working",lost,77108,29.36,117.15,-4022,January 4022 BCE,20651
+"Copper working",lost,77108,29.36,117.15,-4022,January 4022 BCE,20651
+"Irrigation",lost,6922,39.10,38.90,-4021,January 4021 BCE,47858
+"Milk and wool",lost,11554,56.63,29.78,-4021,January 4021 BCE,3805
+"Irrigation",lost,6384,37.32,42.15,-4019,January 4019 BCE,10312
+"Irrigation",lost,17403,37.08,118.03,-4019,January 4019 BCE,24592
+"Copper working",lost,7179,39.89,40.72,-4017,January 4017 BCE,27860
+"Copper working",lost,7180,39.91,40.13,-4017,January 4017 BCE,29144
+"Copper working",lost,7182,39.94,38.95,-4017,January 4017 BCE,27175
+"Milk and wool",lost,9475,47.45,23.74,-4016,January 4016 BCE,3691
+"Copper working",lost,7180,39.91,40.13,-4016,January 4016 BCE,22572
+"Copper working",lost,7182,39.94,38.95,-4016,January 4016 BCE,26884
+"Horse herding",lost,11983,58.77,32.69,-4016,January 4016 BCE,5057
+"Horse riding",lost,11983,58.77,32.69,-4016,January 4016 BCE,5057
+"Irrigation",lost,6657,38.25,39.42,-4014,January 4014 BCE,41273
+"Horse herding",lost,12066,59.18,33.12,-4013,January 4013 BCE,2820
+"Horse riding",lost,12066,59.18,33.12,-4013,January 4013 BCE,2820
+"Irrigation",lost,69252,10.97,15.02,-4011,January 4011 BCE,27070
+"Copper working",lost,548,31.50,115.45,-4007,January 4007 BCE,19474
+"Copper working",lost,548,31.50,115.45,-4007,January 4007 BCE,19474
+"Horse herding",lost,8320,43.53,28.01,-4005,January 4005 BCE,7488
+"Horse riding",lost,8320,43.53,28.01,-4005,January 4005 BCE,7488
+"Copper working",lost,545,31.58,113.96,-4001,January 4001 BCE,15354
+"Copper working",lost,545,31.58,113.96,-4001,January 4001 BCE,15354
+"Copper working",lost,7178,39.87,41.31,-4001,January 4001 BCE,20075
+"Milk and wool",lost,12307,60.42,36.50,-3993,January 3993 BCE,4760
+"Copper working",lost,7178,39.87,41.31,-3992,January 3992 BCE,19090
+"Irrigation",lost,6385,37.34,41.59,-3991,January 3991 BCE,8619
+"Copper working",lost,7178,39.87,41.31,-3991,January 3991 BCE,16461
+"Copper working",lost,7179,39.89,40.72,-3991,January 3991 BCE,26508
+"Copper working",lost,7179,39.89,40.72,-3991,January 3991 BCE,26508
+"Copper working",lost,7180,39.91,40.13,-3991,January 3991 BCE,27924
+"Copper working",lost,7182,39.94,38.95,-3991,January 3991 BCE,26389
+"Horse herding",lost,12381,60.70,42.04,-3991,January 3991 BCE,2603
+"Horse riding",lost,12381,60.70,42.04,-3991,January 3991 BCE,2603
+"Copper working",lost,7180,39.91,40.13,-3990,January 3990 BCE,21437
+"Copper working",lost,7182,39.94,38.95,-3990,January 3990 BCE,26161
+"Irrigation",lost,163197,13.30,-7.12,-3983,January 3983 BCE,6177
+"Irrigation",lost,6656,38.23,39.99,-3981,January 3981 BCE,21265
+"Irrigation",lost,69198,11.04,15.48,-3979,January 3979 BCE,20013
+"Milk and wool",lost,11900,58.33,31.33,-3978,January 3978 BCE,4520
+"Irrigation",lost,66219,12.06,34.28,-3977,January 3977 BCE,27604
+"Copper working",lost,77108,29.36,117.15,-3975,January 3975 BCE,20929
+"Copper working",lost,77108,29.36,117.15,-3975,January 3975 BCE,20929
+"Horse herding",lost,12148,59.60,33.57,-3974,January 3974 BCE,2123
+"Horse riding",lost,12148,59.60,33.57,-3974,January 3974 BCE,2123
+"Irrigation",lost,69198,11.04,15.48,-3973,January 3973 BCE,19551
+"Milk and wool",lost,12148,59.60,33.57,-3969,January 3969 BCE,3449
+"Copper working",lost,77108,29.36,117.15,-3969,January 3969 BCE,20942
+"Copper working",lost,77108,29.36,117.15,-3969,January 3969 BCE,20942
+"Horse riding",lost,11285,55.30,27.87,-3968,January 3968 BCE,2722
+"Milk and wool",lost,11285,55.30,27.87,-3967,January 3967 BCE,2759
+"Horse herding",lost,11285,55.30,27.87,-3967,January 3967 BCE,2759
+"Milk and wool",lost,12463,61.20,38.56,-3964,January 3964 BCE,1497
+"Horse herding",lost,12463,61.20,38.56,-3964,January 3964 BCE,1497
+"Horse riding",lost,12463,61.20,38.56,-3963,January 3963 BCE,1537
+"Milk and wool",lost,12452,60.61,49.61,-3961,January 3961 BCE,1520
+"Milk and wool",lost,12464,61.22,37.54,-3961,January 3961 BCE,1189
+"Horse herding",lost,12464,61.22,37.54,-3961,January 3961 BCE,1189
+"Horse riding",lost,12464,61.22,37.54,-3961,January 3961 BCE,1189
+"Horse herding",lost,8200,43.09,27.77,-3956,January 3956 BCE,4766
+"Horse riding",lost,8200,43.09,27.77,-3956,January 3956 BCE,4766
+"Horse riding",lost,12380,60.66,43.04,-3953,January 3953 BCE,3313
+"The sail",lost,80821,22.17,87.42,-3952,January 3952 BCE,2901
+"Horse herding",lost,12380,60.66,43.04,-3952,January 3952 BCE,3355
+"Horse herding",lost,12384,60.79,39.03,-3952,January 3952 BCE,4597
+"Horse riding",lost,12384,60.79,39.03,-3952,January 3952 BCE,4597
+"Irrigation",lost,16580,34.79,114.90,-3945,January 3945 BCE,33278
+"Irrigation",lost,16446,34.53,110.90,-3941,January 3941 BCE,20535
+"Irrigation",lost,16447,34.54,110.37,-3941,January 3941 BCE,17591
+"Irrigation",lost,69198,11.04,15.48,-3937,January 3937 BCE,19308
+"Horse herding",lost,9027,45.79,24.20,-3932,January 3932 BCE,7691
+"Horse riding",lost,9027,45.79,24.20,-3932,January 3932 BCE,7691
+"Horse herding",lost,9254,46.56,23.30,-3928,January 3928 BCE,6448
+"Horse herding",lost,11984,58.75,31.74,-3928,January 3928 BCE,5735
+"Horse riding",lost,9254,46.56,23.30,-3928,January 3928 BCE,6448
+"Horse riding",lost,11984,58.75,31.74,-3928,January 3928 BCE,5735
+"Horse herding",lost,12386,60.82,37.01,-3926,January 3926 BCE,4288
+"Horse riding",lost,12386,60.82,37.01,-3926,January 3926 BCE,4288
+"Milk and wool",lost,11643,57.02,29.26,-3919,January 3919 BCE,5608
+"Terraced fields",first,164296,7.50,-7.98,-3918,January 3918 BCE,0
+"Horse herding",lost,12067,59.16,32.17,-3916,January 3916 BCE,3985
+"Horse riding",lost,12067,59.16,32.17,-3916,January 3916 BCE,3985
+"Irrigation",lost,16720,35.19,115.22,-3910,January 3910 BCE,27609
+"Horse herding",lost,11901,58.29,30.40,-3909,January 3909 BCE,4123
+"Horse riding",lost,11901,58.29,30.40,-3909,January 3909 BCE,4123
+"Irrigation",lost,6922,39.10,38.90,-3907,January 3907 BCE,49996
+"Horse herding",lost,8913,45.35,23.99,-3907,January 3907 BCE,4815
+"Horse riding",lost,8913,45.35,23.99,-3907,January 3907 BCE,4815
+"Milk and wool",lost,8324,43.36,25.48,-3905,January 3905 BCE,5210
+"Horse herding",lost,8324,43.36,25.48,-3905,January 3905 BCE,5210
+"Horse riding",lost,8324,43.36,25.48,-3905,January 3905 BCE,5210
+"Irrigation",lost,6384,37.32,42.15,-3904,January 3904 BCE,9961
+"Milk and wool",lost,9693,48.27,23.49,-3903,January 3903 BCE,1567
+"Horse herding",lost,9693,48.27,23.49,-3903,January 3903 BCE,1567
+"Horse riding",lost,9693,48.27,23.49,-3903,January 3903 BCE,1567
+"Horse herding",lost,11730,57.44,29.63,-3901,January 3901 BCE,5276
+"Horse riding",lost,11730,57.44,29.63,-3901,January 3901 BCE,5276
+"Irrigation",lost,6657,38.25,39.42,-3900,January 3900 BCE,44755
+"Horse herding",lost,10321,50.86,24.20,-3900,January 3900 BCE,6221
+"Horse riding",lost,10321,50.86,24.20,-3900,January 3900 BCE,6221
+"Milk and wool",lost,11286,55.25,27.03,-3896,January 3896 BCE,2738
+"Horse herding",lost,11286,55.25,27.03,-3896,January 3896 BCE,2738
+"Horse riding",lost,11286,55.25,27.03,-3896,January 3896 BCE,2738
+"Irrigation",lost,163080,13.30,-6.62,-3893,January 3893 BCE,10512
+"Horse herding",lost,12229,60.01,34.03,-3893,January 3893 BCE,4318
+"Horse riding",lost,12229,60.01,34.03,-3893,January 3893 BCE,4318
+"Irrigation",lost,163197,13.30,-7.12,-3892,January 3892 BCE,3131
+"Copper working",lost,6917,39.01,41.79,-3888,January 3888 BCE,18688
+"Copper working",lost,6917,39.01,41.79,-3888,January 3888 BCE,18688
+"Copper working",lost,7048,39.44,41.55,-3888,January 3888 BCE,17576
+"Copper working",lost,7048,39.44,41.55,-3887,January 3887 BCE,11831
+"Horse herding",lost,9585,47.83,23.27,-3879,January 3879 BCE,5083
+"Horse riding",lost,9585,47.83,23.27,-3879,January 3879 BCE,5083
+"Horse herding",lost,12230,59.99,33.05,-3871,January 3871 BCE,3340
+"Horse riding",lost,12230,59.99,33.05,-3871,January 3871 BCE,3340
+"Horse herding",lost,11985,58.71,30.80,-3868,January 3868 BCE,4389
+"Horse riding",lost,11985,58.71,30.80,-3868,January 3868 BCE,4389
+"Irrigation",lost,6384,37.32,42.15,-3865,January 3865 BCE,11553
+"Milk and wool",lost,8445,43.70,24.43,-3859,January 3859 BCE,3243
+"Horse herding",lost,8445,43.70,24.43,-3859,January 3859 BCE,3243
+"Horse riding",lost,8445,43.70,24.43,-3859,January 3859 BCE,3243
+"Irrigation",lost,6922,39.10,38.90,-3858,January 3858 BCE,50573
+"Horse herding",lost,11102,54.32,25.58,-3856,January 3856 BCE,5230
+"Horse riding",lost,11102,54.32,25.58,-3856,January 3856 BCE,5230
+"Horse herding",lost,12149,59.58,32.60,-3854,January 3854 BCE,6112
+"Horse riding",lost,12149,59.58,32.60,-3854,January 3854 BCE,6112
+"Milk and wool",lost,8682,44.47,23.57,-3851,January 3851 BCE,4080
+"Horse herding",lost,11287,55.19,26.19,-3844,January 3844 BCE,1864
+"Horse riding",lost,11287,55.19,26.19,-3843,January 3843 BCE,1912
+"Irrigation",lost,6657,38.25,39.42,-3842,January 3842 BCE,45884
+"Horse herding",lost,10423,51.24,23.70,-3842,January 3842 BCE,7105
+"Horse riding",lost,10423,51.24,23.70,-3842,January 3842 BCE,7105
+"Horse herding",lost,9255,46.50,22.63,-3840,January 3840 BCE,3718
+"Horse riding",lost,9255,46.50,22.63,-3840,January 3840 BCE,3718
+"Horse herding",lost,8322,43.45,26.74,-3838,January 3838 BCE,16856
+"Horse riding",lost,8322,43.45,26.74,-3838,January 3838 BCE,16856
+"Copper working",lost,7178,39.87,41.31,-3833,January 3833 BCE,20755
+"The sail",independent,130960,-9.52,147.68,-3829,January 3829 BCE,0
+"Horse herding",lost,11377,55.68,27.35,-3828,January 3828 BCE,8700
+"Horse riding",lost,11377,55.68,27.35,-3828,January 3828 BCE,8700
+"Copper working",lost,7178,39.87,41.31,-3820,January 3820 BCE,20770
+"Copper working",lost,7178,39.87,41.31,-3820,January 3820 BCE,20770
+"Copper working",lost,7179,39.89,40.72,-3820,January 3820 BCE,34302
+"Copper working",lost,7179,39.89,40.72,-3820,January 3820 BCE,34302
+"Copper working",lost,7180,39.91,40.13,-3820,January 3820 BCE,33195
+"Copper working",lost,7180,39.91,40.13,-3820,January 3820 BCE,33195
+"Irrigation",lost,6384,37.32,42.15,-3818,January 3818 BCE,14841
+"Milk and wool",lost,12231,59.97,32.07,-3818,January 3818 BCE,2774
+"Milk and wool",lost,12069,59.10,30.26,-3815,January 3815 BCE,2889
+"Irrigation",lost,6657,38.25,39.42,-3810,January 3810 BCE,46134
+"Horse herding",lost,10623,52.05,23.44,-3807,January 3807 BCE,6764
+"Horse riding",lost,10623,52.05,23.44,-3807,January 3807 BCE,6764
+"Horse riding",lost,9801,48.65,23.02,-3806,January 3806 BCE,1902
+"Milk and wool",lost,9586,47.76,22.58,-3805,January 3805 BCE,2912
+"Horse herding",lost,9586,47.76,22.58,-3805,January 3805 BCE,2912
+"Horse riding",lost,9586,47.76,22.58,-3805,January 3805 BCE,2912
+"Horse herding",lost,9801,48.65,23.02,-3804,January 3804 BCE,1953
+"Horse herding",lost,9366,46.94,22.84,-3802,January 3802 BCE,5928
+"Horse riding",lost,9366,46.94,22.84,-3802,January 3802 BCE,5928
+"Terraced fields",independent,77211,26.21,114.66,-3800,January 3800 BCE,0
+"Horse herding",lost,8325,43.31,24.85,-3795,January 3795 BCE,7989
+"Horse riding",lost,8325,43.31,24.85,-3795,January 3795 BCE,7989
+"Copper working",lost,77478,31.05,116.18,-3794,January 3794 BCE,18087
+"Copper working",lost,77478,31.05,116.18,-3793,January 3793 BCE,17857
+"Horse herding",lost,10524,51.61,23.19,-3793,January 3793 BCE,4571
+"Irrigation",lost,69252,10.97,15.02,-3790,January 3790 BCE,25629
+"Horse herding",lost,11986,58.68,29.86,-3788,January 3788 BCE,5315
+"Horse riding",lost,11986,58.68,29.86,-3788,January 3788 BCE,5315
+"Irrigation",lost,6385,37.34,41.59,-3787,January 3787 BCE,9953
+"The plough",first,7805,41.78,44.92,-3787,January 3787 BCE,0
+"Horse herding",lost,11645,56.92,27.48,-3778,January 3778 BCE,5347
+"Horse riding",lost,11645,56.92,27.48,-3778,January 3778 BCE,5347
+"Milk and wool",lost,65736,11.23,36.25,-3773,January 3773 BCE,8686
+"Horse herding",lost,9367,46.87,22.16,-3771,January 3771 BCE,3524
+"Horse herding",lost,12151,59.52,30.67,-3770,January 3770 BCE,3830
+"Horse riding",lost,12151,59.52,30.67,-3770,January 3770 BCE,3830
+"Copper working",lost,545,31.58,113.96,-3767,January 3767 BCE,16129
+"Copper working",lost,545,31.58,113.96,-3766,January 3766 BCE,14061
+"Horse herding",lost,7957,42.22,27.30,-3764,January 3764 BCE,6012
+"Horse riding",lost,7957,42.22,27.30,-3764,January 3764 BCE,6012
+"Irrigation",lost,69198,11.04,15.48,-3762,January 3762 BCE,19975
+"Horse herding",lost,11902,58.25,29.47,-3762,January 3762 BCE,8396
+"Horse riding",lost,11902,58.25,29.47,-3762,January 3762 BCE,7407
+"Milk and wool",lost,12070,59.06,29.31,-3757,January 3757 BCE,2716
+"Copper working",lost,548,31.50,115.45,-3757,January 3757 BCE,17051
+"Copper working",lost,77108,29.36,117.15,-3757,January 3757 BCE,20272
+"Copper working",lost,548,31.50,115.45,-3756,January 3756 BCE,14893
+"Copper working",lost,77108,29.36,117.15,-3756,January 3756 BCE,17690
+"Copper working",lost,545,31.58,113.96,-3755,January 3755 BCE,16179
+"Horse herding",lost,12070,59.06,29.31,-3755,January 3755 BCE,2833
+"Horse riding",lost,12070,59.06,29.31,-3750,January 3750 BCE,3121
+"Horse herding",lost,12537,61.50,42.21,-3749,January 3749 BCE,2107
+"Horse riding",lost,12537,61.50,42.21,-3749,January 3749 BCE,2107
+"Milk and wool",lost,12541,61.61,38.07,-3748,January 3748 BCE,2195
+"Horse herding",lost,12541,61.61,38.07,-3748,January 3748 BCE,2195
+"Horse riding",lost,12541,61.61,38.07,-3748,January 3748 BCE,2195
+"Irrigation",lost,69252,10.97,15.02,-3746,January 3746 BCE,23552
+"Irrigation",lost,163197,13.30,-7.12,-3741,January 3741 BCE,9588
+"Horse herding",lost,8446,43.64,23.80,-3741,January 3741 BCE,5572
+"Horse riding",lost,8446,43.64,23.80,-3741,January 3741 BCE,5572
+"Horse herding",lost,12537,61.50,42.21,-3738,January 3738 BCE,2157
+"Horse riding",lost,12537,61.50,42.21,-3738,January 3738 BCE,2157
+"Horse riding",lost,11987,58.64,28.93,-3736,January 3736 BCE,2682
+"Milk and wool",lost,12540,61.59,39.11,-3734,January 3734 BCE,2123
+"Horse herding",lost,11987,58.64,28.93,-3734,January 3734 BCE,3374
+"Horse riding",lost,9030,45.61,22.23,-3734,January 3734 BCE,4072
+"Horse herding",lost,9030,45.61,22.23,-3733,January 3733 BCE,4144
+"Horse herding",lost,11468,56.06,26.82,-3731,January 3731 BCE,6872
+"Horse riding",lost,11468,56.06,26.82,-3731,January 3731 BCE,6872
+"Horse herding",lost,9477,47.32,22.37,-3730,January 3730 BCE,8708
+"Horse riding",lost,9477,47.32,22.37,-3730,January 3730 BCE,8708
+"Irrigation",lost,16580,34.79,114.90,-3725,January 3725 BCE,32334
+"Horse herding",lost,12232,59.94,31.09,-3717,January 3717 BCE,3788
+"Horse riding",lost,12232,59.94,31.09,-3717,January 3717 BCE,3788
+"Irrigation",lost,16447,34.54,110.37,-3716,January 3716 BCE,17871
+"Irrigation",lost,16446,34.53,110.90,-3713,January 3713 BCE,16266
+"Horse herding",lost,8683,44.41,22.93,-3712,January 3712 BCE,5687
+"Horse riding",lost,8683,44.41,22.93,-3712,January 3712 BCE,5687
+"Milk and wool",lost,12617,62.00,38.63,-3711,January 3711 BCE,1280
+"Horse herding",lost,8082,42.53,25.67,-3711,January 3711 BCE,8179
+"Horse riding",lost,8082,42.53,25.67,-3711,January 3711 BCE,8179
+"Horse herding",lost,12617,62.00,38.63,-3710,January 3710 BCE,1312
+"Milk and wool",lost,10221,50.28,22.48,-3706,January 3706 BCE,5412
+"Horse herding",lost,9802,48.58,22.31,-3704,January 3704 BCE,4986
+"Horse riding",lost,9802,48.58,22.31,-3704,January 3704 BCE,4986
+"Irrigation",lost,6655,38.22,40.55,-3703,January 3703 BCE,31432
+"Horse herding",lost,9256,46.43,21.96,-3703,January 3703 BCE,7201
+"Horse riding",lost,9256,46.43,21.96,-3703,January 3703 BCE,7201
+"Horse riding",lost,12617,62.00,38.63,-3702,January 3702 BCE,1535
+"Horse herding",lost,9908,49.02,22.53,-3701,January 3701 BCE,2240
+"Horse riding",lost,9908,49.02,22.53,-3701,January 3701 BCE,2240
+"Milk and wool",lost,9908,49.02,22.53,-3700,January 3700 BCE,2776
+"Horse herding",lost,11196,54.69,25.05,-3700,January 3700 BCE,9618
+"Horse riding",lost,11196,54.69,25.05,-3700,January 3700 BCE,9618
+"Horse herding",lost,12387,60.83,36.00,-3699,January 3699 BCE,5639
+"Horse riding",lost,12387,60.83,36.00,-3699,January 3699 BCE,5639
+"Copper working",lost,548,31.50,115.45,-3697,January 3697 BCE,19770
+"Copper working",lost,548,31.50,115.45,-3697,January 3697 BCE,19770
+"Milk and wool",lost,7959,42.13,26.07,-3695,January 3695 BCE,5891
+"Horse herding",lost,7959,42.13,26.07,-3695,January 3695 BCE,4894
+"Horse riding",lost,7959,42.13,26.07,-3695,January 3695 BCE,4894
+"Copper working",lost,545,31.58,113.96,-3694,January 3694 BCE,15482
+"Copper working",lost,545,31.58,113.96,-3694,January 3694 BCE,15482
+"Milk and wool",lost,12618,62.02,37.58,-3692,January 3692 BCE,1081
+"Horse herding",lost,12618,62.02,37.58,-3691,January 3691 BCE,1114
+"Horse riding",lost,12618,62.02,37.58,-3690,January 3690 BCE,1138
+"Horse herding",lost,10915,53.31,23.42,-3686,January 3686 BCE,7960
+"Horse riding",lost,10915,53.31,23.42,-3686,January 3686 BCE,7960
+"Horse herding",lost,7834,41.78,27.08,-3685,January 3685 BCE,5584
+"Horse herding",lost,11903,58.21,28.55,-3685,January 3685 BCE,9503
+"Horse riding",lost,7834,41.78,27.08,-3685,January 3685 BCE,5584
+"Horse riding",lost,11903,58.21,28.55,-3685,January 3685 BCE,8233
+"Horse herding",lost,11646,56.87,26.60,-3682,January 3682 BCE,5798
+"Horse herding",lost,12539,61.57,40.14,-3682,January 3682 BCE,2674
+"Horse riding",lost,11646,56.87,26.60,-3682,January 3682 BCE,5798
+"Horse riding",lost,12539,61.57,40.14,-3680,January 3680 BCE,2738
+"Horse herding",lost,12153,59.44,28.75,-3678,January 3678 BCE,3415
+"Horse riding",lost,12153,59.44,28.75,-3678,January 3678 BCE,3415
+"Milk and wool",lost,10525,51.54,22.43,-3677,January 3677 BCE,8196
+"Horse herding",lost,12310,60.40,33.51,-3677,January 3677 BCE,5261
+"Horse riding",lost,12310,60.40,33.51,-3677,January 3677 BCE,5261
+"Horse herding",lost,9478,47.25,21.69,-3675,January 3675 BCE,5733
+"Horse riding",lost,9478,47.25,21.69,-3675,January 3675 BCE,5733
+"Irrigation",lost,163197,13.30,-7.12,-3674,January 3674 BCE,8394
+"Milk and wool",lost,7835,41.74,26.47,-3670,January 3670 BCE,4951
+"Irrigation",lost,6655,38.22,40.55,-3661,January 3661 BCE,35192
+"Horse herding",lost,10014,49.39,22.04,-3659,January 3659 BCE,1530
+"Horse herding",lost,10462,48.12,68.97,-3659,January 3659 BCE,1182
+"Horse riding",lost,10014,49.39,22.04,-3659,January 3659 BCE,1530
+"Horse riding",lost,10462,48.12,68.97,-3659,January 3659 BCE,1182
+"Milk and wool",lost,9587,47.69,21.89,-3658,January 3658 BCE,8485
+"Milk and wool",lost,11733,57.30,26.93,-3658,January 3658 BCE,7010
+"Milk and wool",lost,10014,49.39,22.04,-3655,January 3655 BCE,2699
+"Irrigation",lost,163197,13.30,-7.12,-3654,January 3654 BCE,8037
+"Horse herding",lost,11558,56.44,26.27,-3652,January 3652 BCE,5791
+"Horse riding",lost,11558,56.44,26.27,-3652,January 3652 BCE,5791
+"Milk and wool",lost,7833,41.82,27.69,-3650,January 3650 BCE,4778
+"Copper working",lost,545,31.58,113.96,-3650,January 3650 BCE,17127
+"Copper working",lost,545,31.58,113.96,-3650,January 3650 BCE,17127
+"Milk and wool",lost,9696,48.06,21.41,-3647,January 3647 BCE,2353
+"Horse herding",lost,11105,54.11,23.14,-3647,January 3647 BCE,4130
+"Horse riding",lost,11105,54.11,23.14,-3647,January 3647 BCE,4130
+"Horse herding",lost,9696,48.06,21.41,-3645,January 3645 BCE,3198
+"Horse riding",lost,9696,48.06,21.41,-3645,January 3645 BCE,3198
+"The sail",lost,80903,21.56,86.27,-3641,January 3641 BCE,5682
+"Horse herding",lost,10324,50.65,21.97,-3641,January 3641 BCE,6074
+"Horse riding",lost,10324,50.65,21.97,-3641,January 3641 BCE,6074
+"Milk and wool",lost,11011,53.67,22.88,-3637,January 3637 BCE,5441
+"Horse herding",lost,8084,42.43,24.44,-3637,January 3637 BCE,2448
+"Horse herding",lost,11011,53.67,22.88,-3637,January 3637 BCE,4735
+"Horse riding",lost,8084,42.43,24.44,-3637,January 3637 BCE,2448
+"Horse riding",lost,11011,53.67,22.88,-3637,January 3637 BCE,4735
+"Irrigation",lost,163080,13.30,-6.62,-3636,January 3636 BCE,7521
+"Milk and wool",lost,9909,48.95,21.82,-3634,January 3634 BCE,4574
+"Irrigation",lost,6520,37.77,41.36,-3633,January 3633 BCE,42418
+"The plough",lost,7960,42.09,25.46,-3633,January 3633 BCE,5539
+"Horse herding",lost,12619,62.02,36.53,-3632,January 3632 BCE,1742
+"Copper working",lost,545,31.58,113.96,-3629,January 3629 BCE,18017
+"Copper working",lost,545,31.58,113.96,-3629,January 3629 BCE,18017
+"Irrigation",lost,16580,34.79,114.90,-3628,January 3628 BCE,32591
+"Horse herding",lost,11469,56.00,25.96,-3626,January 3626 BCE,8868
+"Horse riding",lost,11469,56.00,25.96,-3626,January 3626 BCE,8868
+"The plough",lost,8206,42.81,24.02,-3624,January 3624 BCE,7850
+"The sail",lost,80865,20.73,86.30,-3620,January 3620 BCE,3144
+"Milk and wool",lost,11470,55.94,25.10,-3615,January 3615 BCE,4928
+"Copper working",lost,548,31.50,115.45,-3611,January 3611 BCE,23131
+"Copper working",lost,548,31.50,115.45,-3611,January 3611 BCE,23131
+"Horse herding",lost,8206,42.81,24.02,-3610,January 3610 BCE,9315
+"Horse riding",lost,8206,42.81,24.02,-3610,January 3610 BCE,9315
+"Irrigation",lost,6655,38.22,40.55,-3609,January 3609 BCE,37782
+"The sail",lost,80904,21.10,86.05,-3603,January 3603 BCE,3248
+"Horse herding",lost,8684,44.34,22.29,-3598,January 3598 BCE,9090
+"Horse riding",lost,8684,44.34,22.29,-3598,January 3598 BCE,9090
+"Irrigation",lost,69252,10.97,15.02,-3597,January 3597 BCE,28178
+"Copper working",lost,7182,39.94,38.95,-3595,January 3595 BCE,36208
+"Copper working",lost,7182,39.94,38.95,-3594,January 3594 BCE,35840
+"Milk and wool",lost,12390,60.79,32.97,-3592,January 3592 BCE,1742
+"Copper working",lost,7182,39.94,38.95,-3589,January 3589 BCE,36340
+"Copper working",lost,7182,39.94,38.95,-3589,January 3589 BCE,36340
+"Milk and wool",lost,12457,60.98,44.65,-3585,January 3585 BCE,1170
+"Horse herding",lost,12457,60.98,44.65,-3585,January 3585 BCE,1170
+"Horse riding",lost,12457,60.98,44.65,-3585,January 3585 BCE,1170
+"Irrigation",lost,6922,39.10,38.90,-3584,January 3584 BCE,64769
+"Copper working",lost,545,31.58,113.96,-3584,January 3584 BCE,20405
+"Copper working",lost,545,31.58,113.96,-3584,January 3584 BCE,20405
+"Horse herding",lost,10325,50.57,21.24,-3581,January 3581 BCE,2974
+"Horse riding",lost,10325,50.57,21.24,-3581,January 3581 BCE,2974
+"Horse herding",lost,8917,45.09,21.38,-3578,January 3578 BCE,4247
+"Horse herding",lost,11290,54.99,23.68,-3576,January 3576 BCE,6403
+"Horse riding",lost,11290,54.99,23.68,-3576,January 3576 BCE,6403
+"The plough",lost,9804,48.43,20.91,-3575,January 3575 BCE,4224
+"Copper working",lost,6660,38.28,37.71,-3575,January 3575 BCE,24738
+"Horse herding",lost,9145,45.91,21.10,-3571,January 3571 BCE,6450
+"Horse riding",lost,9145,45.91,21.10,-3571,January 3571 BCE,6450
+"Irrigation",lost,6384,37.32,42.15,-3570,January 3570 BCE,19562
+"Irrigation",lost,66410,10.35,32.32,-3569,January 3569 BCE,26844
+"Milk and wool",lost,12154,59.39,27.79,-3568,January 3568 BCE,5823
+"Horse herding",lost,8801,44.72,21.84,-3567,January 3567 BCE,9125
+"Horse riding",lost,8801,44.72,21.84,-3567,January 3567 BCE,9125
+"Copper working",lost,7178,39.87,41.31,-3566,January 3566 BCE,26529
+"Copper working",lost,7178,39.87,41.31,-3566,January 3566 BCE,26529
+"Copper working",lost,7179,39.89,40.72,-3563,January 3563 BCE,35463
+"Copper working",lost,7179,39.89,40.72,-3563,January 3563 BCE,35463
+"Copper working",lost,7180,39.91,40.13,-3563,January 3563 BCE,37642
+"Copper working",lost,7180,39.91,40.13,-3563,January 3563 BCE,37642
+"Horse herding",lost,9907,49.09,23.24,-3562,January 3562 BCE,14492
+"Horse riding",lost,9907,49.09,23.24,-3562,January 3562 BCE,14492
+"Milk and wool",lost,10015,49.32,21.32,-3561,January 3561 BCE,5911
+"Horse herding",lost,7709,41.38,27.46,-3561,January 3561 BCE,7597
+"Horse riding",lost,7709,41.38,27.46,-3561,January 3561 BCE,7597
+"Copper working",lost,7178,39.87,41.31,-3560,January 3560 BCE,26529
+"Copper working",lost,7178,39.87,41.31,-3560,January 3560 BCE,26529
+"Horse herding",lost,12535,61.40,44.25,-3559,January 3559 BCE,2580
+"Horse riding",lost,12535,61.40,44.25,-3559,January 3559 BCE,2580
+"Irrigation",lost,6657,38.25,39.42,-3558,January 3558 BCE,53233
+"Milk and wool",lost,12535,61.40,44.25,-3558,January 3558 BCE,3061
+"Copper working",lost,7179,39.89,40.72,-3558,January 3558 BCE,35463
+"Copper working",lost,7179,39.89,40.72,-3558,January 3558 BCE,35463
+"Copper working",lost,7180,39.91,40.13,-3558,January 3558 BCE,37642
+"Copper working",lost,7180,39.91,40.13,-3558,January 3558 BCE,37642
+"Copper working",lost,6111,36.46,42.59,-3557,January 3557 BCE,21576
+"Copper working",lost,6111,36.46,42.59,-3557,January 3557 BCE,21576
+"Copper working",lost,6248,36.89,42.37,-3557,January 3557 BCE,23185
+"Copper working",lost,6248,36.89,42.37,-3557,January 3557 BCE,23185
+"Horse herding",lost,11989,58.53,27.06,-3557,January 3557 BCE,2942
+"Horse riding",lost,11989,58.53,27.06,-3557,January 3557 BCE,2942
+"Copper working",lost,6660,38.28,37.71,-3555,January 3555 BCE,25266
+"Copper working",lost,6660,38.28,37.71,-3555,January 3555 BCE,25266
+"Copper working",lost,6384,37.32,42.15,-3553,January 3553 BCE,26731
+"Copper working",lost,6384,37.32,42.15,-3553,January 3553 BCE,26731
+"The plough",lost,8567,43.90,22.10,-3551,January 3551 BCE,6803
+"Horse herding",lost,8567,43.90,22.10,-3551,January 3551 BCE,6803
+"Horse riding",lost,8567,43.90,22.10,-3551,January 3551 BCE,6803
+"Horse herding",lost,12389,60.81,33.98,-3549,January 3549 BCE,1472
+"Horse riding",lost,12389,60.81,33.98,-3549,January 3549 BCE,1472
+"Milk and wool",lost,10724,52.27,21.37,-3547,January 3547 BCE,6321
+"Horse herding",lost,10724,52.27,21.37,-3547,January 3547 BCE,6321
+"Horse herding",lost,12615,61.95,40.72,-3547,January 3547 BCE,2456
+"Horse riding",lost,10724,52.27,21.37,-3547,January 3547 BCE,6321
+"Horse riding",lost,12615,61.95,40.72,-3547,January 3547 BCE,2456
+"Horse herding",lost,9369,46.73,20.82,-3545,January 3545 BCE,6706
+"Horse riding",lost,9369,46.73,20.82,-3545,January 3545 BCE,6706
+"The plough",lost,10426,51.02,21.45,-3543,January 3543 BCE,11780
+"Milk and wool",lost,12695,62.42,36.00,-3540,January 3540 BCE,1162
+"Horse herding",lost,12695,62.42,36.00,-3540,January 3540 BCE,1162
+"Horse riding",lost,12695,62.42,36.00,-3540,January 3540 BCE,1162
+"Milk and wool",lost,11471,55.87,24.25,-3539,January 3539 BCE,5617
+"Copper working",lost,7182,39.94,38.95,-3538,January 3538 BCE,34640
+"Copper working",lost,7182,39.94,38.95,-3538,January 3538 BCE,34640
+"Horse herding",lost,11647,56.81,25.72,-3538,January 3538 BCE,7334
+"Horse riding",lost,11647,56.81,25.72,-3538,January 3538 BCE,7334
+"The plough",lost,7710,41.35,26.85,-3534,January 3534 BCE,9630
+"Horse herding",lost,10561,48.38,69.56,-3533,January 3533 BCE,2246
+"Horse riding",lost,10561,48.38,69.56,-3533,January 3533 BCE,2246
+"Horse herding",lost,10626,51.82,21.15,-3532,January 3532 BCE,6753
+"Horse riding",lost,10626,51.82,21.15,-3532,January 3532 BCE,6753
+"Irrigation",lost,16580,34.79,114.90,-3531,January 3531 BCE,36586
+"Horse herding",lost,12688,62.25,43.43,-3528,January 3528 BCE,1754
+"Horse riding",lost,12688,62.25,43.43,-3528,January 3528 BCE,1754
+"Terraced fields",independent,7304,40.22,42.84,-3527,January 3527 BCE,0
+"Horse riding",lost,12534,61.35,45.27,-3527,January 3527 BCE,895
+"Irrigation",lost,66410,10.35,32.32,-3526,January 3526 BCE,26099
+"The sail",lost,77629,6.12,100.90,-3525,January 3525 BCE,10381
+"Horse herding",lost,9258,46.28,20.63,-3524,January 3524 BCE,5635
+"Horse riding",lost,9258,46.28,20.63,-3524,January 3524 BCE,5635
+"Copper working",lost,7182,39.94,38.95,-3523,January 3523 BCE,34414
+"Horse herding",lost,12534,61.35,45.27,-3523,January 3523 BCE,974
+"Copper working",lost,7182,39.94,38.95,-3522,January 3522 BCE,30980
+"The plough",lost,11821,57.61,25.47,-3521,January 3521 BCE,2296
+"The plough",lost,12044,58.13,53.75,-3520,January 3520 BCE,3973
+"Irrigation",lost,16447,34.54,110.37,-3513,January 3513 BCE,23935
+"Irrigation",lost,6657,38.25,39.42,-3508,January 3508 BCE,53515
+"Horse herding",lost,8918,45.02,20.73,-3508,January 3508 BCE,3049
+"Horse riding",lost,8918,45.02,20.73,-3508,January 3508 BCE,3049
+"Milk and wool",lost,11821,57.61,25.47,-3504,January 3504 BCE,3088
+"Horse herding",lost,11821,57.61,25.47,-3504,January 3504 BCE,3088
+"Horse herding",lost,11990,58.48,26.13,-3504,January 3504 BCE,2219
+"Horse riding",lost,11821,57.61,25.47,-3504,January 3504 BCE,3088
+"Horse riding",lost,11990,58.48,26.13,-3504,January 3504 BCE,2219
+"Irrigation",lost,16447,34.54,110.37,-3503,January 3503 BCE,22058
+"Milk and wool",lost,11990,58.48,26.13,-3503,January 3503 BCE,2273
+"The plough",lost,11106,54.04,22.33,-3503,January 3503 BCE,8941
+"Irrigation",lost,16446,34.53,110.90,-3497,January 3497 BCE,20883
+"Irrigation",lost,16580,34.79,114.90,-3497,January 3497 BCE,35246
+"Irrigation",lost,16580,34.79,114.90,-3496,January 3496 BCE,34175
+"Horse riding",lost,8568,43.83,21.47,-3496,January 3496 BCE,2449
+"The plough",lost,7712,41.26,25.65,-3495,January 3495 BCE,3948
+"Horse herding",lost,7712,41.26,25.65,-3495,January 3495 BCE,3948
+"Horse riding",lost,7712,41.26,25.65,-3495,January 3495 BCE,3948
+"Horse herding",lost,8568,43.83,21.47,-3494,January 3494 BCE,2534
+"Milk and wool",lost,8448,43.52,22.54,-3493,January 3493 BCE,11462
+"The plough",lost,8448,43.52,22.54,-3493,January 3493 BCE,9288
+"The plough",lost,12393,60.70,29.96,-3492,January 3492 BCE,2332
+"Milk and wool",lost,8568,43.83,21.47,-3490,January 3490 BCE,2744
+"Horse herding",lost,9697,47.98,20.72,-3488,January 3488 BCE,10472
+"Horse riding",lost,9697,47.98,20.72,-3488,January 3488 BCE,10472
+"Irrigation",lost,69199,10.60,15.26,-3487,January 3487 BCE,22704
+"The plough",lost,7837,41.65,25.25,-3487,January 3487 BCE,9735
+"The plough",lost,7838,41.60,24.64,-3487,January 3487 BCE,6046
+"The plough",lost,12126,58.46,54.41,-3487,January 3487 BCE,1680
+"Horse herding",lost,10821,52.71,21.60,-3487,January 3487 BCE,10698
+"Horse riding",lost,10821,52.71,21.60,-3487,January 3487 BCE,10698
+"The plough",lost,11382,55.36,23.12,-3483,January 3483 BCE,6231
+"Milk and wool",lost,10527,51.38,20.93,-3482,January 3482 BCE,10963
+"The plough",lost,10527,51.38,20.93,-3482,January 3482 BCE,10963
+"Horse herding",lost,10223,50.13,21.02,-3478,January 3478 BCE,11794
+"Horse riding",lost,10223,50.13,21.02,-3478,January 3478 BCE,11794
+"Horse herding",lost,12393,60.70,29.96,-3473,January 3473 BCE,4336
+"Horse riding",lost,12393,60.70,29.96,-3473,January 3473 BCE,4336
+"Milk and wool",lost,10427,50.94,20.71,-3472,January 3472 BCE,8393
+"The plough",lost,10427,50.94,20.71,-3472,January 3472 BCE,8393
+"Horse riding",lost,9259,46.20,19.97,-3472,January 3472 BCE,2373
+"Irrigation",lost,69144,10.67,15.71,-3471,January 3471 BCE,26807
+"The plough",lost,8449,43.46,21.91,-3470,January 3470 BCE,4532
+"Horse herding",lost,9259,46.20,19.97,-3469,January 3469 BCE,2575
+"The wheel",first,7181,39.92,39.54,-3467,January 3467 BCE,0
+"Milk and wool",lost,9259,46.20,19.97,-3464,January 3464 BCE,2920
+"The plough",lost,9259,46.20,19.97,-3464,January 3464 BCE,2920
+"Copper working",lost,548,31.50,115.45,-3463,January 3463 BCE,23575
+"Horse herding",lost,8449,43.46,21.91,-3463,January 3463 BCE,5127
+"Horse riding",lost,8449,43.46,21.91,-3463,January 3463 BCE,5127
+"Copper working",lost,548,31.50,115.45,-3462,January 3462 BCE,20460
+"The plough",lost,12453,60.70,48.63,-3461,January 3461 BCE,2689
+"Copper working",lost,7178,39.87,41.31,-3461,January 3461 BCE,25365
+"Copper working",lost,7178,39.87,41.31,-3461,January 3461 BCE,25365
+"Horse herding",lost,12453,60.70,48.63,-3461,January 3461 BCE,2689
+"Horse riding",lost,12453,60.70,48.63,-3461,January 3461 BCE,2689
+"Copper working",lost,7179,39.89,40.72,-3460,January 3460 BCE,34065
+"Copper working",lost,7179,39.89,40.72,-3460,January 3460 BCE,34065
+"Copper working",lost,7180,39.91,40.13,-3460,January 3460 BCE,36748
+"Copper working",lost,7180,39.91,40.13,-3460,January 3460 BCE,36748
+"Irrigation",lost,6385,37.34,41.59,-3459,January 3459 BCE,16352
+"The sail",lost,77538,6.14,101.39,-3458,January 3458 BCE,6983
+"The plough",lost,8685,44.28,21.65,-3456,January 3456 BCE,10489
+"Irrigation",lost,69199,10.60,15.26,-3453,January 3453 BCE,23199
+"Irrigation",lost,66410,10.35,32.32,-3452,January 3452 BCE,26333
+"Copper working",lost,7182,39.94,38.95,-3448,January 3448 BCE,36211
+"Copper working",lost,7182,39.94,38.95,-3448,January 3448 BCE,36211
+"The plough",lost,12074,58.84,25.54,-3441,January 3441 BCE,1888
+"Copper working",lost,5706,35.38,36.80,-3440,January 3440 BCE,16861
+"Horse herding",lost,11561,56.23,23.68,-3440,January 3440 BCE,5381
+"Horse herding",lost,12073,58.91,26.48,-3440,January 3440 BCE,8342
+"Horse herding",lost,12394,60.66,28.96,-3440,January 3440 BCE,2584
+"Horse riding",lost,11561,56.23,23.68,-3440,January 3440 BCE,5381
+"Horse riding",lost,12073,58.91,26.48,-3440,January 3440 BCE,8342
+"Horse riding",lost,12394,60.66,28.96,-3440,January 3440 BCE,2584
+"Copper working",lost,6120,36.62,37.65,-3439,January 3439 BCE,45760
+"Copper working",lost,5706,35.38,36.80,-3438,January 3438 BCE,15599
+"Copper working",lost,6120,36.62,37.65,-3438,January 3438 BCE,44616
+"Irrigation",lost,66410,10.35,32.32,-3437,January 3437 BCE,26239
+"Irrigation",lost,16720,35.19,115.22,-3436,January 3436 BCE,28766
+"The plough",lost,12394,60.66,28.96,-3436,January 3436 BCE,4365
+"Irrigation",lost,6656,38.23,39.99,-3435,January 3435 BCE,27419
+"Irrigation",lost,16581,34.82,114.37,-3435,January 3435 BCE,22522
+"Milk and wool",lost,12394,60.66,28.96,-3435,January 3435 BCE,4451
+"Horse herding",lost,11200,54.40,21.78,-3434,January 3434 BCE,7225
+"Horse riding",lost,11200,54.40,21.78,-3434,January 3434 BCE,7225
+"Horse herding",lost,10918,53.07,21.06,-3433,January 3433 BCE,7817
+"Horse riding",lost,10918,53.07,21.06,-3433,January 3433 BCE,7817
+"Copper working",lost,545,31.58,113.96,-3432,January 3432 BCE,18503
+"Copper working",lost,545,31.58,113.96,-3427,January 3427 BCE,18436
+"Copper working",lost,545,31.58,113.96,-3426,January 3426 BCE,16358
+"Horse riding",lost,7586,40.86,26.04,-3426,January 3426 BCE,5181
+"Horse riding",lost,12074,58.84,25.54,-3426,January 3426 BCE,2986
+"Irrigation",lost,7179,39.89,40.72,-3425,January 3425 BCE,30585
+"Irrigation",lost,7180,39.91,40.13,-3425,January 3425 BCE,26037
+"Irrigation",lost,16586,34.92,111.72,-3425,January 3425 BCE,19594
+"The plough",lost,11013,53.51,21.29,-3425,January 3425 BCE,7746
+"Horse herding",lost,7586,40.86,26.04,-3425,January 3425 BCE,5292
+"Horse herding",lost,12074,58.84,25.54,-3425,January 3425 BCE,3878
+"Irrigation",lost,6790,38.67,39.16,-3424,January 3424 BCE,51671
+"Irrigation",lost,7053,39.52,38.63,-3423,January 3423 BCE,25888
+"The plough",lost,7708,41.42,28.06,-3422,January 3422 BCE,8275
+"The plough",lost,11736,57.11,24.27,-3417,January 3417 BCE,3446
+"Milk and wool",lost,9589,47.54,20.52,-3416,January 3416 BCE,14159
+"The plough",lost,9589,47.54,20.52,-3416,January 3416 BCE,14159
+"Copper working",lost,6255,37.02,38.50,-3416,January 3416 BCE,60615
+"Copper working",lost,6255,37.02,38.50,-3416,January 3416 BCE,60615
+"Irrigation",lost,7181,39.92,39.54,-3415,January 3415 BCE,5168
+"Horse herding",lost,8802,44.65,21.20,-3415,January 3415 BCE,9604
+"Horse herding",lost,10822,52.63,20.83,-3415,January 3415 BCE,26271
+"Horse riding",lost,8802,44.65,21.20,-3415,January 3415 BCE,6323
+"Horse riding",lost,10822,52.63,20.83,-3415,January 3415 BCE,26271
+"Milk and wool",lost,10278,49.82,56.52,-3412,January 3412 BCE,2414
+"The plough",lost,10278,49.82,56.52,-3412,January 3412 BCE,2351
+"The plough",lost,11907,57.98,24.89,-3411,January 3411 BCE,4758
+"The plough",lost,10528,51.30,20.18,-3407,January 3407 BCE,7276
+"The plough",lost,12156,59.27,25.89,-3407,January 3407 BCE,3828
+"The sail",lost,77539,5.73,101.14,-3407,January 3407 BCE,4946
+"Horse herding",lost,9912,48.71,19.71,-3406,January 3406 BCE,2175
+"Horse herding",lost,10224,50.05,20.30,-3406,January 3406 BCE,9652
+"Horse riding",lost,9912,48.71,19.71,-3406,January 3406 BCE,2175
+"Horse riding",lost,10224,50.05,20.30,-3406,January 3406 BCE,9652
+"Horse herding",lost,7585,40.91,26.64,-3404,January 3404 BCE,10599
+"Horse riding",lost,7585,40.91,26.64,-3404,January 3404 BCE,10599
+"Horse riding",lost,12473,61.03,28.36,-3399,January 3399 BCE,1423
+"Horse herding",lost,12473,61.03,28.36,-3397,January 3397 BCE,1498
+"The sail",lost,77540,5.31,100.90,-3395,January 3395 BCE,6738
+"Milk and wool",lost,12473,61.03,28.36,-3394,January 3394 BCE,2148
+"The plough",lost,12545,61.61,33.93,-3394,January 3394 BCE,620
+"The plough",lost,12472,61.08,29.37,-3393,January 3393 BCE,3025
+"Horse herding",lost,7839,41.55,24.04,-3393,January 3393 BCE,10497
+"Horse riding",lost,7839,41.55,24.04,-3393,January 3393 BCE,10497
+"The plough",lost,12468,61.20,33.44,-3392,January 3392 BCE,3697
+"The plough",lost,12469,61.18,32.42,-3392,January 3392 BCE,2480
+"Horse herding",lost,9033,45.39,20.27,-3391,January 3391 BCE,10043
+"Horse riding",lost,9033,45.39,20.27,-3391,January 3391 BCE,10043
+"Milk and wool",lost,12545,61.61,33.93,-3385,January 3385 BCE,790
+"Horse herding",lost,8569,43.76,20.84,-3385,January 3385 BCE,4669
+"Horse riding",lost,8569,43.76,20.84,-3385,January 3385 BCE,4669
+"The plough",lost,7840,41.49,23.44,-3380,January 3380 BCE,3651
+"The plough",lost,11562,56.16,22.82,-3380,January 3380 BCE,5520
+"Horse herding",lost,7840,41.49,23.44,-3380,January 3380 BCE,3651
+"Horse riding",lost,7840,41.49,23.44,-3380,January 3380 BCE,3651
+"The plough",lost,10428,50.85,19.98,-3378,January 3378 BCE,7797
+"Irrigation",lost,16720,35.19,115.22,-3376,January 3376 BCE,28374
+"The sail",independent,100246,24.72,-107.75,-3371,January 3371 BCE,0
+"Granaries",lost,37774,32.48,-104.46,-3370,January 3370 BCE,371
+"Irrigation",lost,16581,34.82,114.37,-3370,January 3370 BCE,22660
+"Milk and wool",lost,8803,44.58,20.56,-3368,January 3368 BCE,7939
+"The plough",lost,8803,44.58,20.56,-3368,January 3368 BCE,7939
+"Horse herding",lost,8803,44.58,20.56,-3368,January 3368 BCE,7939
+"Horse herding",lost,9371,46.57,19.48,-3368,January 3368 BCE,6075
+"Horse herding",lost,10327,50.41,19.77,-3368,January 3368 BCE,5007
+"Horse riding",lost,8803,44.58,20.56,-3368,January 3368 BCE,7939
+"Horse riding",lost,9371,46.57,19.48,-3368,January 3368 BCE,6075
+"Horse riding",lost,10327,50.41,19.77,-3368,January 3368 BCE,5007
+"Irrigation",lost,16586,34.92,111.72,-3366,January 3366 BCE,30128
+"Irrigation",lost,16581,34.82,114.37,-3359,January 3359 BCE,22825
+"Irrigation",lost,6384,37.32,42.15,-3358,January 3358 BCE,25087
+"Irrigation",lost,69252,10.97,15.02,-3358,January 3358 BCE,27041
+"The plough",lost,12546,61.59,32.89,-3354,January 3354 BCE,1101
+"Horse riding",lost,12549,61.50,29.79,-3349,January 3349 BCE,1737
+"The wheel",lost,7964,41.87,23.02,-3348,January 3348 BCE,6678
+"Horse herding",lost,12549,61.50,29.79,-3348,January 3348 BCE,1780
+"Milk and wool",lost,9590,47.46,19.84,-3347,January 3347 BCE,9843
+"The plough",lost,9590,47.46,19.84,-3347,January 3347 BCE,9843
+"Milk and wool",lost,12549,61.50,29.79,-3346,January 3346 BCE,1866
+"The plough",lost,12075,58.77,24.61,-3345,January 3345 BCE,3393
+"Horse herding",lost,8450,43.39,21.29,-3344,January 3344 BCE,12271
+"Horse riding",lost,8450,43.39,21.29,-3344,January 3344 BCE,12271
+"The plough",lost,10823,52.54,20.06,-3343,January 3343 BCE,9068
+"Horse herding",lost,12075,58.77,24.61,-3343,January 3343 BCE,3532
+"Horse riding",lost,12075,58.77,24.61,-3343,January 3343 BCE,3532
+"Irrigation",lost,6384,37.32,42.15,-3342,January 3342 BCE,25229
+"Irrigation",lost,69252,10.97,15.02,-3342,January 3342 BCE,27442
+"Copper working",lost,545,31.58,113.96,-3341,January 3341 BCE,18707
+"Copper working",lost,548,31.50,115.45,-3341,January 3341 BCE,24202
+"Copper working",lost,548,31.50,115.45,-3341,January 3341 BCE,24202
+"Copper working",lost,7180,39.91,40.13,-3335,January 3335 BCE,34210
+"Horse herding",lost,11650,56.60,23.10,-3334,January 3334 BCE,8597
+"Horse riding",lost,11650,56.60,23.10,-3334,January 3334 BCE,8597
+"Copper working",lost,7178,39.87,41.31,-3332,January 3332 BCE,31247
+"Copper working",lost,7178,39.87,41.31,-3332,January 3332 BCE,31247
+"The plough",lost,10529,51.21,19.44,-3331,January 3331 BCE,6294
+"Copper working",lost,77478,31.05,116.18,-3331,January 3331 BCE,25277
+"Copper working",lost,77478,31.05,116.18,-3331,January 3331 BCE,25277
+"The plough",lost,7964,41.87,23.02,-3329,January 3329 BCE,12479
+"Milk and wool",lost,10529,51.21,19.44,-3328,January 3328 BCE,6642
+"Irrigation",lost,6384,37.32,42.15,-3327,January 3327 BCE,24968
+"The plough",lost,11992,58.34,24.29,-3327,January 3327 BCE,4312
+"Copper working",lost,7179,39.89,40.72,-3327,January 3327 BCE,42842
+"Horse herding",lost,11992,58.34,24.29,-3327,January 3327 BCE,5207
+"Horse riding",lost,11992,58.34,24.29,-3327,January 3327 BCE,5207
+"Milk and wool",lost,12547,61.57,31.86,-3326,January 3326 BCE,2196
+"Copper working",lost,7179,39.89,40.72,-3326,January 3326 BCE,42453
+"Copper working",lost,7180,39.91,40.13,-3326,January 3326 BCE,44658
+"Copper working",lost,7180,39.91,40.13,-3326,January 3326 BCE,44658
+"Irrigation",lost,16581,34.82,114.37,-3325,January 3325 BCE,22828
+"Copper working",lost,7182,39.94,38.95,-3323,January 3323 BCE,42678
+"Copper working",lost,7182,39.94,38.95,-3323,January 3323 BCE,42678
+"The plough",lost,9806,48.27,19.53,-3322,January 3322 BCE,8351
+"The plough",lost,11293,54.75,21.21,-3319,January 3319 BCE,10338
+"Horse herding",lost,8919,44.95,20.09,-3318,January 3318 BCE,7673
+"Horse riding",lost,8919,44.95,20.09,-3318,January 3318 BCE,7673
+"Horse herding",lost,11651,56.51,22.24,-3313,January 3313 BCE,3846
+"Horse riding",lost,11651,56.51,22.24,-3313,January 3313 BCE,2786
+"The plough",lost,11651,56.51,22.24,-3310,January 3310 BCE,4091
+"The wheel",lost,9591,47.38,19.16,-3305,January 3305 BCE,1808
+"The wheel",lost,7965,41.81,22.41,-3304,January 3304 BCE,6196
+"The plough",lost,7965,41.81,22.41,-3300,January 3300 BCE,6673
+"Horse herding",lost,9481,47.01,19.66,-3290,January 3290 BCE,13070
+"Horse riding",lost,9481,47.01,19.66,-3290,January 3290 BCE,13070
+"The wheel",lost,9699,47.82,19.34,-3287,January 3287 BCE,8238
+"The plough",lost,11015,53.34,19.72,-3286,January 3286 BCE,6231
+"Horse herding",lost,9591,47.38,19.16,-3285,January 3285 BCE,3115
+"Horse riding",lost,9591,47.38,19.16,-3285,January 3285 BCE,3115
+"Horse herding",lost,9260,46.12,19.31,-3284,January 3284 BCE,10825
+"Horse riding",lost,9260,46.12,19.31,-3284,January 3284 BCE,10825
+"Milk and wool",lost,12625,61.92,30.23,-3281,January 3281 BCE,1693
+"The plough",lost,11563,56.08,21.97,-3281,January 3281 BCE,9398
+"Horse herding",lost,11563,56.08,21.97,-3281,January 3281 BCE,8289
+"Horse riding",lost,11563,56.08,21.97,-3281,January 3281 BCE,8289
+"Copper working",lost,548,31.50,115.45,-3280,January 3280 BCE,24534
+"Copper working",lost,548,31.50,115.45,-3280,January 3280 BCE,24534
+"Granaries",lost,37774,32.48,-104.46,-3275,January 3275 BCE,371
+"The plough",lost,9699,47.82,19.34,-3275,January 3275 BCE,10104
+"Horse herding",lost,9699,47.82,19.34,-3275,January 3275 BCE,9333
+"Horse herding",lost,12474,60.98,27.35,-3275,January 3275 BCE,5702
+"Horse riding",lost,9699,47.82,19.34,-3275,January 3275 BCE,9333
+"Horse riding",lost,12474,60.98,27.35,-3275,January 3275 BCE,5702
+"Milk and wool",lost,10920,52.89,19.50,-3273,January 3273 BCE,7681
+"The plough",lost,10727,52.01,19.09,-3273,January 3273 BCE,5074
+"The plough",lost,10920,52.89,19.50,-3273,January 3273 BCE,6856
+"Copper working",lost,7182,39.94,38.95,-3273,January 3273 BCE,40954
+"Horse herding",lost,10225,49.96,19.58,-3273,January 3273 BCE,6806
+"Horse herding",lost,10920,52.89,19.50,-3273,January 3273 BCE,7681
+"Horse riding",lost,10225,49.96,19.58,-3273,January 3273 BCE,6806
+"Horse riding",lost,10920,52.89,19.50,-3273,January 3273 BCE,7681
+"The wheel",lost,8451,43.32,20.66,-3270,January 3270 BCE,9103
+"Milk and wool",lost,8451,43.32,20.66,-3269,January 3269 BCE,9175
+"The plough",lost,8451,43.32,20.66,-3269,January 3269 BCE,9175
+"Horse herding",lost,11202,54.22,20.16,-3268,January 3268 BCE,6278
+"Horse riding",lost,11202,54.22,20.16,-3268,January 3268 BCE,6278
+"Copper working",lost,6917,39.01,41.79,-3267,January 3267 BCE,29018
+"Copper working",lost,6917,39.01,41.79,-3267,January 3267 BCE,29018
+"Copper working",lost,7048,39.44,41.55,-3267,January 3267 BCE,27230
+"Copper working",lost,7048,39.44,41.55,-3267,January 3267 BCE,27230
+"Copper working",lost,545,31.58,113.96,-3263,January 3263 BCE,18475
+"Copper working",lost,545,31.58,113.96,-3263,January 3263 BCE,18475
+"Horse herding",lost,12158,59.13,24.00,-3263,January 3263 BCE,5233
+"Horse riding",lost,12158,59.13,24.00,-3263,January 3263 BCE,5233
+"Horse herding",lost,8088,42.19,21.99,-3260,January 3260 BCE,11315
+"Horse riding",lost,8088,42.19,21.99,-3260,January 3260 BCE,11315
+"Irrigation",lost,6922,39.10,38.90,-3258,January 3258 BCE,81369
+"The wheel",lost,10018,49.07,19.20,-3256,January 3256 BCE,3835
+"Irrigation",lost,6384,37.32,42.15,-3254,January 3254 BCE,27177
+"Irrigation",lost,6657,38.25,39.42,-3254,January 3254 BCE,72115
+"Milk and wool",lost,10018,49.07,19.20,-3253,January 3253 BCE,3995
+"The plough",lost,10018,49.07,19.20,-3253,January 3253 BCE,3995
+"The plough",lost,12076,58.70,23.69,-3252,January 3252 BCE,7399
+"Horse herding",lost,11738,56.95,22.51,-3250,January 3250 BCE,8798
+"Horse riding",lost,11738,56.95,22.51,-3250,January 3250 BCE,8798
+"Irrigation",lost,162962,13.31,-6.12,-3248,January 3248 BCE,14526
+"The wheel",lost,9913,48.63,19.02,-3247,January 3247 BCE,7006
+"The wheel",lost,11824,57.39,22.79,-3247,January 3247 BCE,3234
+"Copper working",lost,6660,38.28,37.71,-3247,January 3247 BCE,33499
+"Copper working",lost,6660,38.28,37.71,-3247,January 3247 BCE,33499
+"Copper working",lost,545,31.58,113.96,-3246,January 3246 BCE,18483
+"Copper working",lost,545,31.58,113.96,-3246,January 3246 BCE,18483
+"Irrigation",lost,6385,37.34,41.59,-3245,January 3245 BCE,20050
+"The plough",lost,9913,48.63,19.02,-3245,January 3245 BCE,7947
+"Irrigation",lost,69199,10.60,15.26,-3244,January 3244 BCE,20861
+"Copper working",lost,548,31.50,115.45,-3244,January 3244 BCE,24424
+"Copper working",lost,548,31.50,115.45,-3244,January 3244 BCE,24424
+"Copper working",lost,6255,37.02,38.50,-3244,January 3244 BCE,64909
+"Copper working",lost,6255,37.02,38.50,-3244,January 3244 BCE,64909
+"The wheel",lost,10824,52.45,19.30,-3236,January 3236 BCE,9456
+"The plough",lost,11739,56.87,21.64,-3235,January 3235 BCE,4329
+"The plough",lost,12623,61.98,32.32,-3234,January 3234 BCE,4121
+"Irrigation",lost,16720,35.19,115.22,-3233,January 3233 BCE,30069
+"Milk and wool",lost,10824,52.45,19.30,-3233,January 3233 BCE,11363
+"The plough",lost,10824,52.45,19.30,-3233,January 3233 BCE,9770
+"The plough",lost,8920,44.87,19.45,-3229,January 3229 BCE,7674
+"The wheel",lost,8920,44.87,19.45,-3229,January 3229 BCE,7674
+"Horse herding",lost,8920,44.87,19.45,-3229,January 3229 BCE,7674
+"Horse riding",lost,8920,44.87,19.45,-3229,January 3229 BCE,7674
+"Milk and wool",lost,11824,57.39,22.79,-3228,January 3228 BCE,4982
+"The plough",lost,11824,57.39,22.79,-3228,January 3228 BCE,4982
+"The plough",lost,12622,62.00,33.37,-3228,January 3228 BCE,2520
+"Copper working",lost,7178,39.87,41.31,-3228,January 3228 BCE,30685
+"Copper working",lost,7178,39.87,41.31,-3228,January 3228 BCE,30685
+"Horse riding",lost,10256,46.77,70.82,-3228,January 3228 BCE,2113
+"Horse herding",lost,10256,46.77,70.82,-3227,January 3227 BCE,2152
+"Copper working",lost,7179,39.89,40.72,-3225,January 3225 BCE,42279
+"Copper working",lost,7179,39.89,40.72,-3225,January 3225 BCE,42279
+"Copper working",lost,7180,39.91,40.13,-3225,January 3225 BCE,45241
+"Copper working",lost,7180,39.91,40.13,-3225,January 3225 BCE,45241
+"Horse herding",lost,9482,46.93,18.99,-3224,January 3224 BCE,9172
+"Horse herding",lost,12475,60.92,26.35,-3224,January 3224 BCE,2128
+"Horse riding",lost,9482,46.93,18.99,-3224,January 3224 BCE,9172
+"Horse riding",lost,12475,60.92,26.35,-3224,January 3224 BCE,2128
+"The plough",lost,12475,60.92,26.35,-3223,January 3223 BCE,2169
+"Irrigation",lost,6657,38.25,39.42,-3221,January 3221 BCE,70739
+"Horse herding",lost,10122,49.52,19.39,-3215,January 3215 BCE,5281
+"Horse riding",lost,10122,49.52,19.39,-3215,January 3215 BCE,5281
+"Irrigation",lost,6384,37.32,42.15,-3212,January 3212 BCE,27202
+"Irrigation",lost,16447,34.54,110.37,-3209,January 3209 BCE,21954
+"The plough",lost,9700,47.74,18.66,-3209,January 3209 BCE,6696
+"The wheel",lost,9700,47.74,18.66,-3209,January 3209 BCE,6696
+"Horse herding",lost,9700,47.74,18.66,-3209,January 3209 BCE,6696
+"Horse riding",lost,9700,47.74,18.66,-3209,January 3209 BCE,6696
+"Irrigation",lost,16446,34.53,110.90,-3206,January 3206 BCE,21147
+"Copper working",lost,7182,39.94,38.95,-3206,January 3206 BCE,45115
+"Copper working",lost,7182,39.94,38.95,-3206,January 3206 BCE,45115
+"The sail",lost,80984,19.57,84.49,-3204,January 3204 BCE,2215
+"Milk and wool",lost,9261,46.04,18.65,-3203,January 3203 BCE,7808
+"The plough",lost,9261,46.04,18.65,-3203,January 3203 BCE,7808
+"The wheel",lost,9261,46.04,18.65,-3203,January 3203 BCE,7808
+"The wheel",lost,12699,62.36,31.74,-3203,January 3203 BCE,1193
+"Copper working",lost,545,31.58,113.96,-3203,January 3203 BCE,17962
+"Copper working",lost,545,31.58,113.96,-3203,January 3203 BCE,17962
+"Copper working",lost,548,31.50,115.45,-3200,January 3200 BCE,24114
+"Copper working",lost,548,31.50,115.45,-3200,January 3200 BCE,24114
+"Irrigation",lost,69252,10.97,15.02,-3197,January 3197 BCE,25105
+"Horse herding",lost,7590,40.67,23.66,-3193,January 3193 BCE,8886
+"Horse riding",lost,7590,40.67,23.66,-3193,January 3193 BCE,8886
+"The plough",lost,9035,45.23,18.97,-3192,January 3192 BCE,9193
+"The wheel",lost,9035,45.23,18.97,-3192,January 3192 BCE,9193
+"The wheel",lost,12077,58.62,22.76,-3192,January 3192 BCE,2782
+"Horse herding",lost,9035,45.23,18.97,-3192,January 3192 BCE,9193
+"Horse herding",lost,11203,54.13,19.36,-3192,January 3192 BCE,6072
+"Horse herding",lost,11564,55.99,21.12,-3192,January 3192 BCE,8698
+"Horse riding",lost,9035,45.23,18.97,-3192,January 3192 BCE,9193
+"Horse riding",lost,11203,54.13,19.36,-3192,January 3192 BCE,6072
+"Horse riding",lost,11564,55.99,21.12,-3192,January 3192 BCE,8698
+"Irrigation",lost,16446,34.53,110.90,-3191,January 3191 BCE,20567
+"Copper working",lost,7932,42.33,42.85,-3191,January 3191 BCE,19603
+"Horse herding",lost,12396,60.56,26.97,-3191,January 3191 BCE,6596
+"Horse riding",lost,12396,60.56,26.97,-3191,January 3191 BCE,6596
+"The plough",lost,12077,58.62,22.76,-3190,January 3190 BCE,2892
+"The plough",lost,12699,62.36,31.74,-3188,January 3188 BCE,2562
+"Milk and wool",lost,12699,62.36,31.74,-3187,January 3187 BCE,2577
+"The plough",lost,7591,40.61,23.07,-3185,January 3185 BCE,6514
+"The wheel",lost,7591,40.61,23.07,-3185,January 3185 BCE,6514
+"Horse herding",lost,7591,40.61,23.07,-3185,January 3185 BCE,5623
+"Horse riding",lost,7591,40.61,23.07,-3185,January 3185 BCE,5623
+"The plough",lost,10226,49.87,18.86,-3182,January 3182 BCE,8604
+"The wheel",lost,10226,49.87,18.86,-3182,January 3182 BCE,8604
+"Horse herding",lost,10226,49.87,18.86,-3182,January 3182 BCE,3663
+"Horse riding",lost,10226,49.87,18.86,-3182,January 3182 BCE,3663
+"Horse herding",lost,10728,51.91,18.34,-3175,January 3175 BCE,5614
+"Horse riding",lost,10728,51.91,18.34,-3175,January 3175 BCE,5614
+"Irrigation",lost,6657,38.25,39.42,-3173,January 3173 BCE,71795
+"The plough",lost,9807,48.18,18.84,-3173,January 3173 BCE,12956
+"The wheel",lost,9807,48.18,18.84,-3173,January 3173 BCE,12956
+"Irrigation",lost,6384,37.32,42.15,-3172,January 3172 BCE,27432
+"The plough",lost,9149,45.60,18.49,-3169,January 3169 BCE,7396
+"The wheel",lost,9149,45.60,18.49,-3169,January 3169 BCE,7396
+"Irrigation",lost,16447,34.54,110.37,-3166,January 3166 BCE,21779
+"The plough",lost,9592,47.29,18.49,-3166,January 3166 BCE,9357
+"The wheel",lost,9592,47.29,18.49,-3166,January 3166 BCE,9357
+"Irrigation",lost,16446,34.53,110.90,-3165,January 3165 BCE,20754
+"Copper working",lost,6255,37.02,38.50,-3165,January 3165 BCE,67308
+"Copper working",lost,6255,37.02,38.50,-3165,January 3165 BCE,67308
+"Horse herding",lost,8452,43.25,20.04,-3165,January 3165 BCE,9313
+"Horse riding",lost,8452,43.25,20.04,-3165,January 3165 BCE,9313
+"Irrigation",lost,16447,34.54,110.37,-3161,January 3161 BCE,22043
+"Horse herding",lost,8211,42.50,20.94,-3159,January 3159 BCE,7372
+"Horse riding",lost,8211,42.50,20.94,-3159,January 3159 BCE,7372
+"Irrigation",lost,16447,34.54,110.37,-3157,January 3157 BCE,22329
+"Irrigation",lost,6657,38.25,39.42,-3156,January 3156 BCE,70753
+"Copper working",lost,16730,35.37,109.88,-3156,January 3156 BCE,33236
+"Copper working",lost,16869,35.78,110.16,-3156,January 3156 BCE,45812
+"Copper working",lost,16869,35.78,110.16,-3156,January 3156 BCE,45812
+"Irrigation",lost,162962,13.31,-6.12,-3155,January 3155 BCE,13892
+"Irrigation",lost,6384,37.32,42.15,-3154,January 3154 BCE,26936
+"The plough",lost,12697,62.41,33.87,-3154,January 3154 BCE,1020
+"Horse herding",lost,10329,50.23,18.33,-3154,January 3154 BCE,6390
+"Horse riding",lost,10329,50.23,18.33,-3154,January 3154 BCE,6390
+"Irrigation",lost,162844,13.67,-5.87,-3153,January 3153 BCE,10490
+"Irrigation",lost,16446,34.53,110.90,-3152,January 3152 BCE,21078
+"Copper working",lost,6384,37.32,42.15,-3151,January 3151 BCE,39537
+"Copper working",lost,6384,37.32,42.15,-3151,January 3151 BCE,39537
+"Horse herding",lost,10255,46.61,71.41,-3151,January 3151 BCE,1759
+"Horse riding",lost,10255,46.61,71.41,-3151,January 3151 BCE,1759
+"Milk and wool",lost,12697,62.41,33.87,-3150,January 3150 BCE,1084
+"Milk and wool",lost,11825,57.31,21.91,-3145,January 3145 BCE,9681
+"The plough",lost,11825,57.31,21.91,-3145,January 3145 BCE,9681
+"The wheel",lost,11825,57.31,21.91,-3145,January 3145 BCE,9681
+"The plough",lost,8805,44.43,19.28,-3142,January 3142 BCE,9840
+"The wheel",lost,8805,44.43,19.28,-3142,January 3142 BCE,9840
+"Copper working",lost,7183,39.95,38.36,-3141,January 3141 BCE,34353
+"Copper working",lost,7054,39.53,38.05,-3140,January 3140 BCE,30460
+"The plough",lost,9483,46.85,18.32,-3139,January 3139 BCE,9093
+"The wheel",lost,9483,46.85,18.32,-3139,January 3139 BCE,9093
+"Copper working",lost,6110,36.44,43.14,-3139,January 3139 BCE,21587
+"Copper working",lost,6110,36.44,43.14,-3139,January 3139 BCE,21587
+"Copper working",lost,6247,36.86,42.92,-3139,January 3139 BCE,27817
+"Copper working",lost,6111,36.46,42.59,-3138,January 3138 BCE,28119
+"Copper working",lost,6111,36.46,42.59,-3138,January 3138 BCE,28119
+"Copper working",lost,6785,38.58,42.03,-3138,January 3138 BCE,28986
+"The plough",lost,8921,44.79,18.81,-3137,January 3137 BCE,5654
+"The wheel",lost,8921,44.79,18.81,-3137,January 3137 BCE,5654
+"Copper working",lost,6248,36.89,42.37,-3137,January 3137 BCE,28292
+"Copper working",lost,6248,36.89,42.37,-3137,January 3137 BCE,28292
+"Copper working",lost,6785,38.58,42.03,-3137,January 3137 BCE,28477
+"Horse herding",lost,8921,44.79,18.81,-3137,January 3137 BCE,4127
+"Horse riding",lost,8921,44.79,18.81,-3137,January 3137 BCE,4127
+"Horse herding",lost,12774,62.74,31.14,-3135,January 3135 BCE,985
+"Irrigation",lost,69252,10.97,15.02,-3134,January 3134 BCE,24324
+"Irrigation",lost,163197,13.30,-7.12,-3134,January 3134 BCE,5055
+"Copper working",lost,6249,36.92,41.82,-3132,January 3132 BCE,21271
+"Irrigation",lost,163080,13.30,-6.62,-3131,January 3131 BCE,5676
+"Copper working",lost,6660,38.28,37.71,-3131,January 3131 BCE,32696
+"Copper working",lost,6660,38.28,37.71,-3131,January 3131 BCE,32696
+"Horse herding",lost,10431,50.58,17.79,-3131,January 3131 BCE,3638
+"Horse riding",lost,10431,50.58,17.79,-3131,January 3131 BCE,3638
+"Copper working",lost,6249,36.92,41.82,-3130,January 3130 BCE,21264
+"Irrigation",lost,69198,11.04,15.48,-3129,January 3129 BCE,20188
+"The wheel",lost,12774,62.74,31.14,-3129,January 3129 BCE,2135
+"Copper working",lost,6384,37.32,42.15,-3128,January 3128 BCE,35971
+"Copper working",lost,6384,37.32,42.15,-3128,January 3128 BCE,35971
+"Milk and wool",lost,12774,62.74,31.14,-3127,January 3127 BCE,2113
+"The plough",lost,12774,62.74,31.14,-3127,January 3127 BCE,2113
+"Copper working",lost,6917,39.01,41.79,-3126,January 3126 BCE,30309
+"Copper working",lost,6917,39.01,41.79,-3126,January 3126 BCE,30309
+"Copper working",lost,7048,39.44,41.55,-3126,January 3126 BCE,38410
+"Copper working",lost,7048,39.44,41.55,-3126,January 3126 BCE,38410
+"Horse herding",lost,9914,48.54,18.32,-3124,January 3124 BCE,8046
+"Horse riding",lost,9914,48.54,18.32,-3124,January 3124 BCE,8046
+"Milk and wool",lost,7592,40.55,22.48,-3122,January 3122 BCE,7487
+"The plough",lost,7592,40.55,22.48,-3122,January 3122 BCE,7487
+"The wheel",lost,7592,40.55,22.48,-3122,January 3122 BCE,7487
+"Horse herding",lost,7592,40.55,22.48,-3122,January 3122 BCE,4225
+"Horse riding",lost,7592,40.55,22.48,-3122,January 3122 BCE,4225
+"The plough",lost,11204,54.03,18.57,-3121,January 3121 BCE,6251
+"The wheel",lost,11204,54.03,18.57,-3121,January 3121 BCE,6251
+"Copper working",lost,7178,39.87,41.31,-3121,January 3121 BCE,29989
+"Copper working",lost,7178,39.87,41.31,-3121,January 3121 BCE,29989
+"Copper working",lost,7179,39.89,40.72,-3121,January 3121 BCE,49376
+"Copper working",lost,7179,39.89,40.72,-3121,January 3121 BCE,49376
+"Copper working",lost,7180,39.91,40.13,-3121,January 3121 BCE,45760
+"Copper working",lost,7180,39.91,40.13,-3121,January 3121 BCE,45760
+"Copper working",lost,7932,42.33,42.85,-3121,January 3121 BCE,18704
+"Copper working",lost,7932,42.33,42.85,-3121,January 3121 BCE,18704
+"Copper working",lost,7182,39.94,38.95,-3119,January 3119 BCE,38794
+"Copper working",lost,7182,39.94,38.95,-3119,January 3119 BCE,38794
+"Copper working",lost,16863,35.69,113.40,-3118,January 3118 BCE,20363
+"Horse riding",lost,12773,62.77,32.22,-3114,January 3114 BCE,1112
+"Milk and wool",lost,9701,47.65,17.98,-3107,January 3107 BCE,8550
+"The plough",lost,9701,47.65,17.98,-3107,January 3107 BCE,8224
+"The wheel",lost,9701,47.65,17.98,-3107,January 3107 BCE,8224
+"Terraced fields",lost,9701,47.65,17.98,-3107,January 3107 BCE,5565
+"Horse herding",lost,9701,47.65,17.98,-3107,January 3107 BCE,8550
+"Horse herding",lost,12773,62.77,32.22,-3107,January 3107 BCE,1592
+"Horse riding",lost,9701,47.65,17.98,-3107,January 3107 BCE,8550
+"Copper working",lost,16723,35.27,113.62,-3106,January 3106 BCE,38012
+"Copper working",lost,16723,35.27,113.62,-3106,January 3106 BCE,38012
+"Copper working",lost,16863,35.69,113.40,-3106,January 3106 BCE,24084
+"Horse herding",lost,10019,48.98,18.50,-3106,January 3106 BCE,7535
+"Horse riding",lost,10019,48.98,18.50,-3106,January 3106 BCE,7535
+"Irrigation",lost,6385,37.34,41.59,-3103,January 3103 BCE,17995
+"Copper working",lost,7182,39.94,38.95,-3103,January 3103 BCE,34533
+"Horse herding",lost,10630,51.47,18.15,-3103,January 3103 BCE,11319
+"Horse riding",lost,10630,51.47,18.15,-3103,January 3103 BCE,11319
+"The wheel",lost,12773,62.77,32.22,-3102,January 3102 BCE,2266
+"Copper working",lost,545,31.58,113.96,-3102,January 3102 BCE,19270
+"Copper working",lost,545,31.58,113.96,-3102,January 3102 BCE,19270
+"Irrigation",lost,6656,38.23,39.99,-3101,January 3101 BCE,28338
+"Irrigation",lost,7180,39.91,40.13,-3100,January 3100 BCE,24718
+"Irrigation",lost,7179,39.89,40.72,-3099,January 3099 BCE,21380
+"Milk and wool",lost,12773,62.77,32.22,-3099,January 3099 BCE,2407
+"The plough",lost,12773,62.77,32.22,-3099,January 3099 BCE,2407
+"Copper working",lost,7180,39.91,40.13,-3099,January 3099 BCE,27963
+"The plough",lost,9593,47.20,17.82,-3097,January 3097 BCE,6455
+"The wheel",lost,9593,47.20,17.82,-3097,January 3097 BCE,6455
+"Copper working",lost,6249,36.92,41.82,-3097,January 3097 BCE,20147
+"Copper working",lost,6384,37.32,42.15,-3097,January 3097 BCE,36806
+"Horse riding",lost,8922,44.71,18.17,-3096,January 3096 BCE,2015
+"Copper working",lost,7048,39.44,41.55,-3095,January 3095 BCE,35785
+"Irrigation",lost,7181,39.92,39.54,-3094,January 3094 BCE,4871
+"Copper working",lost,6660,38.28,37.71,-3094,January 3094 BCE,30203
+"Copper working",lost,6785,38.58,42.03,-3094,January 3094 BCE,27276
+"Copper working",lost,6785,38.58,42.03,-3094,January 3094 BCE,27276
+"Copper working",lost,17002,36.11,113.18,-3094,January 3094 BCE,23392
+"Horse herding",lost,8922,44.71,18.17,-3094,January 3094 BCE,2140
+"Copper working",lost,6660,38.28,37.71,-3093,January 3093 BCE,25932
+"Horse herding",lost,12772,62.80,33.30,-3093,January 3093 BCE,648
+"Copper working",lost,6249,36.92,41.82,-3092,January 3092 BCE,19200
+"Copper working",lost,6249,36.92,41.82,-3090,January 3090 BCE,19084
+"Copper working",lost,7048,39.44,41.55,-3090,January 3090 BCE,36009
+"Copper working",lost,7048,39.44,41.55,-3090,January 3090 BCE,36009
+"Copper working",lost,6384,37.32,42.15,-3088,January 3088 BCE,33000
+"Copper working",lost,6917,39.01,41.79,-3088,January 3088 BCE,22357
+"Copper working",lost,6384,37.32,42.15,-3087,January 3087 BCE,32713
+"Copper working",lost,6917,39.01,41.79,-3087,January 3087 BCE,18505
+"Horse herding",lost,9150,45.51,17.84,-3087,January 3087 BCE,4111
+"Horse riding",lost,9150,45.51,17.84,-3087,January 3087 BCE,4111
+"Terraced fields",lost,9808,48.09,18.15,-3086,January 3086 BCE,11001
+"Copper working",lost,17140,36.53,112.95,-3086,January 3086 BCE,19963
+"Copper working",lost,17140,36.53,112.95,-3086,January 3086 BCE,19963
+"Horse herding",lost,9808,48.09,18.15,-3086,January 3086 BCE,11001
+"Horse riding",lost,9808,48.09,18.15,-3086,January 3086 BCE,9306
+"Copper working",lost,7178,39.87,41.31,-3083,January 3083 BCE,25845
+"Copper working",lost,7178,39.87,41.31,-3083,January 3083 BCE,25845
+"Copper working",lost,7179,39.89,40.72,-3083,January 3083 BCE,43827
+"Copper working",lost,7179,39.89,40.72,-3083,January 3083 BCE,43827
+"Copper working",lost,7180,39.91,40.13,-3083,January 3083 BCE,40797
+"Copper working",lost,7180,39.91,40.13,-3082,January 3082 BCE,29212
+"Copper working",lost,17002,36.11,113.18,-3080,January 3080 BCE,23314
+"Copper working",lost,17002,36.11,113.18,-3079,January 3079 BCE,23038
+"Copper working",lost,16440,34.42,114.05,-3078,January 3078 BCE,23908
+"Copper working",lost,16440,34.42,114.05,-3078,January 3078 BCE,23908
+"Copper working",lost,16581,34.82,114.37,-3078,January 3078 BCE,23042
+"Copper working",lost,16581,34.82,114.37,-3078,January 3078 BCE,23042
+"Milk and wool",lost,8453,43.17,19.42,-3077,January 3077 BCE,6082
+"The plough",lost,8453,43.17,19.42,-3077,January 3077 BCE,6082
+"The wheel",lost,8453,43.17,19.42,-3077,January 3077 BCE,6082
+"Copper working",lost,7932,42.33,42.85,-3076,January 3076 BCE,18176
+"Copper working",lost,7932,42.33,42.85,-3076,January 3076 BCE,18176
+"Copper working",lost,7182,39.94,38.95,-3075,January 3075 BCE,38696
+"Copper working",lost,7182,39.94,38.95,-3075,January 3075 BCE,38696
+"Horse riding",lost,11297,54.37,17.98,-3074,January 3074 BCE,1897
+"Copper working",lost,16158,33.69,111.89,-3072,January 3072 BCE,26530
+"Copper working",lost,16158,33.69,111.89,-3072,January 3072 BCE,26530
+"The wheel",lost,12476,60.85,25.35,-3071,January 3071 BCE,5625
+"The plough",lost,12476,60.85,25.35,-3070,January 3070 BCE,5669
+"Copper working",lost,548,31.50,115.45,-3069,January 3069 BCE,20710
+"Copper working",lost,548,31.50,115.45,-3069,January 3069 BCE,20710
+"Copper working",lost,17278,36.98,112.16,-3069,January 3069 BCE,16801
+"Copper working",lost,17278,36.98,112.16,-3069,January 3069 BCE,16801
+"Irrigation",lost,6384,37.32,42.15,-3066,January 3066 BCE,22899
+"Horse herding",lost,11297,54.37,17.98,-3066,January 3066 BCE,2646
+"Horse riding",lost,12848,63.12,30.53,-3066,January 3066 BCE,1087
+"Copper working",lost,16306,34.14,109.57,-3065,January 3065 BCE,21182
+"Copper working",lost,16306,34.14,109.57,-3065,January 3065 BCE,21182
+"Copper working",lost,16449,34.56,109.32,-3065,January 3065 BCE,18959
+"Copper working",lost,16449,34.56,109.32,-3065,January 3065 BCE,18959
+"The wheel",lost,12848,63.12,30.53,-3064,January 3064 BCE,1125
+"Copper working",lost,16723,35.27,113.62,-3064,January 3064 BCE,35862
+"Copper working",lost,16723,35.27,113.62,-3064,January 3064 BCE,35862
+"Copper working",lost,16863,35.69,113.40,-3064,January 3064 BCE,21157
+"Copper working",lost,16863,35.69,113.40,-3064,January 3064 BCE,21157
+"Horse herding",lost,12848,63.12,30.53,-3064,January 3064 BCE,1125
+"Milk and wool",lost,11205,53.93,17.78,-3063,January 3063 BCE,5466
+"Milk and wool",lost,12848,63.12,30.53,-3063,January 3063 BCE,1150
+"The plough",lost,12848,63.12,30.53,-3063,January 3063 BCE,1150
+"Horse herding",lost,7844,41.24,21.04,-3062,January 3062 BCE,5001
+"Horse riding",lost,7844,41.24,21.04,-3062,January 3062 BCE,5001
+"The sail",lost,81022,19.02,83.83,-3060,January 3060 BCE,2213
+"Milk and wool",lost,10826,52.26,17.78,-3059,January 3059 BCE,8284
+"The plough",lost,10826,52.26,17.78,-3059,January 3059 BCE,8284
+"The wheel",lost,10826,52.26,17.78,-3059,January 3059 BCE,8284
+"Horse herding",lost,10826,52.26,17.78,-3059,January 3059 BCE,8284
+"Horse riding",lost,10826,52.26,17.78,-3059,January 3059 BCE,8284
+"Milk and wool",lost,11297,54.37,17.98,-3058,January 3058 BCE,3228
+"Copper working",lost,17279,36.99,111.61,-3056,January 3056 BCE,14526
+"Copper working",lost,17280,37.01,111.05,-3056,January 3056 BCE,14347
+"Copper working",lost,17280,37.01,111.05,-3056,January 3056 BCE,14347
+"Copper working",lost,17279,36.99,111.61,-3055,January 3055 BCE,8358
+"Milk and wool",lost,10532,50.92,17.24,-3054,January 3054 BCE,6407
+"The plough",lost,10532,50.92,17.24,-3054,January 3054 BCE,6407
+"The wheel",lost,10532,50.92,17.24,-3054,January 3054 BCE,6407
+"Horse herding",lost,7968,41.62,20.61,-3051,January 3051 BCE,6384
+"Horse riding",lost,7968,41.62,20.61,-3051,January 3051 BCE,6384
+"Copper working",lost,7932,42.33,42.85,-3045,January 3045 BCE,19254
+"Copper working",lost,7932,42.33,42.85,-3045,January 3045 BCE,19254
+"Horse riding",lost,9809,48.00,17.47,-3044,January 3044 BCE,5726
+"Horse herding",lost,9809,48.00,17.47,-3043,January 3043 BCE,5824
+"Horse herding",lost,10922,52.70,17.97,-3043,January 3043 BCE,11852
+"Horse riding",lost,10922,52.70,17.97,-3043,January 3043 BCE,11852
+"Copper working",lost,17280,37.01,111.05,-3038,January 3038 BCE,14323
+"The plough",lost,12398,60.42,25.00,-3027,January 3027 BCE,4332
+"The wheel",lost,12398,60.42,25.00,-3027,January 3027 BCE,3091
+"Horse herding",lost,12627,61.83,28.15,-3027,January 3027 BCE,3183
+"Horse riding",lost,12627,61.83,28.15,-3027,January 3027 BCE,3183
+"Milk and wool",lost,12398,60.42,25.00,-3026,January 3026 BCE,4562
+"Copper working",lost,16300,34.07,112.70,-3020,January 3020 BCE,25744
+"Horse herding",lost,8334,42.73,19.27,-3020,January 3020 BCE,4561
+"Horse riding",lost,8334,42.73,19.27,-3020,January 3020 BCE,4561
+"Copper working",lost,16300,34.07,112.70,-3019,January 3019 BCE,22350
+"Horse herding",lost,21382,46.61,72.59,-3014,January 3014 BCE,2157
+"Horse riding",lost,21382,46.61,72.59,-3014,January 3014 BCE,2157
+"Milk and wool",lost,12477,60.78,24.36,-3012,January 3012 BCE,2821
+"Copper working",lost,17280,37.01,111.05,-3011,January 3011 BCE,14864
+"Irrigation",lost,6657,38.25,39.42,-3010,January 3010 BCE,72026
+"Copper working",lost,17279,36.99,111.61,-3010,January 3010 BCE,11613
+"Copper working",lost,17279,36.99,111.61,-3010,January 3010 BCE,11613
+"Copper working",lost,17280,37.01,111.05,-3010,January 3010 BCE,12220
+"Irrigation",lost,6384,37.32,42.15,-3004,January 3004 BCE,26165
+"Horse herding",lost,8212,42.43,20.33,-3004,January 3004 BCE,39649
+"Horse riding",lost,8212,42.43,20.33,-3004,January 3004 BCE,39649
+"The plough",lost,10827,52.15,17.03,-3003,January 3003 BCE,2928
+"Terraced fields",lost,9702,47.55,17.31,-3003,January 3003 BCE,4685
+"Copper working",lost,548,31.50,115.45,-3003,January 3003 BCE,22796
+"Copper working",lost,548,31.50,115.45,-3003,January 3003 BCE,22796
+"Horse herding",lost,8807,44.26,18.02,-3003,January 3003 BCE,7417
+"Horse riding",lost,8807,44.26,18.02,-3003,January 3003 BCE,7417
+"The plough",lost,9702,47.55,17.31,-3002,January 3002 BCE,10612
+"The wheel",lost,9702,47.55,17.31,-3002,January 3002 BCE,10612

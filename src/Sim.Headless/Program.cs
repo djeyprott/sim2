@@ -88,13 +88,13 @@ public static class Program
                 }
             }
 
-            string originsPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
-                Path.GetFileNameWithoutExtension(statsPath) + "-origins.csv");
-            File.WriteAllText(originsPath, statistics.Origins());
-            string herdingPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
-                Path.GetFileNameWithoutExtension(statsPath) + "-herding-origins.csv");
-            File.WriteAllText(herdingPath, statistics.HerdingOrigins());
-            Console.WriteLine($"Wrote yearly statistics to {statsPath}, farming origins to {originsPath} and herding origins to {herdingPath}");
+            string Beside(string suffix) => Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
+                Path.GetFileNameWithoutExtension(statsPath) + suffix);
+            File.WriteAllText(Beside("-origins.csv"), statistics.Origins());
+            File.WriteAllText(Beside("-herding-origins.csv"), statistics.HerdingOrigins());
+            File.WriteAllText(Beside("-technology-events.csv"), statistics.TechnologyEvents());
+            File.WriteAllText(Beside("-landings.csv"), statistics.Landings());
+            Console.WriteLine($"Wrote yearly statistics to {statsPath}, and beside it farming and herding origins, technology events and landings");
         }
         else
         {

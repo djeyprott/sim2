@@ -45,5 +45,14 @@ public class StatisticsTests : IClassFixture<EarthWorldFixture>
 
         Assert.StartsWith("crop,cell,latitude,longitude,year,date", stats.Origins());
         Assert.StartsWith("animal,homeland,cell,latitude,longitude,year,date", stats.HerdingOrigins());
+
+        // Technology: each column is a share of the world's people, and every recorded event is listed.
+        Assert.Contains("know_the_plough", header);
+        Assert.All(header.Where(h => h.StartsWith("know_", StringComparison.Ordinal)), h => Assert.InRange(Value(h), 0.0, 1.0));
+        string events = stats.TechnologyEvents();
+        Assert.StartsWith("technology,event,cell,latitude,longitude,year,date,contact", events);
+        Assert.Equal(sim.Systems.OfType<Sim.Core.Technologies.TechnologySystem>().Single().Events().Count + 1,
+            events.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length);
+        Assert.StartsWith("cell,latitude,longitude,year,date,from_cell", stats.Landings());
     }
 }

@@ -14,6 +14,7 @@ using Sim.Core.Herding;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
 
@@ -1373,6 +1374,44 @@ public partial class Main : Node2D
     }
 
     // Runs on the simulation thread: the cell's settlement, if any.
+    // Used only on the simulation thread, by the tooltip.
+    private static Prices? _tooltipPrices;
+    private static Simulation? _tooltipPricesFor;
+
+    // Runs on the simulation thread: how far the settlement's boats reach, and when land settled by
+    // sea was first reached.
+    private static string DescribeSea(Simulation sim, int cell)
+    {
+        string text = "";
+        int settled = sim.State.IntField(SettlementSystem.SettlementField)[cell];
+        if (settled > 0 && sim.State.HasField(TradeSystem.BoatRangeField))
+        {
+            int range = sim.State.IntField(TradeSystem.BoatRangeField)[cell];
+            if (range > 0)
+            {
+                text += $"\nBoats cross up to {range} sea cells (about {range * 50} km)";
+            }
+        }
+
+        SeafaringSystem? seafaring = sim.Systems.OfType<SeafaringSystem>().SingleOrDefault();
+        if (seafaring != null && sim.Map.IsLand(cell))
+        {
+            int landmass = SeaMap.Of(sim.Map).Landmass[cell];
+            foreach (Landing landing in seafaring.Landings())
+            {
+                if (landing.Landmass == landmass)
+                {
+                    var date = new GameDate(landing.Tick);
+                    text += $"\nReached by sea in {date.Year} {(date.IsBce ? "BCE" : "CE")}, "
+                        + $"from {sim.Map.Grid.DistanceKm(landing.From, landing.Cell).ToString("N0", CultureInfo.InvariantCulture)} km away";
+                    break;
+                }
+            }
+        }
+
+        return text;
+    }
+
     private static string DescribeSettlement(Simulation sim, int cell, SettlementSystem? settlements)
     {
         if (settlements?.InCell(cell) is not { } s)
@@ -1399,8 +1438,15 @@ public partial class Main : Node2D
             text += "\n  In store: " + Wrap(stock);
         }
 
-        // Prices in food, for the goods the settlement holds or wants.
-        var prices = new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault());
+        // Prices in food, for the goods the settlement holds or wants (one price reckoner per run:
+        // making one works out the technology conditions over the whole map).
+        if (!ReferenceEquals(_tooltipPricesFor, sim))
+        {
+            _tooltipPrices = new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault());
+            _tooltipPricesFor = sim;
+        }
+
+        Prices prices = _tooltipPrices!;
         var wanted = new double[ViewerGoods.Count];
         var price = new double[ViewerGoods.Count];
         prices.Work(cell, sim.Tick, wanted, price);
@@ -1488,7 +1534,7 @@ public partial class Main : Node2D
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeGroups(sim, target, occupations)
+                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeSea(sim, target) + DescribeGroups(sim, target, occupations)
                     + DescribeFarming(sim, target, farmingForCell) + DescribeHerding(sim, target, herdingForCell) + DescribeResources(target, resourcesForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));

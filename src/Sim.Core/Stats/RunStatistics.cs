@@ -6,7 +6,9 @@ using Sim.Core.Farming;
 using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.People;
+using Sim.Core.Sea;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Stats;
 
@@ -14,8 +16,10 @@ namespace Sim.Core.Stats;
 /// Yearly statistics of a run as CSV rows: world population, foragers, farmers, herders and
 /// craftsmen, farming cells, settlements, the worldwide temperature shift, the share of land in
 /// each biome, and for each good what was produced, consumed, spoiled, lost and traded since the
-/// previous row and what is in store and in transit now. Further tables list where and when each
-/// crop was first farmed and each animal first herded. Reads the world state only.
+/// previous row and what is in store and in transit now, and for each technology the share of the
+/// world's people who know it. Further tables list where and when each crop was first farmed, each
+/// animal first herded, each technology discovered or lost, and each land reached by sea. Reads
+/// the world state only.
 /// </summary>
 public sealed class RunStatistics
 {
@@ -28,6 +32,8 @@ public sealed class RunStatistics
     private readonly int[] _land;
     private readonly OccupationSet _occupations = OccupationSet.LoadDefault();
     private readonly Stockpiles? _stockpiles;
+    private readonly TechnologySystem? _technology;
+    private readonly SeafaringSystem? _seafaring;
 
     // Ledger totals at the previous row, by good: produced, consumed, spoiled, lost, traded.
     private double[,] _previous = new double[0, 5];
@@ -40,6 +46,8 @@ public sealed class RunStatistics
         _farming = simulation.Systems.OfType<FarmingSystem>().SingleOrDefault();
         _settlements = simulation.Systems.OfType<SettlementSystem>().SingleOrDefault();
         _herding = simulation.Systems.OfType<HerdingSystem>().SingleOrDefault();
+        _technology = simulation.Systems.OfType<TechnologySystem>().SingleOrDefault();
+        _seafaring = simulation.Systems.OfType<SeafaringSystem>().SingleOrDefault();
         if (simulation.State.HasTable(Stockpiles.LedgerTableName))
         {
             _stockpiles = new Stockpiles(simulation.State, GoodSet.LoadDefault());
@@ -67,6 +75,11 @@ public sealed class RunStatistics
                 columns.AddRange(new[] { "produced", "consumed", "spoiled", "lost", "traded", "in_store", "in_transit" }
                     .Select(what => $"{good.Slug}_{what}"));
             }
+        }
+
+        if (_technology != null)
+        {
+            columns.AddRange(_technology.Technologies.Technologies.Select(t => "know_" + t.Slug));
         }
 
         return string.Join(",", columns);
@@ -133,6 +146,27 @@ public sealed class RunStatistics
             }
         }
 
+        if (_technology != null)
+        {
+            // People who know each technology (each group's share of its people), over all people.
+            EntityTable table = _simulation.State.Table(PopulationGroups.TableName);
+            double world = groups.WorldTotal();
+            foreach (Technology t in _technology.Technologies.Technologies)
+            {
+                DoubleColumn known = table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + t.Slug);
+                double knowing = 0.0;
+                for (int g = 0; g < table.IdCount; g++)
+                {
+                    if (groups.IsAlive(g))
+                    {
+                        knowing += groups.Size(g) * known[g];
+                    }
+                }
+
+                values.Add((world > 0.0 ? knowing / world : 0.0).ToString("F4", CultureInfo.InvariantCulture));
+            }
+        }
+
         return string.Join(",", values);
     }
 
@@ -154,6 +188,56 @@ public sealed class RunStatistics
             long year = date.IsBce ? -date.Year : date.Year;
             text.Append(CultureInfo.InvariantCulture,
                 $"\"{_herding.Livestock.Get(animal).Name}\",{homeland},{cell},{_simulation.Map.Grid.Latitude(cell):F2},{_simulation.Map.Grid.Longitude(cell):F2},{year},{date}\n");
+        }
+
+        return text.ToString();
+    }
+
+    /// <summary>
+    /// Each recorded technology event (first discovery, independent discovery at least the set
+    /// distance from earlier ones, loss), as CSV with a header; for a loss, the people in contact.
+    /// </summary>
+    public string TechnologyEvents()
+    {
+        var text = new StringBuilder("technology,event,cell,latitude,longitude,year,date,contact\n");
+        if (_technology == null)
+        {
+            return text.ToString();
+        }
+
+        foreach (TechnologyEvent e in _technology.Events())
+        {
+            var date = new GameDate(e.Tick);
+            long year = date.IsBce ? -date.Year : date.Year;
+            string kind = e.Kind switch
+            {
+                TechnologyEventKind.First => "first",
+                TechnologyEventKind.Independent => "independent",
+                _ => "lost",
+            };
+            text.Append(CultureInfo.InvariantCulture,
+                $"\"{_technology.Technologies.Get(e.Technology).Name}\",{kind},{e.Cell},{_simulation.Map.Grid.Latitude(e.Cell):F2},{_simulation.Map.Grid.Longitude(e.Cell):F2},{year},{date},{Number(e.Contact)}\n");
+        }
+
+        return text.ToString();
+    }
+
+    /// <summary>Each landing by sea on land not reached at the start, as CSV with a header.</summary>
+    public string Landings()
+    {
+        var text = new StringBuilder("cell,latitude,longitude,year,date,from_cell,from_latitude,from_longitude,distance_km,settlers\n");
+        if (_seafaring == null)
+        {
+            return text.ToString();
+        }
+
+        var grid = _simulation.Map.Grid;
+        foreach (Landing l in _seafaring.Landings())
+        {
+            var date = new GameDate(l.Tick);
+            long year = date.IsBce ? -date.Year : date.Year;
+            text.Append(CultureInfo.InvariantCulture,
+                $"{l.Cell},{grid.Latitude(l.Cell):F2},{grid.Longitude(l.Cell):F2},{year},{date},{l.From},{grid.Latitude(l.From):F2},{grid.Longitude(l.From):F2},{grid.DistanceKm(l.From, l.Cell):F0},{Number(l.Settlers)}\n");
         }
 
         return text.ToString();

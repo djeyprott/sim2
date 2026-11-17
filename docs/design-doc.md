@@ -1,8 +1,9 @@
-# sim2 design doc (version 1.1)
+# sim2 design doc (version 1.2)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 (technology) is in progress (`milestone-3-spec.md`, agreed 2026-11-16).
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4 (`milestone-3-spec.md`). Milestone 4 (states and war) is next; its spec is not yet written.
 
 Change log:
+- 1.2 (2026-11-17): milestone 3 complete, released as v0.4; backlog items on the sail around the Gulf and the Red Sea, the timing of horses, and Austronesian voyaging.
 - 1.1 (2026-11-16): milestone 3 spec agreed: technology is held by population groups; the backlog items on when animals are first herded and on the speed of trade move into milestone 3.
 - 1.0 (2026-11-16): milestone 2 complete, released as v0.3; backlog items on when animals are first herded and on the speed of trade.
 - 0.9 (2026-11-15): milestone 2 spec agreed: herding comes in milestone 2, so the herding backlog item moves into it.
@@ -92,7 +93,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
 | 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | Complete, v0.3 |
-| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | In progress |
+| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | Complete, v0.4 |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
 | 6 | Historical figures | Named actors with personalities and agendas, dynasties, life events, a readable chronicle | |
@@ -111,8 +112,11 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - End-of-Ice-Age start: a colder north and remaining ice sheets (Canada, Scandinavia) that melt back over the first few thousand years. Considered for milestone 1 and declined by the owner on 2026-11-14 in favour of the modern baseline.
 - Climate change caused by people in later eras (consider with milestone 7).
 - Lower Ice Age sea level and changing coastlines.
-- Open grassland is hard to farm before the plough. Steppe, prairie and pampas have tough root mats and unreliable rain, so early farmers kept to forest edges and river valleys while herders held the open grassland (the Pontic steppe was herding country from about 4500 BCE and was ploughed at scale only in the 18th and 19th centuries). Milestone 1 applies a grassland yield factor of 0.5 away from rivers; milestone 2 adds herders who outcompete early farmers there; the plough that removes the penalty is for milestone 3.
+- Open grassland is hard to farm before the plough. Steppe, prairie and pampas have tough root mats and unreliable rain, so early farmers kept to forest edges and river valleys while herders held the open grassland (the Pontic steppe was herding country from about 4500 BCE and was ploughed at scale only in the 18th and 19th centuries). Milestone 1 applies a grassland yield factor of 0.5 away from rivers; milestone 2 adds herders who outcompete early farmers there; milestone 3's plough lifts the penalty where farmers who keep cattle know it.
 - Disease.
 - The Aral Sea at its historical size, and small straits that are currently closed (for example Bali joined to Java).
+- The sail around the Gulf and the Red Sea. In milestone 3's runs the sail is found elsewhere first and never reaches either sea, though it was first seen on the Gulf (Ubaid boats, 5500 to 5000 BCE); the Gulf and Red Sea coasts hold few farming settlements in the simulation.
+- Horses are first herded about 1,500 years early (5800 to 4800 BCE against Botai's 3500 BCE) and riding comes about 2,000 years early; tuned in milestone 3 only so that horse herding is found in most runs.
+- Austronesian voyaging: outrigger canoes (history 1500 BCE) need 7,000 years of farming and so do not come before 3000 BCE; remote Oceania stays unsettled until a later era's runs.
 - Globe view.
 - Charts in the viewer.

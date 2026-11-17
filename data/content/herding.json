@@ -34,8 +34,8 @@
   "inventionChance": 0.0002,
   // In a homeland marked for foragers (eastern Sahel cattle, perhaps herded before farming came
   // there), foragers on pasture with no farmers in or beside the cell take it up this much less
-  // readily. A quarter of the 0.02 used with the lower inventionChance above.
-  "foragerInventionFactor": 0.005,
+  // readily (0.005 left sheep and goats as late as 3700 BCE where wheat and barley began late).
+  "foragerInventionFactor": 0.02,
   "wildMinSuitability": 0.5,
   "randomHomelandMinSuitability": 0.7,
 

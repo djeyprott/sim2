@@ -19,7 +19,8 @@
   // toward the highest share among its trade partners.
   "adoption": 0.05,
   "withinCell": 0.2,
-  "tradeSpread": 0.02,
+  // 0.08 since milestone 3 step 8 (0.02 before, when busier settlements learned no sooner than quiet ones).
+  "tradeSpread": 0.08,
   "busyTrade": 50,
 
   // Knowledge is kept alive by the people in contact: the group, the other groups in its cell and

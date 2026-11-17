@@ -1384,7 +1384,7 @@ public partial class Main : Node2D
     {
         string text = "";
         int settled = sim.State.IntField(SettlementSystem.SettlementField)[cell];
-        if (settled > 0 && sim.State.HasField(TradeSystem.BoatRangeField))
+        if (settled > 0 && sim.State.HasField(TradeSystem.BoatRangeField) && SeaMap.Of(sim.Map).Shore[cell])
         {
             int range = sim.State.IntField(TradeSystem.BoatRangeField)[cell];
             if (range > 0)

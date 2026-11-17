@@ -112,9 +112,10 @@
     },
     {
       // Tin (cassiterite, mostly from streams) from the sources known or argued for the Bronze
-      // Age; places are approximate.
+      // Age; places are approximate, and tin streams spread over wide districts (150 km: at 80,
+      // bronze arose in too few places and tin was too scarce to travel far).
       "good": "Tin", "perPerson": 0.05, "keepPerPerson": 0.01,
-      "sourceRadiusKm": 80,
+      "sourceRadiusKm": 150,
       "sources": [
         { "name": "Kestel (Taurus)", "lat": 37.7, "lon": 34.8 },
         { "name": "Erzgebirge", "lat": 50.6, "lon": 13.0 },

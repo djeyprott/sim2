@@ -1534,7 +1534,7 @@ public partial class Main : Node2D
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeSea(sim, target) + DescribeGroups(sim, target, occupations)
+                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeSea(sim, target) + LabelGroups(DescribeGroups(sim, target, occupations))
                     + DescribeFarming(sim, target, farmingForCell) + DescribeHerding(sim, target, herdingForCell) + DescribeResources(target, resourcesForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));
@@ -1593,8 +1593,7 @@ public partial class Main : Node2D
         {
             text += !people.Reachable
                 ? "\nNo people: not reached yet"
-                : $"\nLand can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)} foragers"
-                    + (people.Groups.Length > 0 ? "\nGroups:" + people.Groups : "\nGroups: none");
+                : $"\nLand can feed {people.Capacity.ToString("N0", CultureInfo.InvariantCulture)} foragers" + people.Groups;
         }
 
         return text;
@@ -1660,6 +1659,8 @@ public partial class Main : Node2D
         return text;
     }
 
+    private static string LabelGroups(string groups) => groups.Length > 0 ? "\nGroups:" + groups : "\nGroups: none";
+
     // Runs on the simulation thread: one line per population group in the cell.
     private static string DescribeGroups(Simulation sim, int cell, OccupationSet occupations)
     {
@@ -1692,7 +1693,7 @@ public partial class Main : Node2D
                 {
                     known.Add(t.Name.ToLowerInvariant());
                 }
-                else if (share > 0.0)
+                else if (share >= 0.005)
                 {
                     known.Add($"{t.Name.ToLowerInvariant()} ({(share * 100.0).ToString("0", CultureInfo.InvariantCulture)}%)");
                 }

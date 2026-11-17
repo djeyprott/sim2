@@ -129,8 +129,8 @@
       // Alloying copper with tin.
       "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
-      "chance": 0.001, "spread": 0.01,
-      "settledYears": 4000,
+      "chance": 0.0003, "spread": 0.01,
+      "settledYears": 2500,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },
     {

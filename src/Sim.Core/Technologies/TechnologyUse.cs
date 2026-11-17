@@ -9,9 +9,10 @@ namespace Sim.Core.Technologies;
 
 /// <summary>
 /// Whether a cell meets a technology's conditions (river, dry climate, coast, terrain, animals
-/// kept), not counting who knows what, and for discovery whether the goods it needs are near.
-/// Shared by the technology system and the systems that apply technologies' effects, so both use
-/// the same rules.
+/// kept, crops farmed, and the goods or animals it works with near), not counting who knows what,
+/// and for discovery whether farming has stood long enough. Shared by the technology system and the
+/// systems that apply technologies' effects, so both use the same rules. The technology system
+/// also counts goods a trade partner holds (see <see cref="TechnologySystem.CellAllows"/>).
 /// </summary>
 public sealed class TechnologyConditions
 {
@@ -23,6 +24,10 @@ public sealed class TechnologyConditions
     private readonly double[] _baseRain;
     private readonly int[] _animalMask;
 
+    // Per technology: the crops (index + 1 as in the crop field) one of which must be farmed in the cell (empty: none needed).
+    private readonly int[][] _cropsPlusOne;
+    private readonly int[]? _cropPlusOne;
+
     // Per technology with near goods: the cells where one of them can be gathered, and the goods.
     private readonly bool[]?[] _goodsSource;
     private readonly int[][] _nearGoods;
@@ -30,6 +35,9 @@ public sealed class TechnologyConditions
 
     // Per technology: the bits of the animal homelands one of which must hold the cell (0: none needed).
     private readonly int[] _wildMask;
+
+    // Per technology: the bits (in the kept-animals field) of its near animals.
+    private readonly int[] _animalsOf;
     private readonly int[]? _wild;
 
     // When farming started in each cell (tick + 1, 0 for none), for technologies that need long-settled farming.
@@ -47,6 +55,9 @@ public sealed class TechnologyConditions
         LivestockSet livestock = LivestockSet.LoadDefault();
         _wild = state.HasField(HerdingSystem.WildField) ? state.IntField(HerdingSystem.WildField) : null;
         _farmingSincePlusOne = state.HasField("farming.since") ? state.IntField("farming.since") : null;
+        _cropPlusOne = state.HasField(Farming.FarmingSystem.CropField) ? state.IntField(Farming.FarmingSystem.CropField) : null;
+        Farming.CropSet? crops = technologies.Technologies.Any(t => t.Crops.Count > 0) ? Farming.CropSet.LoadDefault() : null;
+        _cropsPlusOne = technologies.Technologies.Select(t => t.Crops.Select(c => crops!.IndexOf(c) + 1).ToArray()).ToArray();
         _groups = new PopulationGroups(state);
         _farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
         _wildMask = technologies.Technologies.Select(t =>
@@ -67,6 +78,16 @@ public sealed class TechnologyConditions
         {
             int mask = 0;
             foreach (string name in t.Animals)
+            {
+                mask |= 1 << livestock.IndexOf(name);
+            }
+
+            return mask;
+        }).ToArray();
+        _animalsOf = technologies.Technologies.Select(t =>
+        {
+            int mask = 0;
+            foreach (string name in t.NearWild)
             {
                 mask |= 1 << livestock.IndexOf(name);
             }
@@ -158,8 +179,53 @@ public sealed class TechnologyConditions
             && _groups.Find(c, _farmer) is int g && g >= 0 && _groups.Size(g) > 0.0;
     }
 
-    /// <summary>Whether a cell meets a technology's conditions (not counting who knows what).</summary>
-    public bool Allows(int cell, int technology)
+    /// <summary>Whether a cell meets a technology's conditions (not counting who knows what), with only the cell's own goods counting as near.</summary>
+    public bool Allows(int cell, int technology) => AllowsBesidesSupply(cell, technology) && SuppliedHere(cell, technology);
+
+    /// <summary>Whether a technology needs goods or animals near (see <see cref="SuppliedHere"/>).</summary>
+    public bool NeedsSupply(int technology) => _goodsSource[technology] != null || _wildMask[technology] != 0;
+
+    /// <summary>
+    /// Whether the goods or animals a technology works with are near the cell: one of its goods
+    /// gatherable in the cell or in its store, or one of its animals wild or kept there (true when
+    /// it needs none).
+    /// </summary>
+    public bool SuppliedHere(int cell, int technology)
+    {
+        int wild = _wildMask[technology];
+        if (wild != 0)
+        {
+            int kept = _animalsOf[technology];
+            return (_wild != null && (_wild[cell] & wild) != 0) || (_animals != null && (_animals[cell] & kept) != 0);
+        }
+
+        return GoodsNear(cell, technology);
+    }
+
+    private bool GoodsNear(int cell, int technology)
+    {
+        bool[]? source = _goodsSource[technology];
+        if (source == null || source[cell])
+        {
+            return true;
+        }
+
+        if (_stockpiles != null)
+        {
+            foreach (int good in _nearGoods[technology])
+            {
+                if (_stockpiles.Stock(cell, good) > 0.0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>Whether a cell meets a technology's conditions other than the goods or animals it works with.</summary>
+    public bool AllowsBesidesSupply(int cell, int technology)
     {
         Technology t = _technologies.Get(technology);
         if (t.River && _map.River(cell) == RiverSize.None)
@@ -178,6 +244,12 @@ public sealed class TechnologyConditions
         }
 
         if (t.Terrain.Count > 0 && !t.Terrain.Contains(_map.Terrain(cell)))
+        {
+            return false;
+        }
+
+        int[] crops = _cropsPlusOne[technology];
+        if (crops.Length > 0 && (_cropPlusOne == null || Array.IndexOf(crops, _cropPlusOne[cell]) < 0))
         {
             return false;
         }
@@ -205,29 +277,7 @@ public sealed class TechnologyConditions
             return false;
         }
 
-        bool[]? source = _goodsSource[technology];
-        if (source == null)
-        {
-            return true;
-        }
-
-        if (source[cell])
-        {
-            return true;
-        }
-
-        if (_stockpiles != null)
-        {
-            foreach (int good in _nearGoods[technology])
-            {
-                if (_stockpiles.Stock(cell, good) > 0.0)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return GoodsNear(cell, technology);
     }
 }
 

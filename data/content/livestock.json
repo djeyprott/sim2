@@ -24,6 +24,9 @@
 //   herded  true: kept by herders on open pasture (herding.json); false: kept only by farmers
 //           around their villages (pigs), and first taken up by farmers.
 //   wool    whether it gives wool; every animal gives meat, milk and hides.
+//   notIn   biomes where it cannot be kept whatever the climate: cattle not in tropical forest,
+//           where tsetse flies carry sleeping sickness (West and Central African farmers kept
+//           few or no cattle, and never took up the plough or the wheel).
 {
   "animals": [
     {
@@ -37,7 +40,8 @@
         { "lat": 38.5, "lon": 38.5, "radiusKm": 600, "afterFarmingYears": 300 },
         { "lat": 15.0, "lon": 26.0, "radiusKm": 900, "afterFarmingYears": 500, "foragers": true }
       ],
-      "warmest": [12, 17, 34, 40], "coldest": [-25, -10, 26, 32], "water": [200, 450, 1600, 3000]
+      "warmest": [12, 17, 34, 40], "coldest": [-25, -10, 26, 32], "water": [200, 450, 1600, 3000],
+      "notIn": [ "Rainforest", "Tropical seasonal forest" ]
     },
     {
       "name": "Pigs", "colour": "#e59ab0", "herded": false, "wool": false,

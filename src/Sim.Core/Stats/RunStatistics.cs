@@ -293,21 +293,26 @@ public sealed class RunStatistics
         if (_stockpiles != null)
         {
             columns.AddRange(_stockpiles.Goods.Goods.Select(g => g.Slug + "_in_store"));
+            columns.AddRange(MadeGoods().Select(g => g.Slug + "_made"));
             if (_technology != null)
             {
-                columns.AddRange(new[] { "bronze_settlements", "bronze_settlements_with_tin", "bronze_settlements_with_copper" });
+                columns.AddRange(new[] { "bronze_settlements", "bronze_settlements_with_tin", "bronze_settlements_with_copper", "bronze_settlements_with_both" });
             }
         }
 
         return string.Join(",", columns);
     }
 
+    // Goods craftsmen make (those with a "made last January" field).
+    private List<Good> MadeGoods() => _stockpiles == null ? new List<Good>()
+        : _stockpiles.Goods.Goods.Where(g => _simulation.State.HasField(CraftSystem.MadeFieldPrefix + g.Slug)).ToList();
+
     /// <summary>
     /// One row per broad region (see <see cref="RegionOf"/>) for the state now: people by
     /// occupation, settlements; for each technology the share of the region's people who know it
     /// and the share in groups that use it (at least the in-use share knowing it, where the cell
-    /// meets its conditions); what is in store of each good; and how many settlements have a group
-    /// using bronze, and of those how many hold tin and copper. Each row ends with a newline.
+    /// meets its conditions); what is in store of each good; what its craftsmen made last January;
+    /// and how many settlements have a group using bronze, and of those how many hold tin, copper and both. Each row ends with a newline.
     /// </summary>
     public string RegionRows()
     {
@@ -323,7 +328,10 @@ public sealed class RunStatistics
         var know = new double[regions, techs];
         var use = new double[regions, techs];
         var store = new double[regions, goods];
-        var bronze = new int[regions, 3];
+        List<Good> madeGoods = MadeGoods();
+        double[][] madeFields = madeGoods.Select(g => _simulation.State.DoubleField(CraftSystem.MadeFieldPrefix + g.Slug)).ToArray();
+        var made = new double[regions, madeGoods.Count];
+        var bronze = new int[regions, 4];
         var regionOfCell = new Dictionary<int, int>();
         int Region(int cell)
         {
@@ -402,6 +410,11 @@ public sealed class RunStatistics
                     store[r, good] += _stockpiles!.Stock(cell, good);
                 }
 
+                for (int k = 0; k < madeFields.Length; k++)
+                {
+                    made[r, k] += madeFields[k][cell];
+                }
+
                 if (bronzeTech < 0)
                 {
                     continue;
@@ -421,10 +434,10 @@ public sealed class RunStatistics
                         bronze[r, 1]++;
                     }
 
-                    if (copper >= 0 && _stockpiles!.Stock(cell, copper) > 0.0)
-                    {
-                        bronze[r, 2]++;
-                    }
+                    bool hasTin = tin >= 0 && _stockpiles!.Stock(cell, tin) > 0.0;
+                    bool hasCopper = copper >= 0 && _stockpiles!.Stock(cell, copper) > 0.0;
+                    bronze[r, 2] += hasCopper ? 1 : 0;
+                    bronze[r, 3] += hasTin && hasCopper ? 1 : 0;
                 }
             }
         }
@@ -457,9 +470,14 @@ public sealed class RunStatistics
                     values.Add(Amount(store[r, good]));
                 }
 
+                for (int k = 0; k < madeGoods.Count; k++)
+                {
+                    values.Add(Amount(made[r, k]));
+                }
+
                 if (_technology != null)
                 {
-                    for (int k = 0; k < 3; k++)
+                    for (int k = 0; k < 4; k++)
                     {
                         values.Add(bronze[r, k].ToString(CultureInfo.InvariantCulture));
                     }

@@ -62,6 +62,9 @@ public sealed class HerdingSystem : ISimSystem
     private double[] _temperatureShift = Array.Empty<double>();
     private double[] _rainfallFactor = Array.Empty<double>();
     private int[] _biome = Array.Empty<int>();
+
+    // Per animal, per biome: whether it cannot be kept there (livestock.json "notIn").
+    private readonly bool[][] _notIn;
     private double[] _foragerCapacity = Array.Empty<double>();
     private int[] _crop = Array.Empty<int>();
     private double[] _farmCapacity = Array.Empty<double>();
@@ -109,6 +112,16 @@ public sealed class HerdingSystem : ISimSystem
             _pasture[biomes.IndexOf(pair.Key)] = pair.Value;
         }
 
+        _notIn = livestock.Animals.Select(animal =>
+        {
+            var excluded = new bool[biomes.Count];
+            foreach (string name in animal.NotIn)
+            {
+                excluded[biomes.IndexOf(name)] = true;
+            }
+
+            return excluded;
+        }).ToArray();
         foreach (Animal animal in livestock.Animals)
         {
             int bit = 1 << animal.Index;
@@ -247,7 +260,7 @@ public sealed class HerdingSystem : ISimSystem
     /// <summary>How well an animal does in a land cell's current climate, 0 to 1.</summary>
     public double Suitability(int cell, int animal)
     {
-        if (_biome[cell] < 0)
+        if (_biome[cell] < 0 || _notIn[animal][_biome[cell]])
         {
             return 0.0;
         }

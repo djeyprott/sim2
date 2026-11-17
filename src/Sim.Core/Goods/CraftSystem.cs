@@ -18,6 +18,15 @@ public sealed class CraftSystem : ISimSystem
 {
     public const string SystemName = "crafts";
 
+    /// <summary>
+    /// What a settlement's craftsmen made at their last January's work, per good they can make
+    /// ("crafts.made.&lt;good&gt;"; only recipe outputs have the field). Goods made into others at once
+    /// (bronze into bronze tools) never show in store, so this shows they are made.
+    /// </summary>
+    public const string MadeFieldPrefix = "crafts.made.";
+
+    private double[]?[] _made = Array.Empty<double[]?>();
+
     private readonly CraftRules _rules;
     private readonly OccupationSet _occupations;
     private Prices? _prices;
@@ -58,6 +67,11 @@ public sealed class CraftSystem : ISimSystem
 
     public void Register(WorldState state)
     {
+        _made = new double[]?[_rules.Goods.Count];
+        foreach (int output in _rules.Outputs)
+        {
+            _made[output] = state.AddDoubleField(MadeFieldPrefix + _rules.Goods.Get(output).Slug);
+        }
     }
 
     public void Initialize(SimContext context)
@@ -115,6 +129,11 @@ public sealed class CraftSystem : ISimSystem
     {
         PopulationGroups groups = _groups!;
         Stockpiles stockpiles = _stockpiles!;
+        foreach (int output in _rules.Outputs)
+        {
+            _made[output]![cell] = 0.0;
+        }
+
         int farmerGroup = groups.Find(cell, _farmer);
         double farmers = farmerGroup >= 0 ? groups.Size(farmerGroup) : 0.0;
         int craftsmanGroup = groups.Find(cell, _craftsman);
@@ -206,6 +225,7 @@ public sealed class CraftSystem : ISimSystem
                     }
 
                     stockpiles.Produce(cell, output, units);
+                    _made[output]![cell] += units;
                     work -= units / recipe.PerWorker;
                 }
             }

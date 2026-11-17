@@ -132,6 +132,7 @@ public partial class Hud : CanvasLayer
         _measureButton = new OptionButton { FocusMode = Control.FocusModeEnum.None };
         _measureButton.AddItem("Amount held", 0);
         _measureButton.AddItem("Price", 1);
+        _measureButton.AddItem("Made last January", 2);
         _measureButton.ItemSelected += index => GoodMeasureChosen?.Invoke((int)index);
         goodsRow.AddChild(_measureButton);
 

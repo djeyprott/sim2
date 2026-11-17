@@ -30,6 +30,11 @@
   "keepPeople": 3000,
   "lossRate": 0.03,
 
+  // Where a group's cell does not meet a technology's conditions (no copper or tin within reach,
+  // no horses, no river), it forgets this share of what it knows each year: know-how nobody
+  // practises fades. Since milestone 3 version 0.4.1.
+  "unusedLoss": 0.03,
+
   // A later discovery of a technology is recorded as independent when it is at least this far
   // from every earlier discovery of it.
   "independentKm": 1000

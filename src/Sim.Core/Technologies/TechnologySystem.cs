@@ -88,6 +88,11 @@ public sealed class TechnologySystem : ISimSystem
     private readonly List<int> _tradeCells = new List<int>();
     private double[] _soldValue = Array.Empty<double>();
 
+    // Per technology needing goods near: the cells whose trade partners hold or gather them, worked
+    // out each year from the links and stores (so the same after a load), and the cells marked.
+    private bool[]?[] _partnerSupplied = Array.Empty<bool[]?>();
+    private List<int>[] _partnerMarked = Array.Empty<List<int>>();
+
     /// <param name="chanceScale">Multiplies every discovery chance (tests use it to see discoveries in short runs).</param>
     public TechnologySystem(TechnologyParameters parameters, TechnologySet technologies, TradeSystem? trade, double chanceScale = 1.0)
     {
@@ -168,10 +173,55 @@ public sealed class TechnologySystem : ISimSystem
         _tradeRate = new double[count];
         _tradeUsers = new double[count];
         _soldValue = new double[count];
+        _partnerSupplied = Enumerable.Range(0, Technologies.Count)
+            .Select(t => _conditions.NeedsSupply(t) ? new bool[count] : null).ToArray();
+        _partnerMarked = Enumerable.Range(0, Technologies.Count).Select(_ => new List<int>()).ToArray();
     }
 
-    /// <summary>Whether a cell meets a technology's conditions (not counting who knows what).</summary>
-    public bool CellAllows(int cell, int technology) => _conditions!.Allows(cell, technology);
+    /// <summary>
+    /// Whether a cell meets a technology's conditions (not counting who knows what), counting the
+    /// goods its trade partners hold or gather as near, as of the last update.
+    /// </summary>
+    public bool CellAllows(int cell, int technology) =>
+        _conditions!.AllowsBesidesSupply(cell, technology)
+        && (_conditions.SuppliedHere(cell, technology) || (_partnerSupplied[technology] is bool[] partner && partner[cell]));
+
+    // Fills the cells whose trade partners have a technology's goods near (see TechnologyConditions.SuppliedHere).
+    private void FillPartnerSupply(int tech, List<(int CellA, int CellB)> links)
+    {
+        bool[]? partner = _partnerSupplied[tech];
+        if (partner == null)
+        {
+            return;
+        }
+
+        List<int> marked = _partnerMarked[tech];
+        foreach (int cell in marked)
+        {
+            partner[cell] = false;
+        }
+
+        marked.Clear();
+        if (Technologies.Get(tech).NearGoods.Count == 0)
+        {
+            return;
+        }
+
+        foreach ((int a, int b) in links)
+        {
+            if (!partner[b] && _conditions!.SuppliedHere(a, tech))
+            {
+                partner[b] = true;
+                marked.Add(b);
+            }
+
+            if (!partner[a] && _conditions!.SuppliedHere(b, tech))
+            {
+                partner[a] = true;
+                marked.Add(a);
+            }
+        }
+    }
 
     /// <summary>Every recorded discovery and loss, in the order they happened.</summary>
     public IReadOnlyList<TechnologyEvent> Events()
@@ -275,6 +325,7 @@ public sealed class TechnologySystem : ISimSystem
             }
 
             FillTrade(links);
+            FillPartnerSupply(tech, links);
 
             // Each group that can use it: discover, learn, or forget.
             bool knownAfter = false;
@@ -364,6 +415,12 @@ public sealed class TechnologySystem : ISimSystem
                     {
                         s += _parameters.Adoption * s * (1.0 - s);
                         s += Pull(cell, tech, neighbourBest, s);
+                    }
+
+                    // Where the cell does not meet its conditions, a group slowly forgets it.
+                    if (!cellAllows)
+                    {
+                        s -= _parameters.UnusedLoss * s;
                     }
 
                     // Too few people in contact: the share falls. (The cell's users were counted from

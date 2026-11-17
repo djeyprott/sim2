@@ -56,7 +56,10 @@ public partial class Main : Node2D
 
     // The goods map mode's choices: which good, and whether to show the amount held or the price.
     private int _goodIndex = ViewerGoods.IndexOf(GoodSet.Grain);
-    private bool _goodPrice;
+    // Goods map: 0 amount held, 1 price, 2 made by craftsmen at their last January's work.
+    private int _goodMeasure;
+    private const int GoodPrice = 1;
+    private const int GoodMade = 2;
 
     private const double RecolourSeconds = 0.1;
     private const double CellRefreshSeconds = 0.25;
@@ -205,7 +208,7 @@ public partial class Main : Node2D
         };
         _hud.GoodMeasureChosen += measure =>
         {
-            _goodPrice = measure == 1;
+            _goodMeasure = measure;
             if (_mode == GoodsMode)
             {
                 ApplyMapMode(GoodsMode);
@@ -526,7 +529,7 @@ public partial class Main : Node2D
         _mapView.SetRoutesVisible(mode == TradeMode || mode == GoodsMode, mode == GoodsMode ? GoodRouteColour : TradeRouteColour);
         if (mode == GoodsMode)
         {
-            _hud.ShowPicker(true, "Good:", ViewerGoods.Goods.Select(g => g.Name).ToList(), _goodIndex, true, _goodPrice ? 1 : 0);
+            _hud.ShowPicker(true, "Good:", ViewerGoods.Goods.Select(g => g.Name).ToList(), _goodIndex, true, _goodMeasure);
         }
         else if (mode == TechnologyMode && _technology != null)
         {
@@ -561,8 +564,8 @@ public partial class Main : Node2D
         {
             int cellCount = _map.CellCount;
             int good = _goodIndex;
-            bool price = _goodPrice;
-            extractor = sim => ExtractGoods(sim, good, price, cellCount);
+            int measure = _goodMeasure;
+            extractor = sim => ExtractGoods(sim, good, measure, cellCount);
         }
 
         if (mode == TechnologyMode && _technology != null)
@@ -659,9 +662,10 @@ public partial class Main : Node2D
         return values;
     }
 
-    // Per settlement cell: how much of the good it holds (with what is on its way) per person, or its
-    // price as a multiple of the good's base value; -1 for cells without a settlement.
-    private static double[] ExtractGoods(Simulation sim, int good, bool price, int cellCount)
+    // Per settlement cell: how much of the good it holds (with what is on its way) per person, its
+    // price as a multiple of the good's base value, or how much its craftsmen made at their last
+    // January's work per person; -1 for cells without a settlement.
+    private static double[] ExtractGoods(Simulation sim, int good, int measure, int cellCount)
     {
         var values = new double[cellCount];
         Array.Fill(values, -1.0);
@@ -669,7 +673,9 @@ public partial class Main : Node2D
         IntColumn settlementCell = settlements.IntColumn("cell");
         var stockpiles = new Stockpiles(sim.State, ViewerGoods);
         var groups = new PopulationGroups(sim.State);
-        Prices? prices = price ? new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault()) : null;
+        string madeField = CraftSystem.MadeFieldPrefix + ViewerGoods.Get(good).Slug;
+        double[]? made = measure == GoodMade && sim.State.HasField(madeField) ? sim.State.DoubleField(madeField) : null;
+        Prices? prices = measure == GoodPrice ? new Prices(sim.State, sim.Map, ViewerPriceParameters, ViewerCraftRules, OccupationSet.LoadDefault()) : null;
         var wanted = new double[ViewerGoods.Count];
         var prices1 = new double[ViewerGoods.Count];
         double value = ViewerGoods.Get(good).Value;
@@ -689,7 +695,8 @@ public partial class Main : Node2D
             else
             {
                 double people = groups.CellTotal(cell);
-                values[cell] = people > 0.0 ? (stockpiles.Stock(cell, good) + stockpiles.Incoming(cell, good)) / people : 0.0;
+                double amount = measure == GoodMade ? made?[cell] ?? 0.0 : stockpiles.Stock(cell, good) + stockpiles.Incoming(cell, good);
+                values[cell] = people > 0.0 ? amount / people : 0.0;
             }
         }
 
@@ -864,7 +871,7 @@ public partial class Main : Node2D
                 });
                 break;
             case GoodsMode:
-                bool showPrice = _goodPrice;
+                bool showPrice = _goodMeasure == GoodPrice;
                 _mapView.SetColours(cell =>
                 {
                     if (!map.IsLand(cell))
@@ -989,14 +996,16 @@ public partial class Main : Node2D
                 break;
             case GoodsMode:
                 string goodName = ViewerGoods.Get(_goodIndex).Name;
-                if (_goodPrice)
+                if (_goodMeasure == GoodPrice)
                 {
                     title = $"{goodName}: price in settlements, against its usual value";
                     entries.AddRange(PriceStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture) + " times")));
                 }
                 else
                 {
-                    title = $"{goodName} held per person in settlements ({ViewerGoods.Get(_goodIndex).Unit})";
+                    title = _goodMeasure == GoodMade
+                        ? $"{goodName} made per person by craftsmen last January ({ViewerGoods.Get(_goodIndex).Unit})"
+                        : $"{goodName} held per person in settlements ({ViewerGoods.Get(_goodIndex).Unit})";
                     entries.Add((NoneHeld, "None"));
                     entries.AddRange(HeldStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.####", CultureInfo.InvariantCulture))));
                 }
@@ -1438,6 +1447,24 @@ public partial class Main : Node2D
             text += "\n  In store: " + Wrap(stock);
         }
 
+        // What the craftsmen made at their last January's work (bronze is made into tools at once,
+        // so it never shows in store).
+        var made = new List<string>();
+        foreach (Good good in ViewerGoods.Goods)
+        {
+            string field = CraftSystem.MadeFieldPrefix + good.Slug;
+            double amount = sim.State.HasField(field) ? sim.State.DoubleField(field)[cell] : 0.0;
+            if (amount >= 0.05)
+            {
+                made.Add($"{good.Name.ToLowerInvariant()} {amount.ToString(amount >= 10.0 ? "N0" : "0.#", CultureInfo.InvariantCulture)}");
+            }
+        }
+
+        if (made.Count > 0)
+        {
+            text += "\n  Made last January: " + Wrap(made);
+        }
+
         // Prices in food, for the goods the settlement holds or wants (one price reckoner per run:
         // making one works out the technology conditions over the whole map).
         if (!ReferenceEquals(_tooltipPricesFor, sim))
@@ -1830,7 +1857,7 @@ public partial class Main : Node2D
 
                 // How far obsidian has spread from its sources.
                 _goodIndex = ViewerGoods.IndexOf("Obsidian");
-                _goodPrice = false;
+                _goodMeasure = 0;
                 SetMapMode(GoodsMode);
                 ZoomAt(MapView.MapPosition(36.5, 40.0), 2f);
                 break;

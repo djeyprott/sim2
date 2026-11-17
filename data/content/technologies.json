@@ -9,10 +9,16 @@
 //   coast         the cell must touch the sea
 //   terrain       the cell's terrain must be one of these
 //   animals       the cell must keep at least one of these animals (livestock.json)
-//   nearGoods     for discovery only: one of these goods can be gathered in the cell or is in
-//                 its settlement's store (once known, it spreads without them)
-//   nearWild      for discovery only: one of these animals lives wild in the cell (livestock.json
-//                 homelands); an animal "tamedBy" this technology is then kept there
+//   crops         the cell must farm one of these crops (crops.json): the plough came with wheat
+//                 and barley farming; hoe farmers of sorghum, millet, rice or yams did without it
+//   nearGoods     one of these goods must be near: to discover it, gatherable in the cell or in
+//                 its settlement's store; to learn, use and keep it, also held or gathered by a
+//                 trade partner (copper working near ore or copper, bronze near tin)
+//   nearWild      one of these animals must be near: to discover it, living wild in the cell
+//                 (livestock.json homelands; an animal "tamedBy" this technology is then kept
+//                 there); to learn, use and keep it, wild or kept in the cell
+//                 Where a cell does not meet its conditions, groups slowly forget a technology
+//                 (technology.json "unusedLoss").
 //   settledYears  for discovery only: farming has stood in the cell or a neighbour at least this
 //                 long. Most of this know-how came to long-settled farmers: farming began about
 //                 9500 BCE, so a technology first seen in year Y BCE gets about 9500 - Y - 500
@@ -56,8 +62,10 @@
     {
       "name": "Irrigation", "colour": "#4fa3d9", "occupations": [ "Farmer" ],
       "river": true, "maxRainMm": 600,
-      "chance": 0.00002, "spread": 0.01,
-      "settledYears": 2000,
+      // 0.00005 and 1,500 years since 0.4.1 (0.00002 and 2,000 before): the Nile valley, farmed
+      // thinly until about 5000 BCE and too far from Mesopotamia to learn it over land, never found it.
+      "chance": 0.00005, "spread": 0.01,
+      "settledYears": 1500,
       // Canals carry river water across dry fields beyond the flood plain.
       "effects": { "farmYield": 1.5 },
       "history": "6000 BCE, Mesopotamia"
@@ -74,7 +82,7 @@
     },
     {
       "name": "The plough", "colour": "#a0662f", "occupations": [ "Farmer" ],
-      "animals": [ "Cattle" ],
+      "animals": [ "Cattle" ], "crops": [ "Wheat and barley" ],
       "chance": 0.00001, "spread": 0.01,
       "settledYears": 4000,
       // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
@@ -120,7 +128,7 @@
     {
       // Smelting copper from its ores, and casting and hammering copper tools.
       "name": "Copper working", "colour": "#c87533", "occupations": [ "Craftsman", "Farmer" ],
-      "nearGoods": [ "Copper ore" ],
+      "nearGoods": [ "Copper ore", "Copper" ],
       "chance": 0.0001, "spread": 0.02,
       "settledYears": 2800,
       "history": "5000 BCE, Balkans (Belovode); perhaps soon after 6000 BCE in northern Iraq"

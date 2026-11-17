@@ -542,6 +542,112 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     [Fact]
+    public void Copper_working_is_kept_only_where_ore_or_copper_is_within_reach()
+    {
+        Simulation sim = FastFarming(8);
+        sim.Run(300 * 12);
+        TechnologySystem technology = sim.Systems.OfType<TechnologySystem>().Single();
+        TechnologySet set = technology.Technologies;
+        int copperWorking = set.IndexOf("Copper working");
+        DoubleColumn known = sim.State.Table(PopulationGroups.TableName)
+            .DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + set.Get(copperWorking).Slug);
+        known.Values.Fill(1.0);
+
+        // Every fourth settlement holds plenty of copper (as if smelted there); the rest none.
+        GoodSet goods = GoodSet.LoadDefault();
+        var stock = new Stockpiles(sim.State, goods);
+        int copper = goods.IndexOf("Copper");
+        int[] settled = sim.State.IntField(SettlementSystem.SettlementField);
+        int[] settlementCells = Enumerable.Range(0, _world.CellCount).Where(c => settled[c] > 0).ToArray();
+        for (int i = 0; i < settlementCells.Length; i += 4)
+        {
+            stock.Produce(settlementCells[i], copper, 1e5);
+        }
+
+        sim.Run(60 * 12);
+
+        // Farmers who still use it live where copper or ore is near: held or gathered in their own
+        // cell or by a trade partner; elsewhere they have mostly forgotten it.
+        TechnologyConditions conditions = TechnologyUse.TryCreate(sim.State, _world)!.Conditions;
+        var groups = new PopulationGroups(sim.State);
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        int keptAllowed = 0, keptElsewhere = 0, byPartner = 0, unsupplied = 0;
+        double unsuppliedShare = 0.0;
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            if (!groups.IsAlive(g) || groups.Occupation(g) != farmer || groups.Size(g) <= 0.0)
+            {
+                continue;
+            }
+
+            int cell = groups.Cell(g);
+            bool allows = technology.CellAllows(cell, copperWorking);
+            if (known[g] >= technology.Parameters.InUse)
+            {
+                keptAllowed += allows ? 1 : 0;
+                keptElsewhere += allows ? 0 : 1;
+                byPartner += allows && !conditions.SuppliedHere(cell, copperWorking) ? 1 : 0;
+            }
+
+            if (!allows)
+            {
+                unsupplied++;
+                unsuppliedShare += known[g];
+            }
+        }
+
+        Assert.True(keptAllowed > 0 && unsupplied > 0,
+            $"{keptAllowed} farmer groups use it where copper is near ({byPartner} through a trade partner), {unsupplied} groups have none near.");
+        Assert.True(keptElsewhere <= 0.1 * (keptAllowed + keptElsewhere), $"{keptElsewhere} groups with no copper near still use it, against {keptAllowed} with.");
+        Assert.True(unsuppliedShare / unsupplied < 0.3, $"Groups with no copper near still know {unsuppliedShare / unsupplied:F2} of it on average.");
+    }
+
+    [Fact]
+    public void Cattle_are_not_kept_in_tropical_forest_and_the_plough_needs_wheat_and_barley()
+    {
+        Simulation sim = FastFarming(4);
+        sim.Run(300 * 12);
+        HerdingSystem herding = sim.Systems.OfType<HerdingSystem>().Single();
+        TechnologySystem technology = sim.Systems.OfType<TechnologySystem>().Single();
+        BiomeSet biomes = sim.Systems.OfType<ClimateSystem>().Single().Biomes;
+        int[] biome = sim.State.IntField(ClimateSystem.BiomeField);
+        int cattle = herding.Livestock.IndexOf("Cattle");
+        int[] forests = { biomes.IndexOf("Rainforest"), biomes.IndexOf("Tropical seasonal forest") };
+        int forestCells = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            if (_world.IsLand(cell) && forests.Contains(biome[cell]))
+            {
+                forestCells++;
+                Assert.Equal(0.0, herding.Suitability(cell, cattle));
+            }
+        }
+
+        Assert.True(forestCells > 1000);
+        Assert.Contains(Enumerable.Range(0, _world.CellCount), c => _world.IsLand(c) && biome[c] == biomes.IndexOf("Savanna") && herding.Suitability(c, cattle) > 0.5);
+
+        // Give every farming cell cattle: the plough is allowed only where wheat and barley are farmed.
+        int plough = technology.Technologies.IndexOf("The plough");
+        int[] crop = sim.State.IntField(FarmingSystem.CropField);
+        int[] kept = sim.State.IntField(HerdingSystem.AnimalsField);
+        int wheat = Farming(sim).Crops.IndexOf("Wheat and barley") + 1;
+        int wheatCells = 0, otherCells = 0;
+        for (int cell = 0; cell < _world.CellCount; cell++)
+        {
+            if (crop[cell] > 0)
+            {
+                kept[cell] |= 1 << cattle;
+                bool allows = technology.CellAllows(cell, plough);
+                Assert.Equal(crop[cell] == wheat, allows);
+                wheatCells += allows ? 1 : 0;
+                otherCells += allows ? 0 : 1;
+            }
+        }
+
+        Assert.True(wheatCells > 0 && otherCells > 0, $"{wheatCells} wheat and barley cells, {otherCells} others.");
+    }
+
+    [Fact]
     public void Horses_are_kept_where_people_know_horse_herding_and_horses_live_wild()
     {
         Simulation sim = FastFarming(7);

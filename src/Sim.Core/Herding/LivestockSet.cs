@@ -19,7 +19,14 @@ public sealed class Animal
         Coldest = entry.Coldest.ToArray();
         Water = entry.Water.ToArray();
         TamedBy = entry.TamedBy;
+        NotIn = entry.NotIn.ToArray();
     }
+
+    /// <summary>
+    /// Biomes (biomes.json) where the animal cannot be kept whatever the climate: cattle not in
+    /// tropical forest, where tsetse flies carry sleeping sickness.
+    /// </summary>
+    public IReadOnlyList<string> NotIn { get; }
 
     /// <summary>
     /// A technology (technologies.json) through which it comes to be kept, in place of being first
@@ -178,6 +185,8 @@ internal sealed class AnimalEntry
     public List<double> Water { get; set; } = new List<double>();
 
     public string TamedBy { get; set; } = "";
+
+    public List<string> NotIn { get; set; } = new List<string>();
 }
 
 internal sealed class HomelandCircle

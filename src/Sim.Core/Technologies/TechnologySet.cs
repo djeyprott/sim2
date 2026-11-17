@@ -19,6 +19,7 @@ public sealed class Technology
         Coast = entry.Coast;
         Terrain = terrain;
         Animals = entry.Animals.ToArray();
+        Crops = entry.Crops.ToArray();
         NearGoods = entry.NearGoods.ToArray();
         NearWild = entry.NearWild.ToArray();
         SettledYears = entry.SettledYears;
@@ -56,10 +57,20 @@ public sealed class Technology
     /// <summary>Animal names, at least one of which must be kept in the cell; empty for none needed.</summary>
     public IReadOnlyList<string> Animals { get; }
 
-    /// <summary>For discovery only: goods (by name), one of which must be gatherable in the cell or in its store; empty for none.</summary>
+    /// <summary>Crop names, one of which must be farmed in the cell; empty for none needed.</summary>
+    public IReadOnlyList<string> Crops { get; }
+
+    /// <summary>
+    /// Goods (by name), one of which must be within reach: to discover it, gatherable in the cell or
+    /// in its store; to learn, use and keep it, also in the store of, or gatherable by, a trade
+    /// partner. Empty for none.
+    /// </summary>
     public IReadOnlyList<string> NearGoods { get; }
 
-    /// <summary>For discovery only: animals (by name), one of which must live wild in the cell; empty for none.</summary>
+    /// <summary>
+    /// Animals (by name), one of which must be near: to discover it, living wild in the cell; to
+    /// learn, use and keep it, wild or kept there. Empty for none.
+    /// </summary>
     public IReadOnlyList<string> NearWild { get; }
 
     /// <summary>For discovery only: farming must have stood in the cell or a neighbour at least this many years (0: no need).</summary>
@@ -235,6 +246,8 @@ internal sealed class TechnologyEntry
 
     public List<string> Animals { get; set; } = new List<string>();
 
+    public List<string> Crops { get; set; } = new List<string>();
+
     public List<string> NearGoods { get; set; } = new List<string>();
 
     public List<string> NearWild { get; set; } = new List<string>();
@@ -271,6 +284,9 @@ public sealed class TechnologyParameters
 
     public double LossRate { get; set; } = 0.03;
 
+    /// <summary>The share of what a group knows of a technology that it forgets each year where its cell does not meet the technology's conditions.</summary>
+    public double UnusedLoss { get; set; }
+
     public double IndependentKm { get; set; } = 1000.0;
 
     public static TechnologyParameters LoadDefault() => Parse(ContentFiles.ReadText("technology.json"));
@@ -278,7 +294,7 @@ public sealed class TechnologyParameters
     public static TechnologyParameters Parse(string json)
     {
         TechnologyParameters p = ContentFiles.Parse<TechnologyParameters>(json, "technology");
-        double[] shares = { p.InUse, p.DiscoveryShare, p.Adoption, p.WithinCell, p.TradeSpread, p.LossRate };
+        double[] shares = { p.InUse, p.DiscoveryShare, p.Adoption, p.WithinCell, p.TradeSpread, p.LossRate, p.UnusedLoss };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)) || p.InUse <= 0.0
             || p.DiscoveryPeople <= 0.0 || p.BusyTrade <= 0.0 || p.KeepPeople < 0.0 || p.IndependentKm < 0.0)
         {

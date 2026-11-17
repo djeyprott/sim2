@@ -84,7 +84,7 @@
     {
       "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The plough" ], "animals": [ "Cattle" ],
-      "chance": 0.00005, "spread": 0.015,
+      "chance": 0.0001, "spread": 0.015,
       "settledYears": 5500,
       // Ox carts carry loads over land far more cheaply than people and pack animals.
       "effects": { "landCarrying": 0.7 },
@@ -130,7 +130,7 @@
       "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
       "chance": 0.0003, "spread": 0.01,
-      "settledYears": 2500,
+      "settledYears": 2900,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },
     {

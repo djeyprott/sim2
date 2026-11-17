@@ -243,6 +243,235 @@ public sealed class RunStatistics
         return text.ToString();
     }
 
+    // Broad regions for the regional table, first match wins: name, latitude from and to, longitude from and to.
+    private static readonly (string Name, double LatFrom, double LatTo, double LonFrom, double LonTo)[] RegionBoxes =
+    {
+        ("Americas", -90, 90, -180, -30),
+        ("Egypt and Nile", 15, 32, 24, 36),
+        ("Southwest Asia", 12, 42, 26, 63),
+        ("Europe", 35, 72, -30, 40),
+        ("Siberia", 56, 90, 40, 180),
+        ("Steppe and Central Asia", 35, 56, 40, 95),
+        ("South Asia", 5, 37, 60, 95),
+        ("East Asia", 18, 56, 95, 150),
+        ("Southeast Asia", -12, 28, 92, 180),
+        ("North Africa and Sahara", 18, 38, -30, 40),
+        ("Sahel", 10, 18, -30, 52),
+        ("West and Central Africa", -10, 10, -30, 30),
+        ("East and southern Africa", -40, 18, -30, 60),
+        ("Australia and Pacific", -90, 0, 100, 180),
+    };
+
+    /// <summary>The broad region a cell lies in (the regional table's names), or "Other".</summary>
+    public string RegionOf(int cell)
+    {
+        double lat = _simulation.Map.Grid.Latitude(cell), lon = _simulation.Map.Grid.Longitude(cell);
+        foreach (var box in RegionBoxes)
+        {
+            if (lat >= box.LatFrom && lat < box.LatTo && lon >= box.LonFrom && lon < box.LonTo)
+            {
+                return box.Name;
+            }
+        }
+
+        return "Other";
+    }
+
+    /// <summary>The column names of <see cref="RegionRows"/>.</summary>
+    public string RegionHeader()
+    {
+        var columns = new List<string> { "year", "region", "population", "farmers", "herders", "craftsmen", "settlements" };
+        if (_technology != null)
+        {
+            foreach (Technology t in _technology.Technologies.Technologies)
+            {
+                columns.Add("know_" + t.Slug);
+                columns.Add("use_" + t.Slug);
+            }
+        }
+
+        if (_stockpiles != null)
+        {
+            columns.AddRange(_stockpiles.Goods.Goods.Select(g => g.Slug + "_in_store"));
+            if (_technology != null)
+            {
+                columns.AddRange(new[] { "bronze_settlements", "bronze_settlements_with_tin", "bronze_settlements_with_copper" });
+            }
+        }
+
+        return string.Join(",", columns);
+    }
+
+    /// <summary>
+    /// One row per broad region (see <see cref="RegionOf"/>) for the state now: people by
+    /// occupation, settlements; for each technology the share of the region's people who know it
+    /// and the share in groups that use it (at least the in-use share knowing it, where the cell
+    /// meets its conditions); what is in store of each good; and how many settlements have a group
+    /// using bronze, and of those how many hold tin and copper. Each row ends with a newline.
+    /// </summary>
+    public string RegionRows()
+    {
+        GameDate date = _simulation.Date;
+        long year = date.IsBce ? -date.Year : date.Year;
+        var names = RegionBoxes.Select(b => b.Name).Append("Other").ToList();
+        int regions = names.Count;
+        var groups = new PopulationGroups(_simulation.State);
+        int techs = _technology?.Technologies.Count ?? 0;
+        int goods = _stockpiles?.Goods.Count ?? 0;
+        var people = new double[regions, 4];
+        var settlements = new int[regions];
+        var know = new double[regions, techs];
+        var use = new double[regions, techs];
+        var store = new double[regions, goods];
+        var bronze = new int[regions, 3];
+        var regionOfCell = new Dictionary<int, int>();
+        int Region(int cell)
+        {
+            if (!regionOfCell.TryGetValue(cell, out int r))
+            {
+                r = names.IndexOf(RegionOf(cell));
+                regionOfCell[cell] = r;
+            }
+
+            return r;
+        }
+
+        int[] occupationColumn =
+        {
+            _occupations.Contains(OccupationSet.Farmer) ? _occupations.IndexOf(OccupationSet.Farmer) : -1,
+            _occupations.Contains(OccupationSet.Herder) ? _occupations.IndexOf(OccupationSet.Herder) : -1,
+            _occupations.Contains(OccupationSet.Craftsman) ? _occupations.IndexOf(OccupationSet.Craftsman) : -1,
+        };
+        EntityTable table = _simulation.State.Table(PopulationGroups.TableName);
+        DoubleColumn[] known = Enumerable.Range(0, techs)
+            .Select(t => table.DoubleColumn(PopulationGroups.KnowledgeColumnPrefix + _technology!.Technologies.Get(t).Slug)).ToArray();
+        double inUse = _technology?.Parameters.InUse ?? 0.5;
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            if (!groups.IsAlive(g) || groups.Size(g) <= 0.0)
+            {
+                continue;
+            }
+
+            int cell = groups.Cell(g);
+            int r = Region(cell);
+            double size = groups.Size(g);
+            people[r, 0] += size;
+            for (int k = 0; k < 3; k++)
+            {
+                if (groups.Occupation(g) == occupationColumn[k])
+                {
+                    people[r, k + 1] += size;
+                }
+            }
+
+            for (int t = 0; t < techs; t++)
+            {
+                know[r, t] += size * known[t][g];
+                if (known[t][g] >= inUse && _technology!.CellAllows(cell, t))
+                {
+                    use[r, t] += size;
+                }
+            }
+        }
+
+        int bronzeTech = -1, tin = -1, copper = -1;
+        if (_technology != null && _stockpiles != null)
+        {
+            bronzeTech = _technology.Technologies.Technologies.ToList().FindIndex(t => t.Name == "Bronze");
+            tin = _stockpiles.Goods.Goods.ToList().FindIndex(g => g.Name == "Tin");
+            copper = _stockpiles.Goods.Goods.ToList().FindIndex(g => g.Name == "Copper");
+        }
+
+        if (_settlements != null && _simulation.State.HasTable(SettlementSystem.TableName))
+        {
+            EntityTable settlementTable = _simulation.State.Table(SettlementSystem.TableName);
+            IntColumn cellOf = settlementTable.IntColumn("cell");
+            for (int id = 0; id < settlementTable.IdCount; id++)
+            {
+                if (!settlementTable.IsAlive(id))
+                {
+                    continue;
+                }
+
+                int cell = cellOf[id];
+                int r = Region(cell);
+                settlements[r]++;
+                for (int good = 0; good < goods; good++)
+                {
+                    store[r, good] += _stockpiles!.Stock(cell, good);
+                }
+
+                if (bronzeTech < 0)
+                {
+                    continue;
+                }
+
+                bool usesBronze = false;
+                foreach (int g in groups.InCell(cell))
+                {
+                    usesBronze |= groups.Size(g) > 0.0 && known[bronzeTech][g] >= inUse;
+                }
+
+                if (usesBronze)
+                {
+                    bronze[r, 0]++;
+                    if (tin >= 0 && _stockpiles!.Stock(cell, tin) > 0.0)
+                    {
+                        bronze[r, 1]++;
+                    }
+
+                    if (copper >= 0 && _stockpiles!.Stock(cell, copper) > 0.0)
+                    {
+                        bronze[r, 2]++;
+                    }
+                }
+            }
+        }
+
+        var text = new StringBuilder();
+        for (int r = 0; r < regions; r++)
+        {
+            if (people[r, 0] <= 0.0)
+            {
+                continue;
+            }
+
+            var values = new List<string> { year.ToString(CultureInfo.InvariantCulture), names[r] };
+            for (int k = 0; k < 4; k++)
+            {
+                values.Add(Number(people[r, k]));
+            }
+
+            values.Add(settlements[r].ToString(CultureInfo.InvariantCulture));
+            for (int t = 0; t < techs; t++)
+            {
+                values.Add((know[r, t] / people[r, 0]).ToString("F4", CultureInfo.InvariantCulture));
+                values.Add((use[r, t] / people[r, 0]).ToString("F4", CultureInfo.InvariantCulture));
+            }
+
+            if (_stockpiles != null)
+            {
+                for (int good = 0; good < goods; good++)
+                {
+                    values.Add(Amount(store[r, good]));
+                }
+
+                if (_technology != null)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        values.Add(bronze[r, k].ToString(CultureInfo.InvariantCulture));
+                    }
+                }
+            }
+
+            text.Append(string.Join(",", values)).Append('\n');
+        }
+
+        return text.ToString();
+    }
+
     /// <summary>Where and when each crop was first farmed, as CSV with a header.</summary>
     public string Origins()
     {

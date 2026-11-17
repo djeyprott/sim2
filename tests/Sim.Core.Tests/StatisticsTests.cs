@@ -54,5 +54,25 @@ public class StatisticsTests : IClassFixture<EarthWorldFixture>
         Assert.Equal(sim.Systems.OfType<Sim.Core.Technologies.TechnologySystem>().Single().Events().Count + 1,
             events.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length);
         Assert.StartsWith("cell,latitude,longitude,year,date,from_cell", stats.Landings());
+
+        // By region: rows match their header, and the regions' people add up to the world's.
+        string[] regionHeader = stats.RegionHeader().Split(',');
+        string[] rows = stats.RegionRows().Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        Assert.Contains(rows, r => r.Split(',')[1] == "Southwest Asia");
+        double regionPeople = 0.0;
+        foreach (string row in rows)
+        {
+            string[] cells = row.Split(',');
+            Assert.Equal(regionHeader.Length, cells.Length);
+            Assert.Equal("-9980", cells[0]);
+            regionPeople += double.Parse(cells[2], System.Globalization.CultureInfo.InvariantCulture);
+            foreach (string column in regionHeader.Where(h => h.StartsWith("know_", StringComparison.Ordinal) || h.StartsWith("use_", StringComparison.Ordinal)))
+            {
+                Assert.InRange(double.Parse(cells[Array.IndexOf(regionHeader, column)], System.Globalization.CultureInfo.InvariantCulture), 0.0, 1.0);
+            }
+        }
+
+        Assert.InRange(regionPeople, 0.999 * Value("population"), 1.001 * Value("population") + rows.Length);
+        Assert.Contains("bronze_settlements_with_tin", regionHeader);
     }
 }

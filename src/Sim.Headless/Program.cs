@@ -75,26 +75,33 @@ public static class Program
         var watch = Stopwatch.StartNew();
         if (options.TryGetValue("--stats", out string? statsPath))
         {
-            // One row at the start and one after each simulated year.
+            // One row at the start and one after each simulated year; by region every 100 years.
             var statistics = new RunStatistics(simulation);
+            string Beside(string suffix) => Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
+                Path.GetFileNameWithoutExtension(statsPath) + suffix);
             using (var writer = new StreamWriter(statsPath))
+            using (var regions = new StreamWriter(Beside("-regions.csv")))
             {
                 writer.WriteLine(statistics.Header());
                 writer.WriteLine(statistics.Row());
+                regions.WriteLine(statistics.RegionHeader());
+                regions.Write(statistics.RegionRows());
                 for (long year = 0; year < years; year++)
                 {
                     simulation.Run(GameDate.MonthsPerYear);
                     writer.WriteLine(statistics.Row());
+                    if ((year + 1) % 100 == 0)
+                    {
+                        regions.Write(statistics.RegionRows());
+                    }
                 }
             }
 
-            string Beside(string suffix) => Path.Combine(Path.GetDirectoryName(Path.GetFullPath(statsPath)) ?? ".",
-                Path.GetFileNameWithoutExtension(statsPath) + suffix);
             File.WriteAllText(Beside("-origins.csv"), statistics.Origins());
             File.WriteAllText(Beside("-herding-origins.csv"), statistics.HerdingOrigins());
             File.WriteAllText(Beside("-technology-events.csv"), statistics.TechnologyEvents());
             File.WriteAllText(Beside("-landings.csv"), statistics.Landings());
-            Console.WriteLine($"Wrote yearly statistics to {statsPath}, and beside it farming and herding origins, technology events and landings");
+            Console.WriteLine($"Wrote yearly statistics to {statsPath}, and beside it statistics by region, farming and herding origins, technology events and landings");
         }
         else
         {

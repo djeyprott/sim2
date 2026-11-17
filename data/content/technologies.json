@@ -142,8 +142,9 @@
       // Alloying copper with tin.
       "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
-      // 2,000 years since 0.4.1 (2,900 before): it now needs copper working and tin both near.
-      "chance": 0.0003, "spread": 0.01,
+      // 2,000 years and 0.001 since 0.4.1 (2,900 and 0.0003 before): it now needs copper working
+      // and tin both near, which happens in few places.
+      "chance": 0.001, "spread": 0.01,
       "settledYears": 2000,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },

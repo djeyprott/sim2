@@ -115,8 +115,7 @@
         { "name": "Cornwall and Devon", "lat": 50.45, "lon": -4.3 },
         { "name": "El Aramo (Asturias)", "lat": 43.2, "lon": -5.9 },
         { "name": "Almalyk (Tashkent)", "lat": 40.85, "lon": 69.6 },
-        { "name": "Dongchuan (Yunnan)", "lat": 26.1, "lon": 103.1 },
-        { "name": "Corocoro (Bolivia)", "lat": -17.2, "lon": -68.45 }
+        { "name": "Dongchuan (Yunnan)", "lat": 26.1, "lon": 103.1 }
       ]
     },
     {

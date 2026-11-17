@@ -4,31 +4,46 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",independent,76518,28.72,119.85,-9247,January 9247 BCE,0
 "Granaries",independent,153733,-15.39,-68.32,-8627,January 8627 BCE,0
 "Granaries",independent,130857,-7.06,146.70,-8357,January 8357 BCE,0
-"Milk and wool",first,160795,10.43,4.55,-6682,January 6682 BCE,0
-"Irrigation",first,6525,37.85,38.54,-6283,January 6283 BCE,0
-"Milk and wool",independent,6773,38.09,48.84,-6151,January 6151 BCE,0
-"Copper working",first,6657,38.25,39.42,-6050,January 6050 BCE,0
-"Horse herding",first,9328,46.94,49.16,-5900,January 5900 BCE,0
-"The plough",first,7429,40.55,44.39,-5670,January 5670 BCE,0
-"Horse herding",lost,11624,56.81,46.28,-5635,January 5635 BCE,1889
-"Horse herding",lost,11620,56.51,49.76,-5549,January 5549 BCE,1616
-"Horse herding",lost,10482,50.82,55.49,-5523,January 5523 BCE,874
-"Horse herding",lost,11619,56.43,50.62,-5497,January 5497 BCE,1454
-"Copper working",independent,77572,29.91,114.94,-5383,January 5383 BCE,0
-"Horse herding",lost,11964,58.09,50.43,-5313,January 5313 BCE,1141
-"The sail",first,164706,4.51,-7.92,-5236,January 5236 BCE,0
-"Horse herding",lost,11789,56.81,54.42,-5141,January 5141 BCE,1395
-"Irrigation",independent,153621,-19.49,-65.37,-4879,January 4879 BCE,0
-"Irrigation",independent,163080,13.30,-6.62,-4737,January 4737 BCE,0
-"Horse riding",first,9454,47.98,38.48,-4690,January 4690 BCE,0
-"The wheel",first,7429,40.55,44.39,-4669,January 4669 BCE,0
-"Granaries",independent,98075,18.57,-99.91,-4646,January 4646 BCE,0
-"The sail",independent,76216,25.85,119.56,-4548,January 4548 BCE,0
-"Irrigation",independent,160800,12.25,3.31,-4449,January 4449 BCE,0
-"The sail",independent,7700,41.62,32.94,-4245,January 4245 BCE,0
-"Terraced fields",first,6910,38.77,45.82,-4202,January 4202 BCE,0
-"Horse herding",independent,8844,41.96,68.18,-3923,January 3923 BCE,0
-"Irrigation",independent,69354,12.15,14.77,-3846,January 3846 BCE,0
-"Terraced fields",independent,160920,6.75,6.48,-3813,January 3813 BCE,0
-"Irrigation",independent,11100,54.43,27.23,-3574,January 3574 BCE,0
-"Granaries",lost,65063,-7.87,27.77,-3271,January 3271 BCE,116
+"Irrigation",first,153828,-17.89,-67.33,-6790,January 6790 BCE,0
+"Irrigation",independent,7570,41.23,35.70,-6690,January 6690 BCE,0
+"Milk and wool",first,7169,39.55,46.57,-6668,January 6668 BCE,0
+"Copper working",first,7681,41.38,44.54,-6448,January 6448 BCE,0
+"Horse herding",first,10197,50.87,40.56,-6345,January 6345 BCE,0
+"Horse herding",lost,10785,52.71,50.40,-6093,January 6093 BCE,939
+"Horse herding",lost,11362,55.88,40.34,-5924,January 5924 BCE,1282
+"Horse herding",lost,11443,55.80,48.61,-5897,January 5897 BCE,1642
+"Irrigation",independent,69251,11.41,15.24,-5884,January 5884 BCE,0
+"Horse herding",lost,11451,56.24,41.71,-5847,January 5847 BCE,1408
+"Horse herding",lost,11537,56.49,44.85,-5847,January 5847 BCE,1207
+"The sail",first,76315,27.85,120.32,-5822,January 5822 BCE,0
+"Milk and wool",independent,162715,10.43,-3.03,-5760,January 5760 BCE,0
+"Horse herding",lost,11256,54.57,52.42,-5690,January 5690 BCE,944
+"Copper working",independent,77571,30.30,115.19,-5660,January 5660 BCE,0
+"Horse herding",lost,11618,56.34,51.48,-5620,January 5620 BCE,2437
+"Horse herding",lost,10383,50.58,54.21,-5556,January 5556 BCE,1914
+"Copper working",independent,153930,-17.08,-68.32,-5553,January 5553 BCE,0
+"Horse herding",lost,10778,52.05,55.72,-5485,January 5485 BCE,713
+"Horse herding",lost,10779,52.15,54.97,-5482,January 5482 BCE,2244
+"Bronze",first,153829,-17.48,-67.58,-5443,January 5443 BCE,0
+"Horse herding",lost,11344,54.60,55.42,-5411,January 5411 BCE,1233
+"The plough",first,7428,40.51,44.98,-5376,January 5376 BCE,0
+"Horse herding",lost,11613,55.81,55.66,-5329,January 5329 BCE,1515
+"Horse herding",lost,11613,55.81,55.66,-5327,January 5327 BCE,1570
+"Horse herding",lost,11433,54.81,56.83,-5181,January 5181 BCE,1016
+"Horse riding",first,9218,46.62,48.03,-5124,January 5124 BCE,0
+"Irrigation",independent,10598,52.44,43.12,-5079,January 5079 BCE,0
+"Horse herding",independent,8729,41.67,67.66,-4895,January 4895 BCE,0
+"The wheel",first,7428,40.51,44.98,-4819,January 4819 BCE,0
+"The sail",independent,8776,45.44,38.33,-4558,January 4558 BCE,0
+"Terraced fields",first,7044,39.32,43.88,-4371,January 4371 BCE,0
+"Horse herding",lost,10669,50.21,63.67,-4344,January 4344 BCE,1423
+"Horse riding",lost,10669,50.21,63.67,-4303,January 4303 BCE,2277
+"Horse herding",lost,11522,55.13,57.46,-4224,January 4224 BCE,1532
+"Horse herding",lost,11522,55.13,57.46,-4222,January 4222 BCE,1563
+"Horse riding",lost,11522,55.13,57.46,-4186,January 4186 BCE,1791
+"Granaries",independent,98992,19.18,-104.07,-3893,January 3893 BCE,0
+"Terraced fields",independent,76629,24.82,116.86,-3340,January 3340 BCE,0
+"The sail",independent,132948,-1.97,133.50,-3327,January 3327 BCE,0
+"Granaries",lost,105189,13.77,-14.74,-3180,January 3180 BCE,1
+"Terraced fields",independent,131071,-8.30,146.45,-3028,January 3028 BCE,0
+"Terraced fields",independent,160102,9.33,7.77,-3013,January 3013 BCE,0

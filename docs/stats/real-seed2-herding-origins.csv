@@ -1,7 +1,8 @@
 animal,homeland,cell,latitude,longitude,year,date
-"Cattle",1,6260,37.04,35.72,-8573,January 8573 BCE
-"Cattle",2,67737,20.82,30.59,-8556,January 8556 BCE
-"Pigs",4,77926,30.00,112.96,-8339,January 8339 BCE
-"Pigs",3,6258,37.04,36.83,-8253,January 8253 BCE
-"Sheep and goats",0,6385,37.34,41.59,-7422,January 7422 BCE
-"Horses",6,7677,41.21,46.95,-5372,January 5372 BCE
+"Pigs",4,77839,29.98,113.45,-8739,January 8739 BCE
+"Cattle",2,68405,11.76,21.48,-8585,January 8585 BCE
+"Cattle",1,7307,40.30,41.06,-8485,January 8485 BCE
+"Sheep and goats",0,6651,38.12,42.82,-8366,January 8366 BCE
+"Pigs",3,6519,37.74,41.92,-8210,January 8210 BCE
+"Llamas and alpacas",5,154516,-14.17,-72.98,-5011,January 5011 BCE
+"Horses",6,9653,47.91,51.97,-4052,January 4052 BCE

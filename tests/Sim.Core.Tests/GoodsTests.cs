@@ -194,9 +194,9 @@ public class TechnologyFileTests
 
         // Effects: known names only, and a lifted penalty share of at most 1.
         Assert.Equal(1.25, set.Get(set.IndexOf("The plough")).Effects["farmYield"]);
-        Assert.Equal(0.7, set.Get(set.IndexOf("Granaries")).Effects["grainSpoilage"]);
+        Assert.Equal(0.8, set.Get(set.IndexOf("Granaries")).Effects["grainSpoilage"]);
         Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
-            text.Replace("\"grainSpoilage\": 0.7", "\"grainSpoilige\": 0.7"), occupations));
+            text.Replace("\"grainSpoilage\": 0.8", "\"grainSpoilige\": 0.8"), occupations));
         Assert.Throws<InvalidDataException>(() => Sim.Core.Technologies.TechnologySet.Parse(
             text.Replace("\"biomePenaltyLift\": 1.0", "\"biomePenaltyLift\": 1.5"), occupations));
 

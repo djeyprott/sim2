@@ -1,39 +1,26 @@
 technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",first,214728,-31.73,25.06,-9453,January 9453 BCE,0
 "Granaries",independent,109884,-6.42,-46.64,-9368,January 9368 BCE,0
-"Granaries",independent,67861,0.42,18.69,-8541,January 8541 BCE,0
-"Granaries",independent,162834,10.07,-3.28,-8308,January 8308 BCE,0
-"Granaries",independent,52482,40.77,-5.91,-8169,January 8169 BCE,0
-"Granaries",independent,151735,-18.41,-57.41,-7389,January 7389 BCE,0
-"Granaries",lost,161752,-25.81,23.55,-7379,January 7379 BCE,111
-"Granaries",independent,55618,54.00,-8.37,-7299,January 7299 BCE,0
-"Granaries",lost,161752,-25.81,23.55,-7079,January 7079 BCE,111
-"Milk and wool",first,110554,-5.73,-49.49,-6189,January 6189 BCE,0
-"Irrigation",first,161982,13.34,-2.05,-6059,January 6059 BCE,0
-"Milk and wool",lost,151946,-28.49,-51.91,-5604,January 5604 BCE,1819
-"Milk and wool",lost,151946,-28.49,-51.91,-5581,January 5581 BCE,2644
-"Milk and wool",lost,153316,-16.55,-65.63,-5571,January 5571 BCE,1355
-"Milk and wool",lost,153315,-16.96,-65.38,-5545,January 5545 BCE,1899
-"Milk and wool",lost,150152,3.36,-64.34,-5265,January 5265 BCE,1847
-"Milk and wool",lost,150022,4.50,-64.57,-5050,January 5050 BCE,2076
-"Irrigation",independent,162734,-28.70,21.30,-4965,January 4965 BCE,0
-"The sail",first,55530,53.87,-9.76,-4914,January 4914 BCE,0
-"The sail",independent,215428,-33.37,27.26,-4778,January 4778 BCE,0
-"Milk and wool",lost,154039,-12.91,-71.26,-4759,January 4759 BCE,1166
-"The sail",independent,110542,-1.14,-46.54,-4730,January 4730 BCE,0
-"Milk and wool",lost,154040,-12.49,-71.51,-4721,January 4721 BCE,2138
-"Milk and wool",lost,153796,-30.69,-59.39,-4694,January 4694 BCE,1816
-"Irrigation",lost,162371,-28.45,22.73,-4665,January 4665 BCE,1563
-"Milk and wool",lost,152806,-4.22,-70.52,-4576,January 4576 BCE,1658
-"The plough",first,110078,-5.31,-46.85,-4530,January 4530 BCE,0
-"Copper working",first,55160,52.11,-9.37,-4504,January 4504 BCE,0
-"Milk and wool",lost,152060,-29.68,-51.62,-4470,January 4470 BCE,981
-"Milk and wool",lost,152060,-29.68,-51.62,-4464,January 4464 BCE,1097
-"Milk and wool",lost,152060,-29.68,-51.62,-4463,January 4463 BCE,1097
-"Milk and wool",lost,154236,-12.07,-72.74,-4443,January 4443 BCE,2365
-"Milk and wool",lost,151306,4.07,-69.26,-4441,January 4441 BCE,1726
-"Terraced fields",first,214293,-30.45,25.23,-4316,January 4316 BCE,0
-"Copper working",independent,51497,37.68,-7.19,-4309,January 4309 BCE,0
-"Milk and wool",lost,202982,-30.47,-51.45,-4195,January 4195 BCE,1290
-"Milk and wool",lost,148566,-21.34,-43.16,-4033,January 4033 BCE,537
-"Milk and wool",lost,148423,-20.87,-42.97,-4032,January 4032 BCE,1951
+"Granaries",independent,66806,-3.53,22.09,-8681,January 8681 BCE,0
+"Granaries",independent,161036,-0.03,10.28,-8530,January 8530 BCE,0
+"Granaries",independent,51870,38.36,-4.65,-8466,January 8466 BCE,0
+"Granaries",independent,161983,13.69,-2.31,-8068,January 8068 BCE,0
+"Granaries",lost,162251,-27.26,22.44,-7405,January 7405 BCE,68
+"Granaries",lost,162251,-27.26,22.44,-7096,January 7096 BCE,68
+"Granaries",independent,56130,55.43,-3.57,-6326,January 6326 BCE,0
+"Irrigation",first,214292,-30.35,25.71,-6214,January 6214 BCE,0
+"Irrigation",independent,162483,14.39,-4.87,-6029,January 6029 BCE,0
+"Milk and wool",first,109680,-5.28,-44.91,-5725,January 5725 BCE,0
+"Irrigation",independent,52718,41.51,-5.43,-5634,January 5634 BCE,0
+"Irrigation",lost,159732,-22.51,29.15,-5409,January 5409 BCE,72
+"Irrigation",lost,159732,-22.51,29.15,-5359,January 5359 BCE,72
+"The sail",first,51627,38.45,-8.85,-5335,January 5335 BCE,0
+"Irrigation",lost,159831,13.67,5.87,-4947,January 4947 BCE,873
+"The sail",independent,214280,-29.07,31.39,-4924,January 4924 BCE,0
+"Granaries",lost,56379,57.27,-6.03,-4842,January 4842 BCE,32
+"The plough",first,109982,-6.05,-46.87,-4787,January 4787 BCE,0
+"Terraced fields",first,215006,-31.87,28.38,-4464,January 4464 BCE,0
+"Granaries",lost,162004,-26.35,22.87,-4333,January 4333 BCE,102
+"Granaries",lost,214733,-32.19,22.59,-4278,January 4278 BCE,179
+"Irrigation",lost,159446,-21.94,29.79,-4230,January 4230 BCE,49
+"Milk and wool",lost,151061,5.60,-69.25,-4114,January 4114 BCE,1859

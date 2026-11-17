@@ -121,7 +121,7 @@
       // Smelting copper from its ores, and casting and hammering copper tools.
       "name": "Copper working", "colour": "#c87533", "occupations": [ "Craftsman", "Farmer" ],
       "nearGoods": [ "Copper ore" ],
-      "chance": 0.00003, "spread": 0.01,
+      "chance": 0.00003, "spread": 0.02,
       "settledYears": 2800,
       "history": "5000 BCE, Balkans (Belovode); perhaps soon after 6000 BCE in northern Iraq"
     },
@@ -130,7 +130,7 @@
       "name": "Bronze", "colour": "#cd9b42", "occupations": [ "Craftsman", "Farmer" ],
       "requires": [ "Copper working" ], "nearGoods": [ "Tin" ],
       "chance": 0.001, "spread": 0.02,
-      "settledYears": 4500,
+      "settledYears": 4000,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },
     {

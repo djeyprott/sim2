@@ -1,24 +1,39 @@
 technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",first,214728,-31.73,25.06,-9453,January 9453 BCE,0
 "Granaries",independent,109884,-6.42,-46.64,-9368,January 9368 BCE,0
-"Granaries",independent,56535,57.58,-3.78,-8512,January 8512 BCE,0
-"Granaries",independent,150765,-10.99,-57.95,-8378,January 8378 BCE,0
-"Granaries",independent,162107,12.98,-2.30,-8125,January 8125 BCE,0
-"Granaries",independent,161156,-5.01,12.86,-8115,January 8115 BCE,0
-"Granaries",lost,162004,-26.35,22.87,-7275,January 7275 BCE,99
-"Granaries",independent,51626,38.34,-8.31,-6743,January 6743 BCE,0
-"Granaries",lost,161986,14.76,-3.09,-6681,January 6681 BCE,224
-"Milk and wool",first,110074,-3.79,-45.86,-6388,January 6388 BCE,0
-"Granaries",lost,161368,-24.43,24.19,-5450,January 5450 BCE,96
-"Irrigation",first,160559,-26.72,29.01,-5444,January 5444 BCE,0
-"Milk and wool",lost,149064,4.93,-61.40,-5408,January 5408 BCE,1853
-"Granaries",lost,161368,-24.43,24.19,-5389,January 5389 BCE,96
-"Granaries",lost,161368,-24.43,24.19,-5329,January 5329 BCE,96
-"Milk and wool",lost,150420,5.24,-66.53,-4986,January 4986 BCE,1968
-"Granaries",lost,56379,57.27,-6.03,-4842,January 4842 BCE,27
-"Irrigation",independent,162481,13.68,-4.35,-4817,January 4817 BCE,0
-"Milk and wool",lost,153767,-1.37,-76.68,-4365,January 4365 BCE,2567
-"Granaries",lost,162373,-27.71,22.22,-4353,January 4353 BCE,99
-"Granaries",lost,214733,-32.19,22.59,-4277,January 4277 BCE,194
-"Milk and wool",lost,153667,-0.57,-76.68,-4256,January 4256 BCE,2722
-"Irrigation",lost,1641,-23.12,33.30,-4211,January 4211 BCE,1965
+"Granaries",independent,67861,0.42,18.69,-8541,January 8541 BCE,0
+"Granaries",independent,162834,10.07,-3.28,-8308,January 8308 BCE,0
+"Granaries",independent,52482,40.77,-5.91,-8169,January 8169 BCE,0
+"Granaries",independent,151735,-18.41,-57.41,-7389,January 7389 BCE,0
+"Granaries",lost,161752,-25.81,23.55,-7379,January 7379 BCE,111
+"Granaries",independent,55618,54.00,-8.37,-7299,January 7299 BCE,0
+"Granaries",lost,161752,-25.81,23.55,-7079,January 7079 BCE,111
+"Milk and wool",first,110554,-5.73,-49.49,-6189,January 6189 BCE,0
+"Irrigation",first,161982,13.34,-2.05,-6059,January 6059 BCE,0
+"Milk and wool",lost,151946,-28.49,-51.91,-5604,January 5604 BCE,1819
+"Milk and wool",lost,151946,-28.49,-51.91,-5581,January 5581 BCE,2644
+"Milk and wool",lost,153316,-16.55,-65.63,-5571,January 5571 BCE,1355
+"Milk and wool",lost,153315,-16.96,-65.38,-5545,January 5545 BCE,1899
+"Milk and wool",lost,150152,3.36,-64.34,-5265,January 5265 BCE,1847
+"Milk and wool",lost,150022,4.50,-64.57,-5050,January 5050 BCE,2076
+"Irrigation",independent,162734,-28.70,21.30,-4965,January 4965 BCE,0
+"The sail",first,55530,53.87,-9.76,-4914,January 4914 BCE,0
+"The sail",independent,215428,-33.37,27.26,-4778,January 4778 BCE,0
+"Milk and wool",lost,154039,-12.91,-71.26,-4759,January 4759 BCE,1166
+"The sail",independent,110542,-1.14,-46.54,-4730,January 4730 BCE,0
+"Milk and wool",lost,154040,-12.49,-71.51,-4721,January 4721 BCE,2138
+"Milk and wool",lost,153796,-30.69,-59.39,-4694,January 4694 BCE,1816
+"Irrigation",lost,162371,-28.45,22.73,-4665,January 4665 BCE,1563
+"Milk and wool",lost,152806,-4.22,-70.52,-4576,January 4576 BCE,1658
+"The plough",first,110078,-5.31,-46.85,-4530,January 4530 BCE,0
+"Copper working",first,55160,52.11,-9.37,-4504,January 4504 BCE,0
+"Milk and wool",lost,152060,-29.68,-51.62,-4470,January 4470 BCE,981
+"Milk and wool",lost,152060,-29.68,-51.62,-4464,January 4464 BCE,1097
+"Milk and wool",lost,152060,-29.68,-51.62,-4463,January 4463 BCE,1097
+"Milk and wool",lost,154236,-12.07,-72.74,-4443,January 4443 BCE,2365
+"Milk and wool",lost,151306,4.07,-69.26,-4441,January 4441 BCE,1726
+"Terraced fields",first,214293,-30.45,25.23,-4316,January 4316 BCE,0
+"Copper working",independent,51497,37.68,-7.19,-4309,January 4309 BCE,0
+"Milk and wool",lost,202982,-30.47,-51.45,-4195,January 4195 BCE,1290
+"Milk and wool",lost,148566,-21.34,-43.16,-4033,January 4033 BCE,537
+"Milk and wool",lost,148423,-20.87,-42.97,-4032,January 4032 BCE,1951

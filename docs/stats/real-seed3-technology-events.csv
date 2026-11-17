@@ -5,8 +5,17 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",independent,132664,-7.81,138.36,-8097,January 8097 BCE,0
 "Granaries",independent,153522,-17.83,-65.87,-7956,January 7956 BCE,0
 "Granaries",independent,98174,21.43,-98.68,-7559,January 7559 BCE,0
-"Milk and wool",first,4850,32.93,35.75,-6033,January 6033 BCE,0
-"Granaries",independent,161187,6.74,5.49,-5763,January 5763 BCE,0
-"Irrigation",first,16589,34.96,110.13,-5249,January 5249 BCE,0
-"Irrigation",independent,6390,37.43,38.80,-4161,January 4161 BCE,0
-"Irrigation",independent,98973,26.92,-99.36,-4095,January 4095 BCE,0
+"Irrigation",first,17020,36.13,103.37,-6454,January 6454 BCE,0
+"Granaries",independent,161586,8.96,2.52,-6151,January 6151 BCE,0
+"The sail",first,76734,22.84,115.13,-5942,January 5942 BCE,0
+"Copper working",first,16728,35.35,110.95,-5499,January 5499 BCE,0
+"The sail",independent,131897,-9.14,143.02,-5417,January 5417 BCE,0
+"The sail",lost,132402,-0.88,135.66,-5178,January 5178 BCE,166
+"Milk and wool",first,5702,35.35,38.95,-5114,January 5114 BCE,0
+"Irrigation",independent,99624,29.91,-101.06,-4789,January 4789 BCE,0
+"Irrigation",independent,5413,34.40,42.58,-4645,January 4645 BCE,0
+"The sail",independent,98376,24.31,-97.92,-4472,January 4472 BCE,0
+"Copper working",independent,6522,37.81,40.23,-4450,January 4450 BCE,0
+"Irrigation",lost,100070,27.60,-105.03,-4208,January 4208 BCE,59
+"Terraced fields",first,16313,34.14,105.91,-4177,January 4177 BCE,0
+"Horse herding",first,8767,45.21,44.30,-4120,January 4120 BCE,0

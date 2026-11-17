@@ -2,28 +2,41 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",first,161458,9.70,2.52,-9720,January 9720 BCE,0
 "Granaries",independent,7428,40.51,44.98,-9696,January 9696 BCE,0
 "Granaries",independent,76621,27.99,118.86,-9247,January 9247 BCE,0
-"Granaries",independent,15731,32.52,106.99,-8773,January 8773 BCE,0
-"Granaries",independent,153726,-18.28,-66.60,-8173,January 8173 BCE,0
-"Granaries",independent,98069,20.99,-98.44,-7493,January 7493 BCE,0
-"Granaries",independent,68603,11.62,20.07,-6767,January 6767 BCE,0
-"Milk and wool",first,163523,6.36,-3.75,-6370,January 6370 BCE,0
-"Milk and wool",independent,7037,39.02,47.91,-6096,January 6096 BCE,0
-"Milk and wool",lost,8796,45.02,25.08,-5675,January 5675 BCE,2531
-"Milk and wool",lost,11100,54.43,27.23,-5616,January 5616 BCE,1537
-"Milk and wool",lost,10582,51.26,55.32,-5522,January 5522 BCE,1433
-"Milk and wool",lost,12307,60.42,36.50,-5419,January 5419 BCE,2300
-"Milk and wool",lost,11522,55.13,57.46,-5159,January 5159 BCE,1041
-"Milk and wool",lost,12618,62.02,37.58,-5154,January 5154 BCE,1357
-"Milk and wool",lost,12381,60.70,42.04,-5126,January 5126 BCE,1502
-"Milk and wool",lost,160748,-7.18,15.67,-5107,January 5107 BCE,1997
-"Milk and wool",lost,12475,60.92,26.35,-4825,January 4825 BCE,1943
-"Milk and wool",lost,159489,-6.38,19.56,-4695,January 4695 BCE,2128
-"Irrigation",first,5699,35.31,40.55,-4609,January 4609 BCE,0
-"Milk and wool",lost,159487,-7.11,20.02,-4568,January 4568 BCE,1266
-"The plough",first,161586,8.96,2.52,-4477,January 4477 BCE,0
-"Milk and wool",lost,159485,-7.85,20.48,-4432,January 4432 BCE,1503
-"Milk and wool",lost,159629,-7.90,20.03,-4401,January 4401 BCE,2758
-"Milk and wool",lost,9268,45.38,14.14,-4210,January 4210 BCE,1437
-"Milk and wool",lost,160467,-10.10,18.46,-4174,January 4174 BCE,2803
-"Granaries",lost,100154,28.02,-105.28,-4127,January 4127 BCE,196
-"The sail",first,164809,4.90,-8.66,-4009,January 4009 BCE,0
+"Granaries",independent,16309,34.15,108.00,-8745,January 8745 BCE,0
+"Granaries",independent,67448,10.10,26.49,-8111,January 8111 BCE,0
+"Granaries",independent,153523,-17.42,-66.11,-7890,January 7890 BCE,0
+"Milk and wool",first,7425,40.38,46.76,-6702,January 6702 BCE,0
+"Irrigation",first,6656,38.23,39.99,-6505,January 6505 BCE,0
+"Granaries",independent,97641,18.43,-97.97,-6491,January 6491 BCE,0
+"Milk and wool",independent,160934,11.89,3.05,-6365,January 6365 BCE,0
+"Milk and wool",lost,10997,54.28,34.34,-6273,January 6273 BCE,2358
+"Milk and wool",lost,11537,56.49,44.85,-6225,January 6225 BCE,1985
+"Milk and wool",lost,11625,56.87,45.40,-6197,January 6197 BCE,1169
+"Irrigation",independent,17019,36.15,103.91,-6193,January 6193 BCE,0
+"Milk and wool",lost,11629,57.06,41.84,-6132,January 6132 BCE,1594
+"Copper working",first,7805,41.78,44.92,-5905,January 5905 BCE,0
+"Milk and wool",lost,161156,-5.01,12.86,-5898,January 5898 BCE,2286
+"Milk and wool",lost,11891,58.35,39.74,-5882,January 5882 BCE,2140
+"Milk and wool",lost,11528,55.80,52.56,-5850,January 5850 BCE,1017
+"Irrigation",independent,153625,-17.85,-66.36,-5527,January 5527 BCE,0
+"Granaries",independent,131798,-8.73,143.26,-5455,January 5455 BCE,0
+"Milk and wool",lost,12382,60.74,41.04,-5190,January 5190 BCE,1907
+"Milk and wool",lost,12695,62.42,36.00,-5151,January 5151 BCE,1122
+"Milk and wool",lost,12695,62.42,36.00,-5142,January 5142 BCE,1196
+"Milk and wool",lost,12460,61.12,41.62,-5131,January 5131 BCE,1121
+"Milk and wool",lost,160746,-7.94,16.14,-5014,January 5014 BCE,1822
+"Milk and wool",lost,160745,-8.32,16.37,-4963,January 4963 BCE,1302
+"Milk and wool",lost,12549,61.50,29.79,-4931,January 4931 BCE,2099
+"Milk and wool",lost,160471,-8.60,17.53,-4742,January 4742 BCE,2289
+"The plough",first,162344,8.59,-0.25,-4492,January 4492 BCE,0
+"Terraced fields",first,76620,28.38,119.11,-4437,January 4437 BCE,0
+"Horse herding",first,10286,50.57,50.76,-4421,January 4421 BCE,0
+"Milk and wool",lost,159193,-8.09,21.60,-4363,January 4363 BCE,1309
+"Milk and wool",lost,12775,62.71,30.07,-4294,January 4294 BCE,1459
+"Milk and wool",lost,1596,-7.19,22.47,-4293,January 4293 BCE,1562
+"The wheel",first,161718,10.07,1.26,-4278,January 4278 BCE,0
+"Milk and wool",lost,12782,62.25,22.69,-4263,January 4263 BCE,1493
+"Milk and wool",lost,12856,62.59,21.98,-4231,January 4231 BCE,1303
+"Terraced fields",independent,7171,39.64,45.41,-4197,January 4197 BCE,0
+"Milk and wool",lost,10636,50.82,13.79,-4148,January 4148 BCE,2186
+"Milk and wool",lost,1599,-8.26,23.15,-4088,January 4088 BCE,1728

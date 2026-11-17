@@ -21,6 +21,7 @@ public sealed class Technology
         Animals = entry.Animals.ToArray();
         NearGoods = entry.NearGoods.ToArray();
         NearWild = entry.NearWild.ToArray();
+        SettledYears = entry.SettledYears;
         Chance = entry.Chance;
         Spread = entry.Spread;
         History = entry.History;
@@ -60,6 +61,9 @@ public sealed class Technology
 
     /// <summary>For discovery only: animals (by name), one of which must live wild in the cell; empty for none.</summary>
     public IReadOnlyList<string> NearWild { get; }
+
+    /// <summary>For discovery only: farming must have stood in the cell or a neighbour at least this many years (0: no need).</summary>
+    public double SettledYears { get; }
 
     public double Chance { get; }
 
@@ -143,6 +147,11 @@ public sealed class TechnologySet
                 || entry.Chance < 0.0 || entry.Chance > 1.0 || entry.Spread < 0.0 || entry.Spread > 1.0 || entry.MaxRainMm < 0.0)
             {
                 throw new InvalidDataException($"Technology '{entry.Name}' needs a colour like #RRGGBB, occupations, and chance and spread between 0 and 1.");
+            }
+
+            if (entry.SettledYears < 0.0 || double.IsNaN(entry.SettledYears))
+            {
+                throw new InvalidDataException($"Technology '{entry.Name}': settledYears must not be negative.");
             }
 
             foreach (KeyValuePair<string, double> effect in entry.Effects)
@@ -229,6 +238,8 @@ internal sealed class TechnologyEntry
     public List<string> NearGoods { get; set; } = new List<string>();
 
     public List<string> NearWild { get; set; } = new List<string>();
+
+    public double SettledYears { get; set; }
 
     public double Chance { get; set; }
 

@@ -32,6 +32,11 @@ public sealed class TechnologyConditions
     private readonly int[] _wildMask;
     private readonly int[]? _wild;
 
+    // When farming started in each cell (tick + 1, 0 for none), for technologies that need long-settled farming.
+    private readonly int[]? _farmingSincePlusOne;
+    private readonly PopulationGroups _groups;
+    private readonly int _farmer;
+
     public TechnologyConditions(WorldState state, WorldMap map, TechnologySet technologies)
     {
         _technologies = technologies;
@@ -41,6 +46,9 @@ public sealed class TechnologyConditions
 
         LivestockSet livestock = LivestockSet.LoadDefault();
         _wild = state.HasField(HerdingSystem.WildField) ? state.IntField(HerdingSystem.WildField) : null;
+        _farmingSincePlusOne = state.HasField("farming.since") ? state.IntField("farming.since") : null;
+        _groups = new PopulationGroups(state);
+        _farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
         _wildMask = technologies.Technologies.Select(t =>
         {
             int mask = 0;
@@ -123,6 +131,33 @@ public sealed class TechnologyConditions
         }
     }
 
+    // Whether farming has stood (with farmers) in the cell or a neighbour for at least this many months.
+    private bool FarmingStood(int cell, long months, long tick)
+    {
+        if (_farmingSincePlusOne == null)
+        {
+            return false;
+        }
+
+        if (Stood(cell))
+        {
+            return true;
+        }
+
+        foreach (int other in _map.Grid.Neighbours(cell))
+        {
+            if (Stood(other))
+            {
+                return true;
+            }
+        }
+
+        return false;
+
+        bool Stood(int c) => _farmingSincePlusOne[c] > 0 && tick - (_farmingSincePlusOne[c] - 1) >= months
+            && _groups.Find(c, _farmer) is int g && g >= 0 && _groups.Size(g) > 0.0;
+    }
+
     /// <summary>Whether a cell meets a technology's conditions (not counting who knows what).</summary>
     public bool Allows(int cell, int technology)
     {
@@ -153,10 +188,17 @@ public sealed class TechnologyConditions
 
     /// <summary>
     /// For discovery: whether one of the technology's near goods can be gathered in the cell or is
-    /// in its store, and one of its wild animals lives in the cell (each true when it lists none).
+    /// in its store, one of its wild animals lives in the cell, and farming has stood in the cell
+    /// or a neighbour as long as it needs (each true when it needs none).
     /// </summary>
-    public bool NearForDiscovery(int cell, int technology)
+    public bool NearForDiscovery(int cell, int technology, long tick)
     {
+        double settled = _technologies.Get(technology).SettledYears;
+        if (settled > 0.0 && !FarmingStood(cell, (long)Math.Round(settled * GameDate.MonthsPerYear), tick))
+        {
+            return false;
+        }
+
         int wild = _wildMask[technology];
         if (wild != 0 && (_wild == null || (_wild[cell] & wild) == 0))
         {

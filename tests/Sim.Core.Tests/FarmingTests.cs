@@ -86,13 +86,18 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         };
         var trade = TradeSystem.CreateDefault(occupations);
         systems = systems.Append(trade)
-            .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), TechnologySet.LoadDefault(occupations), trade, chanceScale: 200.0))
+            .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), FastTechnologies(occupations), trade, chanceScale: 200.0))
             .Append(new SeafaringSystem(seafaring ?? SeafaringParameters.LoadDefault(), climate.Biomes))
             .ToArray();
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
 
     private static FarmingSystem Farming(Simulation sim) => sim.Systems.OfType<FarmingSystem>().Single();
+
+    // Technologies need farming to have stood only a fiftieth as long as in the real file, so short runs show them.
+    private static TechnologySet FastTechnologies(OccupationSet occupations) =>
+        TechnologySet.Parse(System.Text.RegularExpressions.Regex.Replace(ContentFiles.ReadText("technologies.json"),
+            "\"settledYears\": ([0-9]+)", m => $"\"settledYears\": {int.Parse(m.Groups[1].Value) / 50}"), occupations);
 
     // Animals wait only 50 years after farming nearby (500 in the real file), so short runs show herding.
     private const double FastHerdingWait = 50.0;

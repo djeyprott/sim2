@@ -1301,7 +1301,7 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         {
             Assert.False(r.BadKnowledge, $"Seed {r.Seed}: a knowledge share left 0 to 1.");
             Assert.True(r.MaxContactAtLoss <= 10000.0, $"Seed {r.Seed}: a group in contact with {r.MaxContactAtLoss:F0} people lost a technology.");
-        });});
+        });
         Assert.True(_results.Any(r => r.TechnologyLosses > 0), "No technology was ever lost.");
     }
 

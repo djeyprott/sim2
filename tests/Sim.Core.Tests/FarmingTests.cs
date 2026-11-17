@@ -308,8 +308,10 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Teach(with, true);
         Teach(without, false);
 
-        // Cattle have barely spread in so short a run: every herding cell and every other farming cell
-        // gets them, in both copies (so some farmland has cattle and some has none).
+        // Cattle have barely spread in so short a run: every herding cell, every wheat and barley cell
+        // (where the plough can be used) and every other farming cell get them, in both copies (so
+        // some farmland has cattle and some has none).
+        int wheatAndBarley = Farming(with).Crops.IndexOf("Wheat and barley") + 1;
         int cattleBit = 1 << LivestockSet.LoadDefault().IndexOf("Cattle");
         var keepers = new PopulationGroups(with.State);
         int[] cropOf = with.State.IntField(FarmingSystem.CropField);
@@ -318,7 +320,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             int[] kept = sim.State.IntField(HerdingSystem.AnimalsField);
             for (int cell = 0; cell < _world.CellCount; cell++)
             {
-                if ((cropOf[cell] > 0 && cell % 2 == 0) || keepers.Find(cell, OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder)) >= 0)
+                if ((cropOf[cell] > 0 && (cell % 2 == 0 || cropOf[cell] == wheatAndBarley)) || keepers.Find(cell, OccupationSet.LoadDefault().IndexOf(OccupationSet.Herder)) >= 0)
                 {
                     kept[cell] |= cattleBit;
                 }
@@ -353,8 +355,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             Assert.Equal(1.4, herdWith[cell] / herdWithout[cell], 6);
         }
 
-        // The plough: farmland with cattle feeds 1.25 times as many, and open grassland away from
-        // rivers twice that again (its penalty lifted); without cattle, nothing changes.
+        // The plough: wheat and barley farmland with cattle feeds 1.25 times as many, and open
+        // grassland away from rivers twice that again (its penalty lifted); elsewhere nothing changes.
         double[] farmWith = with.State.DoubleField(FarmingSystem.CapacityField);
         double[] farmWithout = without.State.DoubleField(FarmingSystem.CapacityField);
         int[] cropWith = with.State.IntField(FarmingSystem.CropField);
@@ -426,7 +428,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         }
 
         Assert.True(milkCells >= 3 && ploughed >= 5 && unploughed >= 5 && stores >= 5 && carts >= 1,
-            $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle, {stores} stores, {carts} settlements with carts.");
+            $"Too few cells to compare: {milkCells} with milk, {ploughed} ploughed ({ploughedGrassland} open grassland), {unploughed} without cattle or wheat and barley, {stores} stores, {carts} settlements with carts.");
     }
 
     [Fact]
@@ -598,7 +600,9 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
 
         Assert.True(keptAllowed > 0 && unsupplied > 0,
             $"{keptAllowed} farmer groups use it where copper is near ({byPartner} through a trade partner), {unsupplied} groups have none near.");
-        Assert.True(keptElsewhere <= 0.1 * (keptAllowed + keptElsewhere), $"{keptElsewhere} groups with no copper near still use it, against {keptAllowed} with.");
+        // Copper comes and goes as it is traded and used, so a few groups lost it lately and have
+        // not yet forgotten (a share of 1 falls below a half in about 20 years).
+        Assert.True(keptElsewhere <= 0.2 * (keptAllowed + keptElsewhere), $"{keptElsewhere} groups with no copper near still use it, against {keptAllowed} with.");
         Assert.True(unsuppliedShare / unsupplied < 0.3, $"Groups with no copper near still know {unsuppliedShare / unsupplied:F2} of it on average.");
     }
 

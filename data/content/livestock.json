@@ -15,7 +15,9 @@
 //                      in some runs, and at 500 they came as late as 5800 BCE.
 //   foragers           foragers on pasture far from farmers may also first herd it, less readily
 //                      (herding.json "foragerInventionFactor"): eastern Sahel cattle may have been
-//                      kept before farming came there.
+//                      kept before farming came there, and sheep in the Zagros (Zawi Chemi
+//                      Shanidar) perhaps before farming there; without it, sheep and goats waited
+//                      until 5300 BCE in a run whose wheat and barley began late.
 //   tamedBy            a technology (technologies.json) through which it comes to be kept, in place
 //                      of being first herded by chance: horses, kept where people know horse herding
 //                      and horses live wild, then spreading with their herders and to farmers.
@@ -26,7 +28,7 @@
   "animals": [
     {
       "name": "Sheep and goats", "colour": "#e8e2c8", "herded": true, "wool": true,
-      "homelands": [ { "lat": 36.0, "lon": 45.0, "radiusKm": 600, "afterFarmingYears": 300 } ],
+      "homelands": [ { "lat": 36.0, "lon": 45.0, "radiusKm": 600, "afterFarmingYears": 300, "foragers": true } ],
       "warmest": [10, 15, 34, 42], "coldest": [-30, -15, 20, 30], "water": [80, 250, 900, 1800]
     },
     {

@@ -162,7 +162,7 @@ public class LivestockTests
 
         string text = ContentFiles.ReadText("livestock.json");
         Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"warmest\": [10, 15, 34, 42]", "\"warmest\": [15, 10, 34, 42]")));
-        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600, \"afterFarmingYears\": 300 } ]", "\"homelands\": [ ]")));
+        Assert.Throws<InvalidDataException>(() => LivestockSet.Parse(text.Replace("\"homelands\": [ { \"lat\": 36.0, \"lon\": 45.0, \"radiusKm\": 600, \"afterFarmingYears\": 300, \"foragers\": true } ]", "\"homelands\": [ ]")));
 
         HerdingParameters p = HerdingParameters.LoadDefault();
         Assert.True(p.HerdDensity > 0.0 && p.Pasture["Grassland"] >= p.MinPasture);

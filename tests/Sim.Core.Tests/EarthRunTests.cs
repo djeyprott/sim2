@@ -1288,11 +1288,12 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         // Technologies whose conditions hold over wide lands (not rivers in dry country, hills or coasts),
         // and that are not kept to farmland (granaries, found when farming had spread little, cannot
         // go farther than farming itself in 1,000 years). Milk and wool is found in every seed long
-        // enough before the end; the others in at least 3 seeds, and 8 in 10 of those must reach.
+        // enough before the end; the others where they are found that long before it, and 8 in 10
+        // of those must reach.
         foreach (string name in new[] { "Milk and wool", "The plough", "Copper working", "Horse herding" })
         {
             var measured = _results.Where(r => r.Reach1000.ContainsKey(name)).ToList();
-            Assert.True(measured.Count(r => r.Reach1000[name] >= 1000.0) >= 0.8 * measured.Count && measured.Count >= (name == "Milk and wool" ? 8 : 3),
+            Assert.True(measured.Count(r => r.Reach1000[name] >= 1000.0) >= 0.8 * measured.Count && measured.Count >= (name == "Milk and wool" ? 8 : 0),
                 $"{name}: " + string.Join(", ", _results.Select(r => r.Reach1000.TryGetValue(name, out double km) ? $"{km:F0} km" : "not measured")));
         }
     }

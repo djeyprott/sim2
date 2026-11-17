@@ -84,7 +84,7 @@
     {
       "name": "The wheel", "colour": "#c0392b", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The plough" ], "animals": [ "Cattle" ],
-      "chance": 0.00002, "spread": 0.015,
+      "chance": 0.00005, "spread": 0.015,
       "settledYears": 5500,
       // Ox carts carry loads over land far more cheaply than people and pack animals.
       "effects": { "landCarrying": 0.7 },

@@ -15,29 +15,28 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Milk and wool",lost,10289,50.80,48.55,-5168,January 5168 BCE,1421
 "Milk and wool",lost,10391,51.24,48.30,-5148,January 5148 BCE,1466
 "Horse riding",first,9566,48.42,36.71,-5041,January 5041 BCE,0
-"Horse herding",lost,8898,45.87,33.98,-4734,January 4734 BCE,2622
-"Horse riding",lost,8898,45.87,33.98,-4734,January 4734 BCE,2622
-"Milk and wool",lost,11268,55.38,42.43,-4362,January 4362 BCE,2089
-"Milk and wool",lost,11347,54.92,53.01,-4331,January 4331 BCE,1166
-"The plough",first,5992,36.17,32.46,-4307,January 4307 BCE,0
-"Horse herding",lost,11347,54.92,53.01,-4302,January 4302 BCE,2063
-"Milk and wool",lost,11254,54.37,54.02,-4297,January 4297 BCE,768
-"Horse herding",lost,11254,54.37,54.02,-4277,January 4277 BCE,1217
-"Horse herding",lost,11254,54.37,54.02,-4275,January 4275 BCE,1238
-"Horse herding",lost,11348,55.01,52.19,-4268,January 4268 BCE,1103
-"Horse riding",lost,11438,55.36,52.79,-4268,January 4268 BCE,1442
-"Horse riding",lost,11254,54.37,54.02,-4251,January 4251 BCE,1646
-"Horse riding",lost,11538,56.54,43.98,-4244,January 4244 BCE,1634
-"Horse riding",lost,11346,54.81,53.82,-4240,January 4240 BCE,2195
-"The sail",lost,81053,21.22,84.42,-4221,January 4221 BCE,1663
-"Horse riding",lost,9960,47.79,60.96,-4173,January 4173 BCE,1309
-"Milk and wool",lost,11616,56.14,53.17,-4123,January 4123 BCE,2358
-"Milk and wool",lost,11617,56.24,52.33,-4097,January 4097 BCE,2849
-"Horse riding",lost,11544,56.74,38.67,-4085,January 4085 BCE,2392
-"Milk and wool",lost,11633,57.16,38.25,-4047,January 4047 BCE,2196
-"The sail",lost,81088,21.13,83.97,-4047,January 4047 BCE,1680
-"Milk and wool",lost,160612,-7.14,16.14,-4034,January 4034 BCE,1053
-"Milk and wool",lost,160612,-7.14,16.14,-4033,January 4033 BCE,1050
-"The plough",lost,9021,46.08,28.21,-4028,January 4028 BCE,2023
-"Horse riding",lost,11721,57.57,37.82,-4025,January 4025 BCE,1031
-"Horse herding",lost,11721,57.57,37.82,-4006,January 4006 BCE,1562
+"Copper working",first,6789,38.66,39.73,-4839,January 4839 BCE,0
+"The sail",lost,19882,43.50,133.24,-4740,January 4740 BCE,2182
+"The sail",lost,20111,44.38,133.07,-4723,January 4723 BCE,840
+"The sail",lost,19997,43.94,133.16,-4692,January 4692 BCE,2543
+"Bronze",first,6665,38.29,34.86,-4678,January 4678 BCE,0
+"Irrigation",independent,160936,12.61,2.55,-4675,January 4675 BCE,0
+"Copper working",independent,16726,35.32,112.02,-4608,January 4608 BCE,0
+"Milk and wool",lost,11076,54.25,47.23,-4606,January 4606 BCE,1245
+"Irrigation",lost,160936,12.61,2.55,-4456,January 4456 BCE,1801
+"Terraced fields",first,77027,23.32,113.91,-4452,January 4452 BCE,0
+"Milk and wool",lost,11535,56.37,46.60,-4356,January 4356 BCE,1062
+"The plough",first,6399,37.44,33.76,-4282,January 4282 BCE,0
+"Milk and wool",lost,160613,-6.76,15.91,-4242,January 4242 BCE,1589
+"Horse riding",lost,9855,47.47,60.41,-4236,January 4236 BCE,1887
+"Bronze",independent,78756,23.83,104.30,-4230,January 4230 BCE,0
+"Milk and wool",lost,11452,56.27,40.83,-4198,January 4198 BCE,1577
+"Horse riding",lost,11452,56.27,40.83,-4197,January 4197 BCE,1612
+"Milk and wool",lost,11620,56.51,49.76,-4174,January 4174 BCE,1323
+"The sail",lost,80906,20.19,85.62,-4166,January 4166 BCE,1593
+"Milk and wool",lost,160475,-7.09,16.60,-4159,January 4159 BCE,1146
+"Horse riding",lost,11542,56.70,40.45,-4099,January 4099 BCE,2473
+"Granaries",independent,153418,-17.81,-65.38,-4038,January 4038 BCE,0
+"The sail",lost,81119,22.41,84.14,-4033,January 4033 BCE,2162
+"The sail",lost,81148,24.16,84.53,-4018,January 4018 BCE,2068
+"Horse riding",lost,10167,48.42,62.09,-4010,January 4010 BCE,1377

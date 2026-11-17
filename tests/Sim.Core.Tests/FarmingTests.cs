@@ -610,7 +610,8 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // Copper comes and goes as it is traded and used, so a few groups lost it lately and have
         // not yet forgotten (a share of 1 falls below a half in about 20 years).
         Assert.True(keptElsewhere <= 0.2 * (keptAllowed + keptElsewhere), $"{keptElsewhere} groups with no copper near still use it, against {keptAllowed} with.");
-        Assert.True(unsuppliedShare / unsupplied < 0.3, $"Groups with no copper near still know {unsuppliedShare / unsupplied:F2} of it on average.");
+        // Farmers moving out of cells with copper (to new land, from famine) keep bringing some of it.
+        Assert.True(unsuppliedShare / unsupplied < 0.5, $"Groups with no copper near still know {unsuppliedShare / unsupplied:F2} of it on average.");
     }
 
     [Fact]

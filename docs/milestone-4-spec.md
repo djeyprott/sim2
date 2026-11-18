@@ -1,9 +1,10 @@
-# Milestone 4 spec: States and war (draft 1)
+# Milestone 4 spec: States and war (draft 2)
 
-Status: draft 1, 2026-11-17, for the owner to review. Nothing is built until it is agreed. Parent: `design-doc.md` version 1.3.
+Status: draft 2, 2026-11-17, awaiting the owner's agreement. Nothing is built until it is agreed. Parent: `design-doc.md` version 1.4.
 
 Change log:
-- Draft 1 (2026-11-17): first draft. Open decisions are marked **(owner)**.
+- Draft 2 (2026-11-17): the owner chose exit runs of 9,000 years, rules plus a temperament per polity, tribes and nomads later, and shared rule speeding the spread of knowledge.
+- Draft 1 (2026-11-17): first draft.
 
 ## Purpose
 
@@ -11,16 +12,17 @@ Give the world political powers you can watch rise, fight and fall. When this mi
 
 ## Decisions
 
-1. **Organizations come first** (design doc). A general organizations table holds every organization: kind, name, founding date, members, positions, resources and goals. Polities (chiefdoms and states) are the only kind built in this milestone; tribes, religions and merchant houses reuse it later. Positions (ruler, heir, general) are listed but left empty until named people arrive in milestone 6; until then a polity acts by simple rules.
+1. **Organizations come first** (design doc). A general organizations table holds every organization: kind, name, founding date, members, positions, resources and goals. Polities (chiefdoms and states) are the only kind built in this milestone; tribes, religions and merchant houses reuse it later. Positions (ruler, heir, general) are listed but left empty until named people arrive in milestone 6; until then a polity acts by simple rules shaped by its temperament (decision 11).
 2. **Territory is held cell by cell.** Each land cell is ruled by at most one polity (a per-cell field). Which polity a population group belongs to comes from who rules its cell, as the population model says. Cells with nobody in them can be ruled, so borders are not full of holes, but only within reach of the polity's settlements.
-3. **Polities grow out of farming.** A chiefdom forms where a settlement is large, its farmers have a surplus, and farming has stood nearby for a long time; it rules the settlement's cell and its neighbours. It grows by drawing in nearby unruled settlements (peacefully, by weight of numbers and trade) and by conquest. A chiefdom becomes a state once it rules enough people and settlements; a state that falls below that becomes a chiefdom again. Foragers and herders do not form polities in this milestone **(owner: see question 3)**.
+3. **Polities grow out of farming.** A chiefdom forms where a settlement is large, its farmers have a surplus, and farming has stood nearby for a long time; it rules the settlement's cell and its neighbours. It grows by drawing in nearby unruled settlements (peacefully, by weight of numbers and trade) and by conquest. A chiefdom becomes a state once it rules enough people and settlements; a state that falls below that becomes a chiefdom again. Foragers and herders do not form polities in this milestone (decided by the owner 2026-11-17); tribal confederations and nomad raids are in the design doc's backlog.
 4. **Rule costs and pays.** A polity takes tribute: a share of its farmers' grain and of its settlements' goods goes to its capital's store. Tribute feeds a new upper-class occupation, the **elite** (rulers, chiefs and their households, in the capital), and a new **soldier** occupation. The more a polity takes, the more its people's needs go unmet, which raises **unrest** (as milestone 2 promised).
 5. **Reach is limited.** A polity's hold on a cell weakens with distance from its capital, measured as trade-link cost (so rivers, the wheel and riding extend it, and mountains shorten it). Far cells pay less tribute and are the first to break away. This is what keeps empires from covering continents in a Bronze Age world.
 6. **War is abstract.** No armies move across the map. A polity may declare war on a neighbour when it is stronger, short of land or food, or the neighbour holds goods it wants. Each year of war, the two sides' strength (soldiers, bronze and copper weapons in store, chariots, fortified settlements, distance from home) decides who takes border cells, with chance. Battles kill soldiers and some farmers, burn stores and can raze settlements. Wars end in peace when one side is exhausted or both are; a polity that loses its capital is conquered.
 7. **Polities collapse.** A polity breaks apart when unrest is high, after a lost war, in a long famine, or when its reach is stretched too far. Its far provinces become new chiefdoms or states (successors), or fall back to no rule. Every founding, war, peace, conquest and collapse is recorded.
-8. **Technology matters, and states do not choose research** (milestone 3 deferred "research by states" here). States do not research: knowledge spreads and is found as before. Instead, being ruled by one polity speeds the spread of knowledge between its settlements (shared rule acts like a trade link). **(owner: see question 4)**
+8. **Technology matters, and states do not choose research** (milestone 3 deferred "research by states" here). States do not research: knowledge spreads and is found as before. Instead, being ruled by one polity speeds the spread of knowledge between its settlements: shared rule acts like a trade link (decided by the owner 2026-11-17).
 9. **Two new technologies for war:** **fortifications** (walled settlements; found in large settlements under threat; defenders count stronger) and **chariots** (needs the wheel and horse riding; promised by milestone 3; attackers count stronger on open land). Bronze and copper weapons are a new good, **weapons**, made from bronze or copper by craftsmen and wanted by soldiers.
-10. **Run length grows** **(owner: see question 1)**. The first states arose about 3500 to 3100 BCE and the first empires about 2300 BCE, after milestone 3's 3000 BCE end. Proposed: exit runs extend to 9,000 years (1000 BCE), with technology still ending at the Bronze Age.
+10. **Run length grows to 9,000 years** (decided by the owner 2026-11-17). The first states arose about 3500 to 3100 BCE and the first empires about 2300 BCE, after milestone 3's 3000 BCE end, so exit runs extend to 1000 BCE, with technology still ending at the Bronze Age. The 5-minute limit stays on a 5,000-year run.
+11. **Each polity has a temperament** (decided by the owner 2026-11-17). Drawn at founding from the run's random streams: how aggressive (how readily it goes to war), how grasping (how much tribute it takes) and how expansive (how readily it draws in its neighbours), each a number around 1 that scales its rules. Successors draw their own. So neighbouring polities behave visibly differently until named rulers take over in milestone 6.
 
 ## What gets built
 
@@ -28,6 +30,7 @@ Give the world political powers you can watch rise, fight and fall. When this mi
 
 - A `WorldState` table of organizations with stable ids: kind, name (from a simple name generator by region), founded, ended, capital cell, polity level (chiefdom or state), and resources (the capital settlement's store stands for the treasury).
 - A positions table (organization, position name, holder: none until milestone 6).
+- Each polity's temperament (aggression, greed, expansion), saved with it.
 - A per-cell field: ruling polity (none, or an organization id).
 
 ### 2. Forming and growing
@@ -78,11 +81,11 @@ Give the world political powers you can watch rise, fight and fall. When this mi
 - Diplomacy beyond war and peace: alliances, vassals, marriages (consider with milestone 6).
 - Armies that move across the map; sieges as events; naval war.
 - Iron, writing and later technologies (later eras); states choosing research.
-- Tribes of herders and foragers raiding settlements, unless the owner chooses them (question 3).
+- Tribes of herders and foragers, confederations and nomad raids on settled states (design doc backlog).
 
 ## Exit tests
 
-Automated, on the Earth map with real homelands, across 10 seeds over the run length chosen (proposed 9,000 years) unless stated:
+Automated, on the Earth map with real homelands, across 10 seeds over 9,000 years (to 1000 BCE) unless stated:
 
 Formation
 - [ ] The first chiefdom forms within 1,500 years of 5000 BCE, and the first state within 1,000 years of 3300 BCE, in at least 6 of 10 seeds; first states form in long-farmed river valleys or plains (Mesopotamia, the Nile, the Indus, the Yellow River or their like with random homelands).
@@ -97,6 +100,7 @@ Size and change
 War
 - [ ] Wars happen in every seed with states; the stronger side wins most wars; fortifications and chariots each raise the share of wars won by their users.
 - [ ] War costs people: deaths in war are recorded, and a polity at war grows more slowly than at peace.
+- [ ] Temperament shows: the most aggressive third of polities start at least twice as many wars per year as the least aggressive third.
 
 Rule
 - [ ] Tribute flows to capitals: capitals' stores hold more per person than other settlements, and the elite live only in capitals.
@@ -123,15 +127,8 @@ Each step ends with a new development build you can download.
 4. War and peace; weapons, fortifications and chariots
 5. Collapse and successor polities
 6. Statistics, events file and viewer polish
-7. Tuning against the exit tests (with the longer runs), release v0.5
+7. Tuning against the exit tests (with the 9,000-year runs), release v0.5
 
 ## Numbers that will need tuning
 
 Founding size and chance, the state threshold, tribute shares, reach costs, soldier shares, war thresholds and strength factors, exhaustion, cohesion and split rules. They start as estimates in a new `data/content/polities.json` and are tuned in the last step.
-
-## Questions for the owner
-
-1. **Run length:** extend exit runs to 9,000 years (1000 BCE) so first states and first empires both appear, or keep 7,000 years (3000 BCE), when states are only just forming?
-2. **How polities act:** simple rules as above (strength, need and chance) until named rulers arrive in milestone 6, or a little more (for example a per-polity temperament drawn at founding: aggressive, cautious)?
-3. **Herders and tribes:** leave tribes and nomad raids for later, or let herders form tribal confederations that raid and sometimes conquer settled states in this milestone?
-4. **Knowledge within states:** should shared rule speed the spread of knowledge between a polity's settlements, as proposed, or should technology stay as milestone 3 left it?

@@ -1,0 +1,16 @@
+// Polities: chiefdoms and states (milestone 4). Runs once a year, after seafaring.
+// Polities are organizations (the "organizations" table): each has a capital, a level (chiefdom
+// or state), a temperament, and a set of positions left empty until named people come in
+// milestone 6. Each land cell is ruled by at most one polity.
+{
+  // Temperament, drawn when a polity is founded: aggression (how readily it goes to war), greed
+  // (how much tribute it takes) and expansion (how readily it draws in its neighbours). Each is
+  // exp(temperamentSpread * a standard normal draw), kept between minTemperament and
+  // maxTemperament, so most lie between about 0.7 and 1.4 and the typical one is 1.
+  "temperamentSpread": 0.35,
+  "minTemperament": 0.4,
+  "maxTemperament": 2.5,
+
+  // Positions every polity has, in order. They hold nobody until named people come (milestone 6).
+  "positions": [ "Ruler", "Heir", "General" ]
+}

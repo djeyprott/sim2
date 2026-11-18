@@ -3,6 +3,7 @@ using Sim.Core.Farming;
 using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.People;
+using Sim.Core.Polities;
 using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
@@ -44,6 +45,9 @@ public static class SystemCatalog
 
             // Settling by sea goes by the boats people know, so it comes after technology.
             systems.Add(SeafaringSystem.CreateDefault(climate.Biomes));
+
+            // Polities (milestone 4) read settlements, stores, trade and knowledge, so they come last.
+            systems.Add(PolitySystem.CreateDefault());
         }
 
         return systems;

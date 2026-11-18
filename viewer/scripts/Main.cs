@@ -14,6 +14,7 @@ using Sim.Core.Herding;
 using Sim.Core.Hosting;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Polities;
 using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
@@ -50,6 +51,7 @@ public partial class Main : Node2D
     private const int HerdingMode = 10;
     private const int GoodsMode = 11;
     private const int TechnologyMode = 12;
+    private const int PoliticalMode = 13;
     private int _techIndex;
     private TechnologySystem? _technology;
     private Color[] _techColours = Array.Empty<Color>();
@@ -88,6 +90,7 @@ public partial class Main : Node2D
     private ForagerSystem? _foragers;
     private FarmingSystem? _farming;
     private HerdingSystem? _herding;
+    private PolitySystem? _polities;
     private Color[] _animalColours = Array.Empty<Color>();
     private SettlementSystem? _settlementSystem;
     private ResourceSystem? _resourceSystem;
@@ -266,6 +269,7 @@ public partial class Main : Node2D
         _farming = systems.OfType<FarmingSystem>().FirstOrDefault();
         _herding = systems.OfType<HerdingSystem>().FirstOrDefault();
         _technology = systems.OfType<TechnologySystem>().FirstOrDefault();
+        _polities = systems.OfType<PolitySystem>().FirstOrDefault();
         _techColours = _technology == null
             ? Array.Empty<Color>()
             : _technology.Technologies.Technologies.Select(t => Color.FromHtml(t.Colour)).ToArray();
@@ -577,6 +581,13 @@ public partial class Main : Node2D
             extractor = sim => ExtractTechnology(sim, technology, tech, column, cellCount);
         }
 
+        if (mode == PoliticalMode && _polities != null)
+        {
+            int cellCount = _map.CellCount;
+            PolitySystem polities = _polities;
+            extractor = sim => ExtractPolitical(sim, polities, cellCount);
+        }
+
         if (mode == HerdingMode && _herding != null)
         {
             int cellCount = _map.CellCount;
@@ -739,6 +750,39 @@ public partial class Main : Node2D
         return values;
     }
 
+    // Per cell: -1 where no polity rules; otherwise the ruling polity's id times 4, plus 2 for its
+    // capital, plus 1 when it is a state (not a chiefdom).
+    private static double[] ExtractPolitical(Simulation sim, PolitySystem polities, int cellCount)
+    {
+        var values = new double[cellCount];
+        var states = new HashSet<int>();
+        var capitals = new HashSet<int>();
+        foreach (PolityInfo p in polities.Standing())
+        {
+            if (p.Level == PolityLevel.State)
+            {
+                states.Add(p.Id);
+            }
+
+            capitals.Add(p.Capital);
+        }
+
+        for (int cell = 0; cell < cellCount; cell++)
+        {
+            int ruler = polities.RulerOf(cell);
+            values[cell] = ruler < 0 ? -1.0 : ruler * 4.0 + (capitals.Contains(cell) ? 2.0 : 0.0) + (states.Contains(ruler) ? 1.0 : 0.0);
+        }
+
+        return values;
+    }
+
+    // A polity's own colour: hues spread by the golden angle so neighbouring ids differ.
+    private static Color PolityColour(int polity, bool state)
+    {
+        float hue = (float)((polity * 0.618033988749895) % 1.0);
+        return Color.FromHsv(hue, state ? 0.75f : 0.4f, state ? 0.85f : 0.75f);
+    }
+
     // Per cell: the main animal's index plus the herders' share of the cell's people (0 to 0.998);
     // or, where animals are kept only by farmers, minus one minus the main animal's index; or -100.
     private static double[] ExtractHerding(Simulation sim, HerdingSystem herding, int cellCount)
@@ -854,6 +898,39 @@ public partial class Main : Node2D
                 _mapView.SetColours(cell => !map.IsLand(cell) ? Neutral(cell)
                     : values[cell] <= 0.0 ? EmptyLand
                     : Gradient(Math.Log10(values[cell]), PopulationStops));
+                break;
+            case PoliticalMode:
+                _mapView.SetColours(cell =>
+                {
+                    if (!map.IsLand(cell))
+                    {
+                        return Neutral(cell);
+                    }
+
+                    double v = values[cell];
+                    if (v < 0.0)
+                    {
+                        return NoFarming;
+                    }
+
+                    int code = (int)v;
+                    int polity = code / 4;
+                    if ((code & 2) != 0)
+                    {
+                        return CapitalColour;
+                    }
+
+                    Color colour = PolityColour(polity, (code & 1) != 0);
+                    foreach (int other in map.Grid.Neighbours(cell))
+                    {
+                        if (map.IsLand(other) && (values[other] < 0.0 || (int)values[other] / 4 != polity))
+                        {
+                            return colour.Darkened(0.45f);
+                        }
+                    }
+
+                    return colour;
+                });
                 break;
             case TechnologyMode:
                 Color techColour = _techIndex < _techColours.Length ? _techColours[_techIndex] : Colors.White;
@@ -978,6 +1055,14 @@ public partial class Main : Node2D
                 title = "People per 100 km²";
                 entries.Add((EmptyLand, "None"));
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
+                break;
+            case PoliticalMode:
+                title = "Who rules: each polity in its own colour, its border darker";
+                entries.Add((PolityColour(1, true), "A state"));
+                entries.Add((PolityColour(1, false), "A chiefdom (paler)"));
+                entries.Add((PolityColour(1, true).Darkened(0.45f), "Border"));
+                entries.Add((CapitalColour, "Capital"));
+                entries.Add((NoFarming, "Ruled by nobody"));
                 break;
             case TechnologyMode:
                 if (_technology != null)
@@ -1115,6 +1200,7 @@ public partial class Main : Node2D
     // Stops are powers of ten of people per 100 km².
     private static readonly Color NoneHeld = Color.Color8(24, 24, 30);
     private static readonly Color DiscoveryColour = Color.Color8(255, 60, 200);
+    private static readonly Color CapitalColour = Color.Color8(255, 255, 255);
 
     // Amount held per person, as a power of ten: 0.0001 to 10.
     private static readonly (double At, Color Colour)[] HeldStops =
@@ -1421,6 +1507,35 @@ public partial class Main : Node2D
         return text;
     }
 
+    // Runs on the simulation thread: who rules the cell.
+    private static string DescribePolity(Simulation sim, int cell, PolitySystem? polities)
+    {
+        if (polities == null)
+        {
+            return "";
+        }
+
+        int ruler = polities.RulerOf(cell);
+        if (ruler < 0)
+        {
+            return "\nRuled by nobody";
+        }
+
+        PolityInfo p = polities.Info(ruler);
+        var founded = new GameDate(p.Founded);
+        string level = p.Level == PolityLevel.State ? "state" : "chiefdom";
+        int cells = 0;
+        for (int c = 0; c < sim.Map.CellCount; c++)
+        {
+            cells += polities.RulerOf(c) == ruler ? 1 : 0;
+        }
+
+        return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, {cells} cells"
+            + (p.Capital == cell ? ", capital here" : "")
+            + $"\n  Temperament: aggression {p.Aggression.ToString("0.00", CultureInfo.InvariantCulture)}, "
+            + $"greed {p.Greed.ToString("0.00", CultureInfo.InvariantCulture)}, expansion {p.Expansion.ToString("0.00", CultureInfo.InvariantCulture)}";
+    }
+
     private static string DescribeSettlement(Simulation sim, int cell, SettlementSystem? settlements)
     {
         if (settlements?.InCell(cell) is not { } s)
@@ -1557,11 +1672,12 @@ public partial class Main : Node2D
             HerdingSystem? herdingForCell = _herding;
             SettlementSystem? settlementsForCell = _settlementSystem;
             ResourceSystem? resourcesForCell = _resourceSystem;
+            PolitySystem? politiesForCell = _polities;
             live.Pending = _host.InvokeAsync(sim => new CellNow(
                 sim.State.DoubleField(ClimateSystem.TemperatureShiftField)[target],
                 sim.State.DoubleField(ClimateSystem.RainfallFactorField)[target],
                 sim.State.IntField(ClimateSystem.BiomeField)[target],
-                foragers != null ? DescribeSettlement(sim, target, settlementsForCell) + DescribeSea(sim, target) + LabelGroups(DescribeGroups(sim, target, occupations))
+                foragers != null ? DescribePolity(sim, target, politiesForCell) + DescribeSettlement(sim, target, settlementsForCell) + DescribeSea(sim, target) + LabelGroups(DescribeGroups(sim, target, occupations))
                     + DescribeFarming(sim, target, farmingForCell) + DescribeHerding(sim, target, herdingForCell) + DescribeResources(target, resourcesForCell) : null,
                 foragers != null ? sim.State.DoubleField(ForagerSystem.CapacityField)[target] : double.NaN,
                 foragers?.IsReachable(target) ?? true));

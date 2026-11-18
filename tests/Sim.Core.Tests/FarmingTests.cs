@@ -6,6 +6,7 @@ using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
+using Sim.Core.Polities;
 using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
@@ -88,6 +89,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         systems = systems.Append(trade)
             .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), FastTechnologies(occupations), trade, chanceScale: 200.0))
             .Append(new SeafaringSystem(seafaring ?? SeafaringParameters.LoadDefault(), climate.Biomes))
+            .Append(PolitySystem.CreateDefault())
             .ToArray();
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -657,6 +659,57 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         }
 
         Assert.True(wheatCells > 0 && otherCells > 0, $"{wheatCells} wheat and barley cells, {otherCells} others.");
+    }
+
+    [Fact]
+    public void A_polity_founded_at_a_settlement_rules_its_cells_and_is_saved()
+    {
+        Simulation sim = FastFarming(6);
+        sim.Run(300 * 12);
+        PolitySystem polities = sim.Systems.OfType<PolitySystem>().Single();
+        SettlementSystem settlements = sim.Systems.OfType<SettlementSystem>().Single();
+        Assert.Empty(polities.All());
+        int capital = settlements.All().OrderBy(s => s.Id).First().Cell;
+        int id = polities.Found(capital, sim.Tick, new Rng(11));
+
+        // Named after its capital, a chiefdom, with a temperament and empty positions.
+        PolityInfo info = polities.Info(id);
+        Assert.Equal(settlements.InCell(capital)!.Value.Name, info.Name);
+        Assert.Equal(PolityLevel.Chiefdom, info.Level);
+        Assert.True(info.Standing);
+        PolityParameters parameters = PolityParameters.LoadDefault();
+        foreach (double t in new[] { info.Aggression, info.Greed, info.Expansion })
+        {
+            Assert.InRange(t, parameters.MinTemperament, parameters.MaxTemperament);
+        }
+
+        Assert.Equal(parameters.Positions, polities.Positions(id).Select(p => p.Position));
+        Assert.All(polities.Positions(id), p => Assert.Equal(-1, p.Holder));
+
+        // It rules its capital and the land around it, and nothing else.
+        var ruled = Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == id).ToHashSet();
+        Assert.Contains(capital, ruled);
+        Assert.All(_world.Grid.Neighbours(capital).Where(_world.IsLand), c => Assert.Contains(c, ruled));
+        Assert.All(ruled, c => Assert.True(c == capital || _world.Grid.Neighbours(capital).Contains(c)));
+        Assert.Throws<ArgumentException>(() => polities.Found(capital, sim.Tick, new Rng(12)));
+
+        // Saved and loaded with the rest of the world.
+        polities.SetLevel(id, PolityLevel.State);
+        var save = new MemoryStream();
+        sim.Save(save);
+        Simulation loaded = FastFarming(6);
+        loaded.Load(new MemoryStream(save.ToArray()));
+        Assert.Equal(sim.StateChecksum(), loaded.StateChecksum());
+        PolitySystem loadedPolities = loaded.Systems.OfType<PolitySystem>().Single();
+        Assert.Equal(polities.Info(id), loadedPolities.Info(id));
+        Assert.Equal(ruled.Count, Enumerable.Range(0, _world.CellCount).Count(c => loadedPolities.RulerOf(c) == id));
+
+        // An ended polity rules nothing but stays on record.
+        polities.End(id, sim.Tick);
+        Assert.DoesNotContain(Enumerable.Range(0, _world.CellCount), c => polities.RulerOf(c) >= 0);
+        Assert.Single(polities.All());
+        Assert.Empty(polities.Standing());
+        Assert.False(polities.Info(id).Standing);
     }
 
     [Fact]

@@ -2,7 +2,7 @@
 
 Status: agreed by the owner 2026-11-16. Feature list is frozen. Parent: `design-doc.md` version 1.3.
 
-Progress: complete 2026-11-17 (steps 1 to 8); released as v0.4, and fixed as v0.4.1 the same day (below). The by-hand viewer checks are the owner's.
+Progress: complete 2026-11-17 (steps 1 to 8); released as v0.4, and fixed as v0.4.1 the same day (below). The owner passed the by-hand viewer checks on 2026-11-17.
 
 - Step 1 (speed): a 5,000-year headless run takes about 115 to 150 seconds on CI's machines, against 165 to 210 before (the 2-minute target is met on the faster machines, not yet on the slowest). Changes: climate's yearly rainfall factors and the needs and gathering rules no longer call Math.Exp and Math.Pow, which were about ten times slower on some build machines; food and luxuries still trade every season, but everyday goods and materials trade once a year in January, sending what four seasons would, with a cheap price path for the goods traded between Januaries; the price-gap measurement runs only in the exit tests; trade's ledger changes are batched. Trade went from about 55 to 107 seconds to about 40 to 57. Exit tests after the change: every milestone 2 test passes except herders outnumbering farmers on open grassland, which failed in 2 of 10 seeds (0.30 against 0.39 and 0.11 against 0.21 million); trading everyday goods yearly changed each run's course, and the result still hangs on when sheep and goats are first herded, which step 5 reworks.
 - Step 2 (technology): `technologies.json` lists eight technologies for now (granaries, irrigation, milk and wool, the plough, the wheel, the sail, outrigger canoes, terraced fields); copper, bronze and horses come with their steps. `technology.json` holds how knowledge spreads and is lost. Each population group carries a share per technology (a column on the groups table), averaged when groups merge and carried by people who move between groups or cells. Each year, where a technology's conditions are met (occupation, river, dry climate, coast, terrain, animals kept, technologies required), a group may discover it, more readily with more people in reach (up to 20,000 in its cell and neighbours); shares grow within a group, move toward the other groups of its cell, its neighbours and its trade partners (faster with busier trade, measured by saved sales so a loaded run matches), and fall where fewer than 3,000 people in contact use it. First and independent discoveries (1,000 km from earlier ones) and losses are recorded. The viewer has a Technology map mode (share of people who know it, discovery places marked) and the tooltip lists what each group knows. Technology takes about 15 seconds of a 5,000-year run. First exit runs (6,000 years, untuned): all eight are discovered in most seeds, but far too early (the plough in years 1,500 to 2,900, about 7000 BCE, against about 4500 BCE in history); losses happen only with fewer than 3,000 people in contact; group shares stay valid. The reach measure counts any user from the first discovery, so independent discoveries inflate it; both are for step 8.
@@ -145,10 +145,10 @@ Soundness (as before)
 
 By hand in the viewer:
 
-- [ ] The technology map mode is readable, and you can watch a discovery spread out from where it was made.
-- [ ] Sea routes appear once boats and sails allow them.
-- [ ] Ploughed grassland and bronze-working regions look plausible.
-- [ ] The frame rate stays smooth at every speed.
+- [x] The technology map mode is readable, and you can watch a discovery spread out from where it was made.
+- [x] Sea routes appear once boats and sails allow them.
+- [x] Ploughed grassland and bronze-working regions look plausible.
+- [x] The frame rate stays smooth at every speed.
 
 ## Build order
 

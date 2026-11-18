@@ -887,7 +887,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
 
         // Fortifications are found under threat and strengthen defenders; chariots need the wheel
         // and riding and strengthen attackers.
-        var technologies = TechnologySet.LoadDefault();
+        var technologies = TechnologySet.LoadDefault(OccupationSet.LoadDefault());
         Technology forts = technologies.Technologies.Single(t => t.Name == "Fortifications");
         Technology chariots = technologies.Technologies.Single(t => t.Name == "Chariots");
         Assert.True(forts.Threatened);

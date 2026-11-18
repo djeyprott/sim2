@@ -61,7 +61,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
     }
 
     // A simulation where farming is first taken up almost at once, so short runs show it.
-    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real, double harvestSpread = -1.0, SeafaringParameters? seafaring = null)
+    private Simulation FastFarming(ulong seed, CropHomelands homelands = CropHomelands.Real, double harvestSpread = -1.0, SeafaringParameters? seafaring = null, PolityParameters? polities = null)
     {
         ClimateSystem climate = ClimateSystem.CreateDefault();
         OccupationSet occupations = OccupationSet.LoadDefault();
@@ -89,7 +89,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         systems = systems.Append(trade)
             .Append(new TechnologySystem(TechnologyParameters.LoadDefault(), FastTechnologies(occupations), trade, chanceScale: 200.0))
             .Append(new SeafaringSystem(seafaring ?? SeafaringParameters.LoadDefault(), climate.Biomes))
-            .Append(PolitySystem.CreateDefault())
+            .Append(new PolitySystem(polities ?? PolityParameters.LoadDefault(), trade))
             .ToArray();
         return new Simulation(_world, new RunSettings { Seed = seed, CropHomelands = homelands }, systems);
     }
@@ -700,7 +700,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.Throws<ArgumentException>(() => polities.Found(capital, sim.Tick, new Rng(12)));
 
         // Saved and loaded with the rest of the world.
-        polities.SetLevel(id, PolityLevel.State);
+        polities.SetLevel(id, PolityLevel.State, sim.Tick);
         var save = new MemoryStream();
         sim.Save(save);
         Simulation loaded = FastFarming(6);
@@ -716,6 +716,64 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.Single(polities.All());
         Assert.Empty(polities.Standing());
         Assert.False(polities.Info(id).Standing);
+    }
+
+    [Fact]
+    public void Chiefdoms_form_at_large_settlements_and_grow_within_their_reach()
+    {
+        // Founding as soon as a settlement is large enough, so a short run shows polities.
+        PolityParameters parameters = PolityParameters.LoadDefault();
+        parameters.FoundSettledYears = 0.0;
+        parameters.FoundSurplusYears = 0.0;
+        parameters.FoundPeople = 300.0;
+        parameters.FoundChance = 0.05;
+        parameters.JoinChance = 0.5;
+        parameters.StatePeople = 5000.0;
+        parameters.StateSettlements = 3;
+        Simulation sim = FastFarming(9, polities: parameters);
+        sim.Run(400 * 12);
+        PolitySystem polities = sim.Systems.OfType<PolitySystem>().Single();
+        SettlementSystem settlements = sim.Systems.OfType<SettlementSystem>().Single();
+        var groups = new PopulationGroups(sim.State);
+        int farmer = OccupationSet.LoadDefault().IndexOf(OccupationSet.Farmer);
+        List<PolityInfo> standing = polities.Standing();
+        Assert.True(standing.Count >= 3, $"{standing.Count} polities after 400 years.");
+
+        int grown = 0, states = 0;
+        foreach (PolityInfo p in standing)
+        {
+            // Each stands on a settled, farming capital, and rules only cells within its reach.
+            Assert.NotNull(settlements.InCell(p.Capital));
+            Assert.True(groups.Find(p.Capital, farmer) >= 0);
+            var cells = Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == p.Id).ToList();
+            Assert.Contains(p.Capital, cells);
+            Assert.All(cells, c => Assert.True(_world.IsLand(c) && !double.IsInfinity(polities.ReachCost(p.Id, c)),
+                $"{p.Name} rules cell {c} beyond its reach."));
+
+            // Its level follows the people and settlements it rules.
+            double people = cells.Sum(c => groups.CellTotal(c));
+            int towns = cells.Count(c => settlements.InCell(c) != null);
+            bool state = people >= parameters.StatePeople && towns >= parameters.StateSettlements;
+            Assert.Equal(state ? PolityLevel.State : PolityLevel.Chiefdom, p.Level);
+            states += state ? 1 : 0;
+            grown += towns > 1 ? 1 : 0;
+            if (state)
+            {
+                Assert.True(p.StateSince >= p.Founded);
+            }
+        }
+
+        Assert.True(grown >= 1, "No polity drew in a second settlement.");
+        Assert.True(states >= 1, "No chiefdom became a state.");
+
+        // Same seed, same polities; and a loaded run carries on as an uninterrupted one.
+        var save = new MemoryStream();
+        sim.Save(save);
+        Simulation loaded = FastFarming(9, polities: parameters);
+        loaded.Load(new MemoryStream(save.ToArray()));
+        sim.Run(20 * 12);
+        loaded.Run(20 * 12);
+        Assert.Equal(sim.StateChecksum(), loaded.StateChecksum());
     }
 
     [Fact]

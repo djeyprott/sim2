@@ -47,7 +47,7 @@ public static class SystemCatalog
             systems.Add(SeafaringSystem.CreateDefault(climate.Biomes));
 
             // Polities (milestone 4) read settlements, stores, trade and knowledge, so they come last.
-            systems.Add(PolitySystem.CreateDefault());
+            systems.Add(PolitySystem.CreateDefault(trade));
         }
 
         return systems;

@@ -1,7 +1,11 @@
 using Sim.Core.Content;
 using Sim.Core.Engine;
+using Sim.Core.Farming;
+using Sim.Core.Goods;
 using Sim.Core.Map;
+using Sim.Core.People;
 using Sim.Core.Settlements;
+using Sim.Core.Technologies;
 
 namespace Sim.Core.Polities;
 
@@ -21,7 +25,7 @@ public enum PolityLevel
 /// <summary>A polity as other systems and the viewer see it.</summary>
 public readonly record struct PolityInfo(
     int Id, string Name, PolityLevel Level, int Capital, long Founded, long Ended,
-    double Aggression, double Greed, double Expansion)
+    double Aggression, double Greed, double Expansion, long StateSince)
 {
     /// <summary>Whether the polity still stands.</summary>
     public bool Standing => Ended < 0;
@@ -38,6 +42,30 @@ public sealed class PolityParameters
 
     public List<string> Positions { get; set; } = new List<string>();
 
+    public double FoundPeople { get; set; } = 1500.0;
+
+    public double FoundSurplusYears { get; set; } = 0.5;
+
+    public double FoundSettledYears { get; set; } = 3000.0;
+
+    public double FoundChance { get; set; } = 0.002;
+
+    public double CrowdPeople { get; set; } = 50000.0;
+
+    public double JoinChance { get; set; } = 0.1;
+
+    public double UnlinkedJoinFactor { get; set; } = 0.5;
+
+    public double ChiefdomReach { get; set; } = 4.0;
+
+    public double StateReach { get; set; } = 10.0;
+
+    public int ClaimNeighbours { get; set; } = 4;
+
+    public double StatePeople { get; set; } = 20000.0;
+
+    public int StateSettlements { get; set; } = 5;
+
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
     public static PolityParameters Parse(string json)
@@ -49,6 +77,14 @@ public sealed class PolityParameters
             throw new InvalidDataException("polities.json: temperament spread not negative, 0 < min <= max, and distinct named positions.");
         }
 
+        double[] chances = { p.FoundChance, p.JoinChance, p.UnlinkedJoinFactor };
+        if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0
+            || p.CrowdPeople <= 0.0 || p.ChiefdomReach <= 0.0 || p.StateReach < p.ChiefdomReach || p.ClaimNeighbours < 1 || p.ClaimNeighbours > 6
+            || p.StatePeople <= 0.0 || p.StateSettlements < 1)
+        {
+            throw new InvalidDataException("polities.json: chances 0 to 1, people and reach above 0, state reach at least chiefdom reach, claimNeighbours 1 to 6.");
+        }
+
         return p;
     }
 }
@@ -56,9 +92,13 @@ public sealed class PolityParameters
 /// <summary>
 /// Polities (milestone 4). Holds the organizations table (every organization, of which polities
 /// are the only kind for now), its positions table (empty until named people in milestone 6) and
-/// which polity rules each land cell. A polity keeps its row after it ends, as history. Step 1
-/// builds the tables and the means to found and rule; polities are founded from step 2.
-/// Runs once a year, after seafaring.
+/// which polity rules each land cell. A polity keeps its row after it ends, as history.
+/// Each year (step 2): a polity whose capital settlement is gone ends; each polity lets go of
+/// cells beyond its reach (trade-link cost from its capital: chiefdoms reach less than states),
+/// draws in unruled settlements within reach (more readily those it trades with, and as its
+/// temperament's expansion says), and claims unruled cells hemmed in by its own; large, crowded,
+/// long-farmed settlements with grain to spare found new chiefdoms; and chiefdoms that rule enough
+/// people and settlements become states (and back). Runs once a year, after seafaring.
 /// </summary>
 public sealed class PolitySystem : ISimSystem
 {
@@ -74,6 +114,24 @@ public sealed class PolitySystem : ISimSystem
     public const string RulerField = "polities.ruler";
 
     private readonly PolityParameters _parameters;
+    private readonly TradeSystem? _trade;
+    private readonly TradeParameters _tradeParameters = TradeParameters.LoadDefault();
+    private IntColumn? _stateSince;
+    private PopulationGroups? _groups;
+    private Stockpiles? _stockpiles;
+    private int _grain = -1;
+    private int[] _farmingSincePlusOne = Array.Empty<int>();
+    private TechnologyUse? _technology;
+    private TechnologyEffect[] _carrying = Array.Empty<TechnologyEffect>();
+    private int[] _land = Array.Empty<int>();
+    private double[] _stepCost = Array.Empty<double>();
+
+    // Reach worked out for one polity at a time: cost from its capital, valid where stamped.
+    private double[] _reachCost = Array.Empty<double>();
+    private int[] _reachStamp = Array.Empty<int>();
+    private int _stamp;
+    private readonly List<int> _reached = new List<int>();
+    private readonly PriorityQueue<int, double> _queue = new PriorityQueue<int, double>();
     private int[] _rulerPlusOne = Array.Empty<int>();
     private EntityTable? _organizations;
     private IntColumn? _kind;
@@ -91,14 +149,17 @@ public sealed class PolitySystem : ISimSystem
     private IntColumn? _positionHolder;
     private WorldMap? _map;
     private StringColumn? _settlementName;
+    private EntityTable? _settlements;
     private int[] _settlementPlusOne = Array.Empty<int>();
 
-    public PolitySystem(PolityParameters parameters)
+    /// <param name="trade">The trade system, whose links make settlements join more readily (none: no links).</param>
+    public PolitySystem(PolityParameters parameters, TradeSystem? trade = null)
     {
         _parameters = parameters;
+        _trade = trade;
     }
 
-    public static PolitySystem CreateDefault() => new PolitySystem(PolityParameters.LoadDefault());
+    public static PolitySystem CreateDefault(TradeSystem? trade = null) => new PolitySystem(PolityParameters.LoadDefault(), trade);
 
     public string Name => SystemName;
 
@@ -119,6 +180,7 @@ public sealed class PolitySystem : ISimSystem
         _aggression = _organizations.AddDoubleColumn("aggression");
         _greed = _organizations.AddDoubleColumn("greed");
         _expansion = _organizations.AddDoubleColumn("expansion");
+        _stateSince = _organizations.AddIntColumn("stateSince");
         _positions = state.AddTable(PositionTableName);
         _positionOrganization = _positions.AddIntColumn("organization");
         _positionName = _positions.AddStringColumn("position");
@@ -127,17 +189,289 @@ public sealed class PolitySystem : ISimSystem
 
     public void Initialize(SimContext context)
     {
+        WorldState state = context.State;
         _map = context.Map;
-        if (context.State.HasTable(SettlementSystem.TableName))
+        if (state.HasTable(SettlementSystem.TableName))
         {
-            _settlementName = context.State.Table(SettlementSystem.TableName).StringColumn("name");
-            _settlementPlusOne = context.State.IntField(SettlementSystem.SettlementField);
+            _settlements = state.Table(SettlementSystem.TableName);
+            _settlementName = _settlements.StringColumn("name");
+            _settlementPlusOne = state.IntField(SettlementSystem.SettlementField);
         }
+
+        _groups = new PopulationGroups(state);
+        if (state.HasTable(Stockpiles.LedgerTableName))
+        {
+            _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
+            _grain = _stockpiles.Goods.IndexOf(GoodSet.Grain);
+        }
+
+        _farmingSincePlusOne = state.HasField(FarmingSystem.SinceField) ? state.IntField(FarmingSystem.SinceField) : Array.Empty<int>();
+        _technology = TechnologyUse.TryCreate(state, context.Map);
+        _carrying = _technology?.WithEffect(TechnologySet.LandCarrying) ?? Array.Empty<TechnologyEffect>();
+        WorldMap map = context.Map;
+        _land = Enumerable.Range(0, map.CellCount).Where(map.IsLand).ToArray();
+        _stepCost = new double[map.CellCount];
+        for (int cell = 0; cell < map.CellCount; cell++)
+        {
+            _stepCost[cell] = !map.IsLand(cell) ? double.PositiveInfinity : map.Terrain(cell) switch
+            {
+                TerrainClass.Hills => _tradeParameters.TerrainCost["hills"],
+                TerrainClass.Mountains => _tradeParameters.TerrainCost["mountains"],
+                _ => _tradeParameters.TerrainCost["lowland"],
+            };
+        }
+
+        _reachCost = new double[map.CellCount];
+        _reachStamp = new int[map.CellCount];
     }
 
     public void Update(SimContext context)
     {
-        // Founding, growth, tribute, war and collapse come in later steps of milestone 4.
+        if (_settlementPlusOne.Length == 0)
+        {
+            return;
+        }
+
+        long tick = context.Tick;
+        Rng rng = context.Rng;
+
+        // Polities whose capital settlement is gone end (collapse into successors comes in step 5).
+        foreach (PolityInfo p in Standing())
+        {
+            if (_settlementPlusOne[p.Capital] <= 0)
+            {
+                End(p.Id, tick);
+            }
+        }
+
+        // Which settlements each settlement trades with, by cell.
+        var linked = new HashSet<(int, int)>();
+        if (_trade != null)
+        {
+            foreach ((int a, int b) in _trade.LinksByCell())
+            {
+                linked.Add((a, b));
+                linked.Add((b, a));
+            }
+        }
+
+        // Each polity, in id order: let go of what is out of reach, draw in settlements, fill gaps.
+        List<int>[] cellsOf = CellsByPolity();
+        foreach (PolityInfo p in Standing())
+        {
+            double reach = p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach;
+            FillReach(p.Capital, reach);
+            foreach (int cell in cellsOf[p.Id])
+            {
+                if (!Reached(cell))
+                {
+                    _rulerPlusOne[cell] = 0;
+                }
+            }
+
+            var ownSettlements = new List<int>();
+            foreach (int cell in cellsOf[p.Id])
+            {
+                if (RulerOf(cell) == p.Id && _settlementPlusOne[cell] > 0)
+                {
+                    ownSettlements.Add(cell);
+                }
+            }
+
+            foreach (int cell in _reached)
+            {
+                if (_settlementPlusOne[cell] <= 0 || RulerOf(cell) >= 0)
+                {
+                    continue;
+                }
+
+                bool trades = ownSettlements.Any(own => linked.Contains((own, cell)));
+                double chance = _parameters.JoinChance * p.Expansion * (1.0 - _reachCost[cell] / reach)
+                    * (trades ? 1.0 : _parameters.UnlinkedJoinFactor);
+                if (rng.Chance(Math.Min(1.0, chance)))
+                {
+                    Rule(cell, p.Id);
+                    ClaimAround(cell, p.Id);
+                }
+            }
+
+            // Unruled land within reach hemmed in by the polity's own cells is claimed.
+            foreach (int cell in _reached)
+            {
+                if (RulerOf(cell) >= 0)
+                {
+                    continue;
+                }
+
+                int own = 0;
+                foreach (int other in _map!.Grid.Neighbours(cell))
+                {
+                    own += RulerOf(other) == p.Id ? 1 : 0;
+                }
+
+                if (own >= _parameters.ClaimNeighbours)
+                {
+                    Rule(cell, p.Id);
+                }
+            }
+        }
+
+        // New chiefdoms, in settlement id order.
+        EntityTable settlements = _settlements!;
+        IntColumn settlementCell = settlements.IntColumn("cell");
+        DoubleColumn settlementPeople = settlements.DoubleColumn("population");
+        for (int id = 0; id < settlements.IdCount; id++)
+        {
+            if (!settlements.IsAlive(id))
+            {
+                continue;
+            }
+
+            int cell = settlementCell[id];
+            if (RulerOf(cell) >= 0 || settlementPeople[id] < _parameters.FoundPeople || !FarmedFor(cell, _parameters.FoundSettledYears, tick))
+            {
+                continue;
+            }
+
+            double people = _groups!.CellTotal(cell);
+            if (_stockpiles != null && _grain >= 0 && _stockpiles.Stock(cell, _grain) < _parameters.FoundSurplusYears * people)
+            {
+                continue;
+            }
+
+            double crowd = people;
+            foreach (int other in _map!.Grid.Neighbours(cell))
+            {
+                crowd += _groups.CellTotal(other);
+            }
+
+            if (rng.Chance(_parameters.FoundChance * Math.Min(1.0, crowd / _parameters.CrowdPeople)))
+            {
+                Found(cell, tick, rng);
+            }
+        }
+
+        // Chiefdoms that rule enough people and settlements are states, and back.
+        cellsOf = CellsByPolity();
+        foreach (PolityInfo p in Standing())
+        {
+            double people = 0.0;
+            int towns = 0;
+            foreach (int cell in cellsOf[p.Id])
+            {
+                people += _groups!.CellTotal(cell);
+                towns += _settlementPlusOne[cell] > 0 ? 1 : 0;
+            }
+
+            bool state = people >= _parameters.StatePeople && towns >= _parameters.StateSettlements;
+            if (state != (p.Level == PolityLevel.State))
+            {
+                SetLevel(p.Id, state ? PolityLevel.State : PolityLevel.Chiefdom, tick);
+            }
+        }
+    }
+
+    // Whether farming has stood in a cell at least this many years.
+    private bool FarmedFor(int cell, double years, long tick) =>
+        _farmingSincePlusOne.Length > 0 && _farmingSincePlusOne[cell] > 0
+        && tick - (_farmingSincePlusOne[cell] - 1) >= years * GameDate.MonthsPerYear;
+
+    // The land cells each polity rules, by polity id (ended polities' lists are empty).
+    private List<int>[] CellsByPolity()
+    {
+        var lists = new List<int>[_organizations!.IdCount];
+        for (int i = 0; i < lists.Length; i++)
+        {
+            lists[i] = new List<int>();
+        }
+
+        foreach (int cell in _land)
+        {
+            int ruler = _rulerPlusOne[cell] - 1;
+            if (ruler >= 0)
+            {
+                lists[ruler].Add(cell);
+            }
+        }
+
+        return lists;
+    }
+
+    // Rules the unruled land cells next to a cell, where they are within the reach worked out last.
+    private void ClaimAround(int cell, int polity)
+    {
+        foreach (int other in _map!.Grid.Neighbours(cell))
+        {
+            if (_map.IsLand(other) && RulerOf(other) < 0 && Reached(other))
+            {
+                Rule(other, polity);
+            }
+        }
+    }
+
+    private bool Reached(int cell) => _reachStamp[cell] == _stamp;
+
+    /// <summary>
+    /// The cost of reaching a cell from a polity's capital, as trade carries goods over land
+    /// (trade.json terrain costs, cheaper along rivers, and cheaper still where the capital uses
+    /// the wheel or riding), or infinity beyond its reach.
+    /// </summary>
+    public double ReachCost(int polity, int cell)
+    {
+        PolityInfo p = Info(polity);
+        FillReach(p.Capital, p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach);
+        return Reached(cell) ? _reachCost[cell] : double.PositiveInfinity;
+    }
+
+    // Fills the reach of a capital: every land cell within maxCost, with its cost, in _reached.
+    private void FillReach(int capital, double maxCost)
+    {
+        WorldMap map = _map!;
+        _stamp++;
+        _reached.Clear();
+        double carrying = _technology?.CellFactor(capital, _carrying) ?? 1.0;
+        _queue.Clear();
+        _reachCost[capital] = 0.0;
+        _reachStamp[capital] = _stamp;
+        _reached.Add(capital);
+        _queue.Enqueue(capital, 0.0);
+        while (_queue.TryDequeue(out int cell, out double cost))
+        {
+            if (cost > _reachCost[cell])
+            {
+                continue;
+            }
+
+            bool river = map.River(cell) != RiverSize.None;
+            foreach (int next in map.Grid.Neighbours(cell))
+            {
+                double step = _stepCost[next];
+                if (double.IsInfinity(step))
+                {
+                    continue;
+                }
+
+                if (river && map.River(next) != RiverSize.None)
+                {
+                    step *= _tradeParameters.RiverFactor;
+                }
+
+                double total = cost + step * carrying;
+                if (total > maxCost || (_reachStamp[next] == _stamp && total >= _reachCost[next]))
+                {
+                    continue;
+                }
+
+                if (_reachStamp[next] != _stamp)
+                {
+                    _reached.Add(next);
+                }
+
+                _reachStamp[next] = _stamp;
+                _reachCost[next] = total;
+                _queue.Enqueue(next, total);
+            }
+        }
     }
 
     /// <summary>The polity ruling a cell, or -1.</summary>
@@ -180,6 +514,7 @@ public sealed class PolitySystem : ISimSystem
         _ended![id] = -1;
         _capital![id] = capital;
         _level![id] = (int)PolityLevel.Chiefdom;
+        _stateSince![id] = -1;
         _aggression![id] = Temperament(rng);
         _greed![id] = Temperament(rng);
         _expansion![id] = Temperament(rng);
@@ -203,8 +538,8 @@ public sealed class PolitySystem : ISimSystem
         return id;
     }
 
-    /// <summary>Sets a standing polity's level.</summary>
-    public void SetLevel(int polity, PolityLevel level)
+    /// <summary>Sets a standing polity's level (it counts as a state from this tick if it never was one).</summary>
+    public void SetLevel(int polity, PolityLevel level, long tick)
     {
         if (!IsStanding(polity))
         {
@@ -212,6 +547,10 @@ public sealed class PolitySystem : ISimSystem
         }
 
         _level![polity] = (int)level;
+        if (level == PolityLevel.State && _stateSince![polity] < 0)
+        {
+            _stateSince[polity] = (int)tick;
+        }
     }
 
     /// <summary>Ends a polity: it rules no cells any more, and its row stays as history.</summary>
@@ -223,7 +562,7 @@ public sealed class PolitySystem : ISimSystem
         }
 
         _ended![polity] = (int)tick;
-        for (int cell = 0; cell < _rulerPlusOne.Length; cell++)
+        foreach (int cell in _land)
         {
             if (_rulerPlusOne[cell] == polity + 1)
             {
@@ -235,7 +574,7 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>One polity, standing or ended.</summary>
     public PolityInfo Info(int polity) => new PolityInfo(
         polity, _name![polity] ?? "", (PolityLevel)_level![polity], _capital![polity], _founded![polity], _ended![polity],
-        _aggression![polity], _greed![polity], _expansion![polity]);
+        _aggression![polity], _greed![polity], _expansion![polity], _stateSince![polity]);
 
     /// <summary>Every polity ever founded (standing and ended), in id order.</summary>
     public List<PolityInfo> All()

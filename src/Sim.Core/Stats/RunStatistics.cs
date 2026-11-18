@@ -6,6 +6,7 @@ using Sim.Core.Farming;
 using Sim.Core.Goods;
 using Sim.Core.Herding;
 using Sim.Core.People;
+using Sim.Core.Polities;
 using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
@@ -34,6 +35,7 @@ public sealed class RunStatistics
     private readonly Stockpiles? _stockpiles;
     private readonly TechnologySystem? _technology;
     private readonly SeafaringSystem? _seafaring;
+    private readonly PolitySystem? _polities;
 
     // Ledger totals at the previous row, by good: produced, consumed, spoiled, lost, traded.
     private double[,] _previous = new double[0, 5];
@@ -48,6 +50,7 @@ public sealed class RunStatistics
         _herding = simulation.Systems.OfType<HerdingSystem>().SingleOrDefault();
         _technology = simulation.Systems.OfType<TechnologySystem>().SingleOrDefault();
         _seafaring = simulation.Systems.OfType<SeafaringSystem>().SingleOrDefault();
+        _polities = simulation.Systems.OfType<PolitySystem>().SingleOrDefault();
         if (simulation.State.HasTable(Stockpiles.LedgerTableName))
         {
             _stockpiles = new Stockpiles(simulation.State, GoodSet.LoadDefault());
@@ -80,6 +83,11 @@ public sealed class RunStatistics
         if (_technology != null)
         {
             columns.AddRange(_technology.Technologies.Technologies.Select(t => "know_" + t.Slug));
+        }
+
+        if (_polities != null)
+        {
+            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2" });
         }
 
         return string.Join(",", columns);
@@ -165,6 +173,39 @@ public sealed class RunStatistics
 
                 values.Add((world > 0.0 ? knowing / world : 0.0).ToString("F4", CultureInfo.InvariantCulture));
             }
+        }
+
+        if (_polities != null)
+        {
+            // Polities standing, the people they rule, and the largest by people (with its area).
+            List<PolityInfo> standing = _polities.Standing();
+            int top = standing.Count == 0 ? 0 : standing.Max(p => p.Id) + 1;
+            var people = new double[top];
+            var area = new double[top];
+            foreach (int cell in _land)
+            {
+                int ruler = _polities.RulerOf(cell);
+                if (ruler >= 0)
+                {
+                    people[ruler] += groups.CellTotal(cell);
+                    area[ruler] += _simulation.Map.Grid.AreaKm2(cell);
+                }
+            }
+
+            int largest = -1;
+            for (int id = 0; id < top; id++)
+            {
+                if (largest < 0 || people[id] > people[largest])
+                {
+                    largest = id;
+                }
+            }
+
+            values.Add(standing.Count(p => p.Level == PolityLevel.Chiefdom).ToString(CultureInfo.InvariantCulture));
+            values.Add(standing.Count(p => p.Level == PolityLevel.State).ToString(CultureInfo.InvariantCulture));
+            values.Add(Number(people.Sum()));
+            values.Add(Number(largest >= 0 ? people[largest] : 0.0));
+            values.Add(Number(largest >= 0 ? area[largest] : 0.0));
         }
 
         return string.Join(",", values);

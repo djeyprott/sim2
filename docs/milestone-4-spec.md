@@ -1,8 +1,11 @@
-# Milestone 4 spec: States and war (draft 2)
+# Milestone 4 spec: States and war (version 1.0, agreed)
 
-Status: draft 2, 2026-11-17, awaiting the owner's agreement. Nothing is built until it is agreed. Parent: `design-doc.md` version 1.4.
+Status: agreed by the owner 2026-11-18. Feature list is frozen. Parent: `design-doc.md` version 1.5.
+
+Progress: step 1 under way.
 
 Change log:
+- 1.0 (2026-11-18): agreed by the owner as draft 2 stood.
 - Draft 2 (2026-11-17): the owner chose exit runs of 9,000 years, rules plus a temperament per polity, tribes and nomads later, and shared rule speeding the spread of knowledge.
 - Draft 1 (2026-11-17): first draft.
 

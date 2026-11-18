@@ -1,8 +1,9 @@
-# sim2 design doc (version 1.4)
+# sim2 design doc (version 1.5)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4, with fixes as v0.4.1 (`milestone-3-spec.md`). Milestone 4 (states and war) is next; its spec is in draft (`milestone-4-spec.md`).
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4, with fixes as v0.4.1 (`milestone-3-spec.md`). Milestone 4 (states and war) is in progress (`milestone-4-spec.md`, agreed 2026-11-18).
 
 Change log:
+- 1.5 (2026-11-18): milestone 4 spec agreed.
 - 1.4 (2026-11-17): milestone 4 spec in draft; backlog item on tribes and nomads.
 - 1.3 (2026-11-17): milestone 3 fixes released as v0.4.1 (spec 1.1): metal know-how and horse herding kept near their goods or animals, no cattle in tropical forest, the plough with wheat and barley; backlog items on copper working in Europe and long-distance tin.
 - 1.2 (2026-11-17): milestone 3 complete, released as v0.4; backlog items on the sail around the Gulf and the Red Sea, the timing of horses, and Austronesian voyaging.
@@ -96,7 +97,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
 | 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | Complete, v0.3 |
 | 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | Complete, v0.4.1 |
-| 4 | States and war | Organizations, polities, borders, conquest, collapse | |
+| 4 | States and war | Organizations, polities, borders, conquest, collapse | In progress |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
 | 6 | Historical figures | Named actors with personalities and agendas, dynasties, life events, a readable chronicle | |
 | 7 | Later eras | Industrial, modern and future systems | |

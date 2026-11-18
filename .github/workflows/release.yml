@@ -143,5 +143,6 @@ jobs:
           git add docs/viewer-screenshot*.png
           git diff --cached --quiet && exit 0
           git commit -m "Update viewer screenshot"
-          git pull --rebase
+          # Another build may have committed screenshots meanwhile; this build's own win.
+          git pull --rebase -X theirs
           git push

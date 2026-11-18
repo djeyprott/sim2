@@ -87,7 +87,7 @@ public sealed class RunStatistics
 
         if (_polities != null)
         {
-            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2" });
+            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain" });
         }
 
         return string.Join(",", columns);
@@ -206,6 +206,23 @@ public sealed class RunStatistics
             values.Add(Number(people.Sum()));
             values.Add(Number(largest >= 0 ? people[largest] : 0.0));
             values.Add(Number(largest >= 0 ? area[largest] : 0.0));
+
+            // Elite and soldiers, the mean unrest of the people ruled, and grain taken in tribute.
+            values.Add(Number(_occupations.Contains(OccupationSet.Elite) ? groups.WorldTotal(_occupations.IndexOf(OccupationSet.Elite)) : 0.0));
+            values.Add(Number(_occupations.Contains(OccupationSet.Soldier) ? groups.WorldTotal(_occupations.IndexOf(OccupationSet.Soldier)) : 0.0));
+            double ruledPeople = 0.0, ruledUnrest = 0.0;
+            foreach (int cell in _land)
+            {
+                if (_polities.RulerOf(cell) >= 0)
+                {
+                    double here = groups.CellTotal(cell);
+                    ruledPeople += here;
+                    ruledUnrest += here * _polities.CellUnrest(cell);
+                }
+            }
+
+            values.Add((ruledPeople > 0.0 ? ruledUnrest / ruledPeople : 0.0).ToString("F4", CultureInfo.InvariantCulture));
+            values.Add(Number(standing.Sum(p => _polities.Tribute(p.Id))));
         }
 
         return string.Join(",", values);

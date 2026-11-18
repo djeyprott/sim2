@@ -56,8 +56,6 @@ public sealed class Prices
     private readonly Stockpiles _stockpiles;
     private readonly PopulationGroups _groups;
     private readonly WorldMap _map;
-    private readonly int _farmer;
-    private readonly int _craftsman;
     private readonly int _grain;
     private readonly int[] _seasonalGoods;
     private readonly double[] _wanted;
@@ -73,6 +71,8 @@ public sealed class Prices
     private readonly TechnologyUse? _technology;
     private readonly int[] _recipeTechnology;
     private readonly bool[] _allowed;
+    private readonly double[] _storeFedWeights;
+    private readonly double[] _luxuryWeights;
     private readonly sbyte[] _known;
 
     public Prices(WorldState state, WorldMap map, PriceParameters parameters, CraftRules craft, OccupationSet occupations)
@@ -82,8 +82,8 @@ public sealed class Prices
         _map = map;
         _stockpiles = new Stockpiles(state, craft.Goods);
         _groups = new PopulationGroups(state);
-        _farmer = occupations.IndexOf(OccupationSet.Farmer);
-        _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
+        _storeFedWeights = occupations.StoreFedWeights();
+        _luxuryWeights = occupations.LuxuryWeights();
         _grain = craft.Goods.IndexOf(GoodSet.Grain);
         _seasonalGoods = craft.Goods.Goods.Where(g => g.Food || g.NeedTier == NeedTier.Luxury).Select(g => g.Index).ToArray();
         _wanted = new double[craft.Goods.Count];
@@ -161,19 +161,11 @@ public sealed class Prices
         return value * Math.Clamp(factor, p.MinFactor, maxFactor);
     }
 
-    /// <summary>The settlement's store-fed people: its farmers and craftsmen.</summary>
-    public double StoreFed(int cell)
-    {
-        int farmer = _groups.Find(cell, _farmer);
-        double people = farmer >= 0 ? _groups.Size(farmer) : 0.0;
-        if (_craftsman >= 0)
-        {
-            int craftsman = _groups.Find(cell, _craftsman);
-            people += craftsman >= 0 ? _groups.Size(craftsman) : 0.0;
-        }
+    /// <summary>The settlement's store-fed people: its farmers, craftsmen, elite and soldiers.</summary>
+    public double StoreFed(int cell) => _groups.CellWeighted(cell, _storeFedWeights);
 
-        return people;
-    }
+    /// <summary>The settlement's store-fed people counted by their luxury needs (the elite want many).</summary>
+    public double LuxuryFed(int cell) => _groups.CellWeighted(cell, _luxuryWeights);
 
     /// <summary>
     /// Fills <paramref name="wanted"/> with what the settlement in a cell wants of each good, at
@@ -182,6 +174,7 @@ public sealed class Prices
     public void Work(int cell, long tick, double[] wanted, double[]? prices = null)
     {
         double fed = StoreFed(cell);
+        double luxuryFed = LuxuryFed(cell);
         Array.Clear(wanted);
 
         // Food until the next harvest, plus a reserve.
@@ -208,7 +201,8 @@ public sealed class Prices
         // ones in store do not already cover.
         for (int g = 0; g < wanted.Length; g++)
         {
-            double need = _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
+            double people = _craft.Goods.Get(g).NeedTier == NeedTier.Luxury ? luxuryFed : fed;
+            double need = _craft.NeedPerPerson[g] * people * (1.0 + _craft.ReserveYears);
             if (need <= 0.0)
             {
                 continue;
@@ -272,13 +266,14 @@ public sealed class Prices
     public void WorkSeasonal(int cell, long tick, double[] prices)
     {
         double fed = StoreFed(cell);
+        double luxuryFed = LuxuryFed(cell);
         int month = (int)(tick % GameDate.MonthsPerYear);
         int harvest = _map.Grid.Latitude(cell) >= 0.0 ? NorthernHarvestMonth : SouthernHarvestMonth;
         int months = (harvest - month + GameDate.MonthsPerYear) % GameDate.MonthsPerYear;
         foreach (int g in _seasonalGoods)
         {
             Good good = _craft.Goods.Get(g);
-            double wanted = _craft.NeedPerPerson[g] * fed * (1.0 + _craft.ReserveYears);
+            double wanted = _craft.NeedPerPerson[g] * (good.NeedTier == NeedTier.Luxury ? luxuryFed : fed) * (1.0 + _craft.ReserveYears);
             if (g == _grain)
             {
                 wanted += fed * (months / (double)GameDate.MonthsPerYear + _parameters.FoodReserveYears);

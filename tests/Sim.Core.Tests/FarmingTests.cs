@@ -766,6 +766,50 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(grown >= 1, "No polity drew in a second settlement.");
         Assert.True(states >= 1, "No chiefdom became a state.");
 
+        // Tribute flows to capitals, which hold more grain per person than the settlements paying it;
+        // the elite and soldiers live only in capitals; unrest stays between 0 and 1.
+        var occupations = OccupationSet.LoadDefault();
+        int elite = occupations.IndexOf(OccupationSet.Elite), soldier = occupations.IndexOf(OccupationSet.Soldier);
+        var capitals = standing.Select(p => p.Capital).ToHashSet();
+        var stock = new Stockpiles(sim.State, GoodSet.LoadDefault());
+        int grain = stock.Goods.IndexOf(GoodSet.Grain);
+        double capitalGrain = 0.0, capitalPeople = 0.0, payingGrain = 0.0, payingPeople = 0.0, eliteCount = 0.0;
+        for (int g = 0; g < groups.IdCount; g++)
+        {
+            if (!groups.IsAlive(g) || groups.Size(g) <= 0.0)
+            {
+                continue;
+            }
+
+            Assert.InRange(groups.Unrest(g), 0.0, 1.0);
+            if (groups.Occupation(g) == elite || groups.Occupation(g) == soldier)
+            {
+                Assert.Contains(groups.Cell(g), capitals);
+                eliteCount += groups.Occupation(g) == elite ? groups.Size(g) : 0.0;
+            }
+        }
+
+        foreach (int cell in Enumerable.Range(0, _world.CellCount).Where(c => settlements.InCell(c) != null && polities.RulerOf(c) >= 0))
+        {
+            if (capitals.Contains(cell))
+            {
+                capitalGrain += stock.Stock(cell, grain);
+                capitalPeople += groups.CellTotal(cell);
+            }
+            else if (polities.Taken(cell) > 0.0)
+            {
+                payingGrain += stock.Stock(cell, grain);
+                payingPeople += groups.CellTotal(cell);
+            }
+        }
+
+        Assert.True(eliteCount > 0.0, "No elite in any capital.");
+        Assert.True(payingPeople > 0.0, "No settlement paid tribute.");
+        Assert.True(capitalGrain / capitalPeople > payingGrain / payingPeople,
+            $"Capitals hold {capitalGrain / capitalPeople:F2} grain a person, tribute payers {payingGrain / payingPeople:F2}.");
+        Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),
+            $"{good.Name} does not balance."));
+
         // Same seed, same polities; and a loaded run carries on as an uninterrupted one.
         var save = new MemoryStream();
         sim.Save(save);

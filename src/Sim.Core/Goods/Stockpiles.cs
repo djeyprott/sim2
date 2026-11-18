@@ -199,6 +199,18 @@ public sealed class Stockpiles
         }
     }
 
+    /// <summary>
+    /// Moves goods straight from one cell's stockpile to another's (tribute): not traded, and the
+    /// world's totals do not change. Returns what was moved (at most what the first holds).
+    /// </summary>
+    public double Transfer(int from, int to, int good, double amount)
+    {
+        double moved = Math.Min(Math.Max(amount, 0.0), _stock[good][from]);
+        _stock[good][from] -= moved;
+        _stock[good][to] += moved;
+        return moved;
+    }
+
     /// <summary>Sends goods from one cell's stockpile to another's; they are in transit until <see cref="Arrive"/>.</summary>
     public double Send(int from, int to, int good, double amount)
     {

@@ -63,6 +63,9 @@ public sealed class FarmingSystem : ISimSystem
     private int[] _lastFaminePlusOne = Array.Empty<int>();
     private int[] _storeFed = Array.Empty<int>();
     private readonly int _craftsman;
+
+    // Per occupation: 1 for store-fed settlement dwellers (craftsmen, elite, soldiers), 0 for others.
+    private readonly double[] _dwellerWeights;
     private readonly int _herder;
     private double[]? _herdingCapacity;
     private double[] _famineDeaths = Array.Empty<double>();
@@ -123,6 +126,7 @@ public sealed class FarmingSystem : ISimSystem
         _forager = occupations.IndexOf(OccupationSet.Forager);
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.Contains(OccupationSet.Craftsman) ? occupations.IndexOf(OccupationSet.Craftsman) : -1;
+        _dwellerWeights = occupations.Occupations.Select(o => o.StoreFed && o.LivesInSettlement ? 1.0 : 0.0).ToArray();
         _herder = occupations.Contains(OccupationSet.Herder) ? occupations.IndexOf(OccupationSet.Herder) : -1;
         _noFarmingBiome = new bool[biomes.Count];
         _biomeFactor = Enumerable.Repeat(1.0, biomes.Count).ToArray();
@@ -593,15 +597,16 @@ public sealed class FarmingSystem : ISimSystem
                 continue;
             }
 
-            // Farmers and craftsmen eat from the store alike.
-            int craftsmanGroup = _craftsman >= 0 ? groups.Find(cell, _craftsman) : -1;
-            double craftsmen = craftsmanGroup >= 0 ? groups.Size(craftsmanGroup) : 0.0;
-            double need = (farmers + craftsmen) / GameDate.MonthsPerYear;
+            // Farmers and the settlement's craftsmen, elite and soldiers eat from the store alike.
+            double dwellers = groups.CellWeighted(cell, _dwellerWeights);
+            double need = (farmers + dwellers) / GameDate.MonthsPerYear;
             double met = _stockpiles.Consume(cell, _grain, need) / need;
-            groups.SetFood(group, met);
-            if (craftsmanGroup >= 0)
+            foreach (int g in groups.InCell(cell))
             {
-                groups.SetFood(craftsmanGroup, met);
+                if (g == group || _dwellerWeights[groups.Occupation(g)] > 0.0)
+                {
+                    groups.SetFood(g, met);
+                }
             }
 
             if (met < 1.0)
@@ -612,16 +617,25 @@ public sealed class FarmingSystem : ISimSystem
                 group = groups.Find(cell, _farmer);
                 groups.SetSize(group, Math.Max(0.0, farmers));
 
-                // Hungry craftsmen die at the same rate; those who would leave go back to the fields.
-                if (craftsmen > 0.0)
+                // Hungry craftsmen, elite and soldiers die at the same rate; those who would leave
+                // go back to the fields.
+                if (dwellers > 0.0)
                 {
-                    double dying = _parameters.FamineDeathShare * (1.0 - met) * craftsmen * scale;
-                    double toFields = _parameters.FamineLeaveShare * (1.0 - met) * craftsmen * scale;
-                    _famineDeaths[cell] += dying;
-                    craftsmanGroup = groups.Find(cell, _craftsman);
-                    groups.SetSize(craftsmanGroup, Math.Max(0.0, craftsmen - dying - toFields));
-                    groups.AddPeople(groups.Find(cell, _farmer), toFields, met, from: craftsmanGroup);
-                    farmers += toFields;
+                    foreach (int g in groups.InCell(cell))
+                    {
+                        double people = groups.Size(g);
+                        if (_dwellerWeights[groups.Occupation(g)] <= 0.0 || people <= 0.0)
+                        {
+                            continue;
+                        }
+
+                        double dying = _parameters.FamineDeathShare * (1.0 - met) * people * scale;
+                        double toFields = _parameters.FamineLeaveShare * (1.0 - met) * people * scale;
+                        _famineDeaths[cell] += dying;
+                        groups.SetSize(g, Math.Max(0.0, people - dying - toFields));
+                        groups.AddPeople(groups.Find(cell, _farmer), toFields, met, from: g);
+                        farmers += toFields;
+                    }
                 }
 
                 double capacity = _capacity[cell];
@@ -637,8 +651,7 @@ public sealed class FarmingSystem : ISimSystem
             return 0.0;
         }
 
-        int group = _groups!.Find(cell, _craftsman);
-        return group >= 0 ? _groups.Size(group) : 0.0;
+        return _groups!.CellWeighted(cell, _dwellerWeights);
     }
 
     private double Famine(int cell, double farmers, double food, long tick, double scale)

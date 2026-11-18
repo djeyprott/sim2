@@ -26,6 +26,7 @@ public sealed class PopulationGroups
     private readonly DoubleColumn _food;
     private readonly DoubleColumn _everyday;
     private readonly DoubleColumn _luxury;
+    private readonly DoubleColumn _unrest;
     private readonly DoubleColumn[] _knowledge;
 
     // Per cell: the first group's id plus one; 0 means the cell has no groups.
@@ -41,6 +42,7 @@ public sealed class PopulationGroups
         _food = _table.DoubleColumn("food");
         _everyday = _table.DoubleColumn("everyday");
         _luxury = _table.DoubleColumn("luxury");
+        _unrest = _table.DoubleColumn("unrest");
         _knowledge = _table.ColumnNames.Where(n => n.StartsWith(KnowledgeColumnPrefix, StringComparison.Ordinal))
             .Select(n => _table.DoubleColumn(n)).ToArray();
         _firstPlusOne = state.IntField(FirstGroupField);
@@ -67,6 +69,7 @@ public sealed class PopulationGroups
         table.AddDoubleColumn("food");
         table.AddDoubleColumn("everyday");
         table.AddDoubleColumn("luxury");
+        table.AddDoubleColumn("unrest");
         state.AddIntField(FirstGroupField);
     }
 
@@ -99,6 +102,11 @@ public sealed class PopulationGroups
 
     /// <summary>Share of the group's luxury needs (salt, obsidian, ornaments) met last year, 0 to 1.</summary>
     public double Luxury(int group) => _luxury[group];
+
+    /// <summary>How restless the group is under its rulers, 0 to 1 (milestone 4).</summary>
+    public double Unrest(int group) => _unrest[group];
+
+    public void SetUnrest(int group, double unrest) => _unrest[group] = Math.Clamp(unrest, 0.0, 1.0);
 
     public void SetNeedsMet(int group, double everyday, double luxury)
     {
@@ -159,6 +167,7 @@ public sealed class PopulationGroups
         _food[group] = 1.0;
         _everyday[group] = 0.0;
         _luxury[group] = 0.0;
+        _unrest[group] = 0.0;
         foreach (DoubleColumn column in _knowledge)
         {
             column[group] = 0.0;
@@ -203,6 +212,8 @@ public sealed class PopulationGroups
             column[group] = Math.Clamp((column[group] * size + arriving * people) / total, 0.0, 1.0);
         }
 
+        double arrivingUnrest = from >= 0 ? _unrest[from] : 0.0;
+        _unrest[group] = Math.Clamp((_unrest[group] * size + arrivingUnrest * people) / total, 0.0, 1.0);
         _food[group] = Math.Clamp((_food[group] * size + food * people) / total, 0.0, 1.0);
         if (everyday >= 0.0)
         {
@@ -215,6 +226,18 @@ public sealed class PopulationGroups
         }
 
         _size[group] = total;
+    }
+
+    /// <summary>People in a cell, each group counted by its occupation's weight (0 leaves it out).</summary>
+    public double CellWeighted(int cell, double[] weightByOccupation)
+    {
+        double total = 0.0;
+        foreach (int group in InCell(cell))
+        {
+            total += _size[group] * weightByOccupation[_occupation[group]];
+        }
+
+        return total;
     }
 
     /// <summary>Total people in a cell, over all its groups.</summary>

@@ -1,12 +1,19 @@
 // Occupations: the way of life of a population group. Each occupation belongs to a class and
-// lives either in the countryside or in its cell's settlement. storeFed: eats from the
-// settlement's store and uses up everyday and luxury goods from it (milestone 2).
-// More occupations (trader, soldier, priest and so on) arrive in later milestones.
+// lives either in the countryside or in its cell's settlement.
+//   storeFed     eats from the settlement's store and uses up everyday and luxury goods from it
+//                (milestone 2); otherwise it feeds itself (foragers, herders)
+//   luxuryNeeds  how many times an ordinary person's luxuries each of its people wants (default 1)
+// Elite and soldiers (milestone 4) live in a polity's capital, fed by tribute; the polity system
+// sets how many there are, drawing them from the capital's farmers and sending them back.
+// More occupations (trader, priest and so on) arrive in later milestones. Add new ones at the end:
+// groups store their occupation by its place in this list.
 {
   "occupations": [
     { "name": "Forager", "class": "lower", "livesIn": "countryside" },
-    { "name": "Farmer", "class": "lower", "livesIn": "countryside" },
-    { "name": "Craftsman", "class": "middle", "livesIn": "settlement" },
-    { "name": "Herder", "class": "lower", "livesIn": "countryside" }
+    { "name": "Farmer", "class": "lower", "livesIn": "countryside", "storeFed": true },
+    { "name": "Craftsman", "class": "middle", "livesIn": "settlement", "storeFed": true },
+    { "name": "Herder", "class": "lower", "livesIn": "countryside" },
+    { "name": "Elite", "class": "upper", "livesIn": "settlement", "storeFed": true, "luxuryNeeds": 10 },
+    { "name": "Soldier", "class": "lower", "livesIn": "settlement", "storeFed": true }
   ]
 }

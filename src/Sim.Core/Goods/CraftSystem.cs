@@ -35,6 +35,8 @@ public sealed class CraftSystem : ISimSystem
     private readonly Recipe?[] _best;
     private readonly int _farmer;
     private readonly int _craftsman;
+    private readonly bool[] _storeFedOccupation;
+    private readonly bool[] _settlementOccupation;
     private Stockpiles? _stockpiles;
     private PopulationGroups? _groups;
     private EntityTable? _settlements;
@@ -52,6 +54,8 @@ public sealed class CraftSystem : ISimSystem
         _best = new Recipe?[rules.Goods.Count];
         _farmer = occupations.IndexOf(OccupationSet.Farmer);
         _craftsman = occupations.IndexOf(OccupationSet.Craftsman);
+        _storeFedOccupation = occupations.Occupations.Select(o => o.StoreFed).ToArray();
+        _settlementOccupation = occupations.Occupations.Select(o => o.LivesInSettlement).ToArray();
         _shortfall = new double[rules.Goods.Count];
         _workers = new double[rules.Goods.Count];
     }
@@ -98,13 +102,13 @@ public sealed class CraftSystem : ISimSystem
         }
     }
 
-    // Craftsmen in a cell that no longer has a settlement go back to farming.
+    // Craftsmen, elite and soldiers in a cell that no longer has a settlement go back to farming.
     private void ReturnStrandedCraftsmen()
     {
         PopulationGroups groups = _groups!;
         for (int group = 0; group < groups.IdCount; group++)
         {
-            if (!groups.IsAlive(group) || groups.Occupation(group) != _craftsman || groups.Size(group) <= 0.0)
+            if (!groups.IsAlive(group) || !_settlementOccupation[groups.Occupation(group)] || groups.Size(group) <= 0.0)
             {
                 continue;
             }
@@ -138,7 +142,8 @@ public sealed class CraftSystem : ISimSystem
         double farmers = farmerGroup >= 0 ? groups.Size(farmerGroup) : 0.0;
         int craftsmanGroup = groups.Find(cell, _craftsman);
         double craftsmen = craftsmanGroup >= 0 ? groups.Size(craftsmanGroup) : 0.0;
-        double fed = farmers + craftsmen;
+        double fed = _prices!.StoreFed(cell);
+        double luxuryFed = _prices.LuxuryFed(cell);
         if (fed <= 0.0)
         {
             return;
@@ -246,7 +251,7 @@ public sealed class CraftSystem : ISimSystem
                 continue;
             }
 
-            double wanted = perPerson * fed;
+            double wanted = perPerson * (_rules.Goods.Get(need).NeedTier == NeedTier.Luxury ? luxuryFed : fed);
             double remaining = wanted;
             foreach (int good in _rules.NeedGoods[need])
             {
@@ -270,16 +275,12 @@ public sealed class CraftSystem : ISimSystem
 
         double everyday = everydayWanted > 0.0 ? everydayTaken / everydayWanted : 1.0;
         double luxury = luxuryWanted > 0.0 ? luxuryTaken / luxuryWanted : 1.0;
-        farmerGroup = groups.Find(cell, _farmer);
-        craftsmanGroup = groups.Find(cell, _craftsman);
-        if (farmerGroup >= 0)
+        foreach (int group in groups.InCell(cell))
         {
-            groups.SetNeedsMet(farmerGroup, everyday, luxury);
-        }
-
-        if (craftsmanGroup >= 0)
-        {
-            groups.SetNeedsMet(craftsmanGroup, everyday, luxury);
+            if (_storeFedOccupation[groups.Occupation(group)])
+            {
+                groups.SetNeedsMet(group, everyday, luxury);
+            }
         }
     }
 

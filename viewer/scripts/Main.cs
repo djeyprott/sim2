@@ -1530,8 +1530,13 @@ public partial class Main : Node2D
             cells += polities.RulerOf(c) == ruler ? 1 : 0;
         }
 
+        string tribute = p.Capital == cell
+            ? $"\n  Capital: takes {polities.Tribute(ruler).ToString("N0", CultureInfo.InvariantCulture)} grain a year in tribute"
+            : polities.Taken(cell) > 0.0 ? $"\n  Gives {(100.0 * polities.Taken(cell)).ToString("0", CultureInfo.InvariantCulture)}% of its store a year in tribute" : "";
         return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, {cells} cells"
             + (p.Capital == cell ? ", capital here" : "")
+            + tribute
+            + $"\n  Unrest {(100.0 * polities.CellUnrest(cell)).ToString("0", CultureInfo.InvariantCulture)}%"
             + $"\n  Temperament: aggression {p.Aggression.ToString("0.00", CultureInfo.InvariantCulture)}, "
             + $"greed {p.Greed.ToString("0.00", CultureInfo.InvariantCulture)}, expansion {p.Expansion.ToString("0.00", CultureInfo.InvariantCulture)}";
     }

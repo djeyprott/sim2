@@ -66,6 +66,28 @@ public sealed class PolityParameters
 
     public int StateSettlements { get; set; } = 5;
 
+    public double TributeShare { get; set; } = 0.15;
+
+    public double MaxTributeShare { get; set; } = 0.5;
+
+    public double EliteShare { get; set; } = 0.01;
+
+    public double PeaceSoldierShare { get; set; } = 0.005;
+
+    public double BorderSoldierShare { get; set; } = 0.02;
+
+    public double StaffChangeRate { get; set; } = 0.2;
+
+    public double MaxStaffShareOfFarmers { get; set; } = 0.5;
+
+    public double UnrestRate { get; set; } = 0.1;
+
+    public double HungerUnrest { get; set; } = 1.0;
+
+    public double NeedsUnrest { get; set; } = 0.2;
+
+    public double TributeUnrest { get; set; } = 1.5;
+
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
     public static PolityParameters Parse(string json)
@@ -80,7 +102,9 @@ public sealed class PolityParameters
         double[] chances = { p.FoundChance, p.JoinChance, p.UnlinkedJoinFactor };
         if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0
             || p.CrowdPeople <= 0.0 || p.ChiefdomReach <= 0.0 || p.StateReach < p.ChiefdomReach || p.ClaimNeighbours < 1 || p.ClaimNeighbours > 6
-            || p.StatePeople <= 0.0 || p.StateSettlements < 1)
+            || p.StatePeople <= 0.0 || p.StateSettlements < 1
+            || new[] { p.TributeShare, p.MaxTributeShare, p.EliteShare, p.PeaceSoldierShare, p.BorderSoldierShare, p.StaffChangeRate, p.MaxStaffShareOfFarmers, p.UnrestRate }.Any(v => v < 0.0 || v > 1.0)
+            || p.HungerUnrest < 0.0 || p.NeedsUnrest < 0.0 || p.TributeUnrest < 0.0)
         {
             throw new InvalidDataException("polities.json: chances 0 to 1, people and reach above 0, state reach at least chiefdom reach, claimNeighbours 1 to 6.");
         }
@@ -97,8 +121,10 @@ public sealed class PolityParameters
 /// cells beyond its reach (trade-link cost from its capital: chiefdoms reach less than states),
 /// draws in unruled settlements within reach (more readily those it trades with, and as its
 /// temperament's expansion says), and claims unruled cells hemmed in by its own; large, crowded,
-/// long-farmed settlements with grain to spare found new chiefdoms; and chiefdoms that rule enough
-/// people and settlements become states (and back). Runs once a year, after seafaring.
+/// long-farmed settlements with grain to spare found new chiefdoms; ruled settlements give their
+/// capital tribute, which feeds the elite and soldiers drawn from its farmers; every group's unrest
+/// follows hunger, unmet needs and tribute; and chiefdoms that rule enough people and settlements
+/// become states (and back). Runs once a year, after seafaring.
 /// </summary>
 public sealed class PolitySystem : ISimSystem
 {
@@ -113,10 +139,19 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>The polity ruling each cell, plus one (0: none).</summary>
     public const string RulerField = "polities.ruler";
 
+    /// <summary>The share of each good in its store that a ruled settlement gave its capital last year.</summary>
+    public const string TakenField = "polities.taken";
+
     private readonly PolityParameters _parameters;
     private readonly TradeSystem? _trade;
     private readonly TradeParameters _tradeParameters = TradeParameters.LoadDefault();
     private IntColumn? _stateSince;
+    private DoubleColumn? _tribute;
+    private double[] _taken = Array.Empty<double>();
+    private OccupationSet _occupations = OccupationSet.LoadDefault();
+    private int _farmer = -1;
+    private int _elite = -1;
+    private int _soldier = -1;
     private PopulationGroups? _groups;
     private Stockpiles? _stockpiles;
     private int _grain = -1;
@@ -181,6 +216,8 @@ public sealed class PolitySystem : ISimSystem
         _greed = _organizations.AddDoubleColumn("greed");
         _expansion = _organizations.AddDoubleColumn("expansion");
         _stateSince = _organizations.AddIntColumn("stateSince");
+        _tribute = _organizations.AddDoubleColumn("tribute");
+        _taken = state.AddDoubleField(TakenField);
         _positions = state.AddTable(PositionTableName);
         _positionOrganization = _positions.AddIntColumn("organization");
         _positionName = _positions.AddStringColumn("position");
@@ -199,6 +236,9 @@ public sealed class PolitySystem : ISimSystem
         }
 
         _groups = new PopulationGroups(state);
+        _farmer = _occupations.IndexOf(OccupationSet.Farmer);
+        _elite = _occupations.Contains(OccupationSet.Elite) ? _occupations.IndexOf(OccupationSet.Elite) : -1;
+        _soldier = _occupations.Contains(OccupationSet.Soldier) ? _occupations.IndexOf(OccupationSet.Soldier) : -1;
         if (state.HasTable(Stockpiles.LedgerTableName))
         {
             _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
@@ -351,8 +391,13 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
-        // Chiefdoms that rule enough people and settlements are states, and back.
+        // Tribute, the elite and soldiers, and unrest.
         cellsOf = CellsByPolity();
+        TakeTribute(cellsOf);
+        Staff(cellsOf);
+        UpdateUnrest();
+
+        // Chiefdoms that rule enough people and settlements are states, and back.
         foreach (PolityInfo p in Standing())
         {
             double people = 0.0;
@@ -369,6 +414,192 @@ public sealed class PolitySystem : ISimSystem
                 SetLevel(p.Id, state ? PolityLevel.State : PolityLevel.Chiefdom, tick);
             }
         }
+    }
+
+    /// <summary>The grain a polity's capital took in tribute last year.</summary>
+    public double Tribute(int polity) => _tribute![polity];
+
+    /// <summary>The share of each good a ruled settlement gave its capital last year (0 for others).</summary>
+    public double Taken(int cell) => _taken[cell];
+
+    // Each ruled settlement but the capital gives the capital a share of each good in its store:
+    // tributeShare times the polity's greed, less the farther it is (1 - cost / reach) and the
+    // more restless its people are (1 - unrest), at most maxTributeShare.
+    private void TakeTribute(List<int>[] cellsOf)
+    {
+        foreach (int cell in _land)
+        {
+            _taken[cell] = 0.0;
+        }
+
+        if (_stockpiles == null)
+        {
+            return;
+        }
+
+        foreach (PolityInfo p in Standing())
+        {
+            double reach = p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach;
+            FillReach(p.Capital, reach);
+            double grain = 0.0;
+            foreach (int cell in cellsOf[p.Id])
+            {
+                if (cell == p.Capital || _settlementPlusOne[cell] <= 0 || !Reached(cell))
+                {
+                    continue;
+                }
+
+                double near = 1.0 - _reachCost[cell] / reach;
+                double share = Math.Min(_parameters.MaxTributeShare, _parameters.TributeShare * p.Greed * near * (1.0 - CellUnrest(cell)));
+                if (share <= 0.0)
+                {
+                    continue;
+                }
+
+                _taken[cell] = share;
+                for (int good = 0; good < _stockpiles.Goods.Count; good++)
+                {
+                    double moved = _stockpiles.Transfer(cell, p.Capital, good, share * _stockpiles.Stock(cell, good));
+                    grain += good == _grain ? moved : 0.0;
+                }
+            }
+
+            _tribute![p.Id] = grain;
+        }
+    }
+
+    // In each capital the elite and soldiers move toward what the polity wants, drawn from the
+    // capital's farmers and sent back to them: elite eliteShare of the people it rules; soldiers
+    // peaceSoldierShare of them, or borderSoldierShare where it borders another polity, times its
+    // aggression; both together no more than last year's grain tribute feeds. Elite and soldiers
+    // anywhere but a standing polity's capital go back to farming.
+    private void Staff(List<int>[] cellsOf)
+    {
+        if (_elite < 0 || _soldier < 0)
+        {
+            return;
+        }
+
+        PopulationGroups groups = _groups!;
+        var capitals = new HashSet<int>();
+        foreach (PolityInfo p in Standing())
+        {
+            capitals.Add(p.Capital);
+            double people = 0.0;
+            bool border = false;
+            foreach (int cell in cellsOf[p.Id])
+            {
+                people += groups.CellTotal(cell);
+                foreach (int other in _map!.Grid.Neighbours(cell))
+                {
+                    int ruler = RulerOf(other);
+                    border |= ruler >= 0 && ruler != p.Id;
+                }
+            }
+
+            double elite = _parameters.EliteShare * people;
+            double soldiers = (border ? _parameters.BorderSoldierShare : _parameters.PeaceSoldierShare) * p.Aggression * people;
+            double fed = _tribute![p.Id];
+            if (elite + soldiers > fed)
+            {
+                double scale = fed / (elite + soldiers);
+                elite *= scale;
+                soldiers *= scale;
+            }
+
+            MoveToward(p.Capital, _elite, elite);
+            MoveToward(p.Capital, _soldier, soldiers);
+        }
+
+        for (int group = 0; group < groups.IdCount; group++)
+        {
+            if (!groups.IsAlive(group) || groups.Size(group) <= 0.0)
+            {
+                continue;
+            }
+
+            int occupation = groups.Occupation(group);
+            int cell = groups.Cell(group);
+            if ((occupation == _elite || occupation == _soldier) && !capitals.Contains(cell) && _settlementPlusOne[cell] > 0)
+            {
+                double people = groups.Size(group);
+                double food = groups.Food(group), everyday = groups.Everyday(group), luxury = groups.Luxury(group);
+                int farmers = groups.FindOrAdd(cell, _farmer);
+                groups.AddPeople(farmers, people, food, everyday, luxury, group);
+                groups.SetSize(group, 0.0);
+            }
+        }
+    }
+
+    // Moves a capital's group of an occupation a step toward a target size, from or to its farmers.
+    private void MoveToward(int cell, int occupation, double target)
+    {
+        PopulationGroups groups = _groups!;
+        int farmerGroup = groups.Find(cell, _farmer);
+        int group = groups.Find(cell, occupation);
+        double now = group >= 0 ? groups.Size(group) : 0.0;
+        double change = _parameters.StaffChangeRate * (target - now);
+        if (change > 0.0 && farmerGroup >= 0)
+        {
+            change = Math.Min(change, _parameters.MaxStaffShareOfFarmers * groups.Size(farmerGroup));
+            if (change <= 0.0)
+            {
+                return;
+            }
+
+            group = groups.FindOrAdd(cell, occupation);
+            farmerGroup = groups.Find(cell, _farmer);
+            if (farmerGroup < 0)
+            {
+                return;
+            }
+
+            groups.AddPeople(group, change, groups.Food(farmerGroup), groups.Everyday(farmerGroup), groups.Luxury(farmerGroup), farmerGroup);
+            groups.SetSize(farmerGroup, groups.Size(farmerGroup) - change);
+        }
+        else if (change < 0.0 && group >= 0)
+        {
+            double leaving = Math.Min(-change, now);
+            int farmers = groups.FindOrAdd(cell, _farmer);
+            group = groups.Find(cell, occupation);
+            groups.AddPeople(farmers, leaving, groups.Food(group), groups.Everyday(group), groups.Luxury(group), group);
+            groups.SetSize(group, now - leaving);
+        }
+    }
+
+    // Each group's unrest moves unrestRate of the way toward hungerUnrest x (1 - food met) +
+    // needsUnrest x (1 - everyday needs met) + tributeUnrest x the share its settlement gave in
+    // tribute, at most 1.
+    private void UpdateUnrest()
+    {
+        PopulationGroups groups = _groups!;
+        for (int group = 0; group < groups.IdCount; group++)
+        {
+            if (!groups.IsAlive(group) || groups.Size(group) <= 0.0)
+            {
+                continue;
+            }
+
+            double target = Math.Min(1.0, _parameters.HungerUnrest * (1.0 - groups.Food(group))
+                + _parameters.NeedsUnrest * (1.0 - groups.Everyday(group))
+                + _parameters.TributeUnrest * _taken[groups.Cell(group)]);
+            double unrest = groups.Unrest(group);
+            groups.SetUnrest(group, unrest + _parameters.UnrestRate * (target - unrest));
+        }
+    }
+
+    /// <summary>The size-weighted unrest of a cell's people (0 where nobody lives).</summary>
+    public double CellUnrest(int cell)
+    {
+        PopulationGroups groups = _groups!;
+        double people = 0.0, unrest = 0.0;
+        foreach (int group in groups.InCell(cell))
+        {
+            people += groups.Size(group);
+            unrest += groups.Size(group) * groups.Unrest(group);
+        }
+
+        return people > 0.0 ? unrest / people : 0.0;
     }
 
     // Whether farming has stood in a cell at least this many years.
@@ -515,6 +746,7 @@ public sealed class PolitySystem : ISimSystem
         _capital![id] = capital;
         _level![id] = (int)PolityLevel.Chiefdom;
         _stateSince![id] = -1;
+        _tribute![id] = 0.0;
         _aggression![id] = Temperament(rng);
         _greed![id] = Temperament(rng);
         _expansion![id] = Temperament(rng);

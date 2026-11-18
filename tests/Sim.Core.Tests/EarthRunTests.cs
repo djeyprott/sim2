@@ -1271,10 +1271,14 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         }
     }
 
+    // The plough came off this list in version 0.4.1 (amended with the owner's agreement): kept to
+    // wheat and barley farming with cattle, it can be used only in one connected belt from Europe to
+    // Central Asia, and spreads across it before anyone else finds it; its second regions had been
+    // African hoe farmers, who never took it up.
     [Fact]
-    public void The_plough_the_wheel_and_bronze_arise_in_2_separate_regions_in_half_the_seeds_where_they_appear()
+    public void The_wheel_and_bronze_arise_in_2_separate_regions_in_half_the_seeds_where_they_appear()
     {
-        foreach (string name in new[] { "The plough", "The wheel", "Bronze" })
+        foreach (string name in new[] { "The wheel", "Bronze" })
         {
             var seen = _results.Where(r => r.FirstDiscovery.ContainsKey(name)).ToList();
             Assert.True(seen.Count(r => r.DiscoveryRegions[name] >= 2) * 2 >= seen.Count,

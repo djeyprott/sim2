@@ -42,6 +42,6 @@
 
   // A chiefdom that rules at least statePeople people and stateSettlements settlements is a
   // state; a state that falls below either is a chiefdom again.
-  "statePeople": 20000,
-  "stateSettlements": 5
+  "statePeople": 150000,
+  "stateSettlements": 15
 }

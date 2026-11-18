@@ -817,7 +817,72 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         loaded.Load(new MemoryStream(save.ToArray()));
         sim.Run(20 * 12);
         loaded.Run(20 * 12);
-        Assert.Equal(sim.StateChecksum(), loaded.StateChecksum());
+        Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
+    }
+
+    // Names the fields and table columns in which two world states differ (for failure messages).
+    private static string StateDifferences(WorldState a, WorldState b)
+    {
+        var differ = new List<string>();
+        foreach (string name in a.FieldNames)
+        {
+            bool same = a.HasField(name) && b.HasField(name) && (
+                IsIntField(a, name) ? a.IntField(name).AsSpan().SequenceEqual(b.IntField(name)) : a.DoubleField(name).AsSpan().SequenceEqual(b.DoubleField(name)));
+            if (!same)
+            {
+                differ.Add(name);
+            }
+        }
+
+        foreach (string tableName in a.TableNames)
+        {
+            EntityTable ta = a.Table(tableName), tb = b.Table(tableName);
+            if (ta.IdCount != tb.IdCount)
+            {
+                differ.Add($"{tableName} ({ta.IdCount} against {tb.IdCount} rows)");
+                continue;
+            }
+
+            foreach (string column in ta.ColumnNames)
+            {
+                bool same = true;
+                try
+                {
+                    same = ta.IntColumn(column).Values.SequenceEqual(tb.IntColumn(column).Values);
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        same = ta.DoubleColumn(column).Values.SequenceEqual(tb.DoubleColumn(column).Values);
+                    }
+                    catch (Exception)
+                    {
+                        same = true;
+                    }
+                }
+
+                if (!same)
+                {
+                    differ.Add(tableName + "." + column);
+                }
+            }
+        }
+
+        return string.Join(", ", differ.Take(30));
+    }
+
+    private static bool IsIntField(WorldState state, string name)
+    {
+        try
+        {
+            state.IntField(name);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     [Fact]

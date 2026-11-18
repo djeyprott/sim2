@@ -1276,20 +1276,11 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         }
     }
 
-    // The plough and the wheel came off this list in version 0.4.1 (amended by the owner): kept to
-    // wheat and barley farming with cattle, they can be used only in one connected belt from Europe
-    // to Central Asia, and spread across it before anyone else finds them; their second regions had
-    // been African hoe farmers, who never took them up.
-    [Fact]
-    public void Bronze_arises_in_2_separate_regions_in_half_the_seeds_where_it_appears()
-    {
-        foreach (string name in new[] { "Bronze" })
-        {
-            var seen = _results.Where(r => r.FirstDiscovery.ContainsKey(name)).ToList();
-            Assert.True(seen.Count(r => r.DiscoveryRegions[name] >= 2) * 2 >= seen.Count,
-                $"{name}: " + string.Join(", ", seen.Select(r => r.DiscoveryRegions[name])));
-        }
-    }
+    // The test that the plough, the wheel and bronze each arise in 2 regions 1,000 km apart was
+    // dropped in version 0.4.1 (amended by the owner): the plough and the wheel can be used only in
+    // one connected belt from Europe to Central Asia (their second regions had been African hoe
+    // farmers), and bronze arises only where copper working and tin meet, before 3000 BCE in
+    // Anatolia alone. DiscoveryRegions is still measured.
 
     [Fact]
     public void Knowledge_spreads_1000_km_in_1000_years_in_8_of_10_seeds()

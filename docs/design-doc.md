@@ -1,8 +1,9 @@
-# sim2 design doc (version 1.2)
+# sim2 design doc (version 1.3)
 
-Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4 (`milestone-3-spec.md`). Milestone 4 (states and war) is next; its spec is not yet written.
+Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4, with fixes as v0.4.1 (`milestone-3-spec.md`). Milestone 4 (states and war) is next; its spec is not yet written.
 
 Change log:
+- 1.3 (2026-11-17): milestone 3 fixes released as v0.4.1 (spec 1.1): metal know-how and horse herding kept near their goods or animals, no cattle in tropical forest, the plough with wheat and barley; backlog items on copper working in Europe and long-distance tin.
 - 1.2 (2026-11-17): milestone 3 complete, released as v0.4; backlog items on the sail around the Gulf and the Red Sea, the timing of horses, and Austronesian voyaging.
 - 1.1 (2026-11-16): milestone 3 spec agreed: technology is held by population groups; the backlog items on when animals are first herded and on the speed of trade move into milestone 3.
 - 1.0 (2026-11-16): milestone 2 complete, released as v0.3; backlog items on when animals are first herded and on the speed of trade.
@@ -93,7 +94,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 | 0 | Skeleton | Earth map grid, headless core, monthly clock, time controls, save/load, map viewer, Windows releases | Complete, v0.1 |
 | 1 | Land and people | Climate that changes, rivers and lakes, biomes, forager population, origin of farming, settlement founding, migration, famine | Complete, v0.2 |
 | 2 | Goods and trade | Production, stockpiles, consumption, spoilage, trade routes, herding | Complete, v0.3 |
-| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | Complete, v0.4 |
+| 3 | Technology | Discovery, diffusion, effects on production and population, seafaring | Complete, v0.4.1 |
 | 4 | States and war | Organizations, polities, borders, conquest, collapse | |
 | 5 | Culture | Language families, religions (as organizations), spread and schism | |
 | 6 | Historical figures | Named actors with personalities and agendas, dynasties, life events, a readable chronicle | |
@@ -118,5 +119,7 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - The sail around the Gulf and the Red Sea. In milestone 3's runs the sail is found elsewhere first and never reaches either sea, though it was first seen on the Gulf (Ubaid boats, 5500 to 5000 BCE); the Gulf and Red Sea coasts hold few farming settlements in the simulation.
 - Horses are first herded about 1,500 years early (5800 to 4800 BCE against Botai's 3500 BCE) and riding comes about 2,000 years early; tuned in milestone 3 only so that horse herding is found in most runs.
 - Austronesian voyaging: outrigger canoes (history 1500 BCE) need 7,000 years of farming and so do not come before 3000 BCE; remote Oceania stays unsettled until a later era's runs.
+- Copper working in Europe. Since v0.4.1 it is kept near copper and no longer spreads from Anatolia, and Europe's copper districts are farmed too late to find it before 3000 BCE (history: the Balkans by about 5000 BCE). A per-place time to discovery, or know-how carried along trade routes without being used, could fix it.
+- Long-distance tin. Tin travels only as far as the lands that work bronze (under 1,000 km), so Afghan and Central Asian tin never reaches Mesopotamia; it needs merchants or goods traded for resale.
 - Globe view.
 - Charts in the viewer.

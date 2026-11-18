@@ -20,6 +20,7 @@
 //                 there); to learn, use and keep it, wild or kept in the cell
 //                 Where a cell does not meet its conditions, groups slowly forget a technology
 //                 (technology.json "unusedLoss").
+//   threatened    for discovery only: the cell's polity must be at war or border another
 //   settledYears  for discovery only: farming has stood in the cell or a neighbour at least this
 //                 long. Most of this know-how came to long-settled farmers: farming began about
 //                 9500 BCE, so a technology first seen in year Y BCE gets about 9500 - Y - 500
@@ -47,6 +48,10 @@
 //                                     the largest known counts, paddling (trade.json) without
 //                   seaCost           the cost of carrying goods across a sea cell, against 1 for
 //                                     a cell of lowland; the smallest known counts
+//                   defence           multiplies a polity's strength defending a cell where it
+//                                     is used (polities.json)
+//                   attack            multiplies a polity's strength attacking over open lowland,
+//                                     where its capital uses it
 // Copper working and bronze have no effects listed here: they open recipes (recipes.json); horse
 // herding has none either: it brings horses (livestock.json).
 // Effect sizes are first estimates, tuned in milestone 3 step 8.
@@ -163,6 +168,25 @@
       "chance": 0.000001, "spread": 0.02,
       "effects": { "herderSpread": 2.0, "landCarrying": 0.85 },
       "history": "2200 BCE, widespread from the Pontic-Caspian steppe (earlier riding debated)"
+    },
+    {
+      // Walls and ditches round a settlement (milestone 4): found only where the cell's polity is
+      // at war or borders another; defenders of a cell where they are used count stronger.
+      "name": "Fortifications", "colour": "#7a7a7a", "occupations": [ "Craftsman", "Farmer" ],
+      "threatened": true,
+      "chance": 0.0003, "spread": 0.01,
+      "settledYears": 3500,
+      "effects": { "defence": 1.5 },
+      "history": "3500 BCE, walled towns in Mesopotamia and the Levant (Jericho's wall is far older)"
+    },
+    {
+      // Light two-wheeled war chariots (milestone 4): a polity whose capital uses them counts
+      // stronger attacking over open lowland.
+      "name": "Chariots", "colour": "#8b2500", "occupations": [ "Farmer", "Herder" ],
+      "requires": [ "The wheel", "Horse riding" ], "animals": [ "Horses" ],
+      "chance": 0.0001, "spread": 0.02,
+      "effects": { "attack": 1.5 },
+      "history": "2000 BCE, Sintashta (southern Urals); across Southwest Asia by 1600 BCE"
     }
   ]
 }

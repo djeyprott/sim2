@@ -87,7 +87,7 @@ public sealed class RunStatistics
 
         if (_polities != null)
         {
-            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain" });
+            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain", "wars", "wars_started", "conquests", "war_deaths" });
         }
 
         return string.Join(",", columns);
@@ -223,6 +223,13 @@ public sealed class RunStatistics
 
             values.Add((ruledPeople > 0.0 ? ruledUnrest / ruledPeople : 0.0).ToString("F4", CultureInfo.InvariantCulture));
             values.Add(Number(standing.Sum(p => _polities.Tribute(p.Id))));
+
+            // Wars under way, wars started and conquests so far, and everyone killed in war so far.
+            List<WarInfo> wars = _polities.Wars();
+            values.Add(wars.Count(w => w.UnderWay).ToString(CultureInfo.InvariantCulture));
+            values.Add(wars.Count.ToString(CultureInfo.InvariantCulture));
+            values.Add(wars.Count(w => w.Conquest).ToString(CultureInfo.InvariantCulture));
+            values.Add(Number(wars.Sum(w => w.AttackerDeaths + w.DefenderDeaths)));
         }
 
         return string.Join(",", values);

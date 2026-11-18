@@ -750,13 +750,14 @@ public partial class Main : Node2D
         return values;
     }
 
-    // Per cell: -1 where no polity rules; otherwise the ruling polity's id times 4, plus 2 for its
-    // capital, plus 1 when it is a state (not a chiefdom).
+    // Per cell: -1 where no polity rules; otherwise the ruling polity's id times 8, plus 4 where
+    // it borders the polity it is at war with, plus 2 for its capital, plus 1 when it is a state.
     private static double[] ExtractPolitical(Simulation sim, PolitySystem polities, int cellCount)
     {
         var values = new double[cellCount];
         var states = new HashSet<int>();
         var capitals = new HashSet<int>();
+        var enemyOf = new Dictionary<int, int>();
         foreach (PolityInfo p in polities.Standing())
         {
             if (p.Level == PolityLevel.State)
@@ -765,12 +766,33 @@ public partial class Main : Node2D
             }
 
             capitals.Add(p.Capital);
+            int war = polities.WarOf(p.Id);
+            if (war >= 0)
+            {
+                WarInfo w = polities.War(war);
+                enemyOf[p.Id] = w.Attacker == p.Id ? w.Defender : w.Attacker;
+            }
         }
 
         for (int cell = 0; cell < cellCount; cell++)
         {
             int ruler = polities.RulerOf(cell);
-            values[cell] = ruler < 0 ? -1.0 : ruler * 4.0 + (capitals.Contains(cell) ? 2.0 : 0.0) + (states.Contains(ruler) ? 1.0 : 0.0);
+            if (ruler < 0)
+            {
+                values[cell] = -1.0;
+                continue;
+            }
+
+            bool front = false;
+            if (enemyOf.TryGetValue(ruler, out int enemy))
+            {
+                foreach (int other in sim.Map.Grid.Neighbours(cell))
+                {
+                    front |= polities.RulerOf(other) == enemy;
+                }
+            }
+
+            values[cell] = ruler * 8.0 + (front ? 4.0 : 0.0) + (capitals.Contains(cell) ? 2.0 : 0.0) + (states.Contains(ruler) ? 1.0 : 0.0);
         }
 
         return values;
@@ -914,16 +936,21 @@ public partial class Main : Node2D
                     }
 
                     int code = (int)v;
-                    int polity = code / 4;
+                    int polity = code / 8;
                     if ((code & 2) != 0)
                     {
                         return CapitalColour;
                     }
 
+                    if ((code & 4) != 0)
+                    {
+                        return WarFrontColour;
+                    }
+
                     Color colour = PolityColour(polity, (code & 1) != 0);
                     foreach (int other in map.Grid.Neighbours(cell))
                     {
-                        if (map.IsLand(other) && (values[other] < 0.0 || (int)values[other] / 4 != polity))
+                        if (map.IsLand(other) && (values[other] < 0.0 || (int)values[other] / 8 != polity))
                         {
                             return colour.Darkened(0.45f);
                         }
@@ -1057,7 +1084,7 @@ public partial class Main : Node2D
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
                 break;
             case PoliticalMode:
-                title = "Who rules: each polity in its own colour, its border darker";
+                title = "Who rules: each polity in its own colour, its border darker, war fronts red";
                 entries.Add((PolityColour(1, true), "A state"));
                 entries.Add((PolityColour(1, false), "A chiefdom (paler)"));
                 entries.Add((PolityColour(1, true).Darkened(0.45f), "Border"));
@@ -1201,6 +1228,7 @@ public partial class Main : Node2D
     private static readonly Color NoneHeld = Color.Color8(24, 24, 30);
     private static readonly Color DiscoveryColour = Color.Color8(255, 60, 200);
     private static readonly Color CapitalColour = Color.Color8(255, 255, 255);
+    private static readonly Color WarFrontColour = Color.Color8(220, 30, 30);
 
     // Amount held per person, as a power of ten: 0.0001 to 10.
     private static readonly (double At, Color Colour)[] HeldStops =
@@ -1536,9 +1564,30 @@ public partial class Main : Node2D
         return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, {cells} cells"
             + (p.Capital == cell ? ", capital here" : "")
             + tribute
+            + DescribeWar(polities, ruler)
             + $"\n  Unrest {(100.0 * polities.CellUnrest(cell)).ToString("0", CultureInfo.InvariantCulture)}%"
             + $"\n  Temperament: aggression {p.Aggression.ToString("0.00", CultureInfo.InvariantCulture)}, "
             + $"greed {p.Greed.ToString("0.00", CultureInfo.InvariantCulture)}, expansion {p.Expansion.ToString("0.00", CultureInfo.InvariantCulture)}";
+    }
+
+    // The war a polity is in, if any, and how it goes.
+    private static string DescribeWar(PolitySystem polities, int polity)
+    {
+        int war = polities.WarOf(polity);
+        if (war < 0)
+        {
+            return "";
+        }
+
+        WarInfo w = polities.War(war);
+        int enemy = w.Attacker == polity ? w.Defender : w.Attacker;
+        var started = new GameDate(w.Started);
+        int took = w.Attacker == polity ? w.AttackerTook : w.DefenderTook;
+        int lost = w.Attacker == polity ? w.DefenderTook : w.AttackerTook;
+        double deaths = w.AttackerDeaths + w.DefenderDeaths;
+        return $"\n  At war with {polities.Info(enemy).Name} since {started.Year} {(started.IsBce ? "BCE" : "CE")}"
+            + (w.Attacker == polity ? " (attacking)" : " (defending)")
+            + $": took {took} cells, lost {lost}, {deaths.ToString("N0", CultureInfo.InvariantCulture)} dead";
     }
 
     private static string DescribeSettlement(Simulation sim, int cell, SettlementSystem? settlements)

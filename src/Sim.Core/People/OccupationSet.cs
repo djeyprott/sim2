@@ -12,7 +12,7 @@ public enum SocialClass
 /// <summary>A way of life a population group can have.</summary>
 public sealed class Occupation
 {
-    internal Occupation(int index, string name, SocialClass socialClass, bool livesInSettlement, bool storeFed = false, double luxuryNeeds = 1.0)
+    internal Occupation(int index, string name, SocialClass socialClass, bool livesInSettlement, bool storeFed = false, double luxuryNeeds = 1.0, IReadOnlyDictionary<string, double>? keeps = null)
     {
         Index = index;
         Name = name;
@@ -20,6 +20,7 @@ public sealed class Occupation
         LivesInSettlement = livesInSettlement;
         StoreFed = storeFed;
         LuxuryNeeds = luxuryNeeds;
+        Keeps = keeps ?? new Dictionary<string, double>();
     }
 
     public int Index { get; }
@@ -36,6 +37,9 @@ public sealed class Occupation
 
     /// <summary>How many times an ordinary person's luxuries each of its people wants (the elite want many).</summary>
     public double LuxuryNeeds { get; }
+
+    /// <summary>Goods (by name) its settlement wants in store for each of its people, worn out only by spoilage (soldiers' weapons).</summary>
+    public IReadOnlyDictionary<string, double> Keeps { get; }
 }
 
 /// <summary>The list of occupations, read from occupations.json.</summary>
@@ -98,7 +102,12 @@ public sealed class OccupationSet
                 throw new InvalidDataException($"Occupation '{entry.Name}': luxuryNeeds not negative; only farmers and settlement dwellers are store-fed.");
             }
 
-            occupations[i] = new Occupation(i, entry.Name, socialClass, inSettlement, entry.StoreFed, entry.LuxuryNeeds);
+            if (entry.Keeps.Values.Any(v => v < 0.0 || double.IsNaN(v)) || (entry.Keeps.Count > 0 && !entry.StoreFed))
+            {
+                throw new InvalidDataException($"Occupation '{entry.Name}': goods kept must not be negative, and only store-fed occupations keep goods.");
+            }
+
+            occupations[i] = new Occupation(i, entry.Name, socialClass, inSettlement, entry.StoreFed, entry.LuxuryNeeds, entry.Keeps);
         }
 
         return new OccupationSet(occupations);
@@ -143,5 +152,7 @@ public sealed class OccupationSet
         public bool StoreFed { get; set; }
 
         public double LuxuryNeeds { get; set; } = 1.0;
+
+        public Dictionary<string, double> Keeps { get; set; } = new Dictionary<string, double>();
     }
 }

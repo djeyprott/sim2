@@ -36,7 +36,7 @@ public sealed class CraftRules
         NeedGoods = new int[goods.Count][];
         for (int g = 0; g < goods.Count; g++)
         {
-            NeedGoods[g] = needs[g] <= 0.0 ? Array.Empty<int>() : Enumerable.Range(0, goods.Count)
+            NeedGoods[g] = needs[g] <= 0.0 && !substituteFor.Contains(g) ? Array.Empty<int>() : Enumerable.Range(0, goods.Count)
                 .Where(s => substituteFor[s] == g)
                 .OrderByDescending(s => substituteCounts[s]).ThenBy(s => s)
                 .Append(g).ToArray();
@@ -72,7 +72,7 @@ public sealed class CraftRules
 
     public double[] SubstituteCounts { get; }
 
-    /// <summary>By need good: the goods that meet it, best first, the good itself last (empty for goods that are not needs).</summary>
+    /// <summary>By need good (or good kept, such as weapons): the goods that meet it, best first, the good itself last (empty for others).</summary>
     public int[][] NeedGoods { get; }
 
     /// <summary>How many units of the need one unit of a good meets (1 for the need's own good).</summary>
@@ -136,10 +136,10 @@ public sealed class CraftRules
         {
             int good = goods.IndexOf(pair.Key);
             int target = goods.IndexOf(pair.Value.For);
-            if (needs[target] <= 0.0 || needs[good] > 0.0 || goods.Get(good).NeedTier != goods.Get(target).NeedTier
+            if ((needs[target] <= 0.0 && goods.Get(target).NeedTier != NeedTier.None) || needs[good] > 0.0 || goods.Get(good).NeedTier != goods.Get(target).NeedTier
                 || pair.Value.Counts <= 0.0 || double.IsNaN(pair.Value.Counts))
             {
-                throw new InvalidDataException($"needs.json: {pair.Key} must stand in for a need of its own tier, not be a need itself, and count for more than 0.");
+                throw new InvalidDataException($"needs.json: {pair.Key} must stand in for a need of its own tier (or a good of no tier kept by an occupation), not be a need itself, and count for more than 0.");
             }
 
             substituteFor[good] = target;

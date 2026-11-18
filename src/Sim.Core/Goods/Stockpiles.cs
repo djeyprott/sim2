@@ -199,6 +199,21 @@ public sealed class Stockpiles
         }
     }
 
+    /// <summary>A share of each good in a cell's stockpile is lost (burned in war).</summary>
+    public void LoseShare(int cell, double share)
+    {
+        share = Math.Clamp(share, 0.0, 1.0);
+        for (int g = 0; g < _stock.Length; g++)
+        {
+            double lost = _stock[g][cell] * share;
+            if (lost > 0.0)
+            {
+                _stock[g][cell] -= lost;
+                _lost[g] += lost;
+            }
+        }
+    }
+
     /// <summary>
     /// Moves goods straight from one cell's stockpile to another's (tribute): not traded, and the
     /// world's totals do not change. Returns what was moved (at most what the first holds).

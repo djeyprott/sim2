@@ -31,6 +31,14 @@ public readonly record struct PolityInfo(
     public bool Standing => Ended < 0;
 }
 
+/// <summary>A war between two polities, under way (Ended below 0) or over.</summary>
+public readonly record struct WarInfo(
+    int Id, int Attacker, int Defender, long Started, long Ended, int Winner, bool Conquest,
+    double AttackerDeaths, double DefenderDeaths, int AttackerTook, int DefenderTook)
+{
+    public bool UnderWay => Ended < 0;
+}
+
 /// <summary>How polities are founded and what they hold, read from polities.json.</summary>
 public sealed class PolityParameters
 {
@@ -88,6 +96,46 @@ public sealed class PolityParameters
 
     public double TributeUnrest { get; set; } = 1.5;
 
+    public double WarSoldierShare { get; set; } = 0.04;
+
+    public double WarThreshold { get; set; } = 0.6;
+
+    public double WarChance { get; set; } = 0.2;
+
+    public double MaxStrengthRatio { get; set; } = 4.0;
+
+    public double HungerWar { get; set; } = 1.0;
+
+    public double CovetWar { get; set; } = 0.5;
+
+    public double PeaceYears { get; set; } = 20.0;
+
+    public double WeaponStrength { get; set; } = 0.5;
+
+    public double MaxWeaponsPerSoldier { get; set; } = 2.0;
+
+    public double MinDistanceFactor { get; set; } = 0.25;
+
+    public double MilitiaShare { get; set; } = 0.01;
+
+    public double TakeRate { get; set; } = 0.3;
+
+    public double SoldierLoss { get; set; } = 0.2;
+
+    public double CivilianLoss { get; set; } = 0.02;
+
+    public double BurnShare { get; set; } = 0.5;
+
+    public double PlunderShare { get; set; } = 0.25;
+
+    public double RazeChance { get; set; } = 0.03;
+
+    public double RazeDeaths { get; set; } = 0.6;
+
+    public double ExhaustionLimit { get; set; } = 0.3;
+
+    public double MaxWarYears { get; set; } = 15.0;
+
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
     public static PolityParameters Parse(string json)
@@ -109,6 +157,13 @@ public sealed class PolityParameters
             throw new InvalidDataException("polities.json: chances 0 to 1, people and reach above 0, state reach at least chiefdom reach, claimNeighbours 1 to 6.");
         }
 
+        if (new[] { p.WarSoldierShare, p.WarChance, p.MinDistanceFactor, p.MilitiaShare, p.TakeRate, p.SoldierLoss, p.CivilianLoss, p.BurnShare, p.PlunderShare, p.RazeChance, p.RazeDeaths }.Any(v => v < 0.0 || v > 1.0)
+            || p.BurnShare + p.PlunderShare > 1.0 || p.MaxStrengthRatio < 1.0 || p.HungerWar < 0.0 || p.CovetWar < 0.0
+            || p.PeaceYears < 0.0 || p.WeaponStrength < 0.0 || p.MaxWeaponsPerSoldier < 0.0 || p.ExhaustionLimit <= 0.0 || p.MaxWarYears < 1.0)
+        {
+            throw new InvalidDataException("polities.json: war shares and chances 0 to 1 (burn and plunder together at most 1), maxStrengthRatio at least 1, exhaustionLimit above 0, maxWarYears at least 1.");
+        }
+
         return p;
     }
 }
@@ -124,7 +179,9 @@ public sealed class PolityParameters
 /// long-farmed settlements with grain to spare found new chiefdoms; ruled settlements give their
 /// capital tribute, which feeds the elite and soldiers drawn from its farmers; every group's unrest
 /// follows hunger, unmet needs and tribute; and chiefdoms that rule enough people and settlements
-/// become states (and back). Runs once a year, after seafaring.
+/// become states (and back). Wars (step 4): polities at war fight a year over their border cells,
+/// and polities at peace may declare war on a neighbour; the wars table keeps every war as history.
+/// Runs once a year, after seafaring.
 /// </summary>
 public sealed class PolitySystem : ISimSystem
 {
@@ -142,7 +199,33 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>The share of each good in its store that a ruled settlement gave its capital last year.</summary>
     public const string TakenField = "polities.taken";
 
+    /// <summary>Every war: attacker, defender, when it started and ended, winner, losses and cells taken.</summary>
+    public const string WarTableName = "polities.wars";
+
+    /// <summary>1 on cells of a polity at war or on its borders with another polity (from the last update), else 0.</summary>
+    public const string ThreatenedField = "polities.threatened";
+
     private readonly PolityParameters _parameters;
+    private int[] _threatened = Array.Empty<int>();
+    private EntityTable? _wars;
+    private IntColumn? _warAttacker;
+    private IntColumn? _warDefender;
+    private IntColumn? _warStarted;
+    private IntColumn? _warEnded;
+    private IntColumn? _warWinner;
+    private IntColumn? _warConquest;
+    private DoubleColumn? _warAttackerPeople;
+    private DoubleColumn? _warDefenderPeople;
+    private IntColumn? _warAttackerCells;
+    private IntColumn? _warDefenderCells;
+    private DoubleColumn? _warAttackerDeaths;
+    private DoubleColumn? _warDefenderDeaths;
+    private IntColumn? _warAttackerTook;
+    private IntColumn? _warDefenderTook;
+    private TechnologyEffect[] _defence = Array.Empty<TechnologyEffect>();
+    private TechnologyEffect[] _attack = Array.Empty<TechnologyEffect>();
+    private int _copperWeapons = -1;
+    private int _bronzeWeapons = -1;
     private readonly TradeSystem? _trade;
     private readonly TradeParameters _tradeParameters = TradeParameters.LoadDefault();
     private IntColumn? _stateSince;
@@ -222,6 +305,22 @@ public sealed class PolitySystem : ISimSystem
         _positionOrganization = _positions.AddIntColumn("organization");
         _positionName = _positions.AddStringColumn("position");
         _positionHolder = _positions.AddIntColumn("holder");
+        _threatened = state.AddIntField(ThreatenedField);
+        _wars = state.AddTable(WarTableName);
+        _warAttacker = _wars.AddIntColumn("attacker");
+        _warDefender = _wars.AddIntColumn("defender");
+        _warStarted = _wars.AddIntColumn("started");
+        _warEnded = _wars.AddIntColumn("ended");
+        _warWinner = _wars.AddIntColumn("winner");
+        _warConquest = _wars.AddIntColumn("conquest");
+        _warAttackerPeople = _wars.AddDoubleColumn("attackerPeople");
+        _warDefenderPeople = _wars.AddDoubleColumn("defenderPeople");
+        _warAttackerCells = _wars.AddIntColumn("attackerCells");
+        _warDefenderCells = _wars.AddIntColumn("defenderCells");
+        _warAttackerDeaths = _wars.AddDoubleColumn("attackerDeaths");
+        _warDefenderDeaths = _wars.AddDoubleColumn("defenderDeaths");
+        _warAttackerTook = _wars.AddIntColumn("attackerTook");
+        _warDefenderTook = _wars.AddIntColumn("defenderTook");
     }
 
     public void Initialize(SimContext context)
@@ -243,11 +342,15 @@ public sealed class PolitySystem : ISimSystem
         {
             _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
             _grain = _stockpiles.Goods.IndexOf(GoodSet.Grain);
+            _copperWeapons = _stockpiles.Goods.Contains(GoodSet.CopperWeapons) ? _stockpiles.Goods.IndexOf(GoodSet.CopperWeapons) : -1;
+            _bronzeWeapons = _stockpiles.Goods.Contains(GoodSet.BronzeWeapons) ? _stockpiles.Goods.IndexOf(GoodSet.BronzeWeapons) : -1;
         }
 
         _farmingSincePlusOne = state.HasField(FarmingSystem.SinceField) ? state.IntField(FarmingSystem.SinceField) : Array.Empty<int>();
         _technology = TechnologyUse.TryCreate(state, context.Map);
         _carrying = _technology?.WithEffect(TechnologySet.LandCarrying) ?? Array.Empty<TechnologyEffect>();
+        _defence = _technology?.WithEffect(TechnologySet.Defence) ?? Array.Empty<TechnologyEffect>();
+        _attack = _technology?.WithEffect(TechnologySet.Attack) ?? Array.Empty<TechnologyEffect>();
         WorldMap map = context.Map;
         _land = Enumerable.Range(0, map.CellCount).Where(map.IsLand).ToArray();
         _stepCost = new double[map.CellCount];
@@ -391,6 +494,9 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
+        // Wars: those under way are fought a year, then new ones may be declared.
+        Wars(tick, rng);
+
         // Tribute, the elite and soldiers, and unrest.
         cellsOf = CellsByPolity();
         TakeTribute(cellsOf);
@@ -415,6 +521,503 @@ public sealed class PolitySystem : ISimSystem
             }
         }
     }
+
+    // ---- War (step 4) ----
+
+    // One year of war, then declarations. Wars under way are fought in id order: a side that no
+    // longer stands loses; each contested border cell may change hands, with the local strengths
+    // deciding the chance; soldiers and the people of contested cells die; taken settlements are
+    // burned and plundered and may be razed; taking the other's capital conquers it; exhaustion or
+    // the years ends a war in peace. Then each polity at peace weighs its neighbours and may
+    // declare war on the one it has the strongest case against. Last, the threatened cells.
+    private void Wars(long tick, Rng rng)
+    {
+        EntityTable wars = _wars!;
+        for (int war = 0; war < wars.IdCount; war++)
+        {
+            if (!wars.IsAlive(war) || _warEnded![war] >= 0)
+            {
+                continue;
+            }
+
+            int a = _warAttacker![war], d = _warDefender![war];
+            if (!IsStanding(a) || !IsStanding(d))
+            {
+                EndWar(war, tick, IsStanding(a) ? a : IsStanding(d) ? d : -1, false);
+                continue;
+            }
+
+            FightYear(war, tick, rng);
+        }
+
+        Dictionary<long, List<int>> borders = Borders(out SortedSet<int>[] neighbours);
+        Declare(tick, rng, neighbours);
+
+        // Threatened cells: every cell of a polity at war, and every cell on a border.
+        foreach (int cell in _land)
+        {
+            int ruler = RulerOf(cell);
+            _threatened[cell] = ruler >= 0 && AtWar(ruler) ? 1 : 0;
+        }
+
+        foreach (List<int> cells in borders.Values)
+        {
+            foreach (int cell in cells)
+            {
+                _threatened[cell] = 1;
+            }
+        }
+    }
+
+    // The cells of each polity next to each other polity's, keyed by Key(own, other), in cell
+    // order; and each polity's neighbours in id order. Only looked up by key, never iterated in
+    // dictionary order for anything that changes state.
+    private Dictionary<long, List<int>> Borders(out SortedSet<int>[] neighbours)
+    {
+        var borders = new Dictionary<long, List<int>>();
+        neighbours = new SortedSet<int>[_organizations!.IdCount];
+        for (int i = 0; i < neighbours.Length; i++)
+        {
+            neighbours[i] = new SortedSet<int>();
+        }
+
+        foreach (int cell in _land)
+        {
+            int own = RulerOf(cell);
+            if (own < 0)
+            {
+                continue;
+            }
+
+            foreach (int other in _map!.Grid.Neighbours(cell))
+            {
+                int ruler = RulerOf(other);
+                if (ruler < 0 || ruler == own)
+                {
+                    continue;
+                }
+
+                neighbours[own].Add(ruler);
+                long key = Key(own, ruler);
+                if (!borders.TryGetValue(key, out List<int>? list))
+                {
+                    list = new List<int>();
+                    borders[key] = list;
+                }
+
+                if (list.Count == 0 || list[^1] != cell)
+                {
+                    list.Add(cell);
+                }
+            }
+        }
+
+        return borders;
+    }
+
+    private static long Key(int a, int b) => ((long)a << 32) | (uint)b;
+
+    // Each polity at peace, in id order, weighs each neighbour at peace it has not fought within
+    // peaceYears: aggression x (strength ratio - 1, the ratio at most maxStrengthRatio) +
+    // hungerWar x its capital farmers' unmet food + covetWar x (the neighbour's share of the two
+    // capitals' grain - 1/2). The strongest case above warThreshold leads to war with chance warChance.
+    private void Declare(long tick, Rng rng, SortedSet<int>[] neighbours)
+    {
+        var lastPeace = new Dictionary<long, long>();
+        EntityTable wars = _wars!;
+        for (int war = 0; war < wars.IdCount; war++)
+        {
+            if (wars.IsAlive(war) && _warEnded![war] >= 0)
+            {
+                int a = _warAttacker![war], d = _warDefender![war];
+                long ended = _warEnded[war];
+                foreach (long key in new[] { Key(a, d), Key(d, a) })
+                {
+                    lastPeace[key] = Math.Max(ended, lastPeace.TryGetValue(key, out long t) ? t : long.MinValue);
+                }
+            }
+        }
+
+        foreach (PolityInfo p in Standing())
+        {
+            double own = Strength(p.Id);
+            if (AtWar(p.Id) || own <= 0.0)
+            {
+                continue;
+            }
+
+            int best = -1;
+            double bestCase = _parameters.WarThreshold;
+            foreach (int other in neighbours[p.Id])
+            {
+                if (!IsStanding(other) || AtWar(other)
+                    || (lastPeace.TryGetValue(Key(p.Id, other), out long ended) && tick - ended < _parameters.PeaceYears * GameDate.MonthsPerYear))
+                {
+                    continue;
+                }
+
+                double theirs = Strength(other);
+                double ratio = theirs > 0.0 ? Math.Min(_parameters.MaxStrengthRatio, own / theirs) : _parameters.MaxStrengthRatio;
+                double hunger = 1.0 - CapitalFood(p.Id);
+                double ownGrain = CapitalGrain(p.Id), theirGrain = CapitalGrain(other);
+                double covet = ownGrain + theirGrain > 0.0 ? theirGrain / (ownGrain + theirGrain) - 0.5 : 0.0;
+                double warCase = p.Aggression * (ratio - 1.0) + _parameters.HungerWar * hunger + _parameters.CovetWar * covet;
+                if (warCase > bestCase)
+                {
+                    bestCase = warCase;
+                    best = other;
+                }
+            }
+
+            if (best >= 0 && rng.Chance(_parameters.WarChance))
+            {
+                StartWar(p.Id, best, tick);
+            }
+        }
+    }
+
+    /// <summary>Starts a war between two standing polities at peace. Returns its id.</summary>
+    public int StartWar(int attacker, int defender, long tick)
+    {
+        if (!IsStanding(attacker) || !IsStanding(defender) || attacker == defender || AtWar(attacker) || AtWar(defender))
+        {
+            throw new ArgumentException($"Polities {attacker} and {defender} cannot go to war.");
+        }
+
+        List<int>[] cellsOf = CellsByPolity();
+        int war = _wars!.Add();
+        _warAttacker![war] = attacker;
+        _warDefender![war] = defender;
+        _warStarted![war] = (int)tick;
+        _warEnded![war] = -1;
+        _warWinner![war] = -1;
+        _warConquest![war] = 0;
+        _warAttackerPeople![war] = PeopleIn(cellsOf[attacker]);
+        _warDefenderPeople![war] = PeopleIn(cellsOf[defender]);
+        _warAttackerCells![war] = cellsOf[attacker].Count;
+        _warDefenderCells![war] = cellsOf[defender].Count;
+        _warAttackerDeaths![war] = 0.0;
+        _warDefenderDeaths![war] = 0.0;
+        _warAttackerTook![war] = 0;
+        _warDefenderTook![war] = 0;
+        return war;
+    }
+
+    // One year of a war between two standing polities.
+    private void FightYear(int war, long tick, Rng rng)
+    {
+        int a = _warAttacker![war], d = _warDefender![war];
+        double strengthA = Strength(a), strengthD = Strength(d);
+        Dictionary<long, List<int>> borders = Borders(out _);
+        List<int> towardD = borders.TryGetValue(Key(d, a), out List<int>? x) ? x : new List<int>();
+        List<int> towardA = borders.TryGetValue(Key(a, d), out List<int>? y) ? y : new List<int>();
+
+        // Distance factors for every contested cell, from each side's capital.
+        var contested = towardD.Concat(towardA).ToList();
+        Dictionary<int, double> nearA = DistanceFactors(a, contested);
+        Dictionary<int, double> nearD = DistanceFactors(d, contested);
+
+        // Soldiers fall in proportion to the other side's share of the strength.
+        double total = strengthA + strengthD;
+        if (total > 0.0)
+        {
+            _warAttackerDeaths![war] += KillSoldiers(a, _parameters.SoldierLoss * strengthD / total);
+            _warDefenderDeaths![war] += KillSoldiers(d, _parameters.SoldierLoss * strengthA / total);
+        }
+
+        // The defender's cells along the border, then the attacker's (the defender strikes back).
+        int capitalD = Info(d).Capital, capitalA = Info(a).Capital;
+        bool conquered = false;
+        foreach ((List<int> cells, int taker, int holder, double takerStrength, double holderStrength, Dictionary<int, double> nearTaker, Dictionary<int, double> nearHolder) in new[]
+        {
+            (towardD, a, d, strengthA, strengthD, nearA, nearD),
+            (towardA, d, a, strengthD, strengthA, nearD, nearA),
+        })
+        {
+            foreach (int cell in cells)
+            {
+                if (RulerOf(cell) != holder || conquered)
+                {
+                    continue;
+                }
+
+                double people = _groups!.CellTotal(cell);
+                // Only land within the taker's reach can be taken; the holder fights at least at minDistanceFactor.
+                double attack = takerStrength * nearTaker[cell] * (_map!.Terrain(cell) == TerrainClass.Lowland ? CapitalFactor(taker, _attack) : 1.0);
+                double defend = holderStrength * Math.Max(_parameters.MinDistanceFactor, nearHolder[cell]) + _parameters.MilitiaShare * people;
+                if (_settlementPlusOne[cell] > 0 && _technology != null)
+                {
+                    defend *= _technology.CellFactor(cell, _defence);
+                }
+
+                double deaths = KillShare(cell, _parameters.CivilianLoss);
+                AddDeaths(war, holder, deaths);
+                if (attack + defend <= 0.0 || !rng.Chance(_parameters.TakeRate * attack / (attack + defend)))
+                {
+                    continue;
+                }
+
+                Rule(cell, taker);
+                if (taker == a)
+                {
+                    _warAttackerTook![war]++;
+                }
+                else
+                {
+                    _warDefenderTook![war]++;
+                }
+
+                if (_settlementPlusOne[cell] > 0)
+                {
+                    Sack(cell, Info(taker).Capital);
+                    if (rng.Chance(_parameters.RazeChance))
+                    {
+                        AddDeaths(war, holder, KillShare(cell, _parameters.RazeDeaths));
+                        _stockpiles?.LoseAll(cell);
+                    }
+                }
+
+                if (cell == (holder == d ? capitalD : capitalA))
+                {
+                    Conquer(taker, holder, tick);
+                    EndWar(war, tick, taker, true);
+                    conquered = true;
+                }
+            }
+        }
+
+        if (conquered)
+        {
+            return;
+        }
+
+        // Peace when either side is exhausted (deaths over its people at the start, plus the
+        // share of its cells it has lost), or after maxWarYears; the less exhausted side wins.
+        double exhaustA = Exhaustion(war, a), exhaustD = Exhaustion(war, d);
+        bool tooLong = tick - _warStarted![war] >= (_parameters.MaxWarYears - 1.0) * GameDate.MonthsPerYear;
+        if (exhaustA >= _parameters.ExhaustionLimit || exhaustD >= _parameters.ExhaustionLimit || tooLong)
+        {
+            EndWar(war, tick, exhaustA < exhaustD ? a : d, false);
+        }
+    }
+
+    private double Exhaustion(int war, int side)
+    {
+        bool attacker = side == _warAttacker![war];
+        double people = attacker ? _warAttackerPeople![war] : _warDefenderPeople![war];
+        double deaths = attacker ? _warAttackerDeaths![war] : _warDefenderDeaths![war];
+        int cells = attacker ? _warAttackerCells![war] : _warDefenderCells![war];
+        int lost = attacker ? _warDefenderTook![war] : _warAttackerTook![war];
+        return (people > 0.0 ? deaths / people : 0.0) + (cells > 0 ? (double)lost / cells : 0.0);
+    }
+
+    private void AddDeaths(int war, int side, double deaths)
+    {
+        if (side == _warAttacker![war])
+        {
+            _warAttackerDeaths![war] += deaths;
+        }
+        else
+        {
+            _warDefenderDeaths![war] += deaths;
+        }
+    }
+
+    private void EndWar(int war, long tick, int winner, bool conquest)
+    {
+        _warEnded![war] = (int)tick;
+        _warWinner![war] = winner;
+        _warConquest![war] = conquest ? 1 : 0;
+    }
+
+    // The conqueror takes the beaten polity's capital and every one of its cells within reach;
+    // the beaten polity ends and the rest of its land falls back to no rule.
+    private void Conquer(int winner, int loser, long tick)
+    {
+        List<int> cells = CellsByPolity()[loser];
+        End(loser, tick);
+        PolityInfo w = Info(winner);
+        FillReach(w.Capital, w.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach);
+        foreach (int cell in cells)
+        {
+            if (Reached(cell))
+            {
+                Rule(cell, winner);
+            }
+        }
+
+        Rule(Info(loser).Capital, winner);
+    }
+
+    // A taken settlement: burnShare of its store is lost, plunderShare goes to the taker's capital.
+    private void Sack(int cell, int capital)
+    {
+        if (_stockpiles == null)
+        {
+            return;
+        }
+
+        if (_parameters.PlunderShare > 0.0)
+        {
+            for (int good = 0; good < _stockpiles.Goods.Count; good++)
+            {
+                _stockpiles.Transfer(cell, capital, good, _parameters.PlunderShare * _stockpiles.Stock(cell, good));
+            }
+        }
+
+        double left = 1.0 - _parameters.PlunderShare;
+        _stockpiles.LoseShare(cell, left > 0.0 ? _parameters.BurnShare / left : 1.0);
+    }
+
+    // For each cell, max(minDistanceFactor, 1 - cost from the polity's capital / its reach), or 0 beyond its reach.
+    private Dictionary<int, double> DistanceFactors(int polity, List<int> cells)
+    {
+        PolityInfo p = Info(polity);
+        double reach = p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach;
+        FillReach(p.Capital, reach);
+        var factors = new Dictionary<int, double>();
+        foreach (int cell in cells)
+        {
+            factors[cell] = Reached(cell) ? Math.Max(_parameters.MinDistanceFactor, 1.0 - _reachCost[cell] / reach) : 0.0;
+        }
+
+        return factors;
+    }
+
+    /// <summary>
+    /// A polity's strength: the soldiers in its capital, times 1 + weaponStrength x the weapons in
+    /// its capital's store per soldier (bronze ones count twice, at most maxWeaponsPerSoldier).
+    /// </summary>
+    public double Strength(int polity)
+    {
+        double soldiers = Soldiers(polity);
+        if (soldiers <= 0.0)
+        {
+            return 0.0;
+        }
+
+        return soldiers * (1.0 + _parameters.WeaponStrength * Math.Min(_parameters.MaxWeaponsPerSoldier, Weapons(polity) / soldiers));
+    }
+
+    /// <summary>The soldiers in a polity's capital.</summary>
+    public double Soldiers(int polity)
+    {
+        if (_soldier < 0)
+        {
+            return 0.0;
+        }
+
+        int group = _groups!.Find(Info(polity).Capital, _soldier);
+        return group >= 0 ? _groups.Size(group) : 0.0;
+    }
+
+    /// <summary>The weapons in a polity's capital's store, bronze ones counting twice.</summary>
+    public double Weapons(int polity)
+    {
+        if (_stockpiles == null)
+        {
+            return 0.0;
+        }
+
+        int capital = Info(polity).Capital;
+        return (_copperWeapons >= 0 ? _stockpiles.Stock(capital, _copperWeapons) : 0.0)
+            + (_bronzeWeapons >= 0 ? 2.0 * _stockpiles.Stock(capital, _bronzeWeapons) : 0.0);
+    }
+
+    // The product of a set of technology effects the capital's people use (1 when none).
+    private double CapitalFactor(int polity, TechnologyEffect[] effects) =>
+        _technology?.CellFactor(Info(polity).Capital, effects) ?? 1.0;
+
+    private double CapitalFood(int polity)
+    {
+        int group = _groups!.Find(Info(polity).Capital, _farmer);
+        return group >= 0 ? _groups.Food(group) : 1.0;
+    }
+
+    private double CapitalGrain(int polity) =>
+        _stockpiles != null && _grain >= 0 ? _stockpiles.Stock(Info(polity).Capital, _grain) : 0.0;
+
+    private double PeopleIn(List<int> cells)
+    {
+        double people = 0.0;
+        foreach (int cell in cells)
+        {
+            people += _groups!.CellTotal(cell);
+        }
+
+        return people;
+    }
+
+    // Kills a share of a polity's soldiers. Returns the deaths.
+    private double KillSoldiers(int polity, double share)
+    {
+        int group = _soldier >= 0 ? _groups!.Find(Info(polity).Capital, _soldier) : -1;
+        if (group < 0)
+        {
+            return 0.0;
+        }
+
+        double size = _groups!.Size(group);
+        double deaths = size * Math.Clamp(share, 0.0, 1.0);
+        _groups.SetSize(group, size - deaths);
+        return deaths;
+    }
+
+    // Kills a share of every group in a cell. Returns the deaths.
+    private double KillShare(int cell, double share)
+    {
+        share = Math.Clamp(share, 0.0, 1.0);
+        double deaths = 0.0;
+        foreach (int group in _groups!.InCell(cell))
+        {
+            double size = _groups.Size(group);
+            deaths += size * share;
+            _groups.SetSize(group, size * (1.0 - share));
+        }
+
+        return deaths;
+    }
+
+    /// <summary>Whether a polity is in a war under way.</summary>
+    public bool AtWar(int polity) => WarOf(polity) >= 0;
+
+    /// <summary>The war under way a polity is in, or -1.</summary>
+    public int WarOf(int polity)
+    {
+        EntityTable wars = _wars!;
+        for (int war = 0; war < wars.IdCount; war++)
+        {
+            if (wars.IsAlive(war) && _warEnded![war] < 0 && (_warAttacker![war] == polity || _warDefender![war] == polity))
+            {
+                return war;
+            }
+        }
+
+        return -1;
+    }
+
+    /// <summary>One war, under way or over.</summary>
+    public WarInfo War(int war) => new WarInfo(
+        war, _warAttacker![war], _warDefender![war], _warStarted![war], _warEnded![war], _warWinner![war], _warConquest![war] != 0,
+        _warAttackerDeaths![war], _warDefenderDeaths![war], _warAttackerTook![war], _warDefenderTook![war]);
+
+    /// <summary>Every war, in id order.</summary>
+    public List<WarInfo> Wars()
+    {
+        var list = new List<WarInfo>();
+        for (int war = 0; war < _wars!.IdCount; war++)
+        {
+            if (_wars.IsAlive(war))
+            {
+                list.Add(War(war));
+            }
+        }
+
+        return list;
+    }
+
+    /// <summary>Whether a cell is threatened: its polity is at war or it lies on a border (last update).</summary>
+    public bool Threatened(int cell) => _threatened[cell] != 0;
 
     /// <summary>The grain a polity's capital took in tribute last year.</summary>
     public double Tribute(int polity) => _tribute![polity];
@@ -498,7 +1101,8 @@ public sealed class PolitySystem : ISimSystem
             }
 
             double elite = _parameters.EliteShare * people;
-            double soldiers = (border ? _parameters.BorderSoldierShare : _parameters.PeaceSoldierShare) * p.Aggression * people;
+            double share = AtWar(p.Id) ? _parameters.WarSoldierShare : border ? _parameters.BorderSoldierShare : _parameters.PeaceSoldierShare;
+            double soldiers = share * p.Aggression * people;
             double fed = _tribute![p.Id];
             if (elite + soldiers > fed)
             {

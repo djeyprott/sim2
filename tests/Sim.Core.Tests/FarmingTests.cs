@@ -820,6 +820,90 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
     }
 
+    [Fact]
+    public void Polities_go_to_war_over_their_borders_and_make_peace()
+    {
+        // Fast founding as above, and war whenever a polity is stronger than its neighbour.
+        PolityParameters parameters = PolityParameters.LoadDefault();
+        parameters.FoundSettledYears = 0.0;
+        parameters.FoundSurplusYears = 0.0;
+        parameters.FoundPeople = 300.0;
+        parameters.FoundChance = 0.05;
+        parameters.JoinChance = 0.5;
+        parameters.StatePeople = 5000.0;
+        parameters.StateSettlements = 3;
+        parameters.WarThreshold = 0.0;
+        parameters.WarChance = 0.5;
+        parameters.PeaceYears = 5.0;
+        Simulation sim = FastFarming(9, polities: parameters);
+        sim.Run(400 * 12);
+        PolitySystem polities = sim.Systems.OfType<PolitySystem>().Single();
+        List<WarInfo> wars = polities.Wars();
+        Assert.True(wars.Count >= 2, $"{wars.Count} wars in 400 years.");
+
+        // Every war is between two polities and started after both were founded; ended wars have
+        // one of the two as winner (or neither if both fell); people died in war.
+        foreach (WarInfo w in wars)
+        {
+            Assert.NotEqual(w.Attacker, w.Defender);
+            Assert.True(w.Started >= polities.Info(w.Attacker).Founded && w.Started >= polities.Info(w.Defender).Founded);
+            Assert.True(w.AttackerDeaths >= 0.0 && w.DefenderDeaths >= 0.0);
+            if (!w.UnderWay)
+            {
+                Assert.True(w.Ended >= w.Started);
+                Assert.True(w.Winner == w.Attacker || w.Winner == w.Defender || w.Winner == -1);
+                Assert.True(w.Ended - w.Started < parameters.MaxWarYears * 12);
+            }
+
+            if (w.Conquest)
+            {
+                int loser = w.Winner == w.Attacker ? w.Defender : w.Attacker;
+                Assert.False(polities.Info(loser).Standing);
+            }
+        }
+
+        Assert.Contains(wars, w => w.AttackerDeaths + w.DefenderDeaths > 0.0);
+        Assert.Contains(wars, w => w.AttackerTook + w.DefenderTook > 0);
+
+        // A polity fights at most one war at a time, and its cells count as threatened.
+        var under = wars.Where(w => w.UnderWay).ToList();
+        Assert.Equal(under.Count * 2, under.SelectMany(w => new[] { w.Attacker, w.Defender }).Distinct().Count());
+        foreach (WarInfo w in under)
+        {
+            Assert.All(Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == w.Attacker || polities.RulerOf(c) == w.Defender),
+                c => Assert.True(polities.Threatened(c)));
+        }
+
+        // Polities still rule only cells within reach; every good still balances.
+        foreach (PolityInfo p in polities.Standing())
+        {
+            Assert.All(Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == p.Id),
+                c => Assert.False(double.IsInfinity(polities.ReachCost(p.Id, c)), $"{p.Name} rules cell {c} beyond its reach."));
+        }
+
+        var stock = new Stockpiles(sim.State, GoodSet.LoadDefault());
+        Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),
+            $"{good.Name} does not balance."));
+
+        // Fortifications are found under threat and strengthen defenders; chariots need the wheel
+        // and riding and strengthen attackers.
+        var technologies = TechnologySet.LoadDefault();
+        Technology forts = technologies.Technologies.Single(t => t.Name == "Fortifications");
+        Technology chariots = technologies.Technologies.Single(t => t.Name == "Chariots");
+        Assert.True(forts.Threatened);
+        Assert.True(forts.Effects[TechnologySet.Defence] > 1.0);
+        Assert.True(chariots.Effects[TechnologySet.Attack] > 1.0);
+
+        // A loaded run carries on as an uninterrupted one, wars and all.
+        var save = new MemoryStream();
+        sim.Save(save);
+        Simulation loaded = FastFarming(9, polities: parameters);
+        loaded.Load(new MemoryStream(save.ToArray()));
+        sim.Run(20 * 12);
+        loaded.Run(20 * 12);
+        Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
+    }
+
     // Names the fields and table columns in which two world states differ (for failure messages).
     private static string StateDifferences(WorldState a, WorldState b)
     {

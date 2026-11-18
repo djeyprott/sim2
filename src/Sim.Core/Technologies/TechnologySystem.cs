@@ -90,6 +90,11 @@ public sealed class TechnologySystem : ISimSystem
 
     // Per technology needing goods near: the cells whose trade partners hold or gather them, worked
     // out each year from the links and stores (so the same after a load), and the cells marked.
+    // Who rules each cell (plus one) and each polity's capital, for knowledge shared under one rule.
+    private int[]? _rulerPlusOne;
+    private IntColumn? _capitalOf;
+    private readonly List<(int Capital, int Cell)> _ruleLinks = new List<(int, int)>();
+
     private bool[]?[] _partnerSupplied = Array.Empty<bool[]?>();
     private List<int>[] _partnerMarked = Array.Empty<List<int>>();
 
@@ -141,6 +146,11 @@ public sealed class TechnologySystem : ISimSystem
         _groupTable = state.Table(PopulationGroups.TableName);
         _groups = new PopulationGroups(state);
         _settlementPlusOne = state.HasField(SettlementSystem.SettlementField) ? state.IntField(SettlementSystem.SettlementField) : null;
+        if (state.HasField(Polities.PolitySystem.RulerField) && state.HasTable(Polities.PolitySystem.OrganizationTableName))
+        {
+            _rulerPlusOne = state.IntField(Polities.PolitySystem.RulerField);
+            _capitalOf = state.Table(Polities.PolitySystem.OrganizationTableName).IntColumn("capital");
+        }
         if (state.HasTable(Stockpiles.LedgerTableName))
         {
             _stockpiles = new Stockpiles(state, GoodSet.LoadDefault());
@@ -280,6 +290,22 @@ public sealed class TechnologySystem : ISimSystem
             _tradeCells.Add(b);
         }
 
+        // Settlements under one rule are linked to their capital for knowledge (decision 8 of milestone 4).
+        _ruleLinks.Clear();
+        if (_rulerPlusOne != null && _settlementPlusOne != null)
+        {
+            foreach (int cell in _cells)
+            {
+                int ruler = _rulerPlusOne[cell] - 1;
+                if (ruler >= 0 && _settlementPlusOne[cell] > 0 && _capitalOf![ruler] != cell)
+                {
+                    _ruleLinks.Add((_capitalOf[ruler], cell));
+                    _tradeCells.Add(_capitalOf[ruler]);
+                    _tradeCells.Add(cell);
+                }
+            }
+        }
+
         FillSoldValue(links);
         double inUse = _parameters.InUse;
 
@@ -344,6 +370,7 @@ public sealed class TechnologySystem : ISimSystem
             }
 
             FillTrade(links);
+            FillRule();
             FillPartnerSupply(tech, links);
 
             // Each group that can use it: discover, learn, or forget.
@@ -560,6 +587,22 @@ public sealed class TechnologySystem : ISimSystem
         foreach ((int a, int b) in links)
         {
             double rate = _parameters.TradeSpread * Math.Min(1.0, (_soldValue[a] + _soldValue[b]) / _parameters.BusyTrade);
+            _tradeBest[a] = Math.Max(_tradeBest[a], _best[b]);
+            _tradeBest[b] = Math.Max(_tradeBest[b], _best[a]);
+            _tradeRate[a] = Math.Max(_tradeRate[a], rate);
+            _tradeRate[b] = Math.Max(_tradeRate[b], rate);
+            _tradeUsers[a] += _users[b];
+            _tradeUsers[b] += _users[a];
+        }
+    }
+
+    // Settlements and their capital learn from each other as along a trade link, at ruleSpread of
+    // tradeSpread.
+    private void FillRule()
+    {
+        double rate = _parameters.TradeSpread * _parameters.RuleSpread;
+        foreach ((int a, int b) in _ruleLinks)
+        {
             _tradeBest[a] = Math.Max(_tradeBest[a], _best[b]);
             _tradeBest[b] = Math.Max(_tradeBest[b], _best[a]);
             _tradeRate[a] = Math.Max(_tradeRate[a], rate);

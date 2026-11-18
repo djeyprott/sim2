@@ -35,6 +35,10 @@
   // practises fades. Since milestone 3 version 0.4.1.
   "unusedLoss": 0.03,
 
+  // A polity's settlements and its capital learn from each other as along a trade link, at this
+  // share of tradeSpread (milestone 4: shared rule speeds the spread of knowledge).
+  "ruleSpread": 0.5,
+
   // Goods a technology needs (copper working: copper ore or copper; bronze: tin) count as near a
   // settlement that holds or gathers them, or lies this many trade links from one that does. At 1
   // and 2, copper and tin met almost nowhere in the Old World and bronze arose only in the Andes.

@@ -73,6 +73,9 @@ public sealed class Prices
     private readonly bool[] _allowed;
     private readonly double[] _storeFedWeights;
     private readonly double[] _luxuryWeights;
+
+    // Goods kept for each person of an occupation (occupations.json "keeps"): occupation, good, amount.
+    private readonly (int Occupation, int Good, double Amount)[] _keeps;
     private readonly sbyte[] _known;
 
     public Prices(WorldState state, WorldMap map, PriceParameters parameters, CraftRules craft, OccupationSet occupations)
@@ -84,6 +87,9 @@ public sealed class Prices
         _groups = new PopulationGroups(state);
         _storeFedWeights = occupations.StoreFedWeights();
         _luxuryWeights = occupations.LuxuryWeights();
+        _keeps = occupations.Occupations
+            .SelectMany(o => o.Keeps.Select(k => (o.Index, craft.Goods.IndexOf(k.Key), k.Value)))
+            .ToArray();
         _grain = craft.Goods.IndexOf(GoodSet.Grain);
         _seasonalGoods = craft.Goods.Goods.Where(g => g.Food || g.NeedTier == NeedTier.Luxury).Select(g => g.Index).ToArray();
         _wanted = new double[craft.Goods.Count];
@@ -209,6 +215,25 @@ public sealed class Prices
             }
 
             foreach (int good in _craft.NeedGoods[g])
+            {
+                double counts = _craft.Counts(good);
+                wanted[good] += need / counts;
+                need = Math.Max(0.0, need - _stockpiles.Stock(cell, good) * counts);
+            }
+        }
+
+        // Goods kept for some occupations (soldiers' weapons), the best wanted for all of it and
+        // each lesser one for what the better ones in store do not cover, as for needs.
+        foreach ((int occupation, int kept, double amount) in _keeps)
+        {
+            int group = _groups.Find(cell, occupation);
+            double need = group >= 0 ? amount * _groups.Size(group) : 0.0;
+            if (need <= 0.0)
+            {
+                continue;
+            }
+
+            foreach (int good in _craft.NeedGoods[kept])
             {
                 double counts = _craft.Counts(good);
                 wanted[good] += need / counts;

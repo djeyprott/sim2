@@ -28,6 +28,9 @@ public sealed class TechnologyConditions
     private readonly int[][] _cropsPlusOne;
     private readonly int[]? _cropPlusOne;
 
+    // Per cell: 1 where its polity is at war or borders another (polities.threatened), from last year.
+    private readonly int[]? _threatened;
+
     // Per technology with near goods: the cells where one of them can be gathered, and the goods.
     private readonly bool[]?[] _goodsSource;
     private readonly int[][] _nearGoods;
@@ -56,6 +59,7 @@ public sealed class TechnologyConditions
         _wild = state.HasField(HerdingSystem.WildField) ? state.IntField(HerdingSystem.WildField) : null;
         _farmingSincePlusOne = state.HasField("farming.since") ? state.IntField("farming.since") : null;
         _cropPlusOne = state.HasField(Farming.FarmingSystem.CropField) ? state.IntField(Farming.FarmingSystem.CropField) : null;
+        _threatened = state.HasField(Polities.PolitySystem.ThreatenedField) ? state.IntField(Polities.PolitySystem.ThreatenedField) : null;
         Farming.CropSet? crops = technologies.Technologies.Any(t => t.Crops.Count > 0) ? Farming.CropSet.LoadDefault() : null;
         _cropsPlusOne = technologies.Technologies.Select(t => t.Crops.Select(c => crops!.IndexOf(c) + 1).ToArray()).ToArray();
         _groups = new PopulationGroups(state);
@@ -276,6 +280,11 @@ public sealed class TechnologyConditions
 
         int wild = _wildMask[technology];
         if (wild != 0 && (_wild == null || (_wild[cell] & wild) == 0))
+        {
+            return false;
+        }
+
+        if (_technologies.Get(technology).Threatened && (_threatened == null || _threatened[cell] == 0))
         {
             return false;
         }

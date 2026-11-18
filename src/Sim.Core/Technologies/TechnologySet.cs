@@ -23,6 +23,7 @@ public sealed class Technology
         NearGoods = entry.NearGoods.ToArray();
         NearWild = entry.NearWild.ToArray();
         SettledYears = entry.SettledYears;
+        Threatened = entry.Threatened;
         Chance = entry.Chance;
         Spread = entry.Spread;
         History = entry.History;
@@ -76,6 +77,9 @@ public sealed class Technology
     /// <summary>For discovery only: farming must have stood in the cell or a neighbour at least this many years (0: no need).</summary>
     public double SettledYears { get; }
 
+    /// <summary>For discovery only: the cell must belong to a polity at war or bordering another (polities.threatened).</summary>
+    public bool Threatened { get; }
+
     public double Chance { get; }
 
     public double Spread { get; }
@@ -119,7 +123,13 @@ public sealed class TechnologySet
     /// <summary>Trade: the cost of carrying goods across one sea cell, against 1 for a cell of lowland (the smallest known counts).</summary>
     public const string SeaCost = "seaCost";
 
-    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool, HerderSpread, LandCarrying, SeaRange, SeaCost };
+    /// <summary>Multiplies the strength of a polity defending a cell where it is used (walls).</summary>
+    public const string Defence = "defence";
+
+    /// <summary>Multiplies the strength of a polity attacking over open lowland, where its capital uses it (chariots).</summary>
+    public const string Attack = "attack";
+
+    public static readonly IReadOnlyList<string> EffectNames = new[] { FarmYield, BiomePenaltyLift, GrainSpoilage, HerdDensity, Wool, HerderSpread, LandCarrying, SeaRange, SeaCost, Defence, Attack };
 
     private readonly Technology[] _technologies;
 
@@ -254,6 +264,8 @@ internal sealed class TechnologyEntry
 
     public double SettledYears { get; set; }
 
+    public bool Threatened { get; set; }
+
     public double Chance { get; set; }
 
     public double Spread { get; set; }
@@ -280,6 +292,9 @@ public sealed class TechnologyParameters
 
     public double BusyTrade { get; set; } = 50.0;
 
+    /// <summary>How fast knowledge passes between a polity's settlements and its capital, as a share of tradeSpread.</summary>
+    public double RuleSpread { get; set; } = 0.5;
+
     public double KeepPeople { get; set; } = 3000.0;
 
     public double LossRate { get; set; } = 0.03;
@@ -297,7 +312,7 @@ public sealed class TechnologyParameters
     public static TechnologyParameters Parse(string json)
     {
         TechnologyParameters p = ContentFiles.Parse<TechnologyParameters>(json, "technology");
-        double[] shares = { p.InUse, p.DiscoveryShare, p.Adoption, p.WithinCell, p.TradeSpread, p.LossRate, p.UnusedLoss };
+        double[] shares = { p.InUse, p.DiscoveryShare, p.Adoption, p.WithinCell, p.TradeSpread, p.LossRate, p.UnusedLoss, p.RuleSpread };
         if (shares.Any(v => v < 0.0 || v > 1.0 || double.IsNaN(v)) || p.InUse <= 0.0
             || p.SupplyLinks < 0 || p.DiscoveryPeople <= 0.0 || p.BusyTrade <= 0.0 || p.KeepPeople < 0.0 || p.IndependentKm < 0.0)
         {

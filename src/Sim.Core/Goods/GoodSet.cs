@@ -51,6 +51,8 @@ public sealed class GoodSet
 
     public const string Grain = "Grain";
     public const string WildFood = "Wild food";
+    public const string CopperWeapons = "Copper weapons";
+    public const string BronzeWeapons = "Bronze weapons";
 
     private readonly Good[] _goods;
 
@@ -113,6 +115,8 @@ public sealed class GoodSet
 
         return new GoodSet(goods);
     }
+
+    public bool Contains(string name) => _goods.Any(g => g.Name == name);
 
     public int IndexOf(string name)
     {

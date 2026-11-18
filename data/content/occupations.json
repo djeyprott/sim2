@@ -3,6 +3,9 @@
 //   storeFed     eats from the settlement's store and uses up everyday and luxury goods from it
 //                (milestone 2); otherwise it feeds itself (foragers, herders)
 //   luxuryNeeds  how many times an ordinary person's luxuries each of its people wants (default 1)
+//   keeps        goods its settlement wants in store for each of its people, not used up but worn
+//                out by spoilage (soldiers' weapons); better goods that meet the same need
+//                (needs.json substitutes) count as several
 // Elite and soldiers (milestone 4) live in a polity's capital, fed by tribute; the polity system
 // sets how many there are, drawing them from the capital's farmers and sending them back.
 // More occupations (trader, priest and so on) arrive in later milestones. Add new ones at the end:
@@ -14,6 +17,6 @@
     { "name": "Craftsman", "class": "middle", "livesIn": "settlement", "storeFed": true },
     { "name": "Herder", "class": "lower", "livesIn": "countryside" },
     { "name": "Elite", "class": "upper", "livesIn": "settlement", "storeFed": true, "luxuryNeeds": 10 },
-    { "name": "Soldier", "class": "lower", "livesIn": "settlement", "storeFed": true }
+    { "name": "Soldier", "class": "lower", "livesIn": "settlement", "storeFed": true, "keeps": { "Copper weapons": 1.0 } }
   ]
 }

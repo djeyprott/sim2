@@ -19,6 +19,7 @@
   // what the better ones in store already cover.
   "substitutes": {
     "Copper tools": { "for": "Stone tools", "counts": 3.0 },
-    "Bronze tools": { "for": "Stone tools", "counts": 5.0 }
+    "Bronze tools": { "for": "Stone tools", "counts": 5.0 },
+    "Bronze weapons": { "for": "Copper weapons", "counts": 2.0 }
   }
 }

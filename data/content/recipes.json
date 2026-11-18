@@ -25,6 +25,8 @@
     { "output": "Copper tools", "perWorker": 3.0, "inputs": { "Copper": 0.5 }, "requires": "Copper working" },
     // Tin bronze: about one part tin to nine of copper.
     { "output": "Bronze", "perWorker": 2.0, "inputs": { "Copper": 0.9, "Tin": 0.1, "Wood": 0.5 }, "requires": "Bronze" },
-    { "output": "Bronze tools", "perWorker": 3.0, "inputs": { "Bronze": 0.5 }, "requires": "Bronze" }
+    { "output": "Bronze tools", "perWorker": 3.0, "inputs": { "Bronze": 0.5 }, "requires": "Bronze" },
+    { "output": "Copper weapons", "perWorker": 3.0, "inputs": { "Copper": 0.5 }, "requires": "Copper working" },
+    { "output": "Bronze weapons", "perWorker": 3.0, "inputs": { "Bronze": 0.5 }, "requires": "Bronze" }
   ]
 }

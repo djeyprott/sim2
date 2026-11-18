@@ -68,5 +68,52 @@
   "unrestRate": 0.1,
   "hungerUnrest": 1.0,
   "needsUnrest": 0.2,
-  "tributeUnrest": 1.5
+  "tributeUnrest": 1.5,
+
+  // War (step 4). A polity at war raises soldiers toward warSoldierShare of its people (times its
+  // aggression) instead of the shares above.
+  "warSoldierShare": 0.04,
+
+  // Strength: the soldiers in the capital times 1 + weaponStrength x the weapons in the capital's
+  // store per soldier (bronze weapons count twice; at most maxWeaponsPerSoldier), so a fully armed
+  // army with copper counts 1.5 and with bronze 2. At a contested cell, each side's strength is
+  // scaled by max(minDistanceFactor, 1 - cost from its capital / its reach); chariots (attack)
+  // multiply an attacker's strength on open lowland, fortifications (defence) a defended
+  // settlement's, and the defender adds militiaShare of the cell's people.
+  "weaponStrength": 0.5,
+  "maxWeaponsPerSoldier": 2,
+  "minDistanceFactor": 0.25,
+  "militiaShare": 0.01,
+
+  // Declaring war: once a year each polity at peace weighs each neighbour at peace that it has not
+  // fought for peaceYears: aggression x (its strength over the neighbour's - 1, the ratio at most
+  // maxStrengthRatio) + hungerWar x its capital farmers' unmet food + covetWar x (the neighbour's
+  // share of the grain in the two capitals - 1/2). The strongest case above warThreshold leads to
+  // war with chance warChance a year.
+  "warThreshold": 0.6,
+  "warChance": 0.2,
+  "maxStrengthRatio": 4,
+  "hungerWar": 1.0,
+  "covetWar": 0.5,
+  "peaceYears": 20,
+
+  // Each year of war every cell along the border is contested: the side across takes it with
+  // chance takeRate x its local strength / both, if the cell is within its reach. Each side loses soldierLoss of its soldiers times
+  // the other's share of the strength, and every contested cell civilianLoss of its people. A taken
+  // settlement loses burnShare of its store and plunderShare goes to the taker's capital; with
+  // chance razeChance it is razed: razeDeaths of its people die and its store is lost. Taking the
+  // enemy's capital conquers it: it ends, and the conqueror rules its cells within reach.
+  "takeRate": 0.3,
+  "soldierLoss": 0.2,
+  "civilianLoss": 0.02,
+  "burnShare": 0.5,
+  "plunderShare": 0.25,
+  "razeChance": 0.03,
+  "razeDeaths": 0.6,
+
+  // Peace: when either side's exhaustion (deaths over its people when the war began, plus the
+  // share of its cells it has lost) reaches exhaustionLimit, or after maxWarYears. The less
+  // exhausted side wins.
+  "exhaustionLimit": 0.3,
+  "maxWarYears": 15
 }

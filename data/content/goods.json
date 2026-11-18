@@ -31,6 +31,11 @@
     { "name": "Copper", "value": 1.2, "unit": "loads", "spoilage": 0.01, "weight": 0.4, "tier": "none", "food": false, "colour": "#c87533" },
     { "name": "Bronze", "value": 1.6, "unit": "loads", "spoilage": 0.01, "weight": 0.4, "tier": "none", "food": false, "colour": "#cd9b42" },
     { "name": "Copper tools", "value": 1.0, "unit": "sets", "spoilage": 0.02, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#d4844a" },
-    { "name": "Bronze tools", "value": 1.6, "unit": "sets", "spoilage": 0.02, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#e0b050" }
+    { "name": "Bronze tools", "value": 1.6, "unit": "sets", "spoilage": 0.02, "weight": 0.2, "tier": "everyday", "food": false, "colour": "#e0b050" },
+    // Weapons (milestone 4): spears, axes and daggers kept in a capital's store for its soldiers
+    // (occupations.json "keeps"); they wear out by their spoilage. Bronze weapons count as two
+    // sets of copper ones, in war (polities.json) and in what soldiers want.
+    { "name": "Copper weapons", "value": 1.2, "unit": "sets", "spoilage": 0.05, "weight": 0.2, "tier": "none", "food": false, "colour": "#b0603a" },
+    { "name": "Bronze weapons", "value": 2.0, "unit": "sets", "spoilage": 0.05, "weight": 0.2, "tier": "none", "food": false, "colour": "#d8a040" }
   ]
 }

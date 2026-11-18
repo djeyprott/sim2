@@ -1,8 +1,9 @@
-# sim2 design doc (version 1.5)
+# sim2 design doc (version 1.6)
 
 Status: top-level design agreed. Milestone 0 is complete and released as v0.1. Milestone 1 is complete and released as v0.2 (`milestone-1-spec.md`). Milestone 2 is complete and released as v0.3 (`milestone-2-spec.md`). Milestone 3 is complete and released as v0.4, with fixes as v0.4.1 (`milestone-3-spec.md`). Milestone 4 (states and war) is in progress (`milestone-4-spec.md`, agreed 2026-11-18).
 
 Change log:
+- 1.6 (2026-11-18): backlog item on military professionalism.
 - 1.5 (2026-11-18): milestone 4 spec agreed.
 - 1.4 (2026-11-17): milestone 4 spec in draft; backlog item on tribes and nomads.
 - 1.3 (2026-11-17): milestone 3 fixes released as v0.4.1 (spec 1.1): metal know-how and horse herding kept near their goods or animals, no cattle in tropical forest, the plough with wheat and barley; backlog items on copper working in Europe and long-distance tin.
@@ -124,5 +125,6 @@ Each milestone ends with a working, watchable program. Work on the next one does
 - Copper working in Europe. Since v0.4.1 it is kept near copper and no longer spreads from Anatolia, and Europe's copper districts are farmed too late to find it before 3000 BCE (history: the Balkans by about 5000 BCE). A per-place time to discovery, or know-how carried along trade routes without being used, could fix it.
 - Long-distance tin. Tin travels only as far as the lands that work bronze (under 1,000 km), so Afghan and Central Asian tin never reaches Mesopotamia; it needs merchants or goods traded for resale.
 - Tribes and nomads: herders and foragers forming tribal confederations that raid settled states and sometimes conquer them (the steppe peoples). Left out of milestone 4 by the owner on 2026-11-17; consider with milestone 5 or 6.
+- Military professionalism (consider with milestone 6 or 7). Milestone 4's soldiers are a levy: drawn from the capital's farmers when threatened and sent back in peace. Later: a quality or training level on soldier groups that grows with service and is lost when they disband; a polity choosing between a cheap seasonal levy and a costly standing army fed in peace; quality counting toward war strength beside weapons, chariots and fortifications; generals and rulers who build or neglect armies, and military reforms. Raised by the owner 2026-11-18.
 - Globe view.
 - Charts in the viewer.

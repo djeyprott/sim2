@@ -1,6 +1,6 @@
 # Milestone 4 spec: States and war (version 1.0, agreed)
 
-Status: agreed by the owner 2026-11-18. Feature list is frozen. Parent: `design-doc.md` version 1.5.
+Status: agreed by the owner 2026-11-18. Feature list is frozen. Parent: `design-doc.md` version 1.6.
 
 Progress: steps 1 to 3 done 2026-11-18.
 

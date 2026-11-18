@@ -61,9 +61,9 @@ public sealed class Technology
     public IReadOnlyList<string> Crops { get; }
 
     /// <summary>
-    /// Goods (by name), one of which must be within reach: to discover it, gatherable in the cell or
-    /// in its store; to learn, use and keep it, also in the store of, or gatherable by, a settlement
-    /// a few trade links away (technology.json "supplyLinks"). Empty for none.
+    /// Goods (by name), one of which must be within reach to discover, learn, use and keep it:
+    /// gatherable in the cell, in its store, or held or gathered by a settlement a few trade links
+    /// away (technology.json "supplyLinks"). Empty for none.
     /// </summary>
     public IReadOnlyList<string> NearGoods { get; }
 

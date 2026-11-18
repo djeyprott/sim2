@@ -186,6 +186,12 @@ public sealed class TechnologySystem : ISimSystem
         _conditions!.AllowsBesidesSupply(cell, technology)
         && (_conditions.SuppliedHere(cell, technology) || (_partnerSupplied[technology] is bool[] partner && partner[cell]));
 
+    // Whether a technology could be discovered in the cell: as TechnologyConditions.NearForDiscovery,
+    // counting goods held or gathered a few trade links away as near (bronze is found where copper
+    // workers trade for tin, or tin people for copper).
+    private bool NearForDiscovery(int cell, int tech, long tick) =>
+        _conditions!.NearForDiscovery(cell, tech, tick, _partnerSupplied[tech] is bool[] partner && partner[cell]);
+
     // Fills the cells whose trade partners have a technology's goods near (see TechnologyConditions.SuppliedHere).
     private void FillPartnerSupply(int tech, List<(int CellA, int CellB)> links)
     {
@@ -353,7 +359,7 @@ public sealed class TechnologySystem : ISimSystem
 
                 // Nobody here, next door or among its trade partners knows it, and the goods it
                 // needs to be discovered are not near: nobody here can learn or find it.
-                if (_best[cell] <= 0.0 && _tradeBest[cell] <= 0.0 && !_conditions!.NearForDiscovery(cell, tech, context.Tick) && !NeighbourKnows(cell))
+                if (_best[cell] <= 0.0 && _tradeBest[cell] <= 0.0 && !NearForDiscovery(cell, tech, context.Tick) && !NeighbourKnows(cell))
                 {
                     continue;
                 }
@@ -400,7 +406,7 @@ public sealed class TechnologySystem : ISimSystem
                             continue;
                         }
 
-                        if (t.Chance <= 0.0 || !_conditions!.NearForDiscovery(cell, tech, context.Tick))
+                        if (t.Chance <= 0.0 || !NearForDiscovery(cell, tech, context.Tick))
                         {
                             continue;
                         }

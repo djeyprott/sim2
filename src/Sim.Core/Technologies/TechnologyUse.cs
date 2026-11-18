@@ -263,7 +263,10 @@ public sealed class TechnologyConditions
     /// in its store, one of its wild animals lives in the cell, and farming has stood in the cell
     /// or a neighbour as long as it needs (each true when it needs none).
     /// </summary>
-    public bool NearForDiscovery(int cell, int technology, long tick)
+    public bool NearForDiscovery(int cell, int technology, long tick) => NearForDiscovery(cell, technology, tick, goodsNearAnyway: false);
+
+    /// <summary>As <see cref="NearForDiscovery(int, int, long)"/>, counting its goods as near when <paramref name="goodsNearAnyway"/> (held by a trade partner).</summary>
+    public bool NearForDiscovery(int cell, int technology, long tick, bool goodsNearAnyway)
     {
         double settled = _technologies.Get(technology).SettledYears;
         if (settled > 0.0 && !FarmingStood(cell, (long)Math.Round(settled * GameDate.MonthsPerYear), tick))
@@ -277,7 +280,7 @@ public sealed class TechnologyConditions
             return false;
         }
 
-        return GoodsNear(cell, technology);
+        return goodsNearAnyway || GoodsNear(cell, technology);
     }
 }
 

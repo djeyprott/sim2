@@ -11,10 +11,10 @@
 //   animals       the cell must keep at least one of these animals (livestock.json)
 //   crops         the cell must farm one of these crops (crops.json): the plough came with wheat
 //                 and barley farming; hoe farmers of sorghum, millet, rice or yams did without it
-//   nearGoods     one of these goods must be near: to discover it, gatherable in the cell or in
-//                 its settlement's store; to learn, use and keep it, also held or gathered by a
-//                 settlement up to technology.json's "supplyLinks" trade links away (copper
-//                 working near ore or copper, bronze near tin)
+//   nearGoods     one of these goods must be near, to discover, learn, use and keep it: gatherable
+//                 in the cell, in its settlement's store, or held or gathered by a settlement up
+//                 to technology.json's "supplyLinks" trade links away (copper working near ore or
+//                 copper, bronze near tin)
 //   nearWild      one of these animals must be near: to discover it, living wild in the cell
 //                 (livestock.json homelands; an animal "tamedBy" this technology is then kept
 //                 there); to learn, use and keep it, wild or kept in the cell

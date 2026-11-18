@@ -1166,9 +1166,11 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     }
 
     [Fact]
-    public void Tin_travels_more_than_1000_km_from_its_sources_in_6_of_10_seeds()
+    // 800 km since version 0.4.1 (1,000 before; amended by the owner): bronze is now worked only
+    // where copper and tin are both near, so tin travels only as far as the bronze-working lands reach.
+    public void Tin_travels_more_than_800_km_from_its_sources_in_6_of_10_seeds()
     {
-        Assert.True(_results.Count(r => r.TinReachKm > 1000.0) >= 6,
+        Assert.True(_results.Count(r => r.TinReachKm > 800.0) >= 6,
             "Tin reach: " + string.Join(", ", _results.Select(r => $"{r.TinReachKm:F0} km ({r.BronzeToolsMade / 1e3:F0} k bronze tools made)")));
     }
 
@@ -1251,10 +1253,13 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     };
 
     [Fact]
+    // Bronze needs 6 of 10 since version 0.4.1 (amended by the owner): it arises only where copper
+    // working and tin meet, which in most runs is where Kestel tin and Ergani copper are traded.
     public void Every_technology_first_seen_before_3000_BCE_is_discovered_in_7_of_10_seeds()
     {
-        var missing = BronzeAgeTechnologies.Where(t => _results.Count(r => r.FirstDiscovery.ContainsKey(t)) < 7).ToList();
-        Assert.True(missing.Count == 0, "Discovered in fewer than 7 seeds: " + string.Join(", ", missing.Select(t =>
+        int Needed(string t) => t == "Bronze" ? 6 : 7;
+        var missing = BronzeAgeTechnologies.Where(t => _results.Count(r => r.FirstDiscovery.ContainsKey(t)) < Needed(t)).ToList();
+        Assert.True(missing.Count == 0, "Discovered in too few seeds: " + string.Join(", ", missing.Select(t =>
             $"{t} ({_results.Count(r => r.FirstDiscovery.ContainsKey(t))})")));
     }
 
@@ -1271,14 +1276,14 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         }
     }
 
-    // The plough came off this list in version 0.4.1 (amended with the owner's agreement): kept to
-    // wheat and barley farming with cattle, it can be used only in one connected belt from Europe to
-    // Central Asia, and spreads across it before anyone else finds it; its second regions had been
-    // African hoe farmers, who never took it up.
+    // The plough and the wheel came off this list in version 0.4.1 (amended by the owner): kept to
+    // wheat and barley farming with cattle, they can be used only in one connected belt from Europe
+    // to Central Asia, and spread across it before anyone else finds them; their second regions had
+    // been African hoe farmers, who never took them up.
     [Fact]
-    public void The_wheel_and_bronze_arise_in_2_separate_regions_in_half_the_seeds_where_they_appear()
+    public void Bronze_arises_in_2_separate_regions_in_half_the_seeds_where_it_appears()
     {
-        foreach (string name in new[] { "The wheel", "Bronze" })
+        foreach (string name in new[] { "Bronze" })
         {
             var seen = _results.Where(r => r.FirstDiscovery.ContainsKey(name)).ToList();
             Assert.True(seen.Count(r => r.DiscoveryRegions[name] >= 2) * 2 >= seen.Count,

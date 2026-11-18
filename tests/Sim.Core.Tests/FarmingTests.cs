@@ -689,8 +689,14 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // It rules its capital and the land around it, and nothing else.
         var ruled = Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == id).ToHashSet();
         Assert.Contains(capital, ruled);
-        Assert.All(_world.Grid.Neighbours(capital).Where(_world.IsLand), c => Assert.Contains(c, ruled));
-        Assert.All(ruled, c => Assert.True(c == capital || _world.Grid.Neighbours(capital).Contains(c)));
+        var around = new List<int>();
+        foreach (int c in _world.Grid.Neighbours(capital))
+        {
+            around.Add(c);
+        }
+
+        Assert.All(around.Where(_world.IsLand), c => Assert.Contains(c, ruled));
+        Assert.All(ruled, c => Assert.True(c == capital || around.Contains(c)));
         Assert.Throws<ArgumentException>(() => polities.Found(capital, sim.Tick, new Rng(12)));
 
         // Saved and loaded with the rest of the world.

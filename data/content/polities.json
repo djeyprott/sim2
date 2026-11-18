@@ -19,24 +19,24 @@
   // farming has stood in its cell at least foundSettledYears, and its store holds grain for at
   // least foundSurplusYears of its cell's people. The yearly chance is foundChance times the
   // people in its cell and the neighbouring ones over crowdPeople (at most 1).
-  "foundPeople": 1500,
+  "foundPeople": 900,
   "foundSettledYears": 3000,
   "foundSurplusYears": 0.5,
-  "foundChance": 0.002,
+  "foundChance": 0.001,
   "crowdPeople": 50000,
 
   // Reach: the most a polity's cells may cost to reach from its capital, as trade carries goods
   // over land (trade.json: 1 a cell of lowland, more on hills and mountains, half along rivers;
   // less where the capital uses the wheel or riding). Cells beyond it are let go.
   "chiefdomReach": 4,
-  "stateReach": 10,
+  "stateReach": 6,
 
   // Growing: each year a polity draws in each unruled settlement within its reach with chance
   // joinChance times its expansion (temperament) times (1 - cost / reach), times
   // unlinkedJoinFactor unless one of its settlements trades with it; it then also rules the
   // unruled land next to it. An unruled cell within reach with at least claimNeighbours of its
   // six neighbours ruled by the polity is claimed.
-  "joinChance": 0.1,
+  "joinChance": 0.02,
   "unlinkedJoinFactor": 0.5,
   "claimNeighbours": 4,
 

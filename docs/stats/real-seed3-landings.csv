@@ -1,3 +1,5 @@
 cell,latitude,longitude,year,date,from_cell,from_latitude,from_longitude,distance_km,settlers
 79563,12.10,92.77,-5546,January 5546 BCE,79554,16.06,94.86,494,200
 5868,35.31,24.70,-5436,January 5436 BCE,6811,38.42,27.12,407,144
+132402,-0.88,135.66,-1354,January 1354 BCE,131814,-2.16,139.32,432,188
+133847,-7.45,131.62,-1244,January 1244 BCE,133204,-3.94,133.27,431,191

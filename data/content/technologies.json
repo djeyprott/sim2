@@ -131,11 +131,12 @@
       // Smelting copper from its ores, and casting and hammering copper tools.
       "name": "Copper working", "colour": "#c87533", "occupations": [ "Craftsman", "Farmer" ],
       "nearGoods": [ "Copper ore", "Copper" ],
-      // 0.0002 and 2,600 years since 0.4.1 (0.0001 and 2,800 before): kept near copper, it no
-      // longer spreads from Anatolia across Europe, so the thinly peopled copper districts of
-      // Europe, farmed later, must find it themselves.
-      "chance": 0.0002, "spread": 0.02,
-      "settledYears": 2600,
+      // 0.00002 and 1,500 years since 0.4.1 (0.0001 and 2,800 before): kept near copper, it no
+      // longer spreads from Anatolia across Europe, so Europe's copper districts, farmed thousands
+      // of years after Anatolia's, must find it themselves (at 2,600 years, none was ever farmed long
+      // enough before 3000 BCE); a smaller chance keeps the first finds near 5000 BCE.
+      "chance": 0.00002, "spread": 0.02,
+      "settledYears": 1500,
       "history": "5000 BCE, Balkans (Belovode); perhaps soon after 6000 BCE in northern Iraq"
     },
     {

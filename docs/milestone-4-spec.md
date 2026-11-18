@@ -2,7 +2,9 @@
 
 Status: agreed by the owner 2026-11-18. Feature list is frozen. Parent: `design-doc.md` version 1.5.
 
-Progress: step 1 under way.
+Progress: step 1 done 2026-11-18.
+
+- Step 1 (organizations, ruled cells, political map): a polity system (`polities.json`, last in the update order) holds the organizations table (kind, name, founded, ended, capital, level, and the temperament: aggression, greed and expansion, each drawn as exp(0.35 × a normal draw) between 0.4 and 2.5), the positions table (Ruler, Heir and General for each polity, held by nobody until milestone 6) and a per-cell field for the ruling polity. A polity is named after its capital settlement for now; names by region are for milestone 5's languages. A founded polity rules its capital and the land around it; an ended one keeps its row as history and rules nothing. Nothing founds polities yet (step 2). The viewer has a Political map mode (each polity in its own colour, states stronger than chiefdoms, borders darker, capitals white) and the tooltip names the ruler, its level, founding date, size and temperament. A test founds a polity at a settlement, checks its cells, positions and temperament, and that it is saved, loaded and ended correctly.
 
 Change log:
 - 1.0 (2026-11-18): agreed by the owner as draft 2 stood.

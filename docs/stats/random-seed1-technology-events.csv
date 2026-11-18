@@ -10,18 +10,21 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Irrigation",independent,11016,53.24,18.94,-6519,January 6519 BCE,0
 "Irrigation",independent,162113,15.11,-3.86,-5818,January 5818 BCE,0
 "Copper working",first,9922,47.71,12.91,-5806,January 5806 BCE,0
-"Bronze",first,10436,50.04,14.22,-5584,January 5584 BCE,0
-"Irrigation",independent,40891,42.02,-103.99,-5539,January 5539 BCE,0
-"Milk and wool",first,62122,-19.99,31.51,-4727,January 4727 BCE,0
-"Granaries",lost,161859,14.76,-2.57,-4678,January 4678 BCE,131
-"The sail",first,96242,18.24,-91.99,-4678,January 4678 BCE,0
-"Granaries",lost,161986,14.76,-3.09,-4663,January 4663 BCE,20
-"Irrigation",independent,37779,32.52,-106.99,-4510,January 4510 BCE,0
-"Granaries",lost,163977,9.33,-7.77,-4366,January 4366 BCE,18
-"The sail",independent,162338,6.35,1.25,-4118,January 4118 BCE,0
-"The sail",independent,8581,42.72,13.47,-3962,January 3962 BCE,0
-"The sail",lost,5868,35.31,24.70,-3818,January 3818 BCE,226
-"The sail",lost,8363,39.54,2.62,-3716,January 3716 BCE,478
-"Terraced fields",first,42443,47.00,-120.48,-3644,January 3644 BCE,0
-"Copper working",independent,64192,-12.58,28.39,-3217,January 3217 BCE,0
-"The sail",independent,60482,-23.48,35.19,-3204,January 3204 BCE,0
+"Bronze",first,10437,49.93,13.52,-5620,January 5620 BCE,0
+"The sail",first,11578,54.31,9.87,-5534,January 5534 BCE,0
+"Milk and wool",first,62762,-18.23,30.26,-4985,January 4985 BCE,0
+"Granaries",lost,161859,14.76,-2.57,-4789,January 4789 BCE,131
+"Granaries",lost,161986,14.76,-3.09,-4780,January 4780 BCE,20
+"Granaries",lost,161986,14.76,-3.09,-4670,January 4670 BCE,20
+"Terraced fields",first,42214,46.44,-116.88,-4460,January 4460 BCE,0
+"Granaries",lost,163977,9.33,-7.77,-4367,January 4367 BCE,12
+"Granaries",lost,161859,14.76,-2.57,-3822,January 3822 BCE,110
+"Granaries",lost,161859,14.76,-2.57,-3666,January 3666 BCE,110
+"Terraced fields",independent,10015,49.32,21.32,-3547,January 3547 BCE,0
+"Granaries",lost,161859,14.76,-2.57,-3519,January 3519 BCE,110
+"Terraced fields",lost,99808,27.96,-103.30,-3387,January 3387 BCE,246
+"Terraced fields",independent,148637,4.60,-59.73,-3346,January 3346 BCE,0
+"Terraced fields",lost,99809,27.56,-103.55,-3344,January 3344 BCE,398
+"Terraced fields",lost,99721,27.13,-103.30,-3338,January 3338 BCE,176
+"Terraced fields",lost,99631,27.11,-102.81,-3335,January 3335 BCE,83
+"Granaries",lost,161859,14.76,-2.57,-3087,January 3087 BCE,110

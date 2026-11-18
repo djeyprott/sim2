@@ -244,22 +244,32 @@ public sealed class TradeSystem : ISimSystem
         Stockpiles stockpiles = _stockpiles!;
 
         // Last season's goods arrive. After a load, every settlement is checked once, since the
-        // list of where goods were sent is not saved.
+        // list of where goods were sent is not saved. Either way they arrive in cell order, so the
+        // ledger's sums are added in the same order and a loaded run matches to the last bit.
+        var arriving = new List<int>();
         if (!_built)
         {
             for (int id = 0; id < settlements.IdCount; id++)
             {
                 if (settlements.IsAlive(id))
                 {
-                    stockpiles.Arrive(_settlementCell![id]);
+                    arriving.Add(_settlementCell![id]);
                 }
             }
         }
         else
         {
-            foreach (int cell in _destinations)
+            arriving.AddRange(_destinations);
+        }
+
+        arriving.Sort();
+        int previous = -1;
+        foreach (int cell in arriving)
+        {
+            if (cell != previous)
             {
                 stockpiles.Arrive(cell);
+                previous = cell;
             }
         }
 

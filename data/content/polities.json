@@ -46,7 +46,7 @@
 
   // A chiefdom that rules at least statePeople people and stateSettlements settlements is a
   // state; a state that falls below stateKeepShare of either is a chiefdom again.
-  "statePeople": 400000,
+  "statePeople": 300000,
   "stateSettlements": 15,
   "stateKeepShare": 0.75,
 

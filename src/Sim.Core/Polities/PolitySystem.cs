@@ -493,16 +493,24 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
-        // Which settlements each settlement trades with, by cell.
-        var linked = new HashSet<(int, int)>();
+        // Between Januaries there is nothing to do until a polity stands.
+        if (!january && !AnyStanding())
+        {
+            return;
+        }
+
+        // Which settlements each settlement trades with, by cell (only looked up, never iterated).
+        var partners = new Dictionary<int, List<int>>();
         if (_trade != null)
         {
             foreach ((int a, int b) in _trade.LinksByCell())
             {
-                linked.Add((a, b));
-                linked.Add((b, a));
+                AddPartner(partners, a, b);
+                AddPartner(partners, b, a);
             }
         }
+
+        bool released = false;
 
         // Each polity, in id order: let go of what is out of reach (going round other polities'
         // land), draw in settlements with the land on the way to them, fill gaps.
@@ -516,15 +524,17 @@ public sealed class PolitySystem : ISimSystem
                 if (!Reached(cell))
                 {
                     _rulerPlusOne[cell] = 0;
+                    released = true;
                 }
             }
 
-            var ownSettlements = new List<int>();
+            // The settlements its own settlements trade with.
+            var tradesWith = new HashSet<int>();
             foreach (int cell in cellsOf[p.Id])
             {
-                if (RulerOf(cell) == p.Id && _settlementPlusOne[cell] > 0)
+                if (RulerOf(cell) == p.Id && _settlementPlusOne[cell] > 0 && partners.TryGetValue(cell, out List<int>? list))
                 {
-                    ownSettlements.Add(cell);
+                    tradesWith.UnionWith(list);
                 }
             }
 
@@ -536,7 +546,7 @@ public sealed class PolitySystem : ISimSystem
                 }
 
                 // The yearly chance, spread over the twelve months.
-                bool trades = ownSettlements.Any(own => linked.Contains((own, cell)));
+                bool trades = tradesWith.Contains(cell);
                 double yearly = Math.Min(1.0, _parameters.JoinChance * p.Expansion * (1.0 - _reachCost[cell] / reach)
                     * (trades ? 1.0 : _parameters.UnlinkedJoinFactor));
                 if (rng.Chance(1.0 - Math.Pow(1.0 - yearly, 1.0 / GameDate.MonthsPerYear)))
@@ -576,10 +586,37 @@ public sealed class PolitySystem : ISimSystem
         {
             Yearly(tick, rng);
         }
-        else
+        else if (released)
         {
+            // Letting go of land is the only monthly change that can cut a polity in two.
             KeepWhole(tick, rng);
         }
+    }
+
+    private static void AddPartner(Dictionary<int, List<int>> partners, int cell, int partner)
+    {
+        if (!partners.TryGetValue(cell, out List<int>? list))
+        {
+            list = new List<int>();
+            partners[cell] = list;
+        }
+
+        list.Add(partner);
+    }
+
+    // Whether any polity stands.
+    private bool AnyStanding()
+    {
+        EntityTable table = _organizations!;
+        for (int id = 0; id < table.IdCount; id++)
+        {
+            if (table.IsAlive(id) && _ended![id] < 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // Each January: new chiefdoms, wars, splits, land cut off breaking away, tribute, the elite and

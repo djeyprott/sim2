@@ -1,0 +1,48 @@
+id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
+0,"Yaiktoush",-5343,-3867,conquered,,1.037,0.811,1.256,,19,22,9,Southwest Asia
+1,"Thoukou",-5332,-4098,conquered,,1.500,2.500,0.867,,2,8,3,Southwest Asia
+2,"Hamrous",-5053,-5022,conquered,,0.474,1.898,0.807,,0,3,0,Southwest Asia
+3,"Heyuri",-4792,,,,1.225,1.166,0.921,,4,144,48,Southwest Asia
+4,"Hamrous",-4313,,,,1.274,1.489,1.400,-3867,116,117,108,Southwest Asia
+5,"Beishous",-4225,-2024,fell,,1.301,0.975,1.416,,25,25,22,Southwest Asia
+6,"Ekpeish",-3869,-3812,conquered,,1.206,1.002,1.515,,0,2,0,Southwest Asia
+7,"Brabuth",-3840,-3758,conquered,,1.061,1.894,1.014,,0,3,0,Southwest Asia
+8,"Pizo",-3744,,,,0.936,1.591,1.456,,2,2,2,East Asia
+9,"Unupei",-3738,,,,1.803,0.720,0.896,,11,12,8,East Asia
+10,"Troultaper",-3619,-2181,conquered,4,0.882,1.325,1.269,,23,29,14,Southwest Asia
+11,"Rainathath",-3460,,,,0.708,0.583,1.023,,0,10,3,East Asia
+12,"Ekpeish",-3388,-2132,conquered,,0.847,0.717,1.091,,2,38,2,Southwest Asia
+13,"Stavokkrem",-3377,,,,0.513,0.731,1.232,-3337,5,6,6,Steppe and Central Asia
+14,"Peayi",-3088,-3074,conquered,,0.942,1.210,0.661,,0,2,0,East Asia
+15,"Branar",-3069,,,,0.826,1.648,0.818,,0,26,3,Southwest Asia
+16,"Vushgei",-2909,,,,1.116,1.383,0.766,-2881,2,2,2,Europe
+17,"Rukkaimou",-2889,-2625,conquered,10,0.934,0.694,0.569,,4,6,0,Southwest Asia
+18,"Kroudothum",-2740,,,,0.745,1.079,1.243,,6,6,6,East Asia
+19,"Varak",-2739,,,,1.171,1.058,0.962,,9,10,8,Steppe and Central Asia
+20,"Dehepil",-2737,,,,0.572,1.386,1.176,,1,1,1,East Asia
+21,"Paithzuhum",-2616,,,,1.054,0.853,0.783,,34,41,21,Southwest Asia
+22,"Romol",-2575,,,,0.712,0.637,1.528,,12,12,12,Americas
+23,"Kemaes",-2490,,,,1.485,0.969,2.384,,17,18,10,East Asia
+24,"Ritredek",-2452,,,,0.758,1.913,0.642,,5,17,1,East Asia
+25,"Kounpi",-2428,,,,0.841,0.902,1.124,,0,0,0,Sahel
+26,"Shepas",-2292,,,,1.178,1.150,1.238,,0,0,0,West and Central Africa
+27,"Vobroun",-2119,,,,2.500,1.143,1.137,,0,0,0,West and Central Africa
+28,"Zostoshail",-2100,-1829,conquered,,1.114,1.286,0.792,,0,12,0,Europe
+29,"Lovumo",-2097,,,,0.983,1.233,0.745,,2,2,0,West and Central Africa
+30,"Habol",-2089,,,,0.976,1.181,1.122,,0,1,0,Southeast Asia
+31,"Riteitouth",-2043,,,,0.936,0.585,0.651,,0,0,0,West and Central Africa
+32,"Lesho",-2011,,,,1.578,0.968,0.886,,0,0,0,Sahel
+33,"Youto",-1965,,,,0.891,1.461,0.985,,3,38,14,East Asia
+34,"Geiamshol",-1922,,,,1.935,0.814,0.731,,13,13,12,Southeast Asia
+35,"Yostigim",-1885,,,,1.005,0.790,0.857,,0,12,0,Americas
+36,"Lesutrar",-1883,,,,1.093,0.802,2.151,,4,5,3,East Asia
+37,"Mueithaik",-1723,,,,0.941,0.764,2.500,,8,11,6,Southwest Asia
+38,"Kisiseth",-1613,,,,0.923,0.706,0.831,,0,2,2,West and Central Africa
+39,"Othehosh",-1575,,,,0.583,0.852,1.346,,0,1,0,Europe
+40,"Zougeivin",-1520,,,,1.191,2.274,0.882,,1,1,1,Southwest Asia
+41,"Burithash",-1511,,,,2.354,1.309,1.117,,11,12,11,East Asia
+42,"Brupaideish",-1221,,,,1.205,1.001,0.928,-1171,1,2,1,Europe
+43,"Bambramo",-1220,,,,0.939,1.542,1.575,,0,0,0,Europe
+44,"Brakrel",-1170,,,,0.604,1.009,0.726,,0,6,2,East Asia
+45,"Soram",-1107,-1031,conquered,,1.714,0.578,1.231,,0,3,0,East Asia
+46,"Okukuk",-1033,,,,0.816,1.340,1.069,,0,1,0,Europe

@@ -810,7 +810,12 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // A capital's elite and soldiers never crowd out its farmers.
         foreach (int capital in capitals)
         {
-            double staff = groups.InCell(capital).Where(g => groups.Occupation(g) == elite || groups.Occupation(g) == soldier).Sum(g => groups.Size(g));
+            double staff = 0.0;
+            foreach (int g in groups.InCell(capital))
+            {
+                staff += groups.Occupation(g) == elite || groups.Occupation(g) == soldier ? groups.Size(g) : 0.0;
+            }
+
             Assert.True(staff <= PolityParameters.LoadDefault().MaxStaffShare * groups.CellTotal(capital) * 1.05 + 1.0,
                 $"Capital {capital} holds {staff:F0} elite and soldiers among {groups.CellTotal(capital):F0} people.");
         }

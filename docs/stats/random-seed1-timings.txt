@@ -2,21 +2,21 @@ Loading world data/earth.world
 World 'Earth', 225002 cells, checksum 35764695A63D8D1F14B8265F9211C753CC39B3D80BE5D0C89E116ED1AEE3B238
 Seed 1, random crop homelands, starting at January 10000 BCE, 13 systems
 Wrote yearly statistics to docs/stats/random-seed1.csv, and beside it statistics by region, farming and herding origins, technology events, landings and polity events
-Ran 108000 ticks (9000 years) in 2050.778 s: 53 ticks per second
-  climate: 33.0 s
+Ran 108000 ticks (9000 years) in 2576.934 s: 42 ticks per second
+  climate: 32.3 s
   population: 0.0 s
-  goods: 35.0 s
-  foragers: 65.7 s
-  farming: 235.2 s
-  herding: 49.7 s
-  settlements: 11.1 s
-  resources: 129.7 s
-  crafts: 313.0 s
-  trade: 655.6 s
-    of which links 61.9 s, prices 198.4 s, trading 293.2 s (1,480,812,407 sends over 11,098,528,661 link-goods), gap measure 0.0 s
-  technology: 269.1 s
-    8 first discoveries, 22 independent, 42 losses; 3,870,831 discovery checks, 230,721,556 group visits
-  seafaring: 3.3 s
-  polities: 74.2 s
+  goods: 44.4 s
+  foragers: 80.3 s
+  farming: 327.7 s
+  herding: 67.7 s
+  settlements: 15.4 s
+  resources: 143.9 s
+  crafts: 417.3 s
+  trade: 765.1 s
+    of which links 64.2 s, prices 250.4 s, trading 337.2 s (1,480,926,980 sends over 11,097,557,699 link-goods), gap measure 0.0 s
+  technology: 341.6 s
+    8 first discoveries, 21 independent, 26 losses; 3,626,167 discovery checks, 229,229,043 group visits
+  seafaring: 4.3 s
+  polities: 98.1 s
 Ended at January 1000 BCE
-State checksum FADD902853E7805A7E912F0526AB3D86CF418D4FF3EB64A40208D2D415DDE5CB
+State checksum BF76D89426C190B1C68BBE7D710CCDB1306D3EF76276D9A7C4D1F859B457C505

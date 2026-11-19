@@ -8,66 +8,49 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",independent,97418,18.35,-97.01,-7737,January 7737 BCE,0
 "Granaries",independent,1625,-17.52,29.25,-6903,January 6903 BCE,0
 "Irrigation",independent,11016,53.24,18.94,-6519,January 6519 BCE,0
-"Fortifications",first,42214,46.44,-116.88,-5646,January 5646 BCE,0
-"The sail",first,112721,5.65,-55.11,-5619,January 5619 BCE,0
-"Irrigation",independent,40765,41.57,-103.11,-5540,January 5540 BCE,0
-"Fortifications",independent,10329,50.23,18.33,-5110,January 5110 BCE,0
-"Irrigation",independent,159971,12.95,5.85,-5039,January 5039 BCE,0
-"Granaries",lost,161859,14.76,-2.57,-4940,January 4940 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-4910,January 4910 BCE,110
-"Irrigation",independent,160028,-18.02,25.03,-4801,January 4801 BCE,0
-"Copper working",first,8800,44.79,22.48,-4460,January 4460 BCE,0
-"Granaries",lost,163977,9.33,-7.77,-4367,January 4367 BCE,9
-"The sail",independent,8810,44.00,16.15,-4354,January 4354 BCE,0
-"Bronze",first,10435,50.16,14.92,-4326,January 4326 BCE,0
-"The sail",independent,8790,45.28,29.02,-4288,January 4288 BCE,0
-"The sail",lost,5869,35.27,24.17,-4203,January 4203 BCE,411
-"Milk and wool",first,61310,-18.30,36.00,-3982,January 3982 BCE,0
-"Terraced fields",first,148645,7.52,-61.58,-3371,January 3371 BCE,0
-"Terraced fields",lost,99808,27.96,-103.30,-3367,January 3367 BCE,336
-"Terraced fields",lost,99721,27.13,-103.30,-3337,January 3337 BCE,343
-"Terraced fields",lost,99809,27.56,-103.55,-3329,January 3329 BCE,325
-"Terraced fields",lost,162111,14.40,-3.34,-3321,January 3321 BCE,548
-"Terraced fields",lost,161986,14.76,-3.09,-3320,January 3320 BCE,231
-"Terraced fields",lost,99631,27.11,-102.81,-3319,January 3319 BCE,215
-"Irrigation",independent,69250,11.84,15.46,-3024,January 3024 BCE,0
-"Terraced fields",independent,112180,3.12,-53.06,-2984,January 2984 BCE,0
-"Fortifications",lost,161859,14.76,-2.57,-2842,January 2842 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-2832,January 2832 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-2769,January 2769 BCE,110
-"Fortifications",lost,161859,14.76,-2.57,-2736,January 2736 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-2719,January 2719 BCE,110
-"Irrigation",independent,99803,29.96,-102.05,-2655,January 2655 BCE,0
-"Milk and wool",independent,152328,-15.47,-61.75,-2555,January 2555 BCE,0
-"Terraced fields",lost,162111,14.40,-3.34,-2550,January 2550 BCE,324
-"Terraced fields",independent,10333,49.82,15.48,-2515,January 2515 BCE,0
-"The sail",independent,11490,53.72,9.02,-2426,January 2426 BCE,0
+"Copper working",first,10130,48.71,13.82,-5619,January 5619 BCE,0
+"Fortifications",first,11118,52.79,13.01,-5520,January 5520 BCE,0
+"Fortifications",independent,42549,47.67,-117.50,-5199,January 5199 BCE,0
+"Irrigation",independent,161736,16.52,-3.37,-5096,January 5096 BCE,0
+"Granaries",lost,164084,8.60,-7.75,-4399,January 4399 BCE,98
+"Granaries",lost,163977,9.33,-7.77,-4366,January 4366 BCE,15
+"Irrigation",independent,160028,-18.02,25.03,-4360,January 4360 BCE,0
+"Bronze",first,10334,49.71,14.78,-4349,January 4349 BCE,0
+"The sail",first,11667,54.60,9.22,-4330,January 4330 BCE,0
+"Granaries",lost,161859,14.76,-2.57,-4210,January 4210 BCE,110
+"The sail",independent,96485,18.36,-92.93,-4178,January 4178 BCE,0
+"Irrigation",independent,159002,-23.71,32.68,-4048,January 4048 BCE,0
+"Milk and wool",first,1625,-17.52,29.25,-3711,January 3711 BCE,0
+"The sail",independent,148508,10.06,-62.73,-3625,January 3625 BCE,0
+"Terraced fields",lost,100153,28.43,-105.03,-3428,January 3428 BCE,279
+"Terraced fields",lost,99809,27.56,-103.55,-3372,January 3372 BCE,342
+"Terraced fields",lost,99721,27.13,-103.30,-3351,January 3351 BCE,184
+"Terraced fields",first,149207,6.03,-62.59,-3343,January 3343 BCE,0
+"Terraced fields",lost,99631,27.11,-102.81,-3327,January 3327 BCE,232
+"Terraced fields",independent,10126,49.14,16.57,-3216,January 3216 BCE,0
+"Fortifications",lost,161859,14.76,-2.57,-2863,January 2863 BCE,110
+"Granaries",lost,161859,14.76,-2.57,-2852,January 2852 BCE,110
+"Granaries",lost,159544,13.66,6.88,-2601,January 2601 BCE,91
+"Milk and wool",independent,109175,-10.77,-46.27,-2515,January 2515 BCE,0
 "Irrigation",lost,159590,-22.05,29.35,-2421,January 2421 BCE,52
-"Granaries",lost,159590,-22.05,29.35,-2388,January 2388 BCE,19
-"Granaries",lost,159544,13.66,6.88,-2353,January 2353 BCE,117
-"Granaries",lost,161859,14.76,-2.57,-2248,January 2248 BCE,110
-"Irrigation",independent,108288,-9.70,-41.54,-2223,January 2223 BCE,0
-"Granaries",lost,159544,13.66,6.88,-2205,January 2205 BCE,117
-"Copper working",independent,1614,-13.62,26.61,-2189,January 2189 BCE,0
-"Terraced fields",lost,41880,44.65,-122.80,-2124,January 2124 BCE,28
-"Terraced fields",lost,41996,45.02,-123.27,-2109,January 2109 BCE,38
-"Granaries",lost,41996,45.02,-123.27,-2108,January 2108 BCE,42
-"Granaries",lost,42110,45.47,-123.08,-2108,January 2108 BCE,38
-"Terraced fields",lost,42110,45.47,-123.08,-2108,January 2108 BCE,20
-"Granaries",lost,159544,13.66,6.88,-1973,January 1973 BCE,117
-"Fortifications",lost,161859,14.76,-2.57,-1945,January 1945 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-1927,January 1927 BCE,110
-"The sail",independent,105467,12.79,-16.35,-1889,January 1889 BCE,0
-"Irrigation",lost,159590,-22.05,29.35,-1674,January 1674 BCE,35
-"Granaries",lost,163977,9.33,-7.77,-1670,January 1670 BCE,25
-"Granaries",lost,163177,5.97,-2.00,-1641,January 1641 BCE,66
-"Granaries",lost,159590,-22.05,29.35,-1639,January 1639 BCE,12
-"Irrigation",lost,100154,28.02,-105.28,-1595,January 1595 BCE,91
-"Granaries",lost,164084,8.60,-7.75,-1562,January 1562 BCE,81
-"Granaries",lost,164083,8.23,-7.50,-1554,January 1554 BCE,115
-"Fortifications",lost,161859,14.76,-2.57,-1191,January 1191 BCE,110
-"Granaries",lost,161859,14.76,-2.57,-1188,January 1188 BCE,110
-"Irrigation",lost,100154,28.02,-105.28,-1180,January 1180 BCE,91
-"Terraced fields",lost,99360,25.02,-102.57,-1151,January 1151 BCE,132
-"Granaries",lost,99360,25.02,-102.57,-1141,January 1141 BCE,132
-"Granaries",lost,163977,9.33,-7.77,-1053,January 1053 BCE,185
+"Granaries",lost,159590,-22.05,29.35,-2371,January 2371 BCE,11
+"Granaries",lost,159544,13.66,6.88,-2360,January 2360 BCE,91
+"Copper working",independent,42617,47.01,-88.49,-2357,January 2357 BCE,0
+"Granaries",lost,159544,13.66,6.88,-2164,January 2164 BCE,91
+"Copper working",independent,64531,-12.56,26.90,-2139,January 2139 BCE,0
+"Terraced fields",lost,41880,44.65,-122.80,-2123,January 2123 BCE,19
+"Terraced fields",lost,41996,45.02,-123.27,-2110,January 2110 BCE,11
+"Granaries",lost,41996,45.02,-123.27,-2109,January 2109 BCE,16
+"Granaries",lost,42110,45.47,-123.08,-2109,January 2109 BCE,11
+"Terraced fields",lost,42110,45.47,-123.08,-2109,January 2109 BCE,5
+"Terraced fields",independent,61854,-18.98,33.37,-2093,January 2093 BCE,0
+"Granaries",lost,161859,14.76,-2.57,-2089,January 2089 BCE,110
+"Irrigation",independent,108057,-9.70,-40.54,-1985,January 1985 BCE,0
+"Fortifications",lost,161859,14.76,-2.57,-1923,January 1923 BCE,110
+"Granaries",lost,161859,14.76,-2.57,-1913,January 1913 BCE,110
+"Irrigation",independent,37930,32.92,-109.27,-1834,January 1834 BCE,0
+"The sail",independent,60341,-24.51,34.91,-1772,January 1772 BCE,0
+"Granaries",lost,163977,9.33,-7.77,-1669,January 1669 BCE,26
+"Granaries",lost,163177,5.97,-2.00,-1642,January 1642 BCE,65
+"Granaries",lost,2887,10.77,-11.25,-1567,January 1567 BCE,38
+"Granaries",lost,163977,9.33,-7.77,-1130,January 1130 BCE,26

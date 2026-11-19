@@ -251,7 +251,8 @@ public sealed class PolityParameters
 /// and polities at peace may declare war on a neighbour; the wars table keeps every war as history.
 /// Collapse (step 5): a polity short of cohesion (unrest, hunger, stretched reach, war and
 /// defeat) may split, its far and restless provinces breaking away as successor chiefdoms; one
-/// that loses its capital breaks into successors too. Runs once a year, after seafaring.
+/// that loses its capital breaks into successors too. Runs every month, after seafaring: growing
+/// and keeping whole each month, everything else each January.
 /// </summary>
 public sealed class PolitySystem : ISimSystem
 {
@@ -368,7 +369,9 @@ public sealed class PolitySystem : ISimSystem
 
     public string Name => SystemName;
 
-    public int IntervalMonths => 12;
+    // Monthly: polities grow, and land cut off from its capital breaks away, every month; the
+    // rest (founding, war, splits, tribute, the elite and soldiers, unrest, levels) runs each January.
+    public int IntervalMonths => 1;
 
     public PolityParameters Parameters => _parameters;
 
@@ -476,13 +479,17 @@ public sealed class PolitySystem : ISimSystem
         long tick = context.Tick;
         Rng rng = context.Rng;
         _warOfDirty = true;
+        bool january = tick % GameDate.MonthsPerYear == 0;
 
         // Polities whose capital settlement is gone end, their other settlements becoming successors.
-        foreach (PolityInfo p in Standing())
+        if (january)
         {
-            if (IsStanding(p.Id) && _settlementPlusOne[p.Capital] <= 0)
+            foreach (PolityInfo p in Standing())
             {
-                Fall(p.Id, tick, rng);
+                if (IsStanding(p.Id) && _settlementPlusOne[p.Capital] <= 0)
+                {
+                    Fall(p.Id, tick, rng);
+                }
             }
         }
 
@@ -528,10 +535,11 @@ public sealed class PolitySystem : ISimSystem
                     continue;
                 }
 
+                // The yearly chance, spread over the twelve months.
                 bool trades = ownSettlements.Any(own => linked.Contains((own, cell)));
-                double chance = _parameters.JoinChance * p.Expansion * (1.0 - _reachCost[cell] / reach)
-                    * (trades ? 1.0 : _parameters.UnlinkedJoinFactor);
-                if (rng.Chance(Math.Min(1.0, chance)))
+                double yearly = Math.Min(1.0, _parameters.JoinChance * p.Expansion * (1.0 - _reachCost[cell] / reach)
+                    * (trades ? 1.0 : _parameters.UnlinkedJoinFactor));
+                if (rng.Chance(1.0 - Math.Pow(1.0 - yearly, 1.0 / GameDate.MonthsPerYear)))
                 {
                     // The unruled land on the way from the capital comes too, so the polity stays whole.
                     for (int on = cell; on >= 0 && RulerOf(on) != p.Id; on = _reachFrom[on])
@@ -564,6 +572,20 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
+        if (january)
+        {
+            Yearly(tick, rng);
+        }
+        else
+        {
+            KeepWhole(tick, rng);
+        }
+    }
+
+    // Each January: new chiefdoms, wars, splits, land cut off breaking away, tribute, the elite and
+    // soldiers, unrest, and levels.
+    private void Yearly(long tick, Rng rng)
+    {
         // New chiefdoms, in settlement id order.
         EntityTable settlements = _settlements!;
         IntColumn settlementCell = settlements.IntColumn("cell");
@@ -609,7 +631,7 @@ public sealed class PolitySystem : ISimSystem
         KeepWhole(tick, rng);
 
         // Tribute, the elite and soldiers, and unrest.
-        cellsOf = CellsByPolity();
+        List<int>[] cellsOf = CellsByPolity();
         TakeTribute(cellsOf);
         Staff(cellsOf);
         UpdateUnrest();

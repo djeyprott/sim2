@@ -272,6 +272,9 @@ public sealed class EarthRunResult
     /// <summary>Largest share of a cell's people lost between the year before a famine and its low point.</summary>
     public double DeepestFamineDrop { get; set; }
 
+    /// <summary>Polities over the whole run (milestone 4), when the run has them.</summary>
+    public PolityResult? Polities { get; set; }
+
     public double FamineRecoveredShare => FaminesRecovered + FaminesNotRecovered == 0
         ? 0.0 : FaminesRecovered / (double)(FaminesRecovered + FaminesNotRecovered);
 
@@ -306,7 +309,8 @@ public sealed class EarthRunResult
             + $"{100.0 * SevereShare:F1}% of famine-death cell-years severe (over 15%); "
             + $"famines: {FamineCellYears} cell-years, {100.0 * FamineRecoveredShare:F0}% of hit cells recovered within 50 years "
             + $"({FaminesRecovered} of {FaminesRecovered + FaminesNotRecovered}), deepest drop {100.0 * DeepestFamineDrop:F0}%; "
-            + $"origins: {origins}";
+            + $"origins: {origins}"
+            + (Polities != null ? "; " + Polities : "");
     }
 }
 
@@ -317,6 +321,9 @@ public sealed class EarthRunResult
 public abstract class EarthRunFixtureBase
 {
     public const int Seeds = 10;
+
+    /// <summary>When the measurements of milestones 1 to 3 that are taken "at the end" are taken.</summary>
+    public const int OldEndYears = 7000;
 
     protected EarthRunFixtureBase(bool farming, CropHomelands homelands, int years)
     {
@@ -377,9 +384,33 @@ public abstract class EarthRunFixtureBase
         var result = new EarthRunResult { Seed = seed, StartPopulation = groups.WorldTotal() };
         TechnologySystem? technology = sim.Systems.OfType<TechnologySystem>().SingleOrDefault();
         var reachMeasured = new bool[technology?.Technologies.Count ?? 0];
+
+        // Runs go to 9,000 years for polities (milestone 4); what milestones 1 to 3 measure at the
+        // end is measured at 7,000 years, as before.
+        int oldEnd = Math.Min(years, OldEndYears);
+        PolityMeasures? polityMeasures = sim.Systems.OfType<Sim.Core.Polities.PolitySystem>().Any() && farming
+            ? new PolityMeasures(sim, land) : null;
         for (int year = 0; year < years; year++)
         {
             sim.Run(12);
+            polityMeasures?.Year(year);
+            if (year == oldEnd - 1)
+            {
+                MeasureEnd();
+            }
+
+            if (year >= oldEnd)
+            {
+                // After 7,000 years only the soundness checks and polities go on.
+                if (year % 100 == 0 || year == years - 1)
+                {
+                    CheckGroups(world, groups, result);
+                    CheckGoods(stockpiles, result);
+                }
+
+                continue;
+            }
+
             if (technology != null)
             {
                 MeasureTechnologyReach(sim, world, groups, technology, year, reachMeasured, result);
@@ -527,83 +558,92 @@ public abstract class EarthRunFixtureBase
             }
         }
 
-        result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
-        result.FinalPopulation = groups.WorldTotal();
-        FarmingSystem? farmingAtEnd = sim.Systems.OfType<FarmingSystem>().SingleOrDefault();
-        if (technology != null && farmingAtEnd != null)
+        if (polityMeasures != null)
         {
-            MeasurePlough(world, groups, technology, farmingAtEnd, sim.State.IntField(FarmingSystem.CropField), biome,
-                sim.Systems.OfType<ClimateSystem>().Single().Biomes.IndexOf("Grassland"), land, result);
-        }
-        CheckGroups(world, groups, result);
-
-        if (technology != null)
-        {
-            var events = technology.Events();
-            foreach (TechnologyEvent e in events.Where(e => e.Kind == TechnologyEventKind.First))
-            {
-                result.TechnologyFirsts.Add($"{technology.Technologies.Get(e.Technology).Name} year {e.Tick / 12} at {world.Grid.Latitude(e.Cell):F0},{world.Grid.Longitude(e.Cell):F0}");
-            }
-
-            foreach (TechnologyEvent e in events.Where(e => e.Kind != TechnologyEventKind.Lost))
-            {
-                string name = technology.Technologies.Get(e.Technology).Name;
-                if (e.Kind == TechnologyEventKind.First)
-                {
-                    result.FirstDiscovery[name] = ((int)(e.Tick / 12), e.Cell);
-                }
-
-                result.DiscoveryRegions[name] = result.DiscoveryRegions.GetValueOrDefault(name) + 1;
-            }
-
-            result.IndependentDiscoveries = events.Count(e => e.Kind == TechnologyEventKind.Independent);
-            result.TechnologyLosses = events.Count(e => e.Kind == TechnologyEventKind.Lost);
-            result.MaxContactAtLoss = events.Where(e => e.Kind == TechnologyEventKind.Lost).Select(e => e.Contact).DefaultIfEmpty(0.0).Max();
-            for (int g = 0; g < groups.IdCount; g++)
-            {
-                for (int t = 0; groups.IsAlive(g) && t < technology.Technologies.Count; t++)
-                {
-                    double share = technology.Knowledge(g, t);
-                    result.BadKnowledge |= double.IsNaN(share) || share < 0.0 || share > 1.0;
-                }
-            }
-        }
-
-        HerdingSystem? herding = sim.Systems.OfType<HerdingSystem>().SingleOrDefault();
-        if (herding != null)
-        {
-            var origins = herding.Origins();
-            result.HerdingRegions6000 = SeparateRegions(world.Grid, origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
-            result.HerdingOrigins = origins.Select(o => $"{herding.Livestock.Get(o.Animal).Name} year {o.Tick / 12}").ToList();
-            int FirstYear(string name)
-            {
-                int animal = herding.Livestock.IndexOf(name);
-                return origins.Where(o => o.Animal == animal).Select(o => (int)(o.Tick / 12)).DefaultIfEmpty(-1).Min();
-            }
-
-            result.FirstSheepYear = FirstYear("Sheep and goats");
-            result.FirstLlamaYear = FirstYear("Llamas and alpacas");
-        }
-
-        if (farmingSystem != null)
-        {
-            result.Origins = farmingSystem.Origins().ToList();
-            result.Regions6000 = SeparateRegions(world.Grid, result.Origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
-            result.SpreadKmPerYear = SpreadSpeed(world.Grid, sim.State.IntField(FarmingSystem.SinceField), cropPlusOne!, result.Origins);
-            result.FarmingCells = cropPlusOne!.Count(c => c > 0);
-            CropSet crops = farmingSystem.Crops;
-            result.FarthestOriginFromRealHomelandKm = result.Origins.Count == 0 ? 0.0 : result.Origins.Max(o =>
-                crops.Crops.Min(c => Km(world.Grid, o.Cell, world.Grid.FindCell(c.HomelandLat, c.HomelandLon))));
-        }
-
-        if (farmingSystem != null)
-        {
-            MeasureMetals(sim, world, stockpiles, result);
-            MeasureSea(sim, world, result);
+            polityMeasures.Finish(years);
+            result.Polities = polityMeasures.Result;
         }
 
         result.Seconds = watch.Elapsed.TotalSeconds;
         return result;
+
+        void MeasureEnd()
+        {
+            result.BiomeChangedShare = changed.Count(c => c) / (double)land.Length;
+            result.FinalPopulation = groups.WorldTotal();
+            FarmingSystem? farmingAtEnd = sim.Systems.OfType<FarmingSystem>().SingleOrDefault();
+            if (technology != null && farmingAtEnd != null)
+            {
+                MeasurePlough(world, groups, technology, farmingAtEnd, sim.State.IntField(FarmingSystem.CropField), biome,
+                    sim.Systems.OfType<ClimateSystem>().Single().Biomes.IndexOf("Grassland"), land, result);
+            }
+            CheckGroups(world, groups, result);
+
+            if (technology != null)
+            {
+                var events = technology.Events();
+                foreach (TechnologyEvent e in events.Where(e => e.Kind == TechnologyEventKind.First))
+                {
+                    result.TechnologyFirsts.Add($"{technology.Technologies.Get(e.Technology).Name} year {e.Tick / 12} at {world.Grid.Latitude(e.Cell):F0},{world.Grid.Longitude(e.Cell):F0}");
+                }
+
+                foreach (TechnologyEvent e in events.Where(e => e.Kind != TechnologyEventKind.Lost))
+                {
+                    string name = technology.Technologies.Get(e.Technology).Name;
+                    if (e.Kind == TechnologyEventKind.First)
+                    {
+                        result.FirstDiscovery[name] = ((int)(e.Tick / 12), e.Cell);
+                    }
+
+                    result.DiscoveryRegions[name] = result.DiscoveryRegions.GetValueOrDefault(name) + 1;
+                }
+
+                result.IndependentDiscoveries = events.Count(e => e.Kind == TechnologyEventKind.Independent);
+                result.TechnologyLosses = events.Count(e => e.Kind == TechnologyEventKind.Lost);
+                result.MaxContactAtLoss = events.Where(e => e.Kind == TechnologyEventKind.Lost).Select(e => e.Contact).DefaultIfEmpty(0.0).Max();
+                for (int g = 0; g < groups.IdCount; g++)
+                {
+                    for (int t = 0; groups.IsAlive(g) && t < technology.Technologies.Count; t++)
+                    {
+                        double share = technology.Knowledge(g, t);
+                        result.BadKnowledge |= double.IsNaN(share) || share < 0.0 || share > 1.0;
+                    }
+                }
+            }
+
+            HerdingSystem? herding = sim.Systems.OfType<HerdingSystem>().SingleOrDefault();
+            if (herding != null)
+            {
+                var origins = herding.Origins();
+                result.HerdingRegions6000 = SeparateRegions(world.Grid, origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
+                result.HerdingOrigins = origins.Select(o => $"{herding.Livestock.Get(o.Animal).Name} year {o.Tick / 12}").ToList();
+                int FirstYear(string name)
+                {
+                    int animal = herding.Livestock.IndexOf(name);
+                    return origins.Where(o => o.Animal == animal).Select(o => (int)(o.Tick / 12)).DefaultIfEmpty(-1).Min();
+                }
+
+                result.FirstSheepYear = FirstYear("Sheep and goats");
+                result.FirstLlamaYear = FirstYear("Llamas and alpacas");
+            }
+
+            if (farmingSystem != null)
+            {
+                result.Origins = farmingSystem.Origins().ToList();
+                result.Regions6000 = SeparateRegions(world.Grid, result.Origins.Where(o => o.Tick < 6000L * 12).Select(o => o.Cell).ToList());
+                result.SpreadKmPerYear = SpreadSpeed(world.Grid, sim.State.IntField(FarmingSystem.SinceField), cropPlusOne!, result.Origins);
+                result.FarmingCells = cropPlusOne!.Count(c => c > 0);
+                CropSet crops = farmingSystem.Crops;
+                result.FarthestOriginFromRealHomelandKm = result.Origins.Count == 0 ? 0.0 : result.Origins.Max(o =>
+                    crops.Crops.Min(c => Km(world.Grid, o.Cell, world.Grid.FindCell(c.HomelandLat, c.HomelandLon))));
+            }
+
+            if (farmingSystem != null)
+            {
+                MeasureMetals(sim, world, stockpiles, result);
+                MeasureSea(sim, world, result);
+            }
+        }
     }
 
     public static double Km(GeodesicGrid grid, int a, int b) => grid.DistanceKm(a, b);
@@ -1086,7 +1126,7 @@ public abstract class EarthRunFixtureBase
 public sealed class RealHomelandRunFixture : EarthRunFixtureBase
 {
     public RealHomelandRunFixture()
-        : base(farming: true, CropHomelands.Real, years: 7000)
+        : base(farming: true, CropHomelands.Real, years: 9000)
     {
     }
 }
@@ -1094,7 +1134,7 @@ public sealed class RealHomelandRunFixture : EarthRunFixtureBase
 public sealed class RandomHomelandRunFixture : EarthRunFixtureBase
 {
     public RandomHomelandRunFixture()
-        : base(farming: true, CropHomelands.Random, years: 7000)
+        : base(farming: true, CropHomelands.Random, years: 9000)
     {
     }
 }
@@ -1400,6 +1440,124 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
             Assert.Equal(0.0, r.MaxUnreachedPopulation);
         }
     }
+
+    // ---- Milestone 4: states and war (9,000-year runs; the run starts in 10,000 BCE) ----
+
+    private IEnumerable<PolityResult> Polities => _results.Select(r => r.Polities!);
+
+    private string Each(Func<PolityResult, string> describe) =>
+        string.Join("; ", _results.Select(r => $"seed {r.Seed}: {describe(r.Polities!)}"));
+
+    [Fact]
+    public void The_first_chiefdom_comes_within_1500_years_of_5000_BCE_and_the_first_state_within_1000_years_of_3300_BCE_in_6_of_10_seeds()
+    {
+        Assert.True(Polities.Count(p => p.FirstChiefdomYear >= 3500 && p.FirstChiefdomYear <= 6500) >= 6,
+            "First chiefdom: " + Each(p => YearText(p.FirstChiefdomYear)));
+        Assert.True(Polities.Count(p => p.FirstStateYear >= 5700 && p.FirstStateYear <= 7700) >= 6,
+            "First state: " + Each(p => YearText(p.FirstStateYear)));
+    }
+
+    [Fact]
+    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds()
+    {
+        Assert.True(Polities.Count(p => p.FirstStateInRiverValleyOrPlain) >= 7,
+            Each(p => $"{p.FirstStatePlace} {(p.FirstStateInRiverValleyOrPlain ? "river valley or plain" : "elsewhere")}"));
+    }
+
+    [Fact]
+    public void States_arise_independently_at_least_1000_km_apart_in_7_of_10_seeds()
+    {
+        Assert.True(Polities.Count(p => p.StateRegionsKm >= 1000.0) >= 7, Each(p => $"{p.StateRegionsKm:F0} km"));
+    }
+
+    [Fact]
+    public void No_polity_forms_without_farming()
+    {
+        Assert.All(Polities, p => Assert.Equal(0, p.FormedWithoutFarming));
+    }
+
+    [Fact]
+    public void The_largest_polity_rules_half_a_million_to_5_million_km2_and_at_most_a_quarter_of_the_people()
+    {
+        Assert.True(Polities.All(p => p.LargestKm2 >= 0.5e6 && p.LargestKm2 <= 5e6 && p.LargestPeopleShare <= 0.25),
+            Each(p => $"{p.LargestKm2 / 1e6:F2} M km2, {100.0 * p.LargestPeopleShare:F1}%"));
+    }
+
+    // The "set numbers" of the spec: at least 3 collapses and 3 conquests in a seed.
+    [Fact]
+    public void Polities_rise_and_fall_and_the_median_state_lasts_100_to_1000_years_in_8_of_10_seeds()
+    {
+        Assert.True(Polities.Count(p => p.Collapses >= 3 && p.Conquests >= 3 && p.MedianStateYears >= 100.0 && p.MedianStateYears <= 1000.0) >= 8,
+            Each(p => $"{p.Collapses} collapses, {p.Conquests} conquests, {p.StatesEver} states, median {p.MedianStateYears:F0} years"));
+    }
+
+    // The "set share" of the spec: 2% of the cells ruled by polities at peace in a year, on average.
+    [Fact]
+    public void Borders_are_steady_in_peace()
+    {
+        Assert.True(Polities.All(p => p.MeanPeacefulChange < 0.02),
+            Each(p => $"{100.0 * p.MeanPeacefulChange:F2}% a year (at most {100.0 * p.MaxPeacefulChange:F2}%)"));
+    }
+
+    [Fact]
+    public void Wars_happen_and_the_stronger_side_wins_most()
+    {
+        Assert.All(Polities.Where(p => p.StatesEver > 0), p => Assert.True(p.Wars > 0));
+        int decided = Polities.Sum(p => p.DecidedWars), stronger = Polities.Sum(p => p.StrongerWon);
+        Assert.True(stronger > decided / 2, $"The stronger side won {stronger} of {decided} wars. " + Each(p => $"{p.StrongerWon} of {p.DecidedWars}"));
+    }
+
+    [Fact]
+    public void Chariots_and_fortifications_each_win_most_wars_where_only_one_side_has_them()
+    {
+        int chariotWars = Polities.Sum(p => p.ChariotWars), chariotWins = Polities.Sum(p => p.ChariotWins);
+        int fortWars = Polities.Sum(p => p.FortWars), fortWins = Polities.Sum(p => p.FortWins);
+        Assert.True(chariotWars >= 10 && chariotWins > chariotWars / 2, $"Chariots won {chariotWins} of {chariotWars} wars.");
+        Assert.True(fortWars >= 10 && fortWins > fortWars / 2, $"Fortifications won {fortWins} of {fortWars} wars.");
+    }
+
+    [Fact]
+    public void War_costs_people()
+    {
+        Assert.All(Polities.Where(p => p.Wars > 0), p => Assert.True(p.WarDeaths > 0.0));
+        double warStart = Polities.Sum(p => p.WarStart), warEnd = Polities.Sum(p => p.WarEnd);
+        double peaceStart = Polities.Sum(p => p.PeaceStart), peaceEnd = Polities.Sum(p => p.PeaceEnd);
+        Assert.True(warEnd / warStart < peaceEnd / peaceStart,
+            $"Growth a year at war {warEnd / warStart:F4}, at peace {peaceEnd / peaceStart:F4}.");
+    }
+
+    [Fact]
+    public void The_most_aggressive_third_starts_at_least_twice_as_many_wars_a_year_as_the_least()
+    {
+        var polities = Polities.SelectMany(p => p.Temperaments).OrderBy(t => t.Aggression).ToList();
+        int third = polities.Count / 3;
+        double Rate(IEnumerable<(double Aggression, int Years, int Started)> list) => list.Sum(t => t.Started) / (double)Math.Max(1, list.Sum(t => t.Years));
+        double low = Rate(polities.Take(third)), high = Rate(polities.Skip(polities.Count - third));
+        Assert.True(third >= 10 && high >= 2.0 * low,
+            $"{polities.Count} polities; wars started per 100 years: least aggressive third {100.0 * low:F2}, most {100.0 * high:F2}.");
+    }
+
+    [Fact]
+    public void Tribute_flows_to_capitals_and_the_elite_live_only_there()
+    {
+        Assert.All(Polities.Where(p => p.StatesEver > 0), p =>
+        {
+            Assert.True(p.CapitalGrainPerPerson > p.OtherGrainPerPerson, $"Capitals {p.CapitalGrainPerPerson:F2}, others {p.OtherGrainPerPerson:F2} grain a person.");
+            Assert.Equal(0, p.EliteOutsideCapitals);
+        });
+    }
+
+    [Fact]
+    public void Polities_with_high_unrest_split_more_often()
+    {
+        var years = Polities.SelectMany(p => p.UnrestYears).OrderBy(y => y.Unrest).ToList();
+        int third = years.Count / 3;
+        double Rate(IEnumerable<(double Unrest, bool Split)> list) => list.Count(y => y.Split) / (double)Math.Max(1, list.Count());
+        double low = Rate(years.Take(third)), high = Rate(years.Skip(years.Count - third));
+        Assert.True(high > low, $"Splits per 1,000 polity-years: calmest third {1000.0 * low:F2}, most restless {1000.0 * high:F2}.");
+    }
+
+    private static string YearText(int year) => year < 0 ? "none" : new GameDate(year * 12L).ToString();
 }
 
 [Trait("Category", "Exit")]
@@ -1433,6 +1591,19 @@ public class EarthRandomHomelandTests : IClassFixture<RandomHomelandRunFixture>
     public void Groups_stay_valid()
     {
         Assert.All(_results, r => Assert.False(r.BadPopulation || r.DuplicateGroups || r.FarmingOnForbiddenLand > 0));
+    }
+
+    [Fact]
+    public void No_polity_forms_without_farming()
+    {
+        Assert.All(_results, r => Assert.Equal(0, r.Polities!.FormedWithoutFarming));
+    }
+
+    [Fact]
+    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds()
+    {
+        Assert.True(_results.Count(r => r.Polities!.FirstStateInRiverValleyOrPlain) >= 7,
+            string.Join("; ", _results.Select(r => $"seed {r.Seed}: {r.Polities!.FirstStatePlace} {r.Polities.FirstStateInRiverValleyOrPlain}")));
     }
 }
 

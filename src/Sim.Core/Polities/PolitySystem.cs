@@ -1416,6 +1416,12 @@ public sealed class PolitySystem : ISimSystem
             + (_bronzeWeapons >= 0 ? 2.0 * _stockpiles.Stock(capital, _bronzeWeapons) : 0.0);
     }
 
+    /// <summary>How much stronger a polity attacks on open lowland for the chariots its capital uses (1: none).</summary>
+    public double AttackFactor(int polity) => CapitalFactor(polity, _attack);
+
+    /// <summary>How much stronger a settlement's defenders are for the fortifications its people use (1: none).</summary>
+    public double DefenceFactor(int cell) => _technology?.CellFactor(cell, _defence) ?? 1.0;
+
     // The product of a set of technology effects the capital's people use (1 when none).
     private double CapitalFactor(int polity, TechnologyEffect[] effects) =>
         _technology?.CellFactor(Info(polity).Capital, effects) ?? 1.0;

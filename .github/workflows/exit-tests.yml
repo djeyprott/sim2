@@ -2,14 +2,15 @@ name: Exit tests
 
 # The milestone exit tests: long runs of the full simulation on Earth with 10 seeds each.
 # They run separately from CI so ordinary changes get quick results, and only when started by
-# hand (gh workflow run exit-tests.yml), since each run takes about 40 minutes a suite.
+# hand (gh workflow run exit-tests.yml). Runs with farming go 9,000 years (milestone 4) and take
+# about two hours a suite.
 on:
   workflow_dispatch:
 
 jobs:
   exit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 300
     strategy:
       fail-fast: false
       matrix:

@@ -76,7 +76,8 @@
 
   // Strength: the soldiers in the capital times 1 + weaponStrength x the weapons in the capital's
   // store per soldier (bronze weapons count twice; at most maxWeaponsPerSoldier), so a fully armed
-  // army with copper counts 1.5 and with bronze 2. At a contested cell, each side's strength is
+  // army with copper counts 1.5 and with bronze 2, plus a levy of militiaShare of the capital's people.
+  // At a contested cell, each side's strength is
   // scaled by max(minDistanceFactor, 1 - cost from its capital / its reach); chariots (attack)
   // multiply an attacker's strength on open lowland, fortifications (defence) a defended
   // settlement's, and the defender adds militiaShare of the cell's people.
@@ -138,5 +139,5 @@
   "splitChance": 0.1,
   "splitDistance": 0.5,
   "revoltUnrest": 0.4,
-  "successorPeople": 900
+  "successorPeople": 2500
 }

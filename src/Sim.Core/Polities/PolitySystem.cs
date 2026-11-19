@@ -159,7 +159,7 @@ public sealed class PolityParameters
 
     public double RevoltUnrest { get; set; } = 0.4;
 
-    public double SuccessorPeople { get; set; } = 900.0;
+    public double SuccessorPeople { get; set; } = 2500.0;
 
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
@@ -1099,17 +1099,19 @@ public sealed class PolitySystem : ISimSystem
 
     /// <summary>
     /// A polity's strength: the soldiers in its capital, times 1 + weaponStrength x the weapons in
-    /// its capital's store per soldier (bronze ones count twice, at most maxWeaponsPerSoldier).
+    /// its capital's store per soldier (bronze ones count twice, at most maxWeaponsPerSoldier),
+    /// plus a levy of militiaShare of its capital's people (so a new polity is not defenceless).
     /// </summary>
     public double Strength(int polity)
     {
+        double levy = _parameters.MilitiaShare * _groups!.CellTotal(Info(polity).Capital);
         double soldiers = Soldiers(polity);
         if (soldiers <= 0.0)
         {
-            return 0.0;
+            return levy;
         }
 
-        return soldiers * (1.0 + _parameters.WeaponStrength * Math.Min(_parameters.MaxWeaponsPerSoldier, Weapons(polity) / soldiers));
+        return levy + soldiers * (1.0 + _parameters.WeaponStrength * Math.Min(_parameters.MaxWeaponsPerSoldier, Weapons(polity) / soldiers));
     }
 
     /// <summary>The soldiers in a polity's capital.</summary>

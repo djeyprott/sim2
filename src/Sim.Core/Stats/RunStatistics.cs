@@ -236,7 +236,7 @@ public sealed class RunStatistics
             values.Add(all.Count(p => !p.Standing).ToString(CultureInfo.InvariantCulture));
             values.Add(all.Sum(p => _polities.Splits(p.Id)).ToString(CultureInfo.InvariantCulture));
             values.Add(standing.Count(p => p.Successor).ToString(CultureInfo.InvariantCulture));
-            values.Add(Number(standing.Count > 0 ? standing.Average(p => _polities.Cohesion(p.Id)) : 0.0));
+            values.Add((standing.Count > 0 ? standing.Average(p => _polities.Cohesion(p.Id)) : 0.0).ToString("0.000", CultureInfo.InvariantCulture));
         }
 
         return string.Join(",", values);

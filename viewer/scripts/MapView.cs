@@ -31,6 +31,7 @@ public partial class MapView : Node2D
     private readonly Node2D[] _copies = new Node2D[3];
     private readonly CellOutline[] _outlines = new CellOutline[3];
     private readonly SettlementLayer[] _settlementLayers = new SettlementLayer[3];
+    private readonly PolityLayer[] _polityLayers = new PolityLayer[3];
     private readonly List<MeshInstance2D> _minorRivers = new List<MeshInstance2D>();
 
     private static readonly Color MajorRiverColour = Color.Color8(52, 104, 205);
@@ -102,6 +103,8 @@ public partial class MapView : Node2D
 
         for (int k = 0; k < _copies.Length; k++)
         {
+            _polityLayers[k] = new PolityLayer { Visible = false };
+            _copies[k].AddChild(_polityLayers[k]);
             _settlementLayers[k] = new SettlementLayer();
             _copies[k].AddChild(_settlementLayers[k]);
             _outlines[k] = new CellOutline();
@@ -135,7 +138,7 @@ public partial class MapView : Node2D
         }
     }
 
-    /// <summary>Tells the settlement layers the zoom and the visible part of the map.</summary>
+    /// <summary>Tells the settlement and polity layers the zoom and the visible part of the map.</summary>
     public void SetSettlementView(float zoom, Rect2 view)
     {
         for (int k = 0; k < _copies.Length; k++)
@@ -145,7 +148,76 @@ public partial class MapView : Node2D
                 Rect2 local = view;
                 local.Position -= _copies[k].Position;
                 _settlementLayers[k].SetView(zoom, local);
+                _polityLayers[k].SetView(zoom, local);
             }
+        }
+    }
+
+    /// <summary>Shows or hides the political borders and names.</summary>
+    public void SetPolitiesVisible(bool visible)
+    {
+        foreach (PolityLayer layer in _polityLayers)
+        {
+            if (layer != null)
+            {
+                layer.Visible = visible;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Replaces the political borders and names: border lines run along every edge between two
+    /// land cells with different rulers (one of them ruled); each name is drawn at its position,
+    /// the states' larger.
+    /// </summary>
+    public void SetPolities(Func<int, int> rulerOf, Vector2[] namePositions, string[] names, bool[] states)
+    {
+        if (_map == null)
+        {
+            return;
+        }
+
+        GeodesicGrid grid = _map.Grid;
+        var lines = new List<Vector2>();
+        Span<Vec3> corners = stackalloc Vec3[GeodesicGrid.MaxNeighbours];
+        Span<Vector2> points = stackalloc Vector2[GeodesicGrid.MaxNeighbours];
+        for (int cell = 0; cell < grid.CellCount; cell++)
+        {
+            if (!_map.IsLand(cell) || Math.Abs(grid.Latitude(cell)) > MaxLatitude)
+            {
+                continue;
+            }
+
+            int ruler = rulerOf(cell);
+            ReadOnlySpan<int> neighbours = grid.Neighbours(cell);
+            bool projected = false;
+            int count = 0;
+            for (int k = 0; k < neighbours.Length; k++)
+            {
+                int other = neighbours[k];
+                int otherRuler = _map.IsLand(other) ? rulerOf(other) : ruler;
+                // Each edge once: from the lower cell id, or from the ruled side when the other is unruled.
+                if (otherRuler == ruler || (ruler < 0) || (otherRuler >= 0 && other < cell))
+                {
+                    continue;
+                }
+
+                if (!projected)
+                {
+                    count = ProjectCell(grid, cell, corners, points);
+                    projected = true;
+                }
+
+                // The edge shared with neighbour k runs from corner k - 1 to corner k.
+                lines.Add(points[(k - 1 + count) % count]);
+                lines.Add(points[k]);
+            }
+        }
+
+        Vector2[] borderLines = lines.ToArray();
+        foreach (PolityLayer layer in _polityLayers)
+        {
+            layer?.SetPolities(borderLines, namePositions, names, states);
         }
     }
 
@@ -574,6 +646,86 @@ public partial class SettlementLayer : Node2D
             DrawSetTransform(_positions[i] + new Vector2(5f * unit, 4f * unit), 0f, scale);
             DrawStringOutline(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, FontSize, 3, Colors.Black);
             DrawString(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, FontSize, Colors.White);
+        }
+
+        DrawSetTransform(Vector2.Zero, 0f, Vector2.One);
+    }
+}
+
+/// <summary>
+/// Draws political borders as bold lines and polity names over their land, in the Political map
+/// mode. One layer sits in each copy of the map; lines and text keep the same size on screen.
+/// </summary>
+public partial class PolityLayer : Node2D
+{
+    private const float LineWidth = 2.5f;
+    private const int StateFontSize = 17;
+    private const int ChiefdomFontSize = 12;
+    private const int MaxNames = 120;
+    private static readonly Color LineColour = new Color(0.05f, 0.05f, 0.05f, 0.9f);
+
+    private Vector2[] _lines = Array.Empty<Vector2>();
+    private Vector2[] _namePositions = Array.Empty<Vector2>();
+    private string[] _names = Array.Empty<string>();
+    private bool[] _states = Array.Empty<bool>();
+    private float _zoom = 1f;
+    private Rect2 _view;
+
+    public void SetPolities(Vector2[] lines, Vector2[] namePositions, string[] names, bool[] states)
+    {
+        _lines = lines;
+        _namePositions = namePositions;
+        _names = names;
+        _states = states;
+        QueueRedraw();
+    }
+
+    /// <summary>Gives the zoom and the visible part of the map, in this copy's own coordinates.</summary>
+    public void SetView(float zoom, Rect2 view)
+    {
+        if (zoom != _zoom || view != _view)
+        {
+            _zoom = zoom;
+            _view = view;
+            if (Visible)
+            {
+                QueueRedraw();
+            }
+        }
+    }
+
+    public override void _Draw()
+    {
+        float unit = 1f / _zoom;
+        if (_lines.Length >= 2)
+        {
+            DrawMultiline(_lines, LineColour, LineWidth * unit);
+        }
+
+        // States first, then chiefdoms; a name that would overlap one already drawn is skipped.
+        Font font = ThemeDB.FallbackFont;
+        var taken = new List<Rect2>();
+        var scale = new Vector2(unit, unit);
+        foreach (int i in Enumerable.Range(0, _names.Length).OrderByDescending(i => _states[i]))
+        {
+            if (taken.Count >= MaxNames || string.IsNullOrEmpty(_names[i]))
+            {
+                continue;
+            }
+
+            int size = _states[i] ? StateFontSize : ChiefdomFontSize;
+            Vector2 text = font.GetStringSize(_names[i], HorizontalAlignment.Left, -1, size) * unit;
+            var box = new Rect2(_namePositions[i] - text / 2f, text);
+            if (!_view.Intersects(box) || taken.Any(t => t.Intersects(box)))
+            {
+                continue;
+            }
+
+            taken.Add(box);
+            // The string is drawn from its baseline, about three quarters of the way down the box.
+            DrawSetTransform(_namePositions[i] + new Vector2(-text.X / 2f, 0.3f * text.Y), 0f, scale);
+            DrawStringOutline(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, size, 4, Colors.Black);
+            DrawString(font, Vector2.Zero, _names[i], HorizontalAlignment.Left, -1, size, Colors.White);
         }
 
         DrawSetTransform(Vector2.Zero, 0f, Vector2.One);

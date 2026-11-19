@@ -95,6 +95,8 @@ public partial class Main : Node2D
     private SettlementSystem? _settlementSystem;
     private ResourceSystem? _resourceSystem;
     private Task<(List<SettlementInfo> Settlements, List<TradeRoute> Routes)>? _settlementTask;
+    private Task<string[]>? _polityNamesTask;
+    private string[] _polityNames = Array.Empty<string>();
     private TradeSystem? _tradeSystem;
 
     // The good whose routes were last asked for (-1: all goods).
@@ -280,6 +282,8 @@ public partial class Main : Node2D
         _resourceSystem = systems.OfType<ResourceSystem>().FirstOrDefault();
         _tradeSystem = systems.OfType<TradeSystem>().FirstOrDefault();
         _settlementTask = null;
+        _polityNamesTask = null;
+        _polityNames = Array.Empty<string>();
         _settlementAge = double.MaxValue;
         _settlementTick = -1;
         _mapView.SetSettlements(Array.Empty<Vector2>(), Array.Empty<string>(), Array.Empty<float>());
@@ -379,6 +383,7 @@ public partial class Main : Node2D
         Vector2 viewSize = GetViewportRect().Size / _zoom;
         _mapView.SetSettlementView(_zoom, new Rect2(_camera.Position - viewSize / 2f, viewSize));
         PollSettlements(frame, delta);
+        PollPolityNames();
         UpdateStatus(frame, delta);
 
         if (_screenshotPath != null)
@@ -585,7 +590,7 @@ public partial class Main : Node2D
         {
             int cellCount = _map.CellCount;
             PolitySystem polities = _polities;
-            extractor = sim => ExtractPolitical(sim, polities, cellCount);
+            extractor = sim => ExtractPolitical(polities, cellCount);
         }
 
         if (mode == HerdingMode && _herding != null)
@@ -613,6 +618,7 @@ public partial class Main : Node2D
         }
 
         _host?.SetValueExtractor(extractor, mode);
+        _mapView.SetPolitiesVisible(mode == PoliticalMode);
 
         WorldMap map = _map;
         if (extractor == null)
@@ -750,14 +756,13 @@ public partial class Main : Node2D
         return values;
     }
 
-    // Per cell: -1 where no polity rules; otherwise the ruling polity's id times 8, plus 4 where
-    // it borders the polity it is at war with, plus 2 for its capital, plus 1 when it is a state.
-    private static double[] ExtractPolitical(Simulation sim, PolitySystem polities, int cellCount)
+    // Per cell: -1 where no polity rules; otherwise the ruling polity's id times 4, plus 2 for
+    // its capital, plus 1 when it is a state.
+    private static double[] ExtractPolitical(PolitySystem polities, int cellCount)
     {
         var values = new double[cellCount];
         var states = new HashSet<int>();
         var capitals = new HashSet<int>();
-        var enemyOf = new Dictionary<int, int>();
         foreach (PolityInfo p in polities.Standing())
         {
             if (p.Level == PolityLevel.State)
@@ -766,36 +771,95 @@ public partial class Main : Node2D
             }
 
             capitals.Add(p.Capital);
-            int war = polities.WarOf(p.Id);
-            if (war >= 0)
-            {
-                WarInfo w = polities.War(war);
-                enemyOf[p.Id] = w.Attacker == p.Id ? w.Defender : w.Attacker;
-            }
         }
 
         for (int cell = 0; cell < cellCount; cell++)
         {
             int ruler = polities.RulerOf(cell);
-            if (ruler < 0)
-            {
-                values[cell] = -1.0;
-                continue;
-            }
-
-            bool front = false;
-            if (enemyOf.TryGetValue(ruler, out int enemy))
-            {
-                foreach (int other in sim.Map.Grid.Neighbours(cell))
-                {
-                    front |= polities.RulerOf(other) == enemy;
-                }
-            }
-
-            values[cell] = ruler * 8.0 + (front ? 4.0 : 0.0) + (capitals.Contains(cell) ? 2.0 : 0.0) + (states.Contains(ruler) ? 1.0 : 0.0);
+            values[cell] = ruler < 0 ? -1.0 : ruler * 4.0 + (capitals.Contains(cell) ? 2.0 : 0.0) + (states.Contains(ruler) ? 1.0 : 0.0);
         }
 
         return values;
+    }
+
+    // Draws the borders and names of the polities in a Political frame. Names are asked of the
+    // simulation when a polity appears whose name is not yet known (a polity's name never changes).
+    private void ShowPolities(double[] values)
+    {
+        WorldMap map = _map!;
+        GeodesicGrid grid = map.Grid;
+        int RulerOf(int cell) => values[cell] < 0.0 ? -1 : (int)values[cell] / 4;
+
+        // Each polity's name goes on its cell nearest the middle of its land.
+        var sums = new Dictionary<int, (double X, double Y, double Z, bool State)>();
+        for (int cell = 0; cell < values.Length; cell++)
+        {
+            int ruler = map.IsLand(cell) ? RulerOf(cell) : -1;
+            if (ruler < 0)
+            {
+                continue;
+            }
+
+            Vec3 c = grid.Centre(cell);
+            sums.TryGetValue(ruler, out var s);
+            sums[ruler] = (s.X + c.X, s.Y + c.Y, s.Z + c.Z, s.State || ((int)values[cell] & 1) != 0);
+        }
+
+        var best = new Dictionary<int, (int Cell, double Dot)>();
+        for (int cell = 0; cell < values.Length; cell++)
+        {
+            int ruler = map.IsLand(cell) ? RulerOf(cell) : -1;
+            if (ruler < 0)
+            {
+                continue;
+            }
+
+            var s = sums[ruler];
+            double dot = Vec3.Dot(grid.Centre(cell), new Vec3(s.X, s.Y, s.Z));
+            if (!best.TryGetValue(ruler, out var b) || dot > b.Dot)
+            {
+                best[ruler] = (cell, dot);
+            }
+        }
+
+        int maxId = best.Count > 0 ? best.Keys.Max() : -1;
+        if (maxId >= _polityNames.Length && _polityNamesTask == null && _host != null && _polities != null)
+        {
+            PolitySystem polities = _polities;
+            _polityNamesTask = _host.InvokeAsync(_ => polities.All().Select(p => p.Name).ToArray());
+        }
+
+        var ids = best.Keys.OrderBy(id => id).ToList();
+        var positions = new Vector2[ids.Count];
+        var names = new string[ids.Count];
+        var states = new bool[ids.Count];
+        for (int i = 0; i < ids.Count; i++)
+        {
+            int cell = best[ids[i]].Cell;
+            positions[i] = MapView.MapPosition(grid.Latitude(cell), grid.Longitude(cell));
+            names[i] = ids[i] < _polityNames.Length ? _polityNames[ids[i]] : "";
+            states[i] = sums[ids[i]].State;
+        }
+
+        _mapView.SetPolities(cell => map.IsLand(cell) ? RulerOf(cell) : -1, positions, names, states);
+    }
+
+    // Takes in polity names once the simulation has sent them, and redraws the names.
+    private void PollPolityNames()
+    {
+        if (_polityNamesTask == null || !_polityNamesTask.IsCompleted)
+        {
+            return;
+        }
+
+        if (_polityNamesTask.IsCompletedSuccessfully)
+        {
+            _polityNames = _polityNamesTask.Result;
+            _colouredFrame = null;
+            _sinceRecolour = RecolourSeconds;
+        }
+
+        _polityNamesTask = null;
     }
 
     // A polity's own colour: hues spread by the golden angle so neighbouring ids differ.
@@ -936,28 +1000,9 @@ public partial class Main : Node2D
                     }
 
                     int code = (int)v;
-                    int polity = code / 8;
-                    if ((code & 2) != 0)
-                    {
-                        return CapitalColour;
-                    }
-
-                    if ((code & 4) != 0)
-                    {
-                        return WarFrontColour;
-                    }
-
-                    Color colour = PolityColour(polity, (code & 1) != 0);
-                    foreach (int other in map.Grid.Neighbours(cell))
-                    {
-                        if (map.IsLand(other) && (values[other] < 0.0 || (int)values[other] / 8 != polity))
-                        {
-                            return colour.Darkened(0.45f);
-                        }
-                    }
-
-                    return colour;
+                    return (code & 2) != 0 ? CapitalColour : PolityColour(code / 4, (code & 1) != 0);
                 });
+                ShowPolities(values);
                 break;
             case TechnologyMode:
                 Color techColour = _techIndex < _techColours.Length ? _techColours[_techIndex] : Colors.White;
@@ -1084,7 +1129,7 @@ public partial class Main : Node2D
                 entries.AddRange(PopulationStops.Select(s => (s.Colour, Math.Pow(10.0, s.At).ToString("0.##", CultureInfo.InvariantCulture))));
                 break;
             case PoliticalMode:
-                title = "Who rules: each polity in its own colour, its border darker, war fronts red";
+                title = "Who rules: each polity in its own colour and name, borders in bold";
                 entries.Add((PolityColour(1, true), "A state"));
                 entries.Add((PolityColour(1, false), "A chiefdom (paler)"));
                 entries.Add((PolityColour(1, true).Darkened(0.45f), "Border"));
@@ -1228,7 +1273,6 @@ public partial class Main : Node2D
     private static readonly Color NoneHeld = Color.Color8(24, 24, 30);
     private static readonly Color DiscoveryColour = Color.Color8(255, 60, 200);
     private static readonly Color CapitalColour = Color.Color8(255, 255, 255);
-    private static readonly Color WarFrontColour = Color.Color8(220, 30, 30);
 
     // Amount held per person, as a power of ten: 0.0001 to 10.
     private static readonly (double At, Color Colour)[] HeldStops =
@@ -2050,8 +2094,29 @@ public partial class Main : Node2D
                 GetViewport().WarpMouse(GetViewportRect().Size / 2f);
                 break;
             case 285:
-                bool savedSettlements = SaveScreenshot("-settlements");
-                GetTree().Quit(_screenshotOk && savedSettlements ? 0 : 1);
+                _screenshotOk &= SaveScreenshot("-settlements");
+
+                // Run on to 3500 BCE, when chiefdoms and states have formed, for the political map.
+                _frameWaits = 0;
+                SetSpeed(4);
+                break;
+            case 290:
+                if (frame != null && frame.Tick < 6500L * 12 && _frameWaits++ < 6000)
+                {
+                    _frame--;
+                    break;
+                }
+
+                SetSpeed(0);
+                SetMapMode(PoliticalMode);
+                _camera.Position = MapView.MapPosition(33.0, 42.0);
+                ZoomAt(MapView.MapPosition(33.0, 42.0), 1.5f);
+                GetViewport().WarpMouse(new Vector2(GetViewportRect().Size.X / 2f, 12f));
+                break;
+            case 330:
+                GD.Print($"Screenshot script: political map at {frame?.Date}");
+                bool savedPolitical = SaveScreenshot("-political");
+                GetTree().Quit(_screenshotOk && savedPolitical ? 0 : 1);
                 break;
         }
     }

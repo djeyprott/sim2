@@ -750,6 +750,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             Assert.Contains(p.Capital, cells);
             Assert.All(cells, c => Assert.True(_world.IsLand(c) && !double.IsInfinity(polities.ReachCost(p.Id, c)),
                 $"{p.Name} rules cell {c} beyond its reach."));
+            Assert.True(polities.IsWhole(p.Id), $"{p.Name}'s land does not all join its capital.");
 
             // Its level follows the people and settlements it rules.
             double people = cells.Sum(c => groups.CellTotal(c));
@@ -893,6 +894,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         {
             Assert.All(Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == p.Id),
                 c => Assert.False(double.IsInfinity(polities.ReachCost(p.Id, c)), $"{p.Name} rules cell {c} beyond its reach."));
+            Assert.True(polities.IsWhole(p.Id), $"{p.Name}'s land does not all join its capital.");
         }
 
         var stock = new Stockpiles(sim.State, GoodSet.LoadDefault());
@@ -971,6 +973,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
             Assert.True(polities.Cohesion(p.Id) <= 1.0);
             Assert.All(Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == p.Id),
                 c => Assert.False(double.IsInfinity(polities.ReachCost(p.Id, c)), $"{p.Name} rules cell {c} beyond its reach."));
+            Assert.True(polities.IsWhole(p.Id), $"{p.Name}'s land does not all join its capital.");
         }
 
         Assert.All(all.Where(p => !p.Standing), p => Assert.DoesNotContain(Enumerable.Range(0, _world.CellCount), c => polities.RulerOf(c) == p.Id));

@@ -333,6 +333,7 @@ public sealed class PolitySystem : ISimSystem
     // Reach worked out for one polity at a time: cost from its capital, valid where stamped.
     private double[] _reachCost = Array.Empty<double>();
     private int[] _reachStamp = Array.Empty<int>();
+    private int[] _reachFrom = Array.Empty<int>();
     private int _stamp;
     private readonly List<int> _reached = new List<int>();
     private readonly PriorityQueue<int, double> _queue = new PriorityQueue<int, double>();
@@ -462,6 +463,7 @@ public sealed class PolitySystem : ISimSystem
 
         _reachCost = new double[map.CellCount];
         _reachStamp = new int[map.CellCount];
+        _reachFrom = new int[map.CellCount];
     }
 
     public void Update(SimContext context)
@@ -495,12 +497,13 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
-        // Each polity, in id order: let go of what is out of reach, draw in settlements, fill gaps.
+        // Each polity, in id order: let go of what is out of reach (going round other polities'
+        // land), draw in settlements with the land on the way to them, fill gaps.
         List<int>[] cellsOf = CellsByPolity();
         foreach (PolityInfo p in Standing())
         {
             double reach = p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach;
-            FillReach(p.Capital, reach);
+            FillReach(p.Capital, reach, p.Id);
             foreach (int cell in cellsOf[p.Id])
             {
                 if (!Reached(cell))
@@ -530,7 +533,12 @@ public sealed class PolitySystem : ISimSystem
                     * (trades ? 1.0 : _parameters.UnlinkedJoinFactor);
                 if (rng.Chance(Math.Min(1.0, chance)))
                 {
-                    Rule(cell, p.Id);
+                    // The unruled land on the way from the capital comes too, so the polity stays whole.
+                    for (int on = cell; on >= 0 && RulerOf(on) != p.Id; on = _reachFrom[on])
+                    {
+                        Rule(on, p.Id);
+                    }
+
                     ClaimAround(cell, p.Id);
                 }
             }
@@ -596,6 +604,9 @@ public sealed class PolitySystem : ISimSystem
 
         // Polities short of cohesion may split.
         Collapse(tick, rng);
+
+        // Land cut off from its capital breaks away.
+        KeepWhole(tick, rng);
 
         // Tribute, the elite and soldiers, and unrest.
         cellsOf = CellsByPolity();
@@ -760,13 +771,22 @@ public sealed class PolitySystem : ISimSystem
 
             made++;
 
+            // The successor takes the breaking land within its reach that joins its capital.
             int successor = NewPolity(town, tick, rng, polity);
             FillReach(town, _parameters.ChiefdomReach);
-            foreach (int cell in cells)
+            var breaking = new HashSet<int>(cells);
+            var stack = new Stack<int>();
+            stack.Push(town);
+            while (stack.Count > 0)
             {
-                if (RulerOf(cell) == polity && Reached(cell))
+                int at = stack.Pop();
+                foreach (int next in _map!.Grid.Neighbours(at))
                 {
-                    Rule(cell, successor);
+                    if (breaking.Contains(next) && RulerOf(next) == polity && Reached(next))
+                    {
+                        Rule(next, successor);
+                        stack.Push(next);
+                    }
                 }
             }
         }
@@ -778,6 +798,98 @@ public sealed class PolitySystem : ISimSystem
                 _rulerPlusOne[cell] = 0;
             }
         }
+    }
+
+    // Each standing polity's land must join its capital, cell to neighbouring cell. Land cut off
+    // (by war, a split or a lost settlement) breaks away, each cut-off piece on its own: its
+    // large settlements become successors, the rest falls back to no rule.
+    private void KeepWhole(long tick, Rng rng)
+    {
+        List<int>[] cellsOf = CellsByPolity();
+        foreach (PolityInfo p in Standing())
+        {
+            List<int> cells = cellsOf[p.Id];
+            if (cells.Count <= 1)
+            {
+                continue;
+            }
+
+            var joined = new HashSet<int> { p.Capital };
+            var stack = new Stack<int>();
+            stack.Push(p.Capital);
+            while (stack.Count > 0)
+            {
+                int at = stack.Pop();
+                foreach (int next in _map!.Grid.Neighbours(at))
+                {
+                    if (RulerOf(next) == p.Id && joined.Add(next))
+                    {
+                        stack.Push(next);
+                    }
+                }
+            }
+
+            if (joined.Count == cells.Count)
+            {
+                continue;
+            }
+
+            // The cut-off pieces, each found from its lowest cell.
+            var seen = new HashSet<int>(joined);
+            foreach (int start in cells)
+            {
+                if (!seen.Add(start))
+                {
+                    continue;
+                }
+
+                var piece = new List<int> { start };
+                stack.Push(start);
+                while (stack.Count > 0)
+                {
+                    int at = stack.Pop();
+                    foreach (int next in _map!.Grid.Neighbours(at))
+                    {
+                        if (RulerOf(next) == p.Id && seen.Add(next))
+                        {
+                            piece.Add(next);
+                            stack.Push(next);
+                        }
+                    }
+                }
+
+                piece.Sort();
+                BreakAway(p.Id, piece, tick, rng);
+            }
+        }
+    }
+
+    /// <summary>Whether all of a standing polity's land joins its capital, cell to neighbouring cell.</summary>
+    public bool IsWhole(int polity)
+    {
+        int capital = Info(polity).Capital;
+        int count = 0;
+        foreach (int cell in _land)
+        {
+            count += RulerOf(cell) == polity ? 1 : 0;
+        }
+
+        var joined = new HashSet<int> { capital };
+        var stack = new Stack<int>();
+        stack.Push(capital);
+        while (stack.Count > 0)
+        {
+            int at = stack.Pop();
+            foreach (int next in _map!.Grid.Neighbours(at))
+            {
+                if (RulerOf(next) == polity && joined.Add(next))
+                {
+                    stack.Push(next);
+                }
+            }
+        }
+
+        return joined.Count == count;
     }
 
     // A polity that has lost its capital settlement ends, its other land breaking into successors.
@@ -1595,8 +1707,10 @@ public sealed class PolitySystem : ISimSystem
         return Reached(cell) ? _reachCost[cell] : double.PositiveInfinity;
     }
 
-    // Fills the reach of a capital: every land cell within maxCost, with its cost, in _reached.
-    private void FillReach(int capital, double maxCost)
+    // Fills the reach of a capital: every land cell within maxCost, with its cost and the cell it
+    // was reached from, in _reached. With a polity given, the reach runs only over that polity's
+    // land and unruled land, never across another polity's.
+    private void FillReach(int capital, double maxCost, int over = -1)
     {
         WorldMap map = _map!;
         _stamp++;
@@ -1605,6 +1719,7 @@ public sealed class PolitySystem : ISimSystem
         _queue.Clear();
         _reachCost[capital] = 0.0;
         _reachStamp[capital] = _stamp;
+        _reachFrom[capital] = -1;
         _reached.Add(capital);
         _queue.Enqueue(capital, 0.0);
         while (_queue.TryDequeue(out int cell, out double cost))
@@ -1618,7 +1733,7 @@ public sealed class PolitySystem : ISimSystem
             foreach (int next in map.Grid.Neighbours(cell))
             {
                 double step = _stepCost[next];
-                if (double.IsInfinity(step))
+                if (double.IsInfinity(step) || (over >= 0 && _rulerPlusOne[next] != 0 && _rulerPlusOne[next] != over + 1))
                 {
                     continue;
                 }
@@ -1641,6 +1756,7 @@ public sealed class PolitySystem : ISimSystem
 
                 _reachStamp[next] = _stamp;
                 _reachCost[next] = total;
+                _reachFrom[next] = cell;
                 _queue.Enqueue(next, total);
             }
         }

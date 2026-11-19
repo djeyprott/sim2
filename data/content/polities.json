@@ -34,8 +34,11 @@
   // Growing: each year a polity draws in each unruled settlement within its reach with chance
   // joinChance times its expansion (temperament) times (1 - cost / reach), times
   // unlinkedJoinFactor unless one of its settlements trades with it; it then also rules the
-  // unruled land next to it. An unruled cell within reach with at least claimNeighbours of its
-  // six neighbours ruled by the polity is claimed.
+  // unruled land on the way to it and next to it. Reach here runs only over the polity's own and
+  // unruled land, never across another polity's. An unruled cell within reach with at least
+  // claimNeighbours of its six neighbours ruled by the polity is claimed. A polity's land always
+  // joins its capital: land cut off (by war or a split) breaks away, its large settlements
+  // becoming successors (see below).
   "joinChance": 0.02,
   "unlinkedJoinFactor": 0.5,
   "claimNeighbours": 4,

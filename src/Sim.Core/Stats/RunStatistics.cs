@@ -87,7 +87,7 @@ public sealed class RunStatistics
 
         if (_polities != null)
         {
-            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain", "wars", "wars_started", "conquests", "war_deaths" });
+            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain", "wars", "wars_started", "conquests", "war_deaths", "fallen", "splits", "successors", "cohesion" });
         }
 
         return string.Join(",", columns);
@@ -230,6 +230,13 @@ public sealed class RunStatistics
             values.Add(wars.Count.ToString(CultureInfo.InvariantCulture));
             values.Add(wars.Count(w => w.Conquest).ToString(CultureInfo.InvariantCulture));
             values.Add(Number(wars.Sum(w => w.AttackerDeaths + w.DefenderDeaths)));
+
+            // Polities ended so far, splits so far, successors standing, and the mean cohesion of those standing.
+            List<PolityInfo> all = _polities.All();
+            values.Add(all.Count(p => !p.Standing).ToString(CultureInfo.InvariantCulture));
+            values.Add(all.Sum(p => _polities.Splits(p.Id)).ToString(CultureInfo.InvariantCulture));
+            values.Add(standing.Count(p => p.Successor).ToString(CultureInfo.InvariantCulture));
+            values.Add(Number(standing.Count > 0 ? standing.Average(p => _polities.Cohesion(p.Id)) : 0.0));
         }
 
         return string.Join(",", values);

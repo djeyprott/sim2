@@ -904,6 +904,64 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
     }
 
+    [Fact]
+    public void Polities_short_of_cohesion_split_into_successors()
+    {
+        // Fast founding as above, and splits whenever cohesion is below 1.
+        PolityParameters parameters = PolityParameters.LoadDefault();
+        parameters.FoundSettledYears = 0.0;
+        parameters.FoundSurplusYears = 0.0;
+        parameters.FoundPeople = 300.0;
+        parameters.FoundChance = 0.05;
+        parameters.JoinChance = 0.5;
+        parameters.StatePeople = 5000.0;
+        parameters.StateSettlements = 3;
+        parameters.SplitThreshold = 1.0;
+        parameters.SplitChance = 0.3;
+        parameters.SplitDistance = 0.3;
+        parameters.SuccessorPeople = 300.0;
+        Simulation sim = FastFarming(10, polities: parameters);
+        sim.Run(400 * 12);
+        PolitySystem polities = sim.Systems.OfType<PolitySystem>().Single();
+        List<PolityInfo> all = polities.All();
+        Assert.True(all.Sum(p => polities.Splits(p.Id)) >= 1, "No polity split in 400 years.");
+        Assert.Contains(all, p => p.Successor);
+
+        // A successor broke away from an older polity after that one was founded, and its capital
+        // was one of that polity's settlements.
+        foreach (PolityInfo p in all.Where(p => p.Successor))
+        {
+            PolityInfo parent = polities.Info(p.Parent);
+            Assert.True(p.Parent < p.Id && p.Founded >= parent.Founded);
+            Assert.True(parent.Ended < 0 || parent.Ended >= p.Founded);
+        }
+
+        // Every standing polity rules its capital, a settlement, and only cells within reach;
+        // cohesion is at most 1.
+        foreach (PolityInfo p in polities.Standing())
+        {
+            Assert.Equal(p.Id, polities.RulerOf(p.Capital));
+            Assert.True(polities.Cohesion(p.Id) <= 1.0);
+            Assert.All(Enumerable.Range(0, _world.CellCount).Where(c => polities.RulerOf(c) == p.Id),
+                c => Assert.False(double.IsInfinity(polities.ReachCost(p.Id, c)), $"{p.Name} rules cell {c} beyond its reach."));
+        }
+
+        Assert.All(all.Where(p => !p.Standing), p => Assert.DoesNotContain(Enumerable.Range(0, _world.CellCount), c => polities.RulerOf(c) == p.Id));
+
+        var stock = new Stockpiles(sim.State, GoodSet.LoadDefault());
+        Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),
+            $"{good.Name} does not balance."));
+
+        // A loaded run carries on as an uninterrupted one, splits and all.
+        var save = new MemoryStream();
+        sim.Save(save);
+        Simulation loaded = FastFarming(10, polities: parameters);
+        loaded.Load(new MemoryStream(save.ToArray()));
+        sim.Run(20 * 12);
+        loaded.Run(20 * 12);
+        Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
+    }
+
     // Names the fields and table columns in which two world states differ (for failure messages).
     private static string StateDifferences(WorldState a, WorldState b)
     {

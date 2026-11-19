@@ -1563,9 +1563,11 @@ public partial class Main : Node2D
             : polities.Taken(cell) > 0.0 ? $"\n  Gives {(100.0 * polities.Taken(cell)).ToString("0", CultureInfo.InvariantCulture)}% of its store a year in tribute" : "";
         return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, {cells} cells"
             + (p.Capital == cell ? ", capital here" : "")
+            + (p.Successor ? $"\n  Broke away from {polities.Info(p.Parent).Name}" : "")
             + tribute
             + DescribeWar(polities, ruler)
-            + $"\n  Unrest {(100.0 * polities.CellUnrest(cell)).ToString("0", CultureInfo.InvariantCulture)}%"
+            + $"\n  Unrest {(100.0 * polities.CellUnrest(cell)).ToString("0", CultureInfo.InvariantCulture)}%, "
+            + $"cohesion of the polity {(100.0 * polities.Cohesion(ruler)).ToString("0", CultureInfo.InvariantCulture)}%"
             + $"\n  Temperament: aggression {p.Aggression.ToString("0.00", CultureInfo.InvariantCulture)}, "
             + $"greed {p.Greed.ToString("0.00", CultureInfo.InvariantCulture)}, expansion {p.Expansion.ToString("0.00", CultureInfo.InvariantCulture)}";
     }

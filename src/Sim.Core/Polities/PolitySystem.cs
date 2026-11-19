@@ -25,10 +25,13 @@ public enum PolityLevel
 /// <summary>A polity as other systems and the viewer see it.</summary>
 public readonly record struct PolityInfo(
     int Id, string Name, PolityLevel Level, int Capital, long Founded, long Ended,
-    double Aggression, double Greed, double Expansion, long StateSince)
+    double Aggression, double Greed, double Expansion, long StateSince, int Parent)
 {
     /// <summary>Whether the polity still stands.</summary>
     public bool Standing => Ended < 0;
+
+    /// <summary>Whether it broke away from another polity (Parent is that polity).</summary>
+    public bool Successor => Parent >= 0;
 }
 
 /// <summary>A war between two polities, under way (Ended below 0) or over.</summary>
@@ -136,6 +139,28 @@ public sealed class PolityParameters
 
     public double MaxWarYears { get; set; } = 15.0;
 
+    public double CohesionUnrest { get; set; } = 1.5;
+
+    public double CohesionFamine { get; set; } = 1.0;
+
+    public double CohesionStretch { get; set; } = 0.5;
+
+    public double CohesionWar { get; set; } = 1.0;
+
+    public double CohesionDefeat { get; set; } = 0.2;
+
+    public double DefeatYears { get; set; } = 20.0;
+
+    public double SplitThreshold { get; set; } = 0.55;
+
+    public double SplitChance { get; set; } = 0.1;
+
+    public double SplitDistance { get; set; } = 0.5;
+
+    public double RevoltUnrest { get; set; } = 0.4;
+
+    public double SuccessorPeople { get; set; } = 900.0;
+
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
     public static PolityParameters Parse(string json)
@@ -164,6 +189,13 @@ public sealed class PolityParameters
             throw new InvalidDataException("polities.json: war shares and chances 0 to 1 (burn and plunder together at most 1), maxStrengthRatio at least 1, exhaustionLimit above 0, maxWarYears at least 1.");
         }
 
+        if (p.CohesionUnrest < 0.0 || p.CohesionFamine < 0.0 || p.CohesionStretch < 0.0 || p.CohesionWar < 0.0 || p.CohesionDefeat < 0.0
+            || p.DefeatYears < 0.0 || p.SplitThreshold <= 0.0 || p.SplitThreshold > 1.0 || p.SplitChance < 0.0 || p.SplitChance > 1.0
+            || p.SplitDistance < 0.0 || p.SplitDistance > 1.0 || p.RevoltUnrest < 0.0 || p.SuccessorPeople <= 0.0)
+        {
+            throw new InvalidDataException("polities.json: cohesion weights not negative, splitThreshold above 0 and at most 1, splitChance and splitDistance 0 to 1, successorPeople above 0.");
+        }
+
         return p;
     }
 }
@@ -181,7 +213,9 @@ public sealed class PolityParameters
 /// follows hunger, unmet needs and tribute; and chiefdoms that rule enough people and settlements
 /// become states (and back). Wars (step 4): polities at war fight a year over their border cells,
 /// and polities at peace may declare war on a neighbour; the wars table keeps every war as history.
-/// Runs once a year, after seafaring.
+/// Collapse (step 5): a polity short of cohesion (unrest, hunger, stretched reach, war and
+/// defeat) may split, its far and restless provinces breaking away as successor chiefdoms; one
+/// that loses its capital breaks into successors too. Runs once a year, after seafaring.
 /// </summary>
 public sealed class PolitySystem : ISimSystem
 {
@@ -230,6 +264,9 @@ public sealed class PolitySystem : ISimSystem
     private readonly TradeParameters _tradeParameters = TradeParameters.LoadDefault();
     private IntColumn? _stateSince;
     private DoubleColumn? _tribute;
+    private IntColumn? _parent;
+    private DoubleColumn? _cohesion;
+    private IntColumn? _splits;
     private double[] _taken = Array.Empty<double>();
     private OccupationSet _occupations = OccupationSet.LoadDefault();
     private int _farmer = -1;
@@ -300,6 +337,9 @@ public sealed class PolitySystem : ISimSystem
         _expansion = _organizations.AddDoubleColumn("expansion");
         _stateSince = _organizations.AddIntColumn("stateSince");
         _tribute = _organizations.AddDoubleColumn("tribute");
+        _parent = _organizations.AddIntColumn("parent");
+        _cohesion = _organizations.AddDoubleColumn("cohesion");
+        _splits = _organizations.AddIntColumn("splits");
         _taken = state.AddDoubleField(TakenField);
         _positions = state.AddTable(PositionTableName);
         _positionOrganization = _positions.AddIntColumn("organization");
@@ -378,12 +418,12 @@ public sealed class PolitySystem : ISimSystem
         long tick = context.Tick;
         Rng rng = context.Rng;
 
-        // Polities whose capital settlement is gone end (collapse into successors comes in step 5).
+        // Polities whose capital settlement is gone end, their other settlements becoming successors.
         foreach (PolityInfo p in Standing())
         {
-            if (_settlementPlusOne[p.Capital] <= 0)
+            if (IsStanding(p.Id) && _settlementPlusOne[p.Capital] <= 0)
             {
-                End(p.Id, tick);
+                Fall(p.Id, tick, rng);
             }
         }
 
@@ -497,6 +537,9 @@ public sealed class PolitySystem : ISimSystem
         // Wars: those under way are fought a year, then new ones may be declared.
         Wars(tick, rng);
 
+        // Polities short of cohesion may split.
+        Collapse(tick, rng);
+
         // Tribute, the elite and soldiers, and unrest.
         cellsOf = CellsByPolity();
         TakeTribute(cellsOf);
@@ -521,6 +564,168 @@ public sealed class PolitySystem : ISimSystem
             }
         }
     }
+
+    // ---- Collapse (step 5) ----
+
+    // Each standing polity's cohesion, in id order: 1 - cohesionUnrest x its people's unrest -
+    // cohesionFamine x their unmet food - cohesionStretch x how far its people live from the
+    // capital (cost over reach) - cohesionWar x its exhaustion in a war under way - cohesionDefeat
+    // if it lost a war in the last defeatYears. Below splitThreshold it splits with chance
+    // splitChance x (splitThreshold - cohesion) / splitThreshold: its far cells (cost at least
+    // splitDistance of its reach) and the cells of its restless settlements (unrest at least
+    // revoltUnrest) break away, as successors where a settlement is large enough.
+    private void Collapse(long tick, Rng rng)
+    {
+        List<int>[] cellsOf = CellsByPolity();
+        var lostWar = new Dictionary<int, long>();
+        EntityTable wars = _wars!;
+        for (int war = 0; war < wars.IdCount; war++)
+        {
+            if (!wars.IsAlive(war) || _warEnded![war] < 0 || _warWinner![war] < 0)
+            {
+                continue;
+            }
+
+            int loser = _warWinner[war] == _warAttacker![war] ? _warDefender![war] : _warAttacker[war];
+            lostWar[loser] = Math.Max(_warEnded[war], lostWar.TryGetValue(loser, out long t) ? t : long.MinValue);
+        }
+
+        foreach (PolityInfo p in Standing())
+        {
+            if (!IsStanding(p.Id))
+            {
+                continue;
+            }
+
+            double reach = p.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach;
+            FillReach(p.Capital, reach);
+            double people = 0.0, unrest = 0.0, hunger = 0.0, stretch = 0.0;
+            var cost = new Dictionary<int, double>();
+            foreach (int cell in cellsOf[p.Id])
+            {
+                double far = Reached(cell) ? _reachCost[cell] / reach : 1.0;
+                cost[cell] = far;
+                foreach (int group in _groups!.InCell(cell))
+                {
+                    double size = _groups.Size(group);
+                    people += size;
+                    unrest += size * _groups.Unrest(group);
+                    hunger += size * (1.0 - _groups.Food(group));
+                    stretch += size * far;
+                }
+            }
+
+            double cohesion = 1.0;
+            if (people > 0.0)
+            {
+                cohesion -= (_parameters.CohesionUnrest * unrest + _parameters.CohesionFamine * hunger + _parameters.CohesionStretch * stretch) / people;
+            }
+
+            int war = WarOf(p.Id);
+            if (war >= 0)
+            {
+                cohesion -= _parameters.CohesionWar * Exhaustion(war, p.Id);
+            }
+
+            if (lostWar.TryGetValue(p.Id, out long ended) && tick - ended < _parameters.DefeatYears * GameDate.MonthsPerYear)
+            {
+                cohesion -= _parameters.CohesionDefeat;
+            }
+
+            _cohesion![p.Id] = cohesion;
+            if (cohesion >= _parameters.SplitThreshold
+                || !rng.Chance(_parameters.SplitChance * (_parameters.SplitThreshold - cohesion) / _parameters.SplitThreshold))
+            {
+                continue;
+            }
+
+            // The far and restless land breaks away; the capital never does.
+            var leaving = new List<int>();
+            foreach (int cell in cellsOf[p.Id])
+            {
+                if (cell != p.Capital && (cost[cell] >= _parameters.SplitDistance
+                    || (_settlementPlusOne[cell] > 0 && CellUnrest(cell) >= _parameters.RevoltUnrest)))
+                {
+                    leaving.Add(cell);
+                }
+            }
+
+            // A restless settlement takes the land next to it that it rules.
+            var leavingSet = new HashSet<int>(leaving);
+            foreach (int cell in leaving.ToList())
+            {
+                if (_settlementPlusOne[cell] <= 0)
+                {
+                    continue;
+                }
+
+                foreach (int other in _map!.Grid.Neighbours(cell))
+                {
+                    if (other != p.Capital && RulerOf(other) == p.Id && leavingSet.Add(other))
+                    {
+                        leaving.Add(other);
+                    }
+                }
+            }
+
+            if (leaving.Count == 0)
+            {
+                continue;
+            }
+
+            leaving.Sort();
+            _splits![p.Id]++;
+            BreakAway(p.Id, leaving, tick, rng);
+        }
+    }
+
+    // Cells of a polity break away from it: in turn, the largest settlement among them with at
+    // least successorPeople people founds a successor chiefdom, which takes the breaking cells
+    // within its reach; what is left falls back to no rule.
+    private void BreakAway(int polity, List<int> cells, long tick, Rng rng)
+    {
+        var towns = cells.Where(c => _settlementPlusOne[c] > 0 && RulerOf(c) == polity && _groups!.CellTotal(c) >= _parameters.SuccessorPeople)
+            .OrderByDescending(c => _groups!.CellTotal(c)).ThenBy(c => c).ToList();
+        foreach (int town in towns)
+        {
+            if (RulerOf(town) != polity)
+            {
+                continue;
+            }
+
+            int successor = NewPolity(town, tick, rng, polity);
+            FillReach(town, _parameters.ChiefdomReach);
+            foreach (int cell in cells)
+            {
+                if (RulerOf(cell) == polity && Reached(cell))
+                {
+                    Rule(cell, successor);
+                }
+            }
+        }
+
+        foreach (int cell in cells)
+        {
+            if (RulerOf(cell) == polity)
+            {
+                _rulerPlusOne[cell] = 0;
+            }
+        }
+    }
+
+    // A polity that has lost its capital settlement ends, its other land breaking into successors.
+    private void Fall(int polity, long tick, Rng rng)
+    {
+        List<int> cells = CellsByPolity()[polity];
+        BreakAway(polity, cells, tick, rng);
+        End(polity, tick);
+    }
+
+    /// <summary>A polity's cohesion last year (1: whole; low values risk a split).</summary>
+    public double Cohesion(int polity) => _cohesion![polity];
+
+    /// <summary>How many times a polity has split.</summary>
+    public int Splits(int polity) => _splits![polity];
 
     // ---- War (step 4) ----
 
@@ -779,7 +984,7 @@ public sealed class PolitySystem : ISimSystem
 
                 if (cell == (holder == d ? capitalD : capitalA))
                 {
-                    Conquer(taker, holder, tick);
+                    Conquer(taker, holder, tick, rng);
                     EndWar(war, tick, taker, true);
                     conquered = true;
                 }
@@ -831,11 +1036,10 @@ public sealed class PolitySystem : ISimSystem
     }
 
     // The conqueror takes the beaten polity's capital and every one of its cells within reach;
-    // the beaten polity ends and the rest of its land falls back to no rule.
-    private void Conquer(int winner, int loser, long tick)
+    // the beaten polity ends and the rest of its land breaks into successors (or no rule).
+    private void Conquer(int winner, int loser, long tick, Rng rng)
     {
         List<int> cells = CellsByPolity()[loser];
-        End(loser, tick);
         PolityInfo w = Info(winner);
         FillReach(w.Capital, w.Level == PolityLevel.State ? _parameters.StateReach : _parameters.ChiefdomReach);
         foreach (int cell in cells)
@@ -847,6 +1051,7 @@ public sealed class PolitySystem : ISimSystem
         }
 
         Rule(Info(loser).Capital, winner);
+        Fall(loser, tick, rng);
     }
 
     // A taken settlement: burnShare of its store is lost, plunderShare goes to the taker's capital.
@@ -1340,6 +1545,22 @@ public sealed class PolitySystem : ISimSystem
             throw new ArgumentException($"A polity cannot be founded in cell {capital}.");
         }
 
+        int id = NewPolity(capital, tick, rng, -1);
+        foreach (int other in _map.Grid.Neighbours(capital))
+        {
+            if (_map.IsLand(other) && RulerOf(other) < 0)
+            {
+                Rule(other, id);
+            }
+        }
+
+        return id;
+    }
+
+    // A new chiefdom ruling its capital cell (taken from whoever ruled it), with a fresh
+    // temperament and empty positions; parent is the polity it broke away from, or -1.
+    private int NewPolity(int capital, long tick, Rng rng, int parent)
+    {
         EntityTable table = _organizations!;
         int id = table.Add();
         _kind![id] = (int)OrganizationKind.Polity;
@@ -1354,6 +1575,9 @@ public sealed class PolitySystem : ISimSystem
         _aggression![id] = Temperament(rng);
         _greed![id] = Temperament(rng);
         _expansion![id] = Temperament(rng);
+        _parent![id] = parent;
+        _cohesion![id] = 1.0;
+        _splits![id] = 0;
         foreach (string position in _parameters.Positions)
         {
             int row = _positions!.Add();
@@ -1363,14 +1587,6 @@ public sealed class PolitySystem : ISimSystem
         }
 
         Rule(capital, id);
-        foreach (int other in _map.Grid.Neighbours(capital))
-        {
-            if (_map.IsLand(other) && RulerOf(other) < 0)
-            {
-                Rule(other, id);
-            }
-        }
-
         return id;
     }
 
@@ -1410,7 +1626,7 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>One polity, standing or ended.</summary>
     public PolityInfo Info(int polity) => new PolityInfo(
         polity, _name![polity] ?? "", (PolityLevel)_level![polity], _capital![polity], _founded![polity], _ended![polity],
-        _aggression![polity], _greed![polity], _expansion![polity], _stateSince![polity]);
+        _aggression![polity], _greed![polity], _expansion![polity], _stateSince![polity], _parent![polity]);
 
     /// <summary>Every polity ever founded (standing and ended), in id order.</summary>
     public List<PolityInfo> All()

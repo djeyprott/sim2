@@ -101,7 +101,8 @@ public static class Program
             File.WriteAllText(Beside("-herding-origins.csv"), statistics.HerdingOrigins());
             File.WriteAllText(Beside("-technology-events.csv"), statistics.TechnologyEvents());
             File.WriteAllText(Beside("-landings.csv"), statistics.Landings());
-            Console.WriteLine($"Wrote yearly statistics to {statsPath}, and beside it statistics by region, farming and herding origins, technology events and landings");
+            File.WriteAllText(Beside("-polity-events.csv"), statistics.PolityEvents());
+            Console.WriteLine($"Wrote yearly statistics to {statsPath}, and beside it statistics by region, farming and herding origins, technology events, landings and polity events");
         }
         else
         {

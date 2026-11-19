@@ -353,6 +353,11 @@ public sealed class RunStatistics
     public string RegionHeader()
     {
         var columns = new List<string> { "year", "region", "population", "farmers", "herders", "craftsmen", "settlements" };
+        if (_polities != null)
+        {
+            columns.AddRange(new[] { "people_ruled", "chiefdoms", "states" });
+        }
+
         if (_technology != null)
         {
             foreach (Technology t in _technology.Technologies.Technologies)
@@ -406,6 +411,9 @@ public sealed class RunStatistics
         double[][] madeFields = madeGoods.Select(g => _simulation.State.DoubleField(CraftSystem.MadeFieldPrefix + g.Slug)).ToArray();
         var made = new double[regions, madeGoods.Count];
         var bronze = new int[regions, 4];
+        var ruled = new double[regions];
+        var chiefdoms = new int[regions];
+        var states = new int[regions];
         var regionOfCell = new Dictionary<int, int>();
         int Region(int cell)
         {
@@ -439,6 +447,11 @@ public sealed class RunStatistics
             int r = Region(cell);
             double size = groups.Size(g);
             people[r, 0] += size;
+            if (_polities != null && _polities.RulerOf(cell) >= 0)
+            {
+                ruled[r] += size;
+            }
+
             for (int k = 0; k < 3; k++)
             {
                 if (groups.Occupation(g) == occupationColumn[k])
@@ -540,6 +553,23 @@ public sealed class RunStatistics
             }
         }
 
+        // Polities count in the region of their capital.
+        if (_polities != null)
+        {
+            foreach (PolityInfo p in _polities.Standing())
+            {
+                int r = Region(p.Capital);
+                if (p.Level == PolityLevel.State)
+                {
+                    states[r]++;
+                }
+                else
+                {
+                    chiefdoms[r]++;
+                }
+            }
+        }
+
         var text = new StringBuilder();
         for (int r = 0; r < regions; r++)
         {
@@ -555,6 +585,13 @@ public sealed class RunStatistics
             }
 
             values.Add(settlements[r].ToString(CultureInfo.InvariantCulture));
+            if (_polities != null)
+            {
+                values.Add(Number(ruled[r]));
+                values.Add(chiefdoms[r].ToString(CultureInfo.InvariantCulture));
+                values.Add(states[r].ToString(CultureInfo.InvariantCulture));
+            }
+
             for (int t = 0; t < techs; t++)
             {
                 values.Add((know[r, t] / people[r, 0]).ToString("F4", CultureInfo.InvariantCulture));
@@ -584,6 +621,45 @@ public sealed class RunStatistics
             }
 
             text.Append(string.Join(",", values)).Append('\n');
+        }
+
+        return text.ToString();
+    }
+
+    /// <summary>
+    /// Every polity event (founding, breakaway, change of level, war, peace, conquest, split,
+    /// fall), in order, as CSV with a header: the polity, the other polity taking part if any,
+    /// where (the polity's capital, or for a war the defender's), the region and when.
+    /// </summary>
+    public string PolityEvents()
+    {
+        var text = new StringBuilder("event,polity_id,polity,other_id,other,cell,latitude,longitude,region,year,date,amount
+");
+        if (_polities == null)
+        {
+            return text.ToString();
+        }
+
+        string Name(int id) => id >= 0 ? "\"" + _polities.Info(id).Name.Replace("\"", "\"\"") + "\"" : "";
+        foreach (PolityEvent e in _polities.Events())
+        {
+            var date = new GameDate(e.Tick);
+            long year = date.IsBce ? -date.Year : date.Year;
+            string kind = e.Kind switch
+            {
+                PolityEventKind.Founded => "founded",
+                PolityEventKind.BrokeAway => "broke_away",
+                PolityEventKind.BecameState => "became_state",
+                PolityEventKind.BecameChiefdom => "became_chiefdom",
+                PolityEventKind.WarStarted => "war",
+                PolityEventKind.Peace => "peace",
+                PolityEventKind.Conquered => "conquered",
+                PolityEventKind.Split => "split",
+                _ => "fell",
+            };
+            text.Append(CultureInfo.InvariantCulture,
+                $"{kind},{e.Polity},{Name(e.Polity)},{(e.Other >= 0 ? e.Other.ToString(CultureInfo.InvariantCulture) : "")},{Name(e.Other)},{e.Cell},"
+                + $"{_simulation.Map.Grid.Latitude(e.Cell):F2},{_simulation.Map.Grid.Longitude(e.Cell):F2},{RegionOf(e.Cell)},{year},{date},{Number(e.Amount)}\n");
         }
 
         return text.ToString();

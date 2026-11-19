@@ -1596,16 +1596,27 @@ public partial class Main : Node2D
         var founded = new GameDate(p.Founded);
         string level = p.Level == PolityLevel.State ? "state" : "chiefdom";
         int cells = 0;
+        double people = 0.0;
+        var groups = new PopulationGroups(sim.State);
         for (int c = 0; c < sim.Map.CellCount; c++)
         {
-            cells += polities.RulerOf(c) == ruler ? 1 : 0;
+            if (polities.RulerOf(c) == ruler)
+            {
+                cells++;
+                people += groups.CellTotal(c);
+            }
         }
+
+        long age = (sim.Tick - p.Founded) / GameDate.MonthsPerYear;
+        GeodesicGrid grid = sim.Map.Grid;
+        double km = grid.DistanceKm(cell, p.Capital);
 
         string tribute = p.Capital == cell
             ? $"\n  Capital: takes {polities.Tribute(ruler).ToString("N0", CultureInfo.InvariantCulture)} grain a year in tribute"
             : polities.Taken(cell) > 0.0 ? $"\n  Gives {(100.0 * polities.Taken(cell)).ToString("0", CultureInfo.InvariantCulture)}% of its store a year in tribute" : "";
-        return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")}, {cells} cells"
-            + (p.Capital == cell ? ", capital here" : "")
+        return $"\nRuled by {p.Name} ({level}), founded {founded.Year} {(founded.IsBce ? "BCE" : "CE")} ({age.ToString("N0", CultureInfo.InvariantCulture)} years ago)"
+            + $"\n  {people.ToString("N0", CultureInfo.InvariantCulture)} people in {cells} cells; "
+            + (p.Capital == cell ? "capital here" : $"capital {p.Name}, {km.ToString("N0", CultureInfo.InvariantCulture)} km away")
             + (p.Successor ? $"\n  Broke away from {polities.Info(p.Parent).Name}" : "")
             + tribute
             + DescribeWar(polities, ruler)

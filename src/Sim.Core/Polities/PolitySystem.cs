@@ -34,6 +34,40 @@ public readonly record struct PolityInfo(
     public bool Successor => Parent >= 0;
 }
 
+/// <summary>What happened to a polity (the events table).</summary>
+public enum PolityEventKind
+{
+    /// <summary>Founded at a settlement no polity ruled.</summary>
+    Founded = 0,
+
+    /// <summary>Broke away from another polity (Other) as its successor.</summary>
+    BrokeAway = 1,
+
+    /// <summary>Became a state.</summary>
+    BecameState = 2,
+
+    /// <summary>Fell back from state to chiefdom.</summary>
+    BecameChiefdom = 3,
+
+    /// <summary>Went to war on another polity (Other).</summary>
+    WarStarted = 4,
+
+    /// <summary>Won a war against another polity (Other), which made peace.</summary>
+    Peace = 5,
+
+    /// <summary>Conquered by another polity (Other), which took its capital.</summary>
+    Conquered = 6,
+
+    /// <summary>Split: Amount cells broke away.</summary>
+    Split = 7,
+
+    /// <summary>Ended when its capital settlement was abandoned.</summary>
+    Fell = 8,
+}
+
+/// <summary>One event in a polity's history: where (a cell) and when, with another polity if one took part.</summary>
+public readonly record struct PolityEvent(PolityEventKind Kind, int Polity, int Other, int Cell, long Tick, double Amount);
+
 /// <summary>A war between two polities, under way (Ended below 0) or over.</summary>
 public readonly record struct WarInfo(
     int Id, int Attacker, int Defender, long Started, long Ended, int Winner, bool Conquest,
@@ -238,6 +272,9 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>Every war: attacker, defender, when it started and ended, winner, losses and cells taken.</summary>
     public const string WarTableName = "polities.wars";
 
+    /// <summary>Every founding, breakaway, change of level, war, peace, conquest, split and fall.</summary>
+    public const string EventTableName = "polities.events";
+
     /// <summary>1 on cells of a polity at war or on its borders with another polity (from the last update), else 0.</summary>
     public const string ThreatenedField = "polities.threatened";
 
@@ -247,6 +284,13 @@ public sealed class PolitySystem : ISimSystem
     private int _warOfWars = -1;
     private bool _warOfDirty = true;
     private EntityTable? _wars;
+    private EntityTable? _events;
+    private IntColumn? _eventKind;
+    private IntColumn? _eventPolity;
+    private IntColumn? _eventOther;
+    private IntColumn? _eventCell;
+    private IntColumn? _eventTick;
+    private DoubleColumn? _eventAmount;
     private IntColumn? _warAttacker;
     private IntColumn? _warDefender;
     private IntColumn? _warStarted;
@@ -366,6 +410,13 @@ public sealed class PolitySystem : ISimSystem
         _warDefenderDeaths = _wars.AddDoubleColumn("defenderDeaths");
         _warAttackerTook = _wars.AddIntColumn("attackerTook");
         _warDefenderTook = _wars.AddIntColumn("defenderTook");
+        _events = state.AddTable(EventTableName);
+        _eventKind = _events.AddIntColumn("kind");
+        _eventPolity = _events.AddIntColumn("polity");
+        _eventOther = _events.AddIntColumn("other");
+        _eventCell = _events.AddIntColumn("cell");
+        _eventTick = _events.AddIntColumn("tick");
+        _eventAmount = _events.AddDoubleColumn("amount");
     }
 
     public void Initialize(SimContext context)
@@ -681,6 +732,7 @@ public sealed class PolitySystem : ISimSystem
 
             leaving.Sort();
             _splits![p.Id]++;
+            Record(PolityEventKind.Split, p.Id, -1, p.Capital, tick, leaving.Count);
             BreakAway(p.Id, leaving, tick, rng);
         }
     }
@@ -729,11 +781,42 @@ public sealed class PolitySystem : ISimSystem
     }
 
     // A polity that has lost its capital settlement ends, its other land breaking into successors.
-    private void Fall(int polity, long tick, Rng rng)
+    private void Fall(int polity, long tick, Rng rng, bool conquered = false)
     {
+        if (!conquered)
+        {
+            Record(PolityEventKind.Fell, polity, -1, Info(polity).Capital, tick, 0.0);
+        }
+
         List<int> cells = CellsByPolity()[polity];
         BreakAway(polity, cells, tick, rng);
         End(polity, tick);
+    }
+
+    private void Record(PolityEventKind kind, int polity, int other, int cell, long tick, double amount)
+    {
+        int row = _events!.Add();
+        _eventKind![row] = (int)kind;
+        _eventPolity![row] = polity;
+        _eventOther![row] = other;
+        _eventCell![row] = cell;
+        _eventTick![row] = (int)tick;
+        _eventAmount![row] = amount;
+    }
+
+    /// <summary>Every polity event so far, in the order they happened.</summary>
+    public List<PolityEvent> Events()
+    {
+        var list = new List<PolityEvent>();
+        for (int row = 0; row < _events!.IdCount; row++)
+        {
+            if (_events.IsAlive(row))
+            {
+                list.Add(new PolityEvent((PolityEventKind)_eventKind![row], _eventPolity![row], _eventOther![row], _eventCell![row], _eventTick![row], _eventAmount![row]));
+            }
+        }
+
+        return list;
     }
 
     /// <summary>A polity's cohesion last year (1: whole; low values risk a split).</summary>
@@ -923,6 +1006,7 @@ public sealed class PolitySystem : ISimSystem
         _warDefenderDeaths![war] = 0.0;
         _warAttackerTook![war] = 0;
         _warDefenderTook![war] = 0;
+        Record(PolityEventKind.WarStarted, attacker, defender, Info(defender).Capital, tick, 0.0);
         return war;
     }
 
@@ -1052,6 +1136,12 @@ public sealed class PolitySystem : ISimSystem
         _warEnded![war] = (int)tick;
         _warWinner![war] = winner;
         _warConquest![war] = conquest ? 1 : 0;
+        int a = _warAttacker![war], d = _warDefender![war];
+        if (!conquest && winner >= 0)
+        {
+            int loser = winner == a ? d : a;
+            Record(PolityEventKind.Peace, winner, loser, IsStanding(loser) ? Info(loser).Capital : Info(winner).Capital, tick, 0.0);
+        }
     }
 
     // The conqueror takes the beaten polity's capital and every one of its cells within reach;
@@ -1070,7 +1160,8 @@ public sealed class PolitySystem : ISimSystem
         }
 
         Rule(Info(loser).Capital, winner);
-        Fall(loser, tick, rng);
+        Record(PolityEventKind.Conquered, loser, winner, Info(loser).Capital, tick, cells.Count);
+        Fall(loser, tick, rng, conquered: true);
     }
 
     // A taken settlement: burnShare of its store is lost, plunderShare goes to the taker's capital.
@@ -1619,6 +1710,7 @@ public sealed class PolitySystem : ISimSystem
         }
 
         Rule(capital, id);
+        Record(parent >= 0 ? PolityEventKind.BrokeAway : PolityEventKind.Founded, id, parent, capital, tick, 0.0);
         return id;
     }
 
@@ -1630,7 +1722,12 @@ public sealed class PolitySystem : ISimSystem
             throw new ArgumentException($"Polity {polity} does not stand.");
         }
 
-        _level![polity] = (int)level;
+        if (_level![polity] != (int)level)
+        {
+            Record(level == PolityLevel.State ? PolityEventKind.BecameState : PolityEventKind.BecameChiefdom, polity, -1, _capital![polity], tick, 0.0);
+        }
+
+        _level[polity] = (int)level;
         if (level == PolityLevel.State && _stateSince![polity] < 0)
         {
             _stateSince[polity] = (int)tick;

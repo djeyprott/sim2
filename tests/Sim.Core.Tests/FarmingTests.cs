@@ -7,6 +7,7 @@ using Sim.Core.Herding;
 using Sim.Core.Map;
 using Sim.Core.People;
 using Sim.Core.Polities;
+using Sim.Core.Stats;
 using Sim.Core.Sea;
 using Sim.Core.Settlements;
 using Sim.Core.Technologies;
@@ -894,6 +895,19 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.True(forts.Effects[TechnologySet.Defence] > 1.0);
         Assert.True(chariots.Effects[TechnologySet.Attack] > 1.0);
 
+        // The events record every war, peace and conquest, and every founding.
+        List<PolityEvent> events = polities.Events();
+        Assert.Equal(wars.Count, events.Count(e => e.Kind == PolityEventKind.WarStarted));
+        Assert.Equal(wars.Count(w => w.Conquest), events.Count(e => e.Kind == PolityEventKind.Conquered));
+        Assert.Equal(wars.Count(w => !w.UnderWay && !w.Conquest && w.Winner >= 0), events.Count(e => e.Kind == PolityEventKind.Peace));
+        Assert.Equal(polities.All().Count(p => !p.Successor), events.Count(e => e.Kind == PolityEventKind.Founded));
+        Assert.Equal(polities.All().Count(p => p.Successor), events.Count(e => e.Kind == PolityEventKind.BrokeAway));
+        Assert.True(events.Zip(events.Skip(1), (x, y) => x.Tick <= y.Tick).All(ok => ok), "Events are out of order.");
+        Assert.All(polities.All().Where(p => !p.Standing),
+            p => Assert.Contains(events, e => e.Polity == p.Id && (e.Kind == PolityEventKind.Conquered || e.Kind == PolityEventKind.Fell)));
+        string csv = new RunStatistics(sim).PolityEvents();
+        Assert.Equal(events.Count + 1, csv.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length);
+
         // A loaded run carries on as an uninterrupted one, wars and all.
         var save = new MemoryStream();
         sim.Save(save);
@@ -951,6 +965,14 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         var stock = new Stockpiles(sim.State, GoodSet.LoadDefault());
         Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),
             $"{good.Name} does not balance."));
+
+        // Each split and each successor is recorded.
+        List<PolityEvent> events = polities.Events();
+        Assert.Equal(all.Sum(p => polities.Splits(p.Id)), events.Count(e => e.Kind == PolityEventKind.Split));
+        Assert.All(all.Where(p => p.Successor), p => Assert.Contains(events, e => e.Kind == PolityEventKind.BrokeAway && e.Polity == p.Id && e.Other == p.Parent));
+        string regions = new RunStatistics(sim).RegionRows();
+        Assert.Contains("people_ruled", new RunStatistics(sim).RegionHeader());
+        Assert.False(string.IsNullOrEmpty(regions));
 
         // A loaded run carries on as an uninterrupted one, splits and all.
         var save = new MemoryStream();

@@ -633,8 +633,7 @@ public sealed class RunStatistics
     /// </summary>
     public string PolityEvents()
     {
-        var text = new StringBuilder("event,polity_id,polity,other_id,other,cell,latitude,longitude,region,year,date,amount
-");
+        var text = new StringBuilder("event,polity_id,polity,other_id,other,cell,latitude,longitude,region,year,date,amount\n");
         if (_polities == null)
         {
             return text.ToString();

@@ -1132,7 +1132,6 @@ public partial class Main : Node2D
                 title = "Who rules: each polity in its own colour and name, borders in bold";
                 entries.Add((PolityColour(1, true), "A state"));
                 entries.Add((PolityColour(1, false), "A chiefdom (paler)"));
-                entries.Add((PolityColour(1, true).Darkened(0.45f), "Border"));
                 entries.Add((CapitalColour, "Capital"));
                 entries.Add((NoFarming, "Ruled by nobody"));
                 break;
@@ -2114,13 +2113,15 @@ public partial class Main : Node2D
                     break;
                 }
 
+                // The Old World, from the Atlantic to China (ZoomAt multiplies the zoom).
                 SetMapMode(PoliticalMode);
-                _camera.Position = MapView.MapPosition(33.0, 42.0);
-                ZoomAt(MapView.MapPosition(33.0, 42.0), 1.5f);
+                FitWholeMap();
+                _camera.Position = MapView.MapPosition(32.0, 62.0);
+                ZoomAt(MapView.MapPosition(32.0, 62.0), 2.2f);
                 GetViewport().WarpMouse(new Vector2(GetViewportRect().Size.X / 2f, 12f));
                 break;
             case 330:
-                GD.Print($"Screenshot script: political map at {frame?.Date}");
+                GD.Print($"Screenshot script: political map at {frame?.Date}, {_polityNames.Length} polities named");
                 bool savedPolitical = SaveScreenshot("-political");
                 GetTree().Quit(_screenshotOk && savedPolitical ? 0 : 1);
                 break;

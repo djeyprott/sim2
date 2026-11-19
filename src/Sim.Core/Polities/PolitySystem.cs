@@ -241,6 +241,9 @@ public sealed class PolitySystem : ISimSystem
 
     private readonly PolityParameters _parameters;
     private int[] _threatened = Array.Empty<int>();
+    private int[] _warOf = Array.Empty<int>();
+    private int _warOfWars = -1;
+    private bool _warOfDirty = true;
     private EntityTable? _wars;
     private IntColumn? _warAttacker;
     private IntColumn? _warDefender;
@@ -417,6 +420,7 @@ public sealed class PolitySystem : ISimSystem
 
         long tick = context.Tick;
         Rng rng = context.Rng;
+        _warOfDirty = true;
 
         // Polities whose capital settlement is gone end, their other settlements becoming successors.
         foreach (PolityInfo p in Standing())
@@ -737,7 +741,9 @@ public sealed class PolitySystem : ISimSystem
     // declare war on the one it has the strongest case against. Last, the threatened cells.
     private void Wars(long tick, Rng rng)
     {
+        _warOfDirty = true;
         EntityTable wars = _wars!;
+        Dictionary<long, List<int>> fronts = Borders(out _);
         for (int war = 0; war < wars.IdCount; war++)
         {
             if (!wars.IsAlive(war) || _warEnded![war] >= 0)
@@ -752,7 +758,7 @@ public sealed class PolitySystem : ISimSystem
                 continue;
             }
 
-            FightYear(war, tick, rng);
+            FightYear(war, tick, rng, fronts);
         }
 
         Dictionary<long, List<int>> borders = Borders(out SortedSet<int>[] neighbours);
@@ -891,6 +897,7 @@ public sealed class PolitySystem : ISimSystem
 
         List<int>[] cellsOf = CellsByPolity();
         int war = _wars!.Add();
+        _warOfDirty = true;
         _warAttacker![war] = attacker;
         _warDefender![war] = defender;
         _warStarted![war] = (int)tick;
@@ -908,12 +915,12 @@ public sealed class PolitySystem : ISimSystem
         return war;
     }
 
-    // One year of a war between two standing polities.
-    private void FightYear(int war, long tick, Rng rng)
+    // One year of a war between two standing polities, over the borders as they stood at the
+    // start of the year (a cell is only fought over while its holder still holds it).
+    private void FightYear(int war, long tick, Rng rng, Dictionary<long, List<int>> borders)
     {
         int a = _warAttacker![war], d = _warDefender![war];
         double strengthA = Strength(a), strengthD = Strength(d);
-        Dictionary<long, List<int>> borders = Borders(out _);
         List<int> towardD = borders.TryGetValue(Key(d, a), out List<int>? x) ? x : new List<int>();
         List<int> towardA = borders.TryGetValue(Key(a, d), out List<int>? y) ? y : new List<int>();
 
@@ -1030,6 +1037,7 @@ public sealed class PolitySystem : ISimSystem
 
     private void EndWar(int war, long tick, int winner, bool conquest)
     {
+        _warOfDirty = true;
         _warEnded![war] = (int)tick;
         _warWinner![war] = winner;
         _warConquest![war] = conquest ? 1 : 0;
@@ -1189,16 +1197,27 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>The war under way a polity is in, or -1.</summary>
     public int WarOf(int polity)
     {
+        // Worked out from the wars table when it or the organizations table has changed; not
+        // saved, as it follows from the saved tables.
         EntityTable wars = _wars!;
-        for (int war = 0; war < wars.IdCount; war++)
+        if (_warOf.Length != _organizations!.IdCount || _warOfWars != wars.IdCount || _warOfDirty)
         {
-            if (wars.IsAlive(war) && _warEnded![war] < 0 && (_warAttacker![war] == polity || _warDefender![war] == polity))
+            _warOf = new int[_organizations.IdCount];
+            Array.Fill(_warOf, -1);
+            for (int war = 0; war < wars.IdCount; war++)
             {
-                return war;
+                if (wars.IsAlive(war) && _warEnded![war] < 0)
+                {
+                    _warOf[_warAttacker![war]] = war;
+                    _warOf[_warDefender![war]] = war;
+                }
             }
+
+            _warOfWars = wars.IdCount;
+            _warOfDirty = false;
         }
 
-        return -1;
+        return polity >= 0 && polity < _warOf.Length ? _warOf[polity] : -1;
     }
 
     /// <summary>One war, under way or over.</summary>

@@ -2096,18 +2096,24 @@ public partial class Main : Node2D
             case 285:
                 _screenshotOk &= SaveScreenshot("-settlements");
 
-                // Run on to 3500 BCE, when chiefdoms and states have formed, for the political map.
+                // The political map needs polities, which take thousands of years to form; the
+                // build saves a headless run at 3000 BCE (SIM2_POLITICAL_SAVE) for this.
+                if (!OS.HasEnvironment("SIM2_POLITICAL_SAVE"))
+                {
+                    GetTree().Quit(_screenshotOk ? 0 : 1);
+                    break;
+                }
+
                 _frameWaits = 0;
-                SetSpeed(4);
+                OnLoadPathChosen(OS.GetEnvironment("SIM2_POLITICAL_SAVE"));
                 break;
             case 290:
-                if (frame != null && frame.Tick < 6500L * 12 && _frameWaits++ < 6000)
+                if (_pendingTask != null && _frameWaits++ < 3000)
                 {
                     _frame--;
                     break;
                 }
 
-                SetSpeed(0);
                 SetMapMode(PoliticalMode);
                 _camera.Position = MapView.MapPosition(33.0, 42.0);
                 ZoomAt(MapView.MapPosition(33.0, 42.0), 1.5f);

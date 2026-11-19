@@ -69,6 +69,10 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri > /dev/null
           export SIM2_WORLD="$PWD/data/earth.world"
           export SIM2_SCREENSHOT="$PWD/docs/viewer-screenshot.png"
+          # A headless run to 3000 BCE, loaded by the screenshot script for the political map.
+          dotnet run --project src/Sim.Headless -c Release -- --world data/earth.world --seed 42 \
+            --homelands real --years 7000 --save /tmp/political.sim \
+            && export SIM2_POLITICAL_SAVE=/tmp/political.sim
           timeout 1200 xvfb-run -a -s "-screen 0 1600x900x24" \
             $GODOT --path viewer --rendering-driver opengl3 --audio-driver Dummy --resolution 1600x900 2>&1 | tee /tmp/viewer.log
           code=${PIPESTATUS[0]}

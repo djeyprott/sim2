@@ -45,9 +45,10 @@
   "claimNeighbours": 4,
 
   // A chiefdom that rules at least statePeople people and stateSettlements settlements is a
-  // state; a state that falls below either is a chiefdom again.
-  "statePeople": 150000,
+  // state; a state that falls below stateKeepShare of either is a chiefdom again.
+  "statePeople": 400000,
   "stateSettlements": 15,
+  "stateKeepShare": 0.75,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share
   // of each good in its store, times the polity's greed, times (1 - cost / reach) so far ones give
@@ -141,7 +142,7 @@
   // chiefdom, which takes the breaking land within its reach, up to maxSuccessors of them; the rest
   // falls back to no rule. A polity that loses its capital (abandoned or conquered) breaks up the
   // same way, all of it.
-  "splitThreshold": 0.35,
+  "splitThreshold": 0.42,
   "splitChance": 0.05,
   "splitDistance": 0.5,
   "revoltUnrest": 0.4,

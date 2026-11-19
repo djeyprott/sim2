@@ -87,7 +87,7 @@ public sealed class RunStatistics
 
         if (_polities != null)
         {
-            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain", "wars", "wars_started", "conquests", "war_deaths", "fallen", "splits", "successors", "cohesion" });
+            columns.AddRange(new[] { "chiefdoms", "states", "people_ruled", "largest_polity_people", "largest_polity_km2", "elite", "soldiers", "unrest_ruled", "tribute_grain", "wars", "wars_started", "conquests", "war_deaths", "fallen", "splits", "successors", "cohesion", "largest_settlement", "largest_capital" });
         }
 
         return string.Join(",", columns);
@@ -237,6 +237,12 @@ public sealed class RunStatistics
             values.Add(all.Sum(p => _polities.Splits(p.Id)).ToString(CultureInfo.InvariantCulture));
             values.Add(standing.Count(p => p.Successor).ToString(CultureInfo.InvariantCulture));
             values.Add((standing.Count > 0 ? standing.Average(p => _polities.Cohesion(p.Id)) : 0.0).ToString("0.000", CultureInfo.InvariantCulture));
+
+            // The people living in the largest settlement, and in the largest capital.
+            List<SettlementInfo> towns = _settlements?.All() ?? new List<SettlementInfo>();
+            var capitals = new HashSet<int>(standing.Select(p => p.Capital));
+            values.Add(Number(towns.Count > 0 ? towns.Max(t => t.Population) : 0.0));
+            values.Add(Number(towns.Where(t => capitals.Contains(t.Cell)).Select(t => t.Population).DefaultIfEmpty(0.0).Max()));
         }
 
         return string.Join(",", values);
@@ -659,6 +665,42 @@ public sealed class RunStatistics
             text.Append(CultureInfo.InvariantCulture,
                 $"{kind},{e.Polity},{Name(e.Polity)},{(e.Other >= 0 ? e.Other.ToString(CultureInfo.InvariantCulture) : "")},{Name(e.Other)},{e.Cell},"
                 + $"{_simulation.Map.Grid.Latitude(e.Cell):F2},{_simulation.Map.Grid.Longitude(e.Cell):F2},{RegionOf(e.Cell)},{year},{date},{Number(e.Amount)}\n");
+        }
+
+        return text.ToString();
+    }
+
+    /// <summary>
+    /// Every polity ever founded, as CSV with a header: when it was founded and ended and how it
+    /// ended, the polity it broke away from, its temperament, when it became a state, and the
+    /// wars it started and won.
+    /// </summary>
+    public string Polities()
+    {
+        var text = new StringBuilder("id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region\n");
+        if (_polities == null)
+        {
+            return text.ToString();
+        }
+
+        var conquered = new HashSet<int>(_polities.Events().Where(e => e.Kind == PolityEventKind.Conquered).Select(e => e.Polity));
+        List<WarInfo> wars = _polities.Wars();
+        long Year(long tick)
+        {
+            var date = new GameDate(tick);
+            return date.IsBce ? -date.Year : date.Year;
+        }
+
+        foreach (PolityInfo p in _polities.All())
+        {
+            int started = wars.Count(w => w.Attacker == p.Id);
+            int fought = wars.Count(w => w.Attacker == p.Id || w.Defender == p.Id);
+            int won = wars.Count(w => w.Winner == p.Id);
+            string end = p.Standing ? "" : conquered.Contains(p.Id) ? "conquered" : "fell";
+            text.Append(CultureInfo.InvariantCulture,
+                $"{p.Id},\"{p.Name.Replace("\"", "\"\"")}\",{Year(p.Founded)},{(p.Standing ? "" : Year(p.Ended).ToString(CultureInfo.InvariantCulture))},{end},"
+                + $"{(p.Parent >= 0 ? p.Parent.ToString(CultureInfo.InvariantCulture) : "")},{p.Aggression:F3},{p.Greed:F3},{p.Expansion:F3},"
+                + $"{(p.StateSince >= 0 ? Year(p.StateSince).ToString(CultureInfo.InvariantCulture) : "")},{started},{fought},{won},{RegionOf(p.Capital)}\n");
         }
 
         return text.ToString();

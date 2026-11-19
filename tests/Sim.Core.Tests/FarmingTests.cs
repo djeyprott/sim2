@@ -732,7 +732,9 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         parameters.StatePeople = 5000.0;
         parameters.StateSettlements = 3;
         Simulation sim = FastFarming(9, polities: parameters);
-        sim.Run(400 * 12);
+
+        // To just after a January, when levels are set (polities grow every month).
+        sim.Run(400 * 12 + 1);
         PolitySystem polities = sim.Systems.OfType<PolitySystem>().Single();
         SettlementSystem settlements = sim.Systems.OfType<SettlementSystem>().Single();
         var groups = new PopulationGroups(sim.State);
@@ -752,10 +754,12 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
                 $"{p.Name} rules cell {c} beyond its reach."));
             Assert.True(polities.IsWhole(p.Id), $"{p.Name}'s land does not all join its capital.");
 
-            // Its level follows the people and settlements it rules.
+            // Its level follows the people and settlements it rules: a chiefdom becomes a state
+            // at the thresholds, and a state stays one down to stateKeepShare of them.
             double people = cells.Sum(c => groups.CellTotal(c));
             int towns = cells.Count(c => settlements.InCell(c) != null);
-            bool state = people >= parameters.StatePeople && towns >= parameters.StateSettlements;
+            double keep = p.Level == PolityLevel.State ? parameters.StateKeepShare : 1.0;
+            bool state = people >= keep * parameters.StatePeople && towns >= keep * parameters.StateSettlements;
             Assert.Equal(state ? PolityLevel.State : PolityLevel.Chiefdom, p.Level);
             states += state ? 1 : 0;
             grown += towns > 1 ? 1 : 0;

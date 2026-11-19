@@ -111,6 +111,8 @@ public sealed class PolityParameters
 
     public int StateSettlements { get; set; } = 5;
 
+    public double StateKeepShare { get; set; } = 0.75;
+
     public double TributeShare { get; set; } = 0.15;
 
     public double MaxTributeShare { get; set; } = 0.5;
@@ -211,7 +213,7 @@ public sealed class PolityParameters
         double[] chances = { p.FoundChance, p.JoinChance, p.UnlinkedJoinFactor };
         if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0
             || p.CrowdPeople <= 0.0 || p.ChiefdomReach <= 0.0 || p.StateReach < p.ChiefdomReach || p.ClaimNeighbours < 1 || p.ClaimNeighbours > 6
-            || p.StatePeople <= 0.0 || p.StateSettlements < 1
+            || p.StatePeople <= 0.0 || p.StateSettlements < 1 || p.StateKeepShare <= 0.0 || p.StateKeepShare > 1.0
             || new[] { p.TributeShare, p.MaxTributeShare, p.EliteShare, p.PeaceSoldierShare, p.BorderSoldierShare, p.StaffChangeRate, p.MaxStaffShare, p.UnrestRate }.Any(v => v < 0.0 || v > 1.0)
             || p.HungerUnrest < 0.0 || p.NeedsUnrest < 0.0 || p.TributeUnrest < 0.0)
         {
@@ -684,7 +686,9 @@ public sealed class PolitySystem : ISimSystem
                 towns += _settlementPlusOne[cell] > 0 ? 1 : 0;
             }
 
-            bool state = people >= _parameters.StatePeople && towns >= _parameters.StateSettlements;
+            // A state stays one until it falls below stateKeepShare of the thresholds.
+            double keep = p.Level == PolityLevel.State ? _parameters.StateKeepShare : 1.0;
+            bool state = people >= keep * _parameters.StatePeople && towns >= keep * _parameters.StateSettlements;
             if (state != (p.Level == PolityLevel.State))
             {
                 SetLevel(p.Id, state ? PolityLevel.State : PolityLevel.Chiefdom, tick);

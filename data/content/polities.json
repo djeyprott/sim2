@@ -133,11 +133,13 @@
   // splitThreshold a year: the land at least splitDistance of its reach from the capital, and each
   // settlement whose unrest is at least revoltUnrest with the land next to it, breaks away. In turn
   // the largest settlement breaking away with at least successorPeople people founds a successor
-  // chiefdom, which takes the breaking land within its reach; the rest falls back to no rule. A
-  // polity that loses its capital (abandoned or conquered) breaks up the same way, all of it.
-  "splitThreshold": 0.55,
-  "splitChance": 0.1,
+  // chiefdom, which takes the breaking land within its reach, up to maxSuccessors of them; the rest
+  // falls back to no rule. A polity that loses its capital (abandoned or conquered) breaks up the
+  // same way, all of it.
+  "splitThreshold": 0.35,
+  "splitChance": 0.05,
   "splitDistance": 0.5,
   "revoltUnrest": 0.4,
-  "successorPeople": 2500
+  "successorPeople": 2500,
+  "maxSuccessors": 2
 }

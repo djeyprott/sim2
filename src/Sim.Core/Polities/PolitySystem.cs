@@ -151,15 +151,17 @@ public sealed class PolityParameters
 
     public double DefeatYears { get; set; } = 20.0;
 
-    public double SplitThreshold { get; set; } = 0.55;
+    public double SplitThreshold { get; set; } = 0.35;
 
-    public double SplitChance { get; set; } = 0.1;
+    public double SplitChance { get; set; } = 0.05;
 
     public double SplitDistance { get; set; } = 0.5;
 
     public double RevoltUnrest { get; set; } = 0.4;
 
     public double SuccessorPeople { get; set; } = 2500.0;
+
+    public int MaxSuccessors { get; set; } = 2;
 
     public static PolityParameters LoadDefault() => Parse(ContentFiles.ReadText("polities.json"));
 
@@ -191,7 +193,7 @@ public sealed class PolityParameters
 
         if (p.CohesionUnrest < 0.0 || p.CohesionFamine < 0.0 || p.CohesionStretch < 0.0 || p.CohesionWar < 0.0 || p.CohesionDefeat < 0.0
             || p.DefeatYears < 0.0 || p.SplitThreshold <= 0.0 || p.SplitThreshold > 1.0 || p.SplitChance < 0.0 || p.SplitChance > 1.0
-            || p.SplitDistance < 0.0 || p.SplitDistance > 1.0 || p.RevoltUnrest < 0.0 || p.SuccessorPeople <= 0.0)
+            || p.SplitDistance < 0.0 || p.SplitDistance > 1.0 || p.RevoltUnrest < 0.0 || p.SuccessorPeople <= 0.0 || p.MaxSuccessors < 0)
         {
             throw new InvalidDataException("polities.json: cohesion weights not negative, splitThreshold above 0 and at most 1, splitChance and splitDistance 0 to 1, successorPeople above 0.");
         }
@@ -685,17 +687,25 @@ public sealed class PolitySystem : ISimSystem
 
     // Cells of a polity break away from it: in turn, the largest settlement among them with at
     // least successorPeople people founds a successor chiefdom, which takes the breaking cells
-    // within its reach; what is left falls back to no rule.
+    // within its reach, up to maxSuccessors; what is left falls back to no rule.
     private void BreakAway(int polity, List<int> cells, long tick, Rng rng)
     {
         var towns = cells.Where(c => _settlementPlusOne[c] > 0 && RulerOf(c) == polity && _groups!.CellTotal(c) >= _parameters.SuccessorPeople)
             .OrderByDescending(c => _groups!.CellTotal(c)).ThenBy(c => c).ToList();
+        int made = 0;
         foreach (int town in towns)
         {
+            if (made >= _parameters.MaxSuccessors)
+            {
+                break;
+            }
+
             if (RulerOf(town) != polity)
             {
                 continue;
             }
+
+            made++;
 
             int successor = NewPolity(town, tick, rng, polity);
             FillReach(town, _parameters.ChiefdomReach);

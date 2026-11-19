@@ -1,39 +1,127 @@
 event,polity_id,polity,other_id,other,cell,latitude,longitude,region,year,date,amount
 founded,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5784,January 5784 BCE,0
-became_state,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5672,January 5672 BCE,0
-founded,1,"Yehamner",,,10930,51.77,12.02,Europe,-4894,January 4894 BCE,0
-became_state,1,"Yehamner",,,10930,51.77,12.02,Europe,-4884,January 4884 BCE,0
-founded,2,"Steiva",,,163320,-28.71,18.66,East and southern Africa,-4296,January 4296 BCE,0
-war,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-4295,January 4295 BCE,0
-peace,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-4281,January 4281 BCE,0
-war,2,"Steiva",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-4004,January 4004 BCE,0
-peace,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-3990,January 3990 BCE,0
-founded,3,"Buzesan",,,10329,50.23,18.33,Europe,-3901,January 3901 BCE,0
-war,1,"Yehamner",3,"Buzesan",10329,50.23,18.33,Europe,-3901,January 3901 BCE,0
-conquered,3,"Buzesan",1,"Yehamner",10329,50.23,18.33,Europe,-3897,January 3897 BCE,5
-founded,4,"Sterush",,,150492,-17.03,-53.19,Americas,-3203,January 3203 BCE,0
-became_state,4,"Sterush",,,150492,-17.03,-53.19,Americas,-3169,January 3169 BCE,0
-founded,5,"Shaipounem",,,162238,15.10,-4.37,Sahel,-3061,January 3061 BCE,0
-founded,6,"Yairal",,,150368,-14.68,-54.17,Americas,-3046,January 3046 BCE,0
-became_state,5,"Shaipounem",,,162238,15.10,-4.37,Sahel,-3043,January 3043 BCE,0
-war,4,"Sterush",6,"Yairal",150368,-14.68,-54.17,Americas,-3042,January 3042 BCE,0
-peace,4,"Sterush",6,"Yairal",150368,-14.68,-54.17,Americas,-3035,January 3035 BCE,0
-became_state,6,"Yairal",,,150368,-14.68,-54.17,Americas,-3012,January 3012 BCE,0
-founded,7,"Leikrahail",,,53175,42.54,-2.74,Europe,-2743,January 2743 BCE,0
-founded,8,"Sukaish",,,148288,-17.20,-44.99,Americas,-2558,January 2558 BCE,0
-became_state,8,"Sukaish",,,148288,-17.20,-44.99,Americas,-2520,January 2520 BCE,0
-founded,9,"Aida",,,160942,14.77,1.03,Sahel,-2328,January 2328 BCE,0
-war,5,"Shaipounem",9,"Aida",160942,14.77,1.03,Sahel,-2322,January 2322 BCE,0
-peace,5,"Shaipounem",9,"Aida",160942,14.77,1.03,Sahel,-2308,January 2308 BCE,0
-became_state,9,"Aida",,,160942,14.77,1.03,Sahel,-2241,January 2241 BCE,0
-became_state,7,"Leikrahail",,,53175,42.54,-2.74,Europe,-1942,January 1942 BCE,0
-war,2,"Steiva",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-1930,January 1930 BCE,0
-peace,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-1916,January 1916 BCE,0
-founded,10,"Relith",,,9917,48.25,16.26,Europe,-1654,January 1654 BCE,0
-war,1,"Yehamner",10,"Relith",9917,48.25,16.26,Europe,-1651,January 1651 BCE,0
-peace,1,"Yehamner",10,"Relith",9917,48.25,16.26,Europe,-1637,January 1637 BCE,0
-became_state,10,"Relith",,,9917,48.25,16.26,Europe,-1597,January 1597 BCE,0
-war,2,"Steiva",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-1361,January 1361 BCE,0
-peace,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-1347,January 1347 BCE,0
-war,2,"Steiva",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-1102,January 1102 BCE,0
-peace,0,"Naidule",2,"Steiva",163320,-28.71,18.66,East and southern Africa,-1096,January 1096 BCE,0
+became_state,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5688,January 5688 BCE,0
+founded,1,"Loshuth",,,10832,51.58,13.34,Europe,-4637,January 4637 BCE,0
+became_state,1,"Loshuth",,,10832,51.58,13.34,Europe,-4605,January 4605 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3799,January 3799 BCE,85
+became_chiefdom,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3799,January 3799 BCE,0
+became_state,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3630,January 3630 BCE,0
+founded,2,"Zairveir",,,150628,-14.41,-55.34,Americas,-2801,January 2801 BCE,0
+founded,3,"Seipaizei",,,163661,-28.17,16.71,East and southern Africa,-2779,January 2779 BCE,0
+became_state,2,"Zairveir",,,150628,-14.41,-55.34,Americas,-2772,January 2772 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2528,January 2528 BCE,84
+became_chiefdom,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2528,January 2528 BCE,0
+became_state,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2511,January 2511 BCE,0
+founded,4,"Samai",,,163319,-29.09,18.91,East and southern Africa,-2438,January 2438 BCE,0
+war,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2425,January 2425 BCE,0
+peace,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2420,January 2420 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2405,January 2405 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2398,January 2398 BCE,0
+war,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2393,January 2393 BCE,0
+split,4,"Samai",,,163319,-29.09,18.91,East and southern Africa,-2388,January 2388 BCE,1
+peace,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2385,January 2385 BCE,0
+founded,5,"Tayizi",,,147850,-15.84,-44.40,Americas,-2383,January 2383 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2375,January 2375 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2368,January 2368 BCE,0
+war,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2365,January 2365 BCE,0
+founded,6,"Thihousou",,,9809,48.00,17.47,Europe,-2364,January 2364 BCE,0
+peace,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2351,January 2351 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2341,January 2341 BCE,0
+became_state,6,"Thihousou",,,9809,48.00,17.47,Europe,-2336,January 2336 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2333,January 2333 BCE,0
+war,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2326,January 2326 BCE,0
+peace,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2317,January 2317 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2312,January 2312 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2307,January 2307 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2280,January 2280 BCE,0
+founded,7,"Breshras",,,150232,-16.51,-52.51,Americas,-2279,January 2279 BCE,0
+war,2,"Zairveir",7,"Breshras",150232,-16.51,-52.51,Americas,-2275,January 2275 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2273,January 2273 BCE,0
+war,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2273,January 2273 BCE,0
+became_state,5,"Tayizi",,,147850,-15.84,-44.40,Americas,-2273,January 2273 BCE,0
+peace,0,"Naidule",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2266,January 2266 BCE,0
+peace,2,"Zairveir",7,"Breshras",150232,-16.51,-52.51,Americas,-2261,January 2261 BCE,0
+war,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-2253,January 2253 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2244,January 2244 BCE,0
+became_state,7,"Breshras",,,150232,-16.51,-52.51,Americas,-2209,January 2209 BCE,0
+founded,8,"Thesek",,,8684,44.34,22.29,Europe,-2150,January 2150 BCE,0
+war,6,"Thihousou",8,"Thesek",8684,44.34,22.29,Europe,-2143,January 2143 BCE,0
+peace,6,"Thihousou",8,"Thesek",8684,44.34,22.29,Europe,-2129,January 2129 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2125,January 2125 BCE,0
+peace,6,"Thihousou",1,"Loshuth",10832,51.58,13.34,Europe,-2111,January 2111 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-2105,January 2105 BCE,0
+peace,6,"Thihousou",8,"Thesek",8684,44.34,22.29,Europe,-2091,January 2091 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2091,January 2091 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2077,January 2077 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-2071,January 2071 BCE,0
+peace,6,"Thihousou",8,"Thesek",8684,44.34,22.29,Europe,-2057,January 2057 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2052,January 2052 BCE,0
+split,8,"Thesek",,,8684,44.34,22.29,Europe,-2052,January 2052 BCE,34
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2038,January 2038 BCE,0
+founded,9,"Dabain",,,149552,-19.85,-47.80,Americas,-2025,January 2025 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-2008,January 2008 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1994,January 1994 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1984,January 1984 BCE,0
+became_state,8,"Thesek",,,8684,44.34,22.29,Europe,-1976,January 1976 BCE,0
+became_state,9,"Dabain",,,149552,-19.85,-47.80,Americas,-1972,January 1972 BCE,0
+peace,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1970,January 1970 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1970,January 1970 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1956,January 1956 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1949,January 1949 BCE,0
+peace,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1935,January 1935 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1925,January 1925 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1911,January 1911 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1911,January 1911 BCE,0
+peace,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1897,January 1897 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1887,January 1887 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1873,January 1873 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1873,January 1873 BCE,0
+peace,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1859,January 1859 BCE,0
+war,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1850,January 1850 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1841,January 1841 BCE,0
+peace,1,"Loshuth",6,"Thihousou",9809,48.00,17.47,Europe,-1836,January 1836 BCE,0
+war,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1834,January 1834 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1830,January 1830 BCE,0
+split,6,"Thihousou",,,9809,48.00,17.47,Europe,-1825,January 1825 BCE,44
+became_chiefdom,6,"Thihousou",,,9809,48.00,17.47,Europe,-1825,January 1825 BCE,0
+peace,8,"Thesek",6,"Thihousou",9809,48.00,17.47,Europe,-1820,January 1820 BCE,0
+split,6,"Thihousou",,,9809,48.00,17.47,Europe,-1813,January 1813 BCE,18
+broke_away,10,"Relith",6,"Thihousou",9917,48.25,16.26,Europe,-1813,January 1813 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1809,January 1809 BCE,0
+war,8,"Thesek",10,"Relith",9917,48.25,16.26,Europe,-1809,January 1809 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1800,January 1800 BCE,0
+peace,8,"Thesek",10,"Relith",9917,48.25,16.26,Europe,-1795,January 1795 BCE,0
+war,10,"Relith",6,"Thihousou",9809,48.00,17.47,Europe,-1795,January 1795 BCE,0
+conquered,6,"Thihousou",10,"Relith",9809,48.00,17.47,Europe,-1792,January 1792 BCE,5
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1774,January 1774 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1770,January 1770 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1750,January 1750 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1744,January 1744 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1721,January 1721 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1714,January 1714 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1691,January 1691 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1683,January 1683 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1661,January 1661 BCE,0
+war,10,"Relith",1,"Loshuth",10832,51.58,13.34,Europe,-1655,January 1655 BCE,0
+peace,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1650,January 1650 BCE,0
+peace,10,"Relith",1,"Loshuth",10832,51.58,13.34,Europe,-1641,January 1641 BCE,0
+became_state,10,"Relith",,,9917,48.25,16.26,Europe,-1638,January 1638 BCE,0
+war,10,"Relith",1,"Loshuth",10832,51.58,13.34,Europe,-1619,January 1619 BCE,0
+peace,1,"Loshuth",10,"Relith",9917,48.25,16.26,Europe,-1605,January 1605 BCE,0
+founded,11,"Goundel",,,162463,7.10,0.25,West and Central Africa,-1420,January 1420 BCE,0
+became_state,11,"Goundel",,,162463,7.10,0.25,West and Central Africa,-1385,January 1385 BCE,0
+war,4,"Samai",3,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-1277,January 1277 BCE,0
+peace,3,"Seipaizei",4,"Samai",163319,-29.09,18.91,East and southern Africa,-1265,January 1265 BCE,0
+war,10,"Relith",1,"Loshuth",10832,51.58,13.34,Europe,-1199,January 1199 BCE,0
+peace,1,"Loshuth",10,"Relith",9917,48.25,16.26,Europe,-1185,January 1185 BCE,0
+war,10,"Relith",1,"Loshuth",10832,51.58,13.34,Europe,-1161,January 1161 BCE,0
+peace,1,"Loshuth",10,"Relith",9917,48.25,16.26,Europe,-1147,January 1147 BCE,0
+war,8,"Thesek",10,"Relith",9917,48.25,16.26,Europe,-1142,January 1142 BCE,0
+peace,8,"Thesek",10,"Relith",9917,48.25,16.26,Europe,-1128,January 1128 BCE,0
+war,9,"Dabain",5,"Tayizi",147850,-15.84,-44.40,Americas,-1070,January 1070 BCE,0
+peace,9,"Dabain",5,"Tayizi",147850,-15.84,-44.40,Americas,-1056,January 1056 BCE,0
+split,5,"Tayizi",,,147850,-15.84,-44.40,Americas,-1054,January 1054 BCE,61
+became_chiefdom,5,"Tayizi",,,147850,-15.84,-44.40,Americas,-1054,January 1054 BCE,0
+became_state,5,"Tayizi",,,147850,-15.84,-44.40,Americas,-1028,January 1028 BCE,0
+war,9,"Dabain",5,"Tayizi",147850,-15.84,-44.40,Americas,-1022,January 1022 BCE,0
+peace,9,"Dabain",5,"Tayizi",147850,-15.84,-44.40,Americas,-1008,January 1008 BCE,0

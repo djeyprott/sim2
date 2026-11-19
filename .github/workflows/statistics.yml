@@ -28,16 +28,26 @@ jobs:
       - name: Build
         run: dotnet build src/Sim.Headless -c Release
       - name: Run seeds 1 to 3 with real and random crop homelands, 9,000 years each
+        # The six runs go side by side (each is single-threaded); each run's timings by system
+        # are kept next to its statistics.
+        timeout-minutes: 300
         run: |
           mkdir -p docs/stats
+          pids=""
           for homelands in real random; do
             for seed in 1 2 3; do
               dotnet run --project src/Sim.Headless -c Release --no-build -- \
                 --world data/earth.world --seed $seed --homelands $homelands --years 9000 \
-                --stats docs/stats/$homelands-seed$seed.csv
+                --stats docs/stats/$homelands-seed$seed.csv > docs/stats/$homelands-seed$seed-timings.txt 2>&1 &
+              pids="$pids $!"
             done
           done
+          status=0
+          for pid in $pids; do wait $pid || status=1; done
+          tail -n 25 docs/stats/*-timings.txt
+          exit $status
       - name: Commit the statistics
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -806,6 +806,14 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
 
         Assert.True(eliteCount > 0.0, "No elite in any capital.");
         Assert.True(payingPeople > 0.0, "No settlement paid tribute.");
+
+        // A capital's elite and soldiers never crowd out its farmers.
+        foreach (int capital in capitals)
+        {
+            double staff = groups.InCell(capital).Where(g => groups.Occupation(g) == elite || groups.Occupation(g) == soldier).Sum(g => groups.Size(g));
+            Assert.True(staff <= PolityParameters.LoadDefault().MaxStaffShare * groups.CellTotal(capital) * 1.05 + 1.0,
+                $"Capital {capital} holds {staff:F0} elite and soldiers among {groups.CellTotal(capital):F0} people.");
+        }
         Assert.True(capitalGrain / capitalPeople > payingGrain / payingPeople,
             $"Capitals hold {capitalGrain / capitalPeople:F2} grain a person, tribute payers {payingGrain / payingPeople:F2}.");
         Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),

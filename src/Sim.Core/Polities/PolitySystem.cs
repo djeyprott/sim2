@@ -123,7 +123,7 @@ public sealed class PolityParameters
 
     public double StaffChangeRate { get; set; } = 0.2;
 
-    public double MaxStaffShareOfFarmers { get; set; } = 0.5;
+    public double MaxStaffShare { get; set; } = 0.3;
 
     public double UnrestRate { get; set; } = 0.1;
 
@@ -212,7 +212,7 @@ public sealed class PolityParameters
         if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0
             || p.CrowdPeople <= 0.0 || p.ChiefdomReach <= 0.0 || p.StateReach < p.ChiefdomReach || p.ClaimNeighbours < 1 || p.ClaimNeighbours > 6
             || p.StatePeople <= 0.0 || p.StateSettlements < 1
-            || new[] { p.TributeShare, p.MaxTributeShare, p.EliteShare, p.PeaceSoldierShare, p.BorderSoldierShare, p.StaffChangeRate, p.MaxStaffShareOfFarmers, p.UnrestRate }.Any(v => v < 0.0 || v > 1.0)
+            || new[] { p.TributeShare, p.MaxTributeShare, p.EliteShare, p.PeaceSoldierShare, p.BorderSoldierShare, p.StaffChangeRate, p.MaxStaffShare, p.UnrestRate }.Any(v => v < 0.0 || v > 1.0)
             || p.HungerUnrest < 0.0 || p.NeedsUnrest < 0.0 || p.TributeUnrest < 0.0)
         {
             throw new InvalidDataException("polities.json: chances 0 to 1, people and reach above 0, state reach at least chiefdom reach, claimNeighbours 1 to 6.");
@@ -1439,6 +1439,15 @@ public sealed class PolitySystem : ISimSystem
                 soldiers *= scale;
             }
 
+            // Together they are at most maxStaffShare of the capital's people, so its farmers stay.
+            double cap = _parameters.MaxStaffShare * groups.CellTotal(p.Capital);
+            if (elite + soldiers > cap)
+            {
+                double scale = cap / (elite + soldiers);
+                elite *= scale;
+                soldiers *= scale;
+            }
+
             MoveToward(p.Capital, _elite, elite);
             MoveToward(p.Capital, _soldier, soldiers);
         }
@@ -1473,7 +1482,7 @@ public sealed class PolitySystem : ISimSystem
         double change = _parameters.StaffChangeRate * (target - now);
         if (change > 0.0 && farmerGroup >= 0)
         {
-            change = Math.Min(change, _parameters.MaxStaffShareOfFarmers * groups.Size(farmerGroup));
+            change = Math.Min(change, groups.Size(farmerGroup));
             if (change <= 0.0)
             {
                 return;

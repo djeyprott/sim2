@@ -52,15 +52,15 @@
   "maxTributeShare": 0.5,
 
   // The elite and soldiers live in the capital, drawn from its farmers (and sent back) staffChangeRate
-  // of the way each year, at most maxStaffShareOfFarmers of them a year: elite eliteShare of the
-  // people the polity rules; soldiers peaceSoldierShare of them, or borderSoldierShare where it
-  // borders another polity, times its aggression; both together no more than last year's grain
-  // tribute feeds (a load of grain feeds a person a year).
+  // of the way each year: elite eliteShare of the people the polity rules; soldiers
+  // peaceSoldierShare of them, or borderSoldierShare where it borders another polity, times its
+  // aggression; both together no more than last year's grain tribute feeds (a load of grain feeds
+  // a person a year), and no more than maxStaffShare of the capital's people.
   "eliteShare": 0.01,
   "peaceSoldierShare": 0.005,
   "borderSoldierShare": 0.02,
   "staffChangeRate": 0.2,
-  "maxStaffShareOfFarmers": 0.5,
+  "maxStaffShare": 0.3,
 
   // Unrest, a condition of every group (0 to 1), moves unrestRate of the way each year toward
   // hungerUnrest x (1 - food met) + needsUnrest x (1 - everyday needs met) + tributeUnrest x the

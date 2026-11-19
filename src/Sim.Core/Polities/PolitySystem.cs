@@ -502,6 +502,7 @@ public sealed class PolitySystem : ISimSystem
         }
 
         // Which settlements each settlement trades with, by cell (only looked up, never iterated).
+        long clock = System.Diagnostics.Stopwatch.GetTimestamp();
         var partners = new Dictionary<int, List<int>>();
         if (_trade != null)
         {
@@ -513,6 +514,8 @@ public sealed class PolitySystem : ISimSystem
         }
 
         bool released = false;
+        PartnersSeconds += Since(clock);
+        clock = System.Diagnostics.Stopwatch.GetTimestamp();
 
         // Each polity, in id order: let go of what is out of reach (going round other polities'
         // land), draw in settlements with the land on the way to them, fill gaps.
@@ -584,6 +587,7 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
+        GrowSeconds += Since(clock);
         if (january)
         {
             Yearly(tick, rng);
@@ -591,7 +595,9 @@ public sealed class PolitySystem : ISimSystem
         else if (released)
         {
             // Letting go of land is the only monthly change that can cut a polity in two.
+            clock = System.Diagnostics.Stopwatch.GetTimestamp();
             KeepWhole(tick, rng);
+            WholeSeconds += Since(clock);
         }
     }
 
@@ -625,6 +631,8 @@ public sealed class PolitySystem : ISimSystem
     // soldiers, unrest, and levels.
     private void Yearly(long tick, Rng rng)
     {
+        long clock = System.Diagnostics.Stopwatch.GetTimestamp();
+
         // New chiefdoms, in settlement id order.
         EntityTable settlements = _settlements!;
         IntColumn settlementCell = settlements.IntColumn("cell");
@@ -660,14 +668,23 @@ public sealed class PolitySystem : ISimSystem
             }
         }
 
+        FoundSeconds += Since(clock);
+
         // Wars: those under way are fought a year, then new ones may be declared.
+        clock = System.Diagnostics.Stopwatch.GetTimestamp();
         Wars(tick, rng);
+        WarSeconds += Since(clock);
 
         // Polities short of cohesion may split.
+        clock = System.Diagnostics.Stopwatch.GetTimestamp();
         Collapse(tick, rng);
+        CollapseSeconds += Since(clock);
 
         // Land cut off from its capital breaks away.
+        clock = System.Diagnostics.Stopwatch.GetTimestamp();
         KeepWhole(tick, rng);
+        WholeSeconds += Since(clock);
+        clock = System.Diagnostics.Stopwatch.GetTimestamp();
 
         // Tribute, the elite and soldiers, and unrest.
         List<int>[] cellsOf = CellsByPolity();
@@ -694,6 +711,8 @@ public sealed class PolitySystem : ISimSystem
                 SetLevel(p.Id, state ? PolityLevel.State : PolityLevel.Chiefdom, tick);
             }
         }
+
+        RuleSeconds += Since(clock);
     }
 
     // ---- Collapse (step 5) ----
@@ -993,6 +1012,23 @@ public sealed class PolitySystem : ISimSystem
 
         return list;
     }
+
+    /// <summary>Time spent in each part, for the headless runner's timings (not saved).</summary>
+    public double PartnersSeconds { get; private set; }
+
+    public double GrowSeconds { get; private set; }
+
+    public double WholeSeconds { get; private set; }
+
+    public double FoundSeconds { get; private set; }
+
+    public double WarSeconds { get; private set; }
+
+    public double CollapseSeconds { get; private set; }
+
+    public double RuleSeconds { get; private set; }
+
+    private static double Since(long start) => System.Diagnostics.Stopwatch.GetElapsedTime(start).TotalSeconds;
 
     /// <summary>A polity's cohesion last year (1: whole; low values risk a split).</summary>
     public double Cohesion(int polity) => _cohesion![polity];

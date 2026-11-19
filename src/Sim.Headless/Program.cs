@@ -126,6 +126,12 @@ public static class Program
                     + $"{technology.DiscoveryChecks:N0} discovery checks, {technology.GroupVisits:N0} group visits");
             }
 
+            if (simulation.Systems[i] is Sim.Core.Polities.PolitySystem polities)
+            {
+                Console.WriteLine($"    of which trade partners {polities.PartnersSeconds:F1} s, growing {polities.GrowSeconds:F1} s, keeping whole {polities.WholeSeconds:F1} s, "
+                    + $"founding {polities.FoundSeconds:F1} s, war {polities.WarSeconds:F1} s, collapse {polities.CollapseSeconds:F1} s, tribute and levels {polities.RuleSeconds:F1} s");
+            }
+
             if (simulation.Systems[i] is Sim.Core.Goods.TradeSystem trade)
             {
                 Console.WriteLine($"    of which links {trade.BuildSeconds:F1} s, prices {trade.PriceSeconds:F1} s, trading {trade.LoopSeconds:F1} s ({trade.Sends:N0} sends over {trade.LinkGoodVisits:N0} link-goods), gap measure {trade.GapSeconds:F1} s");

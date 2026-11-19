@@ -159,7 +159,7 @@ public sealed class PolityParameters
 
     public double RevoltUnrest { get; set; } = 0.4;
 
-    public double SuccessorPeople { get; set; } = 2500.0;
+    public double SuccessorPeople { get; set; } = 1500.0;
 
     public int MaxSuccessors { get; set; } = 2;
 
@@ -690,8 +690,9 @@ public sealed class PolitySystem : ISimSystem
     // within its reach, up to maxSuccessors; what is left falls back to no rule.
     private void BreakAway(int polity, List<int> cells, long tick, Rng rng)
     {
-        var towns = cells.Where(c => _settlementPlusOne[c] > 0 && RulerOf(c) == polity && _groups!.CellTotal(c) >= _parameters.SuccessorPeople)
-            .OrderByDescending(c => _groups!.CellTotal(c)).ThenBy(c => c).ToList();
+        DoubleColumn population = _settlements!.DoubleColumn("population");
+        var towns = cells.Where(c => _settlementPlusOne[c] > 0 && RulerOf(c) == polity && population[_settlementPlusOne[c] - 1] >= _parameters.SuccessorPeople)
+            .OrderByDescending(c => population[_settlementPlusOne[c] - 1]).ThenBy(c => c).ToList();
         int made = 0;
         foreach (int town in towns)
         {

@@ -829,6 +829,21 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         Assert.All(stock.Goods.Goods, good => Assert.True(Math.Abs(stock.Imbalance(good.Index)) < 1e-6 * Math.Max(1.0, stock.InStore(good.Index)),
             $"{good.Name} does not balance."));
 
+        // Knowledge shared under rule comes only from somewhere: every technology anyone knows
+        // was discovered (a knowledge link once leaked one technology's spread into the next).
+        TechnologySystem technology = sim.Systems.OfType<TechnologySystem>().Single();
+        var discovered = new HashSet<int>(technology.Events().Where(e => e.Kind != TechnologyEventKind.Lost).Select(e => e.Technology));
+        for (int t = 0; t < technology.Technologies.Count; t++)
+        {
+            bool known = false;
+            for (int g = 0; g < groups.IdCount && !known; g++)
+            {
+                known = groups.IsAlive(g) && groups.Size(g) > 0.0 && technology.Knowledge(g, t) > 0.0;
+            }
+
+            Assert.False(known && !discovered.Contains(t), $"{technology.Technologies.Get(t).Name} is known but was never discovered.");
+        }
+
         // Same seed, same polities; and a loaded run carries on as an uninterrupted one.
         var save = new MemoryStream();
         sim.Save(save);

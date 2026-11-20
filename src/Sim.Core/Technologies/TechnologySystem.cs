@@ -577,7 +577,16 @@ public sealed class TechnologySystem : ISimSystem
     // them (busier trade, faster), and the people using it among them.
     private void FillTrade(List<(int CellA, int CellB)> links)
     {
+        // Every linked cell starts afresh for this technology, those linked only by rule included
+        // (otherwise they would keep the last technology's values).
         foreach ((int a, int b) in links)
+        {
+            _tradeBest[a] = _tradeBest[b] = 0.0;
+            _tradeRate[a] = _tradeRate[b] = 0.0;
+            _tradeUsers[a] = _tradeUsers[b] = 0.0;
+        }
+
+        foreach ((int a, int b) in _ruleLinks)
         {
             _tradeBest[a] = _tradeBest[b] = 0.0;
             _tradeRate[a] = _tradeRate[b] = 0.0;

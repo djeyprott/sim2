@@ -57,14 +57,23 @@ public sealed class PolityResult
 
     public int StrongerWon { get; set; }
 
-    /// <summary>Wars where only one side used chariots (fortifications), and how many that side won.</summary>
+    /// <summary>Decided wars by whether the attacker used chariots, and how many the attacker won.</summary>
     public int ChariotWars { get; set; }
 
     public int ChariotWins { get; set; }
 
+    public int NoChariotWars { get; set; }
+
+    public int NoChariotWins { get; set; }
+
+    /// <summary>Decided wars by whether the defender's capital used fortifications, and how many the defender won.</summary>
     public int FortWars { get; set; }
 
     public int FortWins { get; set; }
+
+    public int NoFortWars { get; set; }
+
+    public int NoFortWins { get; set; }
 
     public double WarDeaths { get; set; }
 
@@ -99,7 +108,7 @@ public sealed class PolityResult
         + $"states up to {StateRegionsKm:F0} km apart, {FormedWithoutFarming} formed without farming; largest {LargestKm2 / 1e6:F2} M km2, {100.0 * LargestPeopleShare:F1}% of people; "
         + $"{PolitiesAtEnd} polities and {StatesAtEnd} states at the end, {StatesEver} states ever, median {MedianStateYears:F0} years as a state; {Collapses} collapses, {Conquests} conquests, {Wars} wars, {WarDeaths / 1e3:F0} k war deaths; "
         + $"peaceful border change {100.0 * MeanPeacefulChange:F2}% a year (at most {100.0 * MaxPeacefulChange:F2}%); "
-        + $"stronger side won {StrongerWon} of {DecidedWars}; chariots won {ChariotWins} of {ChariotWars}, fortifications {FortWins} of {FortWars}; "
+        + $"stronger side won {StrongerWon} of {DecidedWars}; attackers won {ChariotWins} of {ChariotWars} with chariots, {NoChariotWins} of {NoChariotWars} without; defenders won {FortWins} of {FortWars} with fortifications, {NoFortWins} of {NoFortWars} without; "
         + $"growth at war {WarGrowth:F4}, at peace {PeaceGrowth:F4}; capitals hold {CapitalGrainPerPerson:F2} grain a person, others {OtherGrainPerPerson:F2}; "
         + $"{EliteOutsideCapitals} elite groups outside capitals";
 }
@@ -375,16 +384,26 @@ public sealed class PolityMeasures
                 r.StrongerWon += attackerWon == start.StrongerIsAttacker ? 1 : 0;
             }
 
-            if (start.ChariotsA != start.ChariotsD)
+            if (start.ChariotsA)
             {
                 r.ChariotWars++;
-                r.ChariotWins += attackerWon == start.ChariotsA ? 1 : 0;
+                r.ChariotWins += attackerWon ? 1 : 0;
+            }
+            else
+            {
+                r.NoChariotWars++;
+                r.NoChariotWins += attackerWon ? 1 : 0;
             }
 
-            if (start.FortsA != start.FortsD)
+            if (start.FortsD)
             {
                 r.FortWars++;
-                r.FortWins += attackerWon == start.FortsA ? 1 : 0;
+                r.FortWins += attackerWon ? 0 : 1;
+            }
+            else
+            {
+                r.NoFortWars++;
+                r.NoFortWins += attackerWon ? 0 : 1;
             }
         }
 

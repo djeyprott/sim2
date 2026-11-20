@@ -51,8 +51,9 @@
   "stateKeepShare": 0.75,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share
-  // of each good in its store, times the polity's greed, times (1 - cost / reach) so far ones give
-  // less, times (1 - its people's unrest), at most maxTributeShare.
+  // of each good people use in its store (food, everyday goods and luxuries; raw materials such as
+  // tin and copper stay to be traded and worked), times the polity's greed, times (1 - cost /
+  // reach) so far ones give less, times (1 - its people's unrest), at most maxTributeShare.
   "tributeShare": 0.15,
   "maxTributeShare": 0.5,
 

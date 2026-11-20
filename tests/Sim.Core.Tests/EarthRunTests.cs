@@ -1509,12 +1509,16 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     }
 
     [Fact]
-    public void Chariots_and_fortifications_each_win_most_wars_where_only_one_side_has_them()
+    public void Chariots_raise_the_share_of_wars_attackers_win_and_fortifications_the_share_defenders_win()
     {
-        int chariotWars = Polities.Sum(p => p.ChariotWars), chariotWins = Polities.Sum(p => p.ChariotWins);
-        int fortWars = Polities.Sum(p => p.FortWars), fortWins = Polities.Sum(p => p.FortWins);
-        Assert.True(chariotWars >= 10 && chariotWins > chariotWars / 2, $"Chariots won {chariotWins} of {chariotWars} wars.");
-        Assert.True(fortWars >= 10 && fortWins > fortWars / 2, $"Fortifications won {fortWins} of {fortWars} wars.");
+        double Share(int wins, int wars) => wars > 0 ? wins / (double)wars : double.NaN;
+        int cw = Polities.Sum(p => p.ChariotWars), cwins = Polities.Sum(p => p.ChariotWins);
+        int nw = Polities.Sum(p => p.NoChariotWars), nwins = Polities.Sum(p => p.NoChariotWins);
+        int fw = Polities.Sum(p => p.FortWars), fwins = Polities.Sum(p => p.FortWins);
+        int uw = Polities.Sum(p => p.NoFortWars), uwins = Polities.Sum(p => p.NoFortWins);
+        string text = $"Attackers won {cwins} of {cw} wars with chariots, {nwins} of {nw} without; defenders won {fwins} of {fw} with fortifications, {uwins} of {uw} without.";
+        Assert.True(cw >= 20 && nw >= 20 && Share(cwins, cw) > Share(nwins, nw), text);
+        Assert.True(fw >= 20 && uw >= 20 && Share(fwins, fw) > Share(uwins, uw), text);
     }
 
     [Fact]

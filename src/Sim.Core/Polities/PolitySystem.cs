@@ -1538,9 +1538,10 @@ public sealed class PolitySystem : ISimSystem
     /// <summary>The share of each good a ruled settlement gave its capital last year (0 for others).</summary>
     public double Taken(int cell) => _taken[cell];
 
-    // Each ruled settlement but the capital gives the capital a share of each good in its store:
-    // tributeShare times the polity's greed, less the farther it is (1 - cost / reach) and the
-    // more restless its people are (1 - unrest), at most maxTributeShare.
+    // Each ruled settlement but the capital gives the capital a share of each good people use
+    // (food, everyday goods and luxuries; not raw materials, which stay to be traded and worked)
+    // in its store: tributeShare times the polity's greed, less the farther it is (1 - cost /
+    // reach) and the more restless its people are (1 - unrest), at most maxTributeShare.
     private void TakeTribute(List<int>[] cellsOf)
     {
         foreach (int cell in _land)
@@ -1575,6 +1576,11 @@ public sealed class PolitySystem : ISimSystem
                 _taken[cell] = share;
                 for (int good = 0; good < _stockpiles.Goods.Count; good++)
                 {
+                    if (_stockpiles.Goods.Goods[good].NeedTier == NeedTier.None)
+                    {
+                        continue;
+                    }
+
                     double moved = _stockpiles.Transfer(cell, p.Capital, good, share * _stockpiles.Stock(cell, good));
                     grain += good == _grain ? moved : 0.0;
                 }

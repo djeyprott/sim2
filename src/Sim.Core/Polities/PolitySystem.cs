@@ -179,7 +179,7 @@ public sealed class PolityParameters
 
     public double CohesionFamine { get; set; } = 1.0;
 
-    public double CohesionStretch { get; set; } = 0.8;
+    public double CohesionStretch { get; set; } = 0.65;
 
     public double CohesionWar { get; set; } = 1.0;
 

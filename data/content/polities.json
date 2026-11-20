@@ -131,7 +131,7 @@
   // cohesionDefeat if it lost a war in the last defeatYears.
   "cohesionUnrest": 1.5,
   "cohesionFamine": 1.0,
-  "cohesionStretch": 0.8,
+  "cohesionStretch": 0.65,
   "cohesionWar": 1.0,
   "cohesionDefeat": 0.2,
   "defeatYears": 20,

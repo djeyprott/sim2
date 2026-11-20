@@ -174,7 +174,7 @@
       // at war or borders another; defenders of a cell where they are used count stronger.
       "name": "Fortifications", "colour": "#7a7a7a", "occupations": [ "Craftsman", "Farmer" ],
       "threatened": true,
-      "chance": 0.0003, "spread": 0.01,
+      "chance": 0.0003, "spread": 0.04,
       "settledYears": 3500,
       "effects": { "defence": 1.5 },
       "history": "3500 BCE, walled towns in Mesopotamia and the Levant (Jericho's wall is far older)"
@@ -184,7 +184,7 @@
       // stronger attacking over open lowland.
       "name": "Chariots", "colour": "#8b2500", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The wheel", "Horse riding" ], "animals": [ "Horses" ],
-      "chance": 0.0001, "spread": 0.02,
+      "chance": 0.0001, "spread": 0.05,
       "effects": { "attack": 1.5 },
       "history": "2000 BCE, Sintashta (southern Urals); across Southwest Asia by 1600 BCE"
     }

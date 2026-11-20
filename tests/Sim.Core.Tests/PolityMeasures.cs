@@ -40,6 +40,10 @@ public sealed class PolityResult
 
     public int StatesEver { get; set; }
 
+    public int StatesAtEnd { get; set; }
+
+    public int PolitiesAtEnd { get; set; }
+
     /// <summary>Median years a polity stayed a state (until it fell back, ended, or the run ended).</summary>
     public double MedianStateYears { get; set; }
 
@@ -93,7 +97,7 @@ public sealed class PolityResult
     public override string ToString() =>
         $"polities: first chiefdom year {FirstChiefdomYear}, first state year {FirstStateYear} at {FirstStatePlace} (river valley or plain {FirstStateInRiverValleyOrPlain}), "
         + $"states up to {StateRegionsKm:F0} km apart, {FormedWithoutFarming} formed without farming; largest {LargestKm2 / 1e6:F2} M km2, {100.0 * LargestPeopleShare:F1}% of people; "
-        + $"{StatesEver} states, median {MedianStateYears:F0} years as a state; {Collapses} collapses, {Conquests} conquests, {Wars} wars, {WarDeaths / 1e3:F0} k war deaths; "
+        + $"{PolitiesAtEnd} polities and {StatesAtEnd} states at the end, {StatesEver} states ever, median {MedianStateYears:F0} years as a state; {Collapses} collapses, {Conquests} conquests, {Wars} wars, {WarDeaths / 1e3:F0} k war deaths; "
         + $"peaceful border change {100.0 * MeanPeacefulChange:F2}% a year (at most {100.0 * MaxPeacefulChange:F2}%); "
         + $"stronger side won {StrongerWon} of {DecidedWars}; chariots won {ChariotWins} of {ChariotWars}, fortifications {FortWins} of {FortWars}; "
         + $"growth at war {WarGrowth:F4}, at peace {PeaceGrowth:F4}; capitals hold {CapitalGrainPerPerson:F2} grain a person, others {OtherGrainPerPerson:F2}; "
@@ -324,6 +328,8 @@ public sealed class PolityMeasures
             }
         }
 
+        r.StatesAtEnd = _polities.Standing().Count(p => p.Level == PolityLevel.State);
+        r.PolitiesAtEnd = _polities.Standing().Count;
         r.Collapses = events.Count(e => e.Kind == PolityEventKind.Split || e.Kind == PolityEventKind.Fell);
         r.Conquests = events.Count(e => e.Kind == PolityEventKind.Conquered);
         List<WarInfo> wars = _polities.Wars();

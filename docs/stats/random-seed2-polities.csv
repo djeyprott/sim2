@@ -1,15 +1,26 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
-0,"Naidule",-5784,,,,0.647,1.549,1.974,,2,2,1,East and southern Africa
-1,"Yehamner",-4763,,,,0.815,1.286,0.763,-4473,0,70,69,Europe
-2,"Kazil",-4343,,,,0.839,1.221,1.900,,5,7,6,East and southern Africa
-3,"Yerestrus",-4104,,,,1.580,0.408,0.671,,50,50,3,Europe
-4,"Breshras",-2898,-1223,conquered,,1.557,1.010,1.388,,2,3,0,Americas
-5,"Nazek",-2804,,,,1.395,1.206,0.747,,1,2,2,Americas
-6,"Tayizi",-2584,,,,1.397,0.917,1.418,,4,4,0,Americas
-7,"Gazum",-2306,,,,0.632,0.820,1.832,,0,4,4,Americas
-8,"Thihousou",-2197,,,,1.710,0.885,1.171,,22,24,2,Europe
-9,"Tega",-1918,,,,0.924,1.017,1.820,,2,2,0,Europe
-10,"Reizuhush",-1622,-1615,conquered,,0.985,1.000,0.631,,0,1,0,Europe
-11,"Krudapouth",-1552,,,,0.885,1.309,1.037,,0,1,0,Europe
-12,"Gitreith",-1434,,,,1.209,0.832,0.992,,0,5,0,East and southern Africa
-13,"Stebo",-1231,,,,1.304,1.118,0.575,,0,1,1,Americas
+0,"Naidule",-5784,-4090,conquered,,0.647,1.549,1.974,,1,2,1,East and southern Africa
+1,"Thegath",-5010,,,,0.766,0.615,0.966,,11,12,10,Europe
+2,"Samai",-4857,-2165,conquered,,0.797,0.926,1.424,,4,22,7,East and southern Africa
+3,"Thashhu",-4484,,,,1.290,1.444,1.393,,22,32,20,East and southern Africa
+4,"Duther",-4414,,,,1.052,1.246,1.430,,24,31,17,Europe
+5,"Kaboth",-3902,,,,1.531,1.312,1.020,,9,12,11,Europe
+6,"Kuta",-3764,-3740,conquered,,0.859,1.720,1.324,,0,2,0,Europe
+7,"Gaizeihen",-3609,-3601,conquered,,0.893,0.783,1.517,,0,1,0,Europe
+8,"Alkres",-3596,-3557,conquered,,0.532,1.160,1.153,,0,3,0,Europe
+9,"Mourdae",-3269,-3208,conquered,,1.022,0.805,1.568,,0,4,0,Europe
+10,"Relith",-3238,,,,1.141,1.627,1.459,,3,23,9,Europe
+11,"Tibragis",-3186,-2400,conquered,,1.314,1.483,0.788,,5,9,3,Europe
+12,"Iryas",-3015,-2978,conquered,,0.795,1.627,1.618,,0,3,0,Europe
+13,"Erstouth",-2796,-2758,conquered,,0.984,1.676,0.593,,0,2,0,East and southern Africa
+14,"Negin",-2335,,,,1.147,0.867,1.569,,5,6,6,East and southern Africa
+15,"Shaizein",-2319,-2168,conquered,,1.725,0.884,1.254,,1,3,1,Europe
+16,"Moume",-2279,,,,2.037,0.587,0.757,,6,13,4,East and southern Africa
+17,"Pounaibaith",-2265,-2260,conquered,,0.979,0.789,1.543,,0,1,0,Europe
+18,"Trastrok",-1934,,,,1.851,0.786,0.797,,2,2,2,Europe
+19,"Memlish",-1545,,,,0.795,0.802,1.105,,1,1,1,Americas
+20,"Shavoth",-1545,-1528,conquered,,1.221,1.035,1.078,,0,3,0,Europe
+21,"Keishreizath",-1154,,,,1.005,1.699,0.465,,0,0,0,Americas
+22,"Samai",-1135,,,,1.503,1.574,1.154,,2,3,1,East and southern Africa
+23,"Yairal",-1115,,,,0.640,0.911,0.755,,0,1,0,Americas
+24,"Katersta",-1008,,,,0.912,1.548,1.749,,0,1,0,Europe

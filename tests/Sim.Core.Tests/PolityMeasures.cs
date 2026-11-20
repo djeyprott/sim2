@@ -75,6 +75,9 @@ public sealed class PolityResult
 
     public int NoFortWins { get; set; }
 
+    /// <summary>Each decided war: attacker strength over defender strength at the start (neither counts chariots or walls), whether the attacker used chariots and the defender's capital fortifications, and whether the attacker won.</summary>
+    public List<(double Ratio, bool Chariots, bool Walls, bool AttackerWon)> DecidedWarList { get; } = new List<(double, bool, bool, bool)>();
+
     public double WarDeaths { get; set; }
 
     /// <summary>Growth of the people in cells a polity ruled all year, pooled over polity-years at war and at peace.</summary>
@@ -129,8 +132,8 @@ public sealed class PolityMeasures
     private readonly HashSet<int> _seen = new HashSet<int>();
     private readonly Dictionary<int, int> _years = new Dictionary<int, int>();
     private readonly Dictionary<int, int> _splitsBefore = new Dictionary<int, int>();
-    private readonly Dictionary<int, (bool StrongerIsAttacker, bool Even, bool ChariotsA, bool ChariotsD, bool FortsA, bool FortsD)> _warStarts =
-        new Dictionary<int, (bool, bool, bool, bool, bool, bool)>();
+    private readonly Dictionary<int, (bool StrongerIsAttacker, bool Even, bool ChariotsA, bool ChariotsD, bool FortsA, bool FortsD, double Ratio)> _warStarts =
+        new Dictionary<int, (bool, bool, bool, bool, bool, bool, double)>();
     private readonly List<double> _peacefulChanges = new List<double>();
     private readonly HashSet<int> _atWarThisYear = new HashSet<int>();
 
@@ -182,7 +185,7 @@ public sealed class PolityMeasures
                 bool chariotsD = _polities.IsStanding(w.Defender) && _polities.AttackFactor(w.Defender) > 1.0;
                 bool fortsA = _polities.IsStanding(w.Attacker) && _polities.DefenceFactor(_polities.Info(w.Attacker).Capital) > 1.0;
                 bool fortsD = _polities.IsStanding(w.Defender) && _polities.DefenceFactor(_polities.Info(w.Defender).Capital) > 1.0;
-                _warStarts[w.Id] = (a > d, a == d, chariotsA, chariotsD, fortsA, fortsD);
+                _warStarts[w.Id] = (a > d, a == d, chariotsA, chariotsD, fortsA, fortsD, d > 0.0 ? a / d : double.PositiveInfinity);
             }
         }
 
@@ -378,6 +381,7 @@ public sealed class PolityMeasures
             }
 
             bool attackerWon = w.Winner == w.Attacker;
+            r.DecidedWarList.Add((start.Ratio, start.ChariotsA, start.FortsD, attackerWon));
             if (!start.Even)
             {
                 r.DecidedWars++;

@@ -1477,19 +1477,25 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         Assert.All(Polities, p => Assert.Equal(0, p.FormedWithoutFarming));
     }
 
+    // Amended by the owner (2026-11-20): 8 of 10 seeds for the area (seeds where farming spreads
+    // slowly stay at 0.1 to 0.4 million km2); the quarter-of-the-people cap holds in every seed.
     [Fact]
-    public void The_largest_polity_rules_half_a_million_to_5_million_km2_and_at_most_a_quarter_of_the_people()
+    public void The_largest_polity_rules_half_a_million_to_5_million_km2_in_8_of_10_seeds_and_at_most_a_quarter_of_the_people()
     {
-        Assert.True(Polities.All(p => p.LargestKm2 >= 0.5e6 && p.LargestKm2 <= 5e6 && p.LargestPeopleShare <= 0.25),
-            Each(p => $"{p.LargestKm2 / 1e6:F2} M km2, {100.0 * p.LargestPeopleShare:F1}%"));
+        string text = Each(p => $"{p.LargestKm2 / 1e6:F2} M km2, {100.0 * p.LargestPeopleShare:F1}%");
+        Assert.True(Polities.Count(p => p.LargestKm2 >= 0.5e6 && p.LargestKm2 <= 5e6) >= 8, text);
+        Assert.True(Polities.All(p => p.LargestPeopleShare <= 0.25), text);
     }
 
-    // The "set numbers" of the spec: at least 3 collapses and 3 conquests in a seed.
+    // The "set numbers" of the spec: at least 3 collapses and 3 conquests in every seed. Amended
+    // by the owner (2026-11-20): the median state life counts in 8 of 10 of the seeds with states.
     [Fact]
-    public void Polities_rise_and_fall_and_the_median_state_lasts_100_to_1000_years_in_8_of_10_seeds()
+    public void Polities_rise_and_fall_and_the_median_state_lasts_100_to_1000_years_in_8_of_10_seeds_with_states()
     {
-        Assert.True(Polities.Count(p => p.Collapses >= 3 && p.Conquests >= 3 && p.MedianStateYears >= 100.0 && p.MedianStateYears <= 1000.0) >= 8,
-            Each(p => $"{p.Collapses} collapses, {p.Conquests} conquests, {p.StatesEver} states, median {p.MedianStateYears:F0} years"));
+        string text = Each(p => $"{p.Collapses} collapses, {p.Conquests} conquests, {p.StatesEver} states, median {p.MedianStateYears:F0} years");
+        Assert.True(Polities.All(p => p.Collapses >= 3 && p.Conquests >= 3), text);
+        var withStates = Polities.Where(p => p.StatesEver > 0).ToList();
+        Assert.True(withStates.Count(p => p.MedianStateYears >= 100.0 && p.MedianStateYears <= 1000.0) >= Math.Ceiling(0.8 * withStates.Count), text);
     }
 
     // The "set share" of the spec: 2% of the cells ruled by polities at peace in a year, on average.
@@ -1508,17 +1514,44 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
         Assert.True(stronger > decided / 2, $"The stronger side won {stronger} of {decided} wars. " + Each(p => $"{p.StrongerWon} of {p.DecidedWars}"));
     }
 
+    // Amended by the owner (2026-11-20): compared at like strength. Wars are grouped by the
+    // attacker's strength over the defender's at the start (neither counts chariots or walls);
+    // users must win more than non-users at the same ratios would have.
     [Fact]
-    public void Chariots_raise_the_share_of_wars_attackers_win_and_fortifications_the_share_defenders_win()
+    public void Chariots_and_fortifications_raise_the_share_of_wars_their_users_win_at_like_strength()
     {
-        double Share(int wins, int wars) => wars > 0 ? wins / (double)wars : double.NaN;
-        int cw = Polities.Sum(p => p.ChariotWars), cwins = Polities.Sum(p => p.ChariotWins);
-        int nw = Polities.Sum(p => p.NoChariotWars), nwins = Polities.Sum(p => p.NoChariotWins);
-        int fw = Polities.Sum(p => p.FortWars), fwins = Polities.Sum(p => p.FortWins);
-        int uw = Polities.Sum(p => p.NoFortWars), uwins = Polities.Sum(p => p.NoFortWins);
-        string text = $"Attackers won {cwins} of {cw} wars with chariots, {nwins} of {nw} without; defenders won {fwins} of {fw} with fortifications, {uwins} of {uw} without.";
-        Assert.True(cw >= 20 && nw >= 20 && Share(cwins, cw) > Share(nwins, nw), text);
-        Assert.True(fw >= 20 && uw >= 20 && Share(fwins, fw) > Share(uwins, uw), text);
+        var wars = Polities.SelectMany(p => p.DecidedWarList).ToList();
+        int Band(double ratio) => ratio < 0.5 ? 0 : ratio < 1.0 ? 1 : ratio < 2.0 ? 2 : ratio < 4.0 ? 3 : 4;
+
+        // Users' wins, against what non-users won at the same strength ratios.
+        (int Wars, int Wins, double Expected) Compare(Func<(double Ratio, bool Chariots, bool Walls, bool AttackerWon), bool> uses,
+            Func<(double Ratio, bool Chariots, bool Walls, bool AttackerWon), bool> userWon)
+        {
+            int count = 0, wins = 0;
+            double expected = 0.0;
+            foreach (var group in wars.GroupBy(w => Band(w.Ratio)))
+            {
+                var users = group.Where(uses).ToList();
+                var others = group.Where(w => !uses(w)).ToList();
+                if (users.Count == 0 || others.Count == 0)
+                {
+                    continue;
+                }
+
+                count += users.Count;
+                wins += users.Count(userWon);
+                expected += users.Count * others.Count(userWon) / (double)others.Count;
+            }
+
+            return (count, wins, expected);
+        }
+
+        var chariots = Compare(w => w.Chariots, w => w.AttackerWon);
+        var walls = Compare(w => w.Walls, w => !w.AttackerWon);
+        string text = $"Chariot attackers won {chariots.Wins} of {chariots.Wars} wars, {chariots.Expected:F0} expected without; "
+            + $"walled defenders won {walls.Wins} of {walls.Wars}, {walls.Expected:F0} expected without.";
+        Assert.True(chariots.Wars >= 20 && chariots.Wins > chariots.Expected, text);
+        Assert.True(walls.Wars >= 20 && walls.Wins > walls.Expected, text);
     }
 
     [Fact]

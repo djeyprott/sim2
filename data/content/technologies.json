@@ -176,7 +176,7 @@
       "threatened": true,
       "chance": 0.0003, "spread": 0.04,
       "settledYears": 3500,
-      "effects": { "defence": 1.5 },
+      "effects": { "defence": 2.0 },
       "history": "3500 BCE, walled towns in Mesopotamia and the Levant (Jericho's wall is far older)"
     },
     {

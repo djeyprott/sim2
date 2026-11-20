@@ -179,7 +179,7 @@ public sealed class PolityParameters
 
     public double CohesionFamine { get; set; } = 1.0;
 
-    public double CohesionStretch { get; set; } = 0.5;
+    public double CohesionStretch { get; set; } = 0.8;
 
     public double CohesionWar { get; set; } = 1.0;
 
@@ -1231,10 +1231,7 @@ public sealed class PolitySystem : ISimSystem
                 // Only land within the taker's reach can be taken; the holder fights at least at minDistanceFactor.
                 double attack = takerStrength * nearTaker[cell] * (_map!.Terrain(cell) == TerrainClass.Lowland ? CapitalFactor(taker, _attack) : 1.0);
                 double defend = holderStrength * Math.Max(_parameters.MinDistanceFactor, nearHolder[cell]) + _parameters.MilitiaShare * people;
-                if (_settlementPlusOne[cell] > 0 && _technology != null)
-                {
-                    defend *= _technology.CellFactor(cell, _defence);
-                }
+                defend *= WallsFactor(cell, holder);
 
                 double deaths = KillShare(cell, _parameters.CivilianLoss);
                 AddDeaths(war, holder, deaths);
@@ -1418,6 +1415,27 @@ public sealed class PolitySystem : ISimSystem
         int capital = Info(polity).Capital;
         return (_copperWeapons >= 0 ? _stockpiles.Stock(capital, _copperWeapons) : 0.0)
             + (_bronzeWeapons >= 0 ? 2.0 * _stockpiles.Stock(capital, _bronzeWeapons) : 0.0);
+    }
+
+    // Walls: the strongest fortification factor of a settlement the holder rules in the cell or
+    // next to it (a walled town shelters the country around it), or 1.
+    private double WallsFactor(int cell, int holder)
+    {
+        if (_technology == null || _defence.Length == 0)
+        {
+            return 1.0;
+        }
+
+        double best = _settlementPlusOne[cell] > 0 ? _technology.CellFactor(cell, _defence) : 1.0;
+        foreach (int other in _map!.Grid.Neighbours(cell))
+        {
+            if (_settlementPlusOne[other] > 0 && RulerOf(other) == holder)
+            {
+                best = Math.Max(best, _technology.CellFactor(other, _defence));
+            }
+        }
+
+        return best;
     }
 
     /// <summary>How much stronger a polity attacks on open lowland for the chariots its capital uses (1: none).</summary>

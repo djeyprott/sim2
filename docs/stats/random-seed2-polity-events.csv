@@ -1,357 +1,299 @@
 event,polity_id,polity,other_id,other,cell,latitude,longitude,region,year,date,amount
 founded,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5784,January 5784 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5703,January 5703 BCE,35
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5667,January 5667 BCE,22
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5613,January 5613 BCE,34
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5415,January 5415 BCE,45
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5287,January 5287 BCE,44
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5146,January 5146 BCE,33
-founded,1,"Thegath",,,11120,52.53,11.54,Europe,-5010,January 5010 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4924,January 4924 BCE,40
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-4909,January 4909 BCE,60
-founded,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-4857,January 4857 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4815,January 4815 BCE,39
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4789,January 4789 BCE,20
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4739,January 4739 BCE,19
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-4615,January 4615 BCE,18
-war,0,"Naidule",2,"Samai",163319,-29.09,18.91,East and southern Africa,-4595,January 4595 BCE,0
-peace,0,"Naidule",2,"Samai",163319,-29.09,18.91,East and southern Africa,-4581,January 4581 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4526,January 4526 BCE,37
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4486,January 4486 BCE,28
-founded,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-4484,January 4484 BCE,0
-war,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4477,January 4477 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4467,January 4467 BCE,0
-war,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4447,January 4447 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4443,January 4443 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4441,January 4441 BCE,11
-war,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4422,January 4422 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4415,January 4415 BCE,0
-founded,4,"Duther",,,10434,50.27,15.63,Europe,-4414,January 4414 BCE,0
-war,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-4413,January 4413 BCE,0
-peace,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-4404,January 4404 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-4400,January 4400 BCE,23
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4306,January 4306 BCE,20
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-4256,January 4256 BCE,13
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-4252,January 4252 BCE,0
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-4246,January 4246 BCE,4
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-4240,January 4240 BCE,0
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-4209,January 4209 BCE,62
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-4174,January 4174 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-4166,January 4166 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-4157,January 4157 BCE,33
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4137,January 4137 BCE,28
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4109,January 4109 BCE,19
-war,3,"Thashhu",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-4100,January 4100 BCE,0
-conquered,0,"Naidule",3,"Thashhu",3616,-29.72,22.55,East and southern Africa,-4090,January 4090 BCE,7
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3997,January 3997 BCE,0
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-3986,January 3986 BCE,13
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3983,January 3983 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3983,January 3983 BCE,15
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-3980,January 3980 BCE,66
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-3964,January 3964 BCE,4
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3936,January 3936 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3929,January 3929 BCE,0
-founded,5,"Kaboth",,,10822,52.63,20.83,Europe,-3902,January 3902 BCE,0
-founded,6,"Kuta",,,10532,50.92,17.24,Europe,-3764,January 3764 BCE,0
-war,5,"Kaboth",6,"Kuta",10532,50.92,17.24,Europe,-3762,January 3762 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3759,January 3759 BCE,68
-peace,5,"Kaboth",6,"Kuta",10532,50.92,17.24,Europe,-3748,January 3748 BCE,0
-war,4,"Duther",6,"Kuta",10532,50.92,17.24,Europe,-3748,January 3748 BCE,0
-split,6,"Kuta",,,10532,50.92,17.24,Europe,-3748,January 3748 BCE,8
-conquered,6,"Kuta",4,"Duther",10532,50.92,17.24,Europe,-3740,January 3740 BCE,1
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3738,January 3738 BCE,16
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3690,January 3690 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-3676,January 3676 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3664,January 3664 BCE,9
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-3631,January 3631 BCE,67
-founded,7,"Gaizeihen",,,11117,52.91,13.76,Europe,-3609,January 3609 BCE,0
-war,1,"Thegath",7,"Gaizeihen",11117,52.91,13.76,Europe,-3602,January 3602 BCE,0
-conquered,7,"Gaizeihen",1,"Thegath",11117,52.91,13.76,Europe,-3601,January 3601 BCE,12
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3601,January 3601 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3598,January 3598 BCE,66
-founded,8,"Alkres",,,10426,51.02,21.45,Europe,-3596,January 3596 BCE,0
-war,5,"Kaboth",8,"Alkres",10426,51.02,21.45,Europe,-3594,January 3594 BCE,0
-peace,5,"Kaboth",8,"Alkres",10426,51.02,21.45,Europe,-3592,January 3592 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3587,January 3587 BCE,0
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-3577,January 3577 BCE,7
-war,4,"Duther",8,"Alkres",10426,51.02,21.45,Europe,-3576,January 3576 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3567,January 3567 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-3565,January 3565 BCE,38
-peace,4,"Duther",8,"Alkres",10426,51.02,21.45,Europe,-3562,January 3562 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3561,January 3561 BCE,0
-war,5,"Kaboth",8,"Alkres",10426,51.02,21.45,Europe,-3558,January 3558 BCE,0
-conquered,8,"Alkres",5,"Kaboth",10426,51.02,21.45,Europe,-3557,January 3557 BCE,30
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3535,January 3535 BCE,60
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3532,January 3532 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3520,January 3520 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3493,January 3493 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3486,January 3486 BCE,17
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3479,January 3479 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-3469,January 3469 BCE,32
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3469,January 3469 BCE,49
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3365,January 3365 BCE,54
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3361,January 3361 BCE,13
-split,4,"Duther",,,10434,50.27,15.63,Europe,-3348,January 3348 BCE,32
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3303,January 3303 BCE,13
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-3270,January 3270 BCE,64
-founded,9,"Mourdae",,,10830,51.82,14.80,Europe,-3269,January 3269 BCE,0
-war,4,"Duther",9,"Mourdae",10830,51.82,14.80,Europe,-3267,January 3267 BCE,0
-peace,4,"Duther",9,"Mourdae",10830,51.82,14.80,Europe,-3264,January 3264 BCE,0
-war,1,"Thegath",9,"Mourdae",10830,51.82,14.80,Europe,-3263,January 3263 BCE,0
-split,9,"Mourdae",,,10830,51.82,14.80,Europe,-3261,January 3261 BCE,3
-peace,1,"Thegath",9,"Mourdae",10830,51.82,14.80,Europe,-3258,January 3258 BCE,0
-founded,10,"Relith",,,9917,48.25,16.26,Europe,-3238,January 3238 BCE,0
-war,5,"Kaboth",9,"Mourdae",10830,51.82,14.80,Europe,-3233,January 3233 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3232,January 3232 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3231,January 3231 BCE,0
-peace,5,"Kaboth",9,"Mourdae",10830,51.82,14.80,Europe,-3219,January 3219 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3218,January 3218 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-3218,January 3218 BCE,32
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3217,January 3217 BCE,0
-war,1,"Thegath",9,"Mourdae",10830,51.82,14.80,Europe,-3212,January 3212 BCE,0
-split,9,"Mourdae",,,10830,51.82,14.80,Europe,-3210,January 3210 BCE,14
-conquered,9,"Mourdae",1,"Thegath",10830,51.82,14.80,Europe,-3208,January 3208 BCE,12
-war,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-3208,January 3208 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3207,January 3207 BCE,66
-peace,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-3202,January 3202 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3195,January 3195 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-3193,January 3193 BCE,28
-founded,11,"Tibragis",,,10632,51.26,16.68,Europe,-3186,January 3186 BCE,0
-war,1,"Thegath",11,"Tibragis",10632,51.26,16.68,Europe,-3186,January 3186 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3181,January 3181 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-3176,January 3176 BCE,7
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-3174,January 3174 BCE,13
-peace,1,"Thegath",11,"Tibragis",10632,51.26,16.68,Europe,-3173,January 3173 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-3125,January 3125 BCE,38
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3122,January 3122 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3108,January 3108 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3093,January 3093 BCE,54
-split,10,"Relith",,,9917,48.25,16.26,Europe,-3091,January 3091 BCE,33
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3087,January 3087 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-3083,January 3083 BCE,0
-war,11,"Tibragis",5,"Kaboth",10822,52.63,20.83,Europe,-3075,January 3075 BCE,0
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-3073,January 3073 BCE,0
-peace,2,"Samai",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-3069,January 3069 BCE,0
-peace,11,"Tibragis",5,"Kaboth",10822,52.63,20.83,Europe,-3061,January 3061 BCE,0
-war,11,"Tibragis",10,"Relith",9917,48.25,16.26,Europe,-3058,January 3058 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3055,January 3055 BCE,41
-peace,11,"Tibragis",10,"Relith",9917,48.25,16.26,Europe,-3044,January 3044 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3038,January 3038 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-3027,January 3027 BCE,32
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-3024,January 3024 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-3018,January 3018 BCE,54
-founded,12,"Iryas",,,11016,53.24,18.94,Europe,-3015,January 3015 BCE,0
-war,5,"Kaboth",12,"Iryas",11016,53.24,18.94,Europe,-3014,January 3014 BCE,0
-peace,5,"Kaboth",12,"Iryas",11016,53.24,18.94,Europe,-3008,January 3008 BCE,0
-war,11,"Tibragis",12,"Iryas",11016,53.24,18.94,Europe,-3006,January 3006 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-3001,January 3001 BCE,0
-peace,11,"Tibragis",12,"Iryas",11016,53.24,18.94,Europe,-2992,January 2992 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2987,January 2987 BCE,0
-war,5,"Kaboth",12,"Iryas",11016,53.24,18.94,Europe,-2980,January 2980 BCE,0
-conquered,12,"Iryas",5,"Kaboth",11016,53.24,18.94,Europe,-2978,January 2978 BCE,25
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2973,January 2973 BCE,19
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2956,January 2956 BCE,0
-split,11,"Tibragis",,,10632,51.26,16.68,Europe,-2955,January 2955 BCE,36
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2942,January 2942 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2935,January 2935 BCE,24
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2926,January 2926 BCE,57
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-2920,January 2920 BCE,11
-war,11,"Tibragis",5,"Kaboth",10822,52.63,20.83,Europe,-2900,January 2900 BCE,0
-peace,5,"Kaboth",11,"Tibragis",10632,51.26,16.68,Europe,-2886,January 2886 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2849,January 2849 BCE,50
-split,11,"Tibragis",,,10632,51.26,16.68,Europe,-2844,January 2844 BCE,24
-war,4,"Duther",11,"Tibragis",10632,51.26,16.68,Europe,-2838,January 2838 BCE,0
-peace,4,"Duther",11,"Tibragis",10632,51.26,16.68,Europe,-2837,January 2837 BCE,0
-war,1,"Thegath",11,"Tibragis",10632,51.26,16.68,Europe,-2834,January 2834 BCE,0
-peace,1,"Thegath",11,"Tibragis",10632,51.26,16.68,Europe,-2820,January 2820 BCE,0
-founded,13,"Erstouth",,,162369,-29.18,23.24,East and southern Africa,-2796,January 2796 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2791,January 2791 BCE,41
-split,11,"Tibragis",,,10632,51.26,16.68,Europe,-2790,January 2790 BCE,26
-war,3,"Thashhu",13,"Erstouth",162369,-29.18,23.24,East and southern Africa,-2789,January 2789 BCE,0
-peace,3,"Thashhu",13,"Erstouth",162369,-29.18,23.24,East and southern Africa,-2786,January 2786 BCE,0
-war,3,"Thashhu",13,"Erstouth",162369,-29.18,23.24,East and southern Africa,-2759,January 2759 BCE,0
-conquered,13,"Erstouth",3,"Thashhu",162369,-29.18,23.24,East and southern Africa,-2758,January 2758 BCE,7
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2741,January 2741 BCE,22
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2738,January 2738 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2728,January 2728 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2686,January 2686 BCE,26
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2686,January 2686 BCE,69
-war,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2679,January 2679 BCE,0
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2675,January 2675 BCE,0
-war,11,"Tibragis",5,"Kaboth",10822,52.63,20.83,Europe,-2670,January 2670 BCE,0
-peace,5,"Kaboth",11,"Tibragis",10632,51.26,16.68,Europe,-2656,January 2656 BCE,0
-split,11,"Tibragis",,,10632,51.26,16.68,Europe,-2644,January 2644 BCE,18
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-2479,January 2479 BCE,65
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2471,January 2471 BCE,65
-war,4,"Duther",1,"Thegath",11120,52.53,11.54,Europe,-2466,January 2466 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2465,January 2465 BCE,47
-peace,4,"Duther",1,"Thegath",11120,52.53,11.54,Europe,-2452,January 2452 BCE,0
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-2443,January 2443 BCE,38
-split,11,"Tibragis",,,10632,51.26,16.68,Europe,-2410,January 2410 BCE,33
-war,4,"Duther",11,"Tibragis",10632,51.26,16.68,Europe,-2403,January 2403 BCE,0
-conquered,11,"Tibragis",4,"Duther",10632,51.26,16.68,Europe,-2400,January 2400 BCE,9
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-2352,January 2352 BCE,11
-founded,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-2335,January 2335 BCE,0
-war,3,"Thashhu",14,"Negin",162123,-28.64,23.93,East and southern Africa,-2330,January 2330 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2326,January 2326 BCE,38
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2325,January 2325 BCE,65
-founded,15,"Shaizein",,,10921,52.80,18.73,Europe,-2319,January 2319 BCE,0
-war,5,"Kaboth",15,"Shaizein",10921,52.80,18.73,Europe,-2318,January 2318 BCE,0
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-2316,January 2316 BCE,0
-peace,5,"Kaboth",15,"Shaizein",10921,52.80,18.73,Europe,-2316,January 2316 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2311,January 2311 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-2309,January 2309 BCE,18
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2305,January 2305 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2298,January 2298 BCE,35
-founded,16,"Moume",,,163660,-28.54,16.96,East and southern Africa,-2279,January 2279 BCE,0
-war,2,"Samai",16,"Moume",163660,-28.54,16.96,East and southern Africa,-2279,January 2279 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2278,January 2278 BCE,29
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2272,January 2272 BCE,29
-peace,2,"Samai",16,"Moume",163660,-28.54,16.96,East and southern Africa,-2270,January 2270 BCE,0
-founded,17,"Pounaibaith",,,11209,53.48,14.67,Europe,-2265,January 2265 BCE,0
-war,1,"Thegath",17,"Pounaibaith",11209,53.48,14.67,Europe,-2264,January 2264 BCE,0
-conquered,17,"Pounaibaith",1,"Thegath",11209,53.48,14.67,Europe,-2260,January 2260 BCE,6
-war,16,"Moume",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2241,January 2241 BCE,0
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-2237,January 2237 BCE,3
-peace,16,"Moume",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2227,January 2227 BCE,0
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2222,January 2222 BCE,0
-split,2,"Samai",,,163319,-29.09,18.91,East and southern Africa,-2215,January 2215 BCE,1
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2215,January 2215 BCE,41
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2209,January 2209 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2208,January 2208 BCE,0
-war,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-2207,January 2207 BCE,0
-war,16,"Moume",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2206,January 2206 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2195,January 2195 BCE,0
-war,15,"Shaizein",4,"Duther",10434,50.27,15.63,Europe,-2195,January 2195 BCE,0
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-2193,January 2193 BCE,0
-peace,16,"Moume",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2193,January 2193 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2190,January 2190 BCE,29
-war,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2186,January 2186 BCE,0
-peace,15,"Shaizein",4,"Duther",10434,50.27,15.63,Europe,-2181,January 2181 BCE,0
-war,5,"Kaboth",15,"Shaizein",10921,52.80,18.73,Europe,-2174,January 2174 BCE,0
-peace,3,"Thashhu",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2172,January 2172 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2171,January 2171 BCE,34
-conquered,15,"Shaizein",5,"Kaboth",10921,52.80,18.73,Europe,-2168,January 2168 BCE,41
-war,16,"Moume",2,"Samai",163319,-29.09,18.91,East and southern Africa,-2167,January 2167 BCE,0
-conquered,2,"Samai",16,"Moume",163319,-29.09,18.91,East and southern Africa,-2165,January 2165 BCE,10
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2164,January 2164 BCE,23
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2136,January 2136 BCE,39
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2129,January 2129 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-2125,January 2125 BCE,8
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2115,January 2115 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2106,January 2106 BCE,26
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-2101,January 2101 BCE,63
-split,10,"Relith",,,9917,48.25,16.26,Europe,-2100,January 2100 BCE,36
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-2077,January 2077 BCE,0
-war,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-2070,January 2070 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-2069,January 2069 BCE,71
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2063,January 2063 BCE,0
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-2056,January 2056 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2051,January 2051 BCE,26
-split,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-2051,January 2051 BCE,65
-war,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2039,January 2039 BCE,0
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-2025,January 2025 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-2019,January 2019 BCE,19
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1979,January 1979 BCE,64
-founded,18,"Trastrok",,,8800,44.79,22.48,Europe,-1934,January 1934 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1927,January 1927 BCE,45
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1902,January 1902 BCE,55
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1879,January 1879 BCE,43
-war,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1856,January 1856 BCE,0
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1842,January 1842 BCE,0
-split,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-1825,January 1825 BCE,54
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1798,January 1798 BCE,36
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1794,January 1794 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1783,January 1783 BCE,0
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1748,January 1748 BCE,46
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1724,January 1724 BCE,31
-war,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1718,January 1718 BCE,0
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1704,January 1704 BCE,0
-war,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1696,January 1696 BCE,0
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-1690,January 1690 BCE,61
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1689,January 1689 BCE,16
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1682,January 1682 BCE,0
-war,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1656,January 1656 BCE,0
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1642,January 1642 BCE,0
-war,16,"Moume",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1617,January 1617 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1617,January 1617 BCE,68
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1603,January 1603 BCE,0
-war,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1602,January 1602 BCE,0
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1588,January 1588 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1583,January 1583 BCE,46
-war,16,"Moume",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1578,January 1578 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1574,January 1574 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1571,January 1571 BCE,26
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1566,January 1566 BCE,12
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1564,January 1564 BCE,0
-war,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1563,January 1563 BCE,0
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1560,January 1560 BCE,0
-split,16,"Moume",,,163660,-28.54,16.96,East and southern Africa,-1560,January 1560 BCE,9
-peace,14,"Negin",3,"Thashhu",162734,-28.70,21.30,East and southern Africa,-1549,January 1549 BCE,0
-founded,19,"Memlish",,,150363,-16.58,-52.97,Americas,-1545,January 1545 BCE,0
-founded,20,"Shavoth",,,10829,51.94,15.54,Europe,-1545,January 1545 BCE,0
-war,1,"Thegath",20,"Shavoth",10829,51.94,15.54,Europe,-1544,January 1544 BCE,0
-peace,1,"Thegath",20,"Shavoth",10829,51.94,15.54,Europe,-1543,January 1543 BCE,0
-war,5,"Kaboth",20,"Shavoth",10829,51.94,15.54,Europe,-1543,January 1543 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1536,January 1536 BCE,5
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1533,January 1533 BCE,50
-peace,5,"Kaboth",20,"Shavoth",10829,51.94,15.54,Europe,-1529,January 1529 BCE,0
-war,4,"Duther",20,"Shavoth",10829,51.94,15.54,Europe,-1529,January 1529 BCE,0
-conquered,20,"Shavoth",4,"Duther",10829,51.94,15.54,Europe,-1528,January 1528 BCE,2
-split,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-1512,January 1512 BCE,63
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1466,January 1466 BCE,64
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1449,January 1449 BCE,34
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1379,January 1379 BCE,13
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1355,January 1355 BCE,32
-split,1,"Thegath",,,11120,52.53,11.54,Europe,-1347,January 1347 BCE,63
-war,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-1333,January 1333 BCE,0
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-1320,January 1320 BCE,0
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1319,January 1319 BCE,42
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1310,January 1310 BCE,34
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1306,January 1306 BCE,15
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1300,January 1300 BCE,44
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1275,January 1275 BCE,0
-split,19,"Memlish",,,150363,-16.58,-52.97,Americas,-1268,January 1268 BCE,50
-peace,10,"Relith",4,"Duther",10434,50.27,15.63,Europe,-1261,January 1261 BCE,0
-war,18,"Trastrok",10,"Relith",9917,48.25,16.26,Europe,-1260,January 1260 BCE,0
-peace,18,"Trastrok",10,"Relith",9917,48.25,16.26,Europe,-1246,January 1246 BCE,0
-war,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1242,January 1242 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1237,January 1237 BCE,44
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1234,January 1234 BCE,0
-peace,3,"Thashhu",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1228,January 1228 BCE,0
-split,16,"Moume",,,163660,-28.54,16.96,East and southern Africa,-1222,January 1222 BCE,10
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1220,January 1220 BCE,0
-war,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-1220,January 1220 BCE,0
-peace,1,"Thegath",4,"Duther",10434,50.27,15.63,Europe,-1206,January 1206 BCE,0
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1195,January 1195 BCE,18
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1190,January 1190 BCE,72
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1186,January 1186 BCE,28
-split,19,"Memlish",,,150363,-16.58,-52.97,Americas,-1179,January 1179 BCE,37
-split,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-1172,January 1172 BCE,69
-split,3,"Thashhu",,,162734,-28.70,21.30,East and southern Africa,-1160,January 1160 BCE,20
-founded,21,"Keishreizath",,,150883,-14.53,-56.27,Americas,-1154,January 1154 BCE,0
-split,5,"Kaboth",,,10822,52.63,20.83,Europe,-1136,January 1136 BCE,51
-founded,22,"Samai",,,163319,-29.09,18.91,East and southern Africa,-1135,January 1135 BCE,0
-war,22,"Samai",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1129,January 1129 BCE,0
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1128,January 1128 BCE,40
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1120,January 1120 BCE,0
-peace,16,"Moume",22,"Samai",163319,-29.09,18.91,East and southern Africa,-1117,January 1117 BCE,0
-founded,23,"Yairal",,,150368,-14.68,-54.17,Americas,-1115,January 1115 BCE,0
-war,19,"Memlish",23,"Yairal",150368,-14.68,-54.17,Americas,-1114,January 1114 BCE,0
-split,18,"Trastrok",,,8800,44.79,22.48,Europe,-1111,January 1111 BCE,51
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1109,January 1109 BCE,22
-peace,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1108,January 1108 BCE,0
-peace,19,"Memlish",23,"Yairal",150368,-14.68,-54.17,Americas,-1100,January 1100 BCE,0
-split,14,"Negin",,,162123,-28.64,23.93,East and southern Africa,-1095,January 1095 BCE,58
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1092,January 1092 BCE,12
-split,21,"Keishreizath",,,150883,-14.53,-56.27,Americas,-1084,January 1084 BCE,32
-war,16,"Moume",22,"Samai",163319,-29.09,18.91,East and southern Africa,-1045,January 1045 BCE,0
-peace,22,"Samai",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1039,January 1039 BCE,0
-war,18,"Trastrok",10,"Relith",9917,48.25,16.26,Europe,-1034,January 1034 BCE,0
-peace,18,"Trastrok",10,"Relith",9917,48.25,16.26,Europe,-1020,January 1020 BCE,0
-war,4,"Duther",10,"Relith",9917,48.25,16.26,Europe,-1014,January 1014 BCE,0
-war,22,"Samai",16,"Moume",163660,-28.54,16.96,East and southern Africa,-1009,January 1009 BCE,0
-split,4,"Duther",,,10434,50.27,15.63,Europe,-1009,January 1009 BCE,26
-split,10,"Relith",,,9917,48.25,16.26,Europe,-1009,January 1009 BCE,37
-founded,24,"Katersta",,,10731,51.60,16.11,Europe,-1008,January 1008 BCE,0
-war,1,"Thegath",24,"Katersta",10731,51.60,16.11,Europe,-1001,January 1001 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5646,January 5646 BCE,37
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5526,January 5526 BCE,40
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-5291,January 5291 BCE,44
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4963,January 4963 BCE,44
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4843,January 4843 BCE,44
+founded,1,"Thupivoul",,,11026,52.08,11.42,Europe,-4804,January 4804 BCE,0
+founded,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-4793,January 4793 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4789,January 4789 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4775,January 4775 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4754,January 4754 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4742,January 4742 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4718,January 4718 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4709,January 4709 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4689,January 4689 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4677,January 4677 BCE,31
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4675,January 4675 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4637,January 4637 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4623,January 4623 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4599,January 4599 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4585,January 4585 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4557,January 4557 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-4548,January 4548 BCE,0
+founded,3,"Stupasaim",,,10333,49.82,15.48,Europe,-4424,January 4424 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-4417,January 4417 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-4403,January 4403 BCE,0
+founded,4,"Pounaibaith",,,11209,53.48,14.67,Europe,-4261,January 4261 BCE,0
+war,1,"Thupivoul",4,"Pounaibaith",11209,53.48,14.67,Europe,-4260,January 4260 BCE,0
+conquered,4,"Pounaibaith",1,"Thupivoul",11209,53.48,14.67,Europe,-4259,January 4259 BCE,4
+founded,5,"Tibragis",,,10632,51.26,16.68,Europe,-4083,January 4083 BCE,0
+war,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-4081,January 4081 BCE,0
+peace,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-4069,January 4069 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-4054,January 4054 BCE,32
+founded,6,"Yitosheik",,,11111,53.59,18.36,Europe,-4015,January 4015 BCE,0
+split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-4013,January 4013 BCE,21
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3580,January 3580 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3567,January 3567 BCE,0
+split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-3550,January 3550 BCE,9
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3543,January 3543 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3532,January 3532 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3511,January 3511 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3497,January 3497 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3175,January 3175 BCE,0
+split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-3166,January 3166 BCE,12
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3161,January 3161 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3150,January 3150 BCE,40
+founded,7,"Shethilesh",,,161988,15.46,-3.61,Sahel,-3060,January 3060 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2996,January 2996 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2982,January 2982 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2965,January 2965 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-2964,January 2964 BCE,31
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2961,January 2961 BCE,0
+peace,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2954,January 2954 BCE,0
+split,5,"Tibragis",,,10632,51.26,16.68,Europe,-2954,January 2954 BCE,34
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2947,January 2947 BCE,0
+founded,8,"Seipaizei",,,163661,-28.17,16.71,East and southern Africa,-2488,January 2488 BCE,0
+war,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2488,January 2488 BCE,0
+peace,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2478,January 2478 BCE,0
+war,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2458,January 2458 BCE,0
+peace,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2444,January 2444 BCE,0
+war,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2422,January 2422 BCE,0
+peace,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2415,January 2415 BCE,0
+founded,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-2410,January 2410 BCE,0
+war,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2391,January 2391 BCE,0
+peace,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2378,January 2378 BCE,0
+war,2,"Kazil",8,"Seipaizei",163661,-28.17,16.71,East and southern Africa,-2357,January 2357 BCE,0
+split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-2349,January 2349 BCE,15
+peace,8,"Seipaizei",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-2343,January 2343 BCE,0
+founded,10,"Stipeth",,,162853,-28.78,20.83,East and southern Africa,-2335,January 2335 BCE,0
+war,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-2325,January 2325 BCE,0
+peace,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-2313,January 2313 BCE,0
+founded,11,"Relith",,,9917,48.25,16.26,Europe,-2296,January 2296 BCE,0
+war,3,"Stupasaim",11,"Relith",9917,48.25,16.26,Europe,-2293,January 2293 BCE,0
+peace,3,"Stupasaim",11,"Relith",9917,48.25,16.26,Europe,-2287,January 2287 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2268,January 2268 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2254,January 2254 BCE,0
+war,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2254,January 2254 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-2250,January 2250 BCE,29
+peace,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2240,January 2240 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2237,January 2237 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2237,January 2237 BCE,0
+split,5,"Tibragis",,,10632,51.26,16.68,Europe,-2236,January 2236 BCE,35
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2223,January 2223 BCE,0
+peace,5,"Tibragis",6,"Yitosheik",11111,53.59,18.36,Europe,-2223,January 2223 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2221,January 2221 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2207,January 2207 BCE,0
+war,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2206,January 2206 BCE,0
+split,6,"Yitosheik",,,11111,53.59,18.36,Europe,-2206,January 2206 BCE,54
+split,1,"Thupivoul",,,11026,52.08,11.42,Europe,-2196,January 2196 BCE,59
+peace,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2192,January 2192 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2187,January 2187 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2184,January 2184 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2177,January 2177 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2176,January 2176 BCE,0
+peace,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2170,January 2170 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2162,January 2162 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2162,January 2162 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2148,January 2148 BCE,0
+war,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2148,January 2148 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2148,January 2148 BCE,0
+peace,1,"Thupivoul",5,"Tibragis",10632,51.26,16.68,Europe,-2134,January 2134 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2134,January 2134 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2134,January 2134 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2125,January 2125 BCE,0
+split,5,"Tibragis",,,10632,51.26,16.68,Europe,-2123,January 2123 BCE,36
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2120,January 2120 BCE,0
+founded,12,"Alkres",,,10426,51.02,21.45,Europe,-2117,January 2117 BCE,0
+peace,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-2111,January 2111 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2111,January 2111 BCE,0
+war,6,"Yitosheik",12,"Alkres",10426,51.02,21.45,Europe,-2110,January 2110 BCE,0
+peace,6,"Yitosheik",12,"Alkres",10426,51.02,21.45,Europe,-2103,January 2103 BCE,0
+founded,13,"Toukoth",,,11022,52.59,14.36,Europe,-2102,January 2102 BCE,0
+war,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-2100,January 2100 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2097,January 2097 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2094,January 2094 BCE,0
+peace,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-2090,January 2090 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2086,January 2086 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2076,January 2076 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2066,January 2066 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2065,January 2065 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-2059,January 2059 BCE,8
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2054,January 2054 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2047,January 2047 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2033,January 2033 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2032,January 2032 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-2018,January 2018 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2017,January 2017 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-2013,January 2013 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-2012,January 2012 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-1998,January 1998 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1988,January 1988 BCE,0
+split,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-1978,January 1978 BCE,68
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1974,January 1974 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-1974,January 1974 BCE,0
+war,13,"Toukoth",1,"Thupivoul",11026,52.08,11.42,Europe,-1968,January 1968 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-1961,January 1961 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1959,January 1959 BCE,0
+peace,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-1958,January 1958 BCE,0
+war,5,"Tibragis",1,"Thupivoul",11026,52.08,11.42,Europe,-1954,January 1954 BCE,0
+founded,14,"Douvu",,,160943,15.12,0.77,Sahel,-1950,January 1950 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1947,January 1947 BCE,0
+peace,5,"Tibragis",1,"Thupivoul",11026,52.08,11.42,Europe,-1940,January 1940 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1937,January 1937 BCE,0
+war,12,"Alkres",5,"Tibragis",10632,51.26,16.68,Europe,-1937,January 1937 BCE,0
+war,7,"Shethilesh",14,"Douvu",160943,15.12,0.77,Sahel,-1936,January 1936 BCE,0
+peace,12,"Alkres",5,"Tibragis",10632,51.26,16.68,Europe,-1925,January 1925 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1923,January 1923 BCE,0
+war,13,"Toukoth",1,"Thupivoul",11026,52.08,11.42,Europe,-1923,January 1923 BCE,0
+peace,7,"Shethilesh",14,"Douvu",160943,15.12,0.77,Sahel,-1922,January 1922 BCE,0
+war,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-1919,January 1919 BCE,0
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1912,January 1912 BCE,9
+peace,13,"Toukoth",1,"Thupivoul",11026,52.08,11.42,Europe,-1909,January 1909 BCE,0
+peace,5,"Tibragis",3,"Stupasaim",10333,49.82,15.48,Europe,-1905,January 1905 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-1905,January 1905 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1902,January 1902 BCE,0
+peace,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-1891,January 1891 BCE,0
+war,13,"Toukoth",5,"Tibragis",10632,51.26,16.68,Europe,-1891,January 1891 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1888,January 1888 BCE,0
+split,5,"Tibragis",,,10632,51.26,16.68,Europe,-1885,January 1885 BCE,24
+peace,13,"Toukoth",5,"Tibragis",10632,51.26,16.68,Europe,-1877,January 1877 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1873,January 1873 BCE,0
+war,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-1868,January 1868 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1859,January 1859 BCE,0
+peace,6,"Yitosheik",5,"Tibragis",10632,51.26,16.68,Europe,-1854,January 1854 BCE,0
+war,12,"Alkres",5,"Tibragis",10632,51.26,16.68,Europe,-1854,January 1854 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1851,January 1851 BCE,0
+peace,12,"Alkres",5,"Tibragis",10632,51.26,16.68,Europe,-1847,January 1847 BCE,0
+war,13,"Toukoth",5,"Tibragis",10632,51.26,16.68,Europe,-1843,January 1843 BCE,0
+split,5,"Tibragis",,,10632,51.26,16.68,Europe,-1839,January 1839 BCE,9
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1837,January 1837 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1834,January 1834 BCE,23
+conquered,5,"Tibragis",13,"Toukoth",10632,51.26,16.68,Europe,-1829,January 1829 BCE,12
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1828,January 1828 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1822,January 1822 BCE,0
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1817,January 1817 BCE,16
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1815,January 1815 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1805,January 1805 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1799,January 1799 BCE,0
+war,10,"Stipeth",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-1794,January 1794 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1785,January 1785 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1785,January 1785 BCE,0
+peace,2,"Kazil",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1780,January 1780 BCE,0
+war,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1776,January 1776 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1771,January 1771 BCE,0
+peace,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1762,January 1762 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1754,January 1754 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1742,January 1742 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1742,January 1742 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1728,January 1728 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1727,January 1727 BCE,0
+split,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-1716,January 1716 BCE,66
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1715,January 1715 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1714,January 1714 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1708,January 1708 BCE,15
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1700,January 1700 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1695,January 1695 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1681,January 1681 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1680,January 1680 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1668,January 1668 BCE,14
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1668,January 1668 BCE,21
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1666,January 1666 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1658,January 1658 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1648,January 1648 BCE,9
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1644,January 1644 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1639,January 1639 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1631,January 1631 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1624,January 1624 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1615,January 1615 BCE,16
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1610,January 1610 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1605,January 1605 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1591,January 1591 BCE,0
+war,12,"Alkres",13,"Toukoth",11022,52.59,14.36,Europe,-1591,January 1591 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1584,January 1584 BCE,0
+peace,13,"Toukoth",12,"Alkres",10426,51.02,21.45,Europe,-1577,January 1577 BCE,0
+war,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-1577,January 1577 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1575,January 1575 BCE,0
+peace,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-1567,January 1567 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1549,January 1549 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1535,January 1535 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1535,January 1535 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1521,January 1521 BCE,0
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1515,January 1515 BCE,26
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1511,January 1511 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1497,January 1497 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1493,January 1493 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1488,January 1488 BCE,19
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1479,January 1479 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1479,January 1479 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1465,January 1465 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1465,January 1465 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1451,January 1451 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1447,January 1447 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1435,January 1435 BCE,19
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1433,January 1433 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1419,January 1419 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1405,January 1405 BCE,0
+war,6,"Yitosheik",13,"Toukoth",11022,52.59,14.36,Europe,-1405,January 1405 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1402,January 1402 BCE,0
+peace,6,"Yitosheik",13,"Toukoth",11022,52.59,14.36,Europe,-1391,January 1391 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1388,January 1388 BCE,0
+war,12,"Alkres",13,"Toukoth",11022,52.59,14.36,Europe,-1387,January 1387 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1383,January 1383 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1378,January 1378 BCE,13
+peace,12,"Alkres",13,"Toukoth",11022,52.59,14.36,Europe,-1373,January 1373 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1373,January 1373 BCE,0
+war,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1372,January 1372 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-1369,January 1369 BCE,32
+peace,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1366,January 1366 BCE,0
+war,6,"Yitosheik",13,"Toukoth",11022,52.59,14.36,Europe,-1366,January 1366 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1364,January 1364 BCE,0
+split,13,"Toukoth",,,11022,52.59,14.36,Europe,-1362,January 1362 BCE,30
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1360,January 1360 BCE,17
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1356,January 1356 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1353,January 1353 BCE,0
+peace,13,"Toukoth",6,"Yitosheik",11111,53.59,18.36,Europe,-1352,January 1352 BCE,0
+split,6,"Yitosheik",,,11111,53.59,18.36,Europe,-1352,January 1352 BCE,45
+war,12,"Alkres",13,"Toukoth",11022,52.59,14.36,Europe,-1351,January 1351 BCE,0
+war,0,"Naidule",10,"Stipeth",162853,-28.78,20.83,East and southern Africa,-1346,January 1346 BCE,0
+conquered,10,"Stipeth",0,"Naidule",162853,-28.78,20.83,East and southern Africa,-1341,January 1341 BCE,9
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1339,January 1339 BCE,0
+peace,12,"Alkres",13,"Toukoth",11022,52.59,14.36,Europe,-1337,January 1337 BCE,0
+war,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-1337,January 1337 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1332,January 1332 BCE,0
+peace,1,"Thupivoul",13,"Toukoth",11022,52.59,14.36,Europe,-1323,January 1323 BCE,0
+split,13,"Toukoth",,,11022,52.59,14.36,Europe,-1320,January 1320 BCE,26
+peace,3,"Stupasaim",11,"Relith",9917,48.25,16.26,Europe,-1318,January 1318 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1314,January 1314 BCE,0
+war,6,"Yitosheik",13,"Toukoth",11022,52.59,14.36,Europe,-1313,January 1313 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1300,January 1300 BCE,0
+peace,6,"Yitosheik",13,"Toukoth",11022,52.59,14.36,Europe,-1299,January 1299 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1298,January 1298 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1287,January 1287 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1279,January 1279 BCE,0
+split,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-1278,January 1278 BCE,54
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1276,January 1276 BCE,20
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1265,January 1265 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1263,January 1263 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1252,January 1252 BCE,0
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1252,January 1252 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1249,January 1249 BCE,18
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1238,January 1238 BCE,0
+split,3,"Stupasaim",,,10333,49.82,15.48,Europe,-1238,January 1238 BCE,16
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1221,January 1221 BCE,0
+peace,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1207,January 1207 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1202,January 1202 BCE,0
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-1188,January 1188 BCE,0
+split,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-1187,January 1187 BCE,59
+war,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1171,January 1171 BCE,0
+peace,11,"Relith",3,"Stupasaim",10333,49.82,15.48,Europe,-1162,January 1162 BCE,0
+war,13,"Toukoth",3,"Stupasaim",10333,49.82,15.48,Europe,-1160,January 1160 BCE,0
+split,14,"Douvu",,,160943,15.12,0.77,Sahel,-1148,January 1148 BCE,28
+peace,3,"Stupasaim",13,"Toukoth",11022,52.59,14.36,Europe,-1146,January 1146 BCE,0
+founded,15,"Kreyaibush",,,161082,16.89,-1.04,Sahel,-1114,January 1114 BCE,0
+war,14,"Douvu",15,"Kreyaibush",161082,16.89,-1.04,Sahel,-1109,January 1109 BCE,0
+split,9,"Breitrikrun",,,66587,12.87,32.81,Southwest Asia,-1105,January 1105 BCE,50
+peace,14,"Douvu",15,"Kreyaibush",161082,16.89,-1.04,Sahel,-1100,January 1100 BCE,0
+war,7,"Shethilesh",15,"Kreyaibush",161082,16.89,-1.04,Sahel,-1098,January 1098 BCE,0
+conquered,15,"Kreyaibush",7,"Shethilesh",161082,16.89,-1.04,Sahel,-1094,January 1094 BCE,2

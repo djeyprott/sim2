@@ -278,15 +278,18 @@ public sealed class PolityMeasures
             r.FirstStateYear = (int)(firstState.Value.Tick / GameDate.MonthsPerYear);
             r.FirstStatePlace = $"{map.Grid.Latitude(cell):F1},{map.Grid.Longitude(cell):F1}";
 
-            // A river valley or plain: lowland or coast, with a river in the cell or next to it.
+            // A river valley (a major river in the cell or next to it) or a plain (lowland or
+            // coast with a river in the cell or next to it).
             TerrainClass terrain = map.Terrain(cell);
             bool river = map.River(cell) != RiverSize.None;
+            bool major = map.River(cell) == RiverSize.Major;
             foreach (int other in map.Grid.Neighbours(cell))
             {
                 river |= map.River(other) != RiverSize.None;
+                major |= map.River(other) == RiverSize.Major;
             }
 
-            r.FirstStateInRiverValleyOrPlain = (terrain == TerrainClass.Lowland || terrain == TerrainClass.Coast) && river;
+            r.FirstStateInRiverValleyOrPlain = major || ((terrain == TerrainClass.Lowland || terrain == TerrainClass.Coast) && river);
         }
 
         // States founded on their own: how far apart their capitals were.

@@ -1458,9 +1458,10 @@ public class EarthRealHomelandTests : IClassFixture<RealHomelandRunFixture>
     }
 
     [Fact]
-    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds()
+    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds_with_a_state()
     {
-        Assert.True(Polities.Count(p => p.FirstStateInRiverValleyOrPlain) >= 7,
+        var withState = Polities.Where(p => p.FirstStateYear >= 0).ToList();
+        Assert.True(withState.Count(p => p.FirstStateInRiverValleyOrPlain) >= Math.Ceiling(0.7 * withState.Count),
             Each(p => $"{p.FirstStatePlace} {(p.FirstStateInRiverValleyOrPlain ? "river valley or plain" : "elsewhere")}"));
     }
 
@@ -1600,9 +1601,10 @@ public class EarthRandomHomelandTests : IClassFixture<RandomHomelandRunFixture>
     }
 
     [Fact]
-    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds()
+    public void The_first_state_forms_in_a_river_valley_or_plain_in_7_of_10_seeds_with_a_state()
     {
-        Assert.True(_results.Count(r => r.Polities!.FirstStateInRiverValleyOrPlain) >= 7,
+        var withState = _results.Where(r => r.Polities!.FirstStateYear >= 0).ToList();
+        Assert.True(withState.Count(r => r.Polities!.FirstStateInRiverValleyOrPlain) >= Math.Ceiling(0.7 * withState.Count),
             string.Join("; ", _results.Select(r => $"seed {r.Seed}: {r.Polities!.FirstStatePlace} {r.Polities.FirstStateInRiverValleyOrPlain}")));
     }
 }

@@ -501,21 +501,8 @@ public sealed class PolitySystem : ISimSystem
             return;
         }
 
-        // Which settlements each settlement trades with, by cell (only looked up, never iterated).
         long clock = System.Diagnostics.Stopwatch.GetTimestamp();
-        var partners = new Dictionary<int, List<int>>();
-        if (_trade != null)
-        {
-            foreach ((int a, int b) in _trade.LinksByCell())
-            {
-                AddPartner(partners, a, b);
-                AddPartner(partners, b, a);
-            }
-        }
-
         bool released = false;
-        PartnersSeconds += Since(clock);
-        clock = System.Diagnostics.Stopwatch.GetTimestamp();
 
         // Each polity, in id order: let go of what is out of reach (going round other polities'
         // land), draw in settlements with the land on the way to them, fill gaps.
@@ -533,15 +520,6 @@ public sealed class PolitySystem : ISimSystem
                 }
             }
 
-            // The settlements its own settlements trade with.
-            var tradesWith = new HashSet<int>();
-            foreach (int cell in cellsOf[p.Id])
-            {
-                if (RulerOf(cell) == p.Id && _settlementPlusOne[cell] > 0 && partners.TryGetValue(cell, out List<int>? list))
-                {
-                    tradesWith.UnionWith(list);
-                }
-            }
 
             foreach (int cell in _reached)
             {
@@ -551,7 +529,10 @@ public sealed class PolitySystem : ISimSystem
                 }
 
                 // The yearly chance, spread over the twelve months.
-                bool trades = tradesWith.Contains(cell);
+                // Whether it trades with one of the polity's settlements.
+                int polity = p.Id;
+                bool trades = _trade != null && _trade.TradesWith(_settlementPlusOne[cell] - 1,
+                    other => RulerOf(other) == polity && _settlementPlusOne[other] > 0);
                 double yearly = Math.Min(1.0, _parameters.JoinChance * p.Expansion * (1.0 - _reachCost[cell] / reach)
                     * (trades ? 1.0 : _parameters.UnlinkedJoinFactor));
                 if (rng.Chance(1.0 - Math.Pow(1.0 - yearly, 1.0 / GameDate.MonthsPerYear)))
@@ -599,17 +580,6 @@ public sealed class PolitySystem : ISimSystem
             KeepWhole(tick, rng);
             WholeSeconds += Since(clock);
         }
-    }
-
-    private static void AddPartner(Dictionary<int, List<int>> partners, int cell, int partner)
-    {
-        if (!partners.TryGetValue(cell, out List<int>? list))
-        {
-            list = new List<int>();
-            partners[cell] = list;
-        }
-
-        list.Add(partner);
     }
 
     // Whether any polity stands.
@@ -1014,8 +984,6 @@ public sealed class PolitySystem : ISimSystem
     }
 
     /// <summary>Time spent in each part, for the headless runner's timings (not saved).</summary>
-    public double PartnersSeconds { get; private set; }
-
     public double GrowSeconds { get; private set; }
 
     public double WholeSeconds { get; private set; }

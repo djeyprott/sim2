@@ -128,7 +128,7 @@ public static class Program
 
             if (simulation.Systems[i] is Sim.Core.Polities.PolitySystem polities)
             {
-                Console.WriteLine($"    of which trade partners {polities.PartnersSeconds:F1} s, growing {polities.GrowSeconds:F1} s, keeping whole {polities.WholeSeconds:F1} s, "
+                Console.WriteLine($"    of which growing {polities.GrowSeconds:F1} s, keeping whole {polities.WholeSeconds:F1} s, "
                     + $"founding {polities.FoundSeconds:F1} s, war {polities.WarSeconds:F1} s, collapse {polities.CollapseSeconds:F1} s, tribute and levels {polities.RuleSeconds:F1} s");
             }
 

@@ -121,6 +121,11 @@ public sealed class TradeSystem : ISimSystem
     private static readonly double[] Decay = Enumerable.Range(0, 400).Select(k => Math.Pow(0.9, k)).ToArray();
     private int[] _degree = Array.Empty<int>();
 
+    // Each settlement's links (by settlement id), rebuilt with the links: those of settlement id
+    // run from _partnerStart[id] to _partnerStart[id + 1] in _partner.
+    private int[] _partnerStart = new int[1];
+    private int[] _partner = Array.Empty<int>();
+
     // Prices of the linked settlements this month, by settlement id then good.
     private double[] _price = Array.Empty<double>();
     private double[] _wanted = Array.Empty<double>();
@@ -722,7 +727,44 @@ public sealed class TradeSystem : ISimSystem
             n++;
         }
 
+        _partnerStart = new int[ids + 1];
+        for (int id = 0; id < ids; id++)
+        {
+            _partnerStart[id + 1] = _partnerStart[id] + _degree[id];
+        }
+
+        _partner = new int[_partnerStart[ids]];
+        var next = (int[])_partnerStart.Clone();
+        for (int link = 0; link < _linkA.Length; link++)
+        {
+            _partner[next[_linkA[link]]++] = _linkB[link];
+            _partner[next[_linkB[link]]++] = _linkA[link];
+        }
+
         _built = true;
+    }
+
+    /// <summary>
+    /// Whether the settlement in a cell trades with a standing settlement in a cell for which
+    /// the test holds (as <see cref="LinksByCell"/> would show).
+    /// </summary>
+    public bool TradesWith(int settlement, Func<int, bool> partnerCell)
+    {
+        if (settlement < 0 || settlement + 1 >= _partnerStart.Length || !_settlements!.IsAlive(settlement))
+        {
+            return false;
+        }
+
+        for (int k = _partnerStart[settlement]; k < _partnerStart[settlement + 1]; k++)
+        {
+            int other = _partner[k];
+            if (_settlements.IsAlive(other) && partnerCell(_settlementCell![other]))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // The settlements reachable from a cell within a cost limit, over land and across runs of at

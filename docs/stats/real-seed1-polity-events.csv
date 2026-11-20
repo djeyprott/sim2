@@ -27,599 +27,528 @@ peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4390,January 439
 war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4369,January 4369 BCE,0
 became_state,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-4369,January 4369 BCE,0
 peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4355,January 4355 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4326,January 4326 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4312,January 4312 BCE,0
-split,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-4306,January 4306 BCE,32
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4290,January 4290 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4277,January 4277 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4234,January 4234 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4220,January 4220 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4197,January 4197 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4183,January 4183 BCE,0
-founded,4,"Zougeivin",,,7551,40.77,47.15,Southwest Asia,-4166,January 4166 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4162,January 4162 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4148,January 4148 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4125,January 4125 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4111,January 4111 BCE,0
-war,1,"Thoukou",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4108,January 4108 BCE,0
-conquered,1,"Thoukou",0,"Yaiktoush",6119,36.61,38.20,Southwest Asia,-4104,January 4104 BCE,65
-became_state,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-4104,January 4104 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4078,January 4078 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4064,January 4064 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-4048,January 4048 BCE,65
-became_chiefdom,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-4048,January 4048 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4036,January 4036 BCE,0
-founded,5,"Braimek",,,9553,48.06,45.94,Steppe and Central Asia,-4033,January 4033 BCE,0
-became_state,5,"Braimek",,,9553,48.06,45.94,Steppe and Central Asia,-4027,January 4027 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4022,January 4022 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4001,January 4001 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3987,January 3987 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3962,January 3962 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3948,January 3948 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3926,January 3926 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3912,January 3912 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3890,January 3890 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3876,January 3876 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3859,January 3859 BCE,36
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3856,January 3856 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3848,January 3848 BCE,0
-founded,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3831,January 3831 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3829,January 3829 BCE,10
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3828,January 3828 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3815,January 3815 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3795,January 3795 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3781,January 3781 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3775,January 3775 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3767,January 3767 BCE,24
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3761,January 3761 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3756,January 3756 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3749,January 3749 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3743,January 3743 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3729,January 3729 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3725,January 3725 BCE,0
-split,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3718,January 3718 BCE,27
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3712,January 3712 BCE,0
-war,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3709,January 3709 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3708,January 3708 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3675,January 3675 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3661,January 3661 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3659,January 3659 BCE,0
-founded,7,"Tozaikrol",,,78439,25.14,107.01,East Asia,-3658,January 3658 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3645,January 3645 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4333,January 4333 BCE,0
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4319,January 4319 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4296,January 4296 BCE,0
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4282,January 4282 BCE,0
+split,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-4268,January 4268 BCE,34
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4258,January 4258 BCE,0
+split,1,"Thoukou",,,6119,36.61,38.20,Southwest Asia,-4257,January 4257 BCE,40
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4247,January 4247 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4220,January 4220 BCE,0
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4206,January 4206 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4186,January 4186 BCE,0
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4172,January 4172 BCE,0
+split,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-4166,January 4166 BCE,33
+war,1,"Thoukou",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4163,January 4163 BCE,0
+split,1,"Thoukou",,,6119,36.61,38.20,Southwest Asia,-4154,January 4154 BCE,33
+peace,1,"Thoukou",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4149,January 4149 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4148,January 4148 BCE,0
+peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-4134,January 4134 BCE,0
+war,0,"Yaiktoush",1,"Thoukou",6119,36.61,38.20,Southwest Asia,-4130,January 4130 BCE,0
+conquered,1,"Thoukou",0,"Yaiktoush",6119,36.61,38.20,Southwest Asia,-4128,January 4128 BCE,1
+became_state,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-4128,January 4128 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4109,January 4109 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4095,January 4095 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4055,January 4055 BCE,0
+founded,4,"Beishous",,,7552,40.82,46.56,Southwest Asia,-4042,January 4042 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4041,January 4041 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4020,January 4020 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-4006,January 4006 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3984,January 3984 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3970,January 3970 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3943,January 3943 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3929,January 3929 BCE,0
+founded,5,"Braimek",,,9553,48.06,45.94,Steppe and Central Asia,-3926,January 3926 BCE,0
+became_state,5,"Braimek",,,9553,48.06,45.94,Steppe and Central Asia,-3917,January 3917 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3908,January 3908 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3894,January 3894 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3872,January 3872 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3858,January 3858 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3845,January 3845 BCE,77
+became_chiefdom,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3845,January 3845 BCE,0
+founded,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3830,January 3830 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3829,January 3829 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3819,January 3819 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3812,January 3812 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3804,January 3804 BCE,18
+peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3798,January 3798 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3793,January 3793 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3782,January 3782 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3774,January 3774 BCE,0
+peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3765,January 3765 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3758,January 3758 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3750,January 3750 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3750,January 3750 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3736,January 3736 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3728,January 3728 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3715,January 3715 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3714,January 3714 BCE,22
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3713,January 3713 BCE,0
+peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3707,January 3707 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3706,January 3706 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3692,January 3692 BCE,0
+split,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3692,January 3692 BCE,23
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3682,January 3682 BCE,0
+split,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3679,January 3679 BCE,17
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3668,January 3668 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3658,January 3658 BCE,0
+peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3646,January 3646 BCE,0
 war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3640,January 3640 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3626,January 3626 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3626,January 3626 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3612,January 3612 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3597,January 3597 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3583,January 3583 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3581,January 3581 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3567,January 3567 BCE,0
-founded,8,"Leovuth",,,77312,23.39,112.44,East Asia,-3562,January 3562 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3561,January 3561 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3547,January 3547 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3527,January 3527 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3513,January 3513 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3509,January 3509 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3498,January 3498 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3498,January 3498 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3484,January 3484 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3484,January 3484 BCE,0
-founded,9,"Mekreiais",,,77854,23.87,109.73,East Asia,-3479,January 3479 BCE,0
-war,7,"Tozaikrol",9,"Mekreiais",77854,23.87,109.73,East Asia,-3475,January 3475 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3471,January 3471 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3470,January 3470 BCE,0
-peace,7,"Tozaikrol",9,"Mekreiais",77854,23.87,109.73,East Asia,-3461,January 3461 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3461,January 3461 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3460,January 3460 BCE,0
-war,9,"Mekreiais",8,"Leovuth",77312,23.39,112.44,East Asia,-3458,January 3458 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3456,January 3456 BCE,24
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3446,January 3446 BCE,0
-peace,8,"Leovuth",9,"Mekreiais",77854,23.87,109.73,East Asia,-3444,January 3444 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3441,January 3441 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3427,January 3427 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3423,January 3423 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3409,January 3409 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3405,January 3405 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3391,January 3391 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3388,January 3388 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3374,January 3374 BCE,0
-war,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3374,January 3374 BCE,0
-split,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-3363,January 3363 BCE,16
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3360,January 3360 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3355,January 3355 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3341,January 3341 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3330,January 3330 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3316,January 3316 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3309,January 3309 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3302,January 3302 BCE,26
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3295,January 3295 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3295,January 3295 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3281,January 3281 BCE,0
-war,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3281,January 3281 BCE,0
-peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3267,January 3267 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3257,January 3257 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3243,January 3243 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3243,January 3243 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3229,January 3229 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3212,January 3212 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3198,January 3198 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3195,January 3195 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3188,January 3188 BCE,24
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3181,January 3181 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3170,January 3170 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3164,January 3164 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3157,January 3157 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3143,January 3143 BCE,0
-war,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3140,January 3140 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3129,January 3129 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3128,January 3128 BCE,0
-peace,3,"Heyuri",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-3114,January 3114 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3113,January 3113 BCE,0
-split,0,"Yaiktoush",,,6525,37.85,38.54,Southwest Asia,-3113,January 3113 BCE,128
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3099,January 3099 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3090,January 3090 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3076,January 3076 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3058,January 3058 BCE,24
-founded,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-3045,January 3045 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3041,January 3041 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3029,January 3029 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3028,January 3028 BCE,0
-peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3018,January 3018 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3005,January 3005 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2991,January 2991 BCE,0
-war,10,"Apukail",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2986,January 2986 BCE,0
-peace,10,"Apukail",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2977,January 2977 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2971,January 2971 BCE,0
-peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2961,January 2961 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2960,January 2960 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-2956,January 2956 BCE,6
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2948,January 2948 BCE,0
-war,10,"Apukail",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2936,January 2936 BCE,0
-peace,10,"Apukail",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2930,January 2930 BCE,0
-war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2929,January 2929 BCE,0
-split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-2925,January 2925 BCE,7
-peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2920,January 2920 BCE,0
-war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2916,January 2916 BCE,0
-peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2910,January 2910 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2910,January 2910 BCE,0
-war,10,"Apukail",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2904,January 2904 BCE,0
-conquered,3,"Heyuri",10,"Apukail",6928,39.13,35.42,Southwest Asia,-2902,January 2902 BCE,5
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2896,January 2896 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2896,January 2896 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2882,January 2882 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2876,January 2876 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2862,January 2862 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2844,January 2844 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2830,January 2830 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2817,January 2817 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2803,January 2803 BCE,0
-war,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2802,January 2802 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2792,January 2792 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2792,January 2792 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2778,January 2778 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2777,January 2777 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2763,January 2763 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2754,January 2754 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2740,January 2740 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2738,January 2738 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2724,January 2724 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2709,January 2709 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2695,January 2695 BCE,0
-founded,11,"Steyemthek",,,79060,21.16,100.87,East Asia,-2686,January 2686 BCE,0
-became_state,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-2686,January 2686 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2659,January 2659 BCE,0
-founded,12,"Herastar",,,78841,19.93,101.61,East Asia,-2649,January 2649 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2645,January 2645 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2638,January 2638 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2630,January 2630 BCE,0
-war,12,"Herastar",11,"Steyemthek",79060,21.16,100.87,East Asia,-2630,January 2630 BCE,0
-split,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-2630,January 2630 BCE,57
-became_chiefdom,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-2630,January 2630 BCE,0
-peace,11,"Steyemthek",12,"Herastar",78841,19.93,101.61,East Asia,-2624,January 2624 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2623,January 2623 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2609,January 2609 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2609,January 2609 BCE,0
-war,12,"Herastar",11,"Steyemthek",79060,21.16,100.87,East Asia,-2603,January 2603 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2601,January 2601 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2601,January 2601 BCE,0
-peace,12,"Herastar",11,"Steyemthek",79060,21.16,100.87,East Asia,-2598,January 2598 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2587,January 2587 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2587,January 2587 BCE,0
-founded,13,"Nomu",,,8791,45.25,28.36,Europe,-2574,January 2574 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2573,January 2573 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2572,January 2572 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2561,January 2561 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2556,January 2556 BCE,0
-split,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-2556,January 2556 BCE,47
-became_state,13,"Nomu",,,8791,45.25,28.36,Europe,-2546,January 2546 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2542,January 2542 BCE,0
-founded,14,"Lukur",,,69360,9.54,13.49,West and Central Africa,-2520,January 2520 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2519,January 2519 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2505,January 2505 BCE,0
-founded,15,"Hitram",,,78210,17.92,104.32,Southeast Asia,-2502,January 2502 BCE,0
-founded,16,"Suthaath",,,78374,18.32,103.58,East Asia,-2502,January 2502 BCE,0
-founded,17,"Ritredek",,,79538,23.11,98.66,East Asia,-2500,January 2500 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2496,January 2496 BCE,0
-war,12,"Herastar",16,"Suthaath",78374,18.32,103.58,East Asia,-2488,January 2488 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2482,January 2482 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2480,January 2480 BCE,0
-peace,12,"Herastar",16,"Suthaath",78374,18.32,103.58,East Asia,-2475,January 2475 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2466,January 2466 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2455,January 2455 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2441,January 2441 BCE,0
-founded,18,"Zaadus",,,79343,20.59,98.68,East Asia,-2437,January 2437 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2432,January 2432 BCE,0
-war,11,"Steyemthek",18,"Zaadus",79343,20.59,98.68,East Asia,-2429,January 2429 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2418,January 2418 BCE,0
-peace,11,"Steyemthek",18,"Zaadus",79343,20.59,98.68,East Asia,-2415,January 2415 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2400,January 2400 BCE,0
-founded,19,"Broutomkres",,,10516,52.05,29.34,Europe,-2390,January 2390 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2386,January 2386 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2380,January 2380 BCE,0
-became_state,19,"Broutomkres",,,10516,52.05,29.34,Europe,-2378,January 2378 BCE,0
-war,18,"Zaadus",17,"Ritredek",79538,23.11,98.66,East Asia,-2375,January 2375 BCE,0
-peace,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2369,January 2369 BCE,0
-peace,17,"Ritredek",18,"Zaadus",79343,20.59,98.68,East Asia,-2361,January 2361 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2354,January 2354 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2342,January 2342 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2340,January 2340 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2335,January 2335 BCE,0
-founded,20,"Ougeil",,,153521,-18.24,-65.62,Americas,-2332,January 2332 BCE,0
-peace,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2328,January 2328 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2328,January 2328 BCE,0
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-2328,January 2328 BCE,155
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-2325,January 2325 BCE,28
-split,14,"Lukur",,,69360,9.54,13.49,West and Central Africa,-2324,January 2324 BCE,56
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2322,January 2322 BCE,0
-split,6,"Reimaiko",,,7570,41.23,35.70,Southwest Asia,-2310,January 2310 BCE,20
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2308,January 2308 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2307,January 2307 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2307,January 2307 BCE,0
-became_state,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-2305,January 2305 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2293,January 2293 BCE,0
-peace,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2293,January 2293 BCE,0
-founded,21,"Githemok",,,9568,48.42,35.29,Europe,-2276,January 2276 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2276,January 2276 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-2274,January 2274 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-2270,January 2270 BCE,0
-war,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-2266,January 2266 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2262,January 2262 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2262,January 2262 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2261,January 2261 BCE,0
-peace,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-2260,January 2260 BCE,0
-founded,22,"Neimshaiste",,,160618,-4.87,14.74,West and Central Africa,-2250,January 2250 BCE,0
-peace,19,"Broutomkres",13,"Nomu",8791,45.25,28.36,Europe,-2248,January 2248 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2247,January 2247 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2246,January 2246 BCE,0
-war,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2245,January 2245 BCE,0
-split,13,"Nomu",,,8791,45.25,28.36,Europe,-2239,January 2239 BCE,196
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2238,January 2238 BCE,0
-peace,19,"Broutomkres",5,"Braimek",9553,48.06,45.94,Steppe and Central Asia,-2231,January 2231 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-2230,January 2230 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2226,January 2226 BCE,0
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-2221,January 2221 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2212,January 2212 BCE,0
-war,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2210,January 2210 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2209,January 2209 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2199,January 2199 BCE,0
-peace,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2196,January 2196 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2195,January 2195 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2192,January 2192 BCE,0
-peace,19,"Broutomkres",13,"Nomu",8791,45.25,28.36,Europe,-2181,January 2181 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2178,January 2178 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-2178,January 2178 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2177,January 2177 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2173,January 2173 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2166,January 2166 BCE,0
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-2164,January 2164 BCE,0
-war,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2163,January 2163 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2152,January 2152 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2152,January 2152 BCE,0
-peace,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2149,January 2149 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2149,January 2149 BCE,0
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-2139,January 2139 BCE,242
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2138,January 2138 BCE,0
-peace,19,"Broutomkres",13,"Nomu",8791,45.25,28.36,Europe,-2135,January 2135 BCE,0
-became_state,21,"Githemok",,,9568,48.42,35.29,Europe,-2135,January 2135 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-2127,January 2127 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2120,January 2120 BCE,0
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-2116,January 2116 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2110,January 2110 BCE,0
-founded,23,"Tiboum",,,79848,25.11,97.42,East Asia,-2107,January 2107 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2106,January 2106 BCE,0
-war,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2106,January 2106 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2102,January 2102 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2100,January 2100 BCE,0
-peace,19,"Broutomkres",13,"Nomu",8791,45.25,28.36,Europe,-2096,January 2096 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2086,January 2086 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-2082,January 2082 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2081,January 2081 BCE,0
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-2068,January 2068 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2067,January 2067 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2066,January 2066 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2063,January 2063 BCE,0
-peace,10,"Apukail",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-2052,January 2052 BCE,0
-peace,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2049,January 2049 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-2047,January 2047 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2046,January 2046 BCE,0
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-2033,January 2033 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-2032,January 2032 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2030,January 2030 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-2028,January 2028 BCE,0
-founded,24,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-2020,January 2020 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-2016,January 2016 BCE,0
-peace,19,"Broutomkres",13,"Nomu",8791,45.25,28.36,Europe,-2014,January 2014 BCE,0
-war,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2014,January 2014 BCE,0
-peace,5,"Braimek",19,"Broutomkres",10516,52.05,29.34,Europe,-2000,January 2000 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-1997,January 1997 BCE,0
-founded,25,"Zatreish",,,160943,15.12,0.77,Sahel,-1996,January 1996 BCE,0
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-1992,January 1992 BCE,201
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1989,January 1989 BCE,0
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-1989,January 1989 BCE,17
-peace,19,"Broutomkres",21,"Githemok",9568,48.42,35.29,Europe,-1983,January 1983 BCE,0
-war,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-1983,January 1983 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1975,January 1975 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1973,January 1973 BCE,0
-peace,13,"Nomu",19,"Broutomkres",10516,52.05,29.34,Europe,-1969,January 1969 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1965,January 1965 BCE,0
-war,21,"Githemok",19,"Broutomkres",10516,52.05,29.34,Europe,-1956,January 1956 BCE,0
-split,19,"Broutomkres",,,10516,52.05,29.34,Europe,-1953,January 1953 BCE,151
-became_chiefdom,19,"Broutomkres",,,10516,52.05,29.34,Europe,-1953,January 1953 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1952,January 1952 BCE,0
-conquered,19,"Broutomkres",21,"Githemok",10516,52.05,29.34,Europe,-1949,January 1949 BCE,65
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1948,January 1948 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1938,January 1938 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1938,January 1938 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1937,January 1937 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1934,January 1934 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1917,January 1917 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1916,January 1916 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1905,January 1905 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1902,January 1902 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1902,January 1902 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1895,January 1895 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1895,January 1895 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1885,January 1885 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1881,January 1881 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1875,January 1875 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1873,January 1873 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1859,January 1859 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1859,January 1859 BCE,0
-split,14,"Lukur",,,69360,9.54,13.49,West and Central Africa,-1852,January 1852 BCE,58
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1851,January 1851 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1851,January 1851 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1848,January 1848 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1837,January 1837 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1836,January 1836 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1834,January 1834 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1820,January 1820 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1815,January 1815 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1812,January 1812 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1807,January 1807 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1798,January 1798 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1798,January 1798 BCE,0
-founded,26,"Seikraish",,,10426,51.02,21.45,Europe,-1795,January 1795 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1793,January 1793 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1784,January 1784 BCE,0
-became_state,26,"Seikraish",,,10426,51.02,21.45,Europe,-1783,January 1783 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1780,January 1780 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1777,January 1777 BCE,0
-war,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1773,January 1773 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1763,January 1763 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1762,January 1762 BCE,0
-peace,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1759,January 1759 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1759,January 1759 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1748,January 1748 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1745,January 1745 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1745,January 1745 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1737,January 1737 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1734,January 1734 BCE,0
-war,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1734,January 1734 BCE,0
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1723,January 1723 BCE,0
-war,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1723,January 1723 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1722,January 1722 BCE,0
-peace,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1720,January 1720 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1717,January 1717 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1715,January 1715 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1708,January 1708 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1706,January 1706 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1701,January 1701 BCE,0
-founded,27,"Saistethouk",,,79281,17.55,97.49,Southeast Asia,-1700,January 1700 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1692,January 1692 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1686,January 1686 BCE,0
-war,18,"Zaadus",27,"Saistethouk",79281,17.55,97.49,Southeast Asia,-1683,January 1683 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1679,January 1679 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1672,January 1672 BCE,0
-war,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1672,January 1672 BCE,0
-peace,18,"Zaadus",27,"Saistethouk",79281,17.55,97.49,Southeast Asia,-1669,January 1669 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1665,January 1665 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1664,January 1664 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1659,January 1659 BCE,0
-peace,26,"Seikraish",21,"Githemok",9568,48.42,35.29,Europe,-1658,January 1658 BCE,0
-war,18,"Zaadus",27,"Saistethouk",79281,17.55,97.49,Southeast Asia,-1649,January 1649 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1644,January 1644 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1644,January 1644 BCE,0
-peace,27,"Saistethouk",18,"Zaadus",79343,20.59,98.68,East Asia,-1635,January 1635 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1630,January 1630 BCE,0
-peace,26,"Seikraish",13,"Nomu",8791,45.25,28.36,Europe,-1630,January 1630 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1630,January 1630 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1627,January 1627 BCE,0
-split,13,"Nomu",,,8791,45.25,28.36,Europe,-1621,January 1621 BCE,182
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1619,January 1619 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1616,January 1616 BCE,0
-founded,28,"Yezil",,,160920,6.75,6.48,West and Central Africa,-1613,January 1613 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1610,January 1610 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1609,January 1609 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1596,January 1596 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1595,January 1595 BCE,0
-war,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1595,January 1595 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1594,January 1594 BCE,0
-peace,10,"Apukail",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1586,January 1586 BCE,0
-war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1586,January 1586 BCE,0
-peace,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1581,January 1581 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1581,January 1581 BCE,0
-split,26,"Seikraish",,,10426,51.02,21.45,Europe,-1577,January 1577 BCE,225
-peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-1572,January 1572 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1567,January 1567 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1567,January 1567 BCE,0
-war,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1567,January 1567 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1557,January 1557 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1553,January 1553 BCE,0
-peace,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1553,January 1553 BCE,0
-founded,29,"Brakrel",,,79678,18.17,95.08,East Asia,-1547,January 1547 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1543,January 1543 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1542,January 1542 BCE,0
-split,26,"Seikraish",,,10426,51.02,21.45,Europe,-1533,January 1533 BCE,160
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1528,January 1528 BCE,0
-split,21,"Githemok",,,9568,48.42,35.29,Europe,-1528,January 1528 BCE,89
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1521,January 1521 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1518,January 1518 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1507,January 1507 BCE,0
-war,6,"Reimaiko",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1507,January 1507 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1504,January 1504 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1501,January 1501 BCE,0
-conquered,6,"Reimaiko",10,"Apukail",7570,41.23,35.70,Southwest Asia,-1499,January 1499 BCE,16
-split,26,"Seikraish",,,10426,51.02,21.45,Europe,-1493,January 1493 BCE,153
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1488,January 1488 BCE,0
-war,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1488,January 1488 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1485,January 1485 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1484,January 1484 BCE,0
-split,21,"Githemok",,,9568,48.42,35.29,Europe,-1484,January 1484 BCE,57
-split,21,"Githemok",,,9568,48.42,35.29,Europe,-1480,January 1480 BCE,8
-peace,5,"Braimek",21,"Githemok",9568,48.42,35.29,Europe,-1474,January 1474 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1471,January 1471 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1470,January 1470 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1468,January 1468 BCE,0
-split,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-1465,January 1465 BCE,91
-became_chiefdom,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-1465,January 1465 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1457,January 1457 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1449,January 1449 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1440,January 1440 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1435,January 1435 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1426,January 1426 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1422,January 1422 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1415,January 1415 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1413,January 1413 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1402,January 1402 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1401,January 1401 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1388,January 1388 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1384,January 1384 BCE,0
-founded,30,"Branar",,,6908,38.68,46.96,Southwest Asia,-1381,January 1381 BCE,0
-war,4,"Zougeivin",30,"Branar",6908,38.68,46.96,Southwest Asia,-1381,January 1381 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1380,January 1380 BCE,0
-founded,31,"Redeizai",,,7572,41.23,34.48,Southwest Asia,-1378,January 1378 BCE,0
-became_state,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-1378,January 1378 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1373,January 1373 BCE,0
-peace,4,"Zougeivin",30,"Branar",6908,38.68,46.96,Southwest Asia,-1372,January 1372 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1366,January 1366 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1363,January 1363 BCE,0
-war,10,"Apukail",31,"Redeizai",7572,41.23,34.48,Southwest Asia,-1359,January 1359 BCE,0
-peace,10,"Apukail",31,"Redeizai",7572,41.23,34.48,Southwest Asia,-1354,January 1354 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1349,January 1349 BCE,0
-founded,32,"Pithstos",,,7586,40.86,26.04,Southwest Asia,-1346,January 1346 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1344,January 1344 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1343,January 1343 BCE,0
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1339,January 1339 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1337,January 1337 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1329,January 1329 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1323,January 1323 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1321,January 1321 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1307,January 1307 BCE,0
-war,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1307,January 1307 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1301,January 1301 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1295,January 1295 BCE,0
-peace,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1293,January 1293 BCE,0
-split,26,"Seikraish",,,10426,51.02,21.45,Europe,-1293,January 1293 BCE,210
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1291,January 1291 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1288,January 1288 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1287,January 1287 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1277,January 1277 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1267,January 1267 BCE,0
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1261,January 1261 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1261,January 1261 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1260,January 1260 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1247,January 1247 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1246,January 1246 BCE,0
-war,21,"Githemok",26,"Seikraish",10426,51.02,21.45,Europe,-1245,January 1245 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1240,January 1240 BCE,0
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1237,January 1237 BCE,0
-split,26,"Seikraish",,,10426,51.02,21.45,Europe,-1236,January 1236 BCE,182
-founded,33,"Lesutrar",,,79854,22.47,96.00,East Asia,-1235,January 1235 BCE,0
-peace,26,"Seikraish",21,"Githemok",9568,48.42,35.29,Europe,-1231,January 1231 BCE,0
-war,23,"Tiboum",33,"Lesutrar",79854,22.47,96.00,East Asia,-1231,January 1231 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1227,January 1227 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1222,January 1222 BCE,0
-founded,34,"Zouzaistus",,,10713,52.91,29.99,Europe,-1219,January 1219 BCE,0
-peace,23,"Tiboum",33,"Lesutrar",79854,22.47,96.00,East Asia,-1217,January 1217 BCE,0
-war,29,"Brakrel",33,"Lesutrar",79854,22.47,96.00,East Asia,-1214,January 1214 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1213,January 1213 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1208,January 1208 BCE,0
-war,34,"Zouzaistus",26,"Seikraish",10426,51.02,21.45,Europe,-1208,January 1208 BCE,0
-founded,35,"Lovoulal",,,8085,42.37,23.82,Europe,-1207,January 1207 BCE,0
-became_state,34,"Zouzaistus",,,10713,52.91,29.99,Europe,-1201,January 1201 BCE,0
-peace,33,"Lesutrar",29,"Brakrel",79678,18.17,95.08,East Asia,-1200,January 1200 BCE,0
-war,13,"Nomu",35,"Lovoulal",8085,42.37,23.82,Europe,-1200,January 1200 BCE,0
-war,23,"Tiboum",33,"Lesutrar",79854,22.47,96.00,East Asia,-1196,January 1196 BCE,0
-peace,26,"Seikraish",34,"Zouzaistus",10713,52.91,29.99,Europe,-1194,January 1194 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1193,January 1193 BCE,0
-peace,13,"Nomu",35,"Lovoulal",8085,42.37,23.82,Europe,-1190,January 1190 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1190,January 1190 BCE,0
-split,34,"Zouzaistus",,,10713,52.91,29.99,Europe,-1188,January 1188 BCE,84
-peace,23,"Tiboum",33,"Lesutrar",79854,22.47,96.00,East Asia,-1182,January 1182 BCE,0
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1181,January 1181 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1179,January 1179 BCE,0
-war,35,"Lovoulal",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1176,January 1176 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1175,January 1175 BCE,0
-split,32,"Pithstos",,,7586,40.86,26.04,Southwest Asia,-1171,January 1171 BCE,3
-peace,35,"Lovoulal",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1169,January 1169 BCE,0
-peace,26,"Seikraish",13,"Nomu",8791,45.25,28.36,Europe,-1161,January 1161 BCE,0
-war,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1157,January 1157 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1156,January 1156 BCE,0
-peace,13,"Nomu",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1152,January 1152 BCE,0
-war,34,"Zouzaistus",26,"Seikraish",10426,51.02,21.45,Europe,-1152,January 1152 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1145,January 1145 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1142,January 1142 BCE,0
-war,35,"Lovoulal",32,"Pithstos",7586,40.86,26.04,Southwest Asia,-1141,January 1141 BCE,0
-conquered,32,"Pithstos",35,"Lovoulal",7586,40.86,26.04,Southwest Asia,-1140,January 1140 BCE,8
-peace,34,"Zouzaistus",26,"Seikraish",10426,51.02,21.45,Europe,-1138,January 1138 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1132,January 1132 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1124,January 1124 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1121,January 1121 BCE,0
-peace,26,"Seikraish",13,"Nomu",8791,45.25,28.36,Europe,-1110,January 1110 BCE,0
-war,13,"Nomu",34,"Zouzaistus",10713,52.91,29.99,Europe,-1108,January 1108 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1107,January 1107 BCE,0
-founded,36,"Bathhul",,,153828,-17.89,-67.33,Americas,-1105,January 1105 BCE,0
-war,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1101,January 1101 BCE,0
-peace,13,"Nomu",34,"Zouzaistus",10713,52.91,29.99,Europe,-1094,January 1094 BCE,0
-war,21,"Githemok",34,"Zouzaistus",10713,52.91,29.99,Europe,-1094,January 1094 BCE,0
-peace,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1087,January 1087 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1087,January 1087 BCE,0
-peace,34,"Zouzaistus",21,"Githemok",9568,48.42,35.29,Europe,-1080,January 1080 BCE,0
-war,5,"Braimek",34,"Zouzaistus",10713,52.91,29.99,Europe,-1079,January 1079 BCE,0
-split,34,"Zouzaistus",,,10713,52.91,29.99,Europe,-1079,January 1079 BCE,154
-peace,26,"Seikraish",13,"Nomu",8791,45.25,28.36,Europe,-1073,January 1073 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1073,January 1073 BCE,0
-war,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1071,January 1071 BCE,0
-peace,5,"Braimek",34,"Zouzaistus",10713,52.91,29.99,Europe,-1065,January 1065 BCE,0
-war,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1065,January 1065 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1059,January 1059 BCE,0
-split,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-1059,January 1059 BCE,76
-became_chiefdom,10,"Apukail",,,6931,39.11,33.68,Southwest Asia,-1059,January 1059 BCE,0
-peace,13,"Nomu",21,"Githemok",9568,48.42,35.29,Europe,-1058,January 1058 BCE,0
-war,13,"Nomu",34,"Zouzaistus",10713,52.91,29.99,Europe,-1058,January 1058 BCE,0
-peace,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1051,January 1051 BCE,0
-peace,13,"Nomu",34,"Zouzaistus",10713,52.91,29.99,Europe,-1044,January 1044 BCE,0
-war,26,"Seikraish",34,"Zouzaistus",10713,52.91,29.99,Europe,-1044,January 1044 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1038,January 1038 BCE,0
-war,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1031,January 1031 BCE,0
-peace,26,"Seikraish",34,"Zouzaistus",10713,52.91,29.99,Europe,-1030,January 1030 BCE,0
-war,21,"Githemok",34,"Zouzaistus",10713,52.91,29.99,Europe,-1028,January 1028 BCE,0
-war,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1026,January 1026 BCE,0
-peace,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1024,January 1024 BCE,0
-founded,37,"Minohem",,,9261,46.04,18.65,Europe,-1023,January 1023 BCE,0
-peace,20,"Ougeil",36,"Bathhul",153828,-17.89,-67.33,Americas,-1017,January 1017 BCE,0
-peace,34,"Zouzaistus",21,"Githemok",9568,48.42,35.29,Europe,-1014,January 1014 BCE,0
-peace,13,"Nomu",26,"Seikraish",10426,51.02,21.45,Europe,-1012,January 1012 BCE,0
-war,13,"Nomu",34,"Zouzaistus",10713,52.91,29.99,Europe,-1007,January 1007 BCE,0
-war,37,"Minohem",26,"Seikraish",10426,51.02,21.45,Europe,-1004,January 1004 BCE,0
-war,0,"Yaiktoush",10,"Apukail",6931,39.11,33.68,Southwest Asia,-1002,January 1002 BCE,0
+founded,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-3630,January 3630 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3629,January 3629 BCE,0
+war,3,"Heyuri",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3627,January 3627 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3624,January 3624 BCE,0
+peace,3,"Heyuri",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3620,January 3620 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3610,January 3610 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3603,January 3603 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3589,January 3589 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3579,January 3579 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3573,January 3573 BCE,17
+founded,8,"Apukail",,,6931,39.11,33.68,Southwest Asia,-3567,January 3567 BCE,0
+peace,3,"Heyuri",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3565,January 3565 BCE,0
+war,3,"Heyuri",8,"Apukail",6931,39.11,33.68,Southwest Asia,-3565,January 3565 BCE,0
+conquered,8,"Apukail",3,"Heyuri",6931,39.11,33.68,Southwest Asia,-3561,January 3561 BCE,3
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3559,January 3559 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3545,January 3545 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3545,January 3545 BCE,0
+peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3532,January 3532 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3532,January 3532 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3525,January 3525 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3517,January 3517 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3514,January 3514 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3513,January 3513 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3503,January 3503 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3499,January 3499 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3497,January 3497 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3493,January 3493 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3485,January 3485 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3480,January 3480 BCE,0
+peace,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3466,January 3466 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3457,January 3457 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3453,January 3453 BCE,6
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3452,January 3452 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3429,January 3429 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3427,January 3427 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3420,January 3420 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3415,January 3415 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3411,January 3411 BCE,0
+founded,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3409,January 3409 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3409,January 3409 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3401,January 3401 BCE,0
+war,6,"Reimaiko",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3397,January 3397 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3396,January 3396 BCE,0
+peace,3,"Heyuri",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3383,January 3383 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3381,January 3381 BCE,0
+war,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3377,January 3377 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3373,January 3373 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3372,January 3372 BCE,0
+peace,0,"Yaiktoush",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3363,January 3363 BCE,0
+war,7,"Rashoth",6,"Reimaiko",7570,41.23,35.70,Southwest Asia,-3362,January 3362 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3359,January 3359 BCE,0
+conquered,6,"Reimaiko",7,"Rashoth",7570,41.23,35.70,Southwest Asia,-3355,January 3355 BCE,10
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3352,January 3352 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3347,January 3347 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3345,January 3345 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3343,January 3343 BCE,5
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3333,January 3333 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3331,January 3331 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3323,January 3323 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3319,January 3319 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3317,January 3317 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3314,January 3314 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3300,January 3300 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3300,January 3300 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3298,January 3298 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3286,January 3286 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3286,January 3286 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3284,January 3284 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3276,January 3276 BCE,0
+founded,10,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-3264,January 3264 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3264,January 3264 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3261,January 3261 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3256,January 3256 BCE,13
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3250,January 3250 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3248,January 3248 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3247,January 3247 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3243,January 3243 BCE,13
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3237,January 3237 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3236,January 3236 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3222,January 3222 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3219,January 3219 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-3213,January 3213 BCE,39
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3210,January 3210 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3205,January 3205 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3205,January 3205 BCE,14
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3196,January 3196 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3195,January 3195 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3185,January 3185 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3180,January 3180 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3175,January 3175 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3168,January 3168 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3166,January 3166 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3166,January 3166 BCE,7
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3165,January 3165 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3160,January 3160 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-3157,January 3157 BCE,12
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3141,January 3141 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3132,January 3132 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3129,January 3129 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3129,January 3129 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3115,January 3115 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3115,January 3115 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3112,January 3112 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3110,January 3110 BCE,7
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3101,January 3101 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3097,January 3097 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3093,January 3093 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3087,January 3087 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3087,January 3087 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3079,January 3079 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3073,January 3073 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3071,January 3071 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-3063,January 3063 BCE,6
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3059,January 3059 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3054,January 3054 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3053,January 3053 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3042,January 3042 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3039,January 3039 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3039,January 3039 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3032,January 3032 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3030,January 3030 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-3016,January 3016 BCE,0
+war,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-3012,January 3012 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3011,January 3011 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-3003,January 3003 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2999,January 2999 BCE,0
+peace,4,"Beishous",9,"Branar",6908,38.68,46.96,Southwest Asia,-2998,January 2998 BCE,0
+fell,4,"Beishous",,,7552,40.82,46.56,Southwest Asia,-2994,January 2994 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2992,January 2992 BCE,0
+founded,11,"Vabaith",,,9239,47.13,33.57,Europe,-2991,January 2991 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2991,January 2991 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-2987,January 2987 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2977,January 2977 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-2973,January 2973 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2970,January 2970 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2969,January 2969 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2966,January 2966 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2964,January 2964 BCE,0
+became_state,11,"Vabaith",,,9239,47.13,33.57,Europe,-2964,January 2964 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2953,January 2953 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2952,January 2952 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2938,January 2938 BCE,0
+war,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2938,January 2938 BCE,0
+founded,12,"Zougeivin",,,7551,40.77,47.15,Southwest Asia,-2936,January 2936 BCE,0
+founded,13,"Bamkreihesh",,,162360,14.39,-4.36,Sahel,-2934,January 2934 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2934,January 2934 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2932,January 2932 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2918,January 2918 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2912,January 2912 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2898,January 2898 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2897,January 2897 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2889,January 2889 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2875,January 2875 BCE,0
+peace,7,"Rashoth",0,"Yaiktoush",6525,37.85,38.54,Southwest Asia,-2861,January 2861 BCE,0
+war,3,"Heyuri",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2860,January 2860 BCE,0
+peace,7,"Rashoth",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2854,January 2854 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2844,January 2844 BCE,0
+split,3,"Heyuri",,,6928,39.13,35.42,Southwest Asia,-2843,January 2843 BCE,16
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2830,January 2830 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2829,January 2829 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2815,January 2815 BCE,0
+war,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2810,January 2810 BCE,0
+peace,0,"Yaiktoush",3,"Heyuri",6928,39.13,35.42,Southwest Asia,-2802,January 2802 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2792,January 2792 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2778,January 2778 BCE,0
+war,3,"Heyuri",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2777,January 2777 BCE,0
+conquered,3,"Heyuri",7,"Rashoth",6928,39.13,35.42,Southwest Asia,-2775,January 2775 BCE,15
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2775,January 2775 BCE,83
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2775,January 2775 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2754,January 2754 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2740,January 2740 BCE,0
+split,10,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-2731,January 2731 BCE,63
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2718,January 2718 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2704,January 2704 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2684,January 2684 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2670,January 2670 BCE,0
+founded,14,"Stavaka",,,77767,23.45,109.97,East Asia,-2665,January 2665 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2655,January 2655 BCE,0
+founded,15,"Rainathath",,,77219,22.96,112.68,East Asia,-2653,January 2653 BCE,0
+founded,16,"Zostoshail",,,8661,45.03,37.32,Europe,-2652,January 2652 BCE,0
+war,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2645,January 2645 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2636,January 2636 BCE,0
+peace,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2631,January 2631 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2622,January 2622 BCE,0
+war,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2606,January 2606 BCE,0
+peace,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2602,January 2602 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2586,January 2586 BCE,0
+war,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2579,January 2579 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2572,January 2572 BCE,0
+peace,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2570,January 2570 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2552,January 2552 BCE,0
+war,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2548,January 2548 BCE,0
+peace,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-2541,January 2541 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2538,January 2538 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2517,January 2517 BCE,0
+founded,17,"Mageihi",,,160889,-4.94,13.81,West and Central Africa,-2516,January 2516 BCE,0
+founded,18,"Themapaish",,,78769,18.22,101.13,East Asia,-2514,January 2514 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2503,January 2503 BCE,0
+founded,19,"Kemaes",,,79132,21.13,100.39,East Asia,-2496,January 2496 BCE,0
+founded,20,"Lukur",,,69360,9.54,13.49,West and Central Africa,-2487,January 2487 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2481,January 2481 BCE,0
+founded,21,"Staeth",,,160939,13.69,1.79,Sahel,-2467,January 2467 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2467,January 2467 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2444,January 2444 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2430,January 2430 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2407,January 2407 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2393,January 2393 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2390,January 2390 BCE,80
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2390,January 2390 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2374,January 2374 BCE,48
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2349,January 2349 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2342,January 2342 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2335,January 2335 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2311,January 2311 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-2299,January 2299 BCE,29
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2297,January 2297 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2282,January 2282 BCE,79
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2282,January 2282 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-2233,January 2233 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2215,January 2215 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2201,January 2201 BCE,0
+founded,22,"Yennan",,,153519,-19.06,-65.13,Americas,-2188,January 2188 BCE,0
+founded,23,"Trivaipos",,,79275,20.19,98.93,East Asia,-2186,January 2186 BCE,0
+founded,24,"Hateir",,,78359,24.72,107.26,East Asia,-2184,January 2184 BCE,0
+war,19,"Kemaes",23,"Trivaipos",79275,20.19,98.93,East Asia,-2183,January 2183 BCE,0
+war,14,"Stavaka",24,"Hateir",78359,24.72,107.26,East Asia,-2177,January 2177 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2174,January 2174 BCE,0
+peace,19,"Kemaes",23,"Trivaipos",79275,20.19,98.93,East Asia,-2169,January 2169 BCE,0
+peace,14,"Stavaka",24,"Hateir",78359,24.72,107.26,East Asia,-2163,January 2163 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2160,January 2160 BCE,0
+war,15,"Rainathath",14,"Stavaka",77767,23.45,109.97,East Asia,-2160,January 2160 BCE,0
+war,19,"Kemaes",23,"Trivaipos",79275,20.19,98.93,East Asia,-2148,January 2148 BCE,0
+peace,15,"Rainathath",14,"Stavaka",77767,23.45,109.97,East Asia,-2146,January 2146 BCE,0
+peace,19,"Kemaes",23,"Trivaipos",79275,20.19,98.93,East Asia,-2142,January 2142 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2140,January 2140 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2126,January 2126 BCE,0
+founded,25,"Gaithvagan",,,79850,24.23,96.95,East Asia,-2111,January 2111 BCE,0
+founded,26,"Kisiseth",,,160787,7.49,6.50,West and Central Africa,-2109,January 2109 BCE,0
+founded,27,"Heistouduk",,,79908,25.06,96.94,East Asia,-2109,January 2109 BCE,0
+war,25,"Gaithvagan",27,"Heistouduk",79908,25.06,96.94,East Asia,-2108,January 2108 BCE,0
+peace,25,"Gaithvagan",27,"Heistouduk",79908,25.06,96.94,East Asia,-2106,January 2106 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2104,January 2104 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2090,January 2090 BCE,0
+war,25,"Gaithvagan",27,"Heistouduk",79908,25.06,96.94,East Asia,-2080,January 2080 BCE,0
+conquered,27,"Heistouduk",25,"Gaithvagan",79908,25.06,96.94,East Asia,-2079,January 2079 BCE,7
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2070,January 2070 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2056,January 2056 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2032,January 2032 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-2018,January 2018 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1994,January 1994 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1980,January 1980 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1968,January 1968 BCE,80
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1968,January 1968 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1935,January 1935 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1921,January 1921 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1900,January 1900 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1886,January 1886 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1883,January 1883 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1855,January 1855 BCE,0
+founded,28,"Houthnerpith",,,79602,23.51,98.42,East Asia,-1851,January 1851 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1841,January 1841 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1821,January 1821 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1807,January 1807 BCE,0
+founded,29,"Saistethouk",,,79281,17.55,97.49,Southeast Asia,-1800,January 1800 BCE,0
+war,23,"Trivaipos",29,"Saistethouk",79281,17.55,97.49,Southeast Asia,-1793,January 1793 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1791,January 1791 BCE,69
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1791,January 1791 BCE,0
+founded,30,"Stasa",,,77609,14.57,105.79,Southeast Asia,-1789,January 1789 BCE,0
+peace,23,"Trivaipos",29,"Saistethouk",79281,17.55,97.49,Southeast Asia,-1779,January 1779 BCE,0
+founded,31,"Hitram",,,78210,17.92,104.32,Southeast Asia,-1775,January 1775 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1771,January 1771 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1757,January 1757 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1751,January 1751 BCE,0
+founded,32,"Yustaim",,,8443,43.80,25.70,Europe,-1749,January 1749 BCE,0
+war,11,"Vabaith",32,"Yustaim",8443,43.80,25.70,Europe,-1748,January 1748 BCE,0
+peace,11,"Vabaith",32,"Yustaim",8443,43.80,25.70,Europe,-1734,January 1734 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-1731,January 1731 BCE,33
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1730,January 1730 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1716,January 1716 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1695,January 1695 BCE,0
+founded,33,"Kreyan",,,7836,41.70,25.86,Europe,-1687,January 1687 BCE,0
+war,32,"Yustaim",33,"Kreyan",7836,41.70,25.86,Europe,-1687,January 1687 BCE,0
+conquered,33,"Kreyan",32,"Yustaim",7836,41.70,25.86,Europe,-1683,January 1683 BCE,13
+became_state,32,"Yustaim",,,8443,43.80,25.70,Europe,-1683,January 1683 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1681,January 1681 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1660,January 1660 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1646,January 1646 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1641,January 1641 BCE,80
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1641,January 1641 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1626,January 1626 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1626,January 1626 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1612,January 1612 BCE,0
+war,31,"Hitram",30,"Stasa",77609,14.57,105.79,Southeast Asia,-1605,January 1605 BCE,0
+peace,31,"Hitram",30,"Stasa",77609,14.57,105.79,Southeast Asia,-1591,January 1591 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1591,January 1591 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1577,January 1577 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1557,January 1557 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1543,January 1543 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1523,January 1523 BCE,0
+founded,34,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1514,January 1514 BCE,0
+war,17,"Mageihi",34,"Apusas",160067,-3.60,15.91,West and Central Africa,-1513,January 1513 BCE,0
+peace,17,"Mageihi",34,"Apusas",160067,-3.60,15.91,West and Central Africa,-1510,January 1510 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1509,January 1509 BCE,0
+split,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1492,January 1492 BCE,82
+became_chiefdom,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1492,January 1492 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1480,January 1480 BCE,0
+became_state,7,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1471,January 1471 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1466,January 1466 BCE,0
+founded,35,"Herastar",,,78841,19.93,101.61,East Asia,-1451,January 1451 BCE,0
+war,18,"Themapaish",35,"Herastar",78841,19.93,101.61,East Asia,-1451,January 1451 BCE,0
+peace,18,"Themapaish",35,"Herastar",78841,19.93,101.61,East Asia,-1447,January 1447 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1446,January 1446 BCE,0
+war,19,"Kemaes",35,"Herastar",78841,19.93,101.61,East Asia,-1445,January 1445 BCE,0
+founded,36,"Paithzuhum",,,7571,41.23,35.09,Southwest Asia,-1444,January 1444 BCE,0
+peace,19,"Kemaes",35,"Herastar",78841,19.93,101.61,East Asia,-1442,January 1442 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-1433,January 1433 BCE,35
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1432,January 1432 BCE,0
+war,18,"Themapaish",35,"Herastar",78841,19.93,101.61,East Asia,-1423,January 1423 BCE,0
+peace,18,"Themapaish",35,"Herastar",78841,19.93,101.61,East Asia,-1417,January 1417 BCE,0
+war,19,"Kemaes",35,"Herastar",78841,19.93,101.61,East Asia,-1413,January 1413 BCE,0
+war,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1411,January 1411 BCE,0
+peace,19,"Kemaes",35,"Herastar",78841,19.93,101.61,East Asia,-1399,January 1399 BCE,0
+peace,0,"Yaiktoush",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1397,January 1397 BCE,0
+war,36,"Paithzuhum",7,"Rashoth",7319,40.37,33.91,Southwest Asia,-1395,January 1395 BCE,0
+conquered,7,"Rashoth",36,"Paithzuhum",7319,40.37,33.91,Southwest Asia,-1391,January 1391 BCE,77
+war,18,"Themapaish",35,"Herastar",78841,19.93,101.61,East Asia,-1387,January 1387 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1386,January 1386 BCE,0
+split,10,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1386,January 1386 BCE,56
+conquered,35,"Herastar",18,"Themapaish",78841,19.93,101.61,East Asia,-1381,January 1381 BCE,15
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1372,January 1372 BCE,0
+founded,37,"Thouus",,,10521,51.81,25.48,Europe,-1361,January 1361 BCE,0
+war,11,"Vabaith",37,"Thouus",10521,51.81,25.48,Europe,-1361,January 1361 BCE,0
+peace,11,"Vabaith",37,"Thouus",10521,51.81,25.48,Europe,-1352,January 1352 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1352,January 1352 BCE,0
+war,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1348,January 1348 BCE,0
+split,37,"Thouus",,,10521,51.81,25.48,Europe,-1340,January 1340 BCE,47
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1338,January 1338 BCE,0
+peace,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1334,January 1334 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1331,January 1331 BCE,0
+split,36,"Paithzuhum",,,7571,41.23,35.09,Southwest Asia,-1326,January 1326 BCE,38
+became_state,37,"Thouus",,,10521,51.81,25.48,Europe,-1326,January 1326 BCE,0
+war,25,"Gaithvagan",28,"Houthnerpith",79602,23.51,98.42,East Asia,-1321,January 1321 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1317,January 1317 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1314,January 1314 BCE,0
+war,31,"Hitram",30,"Stasa",77609,14.57,105.79,Southeast Asia,-1313,January 1313 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1311,January 1311 BCE,161
+peace,25,"Gaithvagan",28,"Houthnerpith",79602,23.51,98.42,East Asia,-1307,January 1307 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-1304,January 1304 BCE,25
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1300,January 1300 BCE,0
+peace,30,"Stasa",31,"Hitram",78210,17.92,104.32,Southeast Asia,-1299,January 1299 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1292,January 1292 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1288,January 1288 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1278,January 1278 BCE,0
+war,37,"Thouus",11,"Vabaith",9239,47.13,33.57,Europe,-1278,January 1278 BCE,0
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1274,January 1274 BCE,0
+founded,38,"Nainai",,,6927,39.13,36.00,Southwest Asia,-1269,January 1269 BCE,0
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1269,January 1269 BCE,0
+peace,37,"Thouus",11,"Vabaith",9239,47.13,33.57,Europe,-1268,January 1268 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1264,January 1264 BCE,0
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1263,January 1263 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1263,January 1263 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-1260,January 1260 BCE,16
+founded,39,"Pason",,,160946,16.19,-0.00,Sahel,-1259,January 1259 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1259,January 1259 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1252,January 1252 BCE,61
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1250,January 1250 BCE,0
+peace,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1249,January 1249 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1249,January 1249 BCE,0
+war,13,"Bamkreihesh",39,"Pason",160946,16.19,-0.00,Sahel,-1246,January 1246 BCE,0
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1245,January 1245 BCE,0
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1243,January 1243 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1238,January 1238 BCE,15
+split,38,"Nainai",,,6927,39.13,36.00,Southwest Asia,-1238,January 1238 BCE,16
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1237,January 1237 BCE,0
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1235,January 1235 BCE,0
+peace,13,"Bamkreihesh",39,"Pason",160946,16.19,-0.00,Sahel,-1232,January 1232 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1230,January 1230 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1227,January 1227 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1223,January 1223 BCE,0
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1216,January 1216 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1215,January 1215 BCE,0
+peace,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1213,January 1213 BCE,0
+split,37,"Thouus",,,10521,51.81,25.48,Europe,-1211,January 1211 BCE,284
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1209,January 1209 BCE,0
+war,21,"Staeth",39,"Pason",160946,16.19,-0.00,Sahel,-1206,January 1206 BCE,0
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1206,January 1206 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1204,January 1204 BCE,22
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1201,January 1201 BCE,0
+split,16,"Zostoshail",,,8661,45.03,37.32,Europe,-1201,January 1201 BCE,14
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1199,January 1199 BCE,0
+war,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1195,January 1195 BCE,0
+split,21,"Staeth",,,160939,13.69,1.79,Sahel,-1193,January 1193 BCE,19
+peace,21,"Staeth",39,"Pason",160946,16.19,-0.00,Sahel,-1192,January 1192 BCE,0
+war,13,"Bamkreihesh",39,"Pason",160946,16.19,-0.00,Sahel,-1191,January 1191 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1189,January 1189 BCE,0
+war,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-1186,January 1186 BCE,0
+peace,5,"Braimek",16,"Zostoshail",8661,45.03,37.32,Europe,-1182,January 1182 BCE,0
+peace,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1181,January 1181 BCE,0
+peace,13,"Bamkreihesh",39,"Pason",160946,16.19,-0.00,Sahel,-1177,January 1177 BCE,0
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1177,January 1177 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1177,January 1177 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1169,January 1169 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1168,January 1168 BCE,0
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1163,January 1163 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1157,January 1157 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1155,January 1155 BCE,0
+peace,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1154,January 1154 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1154,January 1154 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1148,January 1148 BCE,29
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1146,January 1146 BCE,0
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1143,January 1143 BCE,0
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1140,January 1140 BCE,0
+war,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1140,January 1140 BCE,0
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1138,January 1138 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1137,January 1137 BCE,0
+peace,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1126,January 1126 BCE,0
+war,37,"Thouus",11,"Vabaith",9239,47.13,33.57,Europe,-1126,January 1126 BCE,0
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1123,January 1123 BCE,0
+peace,37,"Thouus",11,"Vabaith",9239,47.13,33.57,Europe,-1115,January 1115 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1115,January 1115 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1115,January 1115 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1105,January 1105 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1101,January 1101 BCE,0
+peace,37,"Thouus",32,"Yustaim",8443,43.80,25.70,Europe,-1101,January 1101 BCE,0
+split,9,"Branar",,,6908,38.68,46.96,Southwest Asia,-1101,January 1101 BCE,22
+war,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1097,January 1097 BCE,0
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1091,January 1091 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1091,January 1091 BCE,0
+peace,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1083,January 1083 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1078,January 1078 BCE,0
+peace,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1077,January 1077 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1074,January 1074 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1069,January 1069 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1064,January 1064 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1064,January 1064 BCE,0
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1061,January 1061 BCE,0
+peace,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1060,January 1060 BCE,0
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1059,January 1059 BCE,0
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1050,January 1050 BCE,0
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1048,January 1048 BCE,0
+war,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1043,January 1043 BCE,0
+war,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1037,January 1037 BCE,0
+peace,5,"Braimek",11,"Vabaith",9239,47.13,33.57,Europe,-1033,January 1033 BCE,0
+war,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1032,January 1032 BCE,0
+peace,0,"Yaiktoush",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1023,January 1023 BCE,0
+split,11,"Vabaith",,,9239,47.13,33.57,Europe,-1023,January 1023 BCE,33
+war,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1022,January 1022 BCE,0
+peace,32,"Yustaim",11,"Vabaith",9239,47.13,33.57,Europe,-1018,January 1018 BCE,0
+war,32,"Yustaim",37,"Thouus",10521,51.81,25.48,Europe,-1018,January 1018 BCE,0
+war,16,"Zostoshail",11,"Vabaith",9239,47.13,33.57,Europe,-1015,January 1015 BCE,0
+founded,40,"Brakrel",,,79678,18.17,95.08,East Asia,-1014,January 1014 BCE,0
+peace,36,"Paithzuhum",38,"Nainai",6927,39.13,36.00,Southwest Asia,-1013,January 1013 BCE,0
+war,29,"Saistethouk",40,"Brakrel",79678,18.17,95.08,East Asia,-1011,January 1011 BCE,0
+war,0,"Yaiktoush",36,"Paithzuhum",7571,41.23,35.09,Southwest Asia,-1010,January 1010 BCE,0
+peace,37,"Thouus",32,"Yustaim",8443,43.80,25.70,Europe,-1004,January 1004 BCE,0
+peace,29,"Saistethouk",40,"Brakrel",79678,18.17,95.08,East Asia,-1003,January 1003 BCE,0
+peace,11,"Vabaith",16,"Zostoshail",8661,45.03,37.32,Europe,-1001,January 1001 BCE,0

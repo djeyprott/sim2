@@ -29,14 +29,16 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Terraced fields",lost,99631,27.11,-102.81,-3328,January 3328 BCE,196
 "Irrigation",independent,69250,11.84,15.46,-3154,January 3154 BCE,0
 "Copper working",independent,63848,-14.01,28.85,-3041,January 3041 BCE,0
-"Fortifications",lost,161859,14.76,-2.57,-2814,January 2814 BCE,110
 "Granaries",lost,161859,14.76,-2.57,-2804,January 2804 BCE,110
+"Fortifications",lost,161859,14.76,-2.57,-2797,January 2797 BCE,110
 "Granaries",lost,161859,14.76,-2.57,-2772,January 2772 BCE,110
 "Terraced fields",independent,149755,5.26,-64.06,-2760,January 2760 BCE,0
-"Fortifications",lost,161859,14.76,-2.57,-2735,January 2735 BCE,110
+"Fortifications",lost,161859,14.76,-2.57,-2757,January 2757 BCE,110
 "Granaries",lost,161859,14.76,-2.57,-2720,January 2720 BCE,110
+"Fortifications",lost,161859,14.76,-2.57,-2705,January 2705 BCE,110
 "Granaries",lost,161859,14.76,-2.57,-2697,January 2697 BCE,110
 "Irrigation",independent,40638,41.11,-102.25,-2693,January 2693 BCE,0
+"Fortifications",lost,161859,14.76,-2.57,-2681,January 2681 BCE,110
 "Milk and wool",independent,2798,-10.77,-47.25,-2603,January 2603 BCE,0
 "Irrigation",independent,159148,-24.18,32.49,-2258,January 2258 BCE,0
 "Terraced fields",lost,41880,44.65,-122.80,-2122,January 2122 BCE,36
@@ -44,8 +46,8 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Granaries",lost,41996,45.02,-123.27,-2106,January 2106 BCE,73
 "Granaries",lost,42110,45.47,-123.08,-2106,January 2106 BCE,70
 "Terraced fields",lost,42110,45.47,-123.08,-2106,January 2106 BCE,41
-"Fortifications",lost,161859,14.76,-2.57,-2073,January 2073 BCE,110
 "Granaries",lost,161859,14.76,-2.57,-2059,January 2059 BCE,110
+"Fortifications",lost,161859,14.76,-2.57,-2048,January 2048 BCE,110
 "The sail",independent,53826,45.12,-67.39,-1781,January 1781 BCE,0
 "Terraced fields",independent,147878,-5.81,-50.87,-1682,January 1682 BCE,0
 "Granaries",lost,163977,9.33,-7.77,-1670,January 1670 BCE,21

@@ -86,7 +86,8 @@
   // At a contested cell, each side's strength is
   // scaled by max(minDistanceFactor, 1 - cost from its capital / its reach); chariots (attack)
   // multiply an attacker's strength on open lowland, fortifications (defence) a defended
-  // settlement's and its neighbouring cells' (a walled town shelters the country around it), and the defender adds militiaShare of the cell's people.
+  // settlement's and its neighbouring cells' (a walled town shelters the country around it),
+  // and the defender adds militiaShare of the cell's people.
   "weaponStrength": 0.5,
   "maxWeaponsPerSoldier": 2,
   "minDistanceFactor": 0.25,

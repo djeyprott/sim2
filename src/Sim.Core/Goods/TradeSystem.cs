@@ -101,6 +101,10 @@ public sealed class TradeSystem : ISimSystem
     private double[] _stepCost = Array.Empty<double>();
 
     private bool _built;
+
+    // Until the first update after a start or a load, when every settlement is checked once for
+    // arriving goods (links may be built before that, when polities ask for them).
+    private bool _arrivalsChecked;
     private (double Cost, int Id, bool Sea)[]?[] _chosen = Array.Empty<(double, int, bool)[]?>();
 
     // Paths are costed by the cells entered, so the cost back can differ by up to this much.
@@ -252,8 +256,9 @@ public sealed class TradeSystem : ISimSystem
         // list of where goods were sent is not saved. Either way they arrive in cell order, so the
         // ledger's sums are added in the same order and a loaded run matches to the last bit.
         var arriving = new List<int>();
-        if (!_built)
+        if (!_arrivalsChecked)
         {
+            _arrivalsChecked = true;
             for (int id = 0; id < settlements.IdCount; id++)
             {
                 if (settlements.IsAlive(id))
@@ -750,6 +755,11 @@ public sealed class TradeSystem : ISimSystem
     /// </summary>
     public bool TradesWith(int settlement, Func<int, bool> partnerCell)
     {
+        if (!_built)
+        {
+            BuildLinks(update: false, new List<int>());
+        }
+
         if (settlement < 0 || settlement + 1 >= _partnerStart.Length || !_settlements!.IsAlive(settlement))
         {
             return false;

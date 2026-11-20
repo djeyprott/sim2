@@ -837,6 +837,16 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         sim.Run(20 * 12);
         loaded.Run(20 * 12);
         Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load: " + StateDifferences(sim.State, loaded.State));
+
+        // Also when saved between trade's quarterly updates, since polities grow every month.
+        sim.Run(2);
+        save = new MemoryStream();
+        sim.Save(save);
+        loaded = FastFarming(9, polities: parameters);
+        loaded.Load(new MemoryStream(save.ToArray()));
+        sim.Run(5 * 12);
+        loaded.Run(5 * 12);
+        Assert.True(sim.StateChecksum() == loaded.StateChecksum(), "Differs after a load mid-quarter: " + StateDifferences(sim.State, loaded.State));
     }
 
     [Fact]

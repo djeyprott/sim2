@@ -1,0 +1,37 @@
+id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
+0,"Sastek",-4953,,,,1.249,0.640,0.900,,70,71,60,East Asia
+1,"Gazeyan",-4368,,,,0.851,0.705,1.001,,8,9,9,East Asia
+2,"Ousteikouk",-4305,,,,1.122,1.397,1.072,,16,32,2,East Asia
+3,"Kepesh",-3442,,,,2.500,0.520,1.203,,45,67,35,East Asia
+4,"Bushrorkei",-3399,,,,1.031,1.155,1.626,,39,39,31,East Asia
+5,"Mabegai",-3367,,,,1.821,1.391,0.905,,14,28,25,East Asia
+6,"Itar",-3319,,,,0.700,0.809,0.593,,7,10,6,East Asia
+7,"Dezoush",-3316,,,,0.910,0.604,1.527,,1,134,41,East Asia
+8,"Rensovath",-3299,,,,0.505,0.834,1.876,-3135,0,0,0,Southwest Asia
+9,"Sheipaish",-3223,,,,0.807,0.852,0.737,,1,2,2,East Asia
+10,"Latrukre",-3184,,,,0.883,1.420,1.406,,0,0,0,East Asia
+11,"Bashgain",-3181,,,,0.904,1.457,0.649,,1,1,0,East Asia
+12,"Treithbri",-3178,-3133,conquered,,0.904,1.177,0.596,,0,2,1,East Asia
+13,"Betrair",-3157,,,,1.019,0.606,2.500,,0,1,0,East Asia
+14,"Deite",-3063,-1090,conquered,,1.030,1.133,1.122,,8,18,8,East Asia
+15,"Yivou",-2958,,,,1.150,1.752,0.922,,4,6,3,East Asia
+16,"Oubith",-2867,,,,1.308,1.100,1.207,,11,15,9,Southeast Asia
+17,"Reiyus",-2506,,,,1.381,0.738,0.865,,6,13,0,East Asia
+18,"Thustin",-2499,,,,1.382,0.958,0.688,,10,10,5,East Asia
+19,"Retre",-2493,,,,0.527,1.614,1.181,,0,14,7,East Asia
+20,"Soutreithbar",-2417,,,,0.869,0.874,1.025,,1,2,1,Southeast Asia
+21,"Sikakruth",-2394,,,,1.150,0.737,1.513,-2262,0,0,0,Southwest Asia
+22,"Steike",-2247,,,,1.237,1.309,0.954,,5,11,5,South Asia
+23,"Zeyek",-2127,,,,2.156,2.028,0.700,,6,20,3,East Asia
+24,"Dousoth",-2087,,,,1.137,0.990,0.916,-1812,3,4,3,Sahel
+25,"Brestain",-2004,-1984,conquered,,0.990,0.637,1.480,,0,2,0,East Asia
+26,"Heheil",-1951,-1946,conquered,,0.658,0.999,1.448,,0,1,0,Southwest Asia
+27,"Peiheshoul",-1815,,,,1.125,2.109,0.632,,1,2,1,Southwest Asia
+28,"Tishaha",-1712,,,,0.576,1.247,0.997,,2,3,2,Southwest Asia
+29,"Stesei",-1627,,,,1.356,1.012,1.319,,7,11,6,East Asia
+30,"Biski",-1587,-1585,conquered,,0.989,0.868,1.915,,0,1,0,Southwest Asia
+31,"Heheil",-1548,-1545,conquered,,0.909,0.554,0.808,,0,1,0,Southwest Asia
+32,"Patrourzar",-1467,,,,0.725,0.994,1.344,,0,0,0,Sahel
+33,"Youse",-1430,,,,1.240,1.766,0.676,,3,5,2,East Asia
+34,"Noneishaik",-1258,-1242,conquered,,0.988,0.932,0.734,,0,3,0,East Asia
+35,"Gukrim",-1145,,,,1.429,1.384,0.741,-1133,0,0,0,Steppe and Central Asia

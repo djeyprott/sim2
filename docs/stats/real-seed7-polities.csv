@@ -1,0 +1,50 @@
+id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
+0,"Naboun",-5433,,,,1.364,0.413,0.718,,84,85,74,East Asia
+1,"Sipis",-5047,,,,0.524,1.089,0.985,,3,3,3,East Asia
+2,"Bouster",-4892,-4883,conquered,,0.923,1.031,1.009,,0,1,0,East Asia
+3,"Haizesh",-4546,-4503,conquered,,0.647,1.263,0.941,,0,2,0,East Asia
+4,"Thuyous",-4227,-3910,conquered,,1.259,1.257,1.032,,0,2,1,Southwest Asia
+5,"Hishkes",-4151,,,,0.891,0.647,1.469,,4,63,11,East Asia
+6,"Gemail",-4063,-2531,fell,,1.491,1.155,1.070,,32,33,9,Southwest Asia
+7,"Treoza",-3890,,,,0.569,1.244,0.763,-3057,3,27,18,Southwest Asia
+8,"Haizesh",-3610,-3597,conquered,,0.908,2.186,0.667,,0,2,0,East Asia
+9,"Theholbe",-3525,-2048,conquered,,0.725,1.204,0.904,,7,15,13,Southwest Asia
+10,"Zoreini",-3360,,,,1.178,0.797,0.829,,0,0,0,West and Central Africa
+11,"Zaiueik",-3309,,,,0.825,0.834,1.300,-2061,9,20,18,Southwest Asia
+12,"Mavaimshak",-3250,,,,1.834,0.718,0.906,-2973,2,2,1,Sahel
+13,"Brostete",-3171,,,,0.742,0.539,1.493,,1,1,1,East Asia
+14,"Zaigu",-3119,,,,0.640,0.484,1.520,,0,0,0,East Asia
+15,"Stetak",-3050,,,,0.950,0.446,1.305,,6,8,7,East Asia
+16,"Shehethir",-2803,,,,1.263,1.341,0.756,,0,0,0,East Asia
+17,"Mesvabai",-2798,,,,1.233,1.439,1.112,,24,54,27,East Asia
+18,"Siteinai",-2781,-1688,conquered,,0.854,0.988,1.257,,0,34,5,East Asia
+19,"Kroubrim",-2719,,,,0.817,0.751,0.644,,0,0,0,East Asia
+20,"Raishounor",-2461,,,,0.750,1.183,0.726,,10,12,6,East Asia
+21,"Stouyerber",-2442,-1575,conquered,,0.913,1.425,1.956,,24,24,15,Southwest Asia
+22,"Traisteiher",-2442,,,,1.024,1.009,0.950,,6,7,4,East Asia
+23,"Gipek",-2435,-2112,conquered,,1.209,0.927,1.277,,0,4,0,Southwest Asia
+24,"Stanais",-2423,-1961,conquered,,1.284,1.178,1.372,,0,24,1,Southwest Asia
+25,"Neirkohuth",-2402,,,,0.929,1.536,1.196,,3,3,3,Southwest Asia
+26,"Naha",-2375,,,,0.678,0.816,1.778,,0,1,0,Southwest Asia
+27,"Thukushi",-2373,,,,0.760,0.400,1.333,,2,3,1,East Asia
+28,"Dakrudosh",-2330,-2251,conquered,,1.023,0.735,1.195,,0,4,1,Southwest Asia
+29,"Thageis",-2295,,,,1.105,0.815,1.211,,0,0,0,Southwest Asia
+30,"Sheimeibou",-2273,,,,0.805,0.903,1.768,,1,2,2,East Asia
+31,"Pouthus",-1987,,,,0.713,1.372,1.046,,3,4,4,East Asia
+32,"Seei",-1902,,,,0.702,1.175,1.000,,0,6,1,East Asia
+33,"Zaidur",-1897,,,,0.724,0.736,1.024,,0,0,0,Americas
+34,"Thozu",-1862,,,,0.734,0.927,0.710,,0,1,0,East Asia
+35,"Meiththivi",-1849,,,,1.410,1.042,0.949,,0,0,0,East Asia
+36,"Trodais",-1650,,,,1.225,0.867,0.777,-1622,4,4,3,Steppe and Central Asia
+37,"Zoyeimou",-1629,,,,0.711,1.554,0.515,,0,1,0,East Asia
+38,"Dikaimi",-1555,,,,1.521,1.207,0.699,,0,0,0,East Asia
+39,"Neiethek",-1374,,,,1.178,1.433,0.587,,0,1,0,Southeast Asia
+40,"Hemeim",-1236,,,,1.138,1.239,0.668,,0,1,0,Southwest Asia
+41,"Royou",-1227,-1160,conquered,,0.650,0.628,1.010,,0,1,0,Americas
+42,"Zouman",-1225,,,,1.589,0.917,0.784,,1,1,1,Americas
+43,"Steistei",-1217,,,,1.060,0.935,1.035,,0,1,0,Steppe and Central Asia
+44,"Trourstabrel",-1122,,,,1.707,1.002,0.830,,3,4,1,East Asia
+45,"Ikkodoum",-1113,,,,0.719,0.798,0.786,,0,0,0,Americas
+46,"Stuehei",-1094,,,,0.706,1.234,1.419,,0,0,0,East and southern Africa
+47,"Brayaistom",-1070,,,,0.862,0.999,0.895,,0,3,0,Steppe and Central Asia
+48,"Thavoushel",-1013,,,,0.849,1.090,1.771,,0,0,0,West and Central Africa

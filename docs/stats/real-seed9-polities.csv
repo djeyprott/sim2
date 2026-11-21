@@ -1,0 +1,41 @@
+id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
+0,"Noheikrei",-4794,,,,0.588,0.623,0.551,,3,3,3,East Asia
+1,"Shabraithun",-4412,,,,0.887,0.881,0.836,,13,14,13,Americas
+2,"Yisasai",-3880,,,,0.990,0.961,0.941,,12,12,12,East Asia
+3,"Braga",-3718,,,,1.068,1.289,0.759,,0,0,0,East Asia
+4,"Boudas",-3682,,,,0.634,0.981,1.119,,3,4,4,East Asia
+5,"Kroutoth",-3654,,,,0.887,1.175,1.347,,0,0,0,East Asia
+6,"Lothayash",-3615,,,,1.517,0.441,2.500,,1,15,0,East Asia
+7,"Yaitaish",-3548,,,,0.604,0.894,1.039,,0,0,0,East Asia
+8,"Oukaan",-3523,,,,0.745,0.838,0.666,,0,1,0,East Asia
+9,"Neili",-3503,,,,1.476,1.750,1.266,,0,3,0,East Asia
+10,"Beithmath",-3300,,,,1.315,1.146,0.733,,11,38,21,Americas
+11,"Mopaiya",-3065,,,,0.848,2.500,0.999,,1,15,2,West and Central Africa
+12,"Sasapei",-3061,,,,1.149,0.846,1.508,,28,42,13,Americas
+13,"Netrepam",-3039,-2815,conquered,,1.051,0.672,1.639,,7,8,6,West and Central Africa
+14,"Zouthdeku",-2992,,,,0.929,1.134,1.522,,10,17,14,East Asia
+15,"Nothse",-2948,,,,0.988,0.857,0.893,,0,0,0,East Asia
+16,"Rostail",-2937,-2799,conquered,,1.109,1.547,0.782,,1,6,0,East Asia
+17,"Gouhaise",-2882,,,,0.676,0.544,0.923,,9,11,9,West and Central Africa
+18,"Petrele",-2879,-1782,conquered,,0.852,1.801,0.472,,6,9,3,East Asia
+19,"Kistountho",-2824,-1015,conquered,,1.170,0.920,1.179,,6,6,1,East Asia
+20,"Broubretein",-2812,,,,0.915,1.031,0.931,,9,15,8,East Asia
+21,"Vugozem",-2680,,,,0.827,0.785,0.704,,6,6,6,Americas
+22,"Vouvothzeith",-2532,,,,1.059,0.704,0.923,,0,8,4,Americas
+23,"Yammeil",-2385,,,,0.929,0.987,0.878,,1,2,1,West and Central Africa
+24,"Treibuputh",-2353,,,,0.631,0.789,0.724,,0,11,1,East Asia
+25,"Yougi",-2338,,,,0.449,0.513,0.718,,1,7,1,Americas
+26,"Runzish",-2264,,,,0.938,0.801,0.963,,8,13,10,East Asia
+27,"Youvarmain",-2245,,,,0.693,2.353,1.637,,0,3,3,Southeast Asia
+28,"Zorroshyair",-2050,,,,0.986,1.801,0.717,,0,0,0,Southwest Asia
+29,"Brukdothoul",-2034,,,,0.905,0.606,1.660,,0,1,0,Americas
+30,"Teigavuth",-2019,,,,0.790,0.776,1.584,,0,0,0,Sahel
+31,"Naishyamyesh",-1707,,,,1.190,0.794,1.097,,2,3,2,East Asia
+32,"Denakres",-1700,-1668,conquered,,0.698,1.273,1.233,,0,2,1,Americas
+33,"Theash",-1686,,,,1.064,1.143,0.829,,1,1,1,East Asia
+34,"Bribrail",-1602,,,,1.089,1.910,1.011,,0,0,0,West and Central Africa
+35,"Habreigeth",-1533,,,,1.838,0.641,0.738,,1,2,0,East Asia
+36,"Puneistosh",-1527,,,,0.853,1.935,0.708,,0,0,0,Southwest Asia
+37,"Geveshhaith",-1356,,,,0.964,0.737,0.670,,0,0,0,West and Central Africa
+38,"Shuzon",-1347,,,,0.724,1.172,1.344,,0,1,0,Southeast Asia
+39,"Bribraibes",-1024,,,,1.141,1.148,1.025,,0,1,1,Southeast Asia

@@ -1,0 +1,37 @@
+id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
+0,"Staso",-3961,,,,1.205,1.289,0.700,,16,16,14,Southwest Asia
+1,"Baistak",-3958,,,,0.641,0.967,0.794,,14,17,14,Southwest Asia
+2,"Bistuso",-3907,-3569,conquered,,0.644,1.464,0.775,,0,5,0,Sahel
+3,"Trobaketh",-3675,-2402,conquered,,2.287,0.700,1.636,,28,28,12,East Asia
+4,"Nailaibus",-3564,,,,0.643,0.703,0.716,,3,55,31,East Asia
+5,"Vabala",-3557,-3536,conquered,,0.662,1.883,0.853,,0,1,0,East Asia
+6,"Sinai",-3544,,,,0.894,0.746,0.681,,10,10,6,East Asia
+7,"Lemei",-3530,,,,1.319,0.939,1.077,,11,11,5,East Asia
+8,"Truzeindar",-3461,,,,1.404,0.865,0.535,,45,54,38,East Asia
+9,"Deku",-3374,,,,1.458,0.851,1.336,,23,25,12,East Asia
+10,"Vouvakron",-3348,,,,2.059,1.009,0.869,,17,28,9,East Asia
+11,"Tayeta",-3309,,,,0.571,0.612,0.918,,1,25,15,East Asia
+12,"Nothensoum",-3247,-2391,fell,,1.225,0.628,1.311,,1,1,1,Southwest Asia
+13,"Beilash",-3236,-3232,conquered,,1.470,0.879,0.942,,0,1,0,Southwest Asia
+14,"Shouhetes",-3217,,,,0.938,1.250,0.883,,46,46,42,East Asia
+15,"Painnimoush",-3165,,,,0.637,1.586,1.153,,0,1,1,Southeast Asia
+16,"Paivas",-3138,,,,0.786,1.168,0.438,,3,9,5,East Asia
+17,"Teshral",-3061,-3047,conquered,,0.985,1.115,1.677,,0,2,0,East Asia
+18,"Shikaim",-3031,,,,1.032,1.025,0.877,,5,5,5,East Asia
+19,"Nousmoune",-3015,,,,0.639,0.567,1.031,,0,103,15,East Asia
+20,"Vareth",-2993,,,,0.464,0.537,0.882,,1,37,2,Egypt and Nile
+21,"Bimougail",-2952,,,,0.806,0.959,1.505,,4,5,4,Southeast Asia
+22,"Trarus",-2805,,,,1.016,0.871,0.946,,1,1,1,East Asia
+23,"Staa",-2596,,,,0.824,1.453,0.710,,33,33,28,East Asia
+24,"Tugeir",-2554,,,,1.532,1.203,1.249,-2360,10,10,9,Southwest Asia
+25,"Beikepo",-2423,,,,1.286,1.136,0.987,,2,3,1,East Asia
+26,"Mothsegou",-2343,,,,0.647,0.898,1.185,,0,1,0,South Asia
+27,"Rekes",-2263,-2261,conquered,,0.607,1.049,1.132,,0,1,0,East Asia
+28,"Beilash",-1978,,,,1.056,0.726,0.942,,0,9,2,Southwest Asia
+29,"Dahusnath",-1925,,,,1.907,1.404,0.648,,0,1,0,East Asia
+30,"Kriston",-1890,,,,1.247,0.993,1.049,,1,18,0,East Asia
+31,"Sezaya",-1881,,,,1.178,0.847,1.637,-1593,0,10,1,Southwest Asia
+32,"Halel",-1864,,,,1.584,0.934,0.969,,22,23,22,Egypt and Nile
+33,"Dakribim",-1679,,,,1.148,1.192,1.122,,0,0,0,Americas
+34,"Shaiou",-1054,-1004,conquered,,1.215,0.970,1.029,,1,1,0,Southwest Asia
+35,"Nunovoun",-1005,,,,1.081,0.833,1.971,,0,0,0,Americas

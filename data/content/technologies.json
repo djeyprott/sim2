@@ -91,7 +91,7 @@
       "animals": [ "Cattle" ], "crops": [ "Wheat and barley" ],
       // 0.00015 since 0.4.1 (0.00001 before, when it could also be found by African hoe farmers).
       "chance": 0.00015, "spread": 0.01,
-      "settledYears": 3000,
+      "settledYears": 4000,
       // Oxen break more land and heavier soils, and the plough cuts the root mats of open grassland.
       "effects": { "farmYield": 1.25, "biomePenaltyLift": 1.0 },
       "history": "5000 BCE, the Alps; early 4th millennium BCE, northern Mesopotamia"

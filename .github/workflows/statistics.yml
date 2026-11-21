@@ -4,6 +4,13 @@ name: Statistics
 # so runs can be compared and tuned without downloading anything.
 on:
   workflow_dispatch:
+    inputs:
+      seeds:
+        description: Seeds to run (space-separated)
+        default: '1 2 3'
+      homelands:
+        description: Crop homelands (real, random or both)
+        default: 'real random'
   push:
     branches: [main]
     paths:
@@ -27,15 +34,15 @@ jobs:
           dotnet-version: 10.0.x
       - name: Build
         run: dotnet build src/Sim.Headless -c Release
-      - name: Run seeds 1 to 3 with real and random crop homelands, 9,000 years each
+      - name: Run the seeds (1 to 3 unless chosen) with real and random crop homelands, 9,000 years each
         # The six runs go side by side (each is single-threaded); each run's timings by system
         # are kept next to its statistics.
         timeout-minutes: 300
         run: |
           mkdir -p docs/stats
           pids=""
-          for homelands in real random; do
-            for seed in 1 2 3; do
+          for homelands in ${{ github.event.inputs.homelands || 'real random' }}; do
+            for seed in ${{ github.event.inputs.seeds || '1 2 3' }}; do
               dotnet run --project src/Sim.Headless -c Release --no-build -- \
                 --world data/earth.world --seed $seed --homelands $homelands --years 9000 \
                 --stats docs/stats/$homelands-seed$seed.csv > docs/stats/$homelands-seed$seed-timings.txt 2>&1 &

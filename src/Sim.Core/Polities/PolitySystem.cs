@@ -1203,12 +1203,15 @@ public sealed class PolitySystem : ISimSystem
         Dictionary<int, double> nearA = DistanceFactors(a, contested);
         Dictionary<int, double> nearD = DistanceFactors(d, contested);
 
-        // Soldiers fall in proportion to the other side's share of the strength.
-        double total = strengthA + strengthD;
+        // Soldiers fall in proportion to the other side's share of the strength, the attacker's
+        // counting its chariots and the defender's the walls of its capital: storming walls, or
+        // facing chariots, costs lives as well as ground.
+        double fightA = strengthA * AttackFactor(a), fightD = strengthD * DefenceFactor(Info(d).Capital);
+        double total = fightA + fightD;
         if (total > 0.0)
         {
-            _warAttackerDeaths![war] += KillSoldiers(a, _parameters.SoldierLoss * strengthD / total);
-            _warDefenderDeaths![war] += KillSoldiers(d, _parameters.SoldierLoss * strengthA / total);
+            _warAttackerDeaths![war] += KillSoldiers(a, _parameters.SoldierLoss * fightD / total);
+            _warDefenderDeaths![war] += KillSoldiers(d, _parameters.SoldierLoss * fightA / total);
         }
 
         // The defender's cells along the border, then the attacker's (the defender strikes back).

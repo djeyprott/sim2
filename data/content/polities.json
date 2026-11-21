@@ -106,8 +106,10 @@
   "peaceYears": 20,
 
   // Each year of war every cell along the border is contested: the side across takes it with
-  // chance takeRate x its local strength / both, if the cell is within its reach. Each side loses soldierLoss of its soldiers times
-  // the other's share of the strength, and every contested cell civilianLoss of its people. A taken
+  // chance takeRate x its local strength / both, if the cell is within its reach. Each side loses
+  // soldierLoss of its soldiers times the other's share of the strength (the attacker's counting
+  // its chariots, the defender's the walls of its capital), and every contested cell civilianLoss
+  // of its people. A taken
   // settlement loses burnShare of its store and plunderShare goes to the taker's capital; with
   // chance razeChance it is razed: razeDeaths of its people die and its store is lost. Taking the
   // enemy's capital conquers it: it ends, and the conqueror rules its cells within reach.

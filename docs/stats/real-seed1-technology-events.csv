@@ -70,12 +70,12 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Fortifications",independent,160205,-4.39,15.91,-1860,January 1860 BCE,0
 "Terraced fields",lost,16010,33.21,113.65,-1839,January 1839 BCE,4
 "The sail",lost,162214,6.35,1.75,-1616,January 1616 BCE,0
-"Copper working",independent,10581,51.16,56.05,-1381,January 1381 BCE,0
-"Granaries",independent,16873,35.80,108.00,-1277,January 1277 BCE,0
-"Granaries",lost,100237,28.44,-105.52,-1275,January 1275 BCE,339
-"Irrigation",independent,10830,51.82,14.80,-1273,January 1273 BCE,0
-"Terraced fields",lost,16013,33.27,112.11,-1268,January 1268 BCE,27
-"Granaries",lost,100070,27.60,-105.03,-1223,January 1223 BCE,517
-"Granaries",lost,100154,28.02,-105.28,-1220,January 1220 BCE,260
-"Irrigation",independent,98688,22.00,-100.87,-1036,January 1036 BCE,0
-"Fortifications",independent,153625,-17.85,-66.36,-1009,January 1009 BCE,0
+"The sail",independent,100162,24.72,-107.26,-1376,January 1376 BCE,0
+"Granaries",lost,100237,28.44,-105.52,-1273,January 1273 BCE,339
+"Granaries",lost,100070,27.60,-105.03,-1221,January 1221 BCE,517
+"Granaries",lost,100154,28.02,-105.28,-1218,January 1218 BCE,260
+"Granaries",lost,100070,27.60,-105.03,-1119,January 1119 BCE,517
+"Granaries",lost,100154,28.02,-105.28,-1119,January 1119 BCE,517
+"Horse herding",lost,12853,62.84,25.14,-1093,January 1093 BCE,1307
+"Outrigger canoes",first,5985,36.21,36.27,-1088,January 1088 BCE,0
+"Irrigation",independent,98587,21.97,-100.38,-1081,January 1081 BCE,0

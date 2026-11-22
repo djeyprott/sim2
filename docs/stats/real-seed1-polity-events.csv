@@ -402,314 +402,219 @@ split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1632,January 1632 BCE,21
 split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1632,January 1632 BCE,69
 peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1624,January 1624 BCE,0
 split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1620,January 1620 BCE,238
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1619,January 1619 BCE,24
-split,28,"Resheik",,,10614,52.51,30.45,Europe,-1611,January 1611 BCE,147
-split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1607,January 1607 BCE,28
-split,25,"Kroudothum",,,78766,19.52,101.86,East Asia,-1606,January 1606 BCE,42
+became_chiefdom,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1620,January 1620 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1605,January 1605 BCE,21
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1603,January 1603 BCE,0
 became_state,17,"Theiste",,,9569,48.41,34.57,Europe,-1599,January 1599 BCE,0
-founded,41,"Dabakban",,,161076,14.77,0.51,Sahel,-1598,January 1598 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1598,January 1598 BCE,0
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1595,January 1595 BCE,119
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1587,January 1587 BCE,102
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1584,January 1584 BCE,0
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1583,January 1583 BCE,40
-founded,42,"Traipebreish",,,78691,18.67,101.86,East Asia,-1580,January 1580 BCE,0
-war,25,"Kroudothum",42,"Traipebreish",78691,18.67,101.86,East Asia,-1580,January 1580 BCE,0
-conquered,42,"Traipebreish",25,"Kroudothum",78691,18.67,101.86,East Asia,-1577,January 1577 BCE,5
-war,20,"Hitram",25,"Kroudothum",78766,19.52,101.86,East Asia,-1577,January 1577 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1573,January 1573 BCE,21
-split,20,"Hitram",,,78210,17.92,104.32,Southeast Asia,-1568,January 1568 BCE,34
-peace,20,"Hitram",25,"Kroudothum",78766,19.52,101.86,East Asia,-1563,January 1563 BCE,0
-war,30,"Thaitukral",20,"Hitram",78210,17.92,104.32,Southeast Asia,-1563,January 1563 BCE,0
-war,41,"Dabakban",27,"Popoudou",160803,13.33,2.56,Sahel,-1563,January 1563 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1562,January 1562 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1561,January 1561 BCE,55
-peace,30,"Thaitukral",20,"Hitram",78210,17.92,104.32,Southeast Asia,-1556,January 1556 BCE,0
-peace,41,"Dabakban",27,"Popoudou",160803,13.33,2.56,Sahel,-1549,January 1549 BCE,0
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1548,January 1548 BCE,0
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1548,January 1548 BCE,92
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1544,January 1544 BCE,30
-split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1539,January 1539 BCE,58
-founded,43,"Thebotir",,,8445,43.70,24.43,Europe,-1532,January 1532 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1528,January 1528 BCE,0
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1524,January 1524 BCE,19
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1518,January 1518 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1518,January 1518 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1516,January 1516 BCE,19
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1516,January 1516 BCE,54
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1514,January 1514 BCE,0
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1514,January 1514 BCE,0
-split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1506,January 1506 BCE,63
-war,20,"Hitram",30,"Thaitukral",77608,15.00,106.04,Southeast Asia,-1505,January 1505 BCE,0
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1504,January 1504 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1498,January 1498 BCE,18
-war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1497,January 1497 BCE,0
-split,28,"Resheik",,,10614,52.51,30.45,Europe,-1497,January 1497 BCE,133
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1497,January 1497 BCE,22
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1496,January 1496 BCE,77
+split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1594,January 1594 BCE,63
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1589,January 1589 BCE,0
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1589,January 1589 BCE,26
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1583,January 1583 BCE,21
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1581,January 1581 BCE,0
+founded,41,"Seidour",,,78895,28.86,106.27,East Asia,-1580,January 1580 BCE,0
+peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1573,January 1573 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1567,January 1567 BCE,0
+peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1553,January 1553 BCE,0
+split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1551,January 1551 BCE,47
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1547,January 1547 BCE,59
+became_state,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1547,January 1547 BCE,0
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1541,January 1541 BCE,0
+peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1533,January 1533 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1533,January 1533 BCE,0
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1524,January 1524 BCE,28
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1520,January 1520 BCE,49
+peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1519,January 1519 BCE,0
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1512,January 1512 BCE,0
+split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1508,January 1508 BCE,65
+founded,42,"Leishyam",,,160940,14.05,1.54,Sahel,-1501,January 1501 BCE,0
+peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1498,January 1498 BCE,0
+war,23,"Tiyaith",29,"Zaadus",79343,20.59,98.68,East Asia,-1498,January 1498 BCE,0
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1498,January 1498 BCE,108
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1495,January 1495 BCE,11
+split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1494,January 1494 BCE,240
+became_chiefdom,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1494,January 1494 BCE,0
 war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1493,January 1493 BCE,0
-founded,44,"Romol",,,153520,-18.65,-65.38,Americas,-1491,January 1491 BCE,0
-peace,30,"Thaitukral",20,"Hitram",78210,17.92,104.32,Southeast Asia,-1491,January 1491 BCE,0
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1490,January 1490 BCE,0
-peace,40,"Duvam",19,"Laishou",9357,47.40,29.02,Europe,-1483,January 1483 BCE,0
-war,39,"Mua",44,"Romol",153520,-18.65,-65.38,Americas,-1482,January 1482 BCE,0
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1481,January 1481 BCE,0
-war,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1481,January 1481 BCE,0
-split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1481,January 1481 BCE,67
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1480,January 1480 BCE,55
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1479,January 1479 BCE,0
-peace,44,"Romol",39,"Mua",153621,-19.49,-65.37,Americas,-1477,January 1477 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1472,January 1472 BCE,0
-peace,35,"Apusas",31,"Mageihi",160889,-4.94,13.81,West and Central Africa,-1467,January 1467 BCE,0
-split,19,"Laishou",,,9357,47.40,29.02,Europe,-1467,January 1467 BCE,97
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1467,January 1467 BCE,269
-split,43,"Thebotir",,,8445,43.70,24.43,Europe,-1466,January 1466 BCE,51
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1464,January 1464 BCE,35
-split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1461,January 1461 BCE,17
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1458,January 1458 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1458,January 1458 BCE,0
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1456,January 1456 BCE,0
-war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1454,January 1454 BCE,0
-split,31,"Mageihi",,,160889,-4.94,13.81,West and Central Africa,-1454,January 1454 BCE,30
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1448,January 1448 BCE,28
-war,44,"Romol",39,"Mua",153621,-19.49,-65.37,Americas,-1446,January 1446 BCE,0
-conquered,39,"Mua",44,"Romol",153621,-19.49,-65.37,Americas,-1445,January 1445 BCE,5
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1444,January 1444 BCE,0
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1442,January 1442 BCE,0
-peace,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1440,January 1440 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1433,January 1433 BCE,0
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1433,January 1433 BCE,29
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1429,January 1429 BCE,93
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1421,January 1421 BCE,14
-peace,40,"Duvam",43,"Thebotir",8445,43.70,24.43,Europe,-1419,January 1419 BCE,0
-split,28,"Resheik",,,10614,52.51,30.45,Europe,-1418,January 1418 BCE,121
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1414,January 1414 BCE,0
-war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1412,January 1412 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1411,January 1411 BCE,212
-split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1406,January 1406 BCE,39
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1405,January 1405 BCE,0
-split,43,"Thebotir",,,8445,43.70,24.43,Europe,-1402,January 1402 BCE,62
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1400,January 1400 BCE,0
-peace,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1398,January 1398 BCE,0
-war,43,"Thebotir",19,"Laishou",9357,47.40,29.02,Europe,-1396,January 1396 BCE,0
-split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1394,January 1394 BCE,21
-split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1394,January 1394 BCE,51
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1393,January 1393 BCE,63
-war,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1392,January 1392 BCE,0
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1391,January 1391 BCE,0
-peace,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1388,January 1388 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1385,January 1385 BCE,29
-peace,19,"Laishou",43,"Thebotir",8445,43.70,24.43,Europe,-1382,January 1382 BCE,0
-war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1380,January 1380 BCE,0
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1380,January 1380 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1375,January 1375 BCE,49
-peace,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1374,January 1374 BCE,0
-founded,45,"Puker",,,160652,7.86,6.75,West and Central Africa,-1373,January 1373 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1373,January 1373 BCE,0
-split,43,"Thebotir",,,8445,43.70,24.43,Europe,-1371,January 1371 BCE,37
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1366,January 1366 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1364,January 1364 BCE,213
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1359,January 1359 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1357,January 1357 BCE,0
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1355,January 1355 BCE,171
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1354,January 1354 BCE,24
-war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1350,January 1350 BCE,0
-peace,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1348,January 1348 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1348,January 1348 BCE,15
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1347,January 1347 BCE,13
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1345,January 1345 BCE,81
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1344,January 1344 BCE,167
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1343,January 1343 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1338,January 1338 BCE,0
-war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1334,January 1334 BCE,0
-split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1333,January 1333 BCE,23
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1332,January 1332 BCE,52
-became_state,45,"Puker",,,160652,7.86,6.75,West and Central Africa,-1328,January 1328 BCE,0
-war,41,"Dabakban",27,"Popoudou",160803,13.33,2.56,Sahel,-1327,January 1327 BCE,0
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1325,January 1325 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1325,January 1325 BCE,161
-war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1322,January 1322 BCE,0
-peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1321,January 1321 BCE,0
-peace,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1321,January 1321 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1321,January 1321 BCE,0
-war,23,"Tiyaith",29,"Zaadus",79343,20.59,98.68,East Asia,-1321,January 1321 BCE,0
-war,45,"Puker",37,"Boumupeil",69204,8.46,14.17,West and Central Africa,-1321,January 1321 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1318,January 1318 BCE,23
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1317,January 1317 BCE,21
-split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1315,January 1315 BCE,32
-peace,41,"Dabakban",27,"Popoudou",160803,13.33,2.56,Sahel,-1313,January 1313 BCE,0
-founded,46,"Nouleikaish",,,154028,-17.51,-68.56,Americas,-1312,January 1312 BCE,0
-split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1311,January 1311 BCE,8
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1307,January 1307 BCE,0
-peace,29,"Zaadus",23,"Tiyaith",79130,22.00,100.87,East Asia,-1307,January 1307 BCE,0
-peace,37,"Boumupeil",45,"Puker",160652,7.86,6.75,West and Central Africa,-1307,January 1307 BCE,0
-war,25,"Kroudothum",29,"Zaadus",79343,20.59,98.68,East Asia,-1306,January 1306 BCE,0
-war,26,"Simeshil",45,"Puker",160652,7.86,6.75,West and Central Africa,-1306,January 1306 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1305,January 1305 BCE,0
-split,45,"Puker",,,160652,7.86,6.75,West and Central Africa,-1305,January 1305 BCE,142
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1302,January 1302 BCE,175
-war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1299,January 1299 BCE,0
-peace,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1298,January 1298 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1297,January 1297 BCE,42
-war,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1293,January 1293 BCE,0
-peace,25,"Kroudothum",29,"Zaadus",79343,20.59,98.68,East Asia,-1292,January 1292 BCE,0
-peace,26,"Simeshil",45,"Puker",160652,7.86,6.75,West and Central Africa,-1292,January 1292 BCE,0
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1291,January 1291 BCE,0
-split,23,"Tiyaith",,,79130,22.00,100.87,East Asia,-1291,January 1291 BCE,26
-war,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1285,January 1285 BCE,0
-peace,46,"Nouleikaish",36,"Bathhul",153828,-17.89,-67.33,Americas,-1282,January 1282 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1280,January 1280 BCE,0
-split,36,"Bathhul",,,153828,-17.89,-67.33,Americas,-1277,January 1277 BCE,7
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1274,January 1274 BCE,186
-peace,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1271,January 1271 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1270,January 1270 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1267,January 1267 BCE,21
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1266,January 1266 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1265,January 1265 BCE,45
-war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1260,January 1260 BCE,0
-conquered,19,"Laishou",17,"Theiste",9357,47.40,29.02,Europe,-1258,January 1258 BCE,4
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1256,January 1256 BCE,0
-war,43,"Thebotir",17,"Theiste",9569,48.41,34.57,Europe,-1256,January 1256 BCE,0
-founded,47,"Koutratoush",,,153522,-17.83,-65.87,Americas,-1254,January 1254 BCE,0
-war,44,"Romol",47,"Koutratoush",153522,-17.83,-65.87,Americas,-1250,January 1250 BCE,0
-conquered,47,"Koutratoush",44,"Romol",153522,-17.83,-65.87,Americas,-1249,January 1249 BCE,5
-founded,48,"Zamde",,,79061,20.72,100.63,East Asia,-1246,January 1246 BCE,0
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1245,January 1245 BCE,0
-split,41,"Dabakban",,,161076,14.77,0.51,Sahel,-1245,January 1245 BCE,18
-peace,17,"Theiste",43,"Thebotir",8445,43.70,24.43,Europe,-1242,January 1242 BCE,0
-war,12,"Braimek",17,"Theiste",9569,48.41,34.57,Europe,-1242,January 1242 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1242,January 1242 BCE,134
-war,25,"Kroudothum",48,"Zamde",79061,20.72,100.63,East Asia,-1239,January 1239 BCE,0
-conquered,48,"Zamde",25,"Kroudothum",79061,20.72,100.63,East Asia,-1235,January 1235 BCE,5
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1235,January 1235 BCE,8
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1233,January 1233 BCE,0
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1232,January 1232 BCE,0
-split,43,"Thebotir",,,8445,43.70,24.43,Europe,-1229,January 1229 BCE,77
-conquered,17,"Theiste",12,"Braimek",9569,48.41,34.57,Europe,-1228,January 1228 BCE,225
-broke_away,49,"Nomu",17,"Theiste",8791,45.25,28.36,Europe,-1228,January 1228 BCE,0
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1219,January 1219 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1219,January 1219 BCE,27
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1216,January 1216 BCE,71
-war,49,"Nomu",40,"Duvam",9589,47.54,20.52,Europe,-1215,January 1215 BCE,0
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1212,January 1212 BCE,82
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1209,January 1209 BCE,0
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1209,January 1209 BCE,14
-war,27,"Popoudou",41,"Dabakban",161076,14.77,0.51,Sahel,-1208,January 1208 BCE,0
-war,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1207,January 1207 BCE,0
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1207,January 1207 BCE,153
-peace,40,"Duvam",49,"Nomu",8791,45.25,28.36,Europe,-1201,January 1201 BCE,0
-war,49,"Nomu",28,"Resheik",10614,52.51,30.45,Europe,-1197,January 1197 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1197,January 1197 BCE,42
-split,49,"Nomu",,,8791,45.25,28.36,Europe,-1196,January 1196 BCE,79
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1195,January 1195 BCE,0
-peace,27,"Popoudou",41,"Dabakban",161076,14.77,0.51,Sahel,-1194,January 1194 BCE,0
-peace,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1193,January 1193 BCE,0
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1191,January 1191 BCE,69
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1189,January 1189 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1184,January 1184 BCE,18
-peace,49,"Nomu",28,"Resheik",10614,52.51,30.45,Europe,-1183,January 1183 BCE,0
-war,12,"Braimek",28,"Resheik",10614,52.51,30.45,Europe,-1182,January 1182 BCE,0
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1175,January 1175 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1172,January 1172 BCE,9
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1171,January 1171 BCE,0
-founded,50,"Kreirveikzeil",,,8449,43.46,21.91,Europe,-1168,January 1168 BCE,0
-peace,12,"Braimek",28,"Resheik",10614,52.51,30.45,Europe,-1168,January 1168 BCE,0
-war,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1165,January 1165 BCE,0
-war,43,"Thebotir",50,"Kreirveikzeil",8449,43.46,21.91,Europe,-1163,January 1163 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1161,January 1161 BCE,40
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1157,January 1157 BCE,0
-peace,43,"Thebotir",50,"Kreirveikzeil",8449,43.46,21.91,Europe,-1157,January 1157 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1153,January 1153 BCE,0
-peace,46,"Nouleikaish",36,"Bathhul",153828,-17.89,-67.33,Americas,-1151,January 1151 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1150,January 1150 BCE,14
-split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1141,January 1141 BCE,57
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1139,January 1139 BCE,0
-split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1138,January 1138 BCE,68
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1136,January 1136 BCE,0
-war,50,"Kreirveikzeil",40,"Duvam",9589,47.54,20.52,Europe,-1136,January 1136 BCE,0
-war,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1128,January 1128 BCE,0
-war,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1126,January 1126 BCE,0
-split,31,"Mageihi",,,160889,-4.94,13.81,West and Central Africa,-1123,January 1123 BCE,38
-peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1122,January 1122 BCE,0
-peace,50,"Kreirveikzeil",40,"Duvam",9589,47.54,20.52,Europe,-1122,January 1122 BCE,0
-founded,51,"Bretreir",,,7962,41.99,24.24,Europe,-1119,January 1119 BCE,0
-war,49,"Nomu",40,"Duvam",9589,47.54,20.52,Europe,-1119,January 1119 BCE,0
-split,25,"Kroudothum",,,78766,19.52,101.86,East Asia,-1117,January 1117 BCE,44
-war,43,"Thebotir",51,"Bretreir",7962,41.99,24.24,Europe,-1116,January 1116 BCE,0
-peace,35,"Apusas",31,"Mageihi",160889,-4.94,13.81,West and Central Africa,-1114,January 1114 BCE,0
-peace,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1112,January 1112 BCE,0
-peace,43,"Thebotir",51,"Bretreir",7962,41.99,24.24,Europe,-1110,January 1110 BCE,0
-split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1108,January 1108 BCE,39
-split,41,"Dabakban",,,161076,14.77,0.51,Sahel,-1108,January 1108 BCE,12
-war,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1107,January 1107 BCE,0
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1107,January 1107 BCE,65
-split,45,"Puker",,,160652,7.86,6.75,West and Central Africa,-1106,January 1106 BCE,226
-peace,40,"Duvam",49,"Nomu",8791,45.25,28.36,Europe,-1105,January 1105 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1104,January 1104 BCE,0
-split,49,"Nomu",,,8791,45.25,28.36,Europe,-1104,January 1104 BCE,52
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1103,January 1103 BCE,159
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1102,January 1102 BCE,0
-war,27,"Popoudou",41,"Dabakban",161076,14.77,0.51,Sahel,-1095,January 1095 BCE,0
-peace,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1093,January 1093 BCE,0
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1093,January 1093 BCE,0
-peace,27,"Popoudou",41,"Dabakban",161076,14.77,0.51,Sahel,-1091,January 1091 BCE,0
-peace,40,"Duvam",43,"Thebotir",8445,43.70,24.43,Europe,-1090,January 1090 BCE,0
-war,49,"Nomu",40,"Duvam",9589,47.54,20.52,Europe,-1085,January 1085 BCE,0
-split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1084,January 1084 BCE,38
-split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1084,January 1084 BCE,36
-war,45,"Puker",26,"Simeshil",162463,7.10,0.25,West and Central Africa,-1082,January 1082 BCE,0
-war,20,"Hitram",25,"Kroudothum",78766,19.52,101.86,East Asia,-1081,January 1081 BCE,0
-split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1080,January 1080 BCE,30
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1079,January 1079 BCE,254
-split,28,"Resheik",,,10614,52.51,30.45,Europe,-1078,January 1078 BCE,136
-founded,52,"Deithudei",,,79348,18.39,97.49,East Asia,-1077,January 1077 BCE,0
-war,34,"Shunnistor",52,"Deithudei",79348,18.39,97.49,East Asia,-1076,January 1076 BCE,0
-conquered,34,"Shunnistor",52,"Deithudei",79415,18.79,97.24,East Asia,-1075,January 1075 BCE,6
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1073,January 1073 BCE,0
-peace,40,"Duvam",49,"Nomu",8791,45.25,28.36,Europe,-1071,January 1071 BCE,0
-war,49,"Nomu",12,"Braimek",9553,48.06,45.94,Steppe and Central Asia,-1070,January 1070 BCE,0
-split,20,"Hitram",,,78210,17.92,104.32,Southeast Asia,-1069,January 1069 BCE,41
-peace,45,"Puker",26,"Simeshil",162463,7.10,0.25,West and Central Africa,-1068,January 1068 BCE,0
-peace,25,"Kroudothum",20,"Hitram",78210,17.92,104.32,Southeast Asia,-1067,January 1067 BCE,0
-founded,53,"Zailsaishnek",,,153625,-17.85,-66.36,Americas,-1063,January 1063 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1063,January 1063 BCE,94
-war,44,"Romol",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1062,January 1062 BCE,0
-founded,54,"Boui",,,9467,47.83,29.30,Europe,-1061,January 1061 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1060,January 1060 BCE,0
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1059,January 1059 BCE,0
-split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1059,January 1059 BCE,44
-split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1057,January 1057 BCE,95
-peace,12,"Braimek",49,"Nomu",8791,45.25,28.36,Europe,-1056,January 1056 BCE,0
-war,36,"Bathhul",46,"Nouleikaish",154028,-17.51,-68.56,Americas,-1055,January 1055 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1055,January 1055 BCE,121
-peace,44,"Romol",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1053,January 1053 BCE,0
-split,20,"Hitram",,,78210,17.92,104.32,Southeast Asia,-1052,January 1052 BCE,23
-war,29,"Zaadus",25,"Kroudothum",78766,19.52,101.86,East Asia,-1051,January 1051 BCE,0
-war,45,"Puker",37,"Boumupeil",69204,8.46,14.17,West and Central Africa,-1051,January 1051 BCE,0
-war,49,"Nomu",54,"Boui",9467,47.83,29.30,Europe,-1048,January 1048 BCE,0
-conquered,54,"Boui",49,"Nomu",9467,47.83,29.30,Europe,-1047,January 1047 BCE,8
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1046,January 1046 BCE,0
-war,49,"Nomu",40,"Duvam",9589,47.54,20.52,Europe,-1043,January 1043 BCE,0
-split,40,"Duvam",,,9589,47.54,20.52,Europe,-1042,January 1042 BCE,99
-peace,46,"Nouleikaish",36,"Bathhul",153828,-17.89,-67.33,Americas,-1041,January 1041 BCE,0
-peace,25,"Kroudothum",29,"Zaadus",79343,20.59,98.68,East Asia,-1037,January 1037 BCE,0
-peace,45,"Puker",37,"Boumupeil",69204,8.46,14.17,West and Central Africa,-1037,January 1037 BCE,0
-split,53,"Zailsaishnek",,,153625,-17.85,-66.36,Americas,-1037,January 1037 BCE,4
-war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1036,January 1036 BCE,0
-war,36,"Bathhul",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1033,January 1033 BCE,0
-split,36,"Bathhul",,,153828,-17.89,-67.33,Americas,-1030,January 1030 BCE,4
-peace,40,"Duvam",49,"Nomu",8791,45.25,28.36,Europe,-1029,January 1029 BCE,0
-peace,36,"Bathhul",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1029,January 1029 BCE,0
-war,49,"Nomu",12,"Braimek",9553,48.06,45.94,Steppe and Central Asia,-1029,January 1029 BCE,0
-war,44,"Romol",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1027,January 1027 BCE,0
-peace,44,"Romol",53,"Zailsaishnek",153625,-17.85,-66.36,Americas,-1023,January 1023 BCE,0
-split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1023,January 1023 BCE,31
-peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1022,January 1022 BCE,0
-war,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1018,January 1018 BCE,0
-peace,12,"Braimek",49,"Nomu",8791,45.25,28.36,Europe,-1015,January 1015 BCE,0
-war,14,"Varak",12,"Braimek",9553,48.06,45.94,Steppe and Central Asia,-1015,January 1015 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1015,January 1015 BCE,208
-peace,43,"Thebotir",40,"Duvam",9589,47.54,20.52,Europe,-1004,January 1004 BCE,0
-split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1004,January 1004 BCE,113
-peace,12,"Braimek",14,"Varak",8536,44.47,42.20,Steppe and Central Asia,-1003,January 1003 BCE,0
-war,28,"Resheik",12,"Braimek",9553,48.06,45.94,Steppe and Central Asia,-1003,January 1003 BCE,0
+war,27,"Popoudou",42,"Leishyam",160940,14.05,1.54,Sahel,-1493,January 1493 BCE,0
+conquered,42,"Leishyam",27,"Popoudou",160940,14.05,1.54,Sahel,-1490,January 1490 BCE,4
+split,28,"Resheik",,,10614,52.51,30.45,Europe,-1490,January 1490 BCE,152
+peace,23,"Tiyaith",29,"Zaadus",79343,20.59,98.68,East Asia,-1484,January 1484 BCE,0
+founded,43,"Tekrer",,,79537,23.55,98.90,East Asia,-1481,January 1481 BCE,0
+split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1480,January 1480 BCE,41
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1479,January 1479 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1475,January 1475 BCE,25
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1471,January 1471 BCE,153
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1467,January 1467 BCE,68
+war,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1466,January 1466 BCE,0
+split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1464,January 1464 BCE,42
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1462,January 1462 BCE,20
+peace,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1452,January 1452 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1452,January 1452 BCE,0
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1446,January 1446 BCE,54
+split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1446,January 1446 BCE,44
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1444,January 1444 BCE,19
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1438,January 1438 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1419,January 1419 BCE,78
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1417,January 1417 BCE,0
+became_state,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1413,January 1413 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1411,January 1411 BCE,23
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1403,January 1403 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1399,January 1399 BCE,90
+split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1390,January 1390 BCE,201
+became_chiefdom,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1390,January 1390 BCE,0
+war,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1387,January 1387 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1387,January 1387 BCE,63
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1382,January 1382 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1381,January 1381 BCE,3
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1379,January 1379 BCE,29
+split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1374,January 1374 BCE,54
+peace,14,"Varak",15,"Beishous",7552,40.82,46.56,Southwest Asia,-1373,January 1373 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1371,January 1371 BCE,68
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1368,January 1368 BCE,0
+war,29,"Zaadus",43,"Tekrer",79537,23.55,98.90,East Asia,-1368,January 1368 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1359,January 1359 BCE,43
+peace,29,"Zaadus",43,"Tekrer",79537,23.55,98.90,East Asia,-1354,January 1354 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1346,January 1346 BCE,0
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1342,January 1342 BCE,0
+split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1341,January 1341 BCE,55
+war,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1338,January 1338 BCE,0
+split,43,"Tekrer",,,79537,23.55,98.90,East Asia,-1337,January 1337 BCE,8
+peace,31,"Mageihi",35,"Apusas",160067,-3.60,15.91,West and Central Africa,-1336,January 1336 BCE,0
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1336,January 1336 BCE,55
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1334,January 1334 BCE,114
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1333,January 1333 BCE,12
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1332,January 1332 BCE,0
+split,19,"Laishou",,,9357,47.40,29.02,Europe,-1329,January 1329 BCE,102
+peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1328,January 1328 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1327,January 1327 BCE,33
+founded,44,"Haikreish",,,8790,45.28,29.02,Europe,-1316,January 1316 BCE,0
+war,19,"Laishou",44,"Haikreish",8790,45.28,29.02,Europe,-1316,January 1316 BCE,0
+peace,19,"Laishou",44,"Haikreish",8790,45.28,29.02,Europe,-1315,January 1315 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1313,January 1313 BCE,73
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1312,January 1312 BCE,19
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1310,January 1310 BCE,0
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1307,January 1307 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1301,January 1301 BCE,32
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1296,January 1296 BCE,0
+war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1296,January 1296 BCE,0
+peace,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1293,January 1293 BCE,0
+peace,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1282,January 1282 BCE,0
+founded,45,"Shotroteth",,,79740,18.57,94.84,South Asia,-1276,January 1276 BCE,0
+war,33,"Shurin",45,"Shotroteth",79740,18.57,94.84,South Asia,-1274,January 1274 BCE,0
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1274,January 1274 BCE,37
+founded,46,"Haikos",,,8446,43.64,23.80,Europe,-1270,January 1270 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1269,January 1269 BCE,0
+war,19,"Laishou",44,"Haikreish",8790,45.28,29.02,Europe,-1265,January 1265 BCE,0
+conquered,44,"Haikreish",19,"Laishou",8790,45.28,29.02,Europe,-1264,January 1264 BCE,0
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1264,January 1264 BCE,107
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1261,January 1261 BCE,52
+peace,33,"Shurin",45,"Shotroteth",79740,18.57,94.84,South Asia,-1260,January 1260 BCE,0
+split,28,"Resheik",,,10614,52.51,30.45,Europe,-1258,January 1258 BCE,129
+peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1255,January 1255 BCE,0
+split,43,"Tekrer",,,79537,23.55,98.90,East Asia,-1254,January 1254 BCE,11
+became_state,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1253,January 1253 BCE,0
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1248,January 1248 BCE,0
+peace,40,"Duvam",46,"Haikos",8446,43.64,23.80,Europe,-1234,January 1234 BCE,0
+war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1232,January 1232 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1230,January 1230 BCE,0
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1224,January 1224 BCE,26
+split,46,"Haikos",,,8446,43.64,23.80,Europe,-1220,January 1220 BCE,42
+peace,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1218,January 1218 BCE,0
+split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1218,January 1218 BCE,234
+became_chiefdom,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1218,January 1218 BCE,0
+split,46,"Haikos",,,8446,43.64,23.80,Europe,-1217,January 1217 BCE,13
+peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1216,January 1216 BCE,0
+war,45,"Shotroteth",34,"Shunnistor",79415,18.79,97.24,East Asia,-1216,January 1216 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1216,January 1216 BCE,30
+split,31,"Mageihi",,,160889,-4.94,13.81,West and Central Africa,-1214,January 1214 BCE,35
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1212,January 1212 BCE,7
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1211,January 1211 BCE,0
+peace,45,"Shotroteth",34,"Shunnistor",79415,18.79,97.24,East Asia,-1208,January 1208 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1205,January 1205 BCE,64
+peace,40,"Duvam",46,"Haikos",8446,43.64,23.80,Europe,-1197,January 1197 BCE,0
+war,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1197,January 1197 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1195,January 1195 BCE,0
+split,46,"Haikos",,,8446,43.64,23.80,Europe,-1188,January 1188 BCE,26
+peace,19,"Laishou",40,"Duvam",9589,47.54,20.52,Europe,-1183,January 1183 BCE,0
+peace,21,"Rashoth",10,"Rukkaimou",6392,37.45,37.68,Southwest Asia,-1181,January 1181 BCE,0
+war,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1181,January 1181 BCE,0
+peace,19,"Laishou",46,"Haikos",8446,43.64,23.80,Europe,-1174,January 1174 BCE,0
+war,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1172,January 1172 BCE,0
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1169,January 1169 BCE,0
+peace,17,"Theiste",19,"Laishou",9357,47.40,29.02,Europe,-1165,January 1165 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1165,January 1165 BCE,53
+split,46,"Haikos",,,8446,43.64,23.80,Europe,-1165,January 1165 BCE,34
+split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1162,January 1162 BCE,41
+founded,47,"Siralba",,,7835,41.74,26.47,Southwest Asia,-1157,January 1157 BCE,0
+peace,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1155,January 1155 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1155,January 1155 BCE,0
+split,19,"Laishou",,,9357,47.40,29.02,Europe,-1155,January 1155 BCE,61
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1149,January 1149 BCE,92
+war,46,"Haikos",47,"Siralba",7835,41.74,26.47,Southwest Asia,-1148,January 1148 BCE,0
+split,19,"Laishou",,,9357,47.40,29.02,Europe,-1147,January 1147 BCE,17
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1147,January 1147 BCE,178
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1147,January 1147 BCE,9
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1146,January 1146 BCE,28
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1142,January 1142 BCE,10
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1141,January 1141 BCE,0
+war,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1140,January 1140 BCE,0
+split,5,"Sheikeistus",,,6385,37.34,41.59,Southwest Asia,-1140,January 1140 BCE,65
+peace,46,"Haikos",47,"Siralba",7835,41.74,26.47,Southwest Asia,-1137,January 1137 BCE,0
+peace,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1126,January 1126 BCE,0
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1126,January 1126 BCE,29
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1125,January 1125 BCE,0
+split,30,"Thaitukral",,,77608,15.00,106.04,Southeast Asia,-1124,January 1124 BCE,48
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1121,January 1121 BCE,42
+split,28,"Resheik",,,10614,52.51,30.45,Europe,-1119,January 1119 BCE,92
+split,46,"Haikos",,,8446,43.64,23.80,Europe,-1118,January 1118 BCE,54
+war,20,"Hitram",30,"Thaitukral",77608,15.00,106.04,Southeast Asia,-1114,January 1114 BCE,0
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1114,January 1114 BCE,34
+split,47,"Siralba",,,7835,41.74,26.47,Southwest Asia,-1114,January 1114 BCE,13
+peace,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1112,January 1112 BCE,0
+war,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1112,January 1112 BCE,0
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1112,January 1112 BCE,28
+split,39,"Mua",,,153621,-19.49,-65.37,Americas,-1112,January 1112 BCE,14
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1109,January 1109 BCE,0
+split,34,"Shunnistor",,,79415,18.79,97.24,East Asia,-1103,January 1103 BCE,26
+split,40,"Duvam",,,9589,47.54,20.52,Europe,-1102,January 1102 BCE,20
+peace,30,"Thaitukral",20,"Hitram",78210,17.92,104.32,Southeast Asia,-1100,January 1100 BCE,0
+peace,19,"Laishou",46,"Haikos",8446,43.64,23.80,Europe,-1098,January 1098 BCE,0
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1095,January 1095 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1094,January 1094 BCE,91
+war,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1092,January 1092 BCE,0
+war,29,"Zaadus",34,"Shunnistor",79415,18.79,97.24,East Asia,-1086,January 1086 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1082,January 1082 BCE,49
+split,15,"Beishous",,,7552,40.82,46.56,Southwest Asia,-1079,January 1079 BCE,18
+peace,17,"Theiste",40,"Duvam",9589,47.54,20.52,Europe,-1078,January 1078 BCE,0
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1076,January 1076 BCE,0
+peace,34,"Shunnistor",29,"Zaadus",79343,20.59,98.68,East Asia,-1072,January 1072 BCE,0
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1069,January 1069 BCE,0
+war,12,"Braimek",17,"Theiste",9569,48.41,34.57,Europe,-1068,January 1068 BCE,0
+peace,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1065,January 1065 BCE,0
+war,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1058,January 1058 BCE,0
+split,10,"Rukkaimou",,,6392,37.45,37.68,Southwest Asia,-1056,January 1056 BCE,67
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1056,January 1056 BCE,37
+split,35,"Apusas",,,160067,-3.60,15.91,West and Central Africa,-1056,January 1056 BCE,55
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1055,January 1055 BCE,0
+peace,12,"Braimek",17,"Theiste",9569,48.41,34.57,Europe,-1054,January 1054 BCE,0
+war,28,"Resheik",17,"Theiste",9569,48.41,34.57,Europe,-1052,January 1052 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1047,January 1047 BCE,131
+split,43,"Tekrer",,,79537,23.55,98.90,East Asia,-1047,January 1047 BCE,13
+peace,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1044,January 1044 BCE,0
+peace,17,"Theiste",28,"Resheik",10614,52.51,30.45,Europe,-1040,January 1040 BCE,0
+war,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1039,January 1039 BCE,0
+split,28,"Resheik",,,10614,52.51,30.45,Europe,-1036,January 1036 BCE,110
+war,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1032,January 1032 BCE,0
+war,12,"Braimek",17,"Theiste",9569,48.41,34.57,Europe,-1030,January 1030 BCE,0
+peace,46,"Haikos",40,"Duvam",9589,47.54,20.52,Europe,-1025,January 1025 BCE,0
+conquered,17,"Theiste",12,"Braimek",9569,48.41,34.57,Europe,-1024,January 1024 BCE,191
+war,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1023,January 1023 BCE,0
+split,27,"Popoudou",,,160803,13.33,2.56,Sahel,-1020,January 1020 BCE,33
+split,37,"Boumupeil",,,69204,8.46,14.17,West and Central Africa,-1019,January 1019 BCE,44
+peace,10,"Rukkaimou",21,"Rashoth",7319,40.37,33.91,Southwest Asia,-1018,January 1018 BCE,0
+split,26,"Simeshil",,,162463,7.10,0.25,West and Central Africa,-1018,January 1018 BCE,89
+war,29,"Zaadus",43,"Tekrer",79537,23.55,98.90,East Asia,-1017,January 1017 BCE,0
+peace,46,"Haikos",19,"Laishou",9357,47.40,29.02,Europe,-1009,January 1009 BCE,0
+war,28,"Resheik",19,"Laishou",9357,47.40,29.02,Europe,-1009,January 1009 BCE,0
+peace,29,"Zaadus",43,"Tekrer",79537,23.55,98.90,East Asia,-1005,January 1005 BCE,0
+founded,48,"Hisam",,,160653,8.23,6.51,West and Central Africa,-1001,January 1001 BCE,0
+split,21,"Rashoth",,,7319,40.37,33.91,Southwest Asia,-1001,January 1001 BCE,60

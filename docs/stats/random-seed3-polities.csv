@@ -1,12 +1,12 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
 0,"Bruthos",-6069,-3964,conquered,,0.609,0.784,1.044,-4215,10,17,14,Americas
-1,"Maileigeth",-5479,-3010,conquered,,0.782,0.976,1.284,,22,28,5,Americas
+1,"Maileigeth",-5479,-2151,conquered,,0.782,0.976,1.284,-3513,25,32,12,Americas
 2,"Loleikre",-5462,-4892,fell,,1.032,0.703,1.361,,4,7,7,Americas
-3,"Telage",-5444,-3656,fell,,1.328,0.905,1.072,-4230,10,20,9,Americas
+3,"Telage",-5444,-3649,fell,,1.328,0.905,1.072,-4230,9,20,9,Americas
 4,"Keirish",-5370,-5287,conquered,,0.659,0.555,0.759,,0,5,0,Americas
 5,"Zouri",-5301,-5287,conquered,,0.850,1.756,0.753,,0,1,0,Americas
-6,"Bripo",-5287,-3539,fell,,1.484,0.833,0.626,-4120,19,30,21,Americas
-7,"Pitabreish",-5185,,,,1.097,1.122,0.885,-3184,79,82,51,Americas
+6,"Bripo",-5287,,,,1.484,0.833,0.626,-4120,31,38,30,Americas
+7,"Pitabreish",-5185,,,,1.097,1.122,0.885,-3211,55,58,38,Americas
 8,"Retha",-5083,-5059,conquered,,1.095,1.021,1.019,,0,2,0,Americas
 9,"Thounouthri",-5011,-4961,conquered,,2.157,1.411,0.953,,0,2,0,Americas
 10,"Vetage",-4985,-4769,conquered,9,1.507,1.297,1.425,,5,5,3,Americas
@@ -16,12 +16,12 @@ id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_sta
 14,"Thailaiveis",-4765,-4098,conquered,13,0.945,0.876,0.823,,6,6,5,Americas
 15,"Aihestak",-4764,-4075,fell,,1.342,0.626,1.122,,4,10,5,Americas
 16,"Naikouth",-4717,-4694,conquered,,0.720,2.083,1.207,,0,2,0,Americas
-17,"Shouzouya",-4639,,,,0.937,1.171,1.175,-2880,40,44,33,Americas
+17,"Shouzouya",-4639,,,,0.937,1.171,1.175,-2880,47,48,38,Americas
 18,"Lishepein",-4624,-4620,conquered,,1.168,1.319,1.566,,0,1,0,Americas
 19,"Stegu",-4580,-4007,fell,,1.174,0.809,0.512,,1,7,4,Americas
-20,"Outhunum",-4560,,,,0.944,0.950,0.667,-2634,44,44,42,Americas
+20,"Outhunum",-4560,,,,0.944,0.950,0.667,-2634,19,19,18,Americas
 21,"Shetrais",-4442,-4163,conquered,,0.892,1.124,2.195,,0,2,0,Americas
-22,"Bekhunein",-4407,,,,0.993,0.903,1.935,-2762,31,33,26,Americas
+22,"Bekhunein",-4407,,,,0.993,0.903,1.935,-2762,20,22,12,Americas
 23,"Stiyeshom",-4353,-4285,conquered,7,0.630,0.991,0.687,,0,2,1,Americas
 24,"Teshim",-4230,-3729,conquered,14,1.791,0.921,0.579,,19,22,14,Americas
 25,"Thaiker",-4099,-4090,conquered,24,0.854,1.104,0.759,,0,1,0,Americas
@@ -30,126 +30,95 @@ id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_sta
 28,"Mebrouk",-3942,-3716,conquered,,0.704,0.823,0.675,,0,7,0,Americas
 29,"Maibreither",-3930,-3789,fell,3,0.608,0.950,0.708,-3930,0,9,2,Americas
 30,"Zurreis",-3926,-3861,conquered,,1.157,0.565,1.076,,0,2,0,Americas
-31,"Golte",-3897,-2769,fell,,0.798,0.723,1.058,-3286,3,10,8,Americas
-32,"Thebek",-3889,-3506,conquered,,1.245,1.940,1.229,,1,2,0,Americas
-33,"Vikine",-3878,,,,1.062,1.006,2.500,-3728,11,18,18,Southeast Asia
-34,"Paigar",-3820,-3592,fell,,0.793,1.286,0.781,,2,7,4,Americas
+31,"Golte",-3897,-2061,conquered,,0.798,0.723,1.058,-2916,6,12,8,Americas
+32,"Thebek",-3889,-2726,conquered,,1.245,1.940,1.229,,1,7,0,Americas
+33,"Vikine",-3878,,,,1.062,1.006,2.500,-3728,1,1,1,Southeast Asia
+34,"Paigar",-3820,-3639,fell,,0.793,1.286,0.781,,1,5,3,Americas
 35,"Tasho",-3820,-3811,conquered,1,0.858,0.777,0.872,,0,1,0,Americas
-36,"Burgom",-3789,-3664,fell,29,0.904,0.573,1.111,-3789,1,10,6,Americas
+36,"Burgom",-3789,-3667,fell,29,0.904,0.573,1.111,-3789,1,10,7,Americas
 37,"Trentrem",-3778,-3762,conquered,,0.939,0.867,0.748,,0,1,0,Americas
-38,"Lopoushais",-3746,-3190,conquered,24,1.286,2.288,0.916,,18,19,10,Americas
+38,"Lopoushais",-3746,-2843,conquered,24,1.286,2.288,0.916,-3166,14,23,13,Americas
 39,"Shaishu",-3742,-3737,conquered,36,0.497,1.105,1.039,,0,1,0,Americas
 40,"Theikrair",-3731,-3702,conquered,28,0.896,0.705,1.581,,2,2,1,Americas
-41,"Brouzai",-3726,-3681,conquered,3,0.644,1.268,0.774,,0,1,0,Americas
-42,"Rathtram",-3720,-2804,conquered,17,0.982,0.690,1.649,,5,8,2,Americas
-43,"Kanaimbrou",-3691,-2631,conquered,,0.942,0.560,0.709,,1,57,2,Americas
-44,"Soshutrok",-3679,,,,1.027,0.671,1.473,-1929,43,43,43,Americas
-45,"Batras",-3670,-3649,conquered,1,1.604,1.240,0.816,,0,2,0,Americas
-46,"Theikrair",-3664,-3500,conquered,36,0.715,0.653,0.400,,0,7,0,Americas
-47,"Vaikrai",-3664,,,36,0.983,1.463,0.818,-3626,33,34,33,Americas
-48,"Keirish",-3649,-3556,conquered,46,0.691,1.342,0.967,-3649,0,7,5,Americas
-49,"Teivoueis",-3632,-1620,fell,,0.691,1.042,0.740,-1816,16,44,36,Americas
-50,"Bruthos",-3626,-3602,conquered,48,0.777,0.802,1.283,,0,2,0,Americas
-51,"Shetrais",-3622,-3525,conquered,20,0.737,1.017,0.924,,0,6,1,Americas
-52,"Heiyoul",-3613,-3579,conquered,51,0.632,1.217,1.675,,0,2,0,Americas
-53,"Mutek",-3612,-2905,conquered,,1.337,0.974,0.757,,15,20,12,Americas
-54,"Luveishan",-3591,-3586,conquered,43,0.544,0.776,0.968,,0,1,0,Americas
-55,"Tounom",-3581,-3486,fell,,0.891,0.980,1.065,,0,5,1,Americas
-56,"Sheimouth",-3563,-2903,conquered,,2.279,0.846,1.091,,3,26,6,Americas
-57,"Heiyoul",-3561,-3546,conquered,51,0.866,1.499,1.052,,0,1,0,Americas
-58,"Stiyeshom",-3549,-3184,conquered,7,0.903,1.187,0.667,,11,13,5,Americas
-59,"Vemkreikva",-3539,,,6,0.727,0.952,1.264,-3539,6,7,5,Americas
-60,"Tretek",-3525,-3365,fell,,0.879,0.699,1.151,,2,8,4,Americas
-61,"Theikrair",-3500,-3402,fell,47,0.657,1.263,1.479,-3500,0,8,7,Americas
-62,"Payavam",-3496,-3313,conquered,,0.622,1.628,1.423,,1,8,0,Americas
-63,"Destonde",-3431,-3427,conquered,,1.109,1.010,0.992,,0,1,0,Americas
-64,"Krareth",-3406,-2310,fell,,0.940,0.602,1.311,,11,17,7,Americas
-65,"Keirish",-3402,-3359,conquered,61,0.705,0.566,1.026,-3402,0,4,2,Americas
-66,"Tenveiyes",-3399,-3053,fell,,0.830,0.736,1.240,-3159,2,9,7,Americas
-67,"Mibas",-3399,-3394,conquered,7,1.228,1.099,1.884,,0,1,0,Americas
-68,"Dalin",-3392,-3344,conquered,43,0.971,0.499,1.058,,0,3,0,Americas
-69,"Raso",-3391,,,,0.933,1.077,1.101,,2,9,0,Americas
-70,"Zuruth",-3358,,,,0.799,1.281,0.643,,5,17,8,Southeast Asia
-71,"Kraheivu",-3354,-3309,conquered,62,0.747,1.171,1.452,,1,3,1,Americas
-72,"Ishbaipo",-3332,,,62,1.202,1.144,1.037,,6,7,6,Americas
-73,"Trapales",-3327,,,,1.082,1.250,1.061,,16,16,11,East Asia
-74,"Gayain",-3326,-3309,conquered,44,0.567,1.233,1.172,,1,2,1,Americas
-75,"Keirish",-3319,-3249,conquered,47,1.173,0.965,1.329,-3319,0,7,2,Americas
-76,"Zouri",-3314,-3300,conquered,75,0.999,0.630,1.034,,0,1,0,Americas
-77,"Harnebrai",-3312,-3271,conquered,71,0.612,1.125,1.436,,0,3,0,Americas
-78,"Bove",-3286,-3208,conquered,,0.670,0.535,1.181,,0,5,0,Americas
-79,"Mibas",-3267,-3220,conquered,7,0.829,0.773,0.872,,0,3,0,Americas
-80,"Vetage",-3261,-2459,conquered,53,0.928,0.742,1.070,-3049,11,28,17,Americas
-81,"Gemahish",-3247,-3241,conquered,,0.996,1.299,0.629,,0,1,0,Americas
-82,"Siyan",-3235,-1505,conquered,,1.693,1.127,0.861,,15,39,11,Southeast Asia
-83,"Trastei",-3231,-3191,conquered,,1.764,1.792,0.867,,1,2,0,Americas
-84,"Trehelyouk",-3226,-3079,fell,,0.793,0.769,0.552,,2,7,2,Americas
-85,"Neilouna",-3226,-1428,conquered,64,0.698,1.620,0.973,,21,22,9,Americas
-86,"Baszonar",-3201,-1300,conquered,83,0.546,0.514,0.655,,3,12,5,Americas
-87,"Thakein",-3196,-3190,conquered,58,2.489,0.740,1.198,,0,1,0,Americas
-88,"Kries",-3191,,,,1.090,0.664,0.679,,4,5,4,Americas
-89,"Lopoushais",-3125,-3056,conquered,80,0.901,1.042,0.997,,0,4,0,Americas
-90,"Pevo",-3122,-2604,conquered,47,0.555,1.021,1.442,-3122,2,12,4,Americas
-91,"Stayehei",-3071,-2996,fell,,1.495,1.640,0.909,,0,6,1,Americas
-92,"Sisestim",-3058,,,,1.452,1.840,1.191,,6,8,5,East Asia
-93,"Toutour",-2849,-2480,conquered,42,1.718,1.143,0.825,,8,10,3,Americas
-94,"Nadipas",-2847,-2837,conquered,93,1.271,1.729,1.106,,0,1,0,Americas
-95,"Tolesh",-2794,,,,0.716,1.977,1.210,,0,0,0,Steppe and Central Asia
-96,"Tabrel",-2792,-2781,conquered,,0.640,1.033,0.830,,0,1,0,Americas
-97,"Sheimouth",-2784,-2745,conquered,,0.875,1.378,1.409,,0,4,0,Americas
-98,"Keirish",-2638,-2630,conquered,90,1.274,0.763,0.998,,0,1,0,Americas
-99,"Bakethen",-2554,-2530,conquered,,1.425,0.713,1.320,,0,3,0,Americas
-100,"Shoubre",-2549,-2270,conquered,,1.356,0.948,1.045,,0,15,0,Americas
-101,"Pevo",-2525,-2522,conquered,80,0.414,1.587,2.162,,0,1,0,Americas
-102,"Pevo",-2499,,,47,0.889,0.639,1.113,-2499,31,31,16,Americas
-103,"Rathtram",-2497,-2488,conquered,93,1.168,1.121,0.826,,0,1,0,Americas
-104,"Kroro",-2487,,,,1.577,1.178,1.209,-1916,7,8,5,Americas
-105,"Gosouth",-2477,-2468,conquered,,1.003,0.489,1.461,,0,1,0,Americas
-106,"Sayeth",-2471,-2458,conquered,7,0.572,1.647,1.426,,0,1,0,Americas
-107,"Lopoushais",-2423,-2400,conquered,102,0.888,0.948,0.826,-2423,0,2,0,Americas
-108,"Dishhousti",-2415,-1394,conquered,,0.551,0.990,0.713,-1788,0,11,3,Americas
-109,"Zotak",-2341,-2254,fell,,0.952,0.519,0.801,-2328,0,5,4,Americas
-110,"Habeth",-2320,-2272,conquered,47,1.510,1.216,0.903,,0,4,0,Americas
-111,"Ageil",-2278,-1235,fell,,1.381,0.720,1.058,,10,10,8,Steppe and Central Asia
-112,"Lopoushais",-2263,-2174,conquered,102,1.315,0.660,0.703,-2263,0,6,3,Americas
-113,"Nayu",-2224,-2100,fell,,1.433,0.811,0.722,-2141,0,4,2,Americas
-114,"Neikrouash",-2081,,,,0.839,1.999,1.362,-1926,0,1,0,Americas
-115,"Treipik",-2079,-1981,fell,,1.541,1.090,0.957,-2073,0,7,2,Americas
-116,"Shaiteth",-1964,-1882,fell,,1.261,0.802,1.476,-1950,0,5,1,Americas
-117,"Gohoshal",-1957,,,,1.148,1.057,0.819,,0,2,0,Americas
-118,"Lopoushais",-1935,-1850,conquered,102,0.891,1.105,2.177,-1935,0,6,2,Americas
-119,"Destonde",-1831,-1742,fell,,1.075,0.982,1.133,-1817,0,9,2,Americas
-120,"Nompibrol",-1820,-1753,conquered,,0.882,0.891,1.245,,2,4,1,Americas
-121,"Shuvupam",-1818,-1770,conquered,,1.720,0.833,1.000,,2,2,0,Americas
-122,"Patrei",-1818,-1703,conquered,,1.190,1.271,1.369,,2,5,0,Americas
-123,"Hoyar",-1802,-1801,conquered,,0.855,0.901,0.881,,0,1,0,East Asia
-124,"Lopoushais",-1767,-1740,conquered,102,0.795,1.127,0.712,-1767,0,2,0,Americas
-125,"Eiltroth",-1694,,,,1.168,1.174,0.896,-1623,1,3,3,Americas
-126,"Zeszil",-1655,-1554,conquered,,0.502,0.736,1.077,,0,7,0,East Asia
-127,"Koumek",-1625,-1619,conquered,,0.921,1.281,0.620,,0,1,0,Steppe and Central Asia
-128,"Stashlis",-1615,-1088,conquered,,0.957,0.927,1.258,-1610,1,36,25,Americas
-129,"Lopoushais",-1597,-1523,conquered,102,0.814,1.229,1.807,-1597,0,5,3,Americas
-130,"Krihour",-1572,-1556,conquered,,0.833,0.967,1.244,,0,2,0,Americas
-131,"Yosenith",-1564,,,,0.997,0.925,1.688,,0,9,2,Steppe and Central Asia
-132,"Veyashour",-1562,,,,1.829,0.864,0.554,-1459,7,7,5,Americas
-133,"Sayeth",-1519,-1509,conquered,7,0.808,1.084,0.820,,0,1,0,Americas
-134,"Thasouth",-1482,-1348,fell,86,0.710,0.689,1.209,-1482,3,11,5,Americas
-135,"Dirgesga",-1472,-1434,conquered,134,0.827,1.032,1.287,,0,2,0,Americas
-136,"Stashoun",-1461,-1453,conquered,85,1.141,1.242,0.875,,0,1,0,Americas
-137,"Krase",-1454,-1391,conquered,134,0.758,0.895,1.156,,2,5,1,Americas
-138,"Ziraikreim",-1443,,,85,1.062,1.017,1.147,,7,7,2,Americas
-139,"Lopoushais",-1419,-1364,conquered,102,0.896,0.743,1.812,-1419,0,3,1,Americas
-140,"Genun",-1416,,,,0.959,0.825,1.110,-1097,2,4,1,Americas
-141,"Retha",-1393,,,,1.977,2.246,1.962,,0,2,0,Americas
-142,"Yokthubri",-1348,-1314,conquered,134,0.668,2.032,0.813,-1348,1,3,0,Americas
-143,"Beilthu",-1287,-1277,conquered,,0.700,0.788,0.933,,0,1,0,Americas
-144,"Thamemkor",-1263,-1233,conquered,,1.515,0.714,1.204,,0,2,0,Americas
-145,"Lopoushais",-1225,-1197,conquered,102,1.035,1.062,0.895,-1225,0,2,0,Americas
-146,"Trukeman",-1212,,,,1.257,0.718,0.642,,2,2,2,Steppe and Central Asia
-147,"Rothpos",-1207,-1096,conquered,,1.058,0.604,1.051,,0,2,0,Steppe and Central Asia
-148,"Krelle",-1171,,,22,1.144,1.297,1.310,-1171,1,1,0,Americas
-149,"Brekabo",-1153,,,,1.395,0.965,0.943,,0,1,0,Americas
-150,"Sayeth",-1134,-1131,conquered,7,1.269,0.874,0.443,,0,1,0,Americas
-151,"Lopoushais",-1098,-1036,conquered,102,0.813,0.722,1.116,-1098,1,4,3,Americas
-152,"Nahelkrei",-1050,-1025,conquered,,1.196,0.765,0.920,-1036,0,1,0,Americas
-153,"Brukraigeil",-1003,,,,1.242,0.825,1.259,,0,0,0,Americas
+41,"Brouzai",-3726,-3685,conquered,3,0.644,1.268,0.774,,0,1,0,Americas
+42,"Rathtram",-3720,,,17,0.982,0.690,1.649,-2151,26,26,26,Americas
+43,"Rita",-3692,,,,2.167,1.113,0.719,-1980,29,30,29,Americas
+44,"Gatroheir",-3687,-3423,conquered,,1.037,0.528,1.711,,0,14,6,Americas
+45,"Treipor",-3678,-3672,conquered,1,1.316,1.198,0.798,,0,1,0,Americas
+46,"Zouri",-3667,-1841,conquered,36,1.184,1.272,0.731,-3667,29,36,30,Americas
+47,"Trouda",-3647,-3086,conquered,,1.153,0.985,1.483,,0,8,1,Americas
+48,"Lensoupal",-3605,-2813,conquered,,1.959,1.048,1.045,,14,15,10,Southeast Asia
+49,"Soudouga",-3542,,,,0.759,1.262,0.907,-3049,3,4,2,East Asia
+50,"Yokthubri",-3456,-3016,conquered,,1.823,0.830,0.528,,8,8,1,Americas
+51,"Sisestim",-3427,,,,0.802,0.828,1.285,,1,29,6,East Asia
+52,"Kristeibrouth",-3395,,,,1.816,0.478,0.514,,14,14,13,East Asia
+53,"Raso",-3324,-1423,fell,,1.396,0.933,1.282,,1,16,0,Americas
+54,"Lilalash",-3308,-2502,conquered,,1.082,1.250,1.061,,0,14,0,Americas
+55,"Neilouna",-3226,-1630,conquered,50,0.776,0.817,1.105,,18,25,14,Americas
+56,"Vetage",-3114,-3109,conquered,38,0.936,1.088,0.721,,0,1,0,Americas
+57,"Teivoueis",-3106,-1635,fell,,0.903,0.870,0.985,-1816,14,31,22,Americas
+58,"Thailaiveis",-3048,-3038,conquered,38,1.399,0.763,0.697,-3046,0,1,0,Americas
+59,"Toukrousen",-3029,-2904,conquered,55,1.035,0.957,1.073,,0,8,2,Americas
+60,"Hodeth",-2989,-2854,conquered,,1.329,1.246,0.940,,1,6,1,Americas
+61,"Vetage",-2981,-2961,conquered,46,0.969,0.976,1.200,-2981,0,2,0,Americas
+62,"Yokthubri",-2950,,,59,0.799,0.652,1.232,-1413,12,14,10,Americas
+63,"Samil",-2943,-2870,conquered,,1.833,1.053,0.636,,1,4,0,Americas
+64,"Thaiker",-2931,-2819,conquered,,0.829,1.133,1.009,-2863,1,5,3,Americas
+65,"Stenath",-2777,-2043,conquered,,1.133,0.997,1.132,,1,1,0,Steppe and Central Asia
+66,"Lopoushais",-2769,-2734,conquered,46,0.961,0.879,1.045,-2769,0,2,1,Americas
+67,"Stashoun",-2767,-2758,conquered,55,1.793,0.636,1.498,,0,1,0,Americas
+68,"Dotei",-2765,-2728,conquered,,1.208,1.086,1.007,,0,2,0,Americas
+69,"Treipor",-2710,-2705,conquered,46,1.009,1.284,0.400,,0,1,0,Americas
+70,"Trentrem",-2675,-2564,fell,,1.396,1.407,1.169,,0,6,0,Americas
+71,"Lopoushais",-2458,-2025,conquered,46,0.595,1.815,1.165,-2458,0,31,15,Americas
+72,"Tretek",-2447,-2359,fell,,0.649,0.894,1.787,-2435,0,6,2,Americas
+73,"Theikrair",-2441,-1884,conquered,71,1.904,1.456,0.977,,11,14,0,Americas
+74,"Stashoun",-2362,-2357,conquered,55,1.092,0.668,0.657,,0,1,0,Americas
+75,"Stayehei",-2320,-2243,fell,,1.264,1.343,1.077,-2313,0,5,1,Americas
+76,"Krasteihak",-2299,,,,0.738,0.824,0.700,-2242,1,1,1,Americas
+77,"Gastik",-2268,,,,1.492,0.724,1.463,,9,9,7,Steppe and Central Asia
+78,"Vadul",-2187,-2074,fell,,1.328,0.959,1.194,-2143,2,8,4,Americas
+79,"Vekkrusteik",-2184,-2010,fell,,0.898,0.954,0.619,-2066,3,8,1,Americas
+80,"Batras",-2151,-2148,conquered,1,0.816,2.500,1.018,,0,1,0,Americas
+81,"Neger",-2106,,,,0.827,1.194,1.042,-2019,1,1,1,Americas
+82,"Nuboumme",-2056,,,,0.864,1.352,0.603,-1042,12,13,10,Steppe and Central Asia
+83,"Paihukreth",-2002,,,,0.831,0.933,1.830,,0,2,1,East Asia
+84,"Matrei",-1989,-1746,conquered,,0.931,1.524,1.290,,0,15,0,Americas
+85,"Meili",-1986,-1948,conquered,,0.848,1.706,1.046,,0,2,0,Steppe and Central Asia
+86,"Theikraikbais",-1974,-1889,fell,,0.653,1.050,1.020,-1958,0,6,3,Americas
+87,"Treitresh",-1963,-1875,conquered,,1.068,1.795,1.052,,0,6,0,Americas
+88,"Vetage",-1961,-1824,fell,,0.676,1.025,0.821,-1926,0,7,3,Americas
+89,"Kribaik",-1890,-1588,conquered,73,1.136,1.135,1.774,,4,9,2,Americas
+90,"Povohi",-1887,-1798,fell,,1.112,0.671,0.560,-1881,1,6,3,Americas
+91,"Mailvumal",-1880,-1695,conquered,,1.276,1.014,0.992,,4,5,0,Americas
+92,"Teipainar",-1859,,,,1.122,1.974,0.761,,0,0,0,Europe
+93,"Thaitrarba",-1841,-1633,conquered,46,0.822,0.908,1.407,-1841,3,15,5,Americas
+94,"Kraidesh",-1839,-1832,conquered,93,1.302,1.369,0.503,,0,1,0,Americas
+95,"Lopoushais",-1824,,,88,0.739,0.893,1.255,-1824,0,55,21,Americas
+96,"Kolloumou",-1819,,,,0.979,0.803,1.842,,6,12,6,Americas
+97,"Zetraik",-1781,-1721,conquered,,0.950,1.483,0.818,,0,3,0,Steppe and Central Asia
+98,"Vithem",-1780,-1760,conquered,,1.355,0.916,1.113,,0,1,0,Americas
+99,"Theikrair",-1777,-1732,conquered,89,0.905,0.592,1.822,,3,4,1,Americas
+100,"Limashouk",-1739,,,,0.736,0.468,1.126,,0,0,0,Americas
+101,"Tosa",-1702,-1697,conquered,,0.816,0.764,1.037,,0,1,0,Americas
+102,"Krareth",-1641,-1619,conquered,,0.702,1.232,1.513,,0,2,0,Americas
+103,"Stashoun",-1635,,,62,0.947,0.820,1.161,-1217,9,10,7,Americas
+104,"Vumair",-1633,,,93,1.707,0.897,0.543,,10,11,2,Americas
+105,"Reikrail",-1628,,,42,1.505,1.877,0.928,-1628,6,6,6,Americas
+106,"Thesbathloth",-1582,-1479,fell,,1.012,0.622,0.917,-1556,2,7,3,Americas
+107,"Theiloam",-1555,-1380,fell,,1.169,1.405,0.679,-1465,2,6,4,Americas
+108,"Krula",-1503,-1499,conquered,,0.766,1.439,1.333,,0,1,0,Americas
+109,"Vage",-1486,,,,1.293,0.853,1.443,,0,1,0,Southeast Asia
+110,"Krase",-1484,-1457,conquered,103,0.776,0.585,1.970,,0,3,0,Americas
+111,"Davunesh",-1464,-1462,conquered,,0.584,0.507,0.920,,0,1,0,Americas
+112,"Buyobeth",-1464,,,,1.140,1.360,0.991,,0,2,1,Steppe and Central Asia
+113,"Emmeithem",-1421,,,,1.054,1.160,1.041,,0,14,4,Steppe and Central Asia
+114,"Lilalash",-1411,-1409,conquered,20,0.881,0.965,0.931,,0,1,0,Americas
+115,"Sayeth",-1361,-1276,conquered,7,1.179,0.775,1.091,,1,4,1,Americas
+116,"Steshos",-1331,-1321,conquered,,0.461,0.752,2.500,,0,2,0,Americas
+117,"Numvege",-1230,-1136,conquered,,1.152,1.212,1.461,-1212,1,4,1,Americas
+118,"Matrei",-1212,,,,1.520,1.632,1.465,,0,10,0,Americas
+119,"Bibrousthouk",-1201,,,,1.155,0.794,0.817,,0,1,0,Americas
+120,"Teilei",-1098,-1096,conquered,,0.974,1.629,0.765,,0,1,0,Americas
+121,"Sayeth",-1061,,,7,0.980,1.132,1.065,,1,3,0,Americas
+122,"Shaiteth",-1012,,,,1.720,0.628,1.585,,0,1,0,Americas

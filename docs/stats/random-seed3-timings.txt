@@ -2,22 +2,22 @@ Loading world data/earth.world
 World 'Earth', 225002 cells, checksum 35764695A63D8D1F14B8265F9211C753CC39B3D80BE5D0C89E116ED1AEE3B238
 Seed 3, random crop homelands, starting at January 10000 BCE, 13 systems
 Wrote yearly statistics to docs/stats/random-seed3.csv, and beside it statistics by region, farming and herding origins, technology events, landings and polity events
-Ran 108000 ticks (9000 years) in 1866.754 s: 58 ticks per second
-  climate: 35.7 s
+Ran 108000 ticks (9000 years) in 1873.435 s: 58 ticks per second
+  climate: 35.1 s
   population: 0.0 s
-  goods: 27.5 s
-  foragers: 68.5 s
-  farming: 197.7 s
-  herding: 73.3 s
+  goods: 29.6 s
+  foragers: 71.8 s
+  farming: 194.6 s
+  herding: 70.3 s
   settlements: 10.8 s
-  resources: 106.1 s
-  crafts: 267.9 s
-  trade: 530.3 s
-    of which links 47.8 s, prices 157.8 s, trading 236.7 s (1,018,791,226 sends over 7,947,411,013 link-goods), gap measure 0.0 s
-  technology: 260.9 s
-    12 first discoveries, 22 independent, 86 losses; 3,455,102 discovery checks, 235,192,565 group visits
-  seafaring: 3.2 s
-  polities: 96.8 s
-    of which growing 43.5 s, keeping whole 2.1 s, founding 1.0 s, war 6.0 s, collapse 6.7 s, tribute and levels 37.3 s
+  resources: 105.9 s
+  crafts: 265.2 s
+  trade: 538.9 s
+    of which links 47.6 s, prices 161.7 s, trading 233.9 s (1,015,095,903 sends over 7,938,527,830 link-goods), gap measure 0.0 s
+  technology: 259.4 s
+    12 first discoveries, 19 independent, 77 losses; 3,732,296 discovery checks, 230,748,945 group visits
+  seafaring: 3.4 s
+  polities: 97.5 s
+    of which growing 43.5 s, keeping whole 2.1 s, founding 1.0 s, war 6.0 s, collapse 6.9 s, tribute and levels 37.7 s
 Ended at January 1000 BCE
-State checksum 09358EF54431FFAE762190E49ED2EA1C7A3839B42FAF547FD4A4105E70734B1B
+State checksum A77DFED46B31854F5EC7A720869FEF56E405D5C4B3A5B2B6CB0E7FB7DC6C33FD

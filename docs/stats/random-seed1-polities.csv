@@ -1,64 +1,52 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
 0,"Nolakoum",-6386,-6375,conquered,,1.037,0.811,1.256,,1,1,0,Europe
-1,"Kroton",-6377,,,,0.616,0.947,0.976,-4625,12,84,38,Europe
-2,"Veththesh",-6150,-3280,conquered,,0.816,1.113,0.775,,9,30,3,Europe
-3,"Rithoustu",-5917,-4919,conquered,,1.262,1.352,1.485,,10,13,8,Europe
-4,"Douleloun",-5416,-5364,conquered,,0.771,1.136,1.764,,0,3,0,Europe
-5,"Dihistuth",-4229,,,,0.840,0.839,1.043,,17,22,19,Sahel
-6,"Yayeil",-4166,-3075,conquered,,0.666,0.915,0.706,,1,9,3,East and southern Africa
-7,"Yerkrogel",-4152,-2946,conquered,,1.384,0.574,0.675,-4041,6,7,6,East and southern Africa
-8,"Vaiye",-4149,,,,0.687,0.435,1.041,-3729,10,47,22,Europe
-9,"Braikour",-4077,-3935,conquered,,1.063,0.690,1.221,,2,5,2,East and southern Africa
-10,"Mueithaik",-4054,-1729,fell,,1.785,0.619,0.874,-3723,17,19,17,East and southern Africa
-11,"Guem",-4047,-4036,conquered,,0.988,1.015,1.140,,0,2,0,East and southern Africa
-12,"Tramath",-4037,,,,1.270,0.800,0.792,-2044,17,18,17,Sahel
-13,"Braithtadoush",-3979,,,,1.355,0.896,0.828,-1810,6,6,2,West and Central Africa
-14,"Laitrokros",-3940,,,,2.269,0.703,0.925,-3511,90,92,69,Europe
-15,"Yeithourtraish",-3691,-2647,conquered,,1.210,0.921,1.177,,9,12,6,East and southern Africa
-16,"Duhaikre",-3649,-3645,conquered,,1.410,0.504,1.111,,0,1,0,East and southern Africa
-17,"Mothkipe",-3474,-3469,conquered,,1.495,1.456,0.956,,0,1,0,Sahel
-18,"Trerelstul",-3413,-2486,conquered,,1.195,2.013,1.010,,4,6,3,East and southern Africa
-19,"Zostashkrash",-3275,-3114,conquered,,1.228,1.456,2.354,,0,4,0,Sahel
-20,"Saintre",-3093,,,,1.146,0.572,0.444,,5,10,4,Americas
-21,"Haistoun",-3061,-2900,conquered,,0.529,0.781,0.691,,1,5,1,Sahel
-22,"Amitre",-3059,,,,1.498,1.934,1.133,,6,7,4,Americas
-23,"Steinmaith",-3046,,,,1.372,0.965,0.842,,3,3,2,Americas
-24,"Pokrereik",-3003,-2886,conquered,,0.793,1.534,1.009,,0,6,0,Sahel
-25,"Vede",-2995,,,,1.131,1.189,0.731,,8,10,0,Europe
-26,"Vame",-2995,-2801,conquered,,0.646,1.117,0.549,,0,4,1,East and southern Africa
-27,"Maseimlos",-2982,-1074,conquered,,2.019,0.809,0.672,,38,40,32,Americas
-28,"Mupouth",-2982,,,,1.474,1.087,0.935,,5,7,3,Americas
-29,"Stougalkreth",-2948,,,,0.400,0.562,0.881,,0,0,0,Americas
-30,"Haistoun",-2786,-2169,conquered,,1.257,1.395,1.230,,5,11,2,Sahel
-31,"Stinbros",-2784,-2712,conquered,,0.638,0.700,0.705,,0,5,1,Sahel
-32,"Vithkra",-2763,-2734,conquered,,1.143,0.864,0.831,,0,2,0,East and southern Africa
-33,"Lusteis",-2731,-1185,fell,,0.841,1.194,1.243,-2675,5,16,13,East and southern Africa
-34,"Krobei",-2588,,,,1.179,0.903,1.186,,0,0,0,Americas
-35,"Vasro",-2527,,,,1.358,0.746,0.513,,5,5,5,East and southern Africa
-36,"Dakou",-2504,,,,0.853,0.821,1.209,,1,36,8,Americas
-37,"Keilemem",-2171,,,,0.891,1.279,1.612,,0,0,0,Americas
-38,"Braldom",-2166,,,,1.136,0.857,1.227,,0,0,0,Americas
-39,"Trebam",-2045,,,,0.472,0.457,1.760,,1,17,1,East and southern Africa
-40,"Kroura",-2034,,,,0.967,1.006,0.625,,1,1,1,East and southern Africa
-41,"Maitrounir",-1863,,,,0.855,0.667,1.317,,12,16,11,East and southern Africa
-42,"Lotrith",-1861,,,,0.959,0.877,0.826,,2,8,2,Sahel
-43,"Vame",-1818,-1812,conquered,,0.769,1.856,0.704,,0,1,0,East and southern Africa
-44,"Naibetre",-1785,-1774,conquered,,0.715,1.426,0.789,,0,1,0,East and southern Africa
-45,"Stehetreim",-1783,,,,1.305,1.231,1.432,,0,3,1,Americas
-46,"Thokresi",-1756,-1658,conquered,,1.027,0.645,0.911,,0,4,0,Sahel
-47,"Shokoulbon",-1697,-1501,conquered,,0.774,1.124,0.650,,1,5,1,East and southern Africa
-48,"Imainem",-1649,-1642,conquered,,0.917,1.218,0.837,,0,1,0,East and southern Africa
-49,"Stuleimei",-1618,,,,1.359,1.423,1.130,,5,9,5,East and southern Africa
-50,"Thaio",-1579,-1548,conquered,,1.158,0.683,0.890,,0,2,0,East and southern Africa
-51,"Edomash",-1530,,,,0.940,1.199,0.524,,1,7,3,Americas
-52,"Shaimzimleir",-1474,-1469,conquered,,1.487,1.327,1.904,,0,1,0,Americas
-53,"Mounoukreir",-1415,,,,1.125,1.482,0.519,,3,5,0,East and southern Africa
-54,"Troureth",-1383,,,,0.570,1.214,1.034,,1,2,2,East and southern Africa
-55,"Paikbroumos",-1175,,,,0.994,1.025,0.467,,1,4,2,Americas
-56,"Yemou",-1101,-1085,conquered,,0.592,1.562,0.779,,0,2,0,Americas
-57,"Ushis",-1095,-1086,conquered,,1.200,0.605,1.132,,0,1,0,East and southern Africa
-58,"Peigeistil",-1082,,,,0.993,1.392,0.607,,0,0,0,Americas
-59,"Paemu",-1077,,,,0.986,1.092,0.959,,1,1,1,East and southern Africa
-60,"Godero",-1069,,,,0.782,1.123,0.849,,0,4,0,East and southern Africa
-61,"Zuses",-1041,,,,1.116,0.517,1.064,,1,2,0,East and southern Africa
-62,"Doveine",-1016,,,,0.833,0.874,0.706,,0,0,0,East and southern Africa
+1,"Kroton",-6377,,,,0.616,0.947,0.976,-4650,8,34,29,Europe
+2,"Tashuth",-6002,-4546,conquered,,1.377,0.779,0.867,,6,13,3,Europe
+3,"Yaitrol",-5210,-3872,conquered,,1.006,0.761,0.750,,13,16,3,Europe
+4,"Tolpibreis",-4552,,,,1.059,1.300,0.669,-3095,5,15,15,East and southern Africa
+5,"Broli",-4267,,,,1.188,0.838,0.788,-3581,33,33,22,Europe
+6,"Dagaisam",-4052,,,,0.664,0.623,0.845,,10,10,8,Sahel
+7,"Maihei",-3940,,,,0.712,1.080,0.684,-1997,0,0,0,Sahel
+8,"Midadam",-3930,,,,1.386,0.680,0.885,,34,34,5,Americas
+9,"Steinmaith",-3915,,,,1.385,1.220,0.592,,0,0,0,Americas
+10,"Mupouth",-3900,,,,0.876,0.622,0.944,,11,11,7,Americas
+11,"Trailugaith",-3880,,,,1.204,0.996,1.099,,0,0,0,Americas
+12,"Peisin",-3848,,,,0.409,0.514,0.857,,0,11,4,Americas
+13,"Yusunstal",-3708,-1142,conquered,,1.095,1.518,1.216,,48,50,31,Americas
+14,"Brudeheim",-3703,-3517,conquered,,0.627,1.040,0.896,,1,8,0,Americas
+15,"Shepas",-3587,-3351,conquered,,0.723,1.329,1.371,,1,3,2,Americas
+16,"Lushabraish",-3576,-2023,conquered,,1.361,1.799,0.909,,31,41,7,Americas
+17,"Ziam",-3545,,,,1.508,0.503,0.592,,14,14,12,Americas
+18,"Theinheth",-3488,,,,0.694,1.073,0.962,,0,0,0,Americas
+19,"Puvethhair",-3473,-3396,conquered,,0.949,0.795,2.018,,0,3,0,Americas
+20,"Vashga",-3428,,,,1.058,1.160,1.205,-3228,2,34,23,Europe
+21,"Naiga",-3413,,,,0.912,1.082,1.414,-3333,2,86,85,Americas
+22,"Kreitrair",-3345,,,,1.518,0.944,0.655,,22,28,5,East and southern Africa
+23,"Vouvel",-3233,,,,1.120,0.754,0.618,-3070,11,20,18,East and southern Africa
+24,"Baitrosh",-3005,,,,1.369,0.732,1.000,,1,6,0,East and southern Africa
+25,"Dashan",-2812,,,,0.990,0.445,1.535,,14,35,3,Americas
+26,"Dakou",-2799,,,,0.879,0.712,1.097,,0,11,2,Americas
+27,"Hamoun",-2772,,,,1.036,0.603,1.198,,31,33,6,Europe
+28,"Benabrais",-2740,-1035,conquered,,0.516,1.063,1.179,,0,3,1,East and southern Africa
+29,"Kaihi",-2738,,,,0.618,1.306,1.196,,0,0,0,Americas
+30,"Amitre",-2509,-1673,conquered,,0.615,1.444,1.352,,5,10,0,Americas
+31,"Trigemam",-2479,,,,0.825,1.302,1.341,,1,1,1,Americas
+32,"Nenaistou",-2461,-1660,conquered,,1.415,1.358,0.880,,3,8,2,East and southern Africa
+33,"Keilemem",-2450,,,,1.026,0.942,0.654,,0,1,0,Americas
+34,"Duhaikre",-2249,-2222,conquered,,1.318,0.844,0.678,,0,1,0,East and southern Africa
+35,"Stinbros",-2195,-2186,conquered,,0.925,1.663,1.309,,0,1,0,Sahel
+36,"Guha",-2114,,,,1.114,1.846,1.260,,0,0,0,East and southern Africa
+37,"Thitel",-2012,,,,2.500,1.393,0.683,,9,9,5,East and southern Africa
+38,"Lotrith",-1986,,,,0.824,1.700,1.212,,0,9,2,Sahel
+39,"Brilouthith",-1983,-1952,conquered,,0.956,1.720,0.951,,0,2,0,East and southern Africa
+40,"Vede",-1891,,,,1.147,1.011,1.752,,0,24,7,Europe
+41,"Vekreirnam",-1871,-1235,conquered,,1.210,0.796,1.196,,0,4,2,East and southern Africa
+42,"Yersestoun",-1700,-1633,conquered,,0.706,0.880,0.813,,0,6,1,East and southern Africa
+43,"Paizel",-1679,,,,2.224,1.316,1.723,,0,0,0,Americas
+44,"Tasdakrain",-1585,,,,1.697,0.925,1.247,,0,0,0,East and southern Africa
+45,"Sokkothi",-1241,,,,0.921,0.733,0.729,,1,3,2,Americas
+46,"Baiha",-1231,-1163,conquered,,0.400,1.037,1.053,,0,4,1,Americas
+47,"Vasro",-1090,,,,1.372,1.286,1.606,,1,1,1,East and southern Africa
+48,"Mashou",-1086,,,,0.716,0.744,1.183,-1067,0,0,0,West and Central Africa
+49,"Darpethok",-1042,,,,0.696,1.396,0.602,,0,1,1,East and southern Africa
+50,"Reiroudeir",-1007,,,,0.816,0.891,0.802,,0,0,0,Americas

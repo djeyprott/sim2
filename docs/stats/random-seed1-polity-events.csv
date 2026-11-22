@@ -3,453 +3,1155 @@ founded,0,"Nolakoum",,,10832,51.58,13.34,Europe,-6386,January 6386 BCE,0
 founded,1,"Kroton",,,11119,52.66,12.27,Europe,-6377,January 6377 BCE,0
 war,0,"Nolakoum",1,"Kroton",11119,52.66,12.27,Europe,-6377,January 6377 BCE,0
 conquered,0,"Nolakoum",1,"Kroton",10832,51.58,13.34,Europe,-6375,January 6375 BCE,23
-founded,2,"Veththesh",,,10632,51.26,16.68,Europe,-5877,January 5877 BCE,0
-war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5869,January 5869 BCE,0
-peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5863,January 5863 BCE,0
-founded,3,"Breigaidesh",,,10434,50.27,15.63,Europe,-5825,January 5825 BCE,0
-war,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-5824,January 5824 BCE,0
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-5816,January 5816 BCE,0
-founded,4,"Goumoush",,,10822,52.63,20.83,Europe,-4703,January 4703 BCE,0
-war,2,"Veththesh",4,"Goumoush",10822,52.63,20.83,Europe,-4690,January 4690 BCE,0
-peace,4,"Goumoush",2,"Veththesh",10632,51.26,16.68,Europe,-4676,January 4676 BCE,0
-split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4669,January 4669 BCE,35
-war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4661,January 4661 BCE,0
-became_state,1,"Kroton",,,11119,52.66,12.27,Europe,-4650,January 4650 BCE,0
-peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4647,January 4647 BCE,0
-founded,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-3934,January 3934 BCE,0
-became_state,4,"Goumoush",,,10822,52.63,20.83,Europe,-3758,January 3758 BCE,0
-war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3690,January 3690 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-3682,January 3682 BCE,36
-split,2,"Veththesh",,,10632,51.26,16.68,Europe,-3680,January 3680 BCE,28
-conquered,2,"Veththesh",1,"Kroton",10632,51.26,16.68,Europe,-3679,January 3679 BCE,1
-war,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-3677,January 3677 BCE,0
-peace,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-3663,January 3663 BCE,0
-war,3,"Breigaidesh",1,"Kroton",11119,52.66,12.27,Europe,-3660,January 3660 BCE,0
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-3655,January 3655 BCE,0
-founded,6,"Belim",,,161736,16.52,-3.37,Sahel,-3612,January 3612 BCE,0
-founded,7,"Peisin",,,41278,43.09,-116.23,Americas,-3562,January 3562 BCE,0
-founded,8,"Batram",,,40006,39.13,-108.58,Americas,-3559,January 3559 BCE,0
-founded,9,"Sigan",,,41519,43.89,-117.03,Americas,-3555,January 3555 BCE,0
-war,7,"Peisin",9,"Sigan",41519,43.89,-117.03,Americas,-3554,January 3554 BCE,0
-peace,7,"Peisin",9,"Sigan",41519,43.89,-117.03,Americas,-3549,January 3549 BCE,0
-founded,10,"Tilousha",,,42105,45.79,-119.80,Americas,-3538,January 3538 BCE,0
-founded,11,"Shenstuta",,,9810,47.90,16.79,Europe,-3474,January 3474 BCE,0
-war,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3470,January 3470 BCE,0
-founded,12,"Narzeimish",,,41141,42.91,-106.43,Americas,-3459,January 3459 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3456,January 3456 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-3455,January 3455 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-3443,January 3443 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-3436,January 3436 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3422,January 3422 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-3413,January 3413 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-3399,January 3399 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-3397,January 3397 BCE,0
-founded,13,"Humdum",,,39612,37.85,-110.54,Americas,-3383,January 3383 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3383,January 3383 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-3378,January 3378 BCE,0
-war,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-3378,January 3378 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-3364,January 3364 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-3364,January 3364 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-3363,January 3363 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3349,January 3349 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-3340,January 3340 BCE,0
-split,11,"Shenstuta",,,9810,47.90,16.79,Europe,-3340,January 3340 BCE,39
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3327,January 3327 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-3326,January 3326 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-3320,January 3320 BCE,13
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3313,January 3313 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3293,January 3293 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-3279,January 3279 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-3276,January 3276 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3262,January 3262 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-3258,January 3258 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3254,January 3254 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-3244,January 3244 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3240,January 3240 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-3240,January 3240 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-3236,January 3236 BCE,12
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-3226,January 3226 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3219,January 3219 BCE,0
-split,11,"Shenstuta",,,9810,47.90,16.79,Europe,-3213,January 3213 BCE,42
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-3206,January 3206 BCE,6
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3205,January 3205 BCE,0
-founded,14,"Edomash",,,40765,41.57,-103.11,Americas,-3188,January 3188 BCE,0
-war,12,"Narzeimish",14,"Edomash",40765,41.57,-103.11,Americas,-3188,January 3188 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-3188,January 3188 BCE,43
-peace,12,"Narzeimish",14,"Edomash",40765,41.57,-103.11,Americas,-3174,January 3174 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3170,January 3170 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-3156,January 3156 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-3101,January 3101 BCE,12
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3058,January 3058 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3051,January 3051 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3031,January 3031 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-3017,January 3017 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-3010,January 3010 BCE,10
-founded,15,"Brazainaik",,,42661,47.95,-119.34,Americas,-2985,January 2985 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2983,January 2983 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2969,January 2969 BCE,0
-split,6,"Belim",,,161736,16.52,-3.37,Sahel,-2963,January 2963 BCE,25
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2936,January 2936 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2924,January 2924 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2922,January 2922 BCE,0
-founded,16,"Naimdeil",,,38935,35.69,-113.40,Americas,-2910,January 2910 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2910,January 2910 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2901,January 2901 BCE,0
-founded,17,"Theshen",,,41029,42.41,-112.98,Americas,-2888,January 2888 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2887,January 2887 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2885,January 2885 BCE,0
-war,7,"Peisin",17,"Theshen",41029,42.41,-112.98,Americas,-2882,January 2882 BCE,0
-split,15,"Brazainaik",,,42661,47.95,-119.34,Americas,-2880,January 2880 BCE,14
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2874,January 2874 BCE,13
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2871,January 2871 BCE,0
-peace,7,"Peisin",17,"Theshen",41029,42.41,-112.98,Americas,-2870,January 2870 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2866,January 2866 BCE,0
-war,11,"Shenstuta",4,"Goumoush",10822,52.63,20.83,Europe,-2862,January 2862 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2860,January 2860 BCE,0
-peace,13,"Humdum",16,"Naimdeil",38935,35.69,-113.40,Americas,-2852,January 2852 BCE,0
-peace,4,"Goumoush",11,"Shenstuta",9810,47.90,16.79,Europe,-2848,January 2848 BCE,0
-war,3,"Breigaidesh",4,"Goumoush",10822,52.63,20.83,Europe,-2848,January 2848 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2846,January 2846 BCE,0
-war,9,"Sigan",10,"Tilousha",42105,45.79,-119.80,Americas,-2844,January 2844 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2842,January 2842 BCE,0
-peace,4,"Goumoush",3,"Breigaidesh",10434,50.27,15.63,Europe,-2834,January 2834 BCE,0
-peace,10,"Tilousha",9,"Sigan",41519,43.89,-117.03,Americas,-2830,January 2830 BCE,0
-split,11,"Shenstuta",,,9810,47.90,16.79,Europe,-2830,January 2830 BCE,47
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2828,January 2828 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2828,January 2828 BCE,0
-split,9,"Sigan",,,41519,43.89,-117.03,Americas,-2826,January 2826 BCE,18
-war,3,"Breigaidesh",11,"Shenstuta",9810,47.90,16.79,Europe,-2824,January 2824 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2821,January 2821 BCE,6
-peace,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2814,January 2814 BCE,0
-split,13,"Humdum",,,39612,37.85,-110.54,Americas,-2813,January 2813 BCE,13
-peace,3,"Breigaidesh",11,"Shenstuta",9810,47.90,16.79,Europe,-2810,January 2810 BCE,0
-founded,18,"Keilemem",,,95997,17.35,-91.53,Americas,-2758,January 2758 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2752,January 2752 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2741,January 2741 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2738,January 2738 BCE,0
-founded,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2731,January 2731 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2729,January 2729 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-2727,January 2727 BCE,39
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2716,January 2716 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2702,January 2702 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2692,January 2692 BCE,36
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2680,January 2680 BCE,0
-founded,20,"Stougalkreth",,,42319,47.10,-111.81,Americas,-2679,January 2679 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2679,January 2679 BCE,11
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2666,January 2666 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2645,January 2645 BCE,0
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2643,January 2643 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2631,January 2631 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2628,January 2628 BCE,0
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-2626,January 2626 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2623,January 2623 BCE,11
-peace,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2614,January 2614 BCE,0
-peace,1,"Kroton",11,"Shenstuta",9810,47.90,16.79,Europe,-2612,January 2612 BCE,0
-founded,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-2604,January 2604 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2597,January 2597 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2583,January 2583 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2583,January 2583 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2572,January 2572 BCE,10
-peace,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2569,January 2569 BCE,0
-split,13,"Humdum",,,39612,37.85,-110.54,Americas,-2567,January 2567 BCE,10
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2534,January 2534 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2529,January 2529 BCE,0
-became_state,11,"Shenstuta",,,9810,47.90,16.79,Europe,-2517,January 2517 BCE,0
-founded,22,"Tevutral",,,40918,41.49,-120.56,Americas,-2498,January 2498 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-2494,January 2494 BCE,35
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2488,January 2488 BCE,0
-war,6,"Belim",5,"Pakrebrai",160942,14.77,1.03,Sahel,-2486,January 2486 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2477,January 2477 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2473,January 2473 BCE,0
-peace,6,"Belim",5,"Pakrebrai",160942,14.77,1.03,Sahel,-2472,January 2472 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-2462,January 2462 BCE,15
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2459,January 2459 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2458,January 2458 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2455,January 2455 BCE,0
-split,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-2449,January 2449 BCE,41
-war,17,"Theshen",7,"Peisin",41278,43.09,-116.23,Americas,-2445,January 2445 BCE,0
-peace,13,"Humdum",16,"Naimdeil",38935,35.69,-113.40,Americas,-2444,January 2444 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2444,January 2444 BCE,179
-became_chiefdom,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2444,January 2444 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2442,January 2442 BCE,25
-peace,15,"Brazainaik",10,"Tilousha",42105,45.79,-119.80,Americas,-2441,January 2441 BCE,0
-founded,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-2440,January 2440 BCE,0
-peace,17,"Theshen",7,"Peisin",41278,43.09,-116.23,Americas,-2431,January 2431 BCE,0
-split,7,"Peisin",,,41278,43.09,-116.23,Americas,-2428,January 2428 BCE,18
-war,9,"Sigan",7,"Peisin",41278,43.09,-116.23,Americas,-2420,January 2420 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2419,January 2419 BCE,32
-conquered,9,"Sigan",7,"Peisin",41519,43.89,-117.03,Americas,-2418,January 2418 BCE,18
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2415,January 2415 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-2412,January 2412 BCE,30
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2401,January 2401 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2401,January 2401 BCE,0
-split,4,"Goumoush",,,10822,52.63,20.83,Europe,-2397,January 2397 BCE,192
-peace,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2387,January 2387 BCE,0
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2385,January 2385 BCE,0
-founded,24,"Branoth",,,95495,15.57,-90.62,Americas,-2350,January 2350 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2350,January 2350 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2336,January 2336 BCE,0
-war,21,"Nenaistou",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-2332,January 2332 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2324,January 2324 BCE,146
-peace,19,"Vouvel",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-2318,January 2318 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2315,January 2315 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2310,January 2310 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2308,January 2308 BCE,43
-split,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-2305,January 2305 BCE,35
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2301,January 2301 BCE,0
-war,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2301,January 2301 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2296,January 2296 BCE,0
-peace,16,"Naimdeil",13,"Humdum",39612,37.85,-110.54,Americas,-2287,January 2287 BCE,0
-split,13,"Humdum",,,39612,37.85,-110.54,Americas,-2287,January 2287 BCE,11
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2282,January 2282 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2275,January 2275 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2274,January 2274 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2267,January 2267 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2259,January 2259 BCE,139
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2255,January 2255 BCE,14
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2254,January 2254 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2247,January 2247 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2242,January 2242 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2236,January 2236 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-2232,January 2232 BCE,46
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2224,January 2224 BCE,0
-war,21,"Nenaistou",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-2220,January 2220 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2213,January 2213 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2210,January 2210 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2210,January 2210 BCE,10
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2208,January 2208 BCE,0
-peace,19,"Vouvel",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-2206,January 2206 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2183,January 2183 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-2181,January 2181 BCE,21
-war,21,"Nenaistou",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-2180,January 2180 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2169,January 2169 BCE,0
-peace,19,"Vouvel",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-2166,January 2166 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2159,January 2159 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-2147,January 2147 BCE,0
-split,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-2147,January 2147 BCE,38
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-2146,January 2146 BCE,46
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2144,January 2144 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-2130,January 2130 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2115,January 2115 BCE,182
-became_chiefdom,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2115,January 2115 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2114,January 2114 BCE,25
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-2105,January 2105 BCE,26
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-2103,January 2103 BCE,0
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2097,January 2097 BCE,0
-peace,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-2089,January 2089 BCE,0
-war,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-2087,January 2087 BCE,0
-split,1,"Kroton",,,11119,52.66,12.27,Europe,-2083,January 2083 BCE,99
-peace,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-2073,January 2073 BCE,0
-split,1,"Kroton",,,11119,52.66,12.27,Europe,-2071,January 2071 BCE,34
-war,3,"Breigaidesh",1,"Kroton",11119,52.66,12.27,Europe,-2066,January 2066 BCE,0
-split,3,"Breigaidesh",,,10434,50.27,15.63,Europe,-2061,January 2061 BCE,22
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2056,January 2056 BCE,0
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-2055,January 2055 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-2047,January 2047 BCE,132
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2042,January 2042 BCE,0
-founded,25,"Oustil",,,65260,-2.56,30.31,East and southern Africa,-2026,January 2026 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-2024,January 2024 BCE,12
-war,21,"Nenaistou",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-2011,January 2011 BCE,0
-founded,26,"Tolpibreis",,,159887,-17.93,25.48,East and southern Africa,-2009,January 2009 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-2009,January 2009 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-2000,January 2000 BCE,0
-peace,19,"Vouvel",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-1997,January 1997 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-1995,January 1995 BCE,0
-founded,27,"Vame",,,65257,-1.39,31.06,East and southern Africa,-1993,January 1993 BCE,0
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1992,January 1992 BCE,0
-split,15,"Brazainaik",,,42661,47.95,-119.34,Americas,-1991,January 1991 BCE,18
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1986,January 1986 BCE,0
-war,25,"Oustil",27,"Vame",65257,-1.39,31.06,East and southern Africa,-1984,January 1984 BCE,0
-war,21,"Nenaistou",26,"Tolpibreis",159887,-17.93,25.48,East and southern Africa,-1983,January 1983 BCE,0
-peace,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1978,January 1978 BCE,0
-war,3,"Breigaidesh",1,"Kroton",11119,52.66,12.27,Europe,-1977,January 1977 BCE,0
-peace,25,"Oustil",27,"Vame",65257,-1.39,31.06,East and southern Africa,-1975,January 1975 BCE,0
-peace,21,"Nenaistou",26,"Tolpibreis",159887,-17.93,25.48,East and southern Africa,-1969,January 1969 BCE,0
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-1966,January 1966 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1966,January 1966 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1958,January 1958 BCE,0
-split,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-1958,January 1958 BCE,39
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1956,January 1956 BCE,0
-split,15,"Brazainaik",,,42661,47.95,-119.34,Americas,-1956,January 1956 BCE,10
-war,25,"Oustil",27,"Vame",65257,-1.39,31.06,East and southern Africa,-1950,January 1950 BCE,0
-war,21,"Nenaistou",26,"Tolpibreis",159887,-17.93,25.48,East and southern Africa,-1949,January 1949 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1949,January 1949 BCE,54
-peace,25,"Oustil",27,"Vame",65257,-1.39,31.06,East and southern Africa,-1944,January 1944 BCE,0
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-1944,January 1944 BCE,0
-peace,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1942,January 1942 BCE,0
-war,3,"Breigaidesh",1,"Kroton",11119,52.66,12.27,Europe,-1941,January 1941 BCE,0
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-1939,January 1939 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-1938,January 1938 BCE,10
-peace,26,"Tolpibreis",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-1935,January 1935 BCE,0
-war,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-1934,January 1934 BCE,0
-peace,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-1930,January 1930 BCE,0
-founded,28,"Tatostai",,,151920,7.48,-74.01,Americas,-1928,January 1928 BCE,0
-split,25,"Oustil",,,65260,-2.56,30.31,East and southern Africa,-1926,January 1926 BCE,20
-peace,4,"Goumoush",1,"Kroton",11119,52.66,12.27,Europe,-1920,January 1920 BCE,0
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1920,January 1920 BCE,0
-war,21,"Nenaistou",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-1918,January 1918 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1916,January 1916 BCE,175
-became_chiefdom,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1916,January 1916 BCE,0
-peace,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1906,January 1906 BCE,0
-peace,19,"Vouvel",21,"Nenaistou",158873,-16.91,28.33,East and southern Africa,-1904,January 1904 BCE,0
-war,3,"Breigaidesh",1,"Kroton",11119,52.66,12.27,Europe,-1903,January 1903 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1903,January 1903 BCE,54
-peace,1,"Kroton",3,"Breigaidesh",10434,50.27,15.63,Europe,-1900,January 1900 BCE,0
-split,1,"Kroton",,,11119,52.66,12.27,Europe,-1899,January 1899 BCE,82
-split,21,"Nenaistou",,,158873,-16.91,28.33,East and southern Africa,-1896,January 1896 BCE,32
-war,13,"Humdum",8,"Batram",40006,39.13,-108.58,Americas,-1891,January 1891 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-1891,January 1891 BCE,22
-became_state,26,"Tolpibreis",,,159887,-17.93,25.48,East and southern Africa,-1885,January 1885 BCE,0
-peace,8,"Batram",13,"Humdum",39612,37.85,-110.54,Americas,-1877,January 1877 BCE,0
-war,21,"Nenaistou",26,"Tolpibreis",159887,-17.93,25.48,East and southern Africa,-1866,January 1866 BCE,0
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1866,January 1866 BCE,0
-conquered,21,"Nenaistou",26,"Tolpibreis",158873,-16.91,28.33,East and southern Africa,-1859,January 1859 BCE,23
-split,13,"Humdum",,,39612,37.85,-110.54,Americas,-1859,January 1859 BCE,13
-split,6,"Belim",,,161736,16.52,-3.37,Sahel,-1853,January 1853 BCE,32
-founded,29,"Sabrardai",,,39208,36.57,-111.85,Americas,-1836,January 1836 BCE,0
-war,16,"Naimdeil",29,"Sabrardai",39208,36.57,-111.85,Americas,-1834,January 1834 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1834,January 1834 BCE,98
-peace,16,"Naimdeil",29,"Sabrardai",39208,36.57,-111.85,Americas,-1827,January 1827 BCE,0
-founded,30,"Stayeth",,,62237,-14.41,35.23,East and southern Africa,-1817,January 1817 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1815,January 1815 BCE,65
-founded,31,"Erzaira",,,65949,4.57,31.33,East and southern Africa,-1813,January 1813 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-1813,January 1813 BCE,17
-war,16,"Naimdeil",29,"Sabrardai",39208,36.57,-111.85,Americas,-1806,January 1806 BCE,0
-peace,16,"Naimdeil",29,"Sabrardai",39208,36.57,-111.85,Americas,-1799,January 1799 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1794,January 1794 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1787,January 1787 BCE,92
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1780,January 1780 BCE,0
-split,27,"Vame",,,65257,-1.39,31.06,East and southern Africa,-1756,January 1756 BCE,24
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1753,January 1753 BCE,103
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-1746,January 1746 BCE,17
-war,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1675,January 1675 BCE,0
-peace,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1665,January 1665 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1659,January 1659 BCE,124
-war,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1644,January 1644 BCE,0
-founded,32,"Vithkra",,,62754,-15.46,32.39,East and southern Africa,-1634,January 1634 BCE,0
-war,19,"Vouvel",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-1632,January 1632 BCE,0
-peace,19,"Vouvel",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-1631,January 1631 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1631,January 1631 BCE,60
-peace,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1630,January 1630 BCE,0
-war,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1610,January 1610 BCE,0
-peace,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1604,January 1604 BCE,0
-war,16,"Naimdeil",29,"Sabrardai",39208,36.57,-111.85,Americas,-1602,January 1602 BCE,0
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1594,January 1594 BCE,0
-split,13,"Humdum",,,39612,37.85,-110.54,Americas,-1590,January 1590 BCE,7
-war,29,"Sabrardai",13,"Humdum",39612,37.85,-110.54,Americas,-1582,January 1582 BCE,0
-conquered,13,"Humdum",29,"Sabrardai",39612,37.85,-110.54,Americas,-1580,January 1580 BCE,1
-split,30,"Stayeth",,,62237,-14.41,35.23,East and southern Africa,-1559,January 1559 BCE,28
-split,31,"Erzaira",,,65949,4.57,31.33,East and southern Africa,-1555,January 1555 BCE,48
-war,19,"Vouvel",30,"Stayeth",62237,-14.41,35.23,East and southern Africa,-1547,January 1547 BCE,0
-conquered,30,"Stayeth",19,"Vouvel",62237,-14.41,35.23,East and southern Africa,-1546,January 1546 BCE,1
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1541,January 1541 BCE,100
-split,25,"Oustil",,,65260,-2.56,30.31,East and southern Africa,-1541,January 1541 BCE,25
-became_chiefdom,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1541,January 1541 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-1540,January 1540 BCE,23
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1536,January 1536 BCE,25
-founded,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1526,January 1526 BCE,0
-war,32,"Vithkra",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-1526,January 1526 BCE,0
-war,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1520,January 1520 BCE,0
-split,32,"Vithkra",,,62754,-15.46,32.39,East and southern Africa,-1515,January 1515 BCE,28
-peace,19,"Vouvel",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-1512,January 1512 BCE,0
-peace,11,"Shenstuta",1,"Kroton",11119,52.66,12.27,Europe,-1506,January 1506 BCE,0
-war,32,"Vithkra",26,"Tolpibreis",159887,-17.93,25.48,East and southern Africa,-1503,January 1503 BCE,0
-split,27,"Vame",,,65257,-1.39,31.06,East and southern Africa,-1497,January 1497 BCE,22
-peace,26,"Tolpibreis",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-1489,January 1489 BCE,0
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1486,January 1486 BCE,0
-founded,34,"Zaizek",,,65258,-1.78,30.81,East and southern Africa,-1485,January 1485 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1480,January 1480 BCE,0
-war,34,"Zaizek",27,"Vame",65257,-1.39,31.06,East and southern Africa,-1480,January 1480 BCE,0
-conquered,27,"Vame",34,"Zaizek",65257,-1.39,31.06,East and southern Africa,-1477,January 1477 BCE,1
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1472,January 1472 BCE,0
-war,14,"Edomash",12,"Narzeimish",41141,42.91,-106.43,Americas,-1472,January 1472 BCE,0
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1469,January 1469 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1466,January 1466 BCE,0
-became_state,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1463,January 1463 BCE,0
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1459,January 1459 BCE,0
-peace,14,"Edomash",12,"Narzeimish",41141,42.91,-106.43,Americas,-1458,January 1458 BCE,0
-split,6,"Belim",,,161736,16.52,-3.37,Sahel,-1458,January 1458 BCE,30
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1445,January 1445 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1442,January 1442 BCE,54
-split,4,"Goumoush",,,10822,52.63,20.83,Europe,-1411,January 1411 BCE,179
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1402,January 1402 BCE,132
-became_chiefdom,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1402,January 1402 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-1399,January 1399 BCE,29
-became_state,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1382,January 1382 BCE,0
-founded,35,"Tramath",,,162113,15.11,-3.86,Sahel,-1375,January 1375 BCE,0
-war,6,"Belim",35,"Tramath",162113,15.11,-3.86,Sahel,-1373,January 1373 BCE,0
-peace,6,"Belim",35,"Tramath",162113,15.11,-3.86,Sahel,-1370,January 1370 BCE,0
-war,6,"Belim",5,"Pakrebrai",160942,14.77,1.03,Sahel,-1363,January 1363 BCE,0
-split,8,"Batram",,,40006,39.13,-108.58,Americas,-1360,January 1360 BCE,14
-peace,6,"Belim",5,"Pakrebrai",160942,14.77,1.03,Sahel,-1349,January 1349 BCE,0
-war,6,"Belim",35,"Tramath",162113,15.11,-3.86,Sahel,-1349,January 1349 BCE,0
-conquered,35,"Tramath",6,"Belim",162113,15.11,-3.86,Sahel,-1347,January 1347 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1326,January 1326 BCE,125
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1326,January 1326 BCE,54
-split,6,"Belim",,,161736,16.52,-3.37,Sahel,-1321,January 1321 BCE,26
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1313,January 1313 BCE,59
-split,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1309,January 1309 BCE,229
-split,31,"Erzaira",,,65949,4.57,31.33,East and southern Africa,-1297,January 1297 BCE,47
-founded,36,"Gaiki",,,41044,41.75,-122.19,Americas,-1287,January 1287 BCE,0
-founded,37,"Sagope",,,162122,-29.00,24.19,East and southern Africa,-1283,January 1283 BCE,0
-war,23,"Stei",37,"Sagope",162122,-29.00,24.19,East and southern Africa,-1281,January 1281 BCE,0
-peace,23,"Stei",37,"Sagope",162122,-29.00,24.19,East and southern Africa,-1267,January 1267 BCE,0
-war,22,"Tevutral",36,"Gaiki",41044,41.75,-122.19,Americas,-1264,January 1264 BCE,0
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1263,January 1263 BCE,0
-split,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1262,January 1262 BCE,195
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1257,January 1257 BCE,0
-peace,22,"Tevutral",36,"Gaiki",41044,41.75,-122.19,Americas,-1255,January 1255 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1250,January 1250 BCE,0
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1249,January 1249 BCE,0
-split,31,"Erzaira",,,65949,4.57,31.33,East and southern Africa,-1246,January 1246 BCE,46
-founded,38,"Titrai",,,3616,-29.72,22.55,East and southern Africa,-1242,January 1242 BCE,0
-war,22,"Tevutral",36,"Gaiki",41044,41.75,-122.19,Americas,-1234,January 1234 BCE,0
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1229,January 1229 BCE,0
-peace,36,"Gaiki",22,"Tevutral",40918,41.49,-120.56,Americas,-1227,January 1227 BCE,0
-war,37,"Sagope",38,"Titrai",3616,-29.72,22.55,East and southern Africa,-1226,January 1226 BCE,0
-split,22,"Tevutral",,,40918,41.49,-120.56,Americas,-1220,January 1220 BCE,16
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1216,January 1216 BCE,0
-peace,37,"Sagope",38,"Titrai",3616,-29.72,22.55,East and southern Africa,-1216,January 1216 BCE,0
-split,16,"Naimdeil",,,38935,35.69,-113.40,Americas,-1210,January 1210 BCE,13
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1196,January 1196 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1195,January 1195 BCE,130
-split,25,"Oustil",,,65260,-2.56,30.31,East and southern Africa,-1192,January 1192 BCE,22
-war,34,"Zaizek",25,"Oustil",65260,-2.56,30.31,East and southern Africa,-1187,January 1187 BCE,0
-conquered,25,"Oustil",34,"Zaizek",65260,-2.56,30.31,East and southern Africa,-1186,January 1186 BCE,1
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1182,January 1182 BCE,0
-split,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1182,January 1182 BCE,208
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1158,January 1158 BCE,45
-founded,39,"Veitha",,,161746,-28.00,25.09,East and southern Africa,-1152,January 1152 BCE,0
-war,23,"Stei",39,"Veitha",161746,-28.00,25.09,East and southern Africa,-1149,January 1149 BCE,0
-peace,23,"Stei",39,"Veitha",161746,-28.00,25.09,East and southern Africa,-1146,January 1146 BCE,0
-war,37,"Sagope",39,"Veitha",161746,-28.00,25.09,East and southern Africa,-1146,January 1146 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1141,January 1141 BCE,106
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1140,January 1140 BCE,0
-conquered,39,"Veitha",37,"Sagope",161746,-28.00,25.09,East and southern Africa,-1139,January 1139 BCE,3
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1138,January 1138 BCE,0
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1128,January 1128 BCE,0
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1124,January 1124 BCE,0
-war,37,"Sagope",38,"Titrai",3616,-29.72,22.55,East and southern Africa,-1113,January 1113 BCE,0
-conquered,38,"Titrai",37,"Sagope",3616,-29.72,22.55,East and southern Africa,-1108,January 1108 BCE,19
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1105,January 1105 BCE,93
-founded,40,"Pathraiyes",,,62107,-14.77,35.49,East and southern Africa,-1103,January 1103 BCE,0
-split,19,"Vouvel",,,61848,-16.89,34.96,East and southern Africa,-1064,January 1064 BCE,74
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1059,January 1059 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1050,January 1050 BCE,0
-war,19,"Vouvel",40,"Pathraiyes",62107,-14.77,35.49,East and southern Africa,-1041,January 1041 BCE,0
-split,23,"Stei",,,161229,-27.25,26.70,East and southern Africa,-1040,January 1040 BCE,44
-war,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1029,January 1029 BCE,0
-peace,19,"Vouvel",40,"Pathraiyes",62107,-14.77,35.49,East and southern Africa,-1027,January 1027 BCE,0
-war,36,"Gaiki",22,"Tevutral",40918,41.49,-120.56,Americas,-1025,January 1025 BCE,0
-peace,18,"Keilemem",24,"Branoth",95495,15.57,-90.62,Americas,-1023,January 1023 BCE,0
-war,32,"Vithkra",19,"Vouvel",61848,-16.89,34.96,East and southern Africa,-1023,January 1023 BCE,0
-split,5,"Pakrebrai",,,160942,14.77,1.03,Sahel,-1022,January 1022 BCE,30
-became_state,32,"Vithkra",,,62754,-15.46,32.39,East and southern Africa,-1020,January 1020 BCE,0
-peace,22,"Tevutral",36,"Gaiki",41044,41.75,-122.19,Americas,-1016,January 1016 BCE,0
-war,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1016,January 1016 BCE,0
-split,33,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1012,January 1012 BCE,233
-peace,19,"Vouvel",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-1009,January 1009 BCE,0
-war,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1008,January 1008 BCE,0
-split,6,"Belim",,,161736,16.52,-3.37,Sahel,-1003,January 1003 BCE,31
-peace,10,"Tilousha",15,"Brazainaik",42661,47.95,-119.34,Americas,-1002,January 1002 BCE,0
-peace,29,"Sabrardai",16,"Naimdeil",38935,35.69,-113.40,Americas,-1001,January 1001 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-6220,January 6220 BCE,66
+founded,2,"Veththesh",,,10632,51.26,16.68,Europe,-6150,January 6150 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-5983,January 5983 BCE,66
+founded,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5917,January 5917 BCE,0
+war,2,"Veththesh",3,"Rithoustu",11209,53.48,14.67,Europe,-5912,January 5912 BCE,0
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5904,January 5904 BCE,4
+peace,2,"Veththesh",3,"Rithoustu",11209,53.48,14.67,Europe,-5902,January 5902 BCE,0
+war,1,"Kroton",3,"Rithoustu",11209,53.48,14.67,Europe,-5898,January 5898 BCE,0
+peace,1,"Kroton",3,"Rithoustu",11209,53.48,14.67,Europe,-5889,January 5889 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5886,January 5886 BCE,52
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5867,January 5867 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5860,January 5860 BCE,0
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5858,January 5858 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5855,January 5855 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5744,January 5744 BCE,36
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5726,January 5726 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5715,January 5715 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-5473,January 5473 BCE,55
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5467,January 5467 BCE,31
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5441,January 5441 BCE,33
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5437,January 5437 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5429,January 5429 BCE,0
+founded,4,"Douleloun",,,11026,52.08,11.42,Europe,-5416,January 5416 BCE,0
+war,1,"Kroton",4,"Douleloun",11026,52.08,11.42,Europe,-5416,January 5416 BCE,0
+peace,1,"Kroton",4,"Douleloun",11026,52.08,11.42,Europe,-5415,January 5415 BCE,0
+war,1,"Kroton",4,"Douleloun",11026,52.08,11.42,Europe,-5395,January 5395 BCE,0
+peace,1,"Kroton",4,"Douleloun",11026,52.08,11.42,Europe,-5391,January 5391 BCE,0
+war,1,"Kroton",4,"Douleloun",11026,52.08,11.42,Europe,-5368,January 5368 BCE,0
+conquered,4,"Douleloun",1,"Kroton",11026,52.08,11.42,Europe,-5364,January 5364 BCE,0
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5362,January 5362 BCE,34
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5313,January 5313 BCE,52
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5310,January 5310 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5305,January 5305 BCE,0
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5283,January 5283 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5269,January 5269 BCE,0
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5266,January 5266 BCE,30
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5211,January 5211 BCE,48
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5209,January 5209 BCE,0
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5204,January 5204 BCE,20
+peace,2,"Veththesh",3,"Rithoustu",11209,53.48,14.67,Europe,-5195,January 5195 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5099,January 5099 BCE,40
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5088,January 5088 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5083,January 5083 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5071,January 5071 BCE,20
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-5066,January 5066 BCE,25
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5065,January 5065 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5056,January 5056 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5055,January 5055 BCE,25
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5053,January 5053 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-5040,January 5040 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-5029,January 5029 BCE,31
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5020,January 5020 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-5019,January 5019 BCE,0
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-4999,January 4999 BCE,0
+peace,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-4985,January 4985 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4978,January 4978 BCE,15
+war,3,"Rithoustu",2,"Veththesh",10632,51.26,16.68,Europe,-4963,January 4963 BCE,0
+peace,2,"Veththesh",3,"Rithoustu",11209,53.48,14.67,Europe,-4949,January 4949 BCE,0
+split,3,"Rithoustu",,,11209,53.48,14.67,Europe,-4933,January 4933 BCE,18
+war,1,"Kroton",3,"Rithoustu",11209,53.48,14.67,Europe,-4923,January 4923 BCE,0
+conquered,3,"Rithoustu",1,"Kroton",11209,53.48,14.67,Europe,-4919,January 4919 BCE,5
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4776,January 4776 BCE,43
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4769,January 4769 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4764,January 4764 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-4743,January 4743 BCE,57
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4653,January 4653 BCE,45
+became_state,1,"Kroton",,,11119,52.66,12.27,Europe,-4625,January 4625 BCE,0
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-4571,January 4571 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4562,January 4562 BCE,37
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4557,January 4557 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-4435,January 4435 BCE,144
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-4364,January 4364 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-4358,January 4358 BCE,0
+founded,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-4229,January 4229 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-4178,January 4178 BCE,24
+founded,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-4166,January 4166 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-4165,January 4165 BCE,35
+founded,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-4152,January 4152 BCE,0
+founded,8,"Vaiye",,,10725,52.18,20.61,Europe,-4149,January 4149 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-4082,January 4082 BCE,44
+founded,9,"Braikour",,,62110,-15.83,34.71,East and southern Africa,-4077,January 4077 BCE,0
+founded,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-4054,January 4054 BCE,0
+war,9,"Braikour",10,"Mueithaik",61714,-16.89,35.48,East and southern Africa,-4053,January 4053 BCE,0
+peace,9,"Braikour",10,"Mueithaik",61714,-16.89,35.48,East and southern Africa,-4050,January 4050 BCE,0
+founded,11,"Guem",,,62243,-16.53,33.66,East and southern Africa,-4047,January 4047 BCE,0
+war,7,"Yerkrogel",11,"Guem",62243,-16.53,33.66,East and southern Africa,-4047,January 4047 BCE,0
+peace,7,"Yerkrogel",11,"Guem",62243,-16.53,33.66,East and southern Africa,-4042,January 4042 BCE,0
+split,11,"Guem",,,62243,-16.53,33.66,East and southern Africa,-4042,January 4042 BCE,6
+became_state,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-4041,January 4041 BCE,0
+war,9,"Braikour",11,"Guem",62243,-16.53,33.66,East and southern Africa,-4039,January 4039 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-4038,January 4038 BCE,42
+founded,12,"Tramath",,,162113,15.11,-3.86,Sahel,-4037,January 4037 BCE,0
+conquered,11,"Guem",9,"Braikour",62243,-16.53,33.66,East and southern Africa,-4036,January 4036 BCE,12
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-4033,January 4033 BCE,20
+split,9,"Braikour",,,62110,-15.83,34.71,East and southern Africa,-4021,January 4021 BCE,30
+war,7,"Yerkrogel",9,"Braikour",62110,-15.83,34.71,East and southern Africa,-4018,January 4018 BCE,0
+peace,7,"Yerkrogel",9,"Braikour",62110,-15.83,34.71,East and southern Africa,-4014,January 4014 BCE,0
+war,10,"Mueithaik",9,"Braikour",62110,-15.83,34.71,East and southern Africa,-4007,January 4007 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-4001,January 4001 BCE,11
+peace,10,"Mueithaik",9,"Braikour",62110,-15.83,34.71,East and southern Africa,-3993,January 3993 BCE,0
+war,7,"Yerkrogel",10,"Mueithaik",61714,-16.89,35.48,East and southern Africa,-3991,January 3991 BCE,0
+peace,7,"Yerkrogel",10,"Mueithaik",61714,-16.89,35.48,East and southern Africa,-3987,January 3987 BCE,0
+founded,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3979,January 3979 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3961,January 3961 BCE,30
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3952,January 3952 BCE,33
+split,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3949,January 3949 BCE,147
+split,9,"Braikour",,,62110,-15.83,34.71,East and southern Africa,-3946,January 3946 BCE,25
+founded,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3940,January 3940 BCE,0
+war,10,"Mueithaik",9,"Braikour",62110,-15.83,34.71,East and southern Africa,-3940,January 3940 BCE,0
+conquered,9,"Braikour",10,"Mueithaik",62110,-15.83,34.71,East and southern Africa,-3935,January 3935 BCE,5
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3928,January 3928 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3922,January 3922 BCE,33
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3914,January 3914 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3914,January 3914 BCE,0
+peace,1,"Kroton",8,"Vaiye",10725,52.18,20.61,Europe,-3900,January 3900 BCE,0
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3899,January 3899 BCE,0
+split,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3895,January 3895 BCE,134
+became_chiefdom,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3895,January 3895 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-3892,January 3892 BCE,48
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3891,January 3891 BCE,36
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3887,January 3887 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-3883,January 3883 BCE,42
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3880,January 3880 BCE,0
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3866,January 3866 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3863,January 3863 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3862,January 3862 BCE,23
+peace,1,"Kroton",8,"Vaiye",10725,52.18,20.61,Europe,-3849,January 3849 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3845,January 3845 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3843,January 3843 BCE,60
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3831,January 3831 BCE,0
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3831,January 3831 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3831,January 3831 BCE,35
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3821,January 3821 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3818,January 3818 BCE,26
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3801,January 3801 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3793,January 3793 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3793,January 3793 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3788,January 3788 BCE,32
+peace,1,"Kroton",8,"Vaiye",10725,52.18,20.61,Europe,-3779,January 3779 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3777,January 3777 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-3777,January 3777 BCE,58
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-3766,January 3766 BCE,15
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3763,January 3763 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3762,January 3762 BCE,38
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3755,January 3755 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3754,January 3754 BCE,55
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3750,January 3750 BCE,130
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3747,January 3747 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-3746,January 3746 BCE,33
+became_state,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3739,January 3739 BCE,0
+became_state,8,"Vaiye",,,10725,52.18,20.61,Europe,-3729,January 3729 BCE,0
+became_state,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3723,January 3723 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3722,January 3722 BCE,36
+war,12,"Tramath",5,"Dihistuth",160943,15.12,0.77,Sahel,-3720,January 3720 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-3717,January 3717 BCE,49
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3716,January 3716 BCE,8
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3710,January 3710 BCE,47
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3707,January 3707 BCE,30
+peace,12,"Tramath",5,"Dihistuth",160943,15.12,0.77,Sahel,-3706,January 3706 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3692,January 3692 BCE,9
+founded,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3691,January 3691 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3687,January 3687 BCE,65
+war,7,"Yerkrogel",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3686,January 3686 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3686,January 3686 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3682,January 3682 BCE,42
+peace,7,"Yerkrogel",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3672,January 3672 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3672,January 3672 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3668,January 3668 BCE,37
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3655,January 3655 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3654,January 3654 BCE,27
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3653,January 3653 BCE,19
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3653,January 3653 BCE,54
+founded,16,"Duhaikre",,,62238,-14.77,34.97,East and southern Africa,-3649,January 3649 BCE,0
+war,10,"Mueithaik",16,"Duhaikre",62238,-14.77,34.97,East and southern Africa,-3648,January 3648 BCE,0
+conquered,16,"Duhaikre",10,"Mueithaik",62238,-14.77,34.97,East and southern Africa,-3645,January 3645 BCE,3
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3641,January 3641 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3641,January 3641 BCE,29
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3640,January 3640 BCE,0
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3639,January 3639 BCE,0
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3637,January 3637 BCE,12
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3634,January 3634 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3632,January 3632 BCE,0
+peace,6,"Yayeil",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3627,January 3627 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3620,January 3620 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3600,January 3600 BCE,38
+war,7,"Yerkrogel",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3590,January 3590 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3587,January 3587 BCE,0
+peace,7,"Yerkrogel",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3583,January 3583 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3573,January 3573 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3569,January 3569 BCE,0
+split,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3568,January 3568 BCE,149
+became_chiefdom,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3568,January 3568 BCE,0
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3564,January 3564 BCE,10
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3555,January 3555 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3552,January 3552 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3538,January 3538 BCE,0
+war,6,"Yayeil",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3537,January 3537 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3532,January 3532 BCE,25
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3528,January 3528 BCE,0
+peace,6,"Yayeil",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3526,January 3526 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3522,January 3522 BCE,30
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3514,January 3514 BCE,0
+became_state,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3511,January 3511 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3508,January 3508 BCE,105
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3506,January 3506 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3504,January 3504 BCE,0
+peace,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3492,January 3492 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3492,January 3492 BCE,23
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3490,January 3490 BCE,0
+founded,17,"Mothkipe",,,160948,16.89,-0.52,Sahel,-3474,January 3474 BCE,0
+war,5,"Dihistuth",17,"Mothkipe",160948,16.89,-0.52,Sahel,-3472,January 3472 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3472,January 3472 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3472,January 3472 BCE,47
+conquered,17,"Mothkipe",5,"Dihistuth",160948,16.89,-0.52,Sahel,-3469,January 3469 BCE,3
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3458,January 3458 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3444,January 3444 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3441,January 3441 BCE,111
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3430,January 3430 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3429,January 3429 BCE,27
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3420,January 3420 BCE,15
+war,12,"Tramath",5,"Dihistuth",160943,15.12,0.77,Sahel,-3418,January 3418 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3414,January 3414 BCE,0
+founded,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3413,January 3413 BCE,0
+peace,5,"Dihistuth",12,"Tramath",162113,15.11,-3.86,Sahel,-3404,January 3404 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3402,January 3402 BCE,15
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3400,January 3400 BCE,0
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3399,January 3399 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3398,January 3398 BCE,11
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3396,January 3396 BCE,8
+war,2,"Veththesh",1,"Kroton",11119,52.66,12.27,Europe,-3393,January 3393 BCE,0
+became_state,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3393,January 3393 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-3387,January 3387 BCE,42
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3386,January 3386 BCE,0
+peace,6,"Yayeil",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-3385,January 3385 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3382,January 3382 BCE,0
+split,2,"Veththesh",,,10632,51.26,16.68,Europe,-3375,January 3375 BCE,15
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3375,January 3375 BCE,22
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3371,January 3371 BCE,6
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3368,January 3368 BCE,0
+war,14,"Laitrokros",2,"Veththesh",10632,51.26,16.68,Europe,-3368,January 3368 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3358,January 3358 BCE,38
+peace,14,"Laitrokros",2,"Veththesh",10632,51.26,16.68,Europe,-3355,January 3355 BCE,0
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3354,January 3354 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3351,January 3351 BCE,0
+war,8,"Vaiye",2,"Veththesh",10632,51.26,16.68,Europe,-3349,January 3349 BCE,0
+peace,8,"Vaiye",2,"Veththesh",10632,51.26,16.68,Europe,-3346,January 3346 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3341,January 3341 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3334,January 3334 BCE,163
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3330,January 3330 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3329,January 3329 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3328,January 3328 BCE,26
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3327,January 3327 BCE,0
+war,8,"Vaiye",2,"Veththesh",10632,51.26,16.68,Europe,-3326,January 3326 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3324,January 3324 BCE,41
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3322,January 3322 BCE,0
+peace,8,"Vaiye",2,"Veththesh",10632,51.26,16.68,Europe,-3319,January 3319 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3319,January 3319 BCE,31
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-3318,January 3318 BCE,15
+peace,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3310,January 3310 BCE,0
+war,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3304,January 3304 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3303,January 3303 BCE,0
+peace,1,"Kroton",2,"Veththesh",10632,51.26,16.68,Europe,-3302,January 3302 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3294,January 3294 BCE,20
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3289,January 3289 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3289,January 3289 BCE,102
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3288,January 3288 BCE,25
+war,8,"Vaiye",2,"Veththesh",10632,51.26,16.68,Europe,-3286,January 3286 BCE,0
+conquered,2,"Veththesh",8,"Vaiye",10632,51.26,16.68,Europe,-3280,January 3280 BCE,1
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3277,January 3277 BCE,0
+founded,19,"Zostashkrash",,,160947,16.54,-0.26,Sahel,-3275,January 3275 BCE,0
+war,5,"Dihistuth",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3271,January 3271 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3263,January 3263 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3260,January 3260 BCE,97
+peace,5,"Dihistuth",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3257,January 3257 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3257,January 3257 BCE,33
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3254,January 3254 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3251,January 3251 BCE,11
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3242,January 3242 BCE,30
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3240,January 3240 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3234,January 3234 BCE,69
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3229,January 3229 BCE,0
+split,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3216,January 3216 BCE,129
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3215,January 3215 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3203,January 3203 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-3202,January 3202 BCE,37
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3194,January 3194 BCE,18
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3193,January 3193 BCE,172
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3189,January 3189 BCE,0
+war,12,"Tramath",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3181,January 3181 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3179,January 3179 BCE,0
+split,19,"Zostashkrash",,,160947,16.54,-0.26,Sahel,-3172,January 3172 BCE,2
+peace,12,"Tramath",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3167,January 3167 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3165,January 3165 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-3162,January 3162 BCE,65
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3161,January 3161 BCE,28
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3147,January 3147 BCE,28
+war,12,"Tramath",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3145,January 3145 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3145,January 3145 BCE,42
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3143,January 3143 BCE,0
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3142,January 3142 BCE,0
+split,7,"Yerkrogel",,,62880,-15.46,31.88,East and southern Africa,-3136,January 3136 BCE,118
+peace,12,"Tramath",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3131,January 3131 BCE,0
+peace,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3130,January 3130 BCE,0
+split,6,"Yayeil",,,160029,-17.66,24.79,East and southern Africa,-3130,January 3130 BCE,1
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3130,January 3130 BCE,17
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3129,January 3129 BCE,0
+war,5,"Dihistuth",19,"Zostashkrash",160947,16.54,-0.26,Sahel,-3126,January 3126 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3126,January 3126 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3116,January 3116 BCE,22
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-3115,January 3115 BCE,24
+conquered,19,"Zostashkrash",5,"Dihistuth",160947,16.54,-0.26,Sahel,-3114,January 3114 BCE,7
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3114,January 3114 BCE,138
+peace,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3112,January 3112 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-3110,January 3110 BCE,0
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3110,January 3110 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3108,January 3108 BCE,68
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3105,January 3105 BCE,26
+peace,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3103,January 3103 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-3096,January 3096 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3096,January 3096 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-3094,January 3094 BCE,96
+founded,20,"Saintre",,,41638,44.29,-117.43,Americas,-3093,January 3093 BCE,0
+war,15,"Yeithourtraish",6,"Yayeil",160029,-17.66,24.79,East and southern Africa,-3083,January 3083 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3082,January 3082 BCE,0
+conquered,6,"Yayeil",15,"Yeithourtraish",160029,-17.66,24.79,East and southern Africa,-3075,January 3075 BCE,25
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-3073,January 3073 BCE,42
+founded,21,"Haistoun",,,161608,16.88,-3.12,Sahel,-3061,January 3061 BCE,0
+founded,22,"Amitre",,,41017,42.48,-105.51,Americas,-3059,January 3059 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3057,January 3057 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-3053,January 3053 BCE,39
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3052,January 3052 BCE,20
+founded,23,"Steinmaith",,,39344,36.99,-111.61,Americas,-3046,January 3046 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3043,January 3043 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3042,January 3042 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3029,January 3029 BCE,66
+peace,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3028,January 3028 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-3020,January 3020 BCE,20
+war,5,"Dihistuth",21,"Haistoun",161608,16.88,-3.12,Sahel,-3018,January 3018 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-3018,January 3018 BCE,17
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-3014,January 3014 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-3012,January 3012 BCE,37
+peace,5,"Dihistuth",21,"Haistoun",161608,16.88,-3.12,Sahel,-3006,January 3006 BCE,0
+founded,24,"Pokrereik",,,161735,16.17,-3.11,Sahel,-3003,January 3003 BCE,0
+war,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-3001,January 3001 BCE,0
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-3000,January 3000 BCE,0
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-3000,January 3000 BCE,0
+peace,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2998,January 2998 BCE,0
+founded,25,"Vede",,,8791,45.25,28.36,Europe,-2995,January 2995 BCE,0
+founded,26,"Vame",,,65257,-1.39,31.06,East and southern Africa,-2995,January 2995 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-2988,January 2988 BCE,189
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-2988,January 2988 BCE,39
+peace,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-2986,January 2986 BCE,0
+war,5,"Dihistuth",21,"Haistoun",161608,16.88,-3.12,Sahel,-2986,January 2986 BCE,0
+founded,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-2982,January 2982 BCE,0
+founded,28,"Mupouth",,,41151,42.84,-112.72,Americas,-2982,January 2982 BCE,0
+war,20,"Saintre",28,"Mupouth",41151,42.84,-112.72,Americas,-2980,January 2980 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2980,January 2980 BCE,54
+war,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2978,January 2978 BCE,0
+war,7,"Yerkrogel",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-2977,January 2977 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2977,January 2977 BCE,0
+peace,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2975,January 2975 BCE,0
+peace,5,"Dihistuth",21,"Haistoun",161608,16.88,-3.12,Sahel,-2972,January 2972 BCE,0
+peace,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-2966,January 2966 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2965,January 2965 BCE,104
+peace,7,"Yerkrogel",15,"Yeithourtraish",159601,-18.11,26.61,East and southern Africa,-2963,January 2963 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2963,January 2963 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2961,January 2961 BCE,29
+war,10,"Mueithaik",7,"Yerkrogel",62880,-15.46,31.88,East and southern Africa,-2960,January 2960 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2960,January 2960 BCE,8
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2958,January 2958 BCE,0
+founded,29,"Stougalkreth",,,42319,47.10,-111.81,Americas,-2948,January 2948 BCE,0
+war,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2948,January 2948 BCE,0
+peace,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2947,January 2947 BCE,0
+conquered,7,"Yerkrogel",10,"Mueithaik",62880,-15.46,31.88,East and southern Africa,-2946,January 2946 BCE,131
+war,21,"Haistoun",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2945,January 2945 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2944,January 2944 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2944,January 2944 BCE,37
+peace,21,"Haistoun",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2938,January 2938 BCE,0
+war,12,"Tramath",21,"Haistoun",161608,16.88,-3.12,Sahel,-2936,January 2936 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2932,January 2932 BCE,0
+war,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2923,January 2923 BCE,0
+peace,12,"Tramath",21,"Haistoun",161608,16.88,-3.12,Sahel,-2922,January 2922 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2918,January 2918 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2918,January 2918 BCE,7
+peace,26,"Vame",18,"Trerelstul",65154,-2.17,31.05,East and southern Africa,-2915,January 2915 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2914,January 2914 BCE,0
+war,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2910,January 2910 BCE,0
+peace,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2907,January 2907 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2907,January 2907 BCE,15
+war,12,"Tramath",21,"Haistoun",161608,16.88,-3.12,Sahel,-2901,January 2901 BCE,0
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-2900,January 2900 BCE,0
+conquered,21,"Haistoun",12,"Tramath",161608,16.88,-3.12,Sahel,-2900,January 2900 BCE,10
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2897,January 2897 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2895,January 2895 BCE,191
+war,12,"Tramath",24,"Pokrereik",161735,16.17,-3.11,Sahel,-2887,January 2887 BCE,0
+conquered,24,"Pokrereik",12,"Tramath",161735,16.17,-3.11,Sahel,-2886,January 2886 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2883,January 2883 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2881,January 2881 BCE,37
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2876,January 2876 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2874,January 2874 BCE,40
+war,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2869,January 2869 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2867,January 2867 BCE,11
+peace,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2864,January 2864 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2863,January 2863 BCE,156
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-2862,January 2862 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2857,January 2857 BCE,55
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2853,January 2853 BCE,134
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2844,January 2844 BCE,0
+war,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2844,January 2844 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2841,January 2841 BCE,9
+peace,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2835,January 2835 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2830,January 2830 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2823,January 2823 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2823,January 2823 BCE,43
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2820,January 2820 BCE,112
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-2816,January 2816 BCE,149
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-2814,January 2814 BCE,43
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2809,January 2809 BCE,0
+war,18,"Trerelstul",26,"Vame",65257,-1.39,31.06,East and southern Africa,-2803,January 2803 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2803,January 2803 BCE,38
+conquered,26,"Vame",18,"Trerelstul",65257,-1.39,31.06,East and southern Africa,-2801,January 2801 BCE,7
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2801,January 2801 BCE,119
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2794,January 2794 BCE,22
+founded,30,"Haistoun",,,161608,16.88,-3.12,Sahel,-2786,January 2786 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2786,January 2786 BCE,0
+founded,31,"Stinbros",,,161215,16.89,-1.56,Sahel,-2784,January 2784 BCE,0
+war,5,"Dihistuth",31,"Stinbros",161215,16.89,-1.56,Sahel,-2783,January 2783 BCE,0
+peace,5,"Dihistuth",31,"Stinbros",161215,16.89,-1.56,Sahel,-2777,January 2777 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2772,January 2772 BCE,0
+war,30,"Haistoun",31,"Stinbros",161215,16.89,-1.56,Sahel,-2772,January 2772 BCE,0
+founded,32,"Vithkra",,,62754,-15.46,32.39,East and southern Africa,-2763,January 2763 BCE,0
+peace,30,"Haistoun",31,"Stinbros",161215,16.89,-1.56,Sahel,-2763,January 2763 BCE,0
+war,10,"Mueithaik",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-2760,January 2760 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2758,January 2758 BCE,0
+war,5,"Dihistuth",31,"Stinbros",161215,16.89,-1.56,Sahel,-2757,January 2757 BCE,0
+peace,10,"Mueithaik",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-2756,January 2756 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2755,January 2755 BCE,39
+peace,5,"Dihistuth",31,"Stinbros",161215,16.89,-1.56,Sahel,-2751,January 2751 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2744,January 2744 BCE,0
+war,10,"Mueithaik",32,"Vithkra",62754,-15.46,32.39,East and southern Africa,-2735,January 2735 BCE,0
+war,30,"Haistoun",31,"Stinbros",161215,16.89,-1.56,Sahel,-2735,January 2735 BCE,0
+conquered,32,"Vithkra",10,"Mueithaik",62754,-15.46,32.39,East and southern Africa,-2734,January 2734 BCE,6
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2733,January 2733 BCE,0
+founded,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2731,January 2731 BCE,0
+peace,31,"Stinbros",30,"Haistoun",161608,16.88,-3.12,Sahel,-2730,January 2730 BCE,0
+war,15,"Yeithourtraish",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-2725,January 2725 BCE,0
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-2721,January 2721 BCE,30
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2719,January 2719 BCE,0
+war,5,"Dihistuth",31,"Stinbros",161215,16.89,-1.56,Sahel,-2718,January 2718 BCE,0
+peace,15,"Yeithourtraish",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-2715,January 2715 BCE,0
+war,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2713,January 2713 BCE,0
+conquered,31,"Stinbros",5,"Dihistuth",161215,16.89,-1.56,Sahel,-2712,January 2712 BCE,7
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2710,January 2710 BCE,39
+peace,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2708,January 2708 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2704,January 2704 BCE,38
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2703,January 2703 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2690,January 2690 BCE,37
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2689,January 2689 BCE,0
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-2688,January 2688 BCE,21
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2680,January 2680 BCE,0
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2679,January 2679 BCE,30
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2677,January 2677 BCE,32
+became_state,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2675,January 2675 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2673,January 2673 BCE,24
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2666,January 2666 BCE,0
+split,30,"Haistoun",,,161608,16.88,-3.12,Sahel,-2666,January 2666 BCE,10
+war,25,"Vede",14,"Laitrokros",9700,47.74,18.66,Europe,-2663,January 2663 BCE,0
+war,15,"Yeithourtraish",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-2657,January 2657 BCE,0
+split,15,"Yeithourtraish",,,159601,-18.11,26.61,East and southern Africa,-2656,January 2656 BCE,21
+peace,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-2649,January 2649 BCE,0
+conquered,15,"Yeithourtraish",33,"Lusteis",159601,-18.11,26.61,East and southern Africa,-2647,January 2647 BCE,2
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2610,January 2610 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2597,January 2597 BCE,24
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2596,January 2596 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2596,January 2596 BCE,39
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2590,January 2590 BCE,25
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2589,January 2589 BCE,97
+founded,34,"Krobei",,,38783,35.38,-106.66,Americas,-2588,January 2588 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2580,January 2580 BCE,34
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2577,January 2577 BCE,201
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2576,January 2576 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2575,January 2575 BCE,153
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2562,January 2562 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2560,January 2560 BCE,8
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2559,January 2559 BCE,16
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2543,January 2543 BCE,88
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2541,January 2541 BCE,0
+war,30,"Haistoun",5,"Dihistuth",160943,15.12,0.77,Sahel,-2538,January 2538 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2535,January 2535 BCE,28
+split,18,"Trerelstul",,,65154,-2.17,31.05,East and southern Africa,-2533,January 2533 BCE,26
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2528,January 2528 BCE,188
+founded,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-2527,January 2527 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2527,January 2527 BCE,0
+peace,30,"Haistoun",5,"Dihistuth",160943,15.12,0.77,Sahel,-2524,January 2524 BCE,0
+war,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2522,January 2522 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2522,January 2522 BCE,9
+war,35,"Vasro",18,"Trerelstul",65154,-2.17,31.05,East and southern Africa,-2521,January 2521 BCE,0
+peace,35,"Vasro",18,"Trerelstul",65154,-2.17,31.05,East and southern Africa,-2520,January 2520 BCE,0
+peace,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2510,January 2510 BCE,0
+split,30,"Haistoun",,,161608,16.88,-3.12,Sahel,-2508,January 2508 BCE,15
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2507,January 2507 BCE,0
+founded,36,"Dakou",,,42660,48.01,-118.64,Americas,-2504,January 2504 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2503,January 2503 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2501,January 2501 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2501,January 2501 BCE,207
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2493,January 2493 BCE,0
+war,35,"Vasro",18,"Trerelstul",65154,-2.17,31.05,East and southern Africa,-2487,January 2487 BCE,0
+conquered,18,"Trerelstul",35,"Vasro",65154,-2.17,31.05,East and southern Africa,-2486,January 2486 BCE,6
+war,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-2486,January 2486 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2486,January 2486 BCE,132
+war,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2484,January 2484 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2484,January 2484 BCE,41
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2480,January 2480 BCE,0
+peace,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2473,January 2473 BCE,0
+peace,20,"Saintre",28,"Mupouth",41151,42.84,-112.72,Americas,-2472,January 2472 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2471,January 2471 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2471,January 2471 BCE,0
+split,30,"Haistoun",,,161608,16.88,-3.12,Sahel,-2463,January 2463 BCE,6
+split,36,"Dakou",,,42660,48.01,-118.64,Americas,-2458,January 2458 BCE,12
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2457,January 2457 BCE,0
+split,28,"Mupouth",,,41151,42.84,-112.72,Americas,-2456,January 2456 BCE,30
+war,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2452,January 2452 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2450,January 2450 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2443,January 2443 BCE,0
+peace,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2440,January 2440 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2433,January 2433 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2423,January 2423 BCE,71
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2419,January 2419 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2417,January 2417 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2415,January 2415 BCE,36
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2411,January 2411 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2404,January 2404 BCE,162
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2394,January 2394 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2389,January 2389 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2388,January 2388 BCE,26
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2380,January 2380 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2376,January 2376 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2355,January 2355 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2354,January 2354 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2344,January 2344 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2342,January 2342 BCE,76
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2341,January 2341 BCE,0
+war,25,"Vede",14,"Laitrokros",9700,47.74,18.66,Europe,-2341,January 2341 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2330,January 2330 BCE,212
+peace,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-2327,January 2327 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2324,January 2324 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2323,January 2323 BCE,53
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2318,January 2318 BCE,36
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2317,January 2317 BCE,35
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2315,January 2315 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2314,January 2314 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2308,January 2308 BCE,22
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-2304,January 2304 BCE,30
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2300,January 2300 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2297,January 2297 BCE,76
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2290,January 2290 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2289,January 2289 BCE,20
+war,30,"Haistoun",5,"Dihistuth",160943,15.12,0.77,Sahel,-2279,January 2279 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2276,January 2276 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2275,January 2275 BCE,0
+peace,5,"Dihistuth",30,"Haistoun",161608,16.88,-3.12,Sahel,-2272,January 2272 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2264,January 2264 BCE,203
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2262,January 2262 BCE,134
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-2261,January 2261 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2253,January 2253 BCE,0
+split,30,"Haistoun",,,161608,16.88,-3.12,Sahel,-2253,January 2253 BCE,6
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2248,January 2248 BCE,32
+split,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-2242,January 2242 BCE,31
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2240,January 2240 BCE,149
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2239,January 2239 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2227,January 2227 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2220,January 2220 BCE,130
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2219,January 2219 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2216,January 2216 BCE,82
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2213,January 2213 BCE,0
+war,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2213,January 2213 BCE,0
+peace,12,"Tramath",30,"Haistoun",161608,16.88,-3.12,Sahel,-2209,January 2209 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2205,January 2205 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2203,January 2203 BCE,35
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2201,January 2201 BCE,47
+war,5,"Dihistuth",30,"Haistoun",161608,16.88,-3.12,Sahel,-2193,January 2193 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2191,January 2191 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2190,January 2190 BCE,28
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2189,January 2189 BCE,143
+peace,5,"Dihistuth",30,"Haistoun",161608,16.88,-3.12,Sahel,-2186,January 2186 BCE,0
+war,30,"Haistoun",12,"Tramath",162113,15.11,-3.86,Sahel,-2183,January 2183 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2182,January 2182 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2178,January 2178 BCE,39
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2177,January 2177 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2176,January 2176 BCE,127
+founded,37,"Keilemem",,,95997,17.35,-91.53,Americas,-2171,January 2171 BCE,0
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-2171,January 2171 BCE,0
+conquered,30,"Haistoun",12,"Tramath",161608,16.88,-3.12,Sahel,-2169,January 2169 BCE,15
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-2168,January 2168 BCE,30
+founded,38,"Braldom",,,151803,8.22,-74.01,Americas,-2166,January 2166 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2166,January 2166 BCE,30
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2157,January 2157 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2146,January 2146 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2143,January 2143 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2143,January 2143 BCE,148
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2143,January 2143 BCE,34
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2134,January 2134 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-2134,January 2134 BCE,85
+war,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-2133,January 2133 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2129,January 2129 BCE,30
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-2128,January 2128 BCE,181
+peace,8,"Vaiye",1,"Kroton",11119,52.66,12.27,Europe,-2119,January 2119 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2119,January 2119 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2112,January 2112 BCE,34
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2105,January 2105 BCE,0
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-2105,January 2105 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2101,January 2101 BCE,0
+war,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-2100,January 2100 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2098,January 2098 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2094,January 2094 BCE,35
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-2091,January 2091 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-2091,January 2091 BCE,20
+split,34,"Krobei",,,38783,35.38,-106.66,Americas,-2089,January 2089 BCE,36
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2087,January 2087 BCE,0
+peace,20,"Saintre",28,"Mupouth",41151,42.84,-112.72,Americas,-2086,January 2086 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-2086,January 2086 BCE,184
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-2084,January 2084 BCE,0
+split,38,"Braldom",,,151803,8.22,-74.01,Americas,-2083,January 2083 BCE,27
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2082,January 2082 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-2082,January 2082 BCE,37
+split,28,"Mupouth",,,41151,42.84,-112.72,Americas,-2079,January 2079 BCE,29
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2068,January 2068 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-2064,January 2064 BCE,27
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-2059,January 2059 BCE,136
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2055,January 2055 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2052,January 2052 BCE,0
+founded,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-2045,January 2045 BCE,0
+became_state,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2044,January 2044 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-2041,January 2041 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2040,January 2040 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2036,January 2036 BCE,0
+founded,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-2034,January 2034 BCE,0
+split,36,"Dakou",,,42660,48.01,-118.64,Americas,-2031,January 2031 BCE,15
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2029,January 2029 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-2029,January 2029 BCE,17
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2024,January 2024 BCE,0
+war,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2023,January 2023 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-2022,January 2022 BCE,24
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2019,January 2019 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-2019,January 2019 BCE,39
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-2018,January 2018 BCE,174
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-2017,January 2017 BCE,21
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-2015,January 2015 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-2013,January 2013 BCE,0
+peace,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2009,January 2009 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2004,January 2004 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-2003,January 2003 BCE,122
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-2002,January 2002 BCE,86
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-2001,January 2001 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-1997,January 1997 BCE,26
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1995,January 1995 BCE,41
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1993,January 1993 BCE,205
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1991,January 1991 BCE,114
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1987,January 1987 BCE,24
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1986,January 1986 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1985,January 1985 BCE,25
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1973,January 1973 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1972,January 1972 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1972,January 1972 BCE,24
+war,12,"Tramath",5,"Dihistuth",160943,15.12,0.77,Sahel,-1970,January 1970 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1966,January 1966 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1965,January 1965 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-1963,January 1963 BCE,133
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1962,January 1962 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1959,January 1959 BCE,37
+peace,12,"Tramath",5,"Dihistuth",160943,15.12,0.77,Sahel,-1956,January 1956 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1954,January 1954 BCE,95
+split,37,"Keilemem",,,95997,17.35,-91.53,Americas,-1954,January 1954 BCE,32
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1954,January 1954 BCE,23
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1951,January 1951 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1951,January 1951 BCE,15
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1948,January 1948 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1948,January 1948 BCE,42
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1936,January 1936 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-1934,January 1934 BCE,97
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1933,January 1933 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1929,January 1929 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1928,January 1928 BCE,87
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1922,January 1922 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-1922,January 1922 BCE,180
+split,36,"Dakou",,,42660,48.01,-118.64,Americas,-1922,January 1922 BCE,20
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-1919,January 1919 BCE,0
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1918,January 1918 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1916,January 1916 BCE,0
+war,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1914,January 1914 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1910,January 1910 BCE,38
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1904,January 1904 BCE,39
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1902,January 1902 BCE,0
+peace,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1900,January 1900 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1899,January 1899 BCE,93
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1897,January 1897 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1896,January 1896 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1894,January 1894 BCE,12
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1893,January 1893 BCE,167
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1892,January 1892 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1892,January 1892 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-1889,January 1889 BCE,120
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1887,January 1887 BCE,18
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1882,January 1882 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1881,January 1881 BCE,34
+split,38,"Braldom",,,151803,8.22,-74.01,Americas,-1880,January 1880 BCE,33
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1879,January 1879 BCE,72
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-1878,January 1878 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1873,January 1873 BCE,18
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1867,January 1867 BCE,0
+founded,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1863,January 1863 BCE,0
+founded,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1861,January 1861 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1859,January 1859 BCE,31
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1857,January 1857 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1857,January 1857 BCE,0
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1854,January 1854 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-1854,January 1854 BCE,154
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1849,January 1849 BCE,73
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1847,January 1847 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1845,January 1845 BCE,31
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1843,January 1843 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1837,January 1837 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1836,January 1836 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1831,January 1831 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1829,January 1829 BCE,0
+split,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-1824,January 1824 BCE,112
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1824,January 1824 BCE,19
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1823,January 1823 BCE,0
+war,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1823,January 1823 BCE,0
+founded,43,"Vame",,,65257,-1.39,31.06,East and southern Africa,-1818,January 1818 BCE,0
+peace,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1818,January 1818 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1818,January 1818 BCE,26
+war,35,"Vasro",43,"Vame",65257,-1.39,31.06,East and southern Africa,-1816,January 1816 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1815,January 1815 BCE,0
+conquered,43,"Vame",35,"Vasro",65257,-1.39,31.06,East and southern Africa,-1812,January 1812 BCE,5
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-1811,January 1811 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1811,January 1811 BCE,8
+became_state,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1810,January 1810 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1809,January 1809 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1808,January 1808 BCE,0
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1804,January 1804 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1802,January 1802 BCE,0
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1801,January 1801 BCE,0
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-1797,January 1797 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1795,January 1795 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1795,January 1795 BCE,102
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1794,January 1794 BCE,0
+war,20,"Saintre",27,"Maseimlos",42104,45.85,-119.13,Americas,-1793,January 1793 BCE,0
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1789,January 1789 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1789,January 1789 BCE,14
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1788,January 1788 BCE,27
+founded,44,"Naibetre",,,63377,-16.47,29.03,East and southern Africa,-1785,January 1785 BCE,0
+war,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1785,January 1785 BCE,0
+founded,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1783,January 1783 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1783,January 1783 BCE,0
+war,33,"Lusteis",44,"Naibetre",63377,-16.47,29.03,East and southern Africa,-1782,January 1782 BCE,0
+peace,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1780,January 1780 BCE,0
+peace,27,"Maseimlos",20,"Saintre",41638,44.29,-117.43,Americas,-1779,January 1779 BCE,0
+war,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1778,January 1778 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1778,January 1778 BCE,110
+war,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-1777,January 1777 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1775,January 1775 BCE,10
+conquered,44,"Naibetre",33,"Lusteis",63377,-16.47,29.03,East and southern Africa,-1774,January 1774 BCE,3
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1774,January 1774 BCE,0
+peace,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1772,January 1772 BCE,0
+split,20,"Saintre",,,41638,44.29,-117.43,Americas,-1770,January 1770 BCE,25
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1770,January 1770 BCE,208
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-1769,January 1769 BCE,0
+war,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1769,January 1769 BCE,0
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-1768,January 1768 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1765,January 1765 BCE,172
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1765,January 1765 BCE,30
+peace,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-1763,January 1763 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1762,January 1762 BCE,12
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1761,January 1761 BCE,23
+peace,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1760,January 1760 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1759,January 1759 BCE,23
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1758,January 1758 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1757,January 1757 BCE,46
+founded,46,"Thokresi",,,160940,14.05,1.54,Sahel,-1756,January 1756 BCE,0
+peace,10,"Mueithaik",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1756,January 1756 BCE,0
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-1754,January 1754 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1751,January 1751 BCE,96
+war,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1750,January 1750 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1744,January 1744 BCE,0
+peace,10,"Mueithaik",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1744,January 1744 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1741,January 1741 BCE,41
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1736,January 1736 BCE,14
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1731,January 1731 BCE,0
+fell,10,"Mueithaik",,,61714,-16.89,35.48,East and southern Africa,-1729,January 1729 BCE,0
+split,46,"Thokresi",,,160940,14.05,1.54,Sahel,-1727,January 1727 BCE,6
+war,42,"Lotrith",46,"Thokresi",160940,14.05,1.54,Sahel,-1724,January 1724 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1723,January 1723 BCE,77
+war,23,"Steinmaith",45,"Stehetreim",40007,39.13,-109.16,Americas,-1722,January 1722 BCE,0
+peace,42,"Lotrith",46,"Thokresi",160940,14.05,1.54,Sahel,-1718,January 1718 BCE,0
+war,5,"Dihistuth",46,"Thokresi",160940,14.05,1.54,Sahel,-1718,January 1718 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1717,January 1717 BCE,0
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-1716,January 1716 BCE,0
+split,46,"Thokresi",,,160940,14.05,1.54,Sahel,-1713,January 1713 BCE,9
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1712,January 1712 BCE,154
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1711,January 1711 BCE,0
+peace,45,"Stehetreim",23,"Steinmaith",39344,36.99,-111.61,Americas,-1708,January 1708 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1708,January 1708 BCE,0
+split,8,"Vaiye",,,10725,52.18,20.61,Europe,-1705,January 1705 BCE,164
+peace,5,"Dihistuth",46,"Thokresi",160940,14.05,1.54,Sahel,-1704,January 1704 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1704,January 1704 BCE,28
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-1702,January 1702 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1699,January 1699 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-1699,January 1699 BCE,180
+founded,47,"Shokoulbon",,,61847,-16.54,35.22,East and southern Africa,-1697,January 1697 BCE,0
+war,41,"Maitrounir",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1697,January 1697 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1697,January 1697 BCE,24
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1695,January 1695 BCE,65
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1694,January 1694 BCE,0
+split,23,"Steinmaith",,,39344,36.99,-111.61,Americas,-1690,January 1690 BCE,19
+peace,41,"Maitrounir",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1689,January 1689 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1689,January 1689 BCE,0
+war,42,"Lotrith",46,"Thokresi",160940,14.05,1.54,Sahel,-1684,January 1684 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1681,January 1681 BCE,19
+peace,42,"Lotrith",46,"Thokresi",160940,14.05,1.54,Sahel,-1677,January 1677 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-1675,January 1675 BCE,0
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-1675,January 1675 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1675,January 1675 BCE,81
+split,47,"Shokoulbon",,,61847,-16.54,35.22,East and southern Africa,-1672,January 1672 BCE,9
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-1661,January 1661 BCE,0
+war,5,"Dihistuth",46,"Thokresi",160940,14.05,1.54,Sahel,-1661,January 1661 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1661,January 1661 BCE,0
+conquered,46,"Thokresi",5,"Dihistuth",160940,14.05,1.54,Sahel,-1658,January 1658 BCE,3
+founded,48,"Imainem",,,65754,3.78,31.82,East and southern Africa,-1649,January 1649 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1648,January 1648 BCE,158
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1647,January 1647 BCE,0
+war,40,"Kroura",48,"Imainem",65754,3.78,31.82,East and southern Africa,-1645,January 1645 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1643,January 1643 BCE,194
+conquered,48,"Imainem",40,"Kroura",65754,3.78,31.82,East and southern Africa,-1642,January 1642 BCE,5
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1641,January 1641 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1638,January 1638 BCE,47
+split,47,"Shokoulbon",,,61847,-16.54,35.22,East and southern Africa,-1634,January 1634 BCE,20
+war,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1632,January 1632 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1628,January 1628 BCE,34
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1627,January 1627 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1625,January 1625 BCE,24
+founded,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1618,January 1618 BCE,0
+peace,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1618,January 1618 BCE,0
+war,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1617,January 1617 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1617,January 1617 BCE,18
+split,37,"Keilemem",,,95997,17.35,-91.53,Americas,-1613,January 1613 BCE,29
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1612,January 1612 BCE,31
+split,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1609,January 1609 BCE,18
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1608,January 1608 BCE,123
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1605,January 1605 BCE,0
+peace,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1603,January 1603 BCE,0
+peace,8,"Vaiye",14,"Laitrokros",9700,47.74,18.66,Europe,-1591,January 1591 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1588,January 1588 BCE,19
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-1586,January 1586 BCE,175
+split,34,"Krobei",,,38783,35.38,-106.66,Americas,-1586,January 1586 BCE,34
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1582,January 1582 BCE,72
+founded,50,"Thaio",,,65463,-1.01,30.32,East and southern Africa,-1579,January 1579 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1577,January 1577 BCE,114
+war,35,"Vasro",50,"Thaio",65463,-1.01,30.32,East and southern Africa,-1576,January 1576 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1575,January 1575 BCE,15
+peace,35,"Vasro",50,"Thaio",65463,-1.01,30.32,East and southern Africa,-1573,January 1573 BCE,0
+war,23,"Steinmaith",45,"Stehetreim",40007,39.13,-109.16,Americas,-1571,January 1571 BCE,0
+split,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1567,January 1567 BCE,8
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1566,January 1566 BCE,0
+split,50,"Thaio",,,65463,-1.01,30.32,East and southern Africa,-1565,January 1565 BCE,2
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1564,January 1564 BCE,200
+war,47,"Shokoulbon",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1562,January 1562 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1561,January 1561 BCE,39
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1560,January 1560 BCE,0
+split,47,"Shokoulbon",,,61847,-16.54,35.22,East and southern Africa,-1559,January 1559 BCE,26
+peace,23,"Steinmaith",45,"Stehetreim",40007,39.13,-109.16,Americas,-1557,January 1557 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1554,January 1554 BCE,0
+war,35,"Vasro",50,"Thaio",65463,-1.01,30.32,East and southern Africa,-1553,January 1553 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1552,January 1552 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1549,January 1549 BCE,14
+peace,47,"Shokoulbon",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1548,January 1548 BCE,0
+conquered,50,"Thaio",35,"Vasro",65463,-1.01,30.32,East and southern Africa,-1548,January 1548 BCE,6
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1548,January 1548 BCE,39
+war,25,"Vede",8,"Vaiye",10725,52.18,20.61,Europe,-1546,January 1546 BCE,0
+war,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1544,January 1544 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1535,January 1535 BCE,15
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1535,January 1535 BCE,76
+peace,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1534,January 1534 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1533,January 1533 BCE,0
+peace,8,"Vaiye",25,"Vede",8791,45.25,28.36,Europe,-1532,January 1532 BCE,0
+war,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1532,January 1532 BCE,0
+war,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1532,January 1532 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1531,January 1531 BCE,16
+founded,51,"Edomash",,,40765,41.57,-103.11,Americas,-1530,January 1530 BCE,0
+war,49,"Stuleimei",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1527,January 1527 BCE,0
+peace,49,"Stuleimei",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1524,January 1524 BCE,0
+war,41,"Maitrounir",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1524,January 1524 BCE,0
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1523,January 1523 BCE,0
+split,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-1522,January 1522 BCE,25
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1522,January 1522 BCE,33
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1520,January 1520 BCE,0
+split,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1520,January 1520 BCE,13
+peace,41,"Maitrounir",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1519,January 1519 BCE,0
+peace,14,"Laitrokros",8,"Vaiye",10725,52.18,20.61,Europe,-1518,January 1518 BCE,0
+peace,33,"Lusteis",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1518,January 1518 BCE,0
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1518,January 1518 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1518,January 1518 BCE,33
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1516,January 1516 BCE,50
+peace,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1514,January 1514 BCE,0
+war,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1511,January 1511 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1511,January 1511 BCE,26
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1508,January 1508 BCE,110
+peace,33,"Lusteis",13,"Braithtadoush",65170,-8.24,27.02,West and Central Africa,-1504,January 1504 BCE,0
+split,47,"Shokoulbon",,,61847,-16.54,35.22,East and southern Africa,-1504,January 1504 BCE,15
+war,49,"Stuleimei",47,"Shokoulbon",61847,-16.54,35.22,East and southern Africa,-1503,January 1503 BCE,0
+war,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-1502,January 1502 BCE,0
+conquered,47,"Shokoulbon",49,"Stuleimei",61847,-16.54,35.22,East and southern Africa,-1501,January 1501 BCE,2
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1500,January 1500 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1499,January 1499 BCE,184
+peace,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1497,January 1497 BCE,0
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1493,January 1493 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1492,January 1492 BCE,0
+peace,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-1488,January 1488 BCE,0
+peace,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1483,January 1483 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1479,January 1479 BCE,84
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1479,January 1479 BCE,30
+war,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1477,January 1477 BCE,0
+founded,52,"Shaimzimleir",,,42215,46.39,-117.56,Americas,-1474,January 1474 BCE,0
+peace,41,"Maitrounir",39,"Trebam",63129,-15.45,30.85,East and southern Africa,-1473,January 1473 BCE,0
+war,27,"Maseimlos",52,"Shaimzimleir",42215,46.39,-117.56,Americas,-1472,January 1472 BCE,0
+conquered,52,"Shaimzimleir",27,"Maseimlos",42215,46.39,-117.56,Americas,-1469,January 1469 BCE,3
+war,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-1468,January 1468 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1466,January 1466 BCE,10
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1465,January 1465 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1465,January 1465 BCE,29
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1464,January 1464 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1463,January 1463 BCE,27
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1463,January 1463 BCE,23
+peace,14,"Laitrokros",25,"Vede",8791,45.25,28.36,Europe,-1454,January 1454 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1454,January 1454 BCE,50
+war,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1452,January 1452 BCE,0
+peace,33,"Lusteis",13,"Braithtadoush",65170,-8.24,27.02,West and Central Africa,-1451,January 1451 BCE,0
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-1450,January 1450 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1439,January 1439 BCE,32
+peace,49,"Stuleimei",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1438,January 1438 BCE,0
+split,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-1437,January 1437 BCE,24
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1431,January 1431 BCE,0
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1427,January 1427 BCE,0
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1420,January 1420 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1419,January 1419 BCE,34
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1419,January 1419 BCE,24
+peace,33,"Lusteis",13,"Braithtadoush",65170,-8.24,27.02,West and Central Africa,-1417,January 1417 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1416,January 1416 BCE,0
+founded,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1415,January 1415 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1415,January 1415 BCE,179
+war,33,"Lusteis",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1414,January 1414 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1413,January 1413 BCE,0
+peace,33,"Lusteis",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1412,January 1412 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1409,January 1409 BCE,99
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-1407,January 1407 BCE,0
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1405,January 1405 BCE,196
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1400,January 1400 BCE,7
+peace,1,"Kroton",14,"Laitrokros",9700,47.74,18.66,Europe,-1399,January 1399 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1397,January 1397 BCE,34
+founded,54,"Troureth",,,161229,-27.25,26.70,East and southern Africa,-1383,January 1383 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1381,January 1381 BCE,132
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1378,January 1378 BCE,181
+war,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-1377,January 1377 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1373,January 1373 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1372,January 1372 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1370,January 1370 BCE,24
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1367,January 1367 BCE,156
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1366,January 1366 BCE,59
+split,36,"Dakou",,,42660,48.01,-118.64,Americas,-1365,January 1365 BCE,19
+peace,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-1363,January 1363 BCE,0
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1359,January 1359 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1358,January 1358 BCE,0
+split,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1345,January 1345 BCE,21
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1344,January 1344 BCE,39
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1340,January 1340 BCE,20
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1339,January 1339 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1337,January 1337 BCE,27
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1336,January 1336 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1336,January 1336 BCE,137
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1331,January 1331 BCE,0
+war,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1327,January 1327 BCE,0
+peace,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1323,January 1323 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1322,January 1322 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1321,January 1321 BCE,33
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1315,January 1315 BCE,85
+war,23,"Steinmaith",45,"Stehetreim",40007,39.13,-109.16,Americas,-1308,January 1308 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1307,January 1307 BCE,0
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1301,January 1301 BCE,25
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1301,January 1301 BCE,16
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1296,January 1296 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1295,January 1295 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1295,January 1295 BCE,79
+peace,23,"Steinmaith",45,"Stehetreim",40007,39.13,-109.16,Americas,-1294,January 1294 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1294,January 1294 BCE,30
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1293,January 1293 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1281,January 1281 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1280,January 1280 BCE,32
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1279,January 1279 BCE,0
+split,14,"Laitrokros",,,9700,47.74,18.66,Europe,-1279,January 1279 BCE,187
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1275,January 1275 BCE,0
+war,49,"Stuleimei",41,"Maitrounir",62627,-15.47,32.90,East and southern Africa,-1275,January 1275 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1275,January 1275 BCE,22
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1269,January 1269 BCE,167
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1268,January 1268 BCE,0
+war,53,"Mounoukreir",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1265,January 1265 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1263,January 1263 BCE,8
+peace,41,"Maitrounir",49,"Stuleimei",62109,-15.48,34.97,East and southern Africa,-1261,January 1261 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1261,January 1261 BCE,21
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1257,January 1257 BCE,15
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1254,January 1254 BCE,18
+peace,33,"Lusteis",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1251,January 1251 BCE,0
+split,54,"Troureth",,,161229,-27.25,26.70,East and southern Africa,-1251,January 1251 BCE,52
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1245,January 1245 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1245,January 1245 BCE,0
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1243,January 1243 BCE,19
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1237,January 1237 BCE,0
+split,38,"Braldom",,,151803,8.22,-74.01,Americas,-1236,January 1236 BCE,30
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1235,January 1235 BCE,16
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1232,January 1232 BCE,0
+peace,33,"Lusteis",13,"Braithtadoush",65170,-8.24,27.02,West and Central Africa,-1231,January 1231 BCE,0
+war,53,"Mounoukreir",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1231,January 1231 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1230,January 1230 BCE,196
+peace,33,"Lusteis",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1225,January 1225 BCE,0
+split,5,"Dihistuth",,,160943,15.12,0.77,Sahel,-1221,January 1221 BCE,15
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1221,January 1221 BCE,26
+split,34,"Krobei",,,38783,35.38,-106.66,Americas,-1220,January 1220 BCE,36
+split,54,"Troureth",,,161229,-27.25,26.70,East and southern Africa,-1220,January 1220 BCE,27
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1218,January 1218 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1215,January 1215 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1213,January 1213 BCE,74
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1213,January 1213 BCE,21
+split,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1208,January 1208 BCE,191
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-1205,January 1205 BCE,0
+war,53,"Mounoukreir",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1205,January 1205 BCE,0
+split,51,"Edomash",,,40765,41.57,-103.11,Americas,-1205,January 1205 BCE,43
+war,20,"Saintre",27,"Maseimlos",42104,45.85,-119.13,Americas,-1204,January 1204 BCE,0
+split,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-1204,January 1204 BCE,26
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1203,January 1203 BCE,94
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1202,January 1202 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1199,January 1199 BCE,115
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1199,January 1199 BCE,28
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1199,January 1199 BCE,16
+peace,33,"Lusteis",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1191,January 1191 BCE,0
+war,13,"Braithtadoush",33,"Lusteis",160169,-17.75,24.34,East and southern Africa,-1191,January 1191 BCE,0
+peace,27,"Maseimlos",20,"Saintre",41638,44.29,-117.43,Americas,-1190,January 1190 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1190,January 1190 BCE,96
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1189,January 1189 BCE,0
+peace,51,"Edomash",22,"Amitre",41017,42.48,-105.51,Americas,-1188,January 1188 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1187,January 1187 BCE,11
+fell,33,"Lusteis",,,160169,-17.75,24.34,East and southern Africa,-1185,January 1185 BCE,0
+peace,13,"Braithtadoush",33,"Lusteis",65170,-8.24,27.02,West and Central Africa,-1185,January 1185 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1182,January 1182 BCE,26
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1180,January 1180 BCE,21
+founded,55,"Paikbroumos",,,42101,46.00,-117.13,Americas,-1175,January 1175 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1175,January 1175 BCE,0
+war,36,"Dakou",55,"Paikbroumos",42101,46.00,-117.13,Americas,-1172,January 1172 BCE,0
+war,51,"Edomash",22,"Amitre",41017,42.48,-105.51,Americas,-1166,January 1166 BCE,0
+peace,51,"Edomash",22,"Amitre",41017,42.48,-105.51,Americas,-1161,January 1161 BCE,0
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1159,January 1159 BCE,81
+peace,36,"Dakou",55,"Paikbroumos",42101,46.00,-117.13,Americas,-1158,January 1158 BCE,0
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1157,January 1157 BCE,32
+war,20,"Saintre",55,"Paikbroumos",42101,46.00,-117.13,Americas,-1156,January 1156 BCE,0
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1155,January 1155 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1153,January 1153 BCE,105
+split,51,"Edomash",,,40765,41.57,-103.11,Americas,-1152,January 1152 BCE,43
+war,39,"Trebam",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1144,January 1144 BCE,0
+peace,20,"Saintre",55,"Paikbroumos",42101,46.00,-117.13,Americas,-1142,January 1142 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1141,January 1141 BCE,0
+war,28,"Mupouth",20,"Saintre",41638,44.29,-117.43,Americas,-1141,January 1141 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1138,January 1138 BCE,0
+split,39,"Trebam",,,63129,-15.45,30.85,East and southern Africa,-1137,January 1137 BCE,33
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1136,January 1136 BCE,52
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1134,January 1134 BCE,0
+split,41,"Maitrounir",,,62627,-15.47,32.90,East and southern Africa,-1134,January 1134 BCE,22
+peace,39,"Trebam",53,"Mounoukreir",63497,-16.11,28.79,East and southern Africa,-1130,January 1130 BCE,0
+peace,20,"Saintre",28,"Mupouth",41151,42.84,-112.72,Americas,-1127,January 1127 BCE,0
+peace,36,"Dakou",27,"Maseimlos",42104,45.85,-119.13,Americas,-1127,January 1127 BCE,0
+split,25,"Vede",,,8791,45.25,28.36,Europe,-1127,January 1127 BCE,50
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1125,January 1125 BCE,12
+split,28,"Mupouth",,,41151,42.84,-112.72,Americas,-1125,January 1125 BCE,30
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1121,January 1121 BCE,0
+peace,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1120,January 1120 BCE,0
+split,54,"Troureth",,,161229,-27.25,26.70,East and southern Africa,-1116,January 1116 BCE,39
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1112,January 1112 BCE,149
+split,40,"Kroura",,,65557,2.17,31.81,East and southern Africa,-1112,January 1112 BCE,28
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1109,January 1109 BCE,28
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1107,January 1107 BCE,0
+war,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1104,January 1104 BCE,0
+founded,56,"Yemou",,,42216,46.35,-118.23,Americas,-1101,January 1101 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1100,January 1100 BCE,19
+war,55,"Paikbroumos",56,"Yemou",42216,46.35,-118.23,Americas,-1099,January 1099 BCE,0
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1099,January 1099 BCE,79
+peace,55,"Paikbroumos",56,"Yemou",42216,46.35,-118.23,Americas,-1098,January 1098 BCE,0
+founded,57,"Ushis",,,161619,-27.54,25.30,East and southern Africa,-1095,January 1095 BCE,0
+split,38,"Braldom",,,151803,8.22,-74.01,Americas,-1094,January 1094 BCE,33
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1092,January 1092 BCE,0
+split,27,"Maseimlos",,,42104,45.85,-119.13,Americas,-1091,January 1091 BCE,17
+peace,27,"Maseimlos",36,"Dakou",42660,48.01,-118.64,Americas,-1090,January 1090 BCE,0
+war,54,"Troureth",57,"Ushis",161619,-27.54,25.30,East and southern Africa,-1087,January 1087 BCE,0
+conquered,57,"Ushis",54,"Troureth",161619,-27.54,25.30,East and southern Africa,-1086,January 1086 BCE,5
+war,27,"Maseimlos",56,"Yemou",42216,46.35,-118.23,Americas,-1086,January 1086 BCE,0
+conquered,56,"Yemou",27,"Maseimlos",42216,46.35,-118.23,Americas,-1085,January 1085 BCE,6
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1084,January 1084 BCE,14
+founded,58,"Peigeistil",,,152605,4.46,-74.99,Americas,-1082,January 1082 BCE,0
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1078,January 1078 BCE,0
+founded,59,"Paemu",,,162613,-28.99,22.03,East and southern Africa,-1077,January 1077 BCE,0
+war,27,"Maseimlos",55,"Paikbroumos",42101,46.00,-117.13,Americas,-1077,January 1077 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1076,January 1076 BCE,30
+conquered,27,"Maseimlos",55,"Paikbroumos",42104,45.85,-119.13,Americas,-1074,January 1074 BCE,9
+founded,60,"Godero",,,61715,-17.24,35.22,East and southern Africa,-1069,January 1069 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1067,January 1067 BCE,25
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1066,January 1066 BCE,13
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1064,January 1064 BCE,0
+war,49,"Stuleimei",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1062,January 1062 BCE,0
+split,51,"Edomash",,,40765,41.57,-103.11,Americas,-1061,January 1061 BCE,42
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1060,January 1060 BCE,83
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1059,January 1059 BCE,0
+peace,49,"Stuleimei",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1058,January 1058 BCE,0
+split,35,"Vasro",,,65155,-2.56,30.80,East and southern Africa,-1056,January 1056 BCE,32
+split,54,"Troureth",,,161229,-27.25,26.70,East and southern Africa,-1053,January 1053 BCE,35
+peace,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1051,January 1051 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1050,January 1050 BCE,0
+split,60,"Godero",,,61715,-17.24,35.22,East and southern Africa,-1050,January 1050 BCE,12
+split,12,"Tramath",,,162113,15.11,-3.86,Sahel,-1048,January 1048 BCE,129
+war,41,"Maitrounir",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1046,January 1046 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1045,January 1045 BCE,15
+split,13,"Braithtadoush",,,65170,-8.24,27.02,West and Central Africa,-1043,January 1043 BCE,165
+split,51,"Edomash",,,40765,41.57,-103.11,Americas,-1043,January 1043 BCE,21
+split,45,"Stehetreim",,,40007,39.13,-109.16,Americas,-1042,January 1042 BCE,18
+founded,61,"Zuses",,,162122,-29.00,24.19,East and southern Africa,-1041,January 1041 BCE,0
+war,59,"Paemu",61,"Zuses",162122,-29.00,24.19,East and southern Africa,-1039,January 1039 BCE,0
+split,1,"Kroton",,,11119,52.66,12.27,Europe,-1037,January 1037 BCE,43
+peace,41,"Maitrounir",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1035,January 1035 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1035,January 1035 BCE,20
+war,49,"Stuleimei",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1031,January 1031 BCE,0
+war,22,"Amitre",51,"Edomash",40765,41.57,-103.11,Americas,-1030,January 1030 BCE,0
+split,49,"Stuleimei",,,62109,-15.48,34.97,East and southern Africa,-1030,January 1030 BCE,31
+split,53,"Mounoukreir",,,63497,-16.11,28.79,East and southern Africa,-1030,January 1030 BCE,10
+war,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1029,January 1029 BCE,0
+peace,51,"Edomash",22,"Amitre",41017,42.48,-105.51,Americas,-1026,January 1026 BCE,0
+peace,59,"Paemu",61,"Zuses",162122,-29.00,24.19,East and southern Africa,-1025,January 1025 BCE,0
+split,22,"Amitre",,,41017,42.48,-105.51,Americas,-1024,January 1024 BCE,2
+war,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1022,January 1022 BCE,0
+peace,49,"Stuleimei",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1017,January 1017 BCE,0
+peace,5,"Dihistuth",42,"Lotrith",160803,13.33,2.56,Sahel,-1017,January 1017 BCE,0
+founded,62,"Doveine",,,65852,4.18,31.58,East and southern Africa,-1016,January 1016 BCE,0
+war,20,"Saintre",28,"Mupouth",41151,42.84,-112.72,Americas,-1013,January 1013 BCE,0
+war,41,"Maitrounir",60,"Godero",61715,-17.24,35.22,East and southern Africa,-1013,January 1013 BCE,0
+war,61,"Zuses",54,"Troureth",161229,-27.25,26.70,East and southern Africa,-1011,January 1011 BCE,0
+peace,14,"Laitrokros",1,"Kroton",11119,52.66,12.27,Europe,-1008,January 1008 BCE,0
+peace,54,"Troureth",61,"Zuses",162122,-29.00,24.19,East and southern Africa,-1001,January 1001 BCE,0
+split,42,"Lotrith",,,160803,13.33,2.56,Sahel,-1001,January 1001 BCE,22

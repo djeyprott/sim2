@@ -49,7 +49,7 @@
   // stateKeepShare of either is a chiefdom again.
   "statePeople": 200000,
   "stateSettlements": 10,
-  "stateKeepShare": 0.7,
+  "stateKeepShare": 0.75,
   "stateSettledYears": 5000,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share

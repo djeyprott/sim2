@@ -113,7 +113,7 @@ public sealed class PolityParameters
 
     public int StateSettlements { get; set; } = 5;
 
-    public double StateKeepShare { get; set; } = 0.65;
+    public double StateKeepShare { get; set; } = 0.7;
 
     public double TributeShare { get; set; } = 0.15;
 
@@ -1208,9 +1208,10 @@ public sealed class PolitySystem : ISimSystem
         Dictionary<int, double> nearD = DistanceFactors(d, contested);
 
         // Soldiers fall in proportion to the other side's share of the strength, the attacker's
-        // counting its chariots and the defender's the walls of its capital: storming walls, or
-        // facing chariots, costs lives as well as ground.
-        double fightA = strengthA * AttackFactor(a), fightD = strengthD * DefenceFactor(Info(d).Capital);
+        // counting its chariots and the defender's the walls of its capital (at the square root of
+        // their factor, as walls guard only part of a war): storming walls, or facing chariots,
+        // costs lives as well as ground.
+        double fightA = strengthA * AttackFactor(a), fightD = strengthD * Math.Sqrt(DefenceFactor(Info(d).Capital));
         double total = fightA + fightD;
         if (total > 0.0)
         {

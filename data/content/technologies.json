@@ -149,7 +149,7 @@
       // 4,800 years and 0.001 since 0.4.1 (2,900 and 0.0003 before): it now needs copper working
       // and tin both near, which happens in few places, and is found where either is traded in.
       "chance": 0.001, "spread": 0.01,
-      "settledYears": 4000,
+      "settledYears": 4800,
       "history": "3300 to 3000 BCE, Southwest Asia and the Balkans"
     },
     {

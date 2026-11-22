@@ -49,7 +49,7 @@
   // stateKeepShare of either is a chiefdom again.
   "statePeople": 300000,
   "stateSettlements": 15,
-  "stateKeepShare": 0.65,
+  "stateKeepShare": 0.7,
   "stateSettledYears": 5000,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share
@@ -110,7 +110,7 @@
   // Each year of war every cell along the border is contested: the side across takes it with
   // chance takeRate x its local strength / both, if the cell is within its reach. Each side loses
   // soldierLoss of its soldiers times the other's share of the strength (the attacker's counting
-  // its chariots, the defender's the walls of its capital), and every contested cell civilianLoss
+  // its chariots, the defender's the square root of its capital's walls), and every contested cell civilianLoss
   // of its people. A taken
   // settlement loses burnShare of its store and plunderShare goes to the taker's capital; with
   // chance razeChance it is razed: razeDeaths of its people die and its store is lost. Taking the

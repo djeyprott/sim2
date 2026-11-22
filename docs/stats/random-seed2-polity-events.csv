@@ -29,72 +29,124 @@ founded,4,"Iryas",,,11016,53.24,18.94,Europe,-4058,January 4058 BCE,0
 founded,5,"Shavoth",,,10829,51.94,15.54,Europe,-3910,January 3910 BCE,0
 war,4,"Iryas",5,"Shavoth",10829,51.94,15.54,Europe,-3910,January 3910 BCE,0
 peace,4,"Iryas",5,"Shavoth",10829,51.94,15.54,Europe,-3900,January 3900 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3886,January 3886 BCE,34
-split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-3819,January 3819 BCE,21
-founded,6,"Brailraithal",,,10223,50.13,21.02,Europe,-3694,January 3694 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3450,January 3450 BCE,38
-split,4,"Iryas",,,11016,53.24,18.94,Europe,-3383,January 3383 BCE,56
-split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-3195,January 3195 BCE,15
-war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3182,January 3182 BCE,0
-peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3168,January 3168 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3139,January 3139 BCE,43
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2943,January 2943 BCE,36
-founded,7,"Vedou",,,162115,15.81,-4.39,Sahel,-2867,January 2867 BCE,0
-founded,8,"Thayokben",,,9700,47.74,18.66,Europe,-2824,January 2824 BCE,0
-founded,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2745,January 2745 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2706,January 2706 BCE,51
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2649,January 2649 BCE,38
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2642,January 2642 BCE,16
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2554,January 2554 BCE,54
-founded,10,"Sukaish",,,148288,-17.20,-44.99,Americas,-2544,January 2544 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2419,January 2419 BCE,46
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2363,January 2363 BCE,40
-founded,11,"Memlish",,,150363,-16.58,-52.97,Americas,-2317,January 2317 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2316,January 2316 BCE,30
-founded,12,"Yaitadi",,,160940,14.05,1.54,Sahel,-2295,January 2295 BCE,0
-split,10,"Sukaish",,,148288,-17.20,-44.99,Americas,-2265,January 2265 BCE,42
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2219,January 2219 BCE,60
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2199,January 2199 BCE,38
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2128,January 2128 BCE,58
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-2062,January 2062 BCE,40
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1942,January 1942 BCE,65
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1885,January 1885 BCE,55
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1807,January 1807 BCE,57
-founded,13,"Voustukeish",,,8449,43.46,21.91,Europe,-1785,January 1785 BCE,0
-war,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1779,January 1779 BCE,0
-peace,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1765,January 1765 BCE,0
-split,13,"Voustukeish",,,8449,43.46,21.91,Europe,-1749,January 1749 BCE,28
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1673,January 1673 BCE,56
-war,11,"Memlish",9,"Nazek",150498,-14.74,-54.63,Americas,-1667,January 1667 BCE,0
-peace,11,"Memlish",9,"Nazek",150498,-14.74,-54.63,Americas,-1653,January 1653 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1640,January 1640 BCE,24
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-1584,January 1584 BCE,35
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1576,January 1576 BCE,37
-split,10,"Sukaish",,,148288,-17.20,-44.99,Americas,-1421,January 1421 BCE,57
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1380,January 1380 BCE,61
-founded,14,"Keishreizath",,,150883,-14.53,-56.27,Americas,-1360,January 1360 BCE,0
-war,9,"Nazek",14,"Keishreizath",150883,-14.53,-56.27,Americas,-1355,January 1355 BCE,0
-peace,9,"Nazek",14,"Keishreizath",150883,-14.53,-56.27,Americas,-1347,January 1347 BCE,0
-split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-1326,January 1326 BCE,16
-founded,15,"Gitreith",,,163549,-28.10,17.19,East and southern Africa,-1288,January 1288 BCE,0
-war,8,"Thayokben",3,"Stupasaim",10333,49.82,15.48,Europe,-1268,January 1268 BCE,0
-split,8,"Thayokben",,,9700,47.74,18.66,Europe,-1256,January 1256 BCE,67
-peace,8,"Thayokben",3,"Stupasaim",10333,49.82,15.48,Europe,-1254,January 1254 BCE,0
-war,2,"Kazil",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-1244,January 1244 BCE,0
-split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-1237,January 1237 BCE,38
-peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-1230,January 1230 BCE,0
-war,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1228,January 1228 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1222,January 1222 BCE,51
-peace,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1214,January 1214 BCE,0
-war,11,"Memlish",9,"Nazek",150498,-14.74,-54.63,Americas,-1212,January 1212 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1200,January 1200 BCE,17
-peace,11,"Memlish",9,"Nazek",150498,-14.74,-54.63,Americas,-1198,January 1198 BCE,0
-founded,16,"Daimehour",,,161083,17.24,-1.30,Sahel,-1090,January 1090 BCE,0
-war,7,"Vedou",16,"Daimehour",161083,17.24,-1.30,Sahel,-1090,January 1090 BCE,0
-peace,7,"Vedou",16,"Daimehour",161083,17.24,-1.30,Sahel,-1083,January 1083 BCE,0
-split,13,"Voustukeish",,,8449,43.46,21.91,Europe,-1076,January 1076 BCE,38
-war,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1069,January 1069 BCE,0
-war,12,"Yaitadi",16,"Daimehour",161083,17.24,-1.30,Sahel,-1069,January 1069 BCE,0
-peace,8,"Thayokben",13,"Voustukeish",8449,43.46,21.91,Europe,-1055,January 1055 BCE,0
-peace,12,"Yaitadi",16,"Daimehour",161083,17.24,-1.30,Sahel,-1055,January 1055 BCE,0
-split,9,"Nazek",,,150498,-14.74,-54.63,Americas,-1045,January 1045 BCE,38
+war,1,"Thupivoul",5,"Shavoth",10829,51.94,15.54,Europe,-3896,January 3896 BCE,0
+conquered,5,"Shavoth",1,"Thupivoul",10829,51.94,15.54,Europe,-3886,January 3886 BCE,18
+founded,6,"Katersta",,,10731,51.60,16.11,Europe,-3883,January 3883 BCE,0
+war,1,"Thupivoul",6,"Katersta",10731,51.60,16.11,Europe,-3882,January 3882 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3881,January 3881 BCE,35
+peace,1,"Thupivoul",6,"Katersta",10731,51.60,16.11,Europe,-3878,January 3878 BCE,0
+war,3,"Stupasaim",6,"Katersta",10731,51.60,16.11,Europe,-3877,January 3877 BCE,0
+conquered,6,"Katersta",3,"Stupasaim",10731,51.60,16.11,Europe,-3873,January 3873 BCE,7
+founded,7,"Pounaibaith",,,11209,53.48,14.67,Europe,-3797,January 3797 BCE,0
+war,1,"Thupivoul",7,"Pounaibaith",11209,53.48,14.67,Europe,-3794,January 3794 BCE,0
+conquered,7,"Pounaibaith",1,"Thupivoul",11209,53.48,14.67,Europe,-3793,January 3793 BCE,4
+split,2,"Kazil",,,163204,-29.01,19.39,East and southern Africa,-3668,January 3668 BCE,23
+founded,8,"Relith",,,9917,48.25,16.26,Europe,-3623,January 3623 BCE,0
+war,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3622,January 3622 BCE,0
+peace,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3615,January 3615 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3612,January 3612 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3607,January 3607 BCE,0
+split,8,"Relith",,,9917,48.25,16.26,Europe,-3600,January 3600 BCE,16
+war,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3589,January 3589 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3583,January 3583 BCE,0
+peace,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3576,January 3576 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3574,January 3574 BCE,0
+split,8,"Relith",,,9917,48.25,16.26,Europe,-3558,January 3558 BCE,24
+war,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3550,January 3550 BCE,0
+peace,3,"Stupasaim",8,"Relith",9917,48.25,16.26,Europe,-3542,January 3542 BCE,0
+split,4,"Iryas",,,11016,53.24,18.94,Europe,-3493,January 3493 BCE,61
+founded,9,"Daikruk",,,10431,50.58,17.79,Europe,-3450,January 3450 BCE,0
+war,3,"Stupasaim",9,"Daikruk",10431,50.58,17.79,Europe,-3447,January 3447 BCE,0
+peace,3,"Stupasaim",9,"Daikruk",10431,50.58,17.79,Europe,-3442,January 3442 BCE,0
+war,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-3442,January 3442 BCE,0
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3434,January 3434 BCE,0
+split,1,"Thupivoul",,,11026,52.08,11.42,Europe,-3432,January 3432 BCE,65
+peace,1,"Thupivoul",3,"Stupasaim",10333,49.82,15.48,Europe,-3428,January 3428 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3428,January 3428 BCE,40
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3420,January 3420 BCE,0
+founded,10,"Pounaibaith",,,11209,53.48,14.67,Europe,-3413,January 3413 BCE,0
+war,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-3411,January 3411 BCE,0
+peace,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-3400,January 3400 BCE,0
+war,4,"Iryas",10,"Pounaibaith",11209,53.48,14.67,Europe,-3396,January 3396 BCE,0
+founded,11,"Alkres",,,10426,51.02,21.45,Europe,-3393,January 3393 BCE,0
+war,9,"Daikruk",11,"Alkres",10426,51.02,21.45,Europe,-3386,January 3386 BCE,0
+peace,4,"Iryas",10,"Pounaibaith",11209,53.48,14.67,Europe,-3382,January 3382 BCE,0
+war,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-3377,January 3377 BCE,0
+peace,9,"Daikruk",11,"Alkres",10426,51.02,21.45,Europe,-3374,January 3374 BCE,0
+peace,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-3364,January 3364 BCE,0
+war,9,"Daikruk",10,"Pounaibaith",11209,53.48,14.67,Europe,-3364,January 3364 BCE,0
+split,10,"Pounaibaith",,,11209,53.48,14.67,Europe,-3355,January 3355 BCE,9
+peace,9,"Daikruk",10,"Pounaibaith",11209,53.48,14.67,Europe,-3350,January 3350 BCE,0
+war,4,"Iryas",10,"Pounaibaith",11209,53.48,14.67,Europe,-3349,January 3349 BCE,0
+peace,4,"Iryas",10,"Pounaibaith",11209,53.48,14.67,Europe,-3335,January 3335 BCE,0
+war,9,"Daikruk",4,"Iryas",11016,53.24,18.94,Europe,-3214,January 3214 BCE,0
+peace,4,"Iryas",9,"Daikruk",10431,50.58,17.79,Europe,-3200,January 3200 BCE,0
+split,9,"Daikruk",,,10431,50.58,17.79,Europe,-3200,January 3200 BCE,23
+war,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3193,January 3193 BCE,0
+peace,0,"Naidule",2,"Kazil",163204,-29.01,19.39,East and southern Africa,-3179,January 3179 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-3077,January 3077 BCE,38
+founded,12,"Poubraith",,,163771,-28.61,16.47,East and southern Africa,-2972,January 2972 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2964,January 2964 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2950,January 2950 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2927,January 2927 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2913,January 2913 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2889,January 2889 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2875,January 2875 BCE,0
+founded,13,"Braroul",,,162114,15.46,-4.12,Sahel,-2868,January 2868 BCE,0
+founded,14,"Yairal",,,150368,-14.68,-54.17,Americas,-2718,January 2718 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2634,January 2634 BCE,31
+founded,15,"Baibasstil",,,160941,14.41,1.29,Sahel,-2500,January 2500 BCE,0
+split,13,"Braroul",,,162114,15.46,-4.12,Sahel,-2493,January 2493 BCE,38
+split,8,"Relith",,,9917,48.25,16.26,Europe,-2472,January 2472 BCE,37
+founded,16,"Yokailvo",,,161607,16.53,-2.85,Sahel,-2469,January 2469 BCE,0
+war,13,"Braroul",16,"Yokailvo",161607,16.53,-2.85,Sahel,-2462,January 2462 BCE,0
+peace,13,"Braroul",16,"Yokailvo",161607,16.53,-2.85,Sahel,-2455,January 2455 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2297,January 2297 BCE,28
+founded,17,"Brushnal",,,2811,-15.39,-44.20,Americas,-2217,January 2217 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2211,January 2211 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2201,January 2201 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-2184,January 2184 BCE,27
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2178,January 2178 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-2167,January 2167 BCE,0
+war,2,"Kazil",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-2153,January 2153 BCE,0
+peace,2,"Kazil",0,"Naidule",3616,-29.72,22.55,East and southern Africa,-2139,January 2139 BCE,0
+founded,18,"Thedukrath",,,149419,-18.29,-48.32,Americas,-1977,January 1977 BCE,0
+split,13,"Braroul",,,162114,15.46,-4.12,Sahel,-1921,January 1921 BCE,31
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1785,January 1785 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1779,January 1779 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1730,January 1730 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1717,January 1717 BCE,0
+founded,19,"Sheita",,,159601,-18.11,26.61,East and southern Africa,-1691,January 1691 BCE,0
+founded,20,"Thesek",,,8684,44.34,22.29,Europe,-1629,January 1629 BCE,0
+split,13,"Braroul",,,162114,15.46,-4.12,Sahel,-1590,January 1590 BCE,34
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1589,January 1589 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1575,January 1575 BCE,0
+split,0,"Naidule",,,3616,-29.72,22.55,East and southern Africa,-1483,January 1483 BCE,31
+split,18,"Thedukrath",,,149419,-18.29,-48.32,Americas,-1418,January 1418 BCE,60
+founded,21,"Sterush",,,150492,-17.03,-53.19,Americas,-1373,January 1373 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1360,January 1360 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1346,January 1346 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1322,January 1322 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1308,January 1308 BCE,0
+split,21,"Sterush",,,150492,-17.03,-53.19,Americas,-1306,January 1306 BCE,35
+split,19,"Sheita",,,159601,-18.11,26.61,East and southern Africa,-1232,January 1232 BCE,58
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1227,January 1227 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1213,January 1213 BCE,0
+split,21,"Sterush",,,150492,-17.03,-53.19,Americas,-1206,January 1206 BCE,39
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1191,January 1191 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1177,January 1177 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1151,January 1151 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1137,January 1137 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1114,January 1114 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1100,January 1100 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1060,January 1060 BCE,0
+war,8,"Relith",20,"Thesek",8684,44.34,22.29,Europe,-1051,January 1051 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1046,January 1046 BCE,0
+peace,20,"Thesek",8,"Relith",9917,48.25,16.26,Europe,-1037,January 1037 BCE,0
+split,21,"Sterush",,,150492,-17.03,-53.19,Americas,-1036,January 1036 BCE,44
+war,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-1029,January 1029 BCE,0
+peace,1,"Thupivoul",10,"Pounaibaith",11209,53.48,14.67,Europe,-1023,January 1023 BCE,0
+war,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1018,January 1018 BCE,0
+war,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1014,January 1014 BCE,0
+peace,2,"Kazil",12,"Poubraith",163771,-28.61,16.47,East and southern Africa,-1005,January 1005 BCE,0
+peace,14,"Yairal",21,"Sterush",150492,-17.03,-53.19,Americas,-1004,January 1004 BCE,0

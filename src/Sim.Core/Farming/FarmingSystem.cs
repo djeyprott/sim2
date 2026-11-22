@@ -798,7 +798,7 @@ public sealed class FarmingSystem : ISimSystem
                 }
 
                 double suitability = Suitability(cell, crop);
-                if (!rng.Chance(_parameters.InventionChance * suitability * fullness))
+                if (!rng.Chance(_parameters.InventionChance * Crops.Get(crop).InventionFactor * suitability * fullness))
                 {
                     continue;
                 }

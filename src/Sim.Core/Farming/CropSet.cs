@@ -14,6 +14,7 @@ public sealed class Crop
         HomelandLat = entry.Homeland.Lat;
         HomelandLon = entry.Homeland.Lon;
         HomelandRadiusKm = entry.Homeland.RadiusKm;
+        InventionFactor = entry.InventionFactor;
         Warmest = entry.Warmest.ToArray();
         Coldest = entry.Coldest.ToArray();
         Water = entry.Water.ToArray();
@@ -31,6 +32,9 @@ public sealed class Crop
     public double HomelandLon { get; }
 
     public double HomelandRadiusKm { get; }
+
+    /// <summary>How much likelier than farming.json's inventionChance this crop is to be first farmed (1: as likely).</summary>
+    public double InventionFactor { get; }
 
     public IReadOnlyList<double> Warmest { get; }
 
@@ -104,6 +108,11 @@ public sealed class CropSet
                 throw new InvalidDataException($"Crop '{entry.Name}' needs a homeland radius and a colour like #RRGGBB.");
             }
 
+            if (entry.InventionFactor <= 0.0)
+            {
+                throw new InvalidDataException($"Crop '{entry.Name}' needs an inventionFactor above 0.");
+            }
+
             crops[i] = new Crop(i, entry);
         }
 
@@ -138,6 +147,8 @@ internal sealed class CropEntry
     public string Colour { get; set; } = "";
 
     public HomelandEntry Homeland { get; set; } = new HomelandEntry();
+
+    public double InventionFactor { get; set; } = 1.0;
 
     public List<double> Warmest { get; set; } = new List<double>();
 

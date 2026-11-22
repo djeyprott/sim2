@@ -93,6 +93,8 @@ public sealed class PolityParameters
 
     public double FoundSettledYears { get; set; } = 3000.0;
 
+    public double StateSettledYears { get; set; } = 5000.0;
+
     public double FoundChance { get; set; } = 0.002;
 
     public double CrowdPeople { get; set; } = 50000.0;
@@ -111,7 +113,7 @@ public sealed class PolityParameters
 
     public int StateSettlements { get; set; } = 5;
 
-    public double StateKeepShare { get; set; } = 0.5;
+    public double StateKeepShare { get; set; } = 0.65;
 
     public double TributeShare { get; set; } = 0.15;
 
@@ -211,7 +213,7 @@ public sealed class PolityParameters
         }
 
         double[] chances = { p.FoundChance, p.JoinChance, p.UnlinkedJoinFactor };
-        if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0
+        if (chances.Any(c => c < 0.0 || c > 1.0) || p.FoundPeople <= 0.0 || p.FoundSurplusYears < 0.0 || p.FoundSettledYears < 0.0 || p.StateSettledYears < 0.0
             || p.CrowdPeople <= 0.0 || p.ChiefdomReach <= 0.0 || p.StateReach < p.ChiefdomReach || p.ClaimNeighbours < 1 || p.ClaimNeighbours > 6
             || p.StatePeople <= 0.0 || p.StateSettlements < 1 || p.StateKeepShare <= 0.0 || p.StateKeepShare > 1.0
             || new[] { p.TributeShare, p.MaxTributeShare, p.EliteShare, p.PeaceSoldierShare, p.BorderSoldierShare, p.StaffChangeRate, p.MaxStaffShare, p.UnrestRate }.Any(v => v < 0.0 || v > 1.0)
@@ -673,9 +675,11 @@ public sealed class PolitySystem : ISimSystem
                 towns += _settlementPlusOne[cell] > 0 ? 1 : 0;
             }
 
-            // A state stays one until it falls below stateKeepShare of the thresholds.
+            // A state stays one until it falls below stateKeepShare of the thresholds; a chiefdom
+            // becomes one only once its capital has been farmed stateSettledYears.
             double keep = p.Level == PolityLevel.State ? _parameters.StateKeepShare : 1.0;
-            bool state = people >= keep * _parameters.StatePeople && towns >= keep * _parameters.StateSettlements;
+            bool state = people >= keep * _parameters.StatePeople && towns >= keep * _parameters.StateSettlements
+                && (p.Level == PolityLevel.State || FarmedFor(p.Capital, _parameters.StateSettledYears, tick));
             if (state != (p.Level == PolityLevel.State))
             {
                 SetLevel(p.Id, state ? PolityLevel.State : PolityLevel.Chiefdom, tick);

@@ -45,10 +45,12 @@
   "claimNeighbours": 4,
 
   // A chiefdom that rules at least statePeople people and stateSettlements settlements is a
-  // state; a state that falls below stateKeepShare of either is a chiefdom again.
+  // state, once its capital has been farmed stateSettledYears; a state that falls below
+  // stateKeepShare of either is a chiefdom again.
   "statePeople": 300000,
   "stateSettlements": 15,
-  "stateKeepShare": 0.5,
+  "stateKeepShare": 0.65,
+  "stateSettledYears": 5000,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share
   // of each good people use in its store (food, everyday goods and luxuries; raw materials such as

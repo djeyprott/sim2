@@ -8,12 +8,15 @@
 //   water    rainfall over the year plus what a river adds (see farming.json), mm
 // Every crop needs a warmest month of at least 10 degrees C, so none grows in tundra or ice.
 // The homeland is a circle on the real Earth: cells inside it where the crop grows well at the
-// start of a run are where it grows wild and can first be farmed.
+// start of a run are where it grows wild and can first be farmed. An inventionFactor (1 unless
+// given) makes a crop that much likelier to be first farmed than farming.json's inventionChance:
+// wheat and barley's wild lands are small, and without it they were first farmed anywhere from
+// 9950 to 5650 BCE across seeds (on Earth about 9500 BCE, before any other crop).
 {
   "crops": [
     {
       "name": "Wheat and barley", "colour": "#e0bf4c",
-      "homeland": { "lat": 36.0, "lon": 40.0, "radiusKm": 700 },
+      "inventionFactor": 4, "homeland": { "lat": 36.0, "lon": 40.0, "radiusKm": 700 },
       "warmest": [14, 18, 30, 38], "coldest": [-15, -5, 12, 22], "water": [200, 350, 900, 1800]
     },
     {

@@ -1,53 +1,60 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
-0,"Steros",-5581,,,,0.609,0.784,1.044,,2,7,4,East Asia
-1,"Lishepein",-5082,-3194,fell,,0.933,0.677,0.652,-3577,12,17,15,Southwest Asia
-2,"Lethek",-4601,,,,1.306,1.650,1.152,-3175,75,77,59,Southwest Asia
-3,"Ramzuth",-4441,,,,0.955,1.482,1.136,,7,11,4,East Asia
-4,"Zuzeis",-4426,,,,1.142,1.172,1.155,-3579,2,75,14,Southwest Asia
-5,"Krethkashta",-4266,,,,0.851,0.671,0.559,,0,0,0,East Asia
-6,"Besoush",-4174,-3337,conquered,,1.097,1.122,0.885,,4,7,2,East Asia
-7,"Treiruksteis",-4144,,,,1.272,1.172,1.919,,36,54,34,East Asia
-8,"Shakun",-4091,,,,0.722,0.896,0.988,,0,0,0,East Asia
-9,"Reibe",-4047,,,,1.517,1.283,0.875,,0,0,0,East Asia
-10,"Yaimdeilaith",-4026,-2847,conquered,,0.744,0.819,2.500,,4,4,2,East Asia
-11,"Veyashour",-4006,-1921,conquered,,1.003,0.872,1.184,,10,22,15,East Asia
-12,"Thestan",-4005,-2828,conquered,,1.477,0.747,1.512,,6,11,5,East Asia
-13,"Teltrath",-3995,,,,1.540,1.348,1.490,,28,34,12,East Asia
-14,"Tagounai",-3890,,,,1.246,1.194,2.457,,3,3,2,Southeast Asia
-15,"Sholo",-3825,,,,0.837,1.262,0.496,,4,10,5,East Asia
-16,"Naisteis",-3779,-3768,conquered,,0.554,0.786,0.588,,0,1,0,East Asia
-17,"Hehe",-3668,,,,0.705,0.942,1.072,,6,11,7,East Asia
-18,"Zouyeikou",-3582,,,,1.423,0.516,1.210,,16,21,8,East Asia
-19,"Thahun",-3561,,,,0.651,1.393,1.491,,2,31,14,East Asia
-20,"Umuu",-3462,-3355,conquered,,0.704,0.806,0.650,,0,6,0,Southwest Asia
-21,"Krounostal",-3397,,,,0.883,0.793,0.780,,7,8,3,East Asia
-22,"Eistaker",-3393,-3381,conquered,,0.949,0.721,1.195,,0,1,0,Southwest Asia
-23,"Odailel",-3282,,,,1.584,0.972,1.162,,9,13,7,East Asia
-24,"Beshuth",-3105,,,,1.380,0.869,1.323,,0,0,0,East Asia
-25,"Lapam",-3019,-1296,conquered,,1.170,1.116,0.972,,11,13,6,East Asia
-26,"Mouteishor",-3006,-2705,fell,,1.057,1.347,2.500,,6,6,5,Southwest Asia
-27,"Treilas",-2973,-2932,conquered,,0.996,0.599,1.532,,0,3,0,East Asia
-28,"Brekabo",-2953,,,,0.652,0.746,0.759,,2,15,10,South Asia
-29,"Pahaikra",-2940,-1937,fell,,1.051,0.601,1.865,,3,20,3,Southwest Asia
-30,"Rornin",-2926,,,,1.220,1.509,1.680,,5,9,2,East Asia
-31,"Kairosith",-2774,-2714,conquered,,1.645,0.848,0.934,,1,3,0,East Asia
-32,"Nokshash",-2590,-2295,conquered,,1.700,0.855,0.701,,3,10,2,Steppe and Central Asia
-33,"Gouzei",-2552,-2083,conquered,,0.761,0.731,0.832,-2537,1,13,12,Steppe and Central Asia
-34,"Tehoumai",-2495,-2088,fell,32,1.726,0.846,0.715,-2359,21,22,11,Steppe and Central Asia
-35,"Yapur",-2438,-2432,conquered,33,1.378,1.184,1.563,,0,1,0,Steppe and Central Asia
-36,"Seteim",-2236,,,,1.222,1.073,1.853,-1996,0,0,0,West and Central Africa
-37,"Yusteish",-2164,,,,0.465,1.260,0.717,,0,28,13,East Asia
-38,"Stanim",-2097,-2087,conquered,,0.857,0.550,0.763,,0,1,0,Southwest Asia
-39,"Guta",-2088,,,34,1.073,0.413,1.172,-2088,14,15,14,Steppe and Central Asia
-40,"Rethbreik",-2047,-1512,fell,,1.704,0.700,1.476,,7,8,6,Southwest Asia
-41,"Hushpiltro",-2038,,,,1.177,1.528,0.930,,6,16,11,East Asia
-42,"Eikur",-1753,,,,0.712,1.351,0.747,,0,0,0,West and Central Africa
-43,"Sathu",-1654,-1018,fell,,1.306,0.737,1.263,,0,14,1,Southwest Asia
-44,"Aibrabrir",-1622,,,,0.923,1.049,1.052,,0,0,0,West and Central Africa
-45,"Theloura",-1521,,,,1.199,1.325,1.160,-1510,0,1,1,Europe
-46,"Eim",-1403,,,45,1.041,0.891,1.426,-1402,0,0,0,Europe
-47,"Doustei",-1349,,,,1.101,0.846,1.188,,0,3,2,East Asia
-48,"Shaistem",-1293,,,,0.842,0.974,1.132,,0,0,0,Southwest Asia
-49,"Trotrash",-1279,,,,0.960,0.607,0.983,,0,0,0,Southwest Asia
-50,"Umuu",-1223,-1216,conquered,,1.033,0.541,1.487,,0,1,0,Southwest Asia
-51,"Ebrahar",-1184,,,,1.919,1.165,0.556,,0,0,0,Southwest Asia
+0,"Zulshihai",-5663,,,,0.609,0.784,1.044,,6,6,6,Southwest Asia
+1,"Thakrel",-5424,,,,1.032,0.703,1.361,-3539,3,5,4,Southwest Asia
+2,"Rilemim",-5237,,,,1.526,0.781,1.398,-3322,4,5,3,Southwest Asia
+3,"Stuneinsta",-5204,,,,1.006,0.955,1.153,,16,18,10,East Asia
+4,"Reibe",-5044,-4323,conquered,,1.426,1.063,0.854,,0,4,0,Steppe and Central Asia
+5,"Heyais",-4821,,,,1.169,0.730,1.541,,17,24,16,East Asia
+6,"Geithol",-4466,,,4,1.185,0.574,0.664,-2443,44,47,35,Steppe and Central Asia
+7,"Rithtune",-4341,-1746,conquered,,0.837,1.262,0.496,,4,27,9,East Asia
+8,"Voshaitei",-4219,-4213,conquered,,1.431,1.236,0.808,,0,1,0,East Asia
+9,"Muzeis",-4171,,,,0.854,2.073,1.623,,0,3,0,Southwest Asia
+10,"Stayouruth",-4129,,,,1.184,1.030,1.072,-2233,15,51,26,Europe
+11,"Mouthbrom",-4002,-1527,conquered,,1.058,1.122,0.912,,0,2,0,Southwest Asia
+12,"Kreikmouk",-3435,-1131,conquered,,0.939,1.549,0.830,-1460,4,14,7,Europe
+13,"Krulushoun",-3365,-2773,conquered,,0.942,0.981,0.671,,0,2,0,Southwest Asia
+14,"Gushthitul",-3225,,,,1.320,1.863,1.213,,1,1,0,East Asia
+15,"Traihaikbek",-3168,,,,1.051,0.601,1.865,,17,25,17,East Asia
+16,"Nulish",-3168,-2189,conquered,,0.677,0.703,0.524,,0,12,4,Europe
+17,"Nousheshgou",-3141,,,,1.456,0.544,1.034,,19,19,16,East Asia
+18,"Zaikrothshaish",-3139,-3089,conquered,,0.574,1.020,0.801,,0,2,0,East Asia
+19,"Kigokshin",-3119,-3115,conquered,,0.557,1.095,1.095,,0,1,0,Steppe and Central Asia
+20,"Nevaivai",-3107,,,,0.895,0.964,0.926,,4,6,5,Southwest Asia
+21,"Vakesh",-3071,,,,1.011,0.978,1.537,,0,1,1,East Asia
+22,"Doulestain",-3055,,,,0.943,1.081,0.455,,0,3,0,Southwest Asia
+23,"Robeth",-3031,-3016,conquered,,1.332,1.425,1.016,,0,2,0,Europe
+24,"Nadoush",-2992,-2910,conquered,,0.743,2.500,0.889,,0,4,0,East Asia
+25,"Loubath",-2952,,,,1.002,0.520,0.813,,2,37,8,East Asia
+26,"Nastayou",-2929,,,,1.555,0.870,0.543,,4,4,2,Americas
+27,"Rela",-2898,,,,1.738,1.479,0.917,,4,5,0,Steppe and Central Asia
+28,"Toze",-2381,,,,1.251,1.218,0.814,,1,5,2,Americas
+29,"Yogekzeth",-2341,,,,1.365,1.146,1.141,,2,3,2,Sahel
+30,"Zeerein",-2250,-2241,conquered,,2.500,1.912,1.400,,0,1,0,Europe
+31,"Stubriste",-2138,-1791,conquered,,1.452,0.857,0.801,,10,12,8,East Asia
+32,"Nuboumme",-2133,,,,0.761,2.039,0.887,,4,7,3,Europe
+33,"Risasta",-2130,,,,0.914,1.287,1.242,,0,1,0,Egypt and Nile
+34,"Bruvousteim",-2124,,,,0.832,0.575,0.519,,0,1,0,Southwest Asia
+35,"Zagal",-2116,-2092,conquered,,1.903,1.145,0.918,,1,1,0,Southwest Asia
+36,"Stoutou",-1950,,,,0.946,0.653,0.573,,2,7,0,Europe
+37,"Gaiduveis",-1949,,,,0.868,0.999,0.735,,1,2,1,Europe
+38,"Thazueim",-1936,,,,0.537,0.752,2.214,,2,8,6,East Asia
+39,"Aishger",-1892,,,,1.532,1.461,0.907,,8,10,5,East Asia
+40,"Saitruth",-1889,,,,0.634,0.755,1.215,,2,3,2,Europe
+41,"Baiyeimai",-1817,,,,1.051,1.262,1.263,,3,5,1,East Asia
+42,"Davoush",-1791,,,,0.835,0.710,0.624,,2,2,2,East Asia
+43,"Kabar",-1786,,,,1.234,1.458,1.013,,2,2,2,Southwest Asia
+44,"Thaikru",-1716,,,,0.985,1.395,0.641,,0,2,0,Southeast Asia
+45,"Voekrel",-1689,,,,0.877,1.330,1.129,,3,5,4,East Asia
+46,"Toubeil",-1672,,,,0.636,1.096,0.849,,1,1,1,Europe
+47,"Kedubour",-1655,,,,1.126,1.441,1.033,,1,3,0,East Asia
+48,"Keltaish",-1413,,,,1.144,1.374,0.773,,4,5,0,Europe
+49,"Brethal",-1392,,,,0.770,0.835,0.638,,0,0,0,Americas
+50,"Geisbei",-1378,,,,0.930,1.142,1.024,,1,2,2,East Asia
+51,"Kreihon",-1300,,,,1.019,0.735,1.266,,1,1,1,East Asia
+52,"Kesha",-1293,,,,0.959,0.606,0.898,,0,1,0,East Asia
+53,"Obetrail",-1240,,,,0.702,0.771,0.472,,1,3,1,East Asia
+54,"Shonte",-1233,,,,1.087,1.818,2.500,,0,4,0,Southwest Asia
+55,"Ruhi",-1185,,,,0.577,0.797,0.817,,0,2,0,East Asia
+56,"Thikraisho",-1146,,,,0.781,1.465,0.917,,0,1,0,Southeast Asia
+57,"Brepar",-1086,,,,1.739,0.890,0.647,,0,1,0,Americas
+58,"Stohakgei",-1006,,,,1.780,0.945,0.732,,0,0,0,East Asia

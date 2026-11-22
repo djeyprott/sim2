@@ -1,34 +1,43 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
-0,"Yaiktoush",-5343,,,,1.037,0.811,1.256,-4462,3,3,3,Southwest Asia
+0,"Yaiktoush",-5343,,,,1.037,0.811,1.256,-3678,7,7,6,Southwest Asia
 1,"Thoukou",-5332,-4466,conquered,,1.500,2.500,0.867,,0,2,0,Southwest Asia
-2,"Rashoth",-5018,,,,0.881,0.778,0.860,-4113,0,0,0,Southwest Asia
-3,"Nashal",-4368,-4364,conquered,,1.964,0.780,0.973,,0,1,0,Southwest Asia
-4,"Stavokkrem",-3705,,,,1.135,1.013,0.918,-3674,44,44,42,Steppe and Central Asia
-5,"Zougeivin",-3367,,,,1.207,1.019,1.069,,0,0,0,Southwest Asia
-6,"Amebo",-3365,,,,0.700,0.599,1.385,-3351,8,18,4,Europe
-7,"Leovuth",-3349,,,,0.690,1.079,0.899,,2,2,2,East Asia
-8,"Kune",-3157,,,,1.103,1.314,0.770,,3,3,3,East Asia
-9,"Puker",-2669,,,,1.250,1.386,1.030,-2600,4,4,3,West and Central Africa
-10,"Kemaes",-2613,,,,2.016,0.423,0.524,,13,14,10,East Asia
-11,"Inyoush",-2610,-2572,conquered,,0.743,0.636,0.679,,0,2,0,East Asia
-12,"Neimshaiste",-2606,,,,1.541,0.731,1.156,,0,0,0,West and Central Africa
-13,"Soungouter",-2560,,,,1.253,0.937,1.118,,3,8,4,East Asia
-14,"Lovumo",-2390,,,,0.817,1.002,0.907,,0,4,1,West and Central Africa
-15,"Veshel",-2250,,,,0.912,1.082,1.414,,29,29,28,Americas
-16,"Stavaka",-2244,,,,0.891,0.884,0.918,,0,5,0,East Asia
-17,"Doubomraim",-2237,,,,0.957,0.937,1.412,,0,8,1,Americas
-18,"Habol",-2211,,,,2.500,1.258,0.954,,3,5,3,Southeast Asia
-19,"Yirashosh",-2194,,,,0.976,0.576,0.852,,4,5,4,East Asia
-20,"Zostoshail",-2175,,,,1.032,0.622,0.685,,0,36,0,Europe
-21,"Trebragok",-2060,-1657,conquered,,1.066,0.774,1.254,,1,12,1,East Asia
-22,"Moubi",-2032,,,,0.597,0.948,1.341,,0,3,2,East Asia
-23,"Ritredek",-2016,,,,1.042,1.132,1.335,,2,3,2,East Asia
-24,"Brehem",-2001,,,,1.034,1.011,0.866,,0,0,0,Sahel
-25,"Zesek",-1915,,,,0.599,1.457,1.017,,0,26,0,Americas
-26,"Bralzesen",-1864,,,,1.259,1.411,0.859,,0,0,0,Sahel
-27,"Kebreya",-1732,,,,0.887,0.978,0.884,,0,0,0,East Asia
-28,"Mideshsour",-1582,,,,1.110,1.111,0.601,-1546,3,8,6,Europe
-29,"Zailsaishnek",-1306,,,,1.484,0.804,0.906,,8,11,8,Americas
-30,"Poubru",-1271,,,,0.871,1.473,0.986,-1225,3,4,0,Europe
-31,"Mepiton",-1233,,,6,0.912,0.822,0.548,-1233,7,8,4,Europe
-32,"Naian",-1224,,,,0.954,0.596,1.078,-1200,1,14,9,Europe
+2,"Rashoth",-5018,,,,0.881,0.778,0.860,-2275,3,12,11,Southwest Asia
+3,"Nainai",-4307,-4270,conquered,,0.824,0.831,0.759,,0,3,0,Southwest Asia
+4,"Trulash",-4197,,,,1.612,1.585,1.183,,7,9,0,Southwest Asia
+5,"Beishous",-4161,-2456,fell,,1.296,1.097,1.126,,11,11,11,Southwest Asia
+6,"Braimek",-3983,,,,1.033,1.504,1.172,-2061,1,2,2,Steppe and Central Asia
+7,"Eineth",-3712,,,,1.255,1.257,1.084,,0,0,0,East Asia
+8,"Mieste",-3512,,,,1.029,0.923,0.957,,0,0,0,East Asia
+9,"Muthstutras",-3343,,,,1.374,1.391,0.892,,0,0,0,East Asia
+10,"Branar",-3050,,,,1.037,1.534,0.968,,3,14,1,Southwest Asia
+11,"Vushgei",-2928,-2072,conquered,,1.143,0.561,0.620,,4,10,2,Europe
+12,"Tiyaith",-2816,,,,1.233,1.340,1.905,,8,13,7,East Asia
+13,"Githemok",-2766,,,,1.580,0.976,0.643,-1672,18,21,12,Europe
+14,"Ibish",-2709,-1064,conquered,,1.253,1.046,0.491,,4,6,2,West and Central Africa
+15,"Soungouter",-2684,,,,0.989,1.689,0.907,,3,7,0,East Asia
+16,"Hekouseis",-2538,,,,1.313,0.833,0.521,,4,6,4,West and Central Africa
+17,"Budaigi",-2455,-1660,conquered,,1.102,0.688,0.764,,0,25,12,Europe
+18,"Youto",-2452,-1740,conquered,,1.695,1.910,0.749,,1,3,2,East Asia
+19,"Mageihi",-2393,,,,0.872,0.889,1.563,,1,1,1,West and Central Africa
+20,"Mepiton",-2352,,,11,0.729,1.002,0.927,,10,10,5,Europe
+21,"Zailsaishnek",-2255,,,,0.990,0.665,1.369,,1,15,2,Americas
+22,"Staeth",-2172,,,,1.104,1.365,0.889,,0,0,0,Sahel
+23,"Habol",-2139,,,,0.750,1.023,1.037,,3,3,3,Southeast Asia
+24,"Garuhuth",-1993,,,,0.753,1.325,0.766,,0,0,0,Sahel
+25,"Igasar",-1972,,,,0.911,0.882,1.882,,2,2,1,East Asia
+26,"Napirar",-1798,,,,1.300,1.438,1.348,,11,14,10,East Asia
+27,"Yashsteiro",-1752,,,,1.136,1.043,1.133,,2,2,2,Europe
+28,"Trebragok",-1718,,,,0.679,1.202,0.674,,2,15,4,East Asia
+29,"Romol",-1709,,,,0.884,1.389,1.055,,14,15,13,Americas
+30,"Herastar",-1648,,,,1.219,1.406,1.256,,6,8,7,East Asia
+31,"Kapis",-1508,,,,0.913,1.108,0.666,,1,2,1,East Asia
+32,"Apusas",-1446,,,,1.964,0.966,0.623,,0,1,0,West and Central Africa
+33,"Zougeivin",-1389,,,,0.574,0.952,1.131,,0,3,2,Southwest Asia
+34,"Pakrebrai",-1376,,,,0.944,0.609,0.758,,1,2,2,Southeast Asia
+35,"Vadezou",-1356,-1288,conquered,,0.954,0.893,0.667,,0,6,1,East Asia
+36,"Zasokgail",-1230,,,,0.751,0.608,0.730,,0,1,0,East Asia
+37,"Houthnerpith",-1227,,,,1.131,0.643,1.026,,0,0,0,East Asia
+38,"Puker",-1176,,,,1.741,1.110,0.994,,2,2,1,West and Central Africa
+39,"Kenreth",-1163,,,,0.998,0.922,0.825,,0,0,0,Europe
+40,"Lovumo",-1116,,,,0.575,0.959,0.886,,0,6,3,West and Central Africa
+41,"Redeizai",-1098,-1094,conquered,,0.776,1.461,0.753,,0,1,0,Southwest Asia

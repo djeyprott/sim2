@@ -1,22 +1,18 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
-0,"Naidule",-5784,-1826,conquered,,0.647,1.549,1.974,,17,19,17,East and southern Africa
-1,"Thupivoul",-4804,,,,0.859,1.134,0.735,,11,11,11,Europe
-2,"Kazil",-4793,,,,0.544,1.379,1.149,,3,26,4,East and southern Africa
-3,"Stupasaim",-4424,,,,0.557,0.896,0.977,,1,22,4,Europe
-4,"Pounaibaith",-4261,-4259,conquered,,0.529,0.665,1.217,,0,1,0,Europe
-5,"Tibragis",-4083,,,,1.106,0.809,0.861,,12,28,12,Europe
-6,"Yitosheik",-3966,,,,1.130,0.606,1.845,,11,11,10,Europe
-7,"Shebei",-3762,-3690,conquered,,0.880,0.813,1.647,,0,4,0,East and southern Africa
-8,"Relith",-3575,,,,0.867,0.795,0.642,,8,10,6,Europe
-9,"Shethilesh",-2960,,,,1.424,1.340,1.288,,2,2,2,Sahel
-10,"Reizuhush",-2744,,,,0.762,1.387,0.804,,3,5,3,Europe
-11,"Breshras",-2737,,,,0.722,1.727,2.451,,0,1,0,Americas
-12,"Nazek",-2660,,,,0.838,0.660,0.811,,1,1,1,Americas
-13,"Douvu",-2232,,,,0.707,0.753,0.821,,0,2,0,Sahel
-14,"Zeye",-2230,,,,0.624,0.929,1.155,,0,0,0,Southwest Asia
-15,"Toumai",-2175,,,,0.672,1.834,1.142,,0,5,3,Europe
-16,"Thayokben",-2114,,,,1.616,0.991,0.816,,5,6,2,Europe
-17,"Erstouth",-1876,,,,0.986,0.974,0.857,,9,9,8,East and southern Africa
-18,"Tayizi",-1864,,,,1.392,1.776,2.330,,0,0,0,Americas
-19,"Gazum",-1697,,,,1.259,1.062,1.385,,0,0,0,Americas
-20,"Pounaibaith",-1459,,,,1.197,0.841,1.473,,0,3,0,Europe
+0,"Naidule",-5784,,,,0.647,1.549,1.974,,8,9,9,East and southern Africa
+1,"Thupivoul",-4804,,,,0.859,1.134,0.735,,1,1,1,Europe
+2,"Kazil",-4793,,,,0.544,1.379,1.149,,1,9,0,East and southern Africa
+3,"Stupasaim",-4424,,,,0.557,0.896,0.977,,0,2,0,Europe
+4,"Iryas",-4058,,,,0.699,1.258,1.281,,1,1,1,Europe
+5,"Shavoth",-3910,,,,0.945,0.855,1.405,,0,1,0,Europe
+6,"Brailraithal",-3694,,,,1.892,1.435,1.318,,0,0,0,Europe
+7,"Vedou",-2867,,,,0.780,0.719,0.902,,1,1,1,Sahel
+8,"Thayokben",-2824,,,,1.408,0.660,1.469,,4,4,4,Europe
+9,"Nazek",-2745,,,,1.196,2.352,0.874,,1,3,1,Americas
+10,"Sukaish",-2544,,,,0.720,0.833,0.597,,0,0,0,Americas
+11,"Memlish",-2317,,,,1.022,0.805,1.568,,2,2,2,Americas
+12,"Yaitadi",-2295,,,,0.818,0.731,0.707,,1,1,1,Sahel
+13,"Voustukeish",-1785,,,,0.891,1.278,1.202,,0,3,0,Europe
+14,"Keishreizath",-1360,,,,0.956,1.135,2.446,,0,1,0,Americas
+15,"Gitreith",-1288,,,,1.118,1.033,1.361,,0,0,0,East and southern Africa
+16,"Daimehour",-1090,,,,1.417,0.499,0.806,,0,2,0,Sahel

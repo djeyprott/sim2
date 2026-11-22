@@ -29,7 +29,7 @@
   // over land (trade.json: 1 a cell of lowland, more on hills and mountains, half along rivers;
   // less where the capital uses the wheel or riding). Cells beyond it are let go.
   "chiefdomReach": 4,
-  "stateReach": 7,
+  "stateReach": 9,
 
   // Growing, every month: a polity draws in each unruled settlement within its reach with a
   // yearly chance (spread over the twelve months) of joinChance times its expansion

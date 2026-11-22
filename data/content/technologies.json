@@ -185,7 +185,7 @@
       "name": "Chariots", "colour": "#8b2500", "occupations": [ "Farmer", "Herder" ],
       "requires": [ "The wheel", "Horse riding" ], "animals": [ "Horses" ],
       "chance": 0.0001, "spread": 0.05,
-      "effects": { "attack": 1.5 },
+      "effects": { "attack": 2.0 },
       "history": "2000 BCE, Sintashta (southern Urals); across Southwest Asia by 1600 BCE"
     }
   ]

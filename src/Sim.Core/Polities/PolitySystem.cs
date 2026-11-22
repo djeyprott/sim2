@@ -1878,6 +1878,12 @@ public sealed class PolitySystem : ISimSystem
         }
 
         _rulerPlusOne[cell] = polity + 1;
+
+        // Land taken by a polity at war is threatened at once, not from the next January.
+        if (polity >= 0 && _threatened.Length > 0 && AtWar(polity))
+        {
+            _threatened[cell] = 1;
+        }
     }
 
     /// <summary>Whether an organization id names a polity that still stands.</summary>

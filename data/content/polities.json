@@ -47,8 +47,8 @@
   // A chiefdom that rules at least statePeople people and stateSettlements settlements is a
   // state, once its capital has been farmed stateSettledYears; a state that falls below
   // stateKeepShare of either is a chiefdom again.
-  "statePeople": 300000,
-  "stateSettlements": 15,
+  "statePeople": 200000,
+  "stateSettlements": 10,
   "stateKeepShare": 0.7,
   "stateSettledYears": 5000,
 

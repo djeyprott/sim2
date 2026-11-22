@@ -57,26 +57,23 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Chariots",lost,12700,62.33,30.68,-2667,January 2667 BCE,1890
 "Granaries",independent,98484,22.34,-99.65,-2630,January 2630 BCE,0
 "The sail",independent,131189,-3.82,143.26,-2603,January 2603 BCE,0
-"Horse herding",lost,12776,62.66,29.00,-2568,January 2568 BCE,932
-"Horse herding",lost,12776,62.66,29.00,-2567,January 2567 BCE,934
+"Horse herding",lost,12776,62.66,29.00,-2570,January 2570 BCE,929
+"Bronze",lost,5833,35.58,43.55,-2559,January 2559 BCE,1399
+"Bronze",lost,5833,35.58,43.55,-2559,January 2559 BCE,1399
+"Terraced fields",independent,131709,-3.79,140.80,-2483,January 2483 BCE,0
 "Milk and wool",lost,6062,32.66,68.16,-2346,January 2346 BCE,77
 "Milk and wool",lost,6062,32.66,68.16,-2345,January 2345 BCE,81
-"Fortifications",independent,68982,7.00,15.08,-2338,January 2338 BCE,0
 "Milk and wool",lost,6062,32.66,68.16,-2313,January 2313 BCE,23
 "Milk and wool",lost,6062,32.66,68.16,-2312,January 2312 BCE,26
-"Terraced fields",independent,130964,-7.88,146.70,-2269,January 2269 BCE,0
-"Terraced fields",independent,153414,-19.44,-64.40,-2217,January 2217 BCE,0
-"Chariots",lost,12850,63.03,28.36,-2137,January 2137 BCE,1737
-"Horse herding",independent,9073,42.82,68.13,-2019,January 2019 BCE,0
-"Irrigation",independent,10930,51.77,12.02,-1897,January 1897 BCE,0
+"Horse herding",lost,12547,61.57,31.86,-2307,January 2307 BCE,1347
+"Chariots",lost,12547,61.57,31.86,-2304,January 2304 BCE,1384
+"Horse herding",independent,8846,42.24,67.06,-2175,January 2175 BCE,0
+"Irrigation",independent,11209,53.48,14.67,-2011,January 2011 BCE,0
+"Irrigation",independent,16584,34.89,112.78,-1930,January 1930 BCE,0
+"Fortifications",independent,160928,9.70,4.54,-1871,January 1871 BCE,0
+"Chariots",lost,53834,44.49,-0.56,-1725,January 1725 BCE,2359
+"Terraced fields",independent,153517,-19.88,-64.64,-1681,January 1681 BCE,0
 "The sail",lost,162214,6.35,1.75,-1616,January 1616 BCE,0
-"Copper working",independent,9022,46.04,27.54,-1517,January 1517 BCE,0
-"Horse herding",lost,12780,62.41,24.77,-1397,January 1397 BCE,1197
-"Horse riding",lost,12780,62.41,24.77,-1397,January 1397 BCE,1197
-"Chariots",lost,12780,62.41,24.77,-1397,January 1397 BCE,1197
-"Horse herding",lost,12780,62.41,24.77,-1383,January 1383 BCE,1254
-"Chariots",lost,12780,62.41,24.77,-1383,January 1383 BCE,1254
-"Horse riding",lost,12780,62.41,24.77,-1366,January 1366 BCE,1509
-"Fortifications",independent,153518,-19.47,-64.88,-1238,January 1238 BCE,0
 "Milk and wool",lost,20956,46.70,79.75,-1057,January 1057 BCE,99
 "Milk and wool",lost,20956,46.70,79.75,-1056,January 1056 BCE,104
+"Copper working",independent,8328,43.14,22.97,-1038,January 1038 BCE,0

@@ -2,10 +2,14 @@ name: Exit tests
 
 # The milestone exit tests: long runs of the full simulation on Earth with 10 seeds each.
 # They run separately from CI so ordinary changes get quick results, and only when started by
-# hand (gh workflow run exit-tests.yml). Runs with farming go 9,000 years (milestone 4) and take
+# hand (gh workflow run exit-tests.yml), all three suites unless chosen. Runs with farming go 9,000 years (milestone 4) and take
 # about two hours a suite.
 on:
   workflow_dispatch:
+    inputs:
+      suites:
+        description: Suites to run, as a JSON list
+        default: '["EarthRealHomelandTests", "EarthRandomHomelandTests", "EarthNoFarmingTests"]'
 
 jobs:
   exit-tests:
@@ -14,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [EarthRealHomelandTests, EarthRandomHomelandTests, EarthNoFarmingTests]
+        suite: ${{ fromJSON(github.event.inputs.suites || '["EarthRealHomelandTests", "EarthRandomHomelandTests", "EarthNoFarmingTests"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4

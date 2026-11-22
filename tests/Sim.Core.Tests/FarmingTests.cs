@@ -878,6 +878,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         parameters.JoinChance = 0.5;
         parameters.StatePeople = 5000.0;
         parameters.StateSettlements = 3;
+        parameters.StateReach = 6.0; // several polities in this small world, so they have neighbours
         parameters.WarThreshold = 0.0;
         parameters.WarChance = 0.5;
         parameters.PeaceYears = 5.0;

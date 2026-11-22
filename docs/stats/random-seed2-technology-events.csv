@@ -33,20 +33,11 @@ technology,event,cell,latitude,longitude,year,date,contact
 "Irrigation",lost,160848,-20.39,23.54,-3000,January 3000 BCE,206
 "Terraced fields",lost,162251,-27.26,22.44,-2979,January 2979 BCE,149
 "The sail",independent,161424,-3.15,10.73,-2871,January 2871 BCE,0
-"Granaries",lost,163001,-17.33,12.91,-2295,January 2295 BCE,65
-"Terraced fields",independent,10643,49.91,8.92,-2029,January 2029 BCE,0
-"Copper working",independent,63846,-13.30,29.38,-2001,January 2001 BCE,0
-"Granaries",lost,63438,6.10,43.59,-1981,January 1981 BCE,393
-"Granaries",lost,63558,6.12,43.10,-1974,January 1974 BCE,218
-"Terraced fields",lost,162251,-27.26,22.44,-1933,January 1933 BCE,100
-"Granaries",lost,162251,-27.26,22.44,-1905,January 1905 BCE,100
-"Granaries",lost,163001,-17.33,12.91,-1757,January 1757 BCE,65
-"Terraced fields",independent,68137,7.65,21.02,-1729,January 1729 BCE,0
-"Irrigation",lost,160577,-20.21,24.45,-1668,January 1668 BCE,171
-"Granaries",lost,214733,-32.19,22.59,-1620,January 1620 BCE,331
-"Fortifications",lost,214733,-32.19,22.59,-1604,January 1604 BCE,331
-"The sail",independent,7503,36.42,2.01,-1591,January 1591 BCE,0
-"The sail",lost,8362,39.68,3.15,-1502,January 1502 BCE,395
-"Granaries",lost,63556,6.92,43.58,-1397,January 1397 BCE,17
-"Granaries",lost,108957,-9.70,-44.52,-1228,January 1228 BCE,0
-"The sail",lost,5869,35.27,24.17,-1161,January 1161 BCE,402
+"Terraced fields",independent,10043,45.97,2.91,-2424,January 2424 BCE,0
+"Fortifications",independent,149413,-20.49,-46.85,-2274,January 2274 BCE,0
+"Granaries",lost,63438,6.10,43.59,-2214,January 2214 BCE,174
+"Copper working",independent,64417,-11.86,27.92,-1776,January 1776 BCE,0
+"Granaries",lost,62575,3.99,45.77,-1769,January 1769 BCE,255
+"Terraced fields",independent,68803,6.75,16.21,-1485,January 1485 BCE,0
+"Granaries",lost,63556,6.92,43.58,-1396,January 1396 BCE,20
+"Granaries",lost,108957,-9.70,-44.52,-1226,January 1226 BCE,0

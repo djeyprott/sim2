@@ -34,954 +34,943 @@ peace,2,"Daisebi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3758,January 37
 split,0,"Segorei",,,5981,36.19,38.45,Southwest Asia,-3617,January 3617 BCE,68
 broke_away,4,"Koma",0,"Segorei",6791,38.69,38.59,Southwest Asia,-3617,January 3617 BCE,0
 became_state,4,"Koma",,,6791,38.69,38.59,Southwest Asia,-3605,January 3605 BCE,0
-war,4,"Koma",0,"Segorei",5981,36.19,38.45,Southwest Asia,-3593,January 3593 BCE,0
-founded,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-3586,January 3586 BCE,0
-split,0,"Segorei",,,5981,36.19,38.45,Southwest Asia,-3586,January 3586 BCE,33
-peace,4,"Koma",0,"Segorei",5981,36.19,38.45,Southwest Asia,-3582,January 3582 BCE,0
-war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3574,January 3574 BCE,0
-peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3560,January 3560 BCE,0
-war,3,"Stadoudas",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3560,January 3560 BCE,0
-war,4,"Koma",0,"Segorei",5981,36.19,38.45,Southwest Asia,-3552,January 3552 BCE,0
-peace,2,"Daisebi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3549,January 3549 BCE,0
-founded,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-3545,January 3545 BCE,0
-conquered,0,"Segorei",4,"Koma",5981,36.19,38.45,Southwest Asia,-3545,January 3545 BCE,5
-founded,7,"Lanouas",,,78677,24.69,105.28,East Asia,-3543,January 3543 BCE,0
-war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3540,January 3540 BCE,0
-founded,8,"Krouthar",,,77854,23.87,109.73,East Asia,-3527,January 3527 BCE,0
-peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3526,January 3526 BCE,0
-war,3,"Stadoudas",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3524,January 3524 BCE,0
-split,2,"Daisebi",,,6798,38.70,34.56,Southwest Asia,-3523,January 3523 BCE,26
-founded,9,"Shairthum",,,78278,24.30,107.51,East Asia,-3518,January 3518 BCE,0
-war,7,"Lanouas",9,"Shairthum",78278,24.30,107.51,East Asia,-3518,January 3518 BCE,0
-split,2,"Daisebi",,,6798,38.70,34.56,Southwest Asia,-3512,January 3512 BCE,10
-peace,3,"Stadoudas",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3510,January 3510 BCE,0
-peace,9,"Shairthum",7,"Lanouas",78677,24.69,105.28,East Asia,-3510,January 3510 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3507,January 3507 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3493,January 3493 BCE,0
-war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3487,January 3487 BCE,0
-conquered,2,"Daisebi",4,"Koma",6798,38.70,34.56,Southwest Asia,-3473,January 3473 BCE,14
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-3433,January 3433 BCE,76
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3427,January 3427 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3413,January 3413 BCE,0
-founded,10,"Kroutreilo",,,79408,21.87,98.92,East Asia,-3407,January 3407 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3402,January 3402 BCE,0
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3388,January 3388 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3388,January 3388 BCE,0
-founded,11,"Zekrin",,,18457,40.62,115.20,East Asia,-3386,January 3386 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3374,January 3374 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3374,January 3374 BCE,29
-founded,12,"Pathhatrol",,,18331,40.25,114.24,East Asia,-3372,January 3372 BCE,0
-war,11,"Zekrin",12,"Pathhatrol",18331,40.25,114.24,East Asia,-3372,January 3372 BCE,0
-peace,11,"Zekrin",12,"Pathhatrol",18331,40.25,114.24,East Asia,-3366,January 3366 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3362,January 3362 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3352,January 3352 BCE,0
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3348,January 3348 BCE,0
-founded,13,"Kenounrim",,,18339,40.38,109.49,East Asia,-3341,January 3341 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3338,January 3338 BCE,0
-founded,14,"Hitheith",,,78766,19.52,101.86,East Asia,-3316,January 3316 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3312,January 3312 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3306,January 3306 BCE,28
-war,6,"Kropithbeik",14,"Hitheith",78766,19.52,101.86,East Asia,-3302,January 3302 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3298,January 3298 BCE,0
-peace,14,"Hitheith",6,"Kropithbeik",79130,22.00,100.87,East Asia,-3288,January 3288 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-3288,January 3288 BCE,0
-split,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-3283,January 3283 BCE,24
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3274,January 3274 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3270,January 3270 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3256,January 3256 BCE,0
-founded,15,"Kraistoth",,,17816,38.67,111.16,East Asia,-3242,January 3242 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3241,January 3241 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3241,January 3241 BCE,0
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3232,January 3232 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-3227,January 3227 BCE,0
-founded,16,"Saiyes",,,79134,20.25,99.90,East Asia,-3226,January 3226 BCE,0
-war,10,"Kroutreilo",16,"Saiyes",79134,20.25,99.90,East Asia,-3224,January 3224 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3218,January 3218 BCE,0
-peace,10,"Kroutreilo",16,"Saiyes",79134,20.25,99.90,East Asia,-3210,January 3210 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3208,January 3208 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3204,January 3204 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3203,January 3203 BCE,0
-split,15,"Kraistoth",,,17816,38.67,111.16,East Asia,-3198,January 3198 BCE,16
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3195,January 3195 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-3189,January 3189 BCE,0
-war,16,"Saiyes",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3189,January 3189 BCE,0
-split,15,"Kraistoth",,,17816,38.67,111.16,East Asia,-3183,January 3183 BCE,19
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3182,January 3182 BCE,0
-peace,10,"Kroutreilo",16,"Saiyes",79134,20.25,99.90,East Asia,-3175,January 3175 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3171,January 3171 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3168,January 3168 BCE,0
-founded,17,"Leka",,,78455,18.30,103.09,East Asia,-3165,January 3165 BCE,0
-war,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-3162,January 3162 BCE,0
-split,16,"Saiyes",,,79134,20.25,99.90,East Asia,-3162,January 3162 BCE,9
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-3161,January 3161 BCE,0
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3157,January 3157 BCE,0
-peace,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-3156,January 3156 BCE,0
-war,14,"Hitheith",16,"Saiyes",79134,20.25,99.90,East Asia,-3154,January 3154 BCE,0
-conquered,16,"Saiyes",14,"Hitheith",79134,20.25,99.90,East Asia,-3151,January 3151 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-3147,January 3147 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3146,January 3146 BCE,0
-founded,18,"Hilger",,,17145,36.61,110.20,East Asia,-3144,January 3144 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3132,January 3132 BCE,0
-war,15,"Kraistoth",18,"Hilger",17145,36.61,110.20,East Asia,-3131,January 3131 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3129,January 3129 BCE,30
-peace,15,"Kraistoth",18,"Hilger",17145,36.61,110.20,East Asia,-3121,January 3121 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3111,January 3111 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3102,January 3102 BCE,13
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3097,January 3097 BCE,0
-founded,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-3087,January 3087 BCE,0
-war,15,"Kraistoth",18,"Hilger",17145,36.61,110.20,East Asia,-3084,January 3084 BCE,0
-founded,20,"Soushthish",,,66499,11.61,32.57,Sahel,-3073,January 3073 BCE,0
-war,19,"Lezayo",20,"Soushthish",66499,11.61,32.57,Sahel,-3073,January 3073 BCE,0
-founded,21,"Eiluyo",,,17155,36.59,104.70,East Asia,-3072,January 3072 BCE,0
-peace,18,"Hilger",15,"Kraistoth",17816,38.67,111.16,East Asia,-3070,January 3070 BCE,0
-peace,19,"Lezayo",20,"Soushthish",66499,11.61,32.57,Sahel,-3068,January 3068 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3046,January 3046 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3032,January 3032 BCE,0
-war,15,"Kraistoth",18,"Hilger",17145,36.61,110.20,East Asia,-3031,January 3031 BCE,0
-founded,22,"Breibi",,,79336,23.65,100.37,East Asia,-3023,January 3023 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-3020,January 3020 BCE,0
-conquered,18,"Hilger",15,"Kraistoth",17145,36.61,110.20,East Asia,-3018,January 3018 BCE,11
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3014,January 3014 BCE,0
-war,19,"Lezayo",20,"Soushthish",66499,11.61,32.57,Sahel,-3013,January 3013 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3012,January 3012 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-3010,January 3010 BCE,0
-conquered,20,"Soushthish",19,"Lezayo",66499,11.61,32.57,Sahel,-3010,January 3010 BCE,14
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-3000,January 3000 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2998,January 2998 BCE,0
-founded,23,"Talnai",,,77219,22.96,112.68,East Asia,-2996,January 2996 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2992,January 2992 BCE,41
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2989,January 2989 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2987,January 2987 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2974,January 2974 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2960,January 2960 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2959,January 2959 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2946,January 2946 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2945,January 2945 BCE,28
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2935,January 2935 BCE,0
-founded,24,"Stashlain",,,100239,27.62,-106.02,Americas,-2924,January 2924 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2924,January 2924 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2921,January 2921 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2917,January 2917 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2897,January 2897 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2896,January 2896 BCE,0
-war,15,"Kraistoth",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2884,January 2884 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2883,January 2883 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2882,January 2882 BCE,0
-founded,25,"Hubraithe",,,78895,28.86,106.27,East Asia,-2873,January 2873 BCE,0
-peace,15,"Kraistoth",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2870,January 2870 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2868,January 2868 BCE,29
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2861,January 2861 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2854,January 2854 BCE,0
-founded,26,"Thouma",,,77697,15.42,105.79,Southeast Asia,-2853,January 2853 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2834,January 2834 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2827,January 2827 BCE,0
+war,4,"Koma",0,"Segorei",5981,36.19,38.45,Southwest Asia,-3583,January 3583 BCE,0
+conquered,0,"Segorei",4,"Koma",5981,36.19,38.45,Southwest Asia,-3576,January 3576 BCE,32
+founded,5,"Breisedun",,,7194,39.91,31.87,Southwest Asia,-3570,January 3570 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3569,January 3569 BCE,0
+founded,6,"Krouthar",,,77854,23.87,109.73,East Asia,-3565,January 3565 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3555,January 3555 BCE,0
+war,3,"Stadoudas",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3553,January 3553 BCE,0
+peace,3,"Stadoudas",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3543,January 3543 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3541,January 3541 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3531,January 3531 BCE,22
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3527,January 3527 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3526,January 3526 BCE,0
+founded,7,"Talnai",,,77219,22.96,112.68,East Asia,-3523,January 3523 BCE,0
+war,6,"Krouthar",7,"Talnai",77219,22.96,112.68,East Asia,-3520,January 3520 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3518,January 3518 BCE,0
+founded,8,"Lanouas",,,78677,24.69,105.28,East Asia,-3513,January 3513 BCE,0
+peace,6,"Krouthar",7,"Talnai",77219,22.96,112.68,East Asia,-3506,January 3506 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3500,January 3500 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3489,January 3489 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3489,January 3489 BCE,10
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3486,January 3486 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3472,January 3472 BCE,0
+war,5,"Breisedun",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3472,January 3472 BCE,0
+peace,5,"Breisedun",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3461,January 3461 BCE,0
+split,2,"Daisebi",,,6798,38.70,34.56,Southwest Asia,-3457,January 3457 BCE,23
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3456,January 3456 BCE,0
+founded,9,"Zise",,,78279,23.88,107.26,East Asia,-3452,January 3452 BCE,0
+war,6,"Krouthar",9,"Zise",78279,23.88,107.26,East Asia,-3452,January 3452 BCE,0
+peace,6,"Krouthar",9,"Zise",78279,23.88,107.26,East Asia,-3448,January 3448 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3442,January 3442 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3434,January 3434 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3425,January 3425 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3420,January 3420 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3412,January 3412 BCE,14
+founded,10,"Sutra",,,162703,5.97,-0.00,West and Central Africa,-3409,January 3409 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3408,January 3408 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3398,January 3398 BCE,0
+founded,11,"Treitadas",,,18207,39.92,111.54,East Asia,-3395,January 3395 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3390,January 3390 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3387,January 3387 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3377,January 3377 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3362,January 3362 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3356,January 3356 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3356,January 3356 BCE,0
+founded,12,"Emamo",,,78292,18.34,104.07,East Asia,-3354,January 3354 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3347,January 3347 BCE,0
+war,5,"Breisedun",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3346,January 3346 BCE,0
+founded,13,"Laapos",,,79474,22.27,98.67,East Asia,-3340,January 3340 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3339,January 3339 BCE,8
+founded,14,"Goupik",,,17018,36.17,104.46,East Asia,-3334,January 3334 BCE,0
+peace,5,"Breisedun",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3332,January 3332 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3332,January 3332 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3324,January 3324 BCE,0
+founded,15,"Saiyes",,,79134,20.25,99.90,East Asia,-3323,January 3323 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3323,January 3323 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3314,January 3314 BCE,4
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3309,January 3309 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3304,January 3304 BCE,0
+war,5,"Breisedun",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3301,January 3301 BCE,0
+peace,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3295,January 3295 BCE,0
+peace,5,"Breisedun",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3287,January 3287 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3285,January 3285 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3274,January 3274 BCE,0
+war,2,"Daisebi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3274,January 3274 BCE,0
+peace,2,"Daisebi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3260,January 3260 BCE,0
+war,4,"Koma",2,"Daisebi",6798,38.70,34.56,Southwest Asia,-3260,January 3260 BCE,0
+conquered,2,"Daisebi",4,"Koma",6798,38.70,34.56,Southwest Asia,-3250,January 3250 BCE,12
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3249,January 3249 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3235,January 3235 BCE,0
+war,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3234,January 3234 BCE,0
+peace,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3220,January 3220 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3208,January 3208 BCE,0
+split,5,"Breisedun",,,7194,39.91,31.87,Southwest Asia,-3207,January 3207 BCE,25
+founded,16,"Thakrin",,,79409,21.43,98.68,East Asia,-3204,January 3204 BCE,0
+war,13,"Laapos",16,"Thakrin",79409,21.43,98.68,East Asia,-3204,January 3204 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3200,January 3200 BCE,0
+war,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3199,January 3199 BCE,0
+peace,13,"Laapos",16,"Thakrin",79409,21.43,98.68,East Asia,-3196,January 3196 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3196,January 3196 BCE,8
+founded,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-3191,January 3191 BCE,0
+peace,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3185,January 3185 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3179,January 3179 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3176,January 3176 BCE,0
+war,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3165,January 3165 BCE,0
+peace,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3155,January 3155 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3152,January 3152 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3139,January 3139 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-3135,January 3135 BCE,45
+war,4,"Koma",5,"Breisedun",7194,39.91,31.87,Southwest Asia,-3129,January 3129 BCE,0
+fell,5,"Breisedun",,,7194,39.91,31.87,Southwest Asia,-3121,January 3121 BCE,0
+peace,4,"Koma",5,"Breisedun",6791,38.69,38.59,Southwest Asia,-3121,January 3121 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3119,January 3119 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3109,January 3109 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-3107,January 3107 BCE,43
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3089,January 3089 BCE,0
+founded,18,"Shumaitrek",,,78841,19.93,101.61,East Asia,-3086,January 3086 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3085,January 3085 BCE,0
+war,15,"Saiyes",18,"Shumaitrek",78841,19.93,101.61,East Asia,-3085,January 3085 BCE,0
+conquered,18,"Shumaitrek",15,"Saiyes",78841,19.93,101.61,East Asia,-3079,January 3079 BCE,14
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-3072,January 3072 BCE,29
+founded,19,"Lezal",,,17685,38.27,110.28,East Asia,-3058,January 3058 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3056,January 3056 BCE,0
+war,11,"Treitadas",19,"Lezal",17685,38.27,110.28,East Asia,-3054,January 3054 BCE,0
+conquered,19,"Lezal",11,"Treitadas",17685,38.27,110.28,East Asia,-3051,January 3051 BCE,8
+founded,20,"Theilairteis",,,79269,22.81,100.38,East Asia,-3046,January 3046 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3046,January 3046 BCE,0
+war,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-3045,January 3045 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-3034,January 3034 BCE,9
+peace,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-3031,January 3031 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3024,January 3024 BCE,0
+war,16,"Thakrin",15,"Saiyes",79134,20.25,99.90,East Asia,-3016,January 3016 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-3014,January 3014 BCE,0
+peace,15,"Saiyes",16,"Thakrin",79409,21.43,98.68,East Asia,-3003,January 3003 BCE,0
+war,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-3002,January 3002 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2992,January 2992 BCE,0
+founded,21,"Trushenosh",,,78691,18.67,101.86,East Asia,-2990,January 2990 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2989,January 2989 BCE,0
+peace,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-2988,January 2988 BCE,0
+war,16,"Thakrin",15,"Saiyes",79134,20.25,99.90,East Asia,-2983,January 2983 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2981,January 2981 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2981,January 2981 BCE,39
+founded,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2976,January 2976 BCE,0
+peace,15,"Saiyes",16,"Thakrin",79409,21.43,98.68,East Asia,-2973,January 2973 BCE,0
+war,13,"Laapos",16,"Thakrin",79409,21.43,98.68,East Asia,-2972,January 2972 BCE,0
+peace,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2969,January 2969 BCE,0
+conquered,16,"Thakrin",13,"Laapos",79409,21.43,98.68,East Asia,-2969,January 2969 BCE,13
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2968,January 2968 BCE,0
+war,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2964,January 2964 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2959,January 2959 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2952,January 2952 BCE,16
+peace,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2950,January 2950 BCE,0
+war,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-2950,January 2950 BCE,0
+peace,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-2936,January 2936 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2934,January 2934 BCE,0
+founded,23,"Seihena",,,18468,40.81,108.60,East Asia,-2931,January 2931 BCE,0
+war,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2931,January 2931 BCE,0
+split,20,"Theilairteis",,,79269,22.81,100.38,East Asia,-2931,January 2931 BCE,11
+war,11,"Treitadas",23,"Seihena",18468,40.81,108.60,East Asia,-2928,January 2928 BCE,0
+conquered,23,"Seihena",11,"Treitadas",18468,40.81,108.60,East Asia,-2924,January 2924 BCE,3
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2922,January 2922 BCE,7
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2920,January 2920 BCE,0
+peace,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2920,January 2920 BCE,0
+war,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2919,January 2919 BCE,0
+peace,15,"Saiyes",13,"Laapos",79474,22.27,98.67,East Asia,-2905,January 2905 BCE,0
+war,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-2903,January 2903 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2900,January 2900 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2891,January 2891 BCE,23
+peace,15,"Saiyes",20,"Theilairteis",79269,22.81,100.38,East Asia,-2889,January 2889 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2886,January 2886 BCE,0
+war,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2885,January 2885 BCE,0
+founded,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-2872,January 2872 BCE,0
+peace,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2871,January 2871 BCE,0
+war,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2868,January 2868 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2866,January 2866 BCE,41
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2862,January 2862 BCE,0
+split,15,"Saiyes",,,79134,20.25,99.90,East Asia,-2857,January 2857 BCE,18
+founded,25,"Boukreith",,,18329,40.19,115.43,East Asia,-2854,January 2854 BCE,0
+peace,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2854,January 2854 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2853,January 2853 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2853,January 2853 BCE,0
+founded,26,"Toyaith",,,9553,48.06,45.94,Steppe and Central Asia,-2839,January 2839 BCE,0
+peace,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2839,January 2839 BCE,0
+split,21,"Trushenosh",,,78691,18.67,101.86,East Asia,-2836,January 2836 BCE,26
+founded,27,"Hinmukei",,,79275,20.19,98.93,East Asia,-2835,January 2835 BCE,0
+war,13,"Laapos",27,"Hinmukei",79275,20.19,98.93,East Asia,-2834,January 2834 BCE,0
 war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2827,January 2827 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2813,January 2813 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2812,January 2812 BCE,23
-founded,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-2808,January 2808 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2796,January 2796 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2795,January 2795 BCE,14
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2785,January 2785 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2780,January 2780 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2766,January 2766 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2754,January 2754 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2740,January 2740 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2739,January 2739 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2738,January 2738 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2725,January 2725 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2724,January 2724 BCE,0
-split,4,"Koma",,,6791,38.69,38.59,Southwest Asia,-2722,January 2722 BCE,150
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2717,January 2717 BCE,0
-war,13,"Kenounrim",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2708,January 2708 BCE,0
-founded,28,"Thoeres",,,17559,37.86,106.02,East Asia,-2704,January 2704 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2704,January 2704 BCE,0
-war,14,"Hitheith",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2703,January 2703 BCE,0
-war,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2703,January 2703 BCE,0
-peace,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2698,January 2698 BCE,0
-peace,13,"Kenounrim",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2694,January 2694 BCE,0
-peace,14,"Hitheith",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2689,January 2689 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2685,January 2685 BCE,0
-war,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2677,January 2677 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2675,January 2675 BCE,45
-war,13,"Kenounrim",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2673,January 2673 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2671,January 2671 BCE,0
-split,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-2670,January 2670 BCE,21
-peace,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2667,January 2667 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2662,January 2662 BCE,0
-peace,13,"Kenounrim",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2659,January 2659 BCE,0
-war,11,"Zekrin",12,"Pathhatrol",18331,40.25,114.24,East Asia,-2658,January 2658 BCE,0
-conquered,12,"Pathhatrol",11,"Zekrin",18331,40.25,114.24,East Asia,-2656,January 2656 BCE,12
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2655,January 2655 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2648,January 2648 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2646,January 2646 BCE,0
-war,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2643,January 2643 BCE,0
-founded,29,"Breltreishek",,,79846,25.98,97.90,East Asia,-2637,January 2637 BCE,0
-peace,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2629,January 2629 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2624,January 2624 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2622,January 2622 BCE,45
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2620,January 2620 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2610,January 2610 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2607,January 2607 BCE,0
-war,14,"Hitheith",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2607,January 2607 BCE,0
-war,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2606,January 2606 BCE,0
-peace,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2602,January 2602 BCE,0
-split,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-2596,January 2596 BCE,19
-peace,14,"Hitheith",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2593,January 2593 BCE,0
-war,17,"Leka",14,"Hitheith",78766,19.52,101.86,East Asia,-2593,January 2593 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2584,January 2584 BCE,0
-split,14,"Hitheith",,,78766,19.52,101.86,East Asia,-2581,January 2581 BCE,35
-peace,17,"Leka",14,"Hitheith",78766,19.52,101.86,East Asia,-2579,January 2579 BCE,0
-war,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2579,January 2579 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2578,January 2578 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2570,January 2570 BCE,0
-peace,21,"Eiluyo",28,"Thoeres",17559,37.86,106.02,East Asia,-2565,January 2565 BCE,0
-peace,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2564,January 2564 BCE,0
-split,17,"Leka",,,78455,18.30,103.09,East Asia,-2560,January 2560 BCE,33
-split,28,"Thoeres",,,17559,37.86,106.02,East Asia,-2559,January 2559 BCE,6
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2542,January 2542 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2540,January 2540 BCE,0
-split,4,"Koma",,,6791,38.69,38.59,Southwest Asia,-2534,January 2534 BCE,143
-broke_away,30,"Yekrou",4,"Koma",6256,37.03,37.94,Southwest Asia,-2534,January 2534 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2530,January 2530 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2528,January 2528 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2509,January 2509 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2507,January 2507 BCE,0
-war,13,"Kenounrim",28,"Thoeres",17559,37.86,106.02,East Asia,-2506,January 2506 BCE,0
-split,30,"Yekrou",,,6256,37.03,37.94,Southwest Asia,-2498,January 2498 BCE,16
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2496,January 2496 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2494,January 2494 BCE,28
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2493,January 2493 BCE,0
-peace,13,"Kenounrim",28,"Thoeres",17559,37.86,106.02,East Asia,-2492,January 2492 BCE,0
-war,15,"Kraistoth",13,"Kenounrim",18339,40.38,109.49,East Asia,-2492,January 2492 BCE,0
-war,4,"Koma",30,"Yekrou",6256,37.03,37.94,Southwest Asia,-2489,January 2489 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2487,January 2487 BCE,7
-peace,4,"Koma",30,"Yekrou",6256,37.03,37.94,Southwest Asia,-2485,January 2485 BCE,0
-peace,15,"Kraistoth",13,"Kenounrim",18339,40.38,109.49,East Asia,-2481,January 2481 BCE,0
-founded,31,"Nedaik",,,9349,47.57,34.60,Europe,-2478,January 2478 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2476,January 2476 BCE,0
-war,27,"Vaideivak",31,"Nedaik",9349,47.57,34.60,Europe,-2475,January 2475 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2467,January 2467 BCE,0
-split,22,"Breibi",,,79336,23.65,100.37,East Asia,-2465,January 2465 BCE,5
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2462,January 2462 BCE,0
-peace,27,"Vaideivak",31,"Nedaik",9349,47.57,34.60,Europe,-2461,January 2461 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2456,January 2456 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2453,January 2453 BCE,0
-war,4,"Koma",30,"Yekrou",6256,37.03,37.94,Southwest Asia,-2449,January 2449 BCE,0
-peace,4,"Koma",30,"Yekrou",6256,37.03,37.94,Southwest Asia,-2445,January 2445 BCE,0
-split,30,"Yekrou",,,6256,37.03,37.94,Southwest Asia,-2444,January 2444 BCE,7
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2442,January 2442 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2437,January 2437 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2433,January 2433 BCE,0
-became_state,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2427,January 2427 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2426,January 2426 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2419,January 2419 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2404,January 2404 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2390,January 2390 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2389,January 2389 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2379,January 2379 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2375,January 2375 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2370,January 2370 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2370,January 2370 BCE,53
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2367,January 2367 BCE,0
-peace,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2365,January 2365 BCE,0
-split,17,"Leka",,,78455,18.30,103.09,East Asia,-2362,January 2362 BCE,31
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2353,January 2353 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2347,January 2347 BCE,0
-split,17,"Leka",,,78455,18.30,103.09,East Asia,-2346,January 2346 BCE,11
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2343,January 2343 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2339,January 2339 BCE,0
-war,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2327,January 2327 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2320,January 2320 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2319,January 2319 BCE,0
-peace,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2318,January 2318 BCE,0
-split,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-2314,January 2314 BCE,24
-founded,32,"Krukugar",,,78614,18.26,102.11,East Asia,-2308,January 2308 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2306,January 2306 BCE,0
-war,14,"Hitheith",32,"Krukugar",78614,18.26,102.11,East Asia,-2306,January 2306 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2306,January 2306 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2305,January 2305 BCE,0
-conquered,32,"Krukugar",14,"Hitheith",78614,18.26,102.11,East Asia,-2302,January 2302 BCE,5
-founded,33,"Holaishik",,,79414,19.23,97.48,East Asia,-2296,January 2296 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2296,January 2296 BCE,0
-peace,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2292,January 2292 BCE,0
-war,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2292,January 2292 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2282,January 2282 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2282,January 2282 BCE,0
-split,17,"Leka",,,78455,18.30,103.09,East Asia,-2280,January 2280 BCE,22
-peace,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2278,January 2278 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2275,January 2275 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2270,January 2270 BCE,0
-founded,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-2268,January 2268 BCE,0
-peace,22,"Breibi",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2268,January 2268 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2261,January 2261 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2259,January 2259 BCE,43
-became_chiefdom,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2259,January 2259 BCE,0
-peace,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2256,January 2256 BCE,0
-war,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2255,January 2255 BCE,0
-split,17,"Leka",,,78455,18.30,103.09,East Asia,-2250,January 2250 BCE,14
-split,14,"Hitheith",,,78766,19.52,101.86,East Asia,-2249,January 2249 BCE,36
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2248,January 2248 BCE,0
-peace,17,"Leka",14,"Hitheith",78766,19.52,101.86,East Asia,-2241,January 2241 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2241,January 2241 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2240,January 2240 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2228,January 2228 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2226,January 2226 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2216,January 2216 BCE,0
-peace,17,"Leka",26,"Thouma",77697,15.42,105.79,Southeast Asia,-2214,January 2214 BCE,0
-war,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2214,January 2214 BCE,0
-founded,35,"Etre",,,17007,36.19,110.45,East Asia,-2207,January 2207 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2206,January 2206 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2204,January 2204 BCE,0
-split,14,"Hitheith",,,78766,19.52,101.86,East Asia,-2204,January 2204 BCE,32
-founded,36,"Shumaitrek",,,78841,19.93,101.61,East Asia,-2203,January 2203 BCE,0
-war,6,"Kropithbeik",36,"Shumaitrek",78841,19.93,101.61,East Asia,-2202,January 2202 BCE,0
-peace,14,"Hitheith",17,"Leka",78455,18.30,103.09,East Asia,-2200,January 2200 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2190,January 2190 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2189,January 2189 BCE,27
-peace,6,"Kropithbeik",36,"Shumaitrek",78841,19.93,101.61,East Asia,-2188,January 2188 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-2188,January 2188 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2188,January 2188 BCE,0
-war,36,"Shumaitrek",14,"Hitheith",78766,19.52,101.86,East Asia,-2188,January 2188 BCE,0
-war,15,"Kraistoth",35,"Etre",17007,36.19,110.45,East Asia,-2186,January 2186 BCE,0
-conquered,14,"Hitheith",36,"Shumaitrek",78766,19.52,101.86,East Asia,-2185,January 2185 BCE,3
-founded,37,"Thaikikrem",,,7551,40.77,47.15,Southwest Asia,-2177,January 2177 BCE,0
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-2174,January 2174 BCE,0
-peace,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2174,January 2174 BCE,0
-war,13,"Kenounrim",28,"Thoeres",17559,37.86,106.02,East Asia,-2174,January 2174 BCE,0
-peace,15,"Kraistoth",35,"Etre",17007,36.19,110.45,East Asia,-2172,January 2172 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2169,January 2169 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2164,January 2164 BCE,55
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2161,January 2161 BCE,0
-peace,28,"Thoeres",13,"Kenounrim",18339,40.38,109.49,East Asia,-2160,January 2160 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2155,January 2155 BCE,0
-split,10,"Kroutreilo",,,79408,21.87,98.92,East Asia,-2155,January 2155 BCE,25
-war,15,"Kraistoth",35,"Etre",17007,36.19,110.45,East Asia,-2151,January 2151 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2147,January 2147 BCE,0
-war,26,"Thouma",17,"Leka",78455,18.30,103.09,East Asia,-2147,January 2147 BCE,0
-peace,15,"Kraistoth",35,"Etre",17007,36.19,110.45,East Asia,-2137,January 2137 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2136,January 2136 BCE,0
-peace,17,"Leka",26,"Thouma",77697,15.42,105.79,Southeast Asia,-2133,January 2133 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2128,January 2128 BCE,0
-split,35,"Etre",,,17007,36.19,110.45,East Asia,-2127,January 2127 BCE,20
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2123,January 2123 BCE,0
-peace,27,"Vaideivak",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-2122,January 2122 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2122,January 2122 BCE,0
-war,15,"Kraistoth",35,"Etre",17007,36.19,110.45,East Asia,-2116,January 2116 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2114,January 2114 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2114,January 2114 BCE,50
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2109,January 2109 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2108,January 2108 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2106,January 2106 BCE,0
-peace,35,"Etre",15,"Kraistoth",17816,38.67,111.16,East Asia,-2102,January 2102 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-2101,January 2101 BCE,0
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-2093,January 2093 BCE,0
-peace,27,"Vaideivak",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2092,January 2092 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2091,January 2091 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2088,January 2088 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2084,January 2084 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-2084,January 2084 BCE,123
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2079,January 2079 BCE,0
-peace,27,"Vaideivak",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-2078,January 2078 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2075,January 2075 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2070,January 2070 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-2070,January 2070 BCE,38
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2061,January 2061 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2060,January 2060 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2057,January 2057 BCE,0
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-2056,January 2056 BCE,58
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-2051,January 2051 BCE,94
-peace,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2046,January 2046 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-2044,January 2044 BCE,36
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2043,January 2043 BCE,0
-founded,38,"Eimdain",,,66936,14.96,32.07,Southwest Asia,-2038,January 2038 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2037,January 2037 BCE,0
-founded,39,"Pade",,,99891,29.98,-102.55,Americas,-2036,January 2036 BCE,0
-peace,27,"Vaideivak",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-2026,January 2026 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2026,January 2026 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2023,January 2023 BCE,0
-war,19,"Lezayo",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-2023,January 2023 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2022,January 2022 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2012,January 2012 BCE,0
-peace,19,"Lezayo",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-2012,January 2012 BCE,0
-peace,27,"Vaideivak",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2009,January 2009 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2009,January 2009 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2009,January 2009 BCE,23
-founded,40,"Yugik",,,79740,18.57,94.84,South Asia,-2008,January 2008 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-2008,January 2008 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-2008,January 2008 BCE,24
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-2005,January 2005 BCE,0
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1999,January 1999 BCE,55
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1995,January 1995 BCE,0
-war,33,"Holaishik",40,"Yugik",79740,18.57,94.84,South Asia,-1995,January 1995 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1991,January 1991 BCE,0
-founded,41,"Kriaim",,,6908,38.68,46.96,Southwest Asia,-1988,January 1988 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1988,January 1988 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1987,January 1987 BCE,0
-war,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1984,January 1984 BCE,0
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-1982,January 1982 BCE,70
-peace,40,"Yugik",33,"Holaishik",79414,19.23,97.48,East Asia,-1981,January 1981 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1981,January 1981 BCE,0
-founded,42,"Stasar",,,99068,27.75,-99.36,Americas,-1980,January 1980 BCE,0
-peace,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1975,January 1975 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1974,January 1974 BCE,0
-peace,27,"Vaideivak",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1973,January 1973 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1972,January 1972 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1967,January 1967 BCE,0
-split,41,"Kriaim",,,6908,38.68,46.96,Southwest Asia,-1965,January 1965 BCE,3
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1964,January 1964 BCE,23
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1963,January 1963 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1961,January 1961 BCE,13
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1958,January 1958 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1955,January 1955 BCE,108
-founded,43,"Toulaivoth",,,7191,39.95,33.64,Southwest Asia,-1954,January 1954 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1952,January 1952 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1949,January 1949 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1949,January 1949 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1949,January 1949 BCE,0
-war,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1947,January 1947 BCE,0
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-1942,January 1942 BCE,87
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1938,January 1938 BCE,0
-split,22,"Breibi",,,79336,23.65,100.37,East Asia,-1938,January 1938 BCE,6
-peace,27,"Vaideivak",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1935,January 1935 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1935,January 1935 BCE,0
-peace,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1933,January 1933 BCE,0
-founded,44,"Tenvun",,,79912,23.30,95.99,East Asia,-1931,January 1931 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1927,January 1927 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1925,January 1925 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1924,January 1924 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1915,January 1915 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1913,January 1913 BCE,0
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1911,January 1911 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1911,January 1911 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1911,January 1911 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1910,January 1910 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1910,January 1910 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1901,January 1901 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1897,January 1897 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1897,January 1897 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1897,January 1897 BCE,32
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1896,January 1896 BCE,0
-war,3,"Stadoudas",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1896,January 1896 BCE,0
-split,22,"Breibi",,,79336,23.65,100.37,East Asia,-1893,January 1893 BCE,6
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1891,January 1891 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1883,January 1883 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1878,January 1878 BCE,0
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1877,January 1877 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1877,January 1877 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1874,January 1874 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1869,January 1869 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1864,January 1864 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1864,January 1864 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1860,January 1860 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1858,January 1858 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1858,January 1858 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1850,January 1850 BCE,0
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1845,January 1845 BCE,48
-peace,27,"Vaideivak",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1844,January 1844 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1844,January 1844 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1843,January 1843 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1843,January 1843 BCE,0
-founded,45,"Zahige",,,10311,51.30,31.78,Europe,-1842,January 1842 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-1841,January 1841 BCE,0
-war,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1841,January 1841 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1840,January 1840 BCE,0
-peace,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1839,January 1839 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1829,January 1829 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1829,January 1829 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1829,January 1829 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1829,January 1829 BCE,0
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-1828,January 1828 BCE,0
-split,45,"Zahige",,,10311,51.30,31.78,Europe,-1828,January 1828 BCE,33
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1826,January 1826 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1826,January 1826 BCE,0
-war,10,"Kroutreilo",33,"Holaishik",79414,19.23,97.48,East Asia,-1816,January 1816 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1815,January 1815 BCE,0
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1815,January 1815 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1815,January 1815 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1813,January 1813 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1812,January 1812 BCE,0
-war,3,"Stadoudas",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1812,January 1812 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1809,January 1809 BCE,49
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1808,January 1808 BCE,0
-peace,33,"Holaishik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1802,January 1802 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1801,January 1801 BCE,0
-peace,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1799,January 1799 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1798,January 1798 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1798,January 1798 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1798,January 1798 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1797,January 1797 BCE,14
-split,10,"Kroutreilo",,,79408,21.87,98.92,East Asia,-1797,January 1797 BCE,22
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1794,January 1794 BCE,0
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-1791,January 1791 BCE,41
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1784,January 1784 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1784,January 1784 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1784,January 1784 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1783,January 1783 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1782,January 1782 BCE,0
-became_state,43,"Toulaivoth",,,7191,39.95,33.64,Southwest Asia,-1782,January 1782 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1776,January 1776 BCE,48
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1772,January 1772 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1772,January 1772 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1770,January 1770 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1770,January 1770 BCE,120
-became_state,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1770,January 1770 BCE,0
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1769,January 1769 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1768,January 1768 BCE,0
-war,3,"Stadoudas",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1768,January 1768 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1762,January 1762 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1760,January 1760 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1758,January 1758 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1758,January 1758 BCE,0
-split,39,"Pade",,,99891,29.98,-102.55,Americas,-1755,January 1755 BCE,33
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1750,January 1750 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1748,January 1748 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1748,January 1748 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1748,January 1748 BCE,0
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-1738,January 1738 BCE,49
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1737,January 1737 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1737,January 1737 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1737,January 1737 BCE,30
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1736,January 1736 BCE,11
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1735,January 1735 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1734,January 1734 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1734,January 1734 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1732,January 1732 BCE,33
-war,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1731,January 1731 BCE,0
-war,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1730,January 1730 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1727,January 1727 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1725,January 1725 BCE,0
-peace,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1725,January 1725 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1725,January 1725 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1723,January 1723 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1721,January 1721 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1713,January 1713 BCE,0
-war,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1713,January 1713 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1711,January 1711 BCE,0
-split,22,"Breibi",,,79336,23.65,100.37,East Asia,-1710,January 1710 BCE,7
-split,27,"Vaideivak",,,9451,47.92,40.59,Steppe and Central Asia,-1710,January 1710 BCE,34
-founded,46,"Onio",,,79538,23.11,98.66,East Asia,-1708,January 1708 BCE,0
-founded,47,"Pumar",,,65949,4.57,31.33,East and southern Africa,-1707,January 1707 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1707,January 1707 BCE,0
-war,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1704,January 1704 BCE,0
-war,10,"Kroutreilo",46,"Onio",79538,23.11,98.66,East Asia,-1700,January 1700 BCE,0
-peace,31,"Nedaik",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1699,January 1699 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1698,January 1698 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1696,January 1696 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1696,January 1696 BCE,15
-peace,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1694,January 1694 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1690,January 1690 BCE,0
-war,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1687,January 1687 BCE,0
-peace,10,"Kroutreilo",46,"Onio",79538,23.11,98.66,East Asia,-1686,January 1686 BCE,0
-war,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1685,January 1685 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1684,January 1684 BCE,0
-peace,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1678,January 1678 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1677,January 1677 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1676,January 1676 BCE,0
-peace,34,"Thekelse",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1671,January 1671 BCE,0
-war,5,"Bustoum",27,"Vaideivak",9451,47.92,40.59,Steppe and Central Asia,-1671,January 1671 BCE,0
-war,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1669,January 1669 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1668,January 1668 BCE,0
-founded,48,"Rishair",,,9467,47.83,29.30,Europe,-1667,January 1667 BCE,0
-conquered,27,"Vaideivak",5,"Bustoum",9451,47.92,40.59,Steppe and Central Asia,-1667,January 1667 BCE,66
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1667,January 1667 BCE,0
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1663,January 1663 BCE,0
-war,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1662,January 1662 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1661,January 1661 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1658,January 1658 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1657,January 1657 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1656,January 1656 BCE,0
-war,31,"Nedaik",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1654,January 1654 BCE,0
-founded,49,"Zabra",,,153518,-19.47,-64.88,Americas,-1653,January 1653 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1653,January 1653 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1653,January 1653 BCE,51
-peace,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1648,January 1648 BCE,0
-founded,50,"Naiom",,,153522,-17.83,-65.87,Americas,-1644,January 1644 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1644,January 1644 BCE,0
-split,48,"Rishair",,,9467,47.83,29.30,Europe,-1644,January 1644 BCE,48
-broke_away,51,"Zatrisbre",48,"Rishair",8675,44.81,28.10,Europe,-1644,January 1644 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1642,January 1642 BCE,48
-war,51,"Zatrisbre",48,"Rishair",9467,47.83,29.30,Europe,-1641,January 1641 BCE,0
-peace,5,"Bustoum",31,"Nedaik",9349,47.57,34.60,Europe,-1640,January 1640 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1639,January 1639 BCE,0
-war,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1639,January 1639 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1636,January 1636 BCE,0
-peace,51,"Zatrisbre",48,"Rishair",9467,47.83,29.30,Europe,-1634,January 1634 BCE,0
-peace,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1634,January 1634 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1633,January 1633 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1629,January 1629 BCE,20
-war,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1628,January 1628 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1624,January 1624 BCE,0
-split,43,"Toulaivoth",,,7191,39.95,33.64,Southwest Asia,-1624,January 1624 BCE,79
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1623,January 1623 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1622,January 1622 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1619,January 1619 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1618,January 1618 BCE,0
-peace,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1614,January 1614 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1609,January 1609 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1606,January 1606 BCE,40
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1605,January 1605 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1604,January 1604 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1602,January 1602 BCE,0
-war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1601,January 1601 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1601,January 1601 BCE,0
-war,51,"Zatrisbre",48,"Rishair",9467,47.83,29.30,Europe,-1596,January 1596 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1592,January 1592 BCE,0
-peace,51,"Zatrisbre",48,"Rishair",9467,47.83,29.30,Europe,-1592,January 1592 BCE,0
-war,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1592,January 1592 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1588,January 1588 BCE,0
-peace,45,"Zahige",48,"Rishair",9467,47.83,29.30,Europe,-1588,January 1588 BCE,0
-peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1587,January 1587 BCE,0
-war,31,"Nedaik",48,"Rishair",9467,47.83,29.30,Europe,-1584,January 1584 BCE,0
-war,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1581,January 1581 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1581,January 1581 BCE,28
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1577,January 1577 BCE,0
-peace,31,"Nedaik",48,"Rishair",9467,47.83,29.30,Europe,-1576,January 1576 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1576,January 1576 BCE,0
-split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1571,January 1571 BCE,9
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1569,January 1569 BCE,0
-peace,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1567,January 1567 BCE,0
-war,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1567,January 1567 BCE,0
-war,51,"Zatrisbre",48,"Rishair",9467,47.83,29.30,Europe,-1567,January 1567 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1563,January 1563 BCE,0
-conquered,48,"Rishair",51,"Zatrisbre",9467,47.83,29.30,Europe,-1563,January 1563 BCE,9
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1562,January 1562 BCE,0
-war,43,"Toulaivoth",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1560,January 1560 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1559,January 1559 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1558,January 1558 BCE,0
-conquered,3,"Stadoudas",43,"Toulaivoth",7572,41.23,34.48,Southwest Asia,-1557,January 1557 BCE,0
-peace,45,"Zahige",31,"Nedaik",9349,47.57,34.60,Europe,-1553,January 1553 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1548,January 1548 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1545,January 1545 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1543,January 1543 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1542,January 1542 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1539,January 1539 BCE,0
-split,41,"Kriaim",,,6908,38.68,46.96,Southwest Asia,-1539,January 1539 BCE,13
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1534,January 1534 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1533,January 1533 BCE,80
-war,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1531,January 1531 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1530,January 1530 BCE,0
-war,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1530,January 1530 BCE,0
-peace,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1529,January 1529 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1528,January 1528 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1525,January 1525 BCE,0
-peace,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1524,January 1524 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1522,January 1522 BCE,0
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1522,January 1522 BCE,111
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1522,January 1522 BCE,27
-peace,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1517,January 1517 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1517,January 1517 BCE,53
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1516,January 1516 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1516,January 1516 BCE,0
-war,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1510,January 1510 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1508,January 1508 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1506,January 1506 BCE,0
-war,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1504,January 1504 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1503,January 1503 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1499,January 1499 BCE,0
-peace,45,"Zahige",31,"Nedaik",9349,47.57,34.60,Europe,-1496,January 1496 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1496,January 1496 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1495,January 1495 BCE,0
-peace,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1493,January 1493 BCE,0
-war,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1493,January 1493 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1492,January 1492 BCE,0
-split,4,"Koma",,,6791,38.69,38.59,Southwest Asia,-1492,January 1492 BCE,135
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1489,January 1489 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1488,January 1488 BCE,0
-founded,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1487,January 1487 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1486,January 1486 BCE,0
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1485,January 1485 BCE,0
-split,37,"Thaikikrem",,,7551,40.77,47.15,Southwest Asia,-1484,January 1484 BCE,33
-peace,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1479,January 1479 BCE,0
-split,38,"Eimdain",,,66936,14.96,32.07,Southwest Asia,-1478,January 1478 BCE,26
-split,45,"Zahige",,,10311,51.30,31.78,Europe,-1478,January 1478 BCE,163
-peace,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1474,January 1474 BCE,0
-war,19,"Lezayo",52,"Gista",66417,7.41,30.61,East and southern Africa,-1474,January 1474 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1472,January 1472 BCE,0
-war,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1469,January 1469 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1469,January 1469 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1467,January 1467 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1466,January 1466 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1463,January 1463 BCE,41
-peace,52,"Gista",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1460,January 1460 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1459,January 1459 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1458,January 1458 BCE,0
-split,39,"Pade",,,99891,29.98,-102.55,Americas,-1458,January 1458 BCE,32
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1457,January 1457 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1457,January 1457 BCE,54
-peace,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1455,January 1455 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1455,January 1455 BCE,0
-war,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1455,January 1455 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1453,January 1453 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1452,January 1452 BCE,30
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1449,January 1449 BCE,0
-split,39,"Pade",,,99891,29.98,-102.55,Americas,-1447,January 1447 BCE,9
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1445,January 1445 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1445,January 1445 BCE,6
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1442,January 1442 BCE,123
-peace,51,"Zatrisbre",45,"Zahige",10311,51.30,31.78,Europe,-1441,January 1441 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1438,January 1438 BCE,0
-founded,53,"Mayou",,,67014,18.37,33.54,Egypt and Nile,-1437,January 1437 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1436,January 1436 BCE,0
-peace,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1435,January 1435 BCE,0
-war,31,"Nedaik",45,"Zahige",10311,51.30,31.78,Europe,-1435,January 1435 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1431,January 1431 BCE,38
-conquered,45,"Zahige",31,"Nedaik",10311,51.30,31.78,Europe,-1426,January 1426 BCE,134
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1424,January 1424 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1424,January 1424 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1423,January 1423 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1422,January 1422 BCE,0
-war,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-1421,January 1421 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1419,January 1419 BCE,26
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1416,January 1416 BCE,0
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1412,January 1412 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1411,January 1411 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1410,January 1410 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1408,January 1408 BCE,0
-peace,13,"Kenounrim",15,"Kraistoth",17816,38.67,111.16,East Asia,-1408,January 1408 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1408,January 1408 BCE,37
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1403,January 1403 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1402,January 1402 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1400,January 1400 BCE,52
-peace,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1398,January 1398 BCE,0
-peace,31,"Nedaik",51,"Zatrisbre",8675,44.81,28.10,Europe,-1397,January 1397 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1394,January 1394 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1392,January 1392 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1388,January 1388 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1385,January 1385 BCE,37
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1384,January 1384 BCE,0
-peace,50,"Naiom",49,"Zabra",153518,-19.47,-64.88,Americas,-1380,January 1380 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1380,January 1380 BCE,30
-split,49,"Zabra",,,153518,-19.47,-64.88,Americas,-1379,January 1379 BCE,12
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1377,January 1377 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1375,January 1375 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1374,January 1374 BCE,0
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1371,January 1371 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1370,January 1370 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1363,January 1363 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1361,January 1361 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1361,January 1361 BCE,0
-peace,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1359,January 1359 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1356,January 1356 BCE,90
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1355,January 1355 BCE,41
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1350,January 1350 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1348,January 1348 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1347,January 1347 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1347,January 1347 BCE,0
-split,22,"Breibi",,,79336,23.65,100.37,East Asia,-1335,January 1335 BCE,4
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1334,January 1334 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1333,January 1333 BCE,0
-peace,50,"Naiom",49,"Zabra",153518,-19.47,-64.88,Americas,-1333,January 1333 BCE,0
-war,10,"Kroutreilo",46,"Onio",79538,23.11,98.66,East Asia,-1333,January 1333 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1333,January 1333 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1329,January 1329 BCE,0
-peace,10,"Kroutreilo",46,"Onio",79538,23.11,98.66,East Asia,-1325,January 1325 BCE,0
-war,33,"Holaishik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1325,January 1325 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1319,January 1319 BCE,0
-split,33,"Holaishik",,,79414,19.23,97.48,East Asia,-1318,January 1318 BCE,23
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1317,January 1317 BCE,0
-war,31,"Nedaik",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1314,January 1314 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1312,January 1312 BCE,0
-peace,10,"Kroutreilo",33,"Holaishik",79414,19.23,97.48,East Asia,-1311,January 1311 BCE,0
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1307,January 1307 BCE,62
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1303,January 1303 BCE,0
-peace,5,"Bustoum",31,"Nedaik",9349,47.57,34.60,Europe,-1300,January 1300 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1300,January 1300 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1300,January 1300 BCE,43
-war,19,"Lezayo",52,"Gista",66417,7.41,30.61,East and southern Africa,-1298,January 1298 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1297,January 1297 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1296,January 1296 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1295,January 1295 BCE,0
-founded,54,"Terosh",,,10414,51.68,30.57,Europe,-1293,January 1293 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1289,January 1289 BCE,0
-peace,52,"Gista",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1284,January 1284 BCE,0
-war,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1284,January 1284 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1283,January 1283 BCE,0
-peace,31,"Nedaik",51,"Zatrisbre",8675,44.81,28.10,Europe,-1282,January 1282 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1281,January 1281 BCE,0
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1281,January 1281 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1281,January 1281 BCE,25
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1274,January 1274 BCE,0
-war,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1274,January 1274 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1273,January 1273 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1272,January 1272 BCE,46
-split,50,"Naiom",,,153522,-17.83,-65.87,Americas,-1271,January 1271 BCE,6
-peace,19,"Lezayo",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-1270,January 1270 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1269,January 1269 BCE,5
-peace,52,"Gista",47,"Pumar",65949,4.57,31.33,East and southern Africa,-1267,January 1267 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1263,January 1263 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1260,January 1260 BCE,0
-peace,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1260,January 1260 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1260,January 1260 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1260,January 1260 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1257,January 1257 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1253,January 1253 BCE,29
-split,47,"Pumar",,,65949,4.57,31.33,East and southern Africa,-1251,January 1251 BCE,49
-peace,43,"Toulaivoth",4,"Koma",6791,38.69,38.59,Southwest Asia,-1246,January 1246 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1246,January 1246 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1246,January 1246 BCE,0
-split,41,"Kriaim",,,6908,38.68,46.96,Southwest Asia,-1245,January 1245 BCE,18
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1241,January 1241 BCE,0
-split,4,"Koma",,,6791,38.69,38.59,Southwest Asia,-1240,January 1240 BCE,99
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1238,January 1238 BCE,0
-became_state,30,"Yekrou",,,6256,37.03,37.94,Southwest Asia,-1238,January 1238 BCE,0
-war,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1237,January 1237 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1237,January 1237 BCE,0
-war,38,"Eimdain",53,"Mayou",67014,18.37,33.54,Egypt and Nile,-1234,January 1234 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1231,January 1231 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1230,January 1230 BCE,75
-founded,55,"Sutra",,,162703,5.97,-0.00,West and Central Africa,-1229,January 1229 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1226,January 1226 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1224,January 1224 BCE,0
-peace,37,"Thaikikrem",41,"Kriaim",6908,38.68,46.96,Southwest Asia,-1223,January 1223 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1223,January 1223 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1221,January 1221 BCE,0
-peace,38,"Eimdain",53,"Mayou",67014,18.37,33.54,Egypt and Nile,-1220,January 1220 BCE,0
-war,19,"Lezayo",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-1220,January 1220 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1217,January 1217 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1216,January 1216 BCE,0
-split,19,"Lezayo",,,66587,12.87,32.81,Southwest Asia,-1213,January 1213 BCE,18
-war,10,"Kroutreilo",46,"Onio",79538,23.11,98.66,East Asia,-1211,January 1211 BCE,0
-peace,38,"Eimdain",19,"Lezayo",66587,12.87,32.81,Southwest Asia,-1210,January 1210 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1210,January 1210 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1207,January 1207 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1203,January 1203 BCE,0
-war,30,"Yekrou",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1203,January 1203 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1203,January 1203 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1203,January 1203 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1202,January 1202 BCE,0
-peace,46,"Onio",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1197,January 1197 BCE,0
-war,6,"Kropithbeik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1197,January 1197 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1196,January 1196 BCE,0
-split,37,"Thaikikrem",,,7551,40.77,47.15,Southwest Asia,-1196,January 1196 BCE,32
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1192,January 1192 BCE,0
-split,38,"Eimdain",,,66936,14.96,32.07,Southwest Asia,-1190,January 1190 BCE,28
-peace,30,"Yekrou",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1189,January 1189 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1189,January 1189 BCE,0
-war,51,"Zatrisbre",54,"Terosh",10414,51.68,30.57,Europe,-1188,January 1188 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1187,January 1187 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1183,January 1183 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1180,January 1180 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1179,January 1179 BCE,0
-peace,54,"Terosh",51,"Zatrisbre",8675,44.81,28.10,Europe,-1174,January 1174 BCE,0
-war,31,"Nedaik",54,"Terosh",10414,51.68,30.57,Europe,-1174,January 1174 BCE,0
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1172,January 1172 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1167,January 1167 BCE,0
-split,41,"Kriaim",,,6908,38.68,46.96,Southwest Asia,-1166,January 1166 BCE,12
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1165,January 1165 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1161,January 1161 BCE,0
-peace,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1160,January 1160 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1160,January 1160 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1159,January 1159 BCE,0
-war,30,"Yekrou",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1159,January 1159 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1158,January 1158 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1150,January 1150 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1147,January 1147 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1146,January 1146 BCE,0
-peace,43,"Toulaivoth",30,"Yekrou",6256,37.03,37.94,Southwest Asia,-1145,January 1145 BCE,0
-split,51,"Zatrisbre",,,8675,44.81,28.10,Europe,-1145,January 1145 BCE,104
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1144,January 1144 BCE,0
-war,5,"Bustoum",31,"Nedaik",9349,47.57,34.60,Europe,-1144,January 1144 BCE,0
-split,30,"Yekrou",,,6256,37.03,37.94,Southwest Asia,-1143,January 1143 BCE,49
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1141,January 1141 BCE,0
-war,38,"Eimdain",53,"Mayou",67014,18.37,33.54,Egypt and Nile,-1138,January 1138 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1136,January 1136 BCE,0
-peace,5,"Bustoum",31,"Nedaik",9349,47.57,34.60,Europe,-1130,January 1130 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1130,January 1130 BCE,0
-war,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1129,January 1129 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1127,January 1127 BCE,75
-peace,53,"Mayou",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-1124,January 1124 BCE,0
-war,19,"Lezayo",38,"Eimdain",66936,14.96,32.07,Southwest Asia,-1123,January 1123 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1122,January 1122 BCE,0
-conquered,19,"Lezayo",38,"Eimdain",66587,12.87,32.81,Southwest Asia,-1122,January 1122 BCE,19
-split,34,"Thekelse",,,9106,46.24,47.58,Steppe and Central Asia,-1122,January 1122 BCE,62
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1121,January 1121 BCE,0
-founded,56,"Temobreis",,,69204,8.46,14.17,West and Central Africa,-1119,January 1119 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1116,January 1116 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1116,January 1116 BCE,0
-founded,57,"Trouzeteth",,,153827,-18.30,-67.09,Americas,-1115,January 1115 BCE,0
-peace,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1115,January 1115 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1115,January 1115 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1111,January 1111 BCE,0
-founded,58,"Aimil",,,9889,49.69,36.37,Europe,-1109,January 1109 BCE,0
-war,54,"Terosh",58,"Aimil",9889,49.69,36.37,Europe,-1109,January 1109 BCE,0
-peace,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1107,January 1107 BCE,0
-founded,59,"Stontrar",,,159094,9.34,11.20,West and Central Africa,-1104,January 1104 BCE,0
-peace,54,"Terosh",58,"Aimil",9889,49.69,36.37,Europe,-1104,January 1104 BCE,0
-split,43,"Toulaivoth",,,7191,39.95,33.64,Southwest Asia,-1104,January 1104 BCE,79
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1102,January 1102 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1102,January 1102 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1101,January 1101 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1101,January 1101 BCE,0
-war,51,"Zatrisbre",54,"Terosh",10414,51.68,30.57,Europe,-1099,January 1099 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1097,January 1097 BCE,0
-split,42,"Stasar",,,99068,27.75,-99.36,Americas,-1092,January 1092 BCE,42
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1088,January 1088 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1087,January 1087 BCE,0
-war,33,"Holaishik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1086,January 1086 BCE,0
-peace,54,"Terosh",51,"Zatrisbre",8675,44.81,28.10,Europe,-1085,January 1085 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1085,January 1085 BCE,0
-war,36,"Shumaitrek",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1085,January 1085 BCE,0
-split,6,"Kropithbeik",,,79130,22.00,100.87,East Asia,-1085,January 1085 BCE,20
-war,31,"Nedaik",54,"Terosh",10414,51.68,30.57,Europe,-1083,January 1083 BCE,0
-split,54,"Terosh",,,10414,51.68,30.57,Europe,-1080,January 1080 BCE,184
-split,59,"Stontrar",,,159094,9.34,11.20,West and Central Africa,-1079,January 1079 BCE,31
-peace,10,"Kroutreilo",33,"Holaishik",79414,19.23,97.48,East Asia,-1072,January 1072 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1072,January 1072 BCE,0
-split,43,"Toulaivoth",,,7191,39.95,33.64,Southwest Asia,-1072,January 1072 BCE,39
-peace,36,"Shumaitrek",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1071,January 1071 BCE,0
-peace,54,"Terosh",31,"Nedaik",9349,47.57,34.60,Europe,-1069,January 1069 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1069,January 1069 BCE,0
-split,51,"Zatrisbre",,,8675,44.81,28.10,Europe,-1068,January 1068 BCE,92
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1067,January 1067 BCE,0
-war,58,"Aimil",54,"Terosh",10414,51.68,30.57,Europe,-1067,January 1067 BCE,0
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1066,January 1066 BCE,0
-split,31,"Nedaik",,,9349,47.57,34.60,Europe,-1064,January 1064 BCE,35
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1061,January 1061 BCE,59
-peace,22,"Breibi",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1060,January 1060 BCE,0
-peace,31,"Nedaik",51,"Zatrisbre",8675,44.81,28.10,Europe,-1055,January 1055 BCE,0
-split,38,"Eimdain",,,66936,14.96,32.07,Southwest Asia,-1055,January 1055 BCE,27
-peace,54,"Terosh",58,"Aimil",9889,49.69,36.37,Europe,-1053,January 1053 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1052,January 1052 BCE,0
-founded,60,"Tolthos",,,9580,48.11,26.76,Europe,-1050,January 1050 BCE,0
-war,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1050,January 1050 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1050,January 1050 BCE,0
-war,51,"Zatrisbre",60,"Tolthos",9580,48.11,26.76,Europe,-1049,January 1049 BCE,0
-war,56,"Temobreis",59,"Stontrar",159094,9.34,11.20,West and Central Africa,-1049,January 1049 BCE,0
-war,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1048,January 1048 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1046,January 1046 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1045,January 1045 BCE,0
-split,58,"Aimil",,,9889,49.69,36.37,Europe,-1044,January 1044 BCE,26
-founded,61,"Shiste",,,160754,-4.91,14.28,West and Central Africa,-1043,January 1043 BCE,0
-peace,51,"Zatrisbre",60,"Tolthos",9580,48.11,26.76,Europe,-1042,January 1042 BCE,0
-split,51,"Zatrisbre",,,8675,44.81,28.10,Europe,-1041,January 1041 BCE,34
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1040,January 1040 BCE,0
-peace,10,"Kroutreilo",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1036,January 1036 BCE,0
-peace,56,"Temobreis",59,"Stontrar",159094,9.34,11.20,West and Central Africa,-1035,January 1035 BCE,0
-peace,47,"Pumar",52,"Gista",66417,7.41,30.61,East and southern Africa,-1034,January 1034 BCE,0
-war,33,"Holaishik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1034,January 1034 BCE,0
-peace,42,"Stasar",39,"Pade",99891,29.98,-102.55,Americas,-1032,January 1032 BCE,0
-war,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1032,January 1032 BCE,0
-peace,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1031,January 1031 BCE,0
-split,59,"Stontrar",,,159094,9.34,11.20,West and Central Africa,-1029,January 1029 BCE,32
-war,44,"Tenvun",29,"Breltreishek",79846,25.98,97.90,East Asia,-1028,January 1028 BCE,0
-split,52,"Gista",,,66417,7.41,30.61,East and southern Africa,-1028,January 1028 BCE,31
-war,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1027,January 1027 BCE,0
-split,56,"Temobreis",,,69204,8.46,14.17,West and Central Africa,-1027,January 1027 BCE,42
-founded,62,"Kregaim",,,100396,30.88,-105.02,Americas,-1024,January 1024 BCE,0
-war,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1024,January 1024 BCE,0
-peace,33,"Holaishik",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1020,January 1020 BCE,0
-war,34,"Thekelse",5,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1020,January 1020 BCE,0
-war,46,"Onio",10,"Kroutreilo",79408,21.87,98.92,East Asia,-1020,January 1020 BCE,0
-split,5,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1020,January 1020 BCE,123
-peace,6,"Kropithbeik",22,"Breibi",79336,23.65,100.37,East Asia,-1018,January 1018 BCE,0
-conquered,10,"Kroutreilo",46,"Onio",79408,21.87,98.92,East Asia,-1018,January 1018 BCE,16
-war,36,"Shumaitrek",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1018,January 1018 BCE,0
-peace,44,"Tenvun",29,"Breltreishek",79846,25.98,97.90,East Asia,-1014,January 1014 BCE,0
-peace,4,"Koma",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1013,January 1013 BCE,0
-war,30,"Yekrou",43,"Toulaivoth",7191,39.95,33.64,Southwest Asia,-1013,January 1013 BCE,0
-war,39,"Pade",42,"Stasar",99068,27.75,-99.36,Americas,-1012,January 1012 BCE,0
-peace,51,"Zatrisbre",31,"Nedaik",9349,47.57,34.60,Europe,-1010,January 1010 BCE,0
-became_state,26,"Thouma",,,77697,15.42,105.79,Southeast Asia,-1008,January 1008 BCE,0
-war,49,"Zabra",50,"Naiom",153522,-17.83,-65.87,Americas,-1007,January 1007 BCE,0
-peace,5,"Bustoum",34,"Thekelse",9106,46.24,47.58,Steppe and Central Asia,-1006,January 1006 BCE,0
-peace,36,"Shumaitrek",6,"Kropithbeik",79130,22.00,100.87,East Asia,-1004,January 1004 BCE,0
+war,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-2826,January 2826 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2824,January 2824 BCE,0
+founded,28,"Nisi",,,77609,14.57,105.79,Southeast Asia,-2823,January 2823 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2822,January 2822 BCE,0
+peace,13,"Laapos",27,"Hinmukei",79275,20.19,98.93,East Asia,-2820,January 2820 BCE,0
+peace,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-2812,January 2812 BCE,0
+war,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2812,January 2812 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2810,January 2810 BCE,21
+peace,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2808,January 2808 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2808,January 2808 BCE,0
+peace,13,"Laapos",15,"Saiyes",79134,20.25,99.90,East Asia,-2798,January 2798 BCE,0
+split,28,"Nisi",,,77609,14.57,105.79,Southeast Asia,-2798,January 2798 BCE,33
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2796,January 2796 BCE,0
+peace,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2794,January 2794 BCE,0
+split,15,"Saiyes",,,79134,20.25,99.90,East Asia,-2794,January 2794 BCE,16
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2793,January 2793 BCE,13
+war,27,"Hinmukei",15,"Saiyes",79134,20.25,99.90,East Asia,-2792,January 2792 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2790,January 2790 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-2790,January 2790 BCE,26
+peace,27,"Hinmukei",15,"Saiyes",79134,20.25,99.90,East Asia,-2786,January 2786 BCE,0
+war,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-2786,January 2786 BCE,0
+peace,20,"Theilairteis",15,"Saiyes",79134,20.25,99.90,East Asia,-2772,January 2772 BCE,0
+war,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2772,January 2772 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2771,January 2771 BCE,42
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2769,January 2769 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2766,January 2766 BCE,0
+peace,21,"Trushenosh",15,"Saiyes",79134,20.25,99.90,East Asia,-2762,January 2762 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2761,January 2761 BCE,0
+war,27,"Hinmukei",15,"Saiyes",79134,20.25,99.90,East Asia,-2760,January 2760 BCE,0
+conquered,15,"Saiyes",27,"Hinmukei",79134,20.25,99.90,East Asia,-2758,January 2758 BCE,11
+founded,29,"Hemayai",,,79132,21.13,100.39,East Asia,-2757,January 2757 BCE,0
+war,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2757,January 2757 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2756,January 2756 BCE,41
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2755,January 2755 BCE,0
+peace,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2745,January 2745 BCE,0
+war,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-2742,January 2742 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2739,January 2739 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2737,January 2737 BCE,22
+founded,30,"Thelimkraith",,,18470,40.81,107.40,East Asia,-2736,January 2736 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2732,January 2732 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-2732,January 2732 BCE,0
+peace,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-2728,January 2728 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2719,January 2719 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-2718,January 2718 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-2717,January 2717 BCE,20
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2716,January 2716 BCE,0
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2716,January 2716 BCE,20
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2710,January 2710 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2705,January 2705 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2705,January 2705 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2704,January 2704 BCE,0
+peace,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2702,January 2702 BCE,0
+war,22,"Rutremaik",17,"Krushtirmo",66588,12.45,32.57,Southwest Asia,-2697,January 2697 BCE,0
+founded,31,"Paeinein",,,78990,19.88,100.64,East Asia,-2696,January 2696 BCE,0
+war,27,"Hinmukei",31,"Paeinein",78990,19.88,100.64,East Asia,-2696,January 2696 BCE,0
+peace,22,"Rutremaik",17,"Krushtirmo",66588,12.45,32.57,Southwest Asia,-2694,January 2694 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2691,January 2691 BCE,0
+split,28,"Nisi",,,77609,14.57,105.79,Southeast Asia,-2688,January 2688 BCE,49
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2686,January 2686 BCE,26
+split,17,"Krushtirmo",,,66588,12.45,32.57,Southwest Asia,-2685,January 2685 BCE,10
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2684,January 2684 BCE,0
+peace,27,"Hinmukei",31,"Paeinein",78990,19.88,100.64,East Asia,-2682,January 2682 BCE,0
+war,21,"Trushenosh",31,"Paeinein",78990,19.88,100.64,East Asia,-2680,January 2680 BCE,0
+conquered,31,"Paeinein",21,"Trushenosh",78990,19.88,100.64,East Asia,-2676,January 2676 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2675,January 2675 BCE,0
+war,22,"Rutremaik",17,"Krushtirmo",66588,12.45,32.57,Southwest Asia,-2674,January 2674 BCE,0
+conquered,17,"Krushtirmo",22,"Rutremaik",66588,12.45,32.57,Southwest Asia,-2670,January 2670 BCE,13
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2670,January 2670 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2667,January 2667 BCE,9
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2664,January 2664 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2656,January 2656 BCE,0
+peace,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2650,January 2650 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2647,January 2647 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2640,January 2640 BCE,0
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2629,January 2629 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2625,January 2625 BCE,12
+peace,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2615,January 2615 BCE,0
+split,25,"Boukreith",,,18329,40.19,115.43,East Asia,-2615,January 2615 BCE,28
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-2613,January 2613 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2602,January 2602 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-2599,January 2599 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2598,January 2598 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2591,January 2591 BCE,0
+peace,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2584,January 2584 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2581,January 2581 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2581,January 2581 BCE,63
+split,28,"Nisi",,,77609,14.57,105.79,Southeast Asia,-2571,January 2571 BCE,51
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2567,January 2567 BCE,0
+war,29,"Hemayai",21,"Trushenosh",78691,18.67,101.86,East Asia,-2567,January 2567 BCE,0
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2566,January 2566 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2563,January 2563 BCE,0
+founded,32,"Stazethum",,,79281,17.55,97.49,Southeast Asia,-2562,January 2562 BCE,0
+founded,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2558,January 2558 BCE,0
+war,27,"Hinmukei",32,"Stazethum",79281,17.55,97.49,Southeast Asia,-2555,January 2555 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2553,January 2553 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2553,January 2553 BCE,0
+peace,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2552,January 2552 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2552,January 2552 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-2550,January 2550 BCE,0
+founded,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-2542,January 2542 BCE,0
+peace,27,"Hinmukei",32,"Stazethum",79281,17.55,97.49,Southeast Asia,-2541,January 2541 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2541,January 2541 BCE,0
+peace,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2538,January 2538 BCE,0
+peace,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-2536,January 2536 BCE,0
+split,11,"Treitadas",,,18207,39.92,111.54,East Asia,-2536,January 2536 BCE,29
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2532,January 2532 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2527,January 2527 BCE,0
+founded,35,"Kraistoth",,,17816,38.67,111.16,East Asia,-2525,January 2525 BCE,0
+war,11,"Treitadas",35,"Kraistoth",17816,38.67,111.16,East Asia,-2525,January 2525 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2523,January 2523 BCE,0
+peace,11,"Treitadas",35,"Kraistoth",17816,38.67,111.16,East Asia,-2521,January 2521 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2521,January 2521 BCE,9
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2521,January 2521 BCE,13
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2516,January 2516 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2506,January 2506 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2502,January 2502 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2501,January 2501 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2501,January 2501 BCE,43
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2499,January 2499 BCE,0
+war,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2496,January 2496 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2494,January 2494 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2494,January 2494 BCE,13
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2492,January 2492 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2492,January 2492 BCE,0
+founded,36,"Stasar",,,99068,27.75,-99.36,Americas,-2489,January 2489 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2487,January 2487 BCE,8
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2484,January 2484 BCE,24
+peace,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2482,January 2482 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2474,January 2474 BCE,27
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2473,January 2473 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2468,January 2468 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2468,January 2468 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2465,January 2465 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2464,January 2464 BCE,18
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2463,January 2463 BCE,0
+war,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2460,January 2460 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2459,January 2459 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2454,January 2454 BCE,19
+peace,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2452,January 2452 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2451,January 2451 BCE,0
+peace,25,"Boukreith",11,"Treitadas",18207,39.92,111.54,East Asia,-2449,January 2449 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2435,January 2435 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2431,January 2431 BCE,18
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2430,January 2430 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2423,January 2423 BCE,0
+war,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2417,January 2417 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2416,January 2416 BCE,0
+war,11,"Treitadas",35,"Kraistoth",17816,38.67,111.16,East Asia,-2412,January 2412 BCE,0
+peace,22,"Rutremaik",33,"Brepo",66498,12.03,32.81,Southwest Asia,-2409,January 2409 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2409,January 2409 BCE,30
+conquered,35,"Kraistoth",11,"Treitadas",17816,38.67,111.16,East Asia,-2401,January 2401 BCE,19
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2401,January 2401 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2399,January 2399 BCE,18
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2392,January 2392 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2389,January 2389 BCE,13
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2388,January 2388 BCE,0
+war,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2387,January 2387 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2377,January 2377 BCE,16
+peace,22,"Rutremaik",33,"Brepo",66498,12.03,32.81,Southwest Asia,-2376,January 2376 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2375,January 2375 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2374,January 2374 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2372,January 2372 BCE,0
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-2368,January 2368 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2363,January 2363 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2361,January 2361 BCE,0
+peace,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2361,January 2361 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2358,January 2358 BCE,41
+split,29,"Hemayai",,,79132,21.13,100.39,East Asia,-2358,January 2358 BCE,15
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2353,January 2353 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2353,January 2353 BCE,0
+war,33,"Brepo",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-2351,January 2351 BCE,0
+founded,37,"Vatre",,,9678,48.83,34.19,Europe,-2347,January 2347 BCE,0
+split,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2344,January 2344 BCE,24
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2343,January 2343 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2339,January 2339 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2339,January 2339 BCE,0
+fell,33,"Brepo",,,66498,12.03,32.81,Southwest Asia,-2337,January 2337 BCE,0
+peace,22,"Rutremaik",33,"Brepo",66311,12.90,34.28,Southwest Asia,-2337,January 2337 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2337,January 2337 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2335,January 2335 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2333,January 2333 BCE,0
+founded,38,"Soushthish",,,66499,11.61,32.57,Sahel,-2332,January 2332 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2324,January 2324 BCE,41
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2323,January 2323 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2323,January 2323 BCE,27
+peace,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2319,January 2319 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2319,January 2319 BCE,0
+war,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-2317,January 2317 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2311,January 2311 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2306,January 2306 BCE,8
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2305,January 2305 BCE,0
+peace,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-2303,January 2303 BCE,0
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2303,January 2303 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2302,January 2302 BCE,0
+split,29,"Hemayai",,,79132,21.13,100.39,East Asia,-2290,January 2290 BCE,8
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2289,January 2289 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2286,January 2286 BCE,0
+war,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-2283,January 2283 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2282,January 2282 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-2280,January 2280 BCE,28
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2279,January 2279 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2277,January 2277 BCE,0
+founded,39,"Breltreishek",,,79846,25.98,97.90,East Asia,-2276,January 2276 BCE,0
+peace,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-2273,January 2273 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2272,January 2272 BCE,0
+war,27,"Hinmukei",21,"Trushenosh",78691,18.67,101.86,East Asia,-2272,January 2272 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2271,January 2271 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2265,January 2265 BCE,0
+peace,21,"Trushenosh",27,"Hinmukei",79275,20.19,98.93,East Asia,-2258,January 2258 BCE,0
+war,32,"Stazethum",27,"Hinmukei",79275,20.19,98.93,East Asia,-2258,January 2258 BCE,0
+peace,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2257,January 2257 BCE,0
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-2256,January 2256 BCE,50
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2254,January 2254 BCE,0
+war,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2253,January 2253 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2248,January 2248 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2247,January 2247 BCE,0
+peace,32,"Stazethum",27,"Hinmukei",79275,20.19,98.93,East Asia,-2244,January 2244 BCE,0
+peace,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2243,January 2243 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2242,January 2242 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2234,January 2234 BCE,0
+split,27,"Hinmukei",,,79275,20.19,98.93,East Asia,-2234,January 2234 BCE,18
+war,13,"Laapos",27,"Hinmukei",79275,20.19,98.93,East Asia,-2233,January 2233 BCE,0
+peace,13,"Laapos",27,"Hinmukei",79275,20.19,98.93,East Asia,-2230,January 2230 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2228,January 2228 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2220,January 2220 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-2220,January 2220 BCE,50
+war,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-2215,January 2215 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2208,January 2208 BCE,0
+peace,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-2201,January 2201 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2201,January 2201 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2199,January 2199 BCE,8
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2187,January 2187 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2186,January 2186 BCE,0
+founded,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-2179,January 2179 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2175,January 2175 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2173,January 2173 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2165,January 2165 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2162,January 2162 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-2159,January 2159 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2155,January 2155 BCE,0
+split,28,"Nisi",,,77609,14.57,105.79,Southeast Asia,-2153,January 2153 BCE,59
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2151,January 2151 BCE,0
+war,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-2146,January 2146 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-2145,January 2145 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2142,January 2142 BCE,0
+war,40,"Gedovi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2142,January 2142 BCE,0
+peace,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-2132,January 2132 BCE,0
+war,29,"Hemayai",13,"Laapos",79474,22.27,98.67,East Asia,-2132,January 2132 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2130,January 2130 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2129,January 2129 BCE,10
+peace,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2128,January 2128 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-2127,January 2127 BCE,16
+war,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-2121,January 2121 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2120,January 2120 BCE,0
+peace,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-2118,January 2118 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2118,January 2118 BCE,0
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2118,January 2118 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2116,January 2116 BCE,0
+war,27,"Hinmukei",13,"Laapos",79474,22.27,98.67,East Asia,-2116,January 2116 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2115,January 2115 BCE,0
+peace,25,"Boukreith",11,"Treitadas",18207,39.92,111.54,East Asia,-2107,January 2107 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-2107,January 2107 BCE,14
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2104,January 2104 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2103,January 2103 BCE,0
+peace,13,"Laapos",27,"Hinmukei",79275,20.19,98.93,East Asia,-2102,January 2102 BCE,0
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-2101,January 2101 BCE,43
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2096,January 2096 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-2091,January 2091 BCE,48
+war,9,"Zise",8,"Lanouas",78677,24.69,105.28,East Asia,-2090,January 2090 BCE,0
+split,27,"Hinmukei",,,79275,20.19,98.93,East Asia,-2089,January 2089 BCE,24
+split,29,"Hemayai",,,79132,21.13,100.39,East Asia,-2088,January 2088 BCE,19
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2085,January 2085 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2082,January 2082 BCE,0
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2082,January 2082 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2078,January 2078 BCE,0
+peace,9,"Zise",8,"Lanouas",78677,24.69,105.28,East Asia,-2076,January 2076 BCE,0
+founded,41,"Stoukmoustish",,,99892,29.58,-102.80,Americas,-2074,January 2074 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2073,January 2073 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-2068,January 2068 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-2066,January 2066 BCE,28
+founded,42,"Seipam",,,79413,19.67,97.72,East Asia,-2062,January 2062 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2059,January 2059 BCE,0
+war,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2059,January 2059 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-2057,January 2057 BCE,0
+war,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-2052,January 2052 BCE,0
+peace,40,"Gedovi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2045,January 2045 BCE,0
+peace,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-2044,January 2044 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-2044,January 2044 BCE,10
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-2043,January 2043 BCE,0
+war,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-2043,January 2043 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2040,January 2040 BCE,0
+founded,43,"Thoeres",,,17559,37.86,106.02,East Asia,-2037,January 2037 BCE,0
+war,14,"Goupik",43,"Thoeres",17559,37.86,106.02,East Asia,-2037,January 2037 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2036,January 2036 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2035,January 2035 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-2030,January 2030 BCE,28
+peace,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-2029,January 2029 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2026,January 2026 BCE,0
+peace,14,"Goupik",43,"Thoeres",17559,37.86,106.02,East Asia,-2023,January 2023 BCE,0
+war,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-2023,January 2023 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2021,January 2021 BCE,0
+war,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-2019,January 2019 BCE,0
+war,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-2016,January 2016 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-2016,January 2016 BCE,25
+peace,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-2015,January 2015 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-2014,January 2014 BCE,0
+peace,40,"Gedovi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2007,January 2007 BCE,0
+war,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-2006,January 2006 BCE,0
+peace,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-2002,January 2002 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-2002,January 2002 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-2001,January 2001 BCE,0
+peace,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-1997,January 1997 BCE,0
+war,14,"Goupik",43,"Thoeres",17559,37.86,106.02,East Asia,-1997,January 1997 BCE,0
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1995,January 1995 BCE,44
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1994,January 1994 BCE,0
+war,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-1992,January 1992 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1989,January 1989 BCE,0
+peace,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1987,January 1987 BCE,0
+peace,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-1984,January 1984 BCE,0
+peace,14,"Goupik",43,"Thoeres",17559,37.86,106.02,East Asia,-1983,January 1983 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1981,January 1981 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1980,January 1980 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1979,January 1979 BCE,24
+war,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1977,January 1977 BCE,0
+war,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-1972,January 1972 BCE,0
+split,43,"Thoeres",,,17559,37.86,106.02,East Asia,-1970,January 1970 BCE,8
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1967,January 1967 BCE,0
+peace,32,"Stazethum",42,"Seipam",79413,19.67,97.72,East Asia,-1967,January 1967 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1965,January 1965 BCE,0
+war,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-1964,January 1964 BCE,0
+peace,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1963,January 1963 BCE,0
+peace,27,"Hinmukei",42,"Seipam",79413,19.67,97.72,East Asia,-1961,January 1961 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1958,January 1958 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-1955,January 1955 BCE,56
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1953,January 1953 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1944,January 1944 BCE,0
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1944,January 1944 BCE,41
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1939,January 1939 BCE,0
+war,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1938,January 1938 BCE,0
+founded,44,"Railstisheik",,,17416,37.43,110.80,East Asia,-1937,January 1937 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1934,January 1934 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1934,January 1934 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1933,January 1933 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1929,January 1929 BCE,0
+peace,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1924,January 1924 BCE,0
+war,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1923,January 1923 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-1923,January 1923 BCE,0
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1922,January 1922 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1922,January 1922 BCE,14
+split,37,"Vatre",,,9678,48.83,34.19,Europe,-1921,January 1921 BCE,147
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1919,January 1919 BCE,0
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1917,January 1917 BCE,0
+peace,40,"Gedovi",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1909,January 1909 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-1909,January 1909 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1909,January 1909 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1909,January 1909 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1909,January 1909 BCE,11
+split,20,"Theilairteis",,,79269,22.81,100.38,East Asia,-1908,January 1908 BCE,12
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-1907,January 1907 BCE,26
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1905,January 1905 BCE,0
+peace,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1903,January 1903 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1896,January 1896 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1895,January 1895 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1895,January 1895 BCE,0
+founded,45,"Haisourlun",,,16729,35.36,110.41,East Asia,-1892,January 1892 BCE,0
+founded,46,"Muksakel",,,2884,11.84,-10.56,Sahel,-1891,January 1891 BCE,0
+war,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1891,January 1891 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1883,January 1883 BCE,19
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1882,January 1882 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1879,January 1879 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1879,January 1879 BCE,0
+peace,30,"Thelimkraith",43,"Thoeres",17559,37.86,106.02,East Asia,-1877,January 1877 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1876,January 1876 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1865,January 1865 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1865,January 1865 BCE,0
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1865,January 1865 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1862,January 1862 BCE,0
+war,25,"Boukreith",11,"Treitadas",18207,39.92,111.54,East Asia,-1862,January 1862 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1851,January 1851 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1851,January 1851 BCE,5
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1851,January 1851 BCE,44
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-1849,January 1849 BCE,0
+peace,11,"Treitadas",25,"Boukreith",18329,40.19,115.43,East Asia,-1848,January 1848 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1844,January 1844 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1844,January 1844 BCE,12
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1842,January 1842 BCE,0
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1841,January 1841 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-1835,January 1835 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1835,January 1835 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1835,January 1835 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-1835,January 1835 BCE,48
+split,46,"Muksakel",,,2884,11.84,-10.56,Sahel,-1835,January 1835 BCE,24
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1831,January 1831 BCE,0
+peace,20,"Theilairteis",29,"Hemayai",79132,21.13,100.39,East Asia,-1829,January 1829 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1828,January 1828 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1824,January 1824 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1821,January 1821 BCE,0
+war,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1821,January 1821 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1820,January 1820 BCE,27
+peace,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1807,January 1807 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1807,January 1807 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1801,January 1801 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-1801,January 1801 BCE,32
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1796,January 1796 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1795,January 1795 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1793,January 1793 BCE,0
+split,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1793,January 1793 BCE,21
+peace,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1791,January 1791 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1790,January 1790 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-1787,January 1787 BCE,45
+war,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1786,January 1786 BCE,0
+split,44,"Railstisheik",,,17416,37.43,110.80,East Asia,-1786,January 1786 BCE,24
+war,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-1785,January 1785 BCE,0
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1779,January 1779 BCE,0
+war,38,"Soushthish",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1776,January 1776 BCE,0
+peace,4,"Koma",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1773,January 1773 BCE,0
+war,3,"Stadoudas",40,"Gedovi",7194,39.91,31.87,Southwest Asia,-1773,January 1773 BCE,0
+peace,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-1771,January 1771 BCE,0
+became_state,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1770,January 1770 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1769,January 1769 BCE,0
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1769,January 1769 BCE,0
+peace,38,"Soushthish",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1765,January 1765 BCE,0
+fell,40,"Gedovi",,,7194,39.91,31.87,Southwest Asia,-1759,January 1759 BCE,0
+peace,3,"Stadoudas",40,"Gedovi",7572,41.23,34.48,Southwest Asia,-1759,January 1759 BCE,0
+peace,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1759,January 1759 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1759,January 1759 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1757,January 1757 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1756,January 1756 BCE,13
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1752,January 1752 BCE,0
+war,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-1751,January 1751 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1751,January 1751 BCE,50
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1746,January 1746 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1745,January 1745 BCE,0
+peace,13,"Laapos",20,"Theilairteis",79269,22.81,100.38,East Asia,-1737,January 1737 BCE,0
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-1735,January 1735 BCE,0
+war,29,"Hemayai",20,"Theilairteis",79269,22.81,100.38,East Asia,-1734,January 1734 BCE,0
+peace,44,"Railstisheik",11,"Treitadas",18207,39.92,111.54,East Asia,-1732,January 1732 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1731,January 1731 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1730,January 1730 BCE,0
+split,20,"Theilairteis",,,79269,22.81,100.38,East Asia,-1727,January 1727 BCE,9
+conquered,20,"Theilairteis",29,"Hemayai",79269,22.81,100.38,East Asia,-1725,January 1725 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1725,January 1725 BCE,0
+split,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-1725,January 1725 BCE,29
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1723,January 1723 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-1721,January 1721 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1716,January 1716 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1716,January 1716 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1710,January 1710 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1709,January 1709 BCE,0
+war,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-1709,January 1709 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1702,January 1702 BCE,0
+split,37,"Vatre",,,9678,48.83,34.19,Europe,-1700,January 1700 BCE,150
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-1698,January 1698 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1696,January 1696 BCE,0
+peace,29,"Hemayai",27,"Hinmukei",79275,20.19,98.93,East Asia,-1695,January 1695 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1695,January 1695 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1694,January 1694 BCE,0
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1688,January 1688 BCE,0
+split,27,"Hinmukei",,,79275,20.19,98.93,East Asia,-1688,January 1688 BCE,23
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1687,January 1687 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-1686,January 1686 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-1684,January 1684 BCE,0
+split,26,"Toyaith",,,9553,48.06,45.94,Steppe and Central Asia,-1684,January 1684 BCE,142
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1683,January 1683 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1681,January 1681 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1680,January 1680 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1673,January 1673 BCE,0
+war,42,"Seipam",27,"Hinmukei",79275,20.19,98.93,East Asia,-1673,January 1673 BCE,0
+peace,29,"Hemayai",13,"Laapos",79474,22.27,98.67,East Asia,-1672,January 1672 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1672,January 1672 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1669,January 1669 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-1669,January 1669 BCE,25
+peace,42,"Seipam",27,"Hinmukei",79275,20.19,98.93,East Asia,-1667,January 1667 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1660,January 1660 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1658,January 1658 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1654,January 1654 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1648,January 1648 BCE,0
+became_state,46,"Muksakel",,,2884,11.84,-10.56,Sahel,-1644,January 1644 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1641,January 1641 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1640,January 1640 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1640,January 1640 BCE,37
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1627,January 1627 BCE,0
+war,25,"Boukreith",11,"Treitadas",18207,39.92,111.54,East Asia,-1627,January 1627 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1623,January 1623 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1621,January 1621 BCE,0
+peace,25,"Boukreith",11,"Treitadas",18207,39.92,111.54,East Asia,-1613,January 1613 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1611,January 1611 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1609,January 1609 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1609,January 1609 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1609,January 1609 BCE,12
+split,11,"Treitadas",,,18207,39.92,111.54,East Asia,-1607,January 1607 BCE,26
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1600,January 1600 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1599,January 1599 BCE,35
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1595,January 1595 BCE,0
+split,36,"Stasar",,,99068,27.75,-99.36,Americas,-1593,January 1593 BCE,59
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1590,January 1590 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1586,January 1586 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1586,January 1586 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1584,January 1584 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-1582,January 1582 BCE,28
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1582,January 1582 BCE,34
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1577,January 1577 BCE,41
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1570,January 1570 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1566,January 1566 BCE,0
+founded,47,"Reirupel",,,67019,16.23,32.32,Egypt and Nile,-1563,January 1563 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1557,January 1557 BCE,0
+war,22,"Rutremaik",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1556,January 1556 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1553,January 1553 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1546,January 1546 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1543,January 1543 BCE,0
+peace,22,"Rutremaik",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1542,January 1542 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1535,January 1535 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1533,January 1533 BCE,0
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1532,January 1532 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1532,January 1532 BCE,0
+founded,48,"Zobatra",,,66119,14.17,36.00,Southwest Asia,-1524,January 1524 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1524,January 1524 BCE,0
+founded,49,"Pomste",,,9134,46.52,28.47,Europe,-1523,January 1523 BCE,0
+war,22,"Rutremaik",48,"Zobatra",66119,14.17,36.00,Southwest Asia,-1523,January 1523 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1521,January 1521 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1518,January 1518 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1510,January 1510 BCE,0
+peace,22,"Rutremaik",48,"Zobatra",66119,14.17,36.00,Southwest Asia,-1509,January 1509 BCE,0
+war,47,"Reirupel",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1506,January 1506 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1504,January 1504 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1496,January 1496 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1496,January 1496 BCE,14
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1494,January 1494 BCE,0
+peace,22,"Rutremaik",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1492,January 1492 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1490,January 1490 BCE,0
+war,38,"Soushthish",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1488,January 1488 BCE,0
+war,41,"Stoukmoustish",36,"Stasar",99068,27.75,-99.36,Americas,-1488,January 1488 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1485,January 1485 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1480,January 1480 BCE,0
+peace,38,"Soushthish",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1480,January 1480 BCE,0
+war,48,"Zobatra",22,"Rutremaik",66311,12.90,34.28,Southwest Asia,-1479,January 1479 BCE,0
+war,26,"Toyaith",37,"Vatre",9678,48.83,34.19,Europe,-1477,January 1477 BCE,0
+peace,36,"Stasar",41,"Stoukmoustish",99892,29.58,-102.80,Americas,-1474,January 1474 BCE,0
+split,47,"Reirupel",,,67019,16.23,32.32,Egypt and Nile,-1474,January 1474 BCE,7
+fell,22,"Rutremaik",,,66311,12.90,34.28,Southwest Asia,-1472,January 1472 BCE,0
+peace,48,"Zobatra",22,"Rutremaik",66119,14.17,36.00,Southwest Asia,-1472,January 1472 BCE,0
+peace,44,"Railstisheik",11,"Treitadas",18207,39.92,111.54,East Asia,-1471,January 1471 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1469,January 1469 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1469,January 1469 BCE,0
+became_state,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1468,January 1468 BCE,0
+peace,37,"Vatre",26,"Toyaith",9553,48.06,45.94,Steppe and Central Asia,-1463,January 1463 BCE,0
+war,49,"Pomste",37,"Vatre",9678,48.83,34.19,Europe,-1463,January 1463 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1460,January 1460 BCE,0
+split,41,"Stoukmoustish",,,99892,29.58,-102.80,Americas,-1460,January 1460 BCE,20
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1455,January 1455 BCE,0
+peace,49,"Pomste",37,"Vatre",9678,48.83,34.19,Europe,-1449,January 1449 BCE,0
+split,26,"Toyaith",,,9553,48.06,45.94,Steppe and Central Asia,-1449,January 1449 BCE,138
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1445,January 1445 BCE,0
+founded,50,"Tholtaisek",,,100233,30.05,-104.53,Americas,-1435,January 1435 BCE,0
+founded,51,"Stoukrur",,,160652,7.86,6.75,West and Central Africa,-1431,January 1431 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1431,January 1431 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1429,January 1429 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1426,January 1426 BCE,0
+founded,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1422,January 1422 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1419,January 1419 BCE,0
+war,38,"Soushthish",52,"Kraivoknei",66138,6.20,31.34,East and southern Africa,-1419,January 1419 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1416,January 1416 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1415,January 1415 BCE,0
+peace,38,"Soushthish",52,"Kraivoknei",66138,6.20,31.34,East and southern Africa,-1412,January 1412 BCE,0
+war,24,"Krouhegom",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1412,January 1412 BCE,0
+war,47,"Reirupel",38,"Soushthish",66499,11.61,32.57,Sahel,-1412,January 1412 BCE,0
+split,37,"Vatre",,,9678,48.83,34.19,Europe,-1410,January 1410 BCE,117
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1402,January 1402 BCE,0
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-1399,January 1399 BCE,23
+peace,34,"Bustoum",24,"Krouhegom",7552,40.82,46.56,Southwest Asia,-1398,January 1398 BCE,0
+peace,38,"Soushthish",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1398,January 1398 BCE,0
+founded,53,"Ralaiya",,,9105,46.18,48.24,Steppe and Central Asia,-1393,January 1393 BCE,0
+war,48,"Zobatra",38,"Soushthish",66499,11.61,32.57,Sahel,-1392,January 1392 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1391,January 1391 BCE,0
+war,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1390,January 1390 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1390,January 1390 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1389,January 1389 BCE,142
+peace,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1387,January 1387 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1381,January 1381 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1380,January 1380 BCE,0
+war,14,"Goupik",43,"Thoeres",17559,37.86,106.02,East Asia,-1380,January 1380 BCE,0
+peace,38,"Soushthish",48,"Zobatra",66119,14.17,36.00,Southwest Asia,-1378,January 1378 BCE,0
+became_state,51,"Stoukrur",,,160652,7.86,6.75,West and Central Africa,-1378,January 1378 BCE,0
+war,47,"Reirupel",38,"Soushthish",66499,11.61,32.57,Sahel,-1377,January 1377 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1376,January 1376 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1376,January 1376 BCE,0
+peace,38,"Soushthish",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1370,January 1370 BCE,0
+peace,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1367,January 1367 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1367,January 1367 BCE,0
+split,37,"Vatre",,,9678,48.83,34.19,Europe,-1367,January 1367 BCE,85
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1367,January 1367 BCE,67
+peace,43,"Thoeres",14,"Goupik",17018,36.17,104.46,East Asia,-1366,January 1366 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1362,January 1362 BCE,0
+war,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1362,January 1362 BCE,0
+peace,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1360,January 1360 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1359,January 1359 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1353,January 1353 BCE,0
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1350,January 1350 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1349,January 1349 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1343,January 1343 BCE,0
+founded,54,"Melseimo",,,67013,18.80,33.79,Egypt and Nile,-1341,January 1341 BCE,0
+peace,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1336,January 1336 BCE,0
+war,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1332,January 1332 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1329,January 1329 BCE,0
+split,46,"Muksakel",,,2884,11.84,-10.56,Sahel,-1329,January 1329 BCE,158
+war,47,"Reirupel",54,"Melseimo",67013,18.80,33.79,Egypt and Nile,-1327,January 1327 BCE,0
+peace,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1326,January 1326 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1326,January 1326 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1326,January 1326 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1323,January 1323 BCE,91
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1320,January 1320 BCE,9
+split,24,"Krouhegom",,,7552,40.82,46.56,Southwest Asia,-1318,January 1318 BCE,21
+founded,55,"Zaiyistas",,,7320,40.36,33.32,Southwest Asia,-1315,January 1315 BCE,0
+peace,47,"Reirupel",54,"Melseimo",67013,18.80,33.79,Egypt and Nile,-1315,January 1315 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1312,January 1312 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1312,January 1312 BCE,0
+war,4,"Koma",55,"Zaiyistas",7320,40.36,33.32,Southwest Asia,-1310,January 1310 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1309,January 1309 BCE,0
+peace,4,"Koma",55,"Zaiyistas",7320,40.36,33.32,Southwest Asia,-1307,January 1307 BCE,0
+war,26,"Toyaith",53,"Ralaiya",9105,46.18,48.24,Steppe and Central Asia,-1297,January 1297 BCE,0
+split,34,"Bustoum",,,8536,44.47,42.20,Steppe and Central Asia,-1297,January 1297 BCE,53
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1295,January 1295 BCE,0
+conquered,53,"Ralaiya",26,"Toyaith",9105,46.18,48.24,Steppe and Central Asia,-1295,January 1295 BCE,2
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1294,January 1294 BCE,86
+split,36,"Stasar",,,99068,27.75,-99.36,Americas,-1293,January 1293 BCE,51
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1292,January 1292 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1290,January 1290 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1288,January 1288 BCE,0
+split,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1286,January 1286 BCE,51
+peace,44,"Railstisheik",11,"Treitadas",18207,39.92,111.54,East Asia,-1278,January 1278 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1276,January 1276 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1274,January 1274 BCE,0
+war,4,"Koma",55,"Zaiyistas",7320,40.36,33.32,Southwest Asia,-1273,January 1273 BCE,0
+founded,56,"Moyalel",,,65851,4.58,31.82,East and southern Africa,-1272,January 1272 BCE,0
+war,52,"Kraivoknei",56,"Moyalel",65851,4.58,31.82,East and southern Africa,-1271,January 1271 BCE,0
+conquered,55,"Zaiyistas",4,"Koma",7320,40.36,33.32,Southwest Asia,-1268,January 1268 BCE,15
+conquered,56,"Moyalel",52,"Kraivoknei",65851,4.58,31.82,East and southern Africa,-1267,January 1267 BCE,2
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1267,January 1267 BCE,0
+war,41,"Stoukmoustish",36,"Stasar",99068,27.75,-99.36,Americas,-1267,January 1267 BCE,0
+split,11,"Treitadas",,,18207,39.92,111.54,East Asia,-1261,January 1261 BCE,27
+peace,36,"Stasar",41,"Stoukmoustish",99892,29.58,-102.80,Americas,-1256,January 1256 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1253,January 1253 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1252,January 1252 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1249,January 1249 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1247,January 1247 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1241,January 1241 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1235,January 1235 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1232,January 1232 BCE,0
+split,51,"Stoukrur",,,160652,7.86,6.75,West and Central Africa,-1231,January 1231 BCE,164
+peace,44,"Railstisheik",11,"Treitadas",18207,39.92,111.54,East Asia,-1227,January 1227 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1227,January 1227 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1222,January 1222 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1218,January 1218 BCE,0
+split,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1210,January 1210 BCE,46
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1209,January 1209 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1202,January 1202 BCE,0
+war,47,"Reirupel",54,"Melseimo",67013,18.80,33.79,Egypt and Nile,-1199,January 1199 BCE,0
+war,11,"Treitadas",44,"Railstisheik",17416,37.43,110.80,East Asia,-1197,January 1197 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1195,January 1195 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1195,January 1195 BCE,0
+split,48,"Zobatra",,,66119,14.17,36.00,Southwest Asia,-1195,January 1195 BCE,24
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1190,January 1190 BCE,0
+peace,47,"Reirupel",54,"Melseimo",67013,18.80,33.79,Egypt and Nile,-1185,January 1185 BCE,0
+peace,44,"Railstisheik",11,"Treitadas",18207,39.92,111.54,East Asia,-1184,January 1184 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1181,January 1181 BCE,0
+war,26,"Toyaith",37,"Vatre",9678,48.83,34.19,Europe,-1178,January 1178 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1173,January 1173 BCE,130
+war,12,"Emamo",28,"Nisi",77609,14.57,105.79,Southeast Asia,-1171,January 1171 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1171,January 1171 BCE,13
+war,38,"Soushthish",48,"Zobatra",66119,14.17,36.00,Southwest Asia,-1167,January 1167 BCE,0
+split,11,"Treitadas",,,18207,39.92,111.54,East Asia,-1167,January 1167 BCE,15
+peace,26,"Toyaith",37,"Vatre",9678,48.83,34.19,Europe,-1164,January 1164 BCE,0
+war,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1163,January 1163 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1162,January 1162 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1158,January 1158 BCE,0
+peace,28,"Nisi",12,"Emamo",78292,18.34,104.07,East Asia,-1157,January 1157 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1154,January 1154 BCE,0
+peace,38,"Soushthish",48,"Zobatra",66119,14.17,36.00,Southwest Asia,-1153,January 1153 BCE,0
+war,52,"Kraivoknei",38,"Soushthish",66499,11.61,32.57,Sahel,-1153,January 1153 BCE,0
+war,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1151,January 1151 BCE,0
+peace,30,"Thelimkraith",11,"Treitadas",18207,39.92,111.54,East Asia,-1149,January 1149 BCE,0
+split,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1149,January 1149 BCE,31
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1148,January 1148 BCE,0
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1147,January 1147 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1146,January 1146 BCE,0
+peace,38,"Soushthish",52,"Kraivoknei",66138,6.20,31.34,East and southern Africa,-1139,January 1139 BCE,0
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1137,January 1137 BCE,0
+war,29,"Hemayai",21,"Trushenosh",78691,18.67,101.86,East Asia,-1137,January 1137 BCE,0
+split,48,"Zobatra",,,66119,14.17,36.00,Southwest Asia,-1134,January 1134 BCE,15
+founded,57,"Melbroupim",,,18075,39.46,112.97,East Asia,-1133,January 1133 BCE,0
+peace,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1133,January 1133 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1132,January 1132 BCE,0
+split,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1132,January 1132 BCE,116
+war,25,"Boukreith",57,"Melbroupim",18075,39.46,112.97,East Asia,-1131,January 1131 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1128,January 1128 BCE,0
+split,51,"Stoukrur",,,160652,7.86,6.75,West and Central Africa,-1128,January 1128 BCE,192
+war,47,"Reirupel",38,"Soushthish",66499,11.61,32.57,Sahel,-1126,January 1126 BCE,0
+split,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1125,January 1125 BCE,4
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1123,January 1123 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1121,January 1121 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-1120,January 1120 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1119,January 1119 BCE,0
+split,30,"Thelimkraith",,,18470,40.81,107.40,East Asia,-1118,January 1118 BCE,13
+peace,25,"Boukreith",57,"Melbroupim",18075,39.46,112.97,East Asia,-1117,January 1117 BCE,0
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1113,January 1113 BCE,0
+peace,38,"Soushthish",47,"Reirupel",67019,16.23,32.32,Egypt and Nile,-1112,January 1112 BCE,0
+war,52,"Kraivoknei",38,"Soushthish",66499,11.61,32.57,Sahel,-1112,January 1112 BCE,0
+war,11,"Treitadas",57,"Melbroupim",18075,39.46,112.97,East Asia,-1109,January 1109 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1107,January 1107 BCE,0
+founded,58,"Kekrer",,,65948,4.99,31.58,East and southern Africa,-1106,January 1106 BCE,0
+peace,29,"Hemayai",13,"Laapos",79474,22.27,98.67,East Asia,-1106,January 1106 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1105,January 1105 BCE,14
+conquered,57,"Melbroupim",11,"Treitadas",18075,39.46,112.97,East Asia,-1104,January 1104 BCE,8
+war,27,"Hinmukei",29,"Hemayai",79132,21.13,100.39,East Asia,-1104,January 1104 BCE,0
+peace,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1100,January 1100 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1100,January 1100 BCE,0
+peace,38,"Soushthish",52,"Kraivoknei",66138,6.20,31.34,East and southern Africa,-1099,January 1099 BCE,0
+fell,38,"Soushthish",,,66499,11.61,32.57,Sahel,-1095,January 1095 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1092,January 1092 BCE,0
+peace,29,"Hemayai",27,"Hinmukei",79275,20.19,98.93,East Asia,-1090,January 1090 BCE,0
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1089,January 1089 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1086,January 1086 BCE,0
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1079,January 1079 BCE,0
+peace,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1078,January 1078 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1078,January 1078 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1075,January 1075 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-1075,January 1075 BCE,0
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1075,January 1075 BCE,0
+split,27,"Hinmukei",,,79275,20.19,98.93,East Asia,-1073,January 1073 BCE,16
+war,42,"Seipam",27,"Hinmukei",79275,20.19,98.93,East Asia,-1072,January 1072 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-1069,January 1069 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1068,January 1068 BCE,0
+split,58,"Kekrer",,,65948,4.99,31.58,East and southern Africa,-1068,January 1068 BCE,22
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1067,January 1067 BCE,6
+conquered,27,"Hinmukei",42,"Seipam",79275,20.19,98.93,East Asia,-1066,January 1066 BCE,0
+peace,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1065,January 1065 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1062,January 1062 BCE,0
+peace,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-1061,January 1061 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1061,January 1061 BCE,0
+war,52,"Kraivoknei",58,"Kekrer",65948,4.99,31.58,East and southern Africa,-1060,January 1060 BCE,0
+peace,52,"Kraivoknei",58,"Kekrer",65948,4.99,31.58,East and southern Africa,-1056,January 1056 BCE,0
+peace,29,"Hemayai",13,"Laapos",79474,22.27,98.67,East Asia,-1055,January 1055 BCE,0
+war,41,"Stoukmoustish",36,"Stasar",99068,27.75,-99.36,Americas,-1055,January 1055 BCE,0
+war,42,"Seipam",29,"Hemayai",79132,21.13,100.39,East Asia,-1051,January 1051 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1050,January 1050 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1048,January 1048 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1046,January 1046 BCE,0
+split,58,"Kekrer",,,65948,4.99,31.58,East and southern Africa,-1044,January 1044 BCE,7
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1042,January 1042 BCE,0
+peace,36,"Stasar",41,"Stoukmoustish",99892,29.58,-102.80,Americas,-1041,January 1041 BCE,0
+peace,42,"Seipam",29,"Hemayai",79132,21.13,100.39,East Asia,-1037,January 1037 BCE,0
+peace,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1037,January 1037 BCE,0
+founded,59,"Shayaikrus",,,160344,-4.42,15.44,West and Central Africa,-1036,January 1036 BCE,0
+peace,34,"Bustoum",37,"Vatre",9678,48.83,34.19,Europe,-1036,January 1036 BCE,0
+war,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1035,January 1035 BCE,0
+split,48,"Zobatra",,,66119,14.17,36.00,Southwest Asia,-1033,January 1033 BCE,25
+war,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1032,January 1032 BCE,0
+peace,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1028,January 1028 BCE,0
+war,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1026,January 1026 BCE,0
+peace,21,"Trushenosh",29,"Hemayai",79132,21.13,100.39,East Asia,-1021,January 1021 BCE,0
+war,12,"Emamo",21,"Trushenosh",78691,18.67,101.86,East Asia,-1021,January 1021 BCE,0
+peace,26,"Toyaith",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1018,January 1018 BCE,0
+war,13,"Laapos",29,"Hemayai",79132,21.13,100.39,East Asia,-1017,January 1017 BCE,0
+peace,11,"Treitadas",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1015,January 1015 BCE,0
+war,4,"Koma",3,"Stadoudas",7572,41.23,34.48,Southwest Asia,-1010,January 1010 BCE,0
+war,37,"Vatre",34,"Bustoum",8536,44.47,42.20,Steppe and Central Asia,-1009,January 1009 BCE,0
+split,12,"Emamo",,,78292,18.34,104.07,East Asia,-1008,January 1008 BCE,32
+peace,21,"Trushenosh",12,"Emamo",78292,18.34,104.07,East Asia,-1007,January 1007 BCE,0
+split,52,"Kraivoknei",,,66138,6.20,31.34,East and southern Africa,-1007,January 1007 BCE,53
+split,51,"Stoukrur",,,160652,7.86,6.75,West and Central Africa,-1006,January 1006 BCE,190
+war,43,"Thoeres",30,"Thelimkraith",18470,40.81,107.40,East Asia,-1005,January 1005 BCE,0
+split,3,"Stadoudas",,,7572,41.23,34.48,Southwest Asia,-1004,January 1004 BCE,18
+peace,29,"Hemayai",13,"Laapos",79474,22.27,98.67,East Asia,-1003,January 1003 BCE,0
+war,42,"Seipam",29,"Hemayai",79132,21.13,100.39,East Asia,-1001,January 1001 BCE,0

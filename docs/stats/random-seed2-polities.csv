@@ -1,21 +1,23 @@
 id,name,founded,ended,end,parent,aggression,greed,expansion,state_since,wars_started,wars_fought,wars_won,capital_region
-0,"Naidule",-5784,,,,0.647,1.549,1.974,,11,11,11,East and southern Africa
-1,"Thupivoul",-4804,,,,0.859,1.134,0.735,-1038,9,9,9,Europe
-2,"Kazil",-4793,,,,0.544,1.379,1.149,,17,28,17,East and southern Africa
-3,"Stupasaim",-4424,,,,0.557,0.896,0.977,,6,8,6,Europe
-4,"Iryas",-4058,,,,0.699,1.258,1.281,-2164,5,6,6,Europe
+0,"Naidule",-5784,,,,0.647,1.549,1.974,,11,12,11,East and southern Africa
+1,"Thupivoul",-4804,,,,0.859,1.134,0.735,,13,13,13,Europe
+2,"Kazil",-4793,,,,0.544,1.379,1.149,,8,19,7,East and southern Africa
+3,"Stupasaim",-4424,,,,0.557,0.896,0.977,,8,10,8,Europe
+4,"Iryas",-4058,,,,0.699,1.258,1.281,-2164,8,9,9,Europe
 5,"Shavoth",-3910,-3886,conquered,,0.945,0.855,1.405,,0,2,0,Europe
 6,"Katersta",-3883,-3873,conquered,,1.088,1.064,1.106,,0,2,0,Europe
 7,"Pounaibaith",-3797,-3793,conquered,,0.741,0.968,0.712,,0,1,0,Europe
 8,"Relith",-3623,,,,0.693,1.308,0.966,,0,3,0,Europe
-9,"Daikruk",-3450,,,,1.301,0.792,0.680,,4,5,3,Europe
-10,"Pounaibaith",-3413,-1045,conquered,,0.803,0.828,1.364,,0,11,0,Europe
-11,"Alkres",-3393,,,,0.809,1.233,1.187,,0,1,0,Europe
-12,"Poubraith",-2972,,,,0.734,0.657,1.150,,0,17,0,East and southern Africa
-13,"Braroul",-2868,,,,1.027,1.452,0.581,,2,2,2,Sahel
-14,"Yairal",-2718,,,,1.456,0.781,0.894,-2674,0,0,0,Americas
-15,"Veato",-2220,,,,0.609,1.089,1.264,,2,3,2,Sahel
-16,"Gazum",-2177,,,,0.797,0.847,0.981,-1991,0,0,0,Americas
-17,"Nabrato",-1783,,,,0.474,1.635,1.876,,0,0,0,Europe
-18,"Youvei",-1743,,,,0.731,1.744,1.579,,0,0,0,Europe
-19,"Padalu",-1586,,,,0.939,0.661,0.920,,0,3,0,Sahel
+9,"Daikruk",-3450,-1353,conquered,,1.301,0.792,0.680,,3,6,2,Europe
+10,"Pounaibaith",-3413,-1179,conquered,,0.803,0.828,1.364,,0,18,0,Europe
+11,"Alkres",-3393,,,,0.809,1.233,1.187,,1,2,1,Europe
+12,"Poubraith",-2972,,,,0.734,0.657,1.150,,0,7,1,East and southern Africa
+13,"Braroul",-2868,,,,1.027,1.452,0.581,,6,6,6,Sahel
+14,"Yairal",-2718,,,,1.456,0.781,0.894,-2674,1,1,1,Americas
+15,"Dabain",-2620,-1227,conquered,,1.265,1.760,0.856,,4,6,3,Americas
+16,"Reshre",-2285,,,,1.068,1.609,1.554,-1951,2,8,3,Americas
+17,"Mumise",-2251,-2186,conquered,,0.647,0.948,0.929,,0,3,0,Sahel
+18,"Veato",-2054,,,,0.953,0.736,0.698,,1,1,0,Sahel
+19,"Brushnal",-1811,,,,0.763,0.682,1.386,-1364,1,1,1,Americas
+20,"Thivathdam",-1753,-1707,conquered,,0.579,1.628,0.677,,0,3,1,Sahel
+21,"Daimehour",-1687,-1677,conquered,,1.169,0.824,0.969,,0,1,0,Sahel

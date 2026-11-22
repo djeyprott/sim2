@@ -725,6 +725,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // Founding as soon as a settlement is large enough, so a short run shows polities.
         PolityParameters parameters = PolityParameters.LoadDefault();
         parameters.FoundSettledYears = 0.0;
+        parameters.StateSettledYears = 0.0;
         parameters.FoundSurplusYears = 0.0;
         parameters.FoundPeople = 300.0;
         parameters.FoundChance = 0.05;
@@ -870,6 +871,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // Fast founding as above, and war whenever a polity is stronger than its neighbour.
         PolityParameters parameters = PolityParameters.LoadDefault();
         parameters.FoundSettledYears = 0.0;
+        parameters.StateSettledYears = 0.0;
         parameters.FoundSurplusYears = 0.0;
         parameters.FoundPeople = 300.0;
         parameters.FoundChance = 0.05;
@@ -968,6 +970,7 @@ public class FarmingTests : IClassFixture<EarthWorldFixture>
         // Fast founding as above, and splits whenever cohesion is below 1.
         PolityParameters parameters = PolityParameters.LoadDefault();
         parameters.FoundSettledYears = 0.0;
+        parameters.StateSettledYears = 0.0;
         parameters.FoundSurplusYears = 0.0;
         parameters.FoundPeople = 300.0;
         parameters.FoundChance = 0.05;

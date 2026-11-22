@@ -111,7 +111,7 @@ public sealed class PolityParameters
 
     public int StateSettlements { get; set; } = 5;
 
-    public double StateKeepShare { get; set; } = 0.75;
+    public double StateKeepShare { get; set; } = 0.5;
 
     public double TributeShare { get; set; } = 0.15;
 

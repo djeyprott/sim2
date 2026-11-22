@@ -29,7 +29,7 @@
   // over land (trade.json: 1 a cell of lowland, more on hills and mountains, half along rivers;
   // less where the capital uses the wheel or riding). Cells beyond it are let go.
   "chiefdomReach": 4,
-  "stateReach": 6,
+  "stateReach": 7,
 
   // Growing, every month: a polity draws in each unruled settlement within its reach with a
   // yearly chance (spread over the twelve months) of joinChance times its expansion
@@ -48,7 +48,7 @@
   // state; a state that falls below stateKeepShare of either is a chiefdom again.
   "statePeople": 300000,
   "stateSettlements": 15,
-  "stateKeepShare": 0.75,
+  "stateKeepShare": 0.5,
 
   // Tribute (step 3). Each year every ruled settlement but the capital gives the capital this share
   // of each good people use in its store (food, everyday goods and luxuries; raw materials such as
